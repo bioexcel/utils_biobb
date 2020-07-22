@@ -3,8 +3,8 @@
 ### Introduction
 In this repository can be found the utils created for Bioxcel building Blocks:
 
-- [json_generator](json_generator/README.md): Scripts for generating JSON Schemas, config files, command line documentation and changelogs for every package.
-- [new_version](new_version/README.md): Scripts for creating a new package or updating an existing one.
+- [json_generator](json_generator/): Scripts for generating JSON Schemas, config files, command line documentation and changelogs for every package.
+- [new_version](new_version/): Scripts for creating a new package or updating an existing one.
 
 ### Copyright & Licensing
 This software has been developed in the [MMB group](http://mmb.irbbarcelona.org) at the [BSC](http://www.bsc.es/) & [IRB](https://www.irbbarcelona.org/) for the [European BioExcel](http://bioexcel.eu/), funded by the European Commission (EU H2020 [823830](http://cordis.europa.eu/projects/823830), EU H2020 [675728](http://cordis.europa.eu/projects/675728)).

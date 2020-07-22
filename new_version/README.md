@@ -6,7 +6,7 @@ In this repository can be found a script for generating a new bioconda package o
 - Shell script
 - Python (in progress)
 
-The user will be guied through all the steps of the creation of a new package: modify version, create new tag in GitHub, generate meta.yaml recipe with pypi and finally create a new Bioconda recipe.
+The user will be guided through all the steps of the creation of a new package: modify version, create new tag in GitHub, generate meta.yaml recipe with pypi and finally create a new Bioconda recipe.
 
 ### Copyright & Licensing
 This software has been developed in the [MMB group](http://mmb.irbbarcelona.org) at the [BSC](http://www.bsc.es/) & [IRB](https://www.irbbarcelona.org/) for the [European BioExcel](http://bioexcel.eu/), funded by the European Commission (EU H2020 [823830](http://cordis.europa.eu/projects/823830), EU H2020 [675728](http://cordis.europa.eu/projects/675728)).
