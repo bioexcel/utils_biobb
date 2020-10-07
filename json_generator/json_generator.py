@@ -16,6 +16,7 @@ regex_prop_name = '\*\*(.*?)\*\*'
 regex_type = '\(\*(.*?)\*\)'
 regex_sphinx_link = '\`(.+)\<(.+)\>\`\_'
 regex_parameters = '(\w*) (?:\()(\w*)(?:\)):?\ ?(\(\w*\):)? (.*?)(?:\.) (?:File type: )(\w+)\.\ ?(\`(?:.+)\<(.*)\>\`\_\.)? (?:Accepted formats: )(.+)(?:\.)'
+regex_param_value = '(\w*) (?:\()(.*)(?:\))'
 
 class JSONSchemaGenerator():
 
@@ -73,6 +74,33 @@ class JSONSchemaGenerator():
 
     def replaceLink(self, matchobj):
         return matchobj.group(1)
+
+    def getParamFormats(self, vals, description):
+
+        list_vals = re.split(', |,',vals)
+
+        formats = []
+        file_formats = []
+        for val in list_vals:
+            f = re.findall(regex_param_value, val)[0]
+            formats.append('.*\.{0}$'.format(f[0]))
+
+            ff = {
+                    "extension": '.*\.{0}$'.format(f[0]),
+                    "description": description + 'in ' + f[0] + ' format'
+                }
+
+            ffs = re.split('\|',f[1])
+           
+            for item in ffs:
+                parts = re.split('\:',item)
+                ff[parts[0]] = parts[1]
+
+            file_formats.append(ff)
+
+
+        return formats, file_formats
+
 
     def parseDocs(self, doclines, module):
         """ parse python docs to object / JSON format """
@@ -139,16 +167,18 @@ class JSONSchemaGenerator():
                         description = param[3]
                         filetype = param[4]
                         sample = param[6]
+                        formats, file_formats = self.getParamFormats(param[7], title)
 
                         p = {
                             "type": prop_type,
                             "description": description,
                             "filetype": filetype,
-                            "sample": sample
+                            "sample": sample,
+                            "enum": formats,
+                            "file_formats": file_formats
                             }
 
-
-                        print(p)
+                        properties[prop_id] = p
                     
 
 
