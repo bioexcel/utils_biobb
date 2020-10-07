@@ -14,6 +14,8 @@ regex_default_array = '\((\[.*?\])\)'
 regex_float = '\-*\d*\.\d*'
 regex_prop_name = '\*\*(.*?)\*\*'
 regex_type = '\(\*(.*?)\*\)'
+regex_sphinx_link = '\`(.+)\<(.+)\>\`\_'
+regex_parameters = '(\w*) (?:\()(\w*)(?:\)):?\ ?(\(\w*\):)? (.*?)(?:\.) (?:File type: )(\w+)\.\ ?(\`(?:.+)\<(.*)\>\`\_\.)? (?:Accepted formats: )(.+)(?:\.)'
 
 class JSONSchemaGenerator():
 
@@ -69,34 +71,91 @@ class JSONSchemaGenerator():
         return val
 
 
+    def replaceLink(self, matchobj):
+        return matchobj.group(1)
+
     def parseDocs(self, doclines, module):
         """ parse python docs to object / JSON format """
 
-        # get title
-        title = doclines[0]
+        # clean empty spaces from doclines
+        doclines = list(filter(lambda name: name.strip(), doclines))
+
+        # get name, title and descrption
+        name = doclines[0].replace('|', '')
+        name = name.strip()
+        name = re.sub(regex_sphinx_link, self.replaceLink, name)
+        title = doclines[1].replace('|', '')
+        title = title.strip()
+        title = re.sub(regex_sphinx_link, self.replaceLink, title)
+        description = doclines[2].replace('|', '')
+        description = description.strip()
+        #description = re.sub(regex_sphinx_link, self.replaceLink, description)
+
         # parse documentation
         args = False
+        info = False
         required = []
         object_schema = {
             "$schema": "http://json-schema.org/draft-07/schema#",
             "$id": "http://bioexcel.eu/" + self.input_package + "/json_schemas/1.0/" + module,
+            "name": name,
             "title": title,
+            "description": description,
             "type": "object",
+            "info": {},
             "required": [],
             "properties": {}
         }
         properties = {}
+        
         for row in doclines:
             leading = len(row) - len(row.lstrip())
             # check if arguments
             if 'Args:' in row:
                 args = True
+                info = False
 
             if args:
                 # first level: I/O & properties dictionary
                 if leading == 8: 
+                    # get list with all info in parameters:
+                    # * property id
+                    # * property type
+                    # * mandatory / optional
+                    # * file type
+                    # * sample file
+                    # * sample file url
+                    # * formats
+                    param = row.strip()
+
+                    if 'properties' not in param:
+
+                        param = re.findall(regex_parameters, param)[0]
+
+                        prop_id = param[0]
+                        prop_type = param[1]
+                        if not param[2]:
+                            required.append(prop_id)
+                        description = param[3]
+                        filetype = param[4]
+                        sample = param[6]
+
+                        p = {
+                            "type": prop_type,
+                            "description": description,
+                            "filetype": filetype,
+                            "sample": sample
+                            }
+
+
+                        print(p)
+                    
+
+
+
+
                     # get required array
-                    chunks1 = row.split(' (')
+                    """chunks1 = row.split(' (')
                     prop_id = chunks1[0].strip()
                     if('properties' not in chunks1[0] and '(Optional)' not in row): required.append(prop_id)
 
@@ -225,6 +284,24 @@ class JSONSchemaGenerator():
 
                     properties["properties"]["properties"][prop_level1]["parameters"][prop_level2] = p
 
+            # check if info
+            if 'Info:' in row:
+                info = True
+                args = False
+
+            if info:
+                print('TODO INFO!!!')
+                #object_schema["info"] = info"""
+
+            if 'Info:' in row:
+                info = True
+                args = False
+
+            if info:
+                if leading == 8: 
+                    print(row)
+                #object_schema["info"] = info"""
+
         object_schema["required"] = required
         object_schema["properties"] = properties
 
@@ -300,7 +377,7 @@ class JSONSchemaGenerator():
             try:
                 conf = yaml.safe_load(f)
             except yaml.YAMLError as exc:
-                print(exc)                
+                print(exc)
 
         # get documentation of python files
         for package in packages.__all__:
@@ -315,6 +392,9 @@ class JSONSchemaGenerator():
                     mdl = module + '_first'
 
                 # biobb_analysis hardcoding forcing to take docker cofiguration
+                ##########################################
+                ## TO FIX WHEN NEW BIOBB_PMX IS DONE
+                ##########################################
                 if(self.input_package == 'biobb_pmx'):
                     mdl = module + '_docker'
 
