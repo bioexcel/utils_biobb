@@ -1,22 +1,28 @@
-import glob
+#import glob
 import argparse
 import re
 import json
-import yaml
+#import yaml
 from importlib import import_module
 from difflib import SequenceMatcher
-from ast import literal_eval
+#from ast import literal_eval
 from pathlib import Path, PurePath
 from os import walk
 
-regex_default = '\((\"*([a-zA-Z0-9_ \-\^\:\.\/\']*|\-*\d*\.*\d*)\"*)\)'
-regex_default_array = '\((\[.*?\])\)'
-regex_float = '\-*\d*\.\d*'
-regex_prop_name = '\*\*(.*?)\*\*'
-regex_type = '\(\*(.*?)\*\)'
+#regex_default = '\((\"*([a-zA-Z0-9_ \-\^\:\.\/\']*|\-*\d*\.*\d*)\"*)\)'
+#regex_default_array = '\((\[.*?\])\)'
+#regex_float = '\-*\d*\.\d*'
+#regex_prop_name = '\*\*(.*?)\*\*'
+#regex_type = '\(\*(.*?)\*\)'
 regex_sphinx_link = '\`(.+)\<(.+)\>\`\_'
-regex_parameters = '(\w*) (?:\()(\w*)(?:\)):?\ ?(\(\w*\):)? (.*?)(?:\.) (?:File type: )(\w+)\.\ ?(\`(?:.+)\<(.*)\>\`\_\.)? (?:Accepted formats: )(.+)(?:\.)'
-regex_param_value = '(\w*) (?:\()(.*)(?:\))'
+regex_parameters = '(\w*)\ *(?:\()(\w*)(?:\)):?\ *(\(\w*\):)?\ *(.*?)(?:\.)\ ?(?:File type:\ *)(\w+)\.\ *(\`(?:.+)\<(.*)\>\`\_\.)?\ *(?:Accepted formats:\ *)(.+)(?:\.)?'
+#regex_param_value = '(\w*)\ (?:\()(.*)(?:\))'
+regex_param_value = '(\w*)\ *(?:(?:\()(.*)(?:\)))?'
+regex_property_values = '(?:\*\ *\*\*)(.*)(?:\*\*)\ *(?:\(\*)(\w*)(?:\*\))\ *\-\ ?(?:\()(.*?)(?:\))\ *(?:(?:\[)(\d+(?:\.\d+)?)\-(\d+(?:\.\d+)?)(?:\|)?(\d+(?:\.\d+)?)?(?:\]))?\ *(?:(?:\[)(.*)(?:\]))?\ *(.*)?(?:Values:\ *)(.+)(?:\.)?'
+regex_property_non_values = '(?:\*\ *\*\*)(.*)(?:\*\*)\ *(?:\(\*)(\w*)(?:\*\))\ *\-\ ?(?:\()(.*?)(?:\))\ *(?:(?:\[)(\d+(?:\.\d+)?)\-(\d+(?:\.\d+)?)(?:\|)?(\d+(?:\.\d+)?)?(?:\]))?\ *(?:(?:\[)(.*)(?:\]))?\ *(.*)?'
+regex_prop_value = '([a-zA-Z0-9_\-]+)\ *(?:(?:\()(.*)?(?:\)))?'
+regex_info = '\*\ *(.*)'
+regex_info_item = '(.*?)\:(?:\ *)(.*)'
 
 class JSONSchemaGenerator():
 
@@ -32,8 +38,8 @@ class JSONSchemaGenerator():
             raise SystemExit('Incorrect output path. The structure must be: path/biobb_package/biobb_package')
 
         self.output_path = PurePath(output_path).joinpath('json_schemas')
-        self.output_path_test = PurePath(output_path).joinpath('test')
-        self.output_path_config = PurePath(output_path).joinpath('test/data/config')
+        #self.output_path_test = PurePath(output_path).joinpath('test')
+        #self.output_path_config = PurePath(output_path).joinpath('test/data/config')
 
         if not Path(self.output_path).exists():
             raise SystemExit('Incorrect output path. The structure must be: path/biobb_package/biobb_package')
@@ -53,8 +59,8 @@ class JSONSchemaGenerator():
 
         return type 
 
-    def getDefault(self, default, i):
-        """ return defaults """ 
+    """def getDefault(self, default, i):
+        # return defaults
         
         if(i == 0): return literal_eval(default)
         else: val = default[i]
@@ -69,7 +75,7 @@ class JSONSchemaGenerator():
 
         if isinstance(val, str): return val.strip('\"')
         
-        return val
+        return val"""
 
 
     def replaceLink(self, matchobj):
@@ -87,20 +93,134 @@ class JSONSchemaGenerator():
 
             ff = {
                     "extension": '.*\.{0}$'.format(f[0]),
-                    "description": description + 'in ' + f[0] + ' format'
+                    "description": description.strip('.')
                 }
 
-            ffs = re.split('\|',f[1])
-           
-            for item in ffs:
-                parts = re.split('\:',item)
-                ff[parts[0]] = parts[1]
+            if f[1]:
+                ffs = re.split('\|',f[1])
+               
+                for item in ffs:
+                    parts = re.split('\:',item)
+                    ff[parts[0]] = parts[1]
 
             file_formats.append(ff)
 
 
         return formats, file_formats
 
+    def getPropFormats(self, vals):
+
+        formats = []
+        prop_formats = []
+
+        list_vals = re.split(', |,',vals)
+
+        for val in list_vals:
+
+            val = re.sub(regex_sphinx_link, self.replaceLink, val)
+
+            f = re.findall(regex_prop_value, val)[0]
+            formats.append(f[0])
+
+            desc = f[1] if f[1] else None
+
+            ff = {
+                    "name": f[0],
+                    "description": desc
+                }
+
+            prop_formats.append(ff)
+
+        return formats, prop_formats
+
+    def getParameters(self, row, required):
+        # get list with all info in parameters:
+        # * property id
+        # * property type
+        # * property description
+        # * mandatory / optional
+        # * file type
+        # * sample file
+        # * formats
+        param = row.strip()
+
+        param = re.findall(regex_parameters, param)[0]
+
+        param_id = param[0]
+        param_type = param[1]
+        if not param[2]: required.append(param_id)
+        description = param[3]
+        filetype = param[4]
+        sample = param[6] if param[6] else None
+        formats, file_formats = self.getParamFormats(param[7], description)
+
+        p = {
+            "type": self.getType(param_type),
+            "description": description,
+            "filetype": filetype,
+            "sample": sample,
+            "enum": formats,
+            "file_formats": file_formats
+            }
+
+        return param_id, p, required
+
+
+    def getProperties(self, row):
+        # get list with all info in properties:
+        # * property id
+        # * property type
+        # * property default
+        # * property min-max|step
+        # * WF property
+        # * property description
+        # * property possible values
+        prop = row.strip()
+
+        regex = regex_property_values if 'Values:' in row else regex_property_non_values
+
+        prop = re.findall(regex, prop)[0]
+
+        prop_id = prop[0]
+        prop_type = prop[1]
+        default = prop[2]
+        prop_min = prop[3] if prop[3] else None
+        prop_max = prop[4] if prop[4] else None
+        prop_step = prop[5] if prop[5] else None
+        wf_prop = True if prop[6] else False
+        description = prop[7]
+        if len(prop) == 9: formats, property_formats = self.getPropFormats(prop[8])
+
+        p = {
+            "type": self.getType(prop_type),
+            "default": default,
+            "wf_prop": wf_prop,
+            "description": description
+            }
+
+        if prop_min: p["min"] = prop_min
+        if prop_max: p["max"] = prop_max
+        if prop_step: p["step"] = prop_step
+
+        if len(prop) == 9:
+            p["enum"] = formats
+            p["property_formats"] = property_formats
+
+        return prop_id, p
+
+    def getInfoProp(self, info_prop):
+        info_prop = re.findall(regex_info_item, info_prop)[0]
+        return info_prop[0], info_prop[1]
+
+    def getGenericInfo(self, row):
+        output = row.strip()
+        if output.startswith('|'):
+            output = output.replace('|', '')
+            output = output.strip()
+            output = re.sub(regex_sphinx_link, self.replaceLink, output)
+        else:
+            output = None
+        return output
 
     def parseDocs(self, doclines, module):
         """ parse python docs to object / JSON format """
@@ -108,21 +228,16 @@ class JSONSchemaGenerator():
         # clean empty spaces from doclines
         doclines = list(filter(lambda name: name.strip(), doclines))
 
-        # get name, title and descrption
-        name = doclines[0].replace('|', '')
-        name = name.strip()
-        name = re.sub(regex_sphinx_link, self.replaceLink, name)
-        title = doclines[1].replace('|', '')
-        title = title.strip()
-        title = re.sub(regex_sphinx_link, self.replaceLink, title)
-        description = doclines[2].replace('|', '')
-        description = description.strip()
-        #description = re.sub(regex_sphinx_link, self.replaceLink, description)
+        # get name, title and description
+        name = self.getGenericInfo(doclines[0])
+        title = self.getGenericInfo(doclines[1])
+        description = self.getGenericInfo(doclines[2])        
 
         # parse documentation
         args = False
         info = False
         required = []
+        obj_info = {}
         object_schema = {
             "$schema": "http://json-schema.org/draft-07/schema#",
             "$id": "http://bioexcel.eu/" + self.input_package + "/json_schemas/1.0/" + module,
@@ -130,7 +245,7 @@ class JSONSchemaGenerator():
             "title": title,
             "description": description,
             "type": "object",
-            "info": {},
+            "info": [],
             "required": [],
             "properties": {}
         }
@@ -138,140 +253,29 @@ class JSONSchemaGenerator():
         
         for row in doclines:
             leading = len(row) - len(row.lstrip())
+
             # check if arguments
             if 'Args:' in row:
                 args = True
                 info = False
 
             if args:
-                # first level: I/O & properties dictionary
+                # first level: I/O & parameters dictionary
                 if leading == 8: 
-                    # get list with all info in parameters:
-                    # * property id
-                    # * property type
-                    # * mandatory / optional
-                    # * file type
-                    # * sample file
-                    # * sample file url
-                    # * formats
-                    param = row.strip()
 
-                    if 'properties' not in param:
+                    if 'properties' not in row:
 
-                        param = re.findall(regex_parameters, param)[0]
+                        param_id, p, required = self.getParameters(row, required)
 
-                        prop_id = param[0]
-                        prop_type = param[1]
-                        if not param[2]:
-                            required.append(prop_id)
-                        description = param[3]
-                        filetype = param[4]
-                        sample = param[6]
-                        formats, file_formats = self.getParamFormats(param[7], title)
-
-                        p = {
-                            "type": prop_type,
-                            "description": description,
-                            "filetype": filetype,
-                            "sample": sample,
-                            "enum": formats,
-                            "file_formats": file_formats
-                            }
-
-                        properties[prop_id] = p
-                    
-
-
-
-
-                    # get required array
-                    """chunks1 = row.split(' (')
-                    prop_id = chunks1[0].strip()
-                    if('properties' not in chunks1[0] and '(Optional)' not in row): required.append(prop_id)
-
-                    # get I/O properties
-                    if 'properties' not in chunks1[0]:
-
-                        chunks2 = chunks1[1].split(')')
-                        if '(Optional)' not in row: chunks3 = row.split('):')
-                        else: chunks3 = row.split(') (Optional):')
-
-                        #chunks3[1] contains description, file type and accepted formats
-
-                        if 'File type:' in chunks3[1]: filetype = re.search('(?<=File type:\s)(\w+)', chunks3[1]).group(1)
-                        else: filetype = None
-
-                        if 'Sample file' in chunks3[1]: sample = re.search('<(.*)>', chunks3[1]).group(1)
-                        else: sample = None
-
-                        chunks4 = chunks3[1].split('Accepted formats:')
-
-                        # check if property has "Accepted formats:"
-                        if len(chunks4) > 1: 
-
-                            values = chunks4[1].replace('.','').split(',')
-                            values = [item.strip() for item in values]
-                            values = ['.*\.{0}$'.format(item) for item in values]
-
-                            p = {
-                                "type": self.getType(chunks2[0].strip()),
-                                #"description": chunks4[0].strip(),
-                                "description": re.search('^(.*?)(?=\.)', chunks3[1]).group(1).strip(),
-                                "filetype": filetype,
-                                "sample": sample,
-                                "enum": values
-                                }
-
-                        else:
-
-                            p = {
-                                "type": self.getType(chunks2[0].strip()),
-                                #"description": chunks3[1].strip(),
-                                "description": re.search('^(.*?)(?=\.)', chunks3[1]).group(1).strip(),
-                                "filetype": filetype,
-                                "sample": sample
-                                }
-
-                        properties[prop_id] = p
-
+                        properties[param_id] = p
+                
                 # second level: properties
                 if leading == 12 and not row.isspace():
 
                     if not "properties" in properties: 
                         properties["properties"] = { "type": "object", "properties": {} }
 
-                    prop_level1 = re.findall(regex_prop_name, row)[0]
-
-                    chunks5 = row.split('Values:')
-
-                    
-
-                    if '["' and '"]' in row: 
-                        regex_def = regex_default_array
-                        index_def = 0
-                    else: 
-                        regex_def = regex_default
-                        index_def = 1
-
-                    if len(chunks5) > 1: 
-
-                        values = chunks5[1].replace('.','').split(',')
-                        values = [item.strip() for item in values]
-
-                        p = {
-                            "type": self.getType(re.findall(regex_type, row)[0]),
-                            "default": self.getDefault(re.findall(regex_def, row)[0], index_def),
-                            "description": chunks5[0].strip().split(') ')[-1],
-                            "enum": values
-                            }
-
-                    else:
-
-                        p = {
-                            "type": self.getType(re.findall(regex_type, row)[0]),
-                            "default": self.getDefault(re.findall(regex_def, row)[0], index_def),
-                            "description": chunks5[0].strip().split(') ')[-1],
-                            }
+                    prop_level1, p = self.getProperties(row)
 
                     properties["properties"]["properties"][prop_level1] = p
 
@@ -279,38 +283,10 @@ class JSONSchemaGenerator():
                 if(leading == 16):
 
                     if not "parameters" in properties["properties"]["properties"][prop_level1]: 
-                        properties["properties"]["properties"][prop_level1] = { "type": "object", "parameters": {} }
+                        properties["properties"]["properties"][prop_level1]["type"] = "object"
+                        properties["properties"]["properties"][prop_level1]["parameters"] = {}
 
-                    prop_level2 = re.findall(regex_prop_name, row)[0]
-
-                    chunks6 = row.split('Values:')
-
-                    if '["' and '"]' in row: 
-                        regex_def = regex_default_array
-                        index_def = 0
-                    else: 
-                        regex_def = regex_default
-                        index_def = 1
-
-                    if len(chunks6) > 1: 
-
-                        values = chunks6[1].replace('.','').split(',')
-                        values = [item.strip() for item in values]
-
-                        p = {
-                            "type": self.getType(re.findall(regex_type, row)[0]),
-                            "default": self.getDefault(re.findall(regex_def, row)[0], index_def),
-                            "description": chunks6[0].strip().split(') ')[-1],
-                            "enum": values
-                            }
-
-                    else:
-                        
-                        p = {
-                            "type": self.getType(re.findall(regex_type, row)[0]),
-                            "default": self.getDefault(re.findall(regex_def, row)[0], index_def),
-                            "description": chunks6[0].strip().split(') ')[-1],
-                            }
+                    prop_level2, p = self.getProperties(row)
 
                     properties["properties"]["properties"][prop_level1]["parameters"][prop_level2] = p
 
@@ -320,17 +296,16 @@ class JSONSchemaGenerator():
                 args = False
 
             if info:
-                print('TODO INFO!!!')
-                #object_schema["info"] = info"""
-
-            if 'Info:' in row:
-                info = True
-                args = False
-
-            if info:
                 if leading == 8: 
-                    print(row)
-                #object_schema["info"] = info"""
+                    info_id = row.strip()
+                    info_id = re.findall(regex_info, info_id)[0].strip(':')
+                    obj_info[info_id] = {}
+                if leading == 12: 
+                    info_prop = row.strip()
+                    info_prop = re.findall(regex_info, info_prop)[0].strip(':')
+                    k, v = self.getInfoProp(info_prop)
+                    obj_info[info_id][k] = v
+                object_schema["info"] = obj_info
 
         object_schema["required"] = required
         object_schema["properties"] = properties
@@ -357,15 +332,15 @@ class JSONSchemaGenerator():
             Path(path).unlink()
 
         # get all files in config folder
-        files = []
-        for (dirpath, dirnames, filenames) in walk(self.output_path_config):
-            files.extend(filenames)
-            break
+        #files = []
+        #for (dirpath, dirnames, filenames) in walk(self.output_path_config):
+        #    files.extend(filenames)
+        #    break
 
         # remove files from array of files
-        for f in files:
-            path = PurePath(self.output_path_config).joinpath(f)
-            Path(path).unlink()
+        #for f in files:
+        #    path = PurePath(self.output_path_config).joinpath(f)
+        #    Path(path).unlink()
 
     def saveJSONFile(self, module, object_schema):
         """ save JSON file for each module """
@@ -377,8 +352,8 @@ class JSONSchemaGenerator():
 
         print(str(path) + " file saved")
 
-    def saveConfigJSONFile(self, properties, module, ):
-        """ save config JSON file for each module """
+    """def saveConfigJSONFile(self, properties, module, ):
+        # save config JSON file for each module 
 
         # pmx hardcoding
         if module.endswith('_docker'):
@@ -391,7 +366,7 @@ class JSONSchemaGenerator():
         with open(path, 'w') as file:
             json.dump(conf_json, file, indent=4)
 
-        print(str(path) + " file saved")
+        print(str(path) + " file saved")"""
 
     def launch(self):
         """ launch function for JSONSchemaGenerator """
@@ -403,11 +378,11 @@ class JSONSchemaGenerator():
         self.cleanOutputPath()
 
         # get config properties
-        with open(PurePath(self.output_path_test).joinpath('conf.yml')) as f:
+        """with open(PurePath(self.output_path_test).joinpath('conf.yml')) as f:
             try:
                 conf = yaml.safe_load(f)
             except yaml.YAMLError as exc:
-                print(exc)
+                print(exc)"""
 
         # get documentation of python files
         for package in packages.__all__:
@@ -417,19 +392,19 @@ class JSONSchemaGenerator():
 
                 # config files
                 # biobb_analysis hardcoding for bfactor, rms and rmsf
-                mdl = module
-                if(self.input_package == 'biobb_analysis' and not module in conf):
-                    mdl = module + '_first'
+                #mdl = module
+                #if(self.input_package == 'biobb_analysis' and not module in conf):
+                #    mdl = module + '_first'
 
                 # biobb_analysis hardcoding forcing to take docker cofiguration
                 ##########################################
                 ## TO FIX WHEN NEW BIOBB_PMX IS DONE
                 ##########################################
-                if(self.input_package == 'biobb_pmx'):
-                    mdl = module + '_docker'
+                #if(self.input_package == 'biobb_pmx'):
+                #    mdl = module + '_docker'
 
-                if('properties' in conf[mdl] and conf[mdl]['properties'] is not None): 
-                    self.saveConfigJSONFile(conf[mdl]['properties'], mdl)
+                #if('properties' in conf[mdl] and conf[mdl]['properties'] is not None): 
+                #    self.saveConfigJSONFile(conf[mdl]['properties'], mdl)
 
                 # json schemas
                 # import single module
