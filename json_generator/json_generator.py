@@ -1,25 +1,20 @@
-#import glob
 import argparse
 import re
 import json
-#import yaml
 from importlib import import_module
 from difflib import SequenceMatcher
-#from ast import literal_eval
 from pathlib import Path, PurePath
 from os import walk
 
-#regex_default = '\((\"*([a-zA-Z0-9_ \-\^\:\.\/\']*|\-*\d*\.*\d*)\"*)\)'
-#regex_default_array = '\((\[.*?\])\)'
-#regex_float = '\-*\d*\.\d*'
-#regex_prop_name = '\*\*(.*?)\*\*'
-#regex_type = '\(\*(.*?)\*\)'
 regex_sphinx_link = '\`(.+)\<(.+)\>\`\_'
-regex_parameters = '(\w*)\ *(?:\()(\w*)(?:\)):?\ *(\(\w*\):)?\ *(.*?)(?:\.)\ ?(?:File type:\ *)(\w+)\.\ *(\`(?:.+)\<(.*)\>\`\_\.)?\ *(?:Accepted formats:\ *)(.+)(?:\.)?'
-#regex_param_value = '(\w*)\ (?:\()(.*)(?:\))'
+regex_parameters = '(\w*)\ *(?:\()(\w*)(?:\)):?\ *(\(\w*\):)?\ *(.*?)(?:\.)\ *(?:File type:\ *)(\w+)\.\ *(\`(?:.+)\<(.*)\>\`\_\.)?\ *(?:Accepted formats:\ *)(.+)(?:\.)?'
 regex_param_value = '(\w*)\ *(?:(?:\()(.*)(?:\)))?'
-regex_property_values = '(?:\*\ *\*\*)(.*)(?:\*\*)\ *(?:\(\*)(\w*)(?:\*\))\ *\-\ ?(?:\()(.*?)(?:\))\ *(?:(?:\[)(\d+(?:\.\d+)?)\-(\d+(?:\.\d+)?)(?:\|)?(\d+(?:\.\d+)?)?(?:\]))?\ *(?:(?:\[)(.*)(?:\]))?\ *(.*)?(?:Values:\ *)(.+)(?:\.)?'
-regex_property_non_values = '(?:\*\ *\*\*)(.*)(?:\*\*)\ *(?:\(\*)(\w*)(?:\*\))\ *\-\ ?(?:\()(.*?)(?:\))\ *(?:(?:\[)(\d+(?:\.\d+)?)\-(\d+(?:\.\d+)?)(?:\|)?(\d+(?:\.\d+)?)?(?:\]))?\ *(?:(?:\[)(.*)(?:\]))?\ *(.*)?'
+#regex_property_values = '(?:\*\ *\*\*)(.*)(?:\*\*)\ *(?:\(\*)(\w*)(?:\*\))\ *\-\ *(?:\()(.*?)(?:\))\ *(?:(?:\[)(\d+(?:\.\d+)?)\-(\d+(?:\.\d+)?)(?:\|)?(\d+(?:\.\d+)?)?(?:\]))?\ *(?:(?:\[)(.*)(?:\]))?\ *(.*)?(?:Values:\ *)(.+)(?:\.)?'
+regex_property_values = '(?:\*\ *\*\*)(.*)(?:\*\*)\ *(?:\(\*)(\w*)(?:\*\))\ *\-\ ?(?:\()(.*)(?:\))\ *(?:(?:\[)(\w*)\-(\w*)(?:\|)?(\w*)?(?:\]))?\ *(?:(?:\[)(.*)(?:\]))?\ *(.*)\ ?(?:Values:\ *)(.+)(?:\.)?'
+regex_property_non_values = '(?:\*\ *\*\*)(.*)(?:\*\*)\ *(?:\(\*)(\w*)(?:\*\))\ *\-\ *(?:\()(.*?)(?:\))\ *(?:(?:\[)(\d+(?:\.\d+)?)\-(\d+(?:\.\d+)?)(?:\|)?(\d+(?:\.\d+)?)?(?:\]))?\ *(?:(?:\[)(.*)(?:\]))?\ *(.*)?'
+#################
+#regex_property_values = '(?:\*\s*\*\*)(.*)(?:\*\*)\s*(?:\(\*)(\w*)(?:\*\))\s*\-\s*(?:\()(.*)(?:\))\s*(?:(?:\[)(\w*)\-(\w*)(?:\|)?(\w*)?(?:\]))?\s*(?:(?:\[)(.*)(?:\]))?\s([a-zA-Z0-9_\- ().&?,!;]+)(?:\s|\.)+(?:(?:Values:)(.+))?'
+###################
 regex_prop_value = '([a-zA-Z0-9_\-]+)\ *(?:(?:\()(.*)?(?:\)))?'
 regex_info = '\*\ *(.*)'
 regex_info_item = '(.*?)\:(?:\ *)(.*)'
@@ -38,8 +33,6 @@ class JSONSchemaGenerator():
             raise SystemExit('Incorrect output path. The structure must be: path/biobb_package/biobb_package')
 
         self.output_path = PurePath(output_path).joinpath('json_schemas')
-        #self.output_path_test = PurePath(output_path).joinpath('test')
-        #self.output_path_config = PurePath(output_path).joinpath('test/data/config')
 
         if not Path(self.output_path).exists():
             raise SystemExit('Incorrect output path. The structure must be: path/biobb_package/biobb_package')
@@ -58,24 +51,6 @@ class JSONSchemaGenerator():
         if type == 'dic': return 'object'
 
         return type 
-
-    """def getDefault(self, default, i):
-        # return defaults
-        
-        if(i == 0): return literal_eval(default)
-        else: val = default[i]
-
-        if val == 'True': return True
-        if val == 'False': return False
-        if val == 'None': return None
-        if val.lstrip('-+').isdigit(): 
-            return int(val)
-        if re.match(regex_float, val) is not None:
-            return float(val)
-
-        if isinstance(val, str): return val.strip('\"')
-        
-        return val"""
 
 
     def replaceLink(self, matchobj):
@@ -109,6 +84,8 @@ class JSONSchemaGenerator():
         return formats, file_formats
 
     def getPropFormats(self, vals):
+
+        if not vals: return None, None
 
         formats = []
         prop_formats = []
@@ -178,6 +155,7 @@ class JSONSchemaGenerator():
         prop = row.strip()
 
         regex = regex_property_values if 'Values:' in row else regex_property_non_values
+        #regex = regex_property_values
 
         prop = re.findall(regex, prop)[0]
 
@@ -190,6 +168,7 @@ class JSONSchemaGenerator():
         wf_prop = True if prop[6] else False
         description = prop[7]
         if len(prop) == 9: formats, property_formats = self.getPropFormats(prop[8])
+        #formats, property_formats = self.getPropFormats(prop[8])
 
         p = {
             "type": self.getType(prop_type),
@@ -205,6 +184,9 @@ class JSONSchemaGenerator():
         if len(prop) == 9:
             p["enum"] = formats
             p["property_formats"] = property_formats
+        #if formats and property_formats:
+        #    p["enum"] = formats
+        #    p["property_formats"] = property_formats
 
         return prop_id, p
 
@@ -331,17 +313,6 @@ class JSONSchemaGenerator():
             path = PurePath(self.output_path).joinpath(f)
             Path(path).unlink()
 
-        # get all files in config folder
-        #files = []
-        #for (dirpath, dirnames, filenames) in walk(self.output_path_config):
-        #    files.extend(filenames)
-        #    break
-
-        # remove files from array of files
-        #for f in files:
-        #    path = PurePath(self.output_path_config).joinpath(f)
-        #    Path(path).unlink()
-
     def saveJSONFile(self, module, object_schema):
         """ save JSON file for each module """
 
@@ -352,22 +323,6 @@ class JSONSchemaGenerator():
 
         print(str(path) + " file saved")
 
-    """def saveConfigJSONFile(self, properties, module, ):
-        # save config JSON file for each module 
-
-        # pmx hardcoding
-        if module.endswith('_docker'):
-            module = module.replace('_docker', '')
-
-        conf_json = {
-            'properties': properties
-        }
-        path = PurePath(self.output_path_config).joinpath('config_'+ module + '.json')
-        with open(path, 'w') as file:
-            json.dump(conf_json, file, indent=4)
-
-        print(str(path) + " file saved")"""
-
     def launch(self):
         """ launch function for JSONSchemaGenerator """
 
@@ -377,34 +332,11 @@ class JSONSchemaGenerator():
         # remove old JSON files
         self.cleanOutputPath()
 
-        # get config properties
-        """with open(PurePath(self.output_path_test).joinpath('conf.yml')) as f:
-            try:
-                conf = yaml.safe_load(f)
-            except yaml.YAMLError as exc:
-                print(exc)"""
-
         # get documentation of python files
         for package in packages.__all__:
             # for every package import all modules
             modules = import_module(self.input_package + '.' + package)
             for module in modules.__all__:
-
-                # config files
-                # biobb_analysis hardcoding for bfactor, rms and rmsf
-                #mdl = module
-                #if(self.input_package == 'biobb_analysis' and not module in conf):
-                #    mdl = module + '_first'
-
-                # biobb_analysis hardcoding forcing to take docker cofiguration
-                ##########################################
-                ## TO FIX WHEN NEW BIOBB_PMX IS DONE
-                ##########################################
-                #if(self.input_package == 'biobb_pmx'):
-                #    mdl = module + '_docker'
-
-                #if('properties' in conf[mdl] and conf[mdl]['properties'] is not None): 
-                #    self.saveConfigJSONFile(conf[mdl]['properties'], mdl)
 
                 # json schemas
                 # import single module
