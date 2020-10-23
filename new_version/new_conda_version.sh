@@ -20,7 +20,7 @@ fi
 read -p "Do you want to generate json schemas for this repository [Y/n]? " json_schemas
 if [ $json_schemas == 'y' -o $json_schemas == 'Y'  ]
 then
-	python3 ${path_json_schemas}json_generator.py -p $REPOSITORY -o $path_biobb$REPOSITORY/$REPOSITORY/json_schemas
+	python3 ${path_json_schemas}json_generator.py -p $REPOSITORY -o $path_biobb$REPOSITORY/$REPOSITORY
 fi
 read -p "Before opening setup.py remember to check if some dependency has changed. Press any key to continue..." -n1 -s
 echo ""
@@ -36,13 +36,30 @@ echo ""
 $ide $path_biobb$REPOSITORY/$REPOSITORY/docs/source/conf.py
 read -p "Modify conf.py with the new version number..." -n1 -s
 echo ""
+$ide $path_biobb$REPOSITORY/$REPOSITORY/docs/source/change_log.md
+read -p "Modify change_log.md with the new version..." -n1 -s
+echo ""
 $ide $path_biobb$REPOSITORY/$REPOSITORY/docs/source/schema.html
 read -p "Modify schema.html with the new version number..." -n1 -s
 echo ""
 cd $path_biobb$REPOSITORY
 cp -v $path_biobb$REPOSITORY/README.md $path_biobb$REPOSITORY/$REPOSITORY/docs/source/readme.md
-git status ; git add . ; git commit -m "$message" ; git push ; git push bioexcel
-git tag -a v$version -m "$message"; git push origin v$version; git push bioexcel v$version
+git status
+git add .
+git commit -m "$message"
+read -p "Only github [Y/n]?" github
+if [ $github == 'y' -o $github == 'Y'  ]
+then
+	git push 
+	git tag -a v$version -m "$message"
+	git push origin v$version
+else
+	#git push 
+	git push bioexcel
+	git tag -a v$version -m "$message"
+	#git push origin v$version
+	git push bioexcel v$version
+fi
 python3 setup.py sdist bdist_wheel; python3 -m twine upload dist/* #<<< in_case_of_user_keyring
 rm -rfv $REPOSITORY.egg-info dist build
 
