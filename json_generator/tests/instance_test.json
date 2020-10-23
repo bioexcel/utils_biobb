@@ -1,0 +1,138 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://bioexcel.eu/biobb_md/json_schemas/1.0/grompp",
+    "name": "biobb_md Grompp",
+    "title": "Wrapper of the GROMACS grompp  module.",
+    "description": "The GROMACS preprocessor module needs to be fed with the input system and the dynamics parameters to create a portable binary run input file TPR. The dynamics parameters are specified in the mdp section of the configuration YAML file. The parameter names and defaults are the same as the ones in the official MDP specification .",
+    "type": "object",
+    "info": {
+        "wrapped_software": {
+            "name": "GROMACS grompp",
+            "version": ">5.1",
+            "license": "LGPL 2.1"
+        },
+        "ontology": {
+            "name": "EDAM",
+            "schema": "http://edamontology.org/EDAM.owl"
+        }
+    },
+    "required": [
+        "input_gro_path",
+        "input_top_zip_path",
+        "output_tpr_path"
+    ],
+    "properties": {
+        "input_gro_path": {
+            "type": "string",
+            "description": "Path to the input GROMACS structure GRO file",
+            "filetype": "input",
+            "sample": "https://github.com/bioexcel/biobb_md/raw/master/biobb_md/test/data/gromacs/grompp.gro",
+            "enum": [
+                ".*\\.gro$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.gro$",
+                    "description": "Path to the input GROMACS structure GRO file",
+                    "edam": "format_2330"
+                }
+            ]
+        },
+        "input_top_zip_path": {
+            "type": "string",
+            "description": "Path to the input GROMACS topology TOP and ITP files in zip format",
+            "filetype": "input",
+            "sample": "https://github.com/bioexcel/biobb_md/raw/master/biobb_md/test/data/gromacs/grompp.zip",
+            "enum": [
+                ".*\\.zip$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.zip$",
+                    "description": "Path to the input GROMACS topology TOP and ITP files in zip format",
+                    "edam": "format_3987"
+                }
+            ]
+        },
+        "output_tpr_path": {
+            "type": "string",
+            "description": "Path to the output portable binary run file TPR",
+            "filetype": "output",
+            "sample": "https://github.com/bioexcel/biobb_md/raw/master/biobb_md/test/reference/gromacs/ref_grompp.tpr",
+            "enum": [
+                ".*\\.tpr$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.tpr$",
+                    "description": "Path to the output portable binary run file TPR",
+                    "edam": "format_2333"
+                }
+            ]
+        },
+        "input_cpt_path": {
+            "type": "string",
+            "description": "Path to the input GROMACS checkpoint file CPT",
+            "filetype": "input",
+            "sample": null,
+            "enum": [
+                ".*\\.cpt$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.cpt$",
+                    "description": "Path to the input GROMACS checkpoint file CPT",
+                    "edam": "format_2333"
+                }
+            ]
+        },
+        "input_ndx_path": {
+            "type": "string",
+            "description": "Path to the input GROMACS index files NDX",
+            "filetype": "input",
+            "sample": null,
+            "enum": [
+                ".*\\.ndx$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.ndx$",
+                    "description": "Path to the input GROMACS index files NDX",
+                    "edam": "format_2330"
+                }
+            ]
+        },
+        "input_mdp_path": {
+            "type": "string",
+            "description": "Path of the input GROMACS `MDP file <http://manual.gromacs.org/current/user-guide/mdp-options.html>`_",
+            "filetype": "input",
+            "sample": null,
+            "enum": [
+                ".*\\.mdp$"
+            ],
+            "file_formats": [
+                {
+                    "extension": ".*\\.mdp$",
+                    "description": "Path of the input GROMACS `MDP file <http://manual.gromacs.org/current/user-guide/mdp-options.html>`_",
+                    "edam": "format_2330"
+                }
+            ]
+        },
+        "properties": {
+            "type":"object",
+            "properties": {
+                "maxwarn": {
+                    "type": "number",
+                    "default": "10",
+                    "wf_prop": false,
+                    "description": "Maximum number of allowed warnings.",
+                    "min": "0",
+                    "max": "1000",
+                    "step": "1"
+                }
+            }
+            
+        }
+    },
+    "additionalProperties": false
+}
