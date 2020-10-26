@@ -51,6 +51,7 @@ inputs:
     inputBinding:
       position: 3
       prefix: --output_tpr_path
+    default: system.tpr
   input_cpt_path:
     label: Path to the input GROMACS checkpoint file CPT
     doc: |-
@@ -90,7 +91,23 @@ inputs:
     - edam:format_2330
     inputBinding:
       prefix: --input_mdp_path
-outputs: []
+  config:
+    label: Advanced configuration options for biobb_md Grompp
+    doc: |-
+      Advanced configuration options for biobb_md Grompp. This should be passed as a string containing a dict. The possible options to include here are listed under 'properties' in the biobb_md Grompp documentation: https://biobb-md.readthedocs.io/en/latest/gromacs.html#module-gromacs.grompp
+    type: string?
+    inputBinding:
+      prefix: --config
+outputs:
+  output_tpr_path:
+    label: Path to the output portable binary run file TPR
+    doc: |-
+      Path to the output portable binary run file TPR
+    type: File
+    format:
+    - edam:format_2333
+    outputBinding:
+      glob: $(inputs.output_tpr_path)
 $namespaces:
   edam: http://edamontology.org/
 $schemas:

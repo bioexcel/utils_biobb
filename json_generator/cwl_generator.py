@@ -5,8 +5,36 @@ import re
 from importlib import import_module
 from pathlib import Path, PurePath
 from os import walk
+from enum import Enum
 
 class literal_unicode(str): pass
+
+class MyDumper(yaml.Dumper):
+    # HACK: insert blank lines between top-level objects
+    # inspired by https://stackoverflow.com/a/44284819/3786245
+    def write_line_break(self, data=None):
+        
+        super().write_line_break(data)
+
+        if len(self.indents) == 1:
+            super().write_line_break()
+
+    def write_indent(self):
+        indent = self.indent or 0
+        if not self.indention or self.column > indent or (self.column == indent and not self.whitespace):
+            self.write_line_break()
+
+        if indent == 2:
+            self.write_line_break()
+
+        if self.column < indent:
+            self.whitespace = True
+            data = u' '*(indent-self.column)
+            self.column = indent
+            if self.encoding:
+                data = data.encode(self.encoding)
+
+            self.stream.write(data)
 
 class CWLGenerator():
 
@@ -50,6 +78,8 @@ class CWLGenerator():
         return schema
 
     def getFormat(self, ff):
+        """ gets formats in type list """
+
         flist = []
         aflist = []
         
@@ -60,60 +90,37 @@ class CWLGenerator():
 
         return flist, aflist
 
-    def returnInputs(self, tool_schema):
+    def getOutputDefault(self, accepted_formats):
+        """ returns default output according to the accepted_formats list """
 
-        inputs_required = {}
-        inputs_optional = {}
+        return "system." + accepted_formats[0]
 
-        for attr, value in tool_schema['properties'].items():
-            if attr != 'properties': 
-                if attr in tool_schema['required']:
-                    inputs_required[attr] = value
-                else:
-                    inputs_optional[attr] = value
+    def setConfText(self, conf_label, conf_dict):
+        """ formats config texts """
+
+        output = conf_label
+        for attr, value in conf_dict.items():
+            output = re.sub(r'\#\#' + attr + '\#\#', value, output)
+
+        return output
+
+
+    def formatInputs(self, inputs_dict, typ):
+        """ returns CWL inputs properly formatted """
 
         inputs = {}
 
-        # TODO: put the content of the 2 fors in a new function and check if required or not
-
         position = 1
-        for attr, value in inputs_required.items():
+        for attr, value in inputs_dict.items():
             
             if value['filetype'] == "input":
-                tp = "File"
+                tp = "File" if typ == "req" else "File?"
             else:
                 tp = "string"
-
-            formats, accepted_formats = self.getFormat(value['file_formats'])
-
-            inputs[attr] = {
-                "label": value['description'],
-                "doc": literal_unicode(value['description'] + "\n"
-                    + "Type: " + value['type'] + "\n"
-                    + "File type: " + value['filetype'] + "\n"
-                    + "Accepted formats: " + ', '.join(accepted_formats) + "\n"
-                    + "Example file: " + value['sample']
-                    ),
-                "type": tp,
-                "format": formats,
-                "inputBinding": {
-                    "position": position,
-                    "prefix": "--" + attr
-                }
-            }
-            
-            position = position + 1
-
-        for attr, value in inputs_optional.items():
-            
-            if value['filetype'] == "input":
-                tp = "File?"
-            else:
-                tp = "string"
-
             formats, accepted_formats = self.getFormat(value['file_formats'])
 
             sample = value['sample'] if value['sample'] else "null"
+            ib = { "position": position, "prefix": "--" + attr } if typ == "req" else { "prefix": "--" + attr }
 
             inputs[attr] = {
                 "label": value['description'],
@@ -125,41 +132,101 @@ class CWLGenerator():
                     ),
                 "type": tp,
                 "format": formats,
-                "inputBinding": {
-                    "prefix": "--" + attr
-                }
+                "inputBinding": ib
             }
 
-        #print(inputs_required)
-        #print(inputs_optional)
+            if value['filetype'] == "output":
+                inputs[attr]['default'] = self.getOutputDefault(accepted_formats)
+            
+            position = position + 1
 
         return inputs
 
-        #print(json.dumps(inputs, indent=4))
 
-        """label: Path to GRO file
-            doc: |
-              Path to the input GROMACS structure GRO file.
-              Type: str
-              File type: input
-              Accepted formats: gro
-              Example file:
-                https://github.com/bioexcel/biobb_md/raw/master/biobb_md/test/data/gromacs/grompp.gro
-            type: File
-            format: edam:format_GROMACS_GRO
-            inputBinding:
-              position: 1
-              prefix: --input_gro_path"""
+    def returnInputs(self, tool_schema, tools, basename):
+        """ returns inputs list """
 
+        inputs_required = {}
+        inputs_optional = {}
+
+        for attr, value in tool_schema['properties'].items():
+            if attr != 'properties': 
+                if attr in tool_schema['required']:
+                    inputs_required[attr] = value
+                else:
+                    inputs_optional[attr] = value
+
+        inputs_r = self.formatInputs(inputs_required, 'req')
+        inputs_o = self.formatInputs(inputs_optional, 'opt')
+
+        inputs = {**inputs_r, **inputs_o}
+
+        conf_label = "Advanced configuration options for ##name##"
+        conf_doc = "Advanced configuration options for ##name##. This should be passed as a string containing a dict. The possible options to include here are listed under 'properties' in the ##name## documentation: ##documentation##"
+        conf_doc_link = [item for item in tools if item['exec'] == basename][0]['docs']
+
+        inputs['config'] = {
+            "label": self.setConfText(conf_label, {"name": tool_schema['name']}),
+            "doc": literal_unicode(self.setConfText(conf_doc, {"name": tool_schema['name'],"documentation": conf_doc_link})),
+            "type": "string?",
+            "inputBinding": {
+                "prefix": "--config"
+            }
+        }
+
+        return inputs
+
+    def formatOutputs(self, outputs_dict, typ):
+        """ returns CWL outputs properly formatted """
+
+        outputs = {}
+
+        for attr, value in outputs_dict.items():
+            
+            tp = "File" if typ == "req" else "File?"
+
+            formats, accepted_formats = self.getFormat(value['file_formats'])
+
+            outputs[attr] = {
+                "label": value['description'],
+                "doc": literal_unicode(value['description']),
+                "type": tp,
+                "format": formats,
+                "outputBinding": {
+                    "glob": "$(inputs." + attr + ")"
+                }
+            }
+
+        return outputs
+
+    def returnOutputs(self, tool_schema):
+        """ returns outputs list """
+
+        outputs_required = {}
+        outputs_optional = {}
+
+        for attr, value in tool_schema['properties'].items():
+            if attr != 'properties' and value['filetype'] == 'output': 
+                if attr in tool_schema['required']:
+                    outputs_required[attr] = value
+                else:
+                    outputs_optional[attr] = value
+
+        outputs_r = self.formatOutputs(outputs_required, 'req')
+        outputs_o = self.formatOutputs(outputs_optional, 'opt')
+
+        outputs = {**outputs_r, **outputs_o}
+
+        return outputs
 
 
     def literal_unicode_representer(self, dumper, data):
+        """ returns a literal unicode """
+
         return dumper.represent_scalar(u'tag:yaml.org,2002:str', data, style='|')
 
     def generateCWL(self, tool_schema, pckg_schema, basename):
         """ generates cwl """
-
-        #print(pckg_schema['tools'])
 
         object_cwl = {
             "tprcwlVersion": "v1.0",
@@ -172,8 +239,8 @@ class CWLGenerator():
                     "dockerPull": 'quay.io/biocontainers/' + pckg_schema['_id'] + ':' + pckg_schema['version'] + '--py_0'
                 }
             },
-            "inputs": self.returnInputs(tool_schema),
-            "outputs": [],
+            "inputs": self.returnInputs(tool_schema, pckg_schema['tools'], basename),
+            "outputs": self.returnOutputs(tool_schema),
             "$namespaces": {
                 "edam": "http://edamontology.org/"
             },
@@ -184,14 +251,13 @@ class CWLGenerator():
 
         yaml.add_representer(literal_unicode, self.literal_unicode_representer)
 
-        #print(object_cwl)
-
         # get cwl output file path
         path = PurePath(self.output_path).joinpath(basename + '.cwl')
 
         # save object to cwl file
         with open(path, 'w+') as yml_file:
             yml_file.write('#!/usr/bin/env cwl-runner\n')
+            #yaml.dump(object_cwl, yml_file, Dumper=MyDumper, sort_keys=False)
             yaml.dump(object_cwl, yml_file, sort_keys=False)
 
 
@@ -206,36 +272,10 @@ class CWLGenerator():
         for json_file in json_files:
             json_file_path = PurePath(self.input_path).joinpath(json_file)
 
-            ###########################
-            # HARCODED!!!!!
-            if 'grompp' in str(json_file_path):
-                tool_schema = self.parseJSON(json_file_path)
-                self.generateCWL(tool_schema, pckg_schema, PurePath(json_file_path).stem)
-            ##########################
+            tool_schema = self.parseJSON(json_file_path)
+            self.generateCWL(tool_schema, pckg_schema, PurePath(json_file_path).stem)
 
-        #print(package)
-        exit()
-
-        # Opening SINGLE JSON file (TODO FOR EACH SCHEMA IN PACKAGE)
-        
-
-
-
-
-
-
-
-        exit()
-
-        # TODO FOR EACH SCHEMA IN PACKAGE
-        basename = PurePath(self.input_package).stem
-
-        path = PurePath(self.output_path).joinpath(basename + '.yaml')
-
-        yml_file = open(path, 'w+')
-
-        yaml.dump(schema, yml_file, allow_unicode=True)
-
+            print(str(PurePath(self.output_path).joinpath(PurePath(json_file_path).stem + '.cwl')) + " file saved")
 
 
 def main():
