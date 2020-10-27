@@ -30,7 +30,9 @@ class JSONSchemaValidator():
             json_files.extend(filenames)
             break
 
-        if(self.package + '.json' in json_files): 
+        json_pckg = self.package + '.json'
+
+        if(json_pckg in json_files): 
             json_files.remove(json_pckg)
 
         return json_files
@@ -52,7 +54,7 @@ class JSONSchemaValidator():
             try:
                 validate(instance, schema)
             except exceptions.ValidationError as e:
-                print("Error in " + str(json_file_path))
+                print("Error validating " + str(json_file_path))
                 print(e)
                 exit(0)
 
