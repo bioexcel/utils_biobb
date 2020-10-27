@@ -111,7 +111,7 @@
         },
         "biobb_property_object": {
             "type": "object",
-            "required": ["wf_prop", "description"],
+            "required": ["type", "wf_prop", "description"],
             "properties": {
                 "type": {
                     "type": "string",
@@ -134,7 +134,7 @@
         },
         "biobb_file_path": {
             "type": "object",
-            "required": ["type", "description", "filetype"],
+            "required": ["type", "description", "filetype", "enum", "file_formats"],
             "properties": {
                 "type": {
                     "type": "string",
