@@ -8,32 +8,20 @@ from os import walk
 
 class literal_unicode(str): pass
 
+prev_indent = 1
+
 class MyDumper(yaml.Dumper):
     # HACK: insert blank lines between top-level objects
     # inspired by https://stackoverflow.com/a/44284819/3786245
     def write_line_break(self, data=None):
-        
+        global prev_indent
+        indent = len(self.indents)
         super().write_line_break(data)
 
-        if len(self.indents) == 1:
+        if indent == 1 or indent == 2 and prev_indent >= 1:
             super().write_line_break()
 
-    def write_indent(self):
-        indent = self.indent or 0
-        if not self.indention or self.column > indent or (self.column == indent and not self.whitespace):
-            self.write_line_break()
-
-        if indent == 2:
-            self.write_line_break()
-
-        if self.column < indent:
-            self.whitespace = True
-            data = u' '*(indent-self.column)
-            self.column = indent
-            if self.encoding:
-                data = data.encode(self.encoding)
-
-            self.stream.write(data)
+        prev_indent = indent
 
 class CWLGenerator():
 
@@ -256,8 +244,8 @@ class CWLGenerator():
         # save object to cwl file
         with open(path, 'w+') as yml_file:
             yml_file.write('#!/usr/bin/env cwl-runner\n')
-            #yaml.dump(object_cwl, yml_file, Dumper=MyDumper, sort_keys=False)
-            yaml.dump(object_cwl, yml_file, sort_keys=False)
+            yaml.dump(object_cwl, yml_file, Dumper=MyDumper, sort_keys=False)
+            #yaml.dump(object_cwl, yml_file, sort_keys=False)
 
 
     def launch(self):
