@@ -5,7 +5,6 @@ import re
 from importlib import import_module
 from pathlib import Path, PurePath
 from os import walk
-from enum import Enum
 
 class literal_unicode(str): pass
 

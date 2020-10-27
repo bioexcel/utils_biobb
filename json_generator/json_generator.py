@@ -45,8 +45,8 @@ class JSONSchemaGenerator():
     def getType(self, type):
         """ return JSON friendly type """
         if type == 'str': return 'string'
-        if type == 'int': return 'number'
-        if type == 'float': return 'float'
+        if type == 'int': return 'integer'
+        if type == 'float': return 'number'
         if type == 'bool': return 'boolean'
         if type == 'dic': return 'object'
 
@@ -54,7 +54,7 @@ class JSONSchemaGenerator():
 
 
     def replaceLink(self, matchobj):
-        return matchobj.group(1)
+        return matchobj.group(1).strip()
 
     def getParamFormats(self, vals, description):
 
@@ -126,7 +126,7 @@ class JSONSchemaGenerator():
         param_id = param[0]
         param_type = param[1]
         if not param[2]: required.append(param_id)
-        description = param[3]
+        description = re.sub(regex_sphinx_link, self.replaceLink, param[3])
         filetype = param[4]
         sample = param[6] if param[6] else None
         formats, file_formats = self.getParamFormats(param[7], description)
