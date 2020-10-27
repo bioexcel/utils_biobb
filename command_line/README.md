@@ -1,4 +1,4 @@
-# Command line file
+# Command line generator
 
 The creation of the command line documentation file is automatic and the data is taken from the path/to/biobb/package/json_schemas and path/to/biobb/package/test/data/config folders. The script will generate a single command line documentation file for each package.
 

@@ -1,4 +1,4 @@
-# Changelog file
+# Changelog generator
 
 The creation of the changelog file is automatic and the data is taken from the package git repo. The script will generate a changelog file for each package.
 

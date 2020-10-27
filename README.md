@@ -13,15 +13,15 @@ In this repository can be found the utils created for Bioxcel building Blocks:
 
 #### Execution order for documentation scripts
 
-1. [json_generator.py](json#json-generator)
+1. [JSON generator](json#json-generator)
 
-2. [json_validator.py](json#json-validator)
+2. [JSON validator](json#json-validator)
 
-3. [cwl_generator.py](cwl/)
+3. [CWL generator](cwl#cwl-files)
 
-4. [command_line_doc_generator.py](command_line)
+4. [Command line generator](command_line#command-line-generator)
 
-5. [changelog_generator.py](changelog)
+5. [Changelog generator](changelog#changelog-generator)
 
 ### Bioconda package generation
 

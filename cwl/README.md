@@ -1,4 +1,4 @@
-# CWL files
+# CWL generator
 
 Script for generating BioBB CWL files for every package. Passing the BioBB package, the absolute path to the modules JSON schema files of this package and the route where the CWL files must be saved, all the CWL files will be automatically generated from the JSON schemas of every package's module.
 
