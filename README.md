@@ -17,7 +17,7 @@ In this repository can be found the utils created for Bioxcel building Blocks:
 
 2. [JSON validator](json#json-validator)
 
-3. [CWL generator](cwl#cwl-files)
+3. [CWL generator](cwl#cwl-generator)
 
 4. [Command line generator](command_line#command-line-generator)
 
