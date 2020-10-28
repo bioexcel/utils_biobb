@@ -18,7 +18,7 @@ class MyDumper(yaml.Dumper):
         indent = len(self.indents)
         super().write_line_break(data)
 
-        if indent == 1 or indent == 2 and prev_indent >= 1:
+        if indent == 1 or indent == 2 and prev_indent >= 2:
             super().write_line_break()
 
         prev_indent = indent
@@ -223,7 +223,7 @@ class CWLGenerator():
             "baseCommand": basename,
             "hints": {
                 "DockerRequirement": {
-                    "dockerPull": 'quay.io/biocontainers/' + pckg_schema['_id'] + ':' + pckg_schema['version'] + '--py_0'
+                    "dockerPull": "quay.io/biocontainers/" + pckg_schema['_id'] + ":" + pckg_schema['version'] + "--py_0"
                 }
             },
             "inputs": self.returnInputs(tool_schema, pckg_schema['tools'], basename),
