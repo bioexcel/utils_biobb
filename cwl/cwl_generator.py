@@ -67,12 +67,20 @@ class CWLGenerator():
     def getFormat(self, ff):
         """ gets formats in type list """
 
+        """flist = [
+            {
+                "type": "enum",
+                "symbols": []
+            }
+        ]"""
+
         flist = []
         aflist = []
         
         for frmt in ff:
             gr = re.match('\.\*\\\\\.(.*)\$', frmt['extension'])
             aflist.append(gr.groups()[0])
+            #flist[0]["symbols"].append("edam:" + frmt['edam'])
             flist.append("edam:" + frmt['edam'])
 
         return flist, aflist
@@ -178,7 +186,8 @@ class CWLGenerator():
                 "label": value['description'],
                 "doc": literal_unicode(value['description']),
                 "type": tp,
-                "format": formats,
+                # trick for passing cwltool --validate
+                "format": formats[0],
                 "outputBinding": {
                     "glob": "$(inputs." + attr + ")"
                 }
@@ -216,7 +225,7 @@ class CWLGenerator():
         """ generates cwl """
 
         object_cwl = {
-            "tprcwlVersion": "v1.0",
+            "cwlVersion": "v1.0",
             "class": "CommandLineTool",
             "label": tool_schema['title'],
             "doc": literal_unicode(tool_schema['description']),

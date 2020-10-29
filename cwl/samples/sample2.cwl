@@ -1,5 +1,5 @@
 #!/usr/bin/env cwl-runner
-tprcwlVersion: v1.0
+cwlVersion: v1.0
 
 class: CommandLineTool
 
@@ -12,7 +12,7 @@ baseCommand: genrestr
 
 hints:
   DockerRequirement:
-    dockerPull: quay.io/biocontainers/biobb_md:3.0.0--py_0
+    dockerPull: quay.io/biocontainers/biobb_md:3.0.1--py_0
 
 inputs:
   input_structure_path:
@@ -77,8 +77,7 @@ outputs:
     doc: |-
       Path the output ITP topology file with restrains
     type: File
-    format:
-    - edam:format_3883
+    format: edam:format_3883
     outputBinding:
       glob: $(inputs.output_itp_path)
 

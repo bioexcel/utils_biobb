@@ -1,5 +1,5 @@
 #!/usr/bin/env cwl-runner
-tprcwlVersion: v1.0
+cwlVersion: v1.0
 
 class: CommandLineTool
 
@@ -12,7 +12,7 @@ baseCommand: grompp
 
 hints:
   DockerRequirement:
-    dockerPull: quay.io/biocontainers/biobb_md:3.0.0--py_0
+    dockerPull: quay.io/biocontainers/biobb_md:3.0.1--py_0
 
 inputs:
   input_gro_path:
@@ -117,8 +117,7 @@ outputs:
     doc: |-
       Path to the output portable binary run file TPR
     type: File
-    format:
-    - edam:format_2333
+    format: edam:format_2333
     outputBinding:
       glob: $(inputs.output_tpr_path)
 
