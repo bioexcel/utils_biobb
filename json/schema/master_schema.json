@@ -90,7 +90,7 @@
                     "enum": ["string", "number", "integer", "boolean"]
                 },
                 "default": {
-                    "type": "string"
+                    "type": ["string", "number", "integer", "boolean", "null"]
                 },
                 "wf_prop": {
                     "type": "boolean"
@@ -99,13 +99,13 @@
                     "type": "string"
                 },
                 "min": {
-                    "type": "string"
+                    "type": ["string", "number", "integer"]
                 },
                 "max": {
-                    "type": "string"
+                    "type": ["string", "number", "integer"]
                 },
                 "step": {
-                    "type": "string"
+                    "type": ["string", "number", "integer"]
                 }
             }
         },
@@ -125,7 +125,7 @@
                     "type": "string"
                 },
                 "default": {
-                    "type": "string"
+                    "type": ["string", "number", "integer", "boolean", "null"]
                 },
                 "wf_prop": {
                     "type": "boolean"
