@@ -52,6 +52,23 @@ class JSONSchemaGenerator():
 
         return type 
 
+    def getDefaultProperty(self, type, default):
+        """ return default according to type """
+        if default == 'None': default = None
+        else: default = re.sub('\"|\'', '', default)
+
+        if type == 'str' or type == 'string': return default
+        if type == 'int': return int(default)
+        if type == 'float': return float(default)
+        if type == 'bool': return default.lower() in ("yes", "true", "t", "1")
+        if type == 'dic': return default
+
+        return default 
+
+    
+    def getMinMaxStep(self, prop_type, prop_min):
+        if prop_type == "float": return float(prop_min)
+        elif prop_type == "int": return int(prop_min)
 
     def replaceLink(self, matchobj):
         return matchobj.group(1).strip()
@@ -172,14 +189,15 @@ class JSONSchemaGenerator():
 
         p = {
             "type": self.getType(prop_type),
-            "default": default,
+            "default": self.getDefaultProperty(prop_type, default),
             "wf_prop": wf_prop,
             "description": description
             }
 
-        if prop_min: p["min"] = prop_min
-        if prop_max: p["max"] = prop_max
-        if prop_step: p["step"] = prop_step
+        if prop_min: 
+            p["min"] = self.getMinMaxStep(prop_type, prop_min)
+        if prop_max: p["max"] = self.getMinMaxStep(prop_type, prop_max) 
+        if prop_step: p["step"] = self.getMinMaxStep(prop_type, prop_step) 
 
         if len(prop) == 9:
             p["enum"] = formats
