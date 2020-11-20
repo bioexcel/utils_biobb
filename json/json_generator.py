@@ -6,7 +6,8 @@ from difflib import SequenceMatcher
 from pathlib import Path, PurePath
 from os import walk
 
-regex_sphinx_link = '\`(.+)\<(.+)\>\`\_'
+#regex_sphinx_link = '\`(.+)\<(.+)\>\`\_'
+regex_sphinx_link = '\`([^\`]+)\ (\<[^\`]+\>\`\_)'
 regex_parameters = '(\w*)\ *(?:\()(\w*)(?:\)):?\ *(\(\w*\):)?\ *(.*?)(?:\.)\ *(?:File type:\ *)(\w+)\.\ *(\`(?:.+)\<(.*)\>\`\_\.)?\ *(?:Accepted formats:\ *)(.+)(?:\.)?'
 regex_param_value = '(\w*)\ *(?:(?:\()(.*)(?:\)))?'
 #regex_property_values = '(?:\*\ *\*\*)(.*)(?:\*\*)\ *(?:\(\*)(\w*)(?:\*\))\ *\-\ *(?:\()(.*?)(?:\))\ *(?:(?:\[)(\d+(?:\.\d+)?)\-(\d+(?:\.\d+)?)(?:\|)?(\d+(?:\.\d+)?)?(?:\]))?\ *(?:(?:\[)(.*)(?:\]))?\ *(.*)?(?:Values:\ *)(.+)(?:\.)?'
@@ -48,20 +49,23 @@ class JSONSchemaGenerator():
         if type == 'int': return 'integer'
         if type == 'float': return 'number'
         if type == 'bool': return 'boolean'
-        if type == 'dic': return 'object'
+        if type == 'dict': return 'object'
+        if type == 'list': return 'array'
 
         return type 
 
     def getDefaultProperty(self, type, default):
         """ return default according to type """
-        if default == 'None': default = None
-        else: default = re.sub('\"|\'', '', default)
+        if default == 'None' and type != 'dict': return None
+        elif default == 'None' and type == 'dict': default = {}
+        elif type != 'dict': default = re.sub('\"|\'', '', default)
+        elif type == 'dict': default = json.loads(default)
 
         if type == 'str' or type == 'string': return default
         if type == 'int': return int(default)
         if type == 'float': return float(default)
         if type == 'bool': return default.lower() in ("yes", "true", "t", "1")
-        if type == 'dic': return default
+        if type == 'dict': return default
 
         return default 
 
