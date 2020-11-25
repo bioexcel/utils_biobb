@@ -15,7 +15,7 @@
                 "wrapped_software": {
                     "description": "Info about the wrapped software",
                     "type": "object",
-                    "required": ["name", "version", "license"],
+                    "required": ["name", "license"],
                     "properties": {
                         "name": {
                             "description": "Program name",
@@ -28,7 +28,7 @@
                         "license": {
                             "description": "Software license",
                             "type": "string",
-                            "enum": ["LGPL 2.1", "MIT", "Apache", "Apache-2.0", "BSD 3-Clause", "other"]
+                            "enum": ["LGPL 2.1", "MIT", "Apache", "Apache-2.0", "BSD 3-Clause", "Creative Commons", "other"]
                         }
                     }
                 },

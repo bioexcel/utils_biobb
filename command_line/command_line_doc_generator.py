@@ -25,9 +25,9 @@ def get_file_content(file_path):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Creates config_biobb.json and config_biobb.yml files.",
+    parser = argparse.ArgumentParser(description="Creates command line documentation file.",
                                      formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999),
-                                     epilog="Examples: \nconfigs_generator.py -i path/to/testconffile/conf.yml -o path/to/outputdir")
+                                     epilog="Examples: \ncommand_line_doc_generator.py -j path/to/json_schemas_folder -c path/to/config_folder -b biobb_name -o path/to/docs/source/command_line.md")
 
     required_args = parser.add_argument_group('required arguments')
     required_args.add_argument('--json_schemas_folder', '-j', required=True,

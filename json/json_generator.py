@@ -16,7 +16,7 @@ regex_property_non_values = '(?:\*\ *\*\*)(.*)(?:\*\*)\ *(?:\(\*)(\w*)(?:\*\))\ 
 #################
 #regex_property_values = '(?:\*\s*\*\*)(.*)(?:\*\*)\s*(?:\(\*)(\w*)(?:\*\))\s*\-\s*(?:\()(.*)(?:\))\s*(?:(?:\[)(\w*)\-(\w*)(?:\|)?(\w*)?(?:\]))?\s*(?:(?:\[)(.*)(?:\]))?\s([a-zA-Z0-9_\- ().&?,!;]+)(?:\s|\.)+(?:(?:Values:)(.+))?'
 ###################
-regex_prop_value = '([a-zA-Z0-9_\-]+)\ *(?:(?:\()(.*)?(?:\)))?'
+regex_prop_value = '([a-zA-Z0-9_\-:\/\/\.\ \,]+)\ *(?:(?:\()(.*)?(?:\)))?'
 regex_info = '\*\ *(.*)'
 regex_info_item = '(.*?)\:(?:\ *)(.*)'
 
@@ -104,7 +104,7 @@ class JSONSchemaGenerator():
 
         return formats, file_formats
 
-    def getPropFormats(self, vals):
+    def getPropFormats(self, vals, type_):
 
         if not vals: return None, None
 
@@ -118,12 +118,17 @@ class JSONSchemaGenerator():
             val = re.sub(regex_sphinx_link, self.replaceLink, val)
 
             f = re.findall(regex_prop_value, val)[0]
-            formats.append(f[0])
+
+            frmt = f[0].rstrip(' ')
+            if type_ == 'integer': frmt = int(f[0])
+            if type_ == 'float': frmt = float(f[0])
+
+            formats.append(frmt)
 
             desc = f[1] if f[1] else None
 
             ff = {
-                    "name": f[0],
+                    "name": frmt,
                     "description": desc
                 }
 
@@ -187,8 +192,8 @@ class JSONSchemaGenerator():
         prop_max = prop[4] if prop[4] else None
         prop_step = prop[5] if prop[5] else None
         wf_prop = True if prop[6] else False
-        description = prop[7]
-        if len(prop) == 9: formats, property_formats = self.getPropFormats(prop[8])
+        description = re.sub(regex_sphinx_link, self.replaceLink, prop[7])
+        if len(prop) == 9: formats, property_formats = self.getPropFormats(prop[8].rstrip('\.'), self.getType(prop_type))
         #formats, property_formats = self.getPropFormats(prop[8])
 
         p = {
