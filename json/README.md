@@ -136,7 +136,7 @@ The *property type* must be between brackets and in markdown italic (between ast
 
 The *property default* must be between brackets. If it's a text it's highly recommendable to put it between double quotes instead of single ones.
 
-The *property range* (only for integer or float properties) must be between square brackets following the next pattern: *[min-max|step]*.
+The *property range* (only for integer or float properties) must be between square brackets following the next pattern: *[min~max|step]*.
 
 The *WF property* indicates if this is a Workflow property. It must be between square brackets and it's optional.
 
@@ -158,7 +158,7 @@ The *parameter type* must be between brackets and in markdown italic (between as
 
 The *parameter default* must be between brackets. If it's a text it's highly recommendable to put it between double quotes instead of single ones.
 
-The *parameter range* (only for integer or float parameters) must be between square brackets following the next pattern: *[min-max|step]*.
+The *parameter range* (only for integer or float parameters) must be between square brackets following the next pattern: *[min~max|step]*.
 
 *Description* is a string descriving the functionality of the parameter.
 

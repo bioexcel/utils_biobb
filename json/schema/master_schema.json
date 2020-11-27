@@ -28,7 +28,7 @@
                         "license": {
                             "description": "Software license",
                             "type": "string",
-                            "enum": ["LGPL 2.1", "MIT", "Apache", "Apache-2.0", "BSD 3-Clause", "Creative Commons", "other"]
+                            "enum": ["LGPL 2.1", "MIT", "Apache", "Apache-2.0", "BSD 3-Clause", "Creative Commons", "GNU", "other"]
                         }
                     }
                 },
@@ -69,8 +69,7 @@
                             "type":"object",
                             "additionalProperties": {
                                 "oneOf": [
-                                    {"$ref": "#/definitions/biobb_property"},
-                                    {"$ref": "#/definitions/biobb_property_object"}
+                                    {"$ref": "#/definitions/biobb_property"}
                                 ]
                             }
                         }
@@ -106,29 +105,6 @@
                 },
                 "step": {
                     "type": ["string", "number", "integer"]
-                }
-            }
-        },
-        "biobb_property_object": {
-            "type": "object",
-            "required": ["type", "wf_prop", "description"],
-            "properties": {
-                "type": {
-                    "type": "string",
-                    "enum": ["object"]
-                },
-                "required": {
-                    "type":"array",
-                    "items": {"type":"string"}
-                },
-                "description": {
-                    "type": "string"
-                },
-                "default": {
-                    "type": ["string", "number", "integer", "boolean", "null"]
-                },
-                "wf_prop": {
-                    "type": "boolean"
                 }
             }
         },
