@@ -16,7 +16,7 @@ regex_property_non_values = '(?:\*\ *\*\*)(.*)(?:\*\*)\ *(?:\(\*)(\w*)(?:\*\))\ 
 #################
 #regex_property_values = '(?:\*\s*\*\*)(.*)(?:\*\*)\s*(?:\(\*)(\w*)(?:\*\))\s*\-\s*(?:\()(.*)(?:\))\s*(?:(?:\[)(\w*)\-(\w*)(?:\|)?(\w*)?(?:\]))?\s*(?:(?:\[)(.*)(?:\]))?\s([a-zA-Z0-9_\- ().&?,!;]+)(?:\s|\.)+(?:(?:Values:)(.+))?'
 ###################
-regex_prop_value = '([a-zA-Z0-9_\-:\/\/\.\ \,]+)\ *(?:(?:\()(.*)?(?:\)))?'
+regex_prop_value = '([a-zA-Z0-9_\-\+:\/\/\.\ \,\*\#]+)\ *(?:(?:\()(.*)?(?:\)))?'
 regex_info = '\*\ *(.*)'
 regex_info_item = '(.*?)\:(?:\ *)(.*)'
 
@@ -115,17 +115,27 @@ class JSONSchemaGenerator():
 
         for val in list_vals:
 
+            # trick for cases when there are parenthesis in the format name
+            val = re.sub(r'\\\(', '****', val)
+            val = re.sub(r'\\\)', '++++', val)
+
             val = re.sub(regex_sphinx_link, self.replaceLink, val)
 
             f = re.findall(regex_prop_value, val)[0]
 
-            frmt = f[0].rstrip(' ')
+            frmt = f[0].strip(' ')
             if type_ == 'integer': frmt = int(f[0])
             if type_ == 'float': frmt = float(f[0])
 
-            formats.append(frmt)
-
             desc = f[1] if f[1] else None
+
+            # trick for cases when there are parenthesis in the format name
+            if type_ != 'integer' and type_ != 'float':
+                if '****' in frmt: 
+                    frmt = re.sub(r'\*\*\*\*', '(', frmt)
+                    frmt = re.sub(r'\+\+\+\+', ')', frmt)
+
+            formats.append(frmt)
 
             ff = {
                     "name": frmt,
