@@ -186,12 +186,15 @@ class CWLGenerator():
                 "label": value['description'],
                 "doc": literal_unicode(value['description']),
                 "type": tp,
-                # trick for passing cwltool --validate
-                "format": formats[0],
                 "outputBinding": {
                     "glob": "$(inputs." + attr + ")"
                 }
             }
+
+            if len(accepted_formats) == 1:
+                # trick for passing cwltool --validate
+                outputs[attr]["format"] =  formats[0]
+
 
         return outputs
 
