@@ -381,6 +381,8 @@ class JSONSchemaGenerator():
             modules = import_module(self.input_package + '.' + package)
             for module in modules.__all__:
 
+                print("Parsing " + str(PurePath(self.output_path).joinpath(module + '.json')))
+
                 # json schemas
                 # import single module
                 mod = import_module(self.input_package + '.' + package + '.' + module)
