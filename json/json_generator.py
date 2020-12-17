@@ -309,6 +309,12 @@ class JSONSchemaGenerator():
 
                     properties["properties"]["properties"][prop_level1]["parameters"][prop_level2] = p
 
+            # check if examples
+            r = row.strip()
+            if r.startswith('Examples'):
+                info = False
+                args = False
+
             # check if info
             if 'Info:' in row:
                 info = True
