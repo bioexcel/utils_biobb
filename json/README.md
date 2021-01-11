@@ -48,11 +48,9 @@ The structure of a biobb package must be:
 			* unitests/
 			* conf.yml
 	* .gitignore
-	* Dockerfile
 	* LICENSE
 	* README.md
 	* setup.py
-	* Singularity.latest
 
 #### \_\_init\_\_.py files
 
@@ -85,7 +83,9 @@ The *config* folder must exist before executing the script. All the JSON config 
 All the docs must be written in correct [Google Style Python Docstrings](https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_google.html) format and they must be properly indented. Example of documentation:
 
 ```rst
-Description of the module.
+| biobb_package ToolName
+| Short description for the `tool_name <http://tool_name-documentation.org>`_ module in Restructured Text (reST) syntax. Mandatory.
+| Long description for the `tool_name <http://tool_name-documentation.org>`_ module in Restructured Text (reST) syntax. Optional.
 
 Args:
     arg_name1 (arg_type): Description for argument 1. File type: input / output. `Sample file <url_to_sample_file1>`_. Accepted formats: format1 (edam:format_XXXX), format2 (edam:format_XXXX), format3 (edam:format_XXXX). 
@@ -95,7 +95,44 @@ Args:
         * **property2** (*prop_type*) - (property2_default) Property 2 description. 
         * **property3** (*dic*) - (None) Property 3 description.
             * **parameter1** (*param_type*) - (parameter1_default) Parameter 1 description. Values: value1 (description for value1), value2 (description for value2), value3 (description for value3).
+
+Examples:
+    This is a use example of how to use the building block from Python::
+
+        from biobb_package.tool_name.tool_name import tool_name
+
+        prop = { 
+            'some_boolean_property': True 
+        }
+        tool_name(arg_name1='/path/to/arg_name1.file',
+                  arg_name2='/path/to/arg_name2.file',
+                  properties=prop)
+
+Info:
+    * wrapped_software:
+        * name: Wrapped Software
+        * version: >=3.0
+        * license: GNU 
+    * ontology:
+        * name: EDAM
+        * schema: http://edamontology.org/EDAM.owl
+
 ```
+
+#### Tool name & descriptions
+
+The package name & descriptions must have the next format:
+
+```rst
+| biobb_package ToolName
+| Short description for the `tool_name <http://tool_name-documentation.org>`_ module in Restructured Text (reST) syntax. Mandatory.
+| Long description for the `tool_name <http://tool_name-documentation.org>`_ module in Restructured Text (reST) syntax. Optional.
+```
+* In the first line, the name of the package and the class
+* A short description of the tool (mandatory).
+* A long description of the tool (optional).
+
+The three contents must be in a single line preceded by the pipe (**\|**) symbol.
 
 #### Arguments
 
@@ -163,6 +200,37 @@ The *parameter range* (only for integer or float parameters) must be between squ
 *Description* is a string descriving the functionality of the parameter.
 
 Preceded by the **Values:** expression, there can be a list with the possible value for each parameter. The patther must be the following (value description is not mandatory):  *value (description for value)*.
+
+#### Examples
+
+In the docstring, the tool developer must provide a Python example of a plain call to the tool:
+
+```rst
+This is a use example of how to use the building block from Python::
+
+    from biobb_package.tool_name.tool_name import tool_name
+
+    prop = { 
+        'some_boolean_property': True 
+    }
+    tool_name(arg_name1='/path/to/arg_name1.file',
+              arg_name2='/path/to/arg_name2.file',
+              properties=prop)
+```
+
+#### Info
+
+The user must also provide information about the wrapped software (name, version and license) and the EDAM ontology:
+
+```rst
+* wrapped_software:
+    * name: Wrapped Software
+    * version: >=3.0
+    * license: GNU 
+* ontology:
+    * name: EDAM
+    * schema: http://edamontology.org/EDAM.owl
+```
 
 ## JSON validator
 
