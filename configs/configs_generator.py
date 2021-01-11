@@ -3,7 +3,8 @@
 import argparse
 import yaml
 import json
-from pathlib import Path
+from os import walk
+from pathlib import Path, PurePath
 
 
 def main():
@@ -16,8 +17,19 @@ def main():
 
     args = parser.parse_args()
 
+    # clean output path
+    files = []
+    for (dirpath, dirnames, filenames) in walk(args.output):
+        files.extend(filenames)
+        break
+
+    # remove files from array of files
+    for f in files:
+        path = PurePath(args.output).joinpath(f)
+        Path(path).unlink()
+
     config = yaml.safe_load(open(args.input_conf_yaml))
-    print(config)
+
     for module, module_properties in config.items():
         if isinstance(module_properties, dict) and module_properties.get('properties'):
             del module_properties['paths']
