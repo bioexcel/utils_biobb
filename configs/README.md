@@ -1,6 +1,39 @@
 # Configuration files
 
-The creation of the configuration files is automatic and the data is taken from the path/to/biobb/package/test/conf.yml file. The script will generate a JSON config file for each module with *properties* defined in its parameters.
+The creation of the configuration files is automatic and the data is taken from the path/to/biobb/package/test/conf.yml file. The script will generate a JSON and a YAML config files for each module with *properties* defined in its parameters.
+
+## Configs generator
+
+Script for the creation of JSON / YAML config files
+
+### Execution steps
+
+#### Step 1: activate environment
+
+Activate the environment where the BioBB package is loaded:
+
+```Shell
+conda activate biobb_env
+```
+#### Step 2: create config/ folder
+
+Create the folder *config/* for storing all the config files:
+
+```Shell
+path/to/biobb_package/biobb_package/test/data/config
+```
+
+#### Step 3: execute script
+
+Run the python script passing the path to the *conf.yml* file and the path to the configs folder:
+
+```Shell
+configs_generator.py -i path/to/testconffile/conf.yml -o path/to/outputdir
+```
+
+```Shell
+configs_generator.py --input_conf_yaml path/to/testconffile/conf.yml --output path/to/outputdir
+```
 
 ## Copyright & Licensing
 This software has been developed in the [MMB group](http://mmb.irbbarcelona.org) at the [BSC](http://www.bsc.es/) & [IRB](https://www.irbbarcelona.org/) for the [European BioExcel](http://bioexcel.eu/), funded by the European Commission (EU H2020 [823830](http://cordis.europa.eu/projects/823830), EU H2020 [675728](http://cordis.europa.eu/projects/675728)).

@@ -19,9 +19,11 @@ In this repository can be found the utils created for Bioxcel building Blocks:
 
 3. [CWL generator](cwl#cwl-generator)
 
-4. [Command line generator](command_line#command-line-generator)
+4. [Configs generator](configs#configuration-files)
 
-5. [Changelog generator](changelog#changelog-generator)
+5. [Command line generator](command_line#command-line-generator)
+
+6. [Changelog generator](changelog#changelog-generator)
 
 ### Bioconda package generation
 
