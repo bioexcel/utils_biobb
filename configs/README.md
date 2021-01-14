@@ -28,11 +28,11 @@ path/to/biobb_package/biobb_package/test/data/config
 Run the python script passing the path to the *conf.yml* file and the path to the configs folder:
 
 ```Shell
-configs_generator.py -i path/to/testconffile/conf.yml -o path/to/outputdir
+python3 configs_generator.py -i path/to/testconffile/conf.yml -o path/to/outputdir
 ```
 
 ```Shell
-configs_generator.py --input_conf_yaml path/to/testconffile/conf.yml --output path/to/outputdir
+python3 configs_generator.py --input_conf_yaml path/to/testconffile/conf.yml --output path/to/outputdir
 ```
 
 ## Copyright & Licensing

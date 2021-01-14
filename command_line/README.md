@@ -21,11 +21,11 @@ conda activate biobb_env
 Run the python script passing the path to the package *json_schemas/* folder, the package *configs/* folder, the package name and the path to the *command_line.md* file in the *docs/source/* folder:
 
 ```Shell
-command_line_doc_generator.py -j path/to/json_schemas_folder -c path/to/config_folder -b biobb_name -o path/to/docs/source/command_line.md
+python3 command_line_doc_generator.py -j path/to/json_schemas_folder -c path/to/config_folder -b biobb_name -o path/to/docs/source/command_line.md
 ```
 
 ```Shell
-command_line_doc_generator.py --json_schemas_folder path/to/json_schemas_folder --config_folder path/to/config_folder --biobb_name biobb_name --output path/to/docs/source/command_line.md
+python3 command_line_doc_generator.py --json_schemas_folder path/to/json_schemas_folder --config_folder path/to/config_folder --biobb_name biobb_name --output path/to/docs/source/command_line.md
 ```
 
 ## Copyright & Licensing
