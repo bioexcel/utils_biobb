@@ -2,10 +2,14 @@
 
 #Usage: ./new_conda_version.sh
 #Activate conda
-ide=subl
-path_user=path_to_user_home
-path_biobb=${path_user}path_to_biobb_project
-path_json_schemas=path_to_json_generator/
+ide=code
+path_user=
+path_biobb=
+path_json_schemas=
+conda=
+echo "******************************************************"
+echo "Be sure of having activated $conda conda environment!"
+echo "******************************************************"
 read -p "Repository name ie biobb_md : " REPOSITORY
 read -p "Version number ie 0.1.2 : " version
 read -p "Commit message ie 2019.4 : " message
@@ -54,10 +58,10 @@ then
 	git tag -a v$version -m "$message"
 	git push origin v$version
 else
-	#git push 
+	git push 
 	git push bioexcel
 	git tag -a v$version -m "$message"
-	#git push origin v$version
+	git push origin v$version
 	git push bioexcel v$version
 fi
 python3 setup.py sdist bdist_wheel; python3 -m twine upload dist/* #<<< in_case_of_user_keyring
