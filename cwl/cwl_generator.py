@@ -273,6 +273,9 @@ class CWLGenerator():
             json_file_path = PurePath(self.input_path).joinpath(json_file)
 
             tool_schema = self.parseJSON(json_file_path)
+
+            print("Generating " + str(PurePath(self.output_path).joinpath(PurePath(json_file_path).stem + '.cwl')) + " file")
+
             self.generateCWL(tool_schema, pckg_schema, PurePath(json_file_path).stem)
 
             print(str(PurePath(self.output_path).joinpath(PurePath(json_file_path).stem + '.cwl')) + " file saved")
