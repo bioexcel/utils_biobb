@@ -16,10 +16,10 @@ task_time_out = int(os.environ.get('TASK_TIME_OUT', 0))
 @task({% for argument in module_info.arguments %}{{argument[0]}}={{argument[1]}}, {% endfor %}
       on_failure="IGNORE", time_out=task_time_out)
 def _{{ module_info.iclass | lower }}({% for argument in module_info.arguments %}{{argument[0]}}, {% endfor %} properties, **kwargs):
-    {% if mpi %}
-        task_config.config_gromacs_multinode(properties)
+    {% if module_info.mpi %}
+    task_config.config_gromacs_multinode(properties)
     {% else %}
-        task_config.pop_pmi(os.environ)
+    task_config.pop_pmi(os.environ)
     {% endif %}
     try:
         {{ module_info.iclass }}({% for argument in module_info.arguments %}{{argument[0]}}={{argument[0]}}, {% endfor %}properties=properties, **kwargs).launch()

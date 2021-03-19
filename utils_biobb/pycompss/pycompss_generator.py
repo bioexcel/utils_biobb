@@ -29,6 +29,7 @@ class PycompssGenerator:
                 module_info['iclass']= json_dict.get('name').split()[-1]
                 module_info['module_dot_path'] = sub_paths_dict.get(module_name).replace('/', '.')+'.'+module_name
                 module_info['mpi'] = json_dict.get('info').get('wrapped_software').get('multinode')
+                #print(f'module_info["mpi"]: {module_info["mpi"]}')
                 module_info['required'] = json_dict.get('required')
                 module_info['arguments'] = []
                 not_required = []
@@ -56,6 +57,7 @@ class PycompssGenerator:
                     templateEnv = jinja2.Environment(loader=templateLoader)
                     TEMPLATE_FILE = "pycompss_wrapper.tmpl"
                     template = templateEnv.get_template(TEMPLATE_FILE)
+                    print(f'Writting {str(adapter_file_path)}')
                     adapter_file.write(template.render(module_info=module_info))
 
 
