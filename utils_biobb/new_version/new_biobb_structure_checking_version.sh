@@ -26,6 +26,9 @@ if [ $json_schemas == 'y' -o $json_schemas == 'Y'  ]
 then
 	python3 ${path_json_schemas}json_generator.py -p $REPOSITORY -o $path_biobb$REPOSITORY/$REPOSITORY
 fi
+read -p "Add new version number to CHANGELOG and constants.py Press any key to continue..." -n1 -s
+echo ""
+$ide /Users/pau/projects/biobb_structure_checking/biobb_structure_checking/constants.py /Users/pau/projects/biobb_structure_checking/CHANGELOG
 read -p "Before opening setup.py remember to check if some dependency has changed. Press any key to continue..." -n1 -s
 echo ""
 $ide $path_biobb$REPOSITORY/setup.py
