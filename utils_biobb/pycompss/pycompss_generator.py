@@ -8,7 +8,6 @@ import json
 import jinja2
 
 
-
 class PycompssGenerator:
 
     def __init__(self, package, output_dir):
@@ -61,13 +60,10 @@ class PycompssGenerator:
                     adapter_file.write(template.render(module_info=module_info))
 
 
-
-
-
 def main():
     parser = argparse.ArgumentParser(description="Creates pycompss adapters.",
                                      formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999),
-                                     epilog='''Examples: \npycompss_generator.py -p biobb_package  -o path/to/biobb_adapters/biobb_adapters/pycompss\ncwl_generator.py --package biobb_package --input path/to/json_schemas --output path/to/cwl_adapters''')
+                                     epilog='''Examples: \npycompss_generator.py -p biobb_package  -o path/to/biobb_adapters/biobb_adapters/pycompss''')
     required_args = parser.add_argument_group('required arguments')
     required_args.add_argument('--package_name', '-p', required=True, help='BioBB package name from where the json schemas will be taken.')
     required_args.add_argument('--output_pycompss_dir', '-o', required=True, help='Output path to the Pycompss adapters folder.')
