@@ -44,7 +44,7 @@ class PycompssGenerator:
                         if argument in module_info['required']:
                             module_info['arguments'].append((argument, 'FILE_OUT'))
                         else:
-                            not_required.append((argument, 'FILE_IN'))
+                            not_required.append((argument, 'FILE_OUT'))
 
                 module_info['arguments'].extend(not_required)
 
@@ -55,6 +55,9 @@ class PycompssGenerator:
                     templateLoader = jinja2.FileSystemLoader(str(Path(__file__).parent))
                     templateEnv = jinja2.Environment(loader=templateLoader)
                     TEMPLATE_FILE = "pycompss_wrapper.tmpl"
+                    # Exception for mdrun special template
+                    if module_info['iclass']=='Mdrun':
+                        TEMPLATE_FILE = "pycompss_wrapper_mdrun.tmpl"
                     template = templateEnv.get_template(TEMPLATE_FILE)
                     print(f'Writting {str(adapter_file_path)}')
                     adapter_file.write(template.render(module_info=module_info))

@@ -1,0 +1,45 @@
+# Python
+import os
+import sys
+import traceback
+# Pycompss
+from pycompss.api.task import task
+from pycompss.api.parameter import FILE_IN, FILE_OUT
+from pycompss.api.multinode import multinode
+from pycompss.api.constraint import constraint
+# Adapters commons pycompss
+from biobb_adapters.pycompss.biobb_commons import task_config
+# Wrapped Biobb
+from {{ module_info.module_dot_path }} import {{ module_info.iclass }}  # Importing class instead of module to avoid name collision
+
+task_time_out = int(os.environ.get('TASK_TIME_OUT', 0))
+computing_nodes = str(os.environ.get('TASK_COMPUTING_NODES', "1"))
+computing_units = str(os.environ.get('TASK_COMPUTING_UNITS', "1"))
+
+@constraint(computing_units=computing_units)
+@multinode(computing_nodes=computing_nodes)
+@task({% for argument in module_info.arguments %}{{argument[0]}}={{argument[1]}}, {% endfor %}
+      on_failure="IGNORE", time_out=task_time_out)
+def _{{ module_info.iclass | lower }}({% for argument in module_info.arguments %}{{argument[0]}}, {% endfor %} properties, **kwargs):
+    {% if module_info.mpi %}
+    task_config.config_multinode(properties)
+    {% else %}
+    task_config.pop_pmi(os.environ)
+    {% endif %}
+    try:
+        {{ module_info.iclass }}({% for argument in module_info.arguments %}{{argument[0]}}={{argument[0]}}, {% endfor %}properties=properties, **kwargs).launch()
+    except Exception as e:
+        traceback.print_exc()
+        raise e
+    finally:
+        sys.stdout.flush()
+        sys.stderr.flush()
+
+
+def {{ module_info.iclass | lower }}({% for argument in module_info.arguments %}{% if argument[0] in module_info.required %}{{argument[0]}}, {% else %}{{argument[0]}}=None, {% endif %}{% endfor %}properties=None, **kwargs):
+
+    if {% for argument in module_info.arguments if argument[1] == 'FILE_OUT' %}({{argument[0]}} is None or os.path.exists({{argument[0]}})) and \
+       {% endfor %}True:
+        print("WARN: Task {{module_info.iclass}} already executed.")
+    else:
+        _{{ module_info.iclass | lower }}({% for argument in module_info.arguments %} {{argument[0]}}, {% endfor %} properties, **kwargs)
