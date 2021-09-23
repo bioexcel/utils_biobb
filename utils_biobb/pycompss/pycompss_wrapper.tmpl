@@ -31,7 +31,7 @@ def _{{ module_info.iclass | lower }}({% for argument in module_info.arguments %
         sys.stderr.flush()
 
 
-def {{ module_info.iclass | lower }}({% for argument in module_info.arguments %}{% if argument[0] in module_info.required %}{{argument[0]}}, {% else %}{{argument[0]}}=None, {% endif %}{% endfor %}properties=None, **kwargs):
+def {{ module_info.module_name | lower }}({% for argument in module_info.arguments %}{% if argument[0] in module_info.required %}{{argument[0]}}, {% else %}{{argument[0]}}=None, {% endif %}{% endfor %}properties=None, **kwargs):
 
     if {% for argument in module_info.arguments if argument[1] == 'FILE_OUT' %}({{argument[0]}} is None or os.path.exists({{argument[0]}})) and \
        {% endfor %}True:
