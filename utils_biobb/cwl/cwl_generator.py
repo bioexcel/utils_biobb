@@ -236,7 +236,7 @@ class CWLGenerator():
             "hints": {
                 "DockerRequirement": {
                     #"dockerPull": "quay.io/biocontainers/" + pckg_schema['_id'] + ":" + pckg_schema['version'] + "--py_0"
-                    "dockerPull": pckg_schema['docker']
+                    "dockerPull": pckg_schema['docker'].replace("https://", "")
                 }
             },
             "inputs": self.returnInputs(tool_schema, pckg_schema['tools'], basename),
