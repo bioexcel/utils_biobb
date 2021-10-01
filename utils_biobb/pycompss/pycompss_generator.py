@@ -57,7 +57,7 @@ class PycompssGenerator:
                     templateEnv = jinja2.Environment(loader=templateLoader)
                     TEMPLATE_FILE = "pycompss_wrapper.tmpl"
                     # Exception for mdrun special template
-                    if module_info['iclass']=='Mdrun':
+                    if module_info['iclass'] in ['Mdrun', 'PmemdMDRun', 'SanderMDRun']:
                         TEMPLATE_FILE = "pycompss_wrapper_mdrun.tmpl"
                     template = templateEnv.get_template(TEMPLATE_FILE)
                     print(f'Writting {str(adapter_file_path)}')
