@@ -1,0 +1,16 @@
+name: biobb_360
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - biobb_amber==3.6.0
+  - biobb_analysis==3.6.0
+  - biobb_chemistry==3.6.0
+  - biobb_io==3.6.0
+  - biobb_md==3.6.0
+  - biobb_ml==3.6.0
+  - biobb_model==3.6.0
+  - biobb_pmx==3.6.0
+  - biobb_structure_utils==3.6.1
+  - biobb_vs==3.6.0
+  - conda
