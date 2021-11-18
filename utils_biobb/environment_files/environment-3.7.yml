@@ -8,7 +8,7 @@ dependencies:
   - biobb_chemistry==3.7.0
   - biobb_dna==3.7.1
   - biobb_io==3.7.0
-  - biobb_md==3.7.0
+  - biobb_md==3.7.1
   - biobb_ml==3.7.0
   - biobb_model==3.7.0
   - biobb_pmx==3.7.0
