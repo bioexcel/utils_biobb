@@ -191,9 +191,8 @@ class CWLGenerator():
                 }
             }
 
-            if len(accepted_formats) == 1:
-                # trick for passing cwltool --validate
-                outputs[attr]["format"] =  formats[0]
+            # trick for passing cwltool --validate
+            outputs[attr]["format"] = formats[0]
 
 
         return outputs
