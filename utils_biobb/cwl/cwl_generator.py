@@ -241,7 +241,7 @@ class CWLGenerator():
             "inputs": self.returnInputs(tool_schema, pckg_schema['tools'], basename),
             "outputs": self.returnOutputs(tool_schema),
             "$namespaces": {
-                "edam": "http://edamontology.org/"
+                "edam": "https://edamontology.org/"
             },
             "$schemas": [
                 "https://raw.githubusercontent.com/edamontology/edamontology/master/EDAM_dev.owl"
