@@ -16,19 +16,9 @@ read -p "Commit message ie 2019.4 : " message
 echo "Repository: $REPOSITORY"
 echo "Version: $version"
 echo "Message: $message"
-read -p "Do you want to run tests for this repository [Y/n]? " test
-if [ $test == 'y' -o $test == 'Y'  ]
-then
-	nosetests -s $path_biobb$REPOSITORY/$REPOSITORY/test/unitests
-fi
-read -p "Do you want to generate json schemas for this repository [Y/n]? " json_schemas
-if [ $json_schemas == 'y' -o $json_schemas == 'Y'  ]
-then
-	python3 ${path_json_schemas}json_generator.py -p $REPOSITORY -o $path_biobb$REPOSITORY/$REPOSITORY
-fi
 read -p "Add new version number to CHANGELOG and constants.py Press any key to continue..." -n1 -s
 echo ""
-$ide /Users/pau/projects/biobb_structure_checking/biobb_structure_checking/constants.py /Users/pau/projects/biobb_structure_checking/CHANGELOG
+$ide /Users/pau/projects/biobb_structure_checking/biobb_structure_checking/constants.py /Users/pau/projects/biobb_structure_checking/CHANGELOG.md
 read -p "Before opening setup.py remember to check if some dependency has changed. Press any key to continue..." -n1 -s
 echo ""
 $ide $path_biobb$REPOSITORY/setup.py
@@ -37,14 +27,11 @@ echo ""
 $ide $path_biobb$REPOSITORY/README.md
 read -p "Modify README.md with the new version number (in version and instructions) and press any key..." -n1 -s
 echo ""
-$ide $path_biobb$REPOSITORY/$REPOSITORY/json_schemas/$REPOSITORY.json
-read -p "Modify $REPOSITORY.json with the new version number and the check if some dependency has changed..." -n1 -s
-echo ""
 $ide $path_biobb$REPOSITORY/$REPOSITORY/docs/source/conf.py
 read -p "Modify conf.py with the new version number..." -n1 -s
 echo ""
-$ide $path_biobb$REPOSITORY/$REPOSITORY/docs/source/change_log.md
-read -p "Modify change_log.md with the new version..." -n1 -s
+$ide $path_biobb$REPOSITORY/$REPOSITORY/docs/source/changelog.md
+read -p "Modify changelog.md with the new version..." -n1 -s
 echo ""
 $ide $path_biobb$REPOSITORY/$REPOSITORY/docs/source/schema.html
 read -p "Modify schema.html with the new version number..." -n1 -s
@@ -54,35 +41,31 @@ cp -v $path_biobb$REPOSITORY/README.md $path_biobb$REPOSITORY/$REPOSITORY/docs/s
 git status
 git add .
 git commit -m "$message"
-read -p "Only github [Y/n]?" github
-if [ $github == 'y' -o $github == 'Y'  ]
-then
-	git push
-	git tag -a v$version -m "$message"
-	git push origin v$version
-else
-	git push
-	git push bioexcel
-	git tag -a v$version -m "$message"
-	git push origin v$version
-	git push bioexcel v$version
-fi
+git push
+git tag -a v$version -m "$message"
+git push origin v$version
 python3 setup.py sdist bdist_wheel; python3 -m twine upload dist/* <<< andriopau
 rm -rfv $REPOSITORY.egg-info dist build
 
+# Conda skeleton
+# rm -rf $path_user$REPOSITORY 2> /dev/null
+# retval=1
+# while [ $retval -ne 0 ]
+# do
+#   echo "Sleeping for 5 seconds..."
+#   sleep 5
+#   cd ~; conda skeleton pypi $REPOSITORY --version $version
+#   retval=$?
+# done
+# $ide $path_user$REPOSITORY/meta.yaml
+# read -p "Copy the headers (lines that starts with {%) from  ~/$REPOSITORY/meta.yaml and press any key..." -n1 -s
+# echo ""
+
+
+# https://pypi.org/project/biobb-structure-checking/#copy-hash-modal-735762e9-48f7-451f-8481-ce6f4981b9bc
+read -p "Copy the hash of the tgz file and press any key..." -n1 -s
+open https://pypi.org/project/$REPOSITORY
 #Bioconda
-rm -rf $path_user$REPOSITORY 2> /dev/null
-retval=1
-while [ $retval -ne 0 ]
-do
-  echo "Sleeping for 5 seconds..."
-  sleep 5
-  cd ~; conda skeleton pypi $REPOSITORY --version $version
-  retval=$?
-done
-$ide $path_user$REPOSITORY/meta.yaml
-read -p "Copy the headers (lines that starts with {%) from  ~/$REPOSITORY/meta.yaml and press any key..." -n1 -s
-echo ""
 cd ${path_biobb}bioconda-recipes/
 git checkout -f master; git pull origin master
 git branch -D $REPOSITORY; git push origin --delete $REPOSITORY; git checkout -b $REPOSITORY
