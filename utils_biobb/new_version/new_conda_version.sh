@@ -31,6 +31,9 @@ echo ""
 $ide $path_biobb$REPOSITORY/setup.py
 read -p "Modify setup.py with the new version number and press any key..." -n1 -s
 echo ""
+$ide $path_biobb$REPOSITORY/$REPOSITORY/__init__.py
+read -p "Modify __init__.py adding the new version number: __version__ = \"$version\"" -n1 -s
+echo ""
 $ide $path_biobb$REPOSITORY/README.md
 read -p "Modify README.md with the new version number (in version and instructions) and press any key..." -n1 -s
 echo ""
@@ -67,19 +70,23 @@ fi
 python3 setup.py sdist bdist_wheel; python3 -m twine upload dist/* <<< andriopau
 rm -rfv $REPOSITORY.egg-info dist build
 
+# Conda skeleton
+# rm -rf $path_user$REPOSITORY 2> /dev/null
+# retval=1
+# while [ $retval -ne 0 ]
+# do
+#   echo "Sleeping for 5 seconds..."
+#   sleep 5
+#   cd ~; conda skeleton pypi $REPOSITORY --version $version
+#   retval=$?
+# done
+# $ide $path_user$REPOSITORY/meta.yaml
+# read -p "Copy the headers (lines that starts with {%) from  ~/$REPOSITORY/meta.yaml and press any key..." -n1 -s
+# echo ""
+
+read -p "Copy the sha256 hash of the tgz file and press any key..." -n1 -s
+open https://pypi.org/project/$REPOSITORY
 #Bioconda
-rm -rf $path_user$REPOSITORY 2> /dev/null
-retval=1
-while [ $retval -ne 0 ]
-do
-  echo "Sleeping for 5 seconds..."
-  sleep 5
-  cd ~; conda skeleton pypi $REPOSITORY --version $version
-  retval=$?
-done
-$ide $path_user$REPOSITORY/meta.yaml
-read -p "Copy the headers (lines that starts with {%) from  ~/$REPOSITORY/meta.yaml and press any key..." -n1 -s
-echo ""
 cd ${path_biobb}bioconda-recipes/
 git checkout -f master; git pull origin master
 git branch -D $REPOSITORY; git push origin --delete $REPOSITORY; git checkout -b $REPOSITORY
