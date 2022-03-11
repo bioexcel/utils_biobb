@@ -1,0 +1,96 @@
+<tool id="biobb_structure_utils_cat_pdb_ext" name="CatPdb" version="3.7.4" >
+    <description>: Class to concat two PDB structures in a single PDB file.</description>
+    <requirements>
+        <requirement type="package"
+        version="3.7.4"
+        >biobb_structure_utils</requirement>
+    </requirements>
+    <command detect_errors="aggressive"><![CDATA[
+        
+          ln -f -s ${input_structure1} ${input_structure1}.${input_structure1.ext};
+        
+          ln -f -s ${input_structure2} ${input_structure2}.${input_structure2.ext};
+        
+        
+        
+        cat_pdb
+
+        
+        
+          #if str($input_structure1) != 'None':
+            --input_structure1 ${input_structure1}.${input_structure1.ext}
+          #end if
+        
+          #if str($input_structure2) != 'None':
+            --input_structure2 ${input_structure2}.${input_structure2.ext}
+          #end if
+        
+        
+          --output_structure_path $__new_file_path__/$outname_output_structure_path
+        ;          
+        
+        
+          rm -f ${input_structure1}.${input_structure1.ext};
+        
+          rm -f ${input_structure2}.${input_structure2.ext};
+        
+        
+          if test -f $__new_file_path__/$outname_output_structure_path; then mv $__new_file_path__/$outname_output_structure_path $output_structure_path; fi;
+        
+    ]]>
+    </command>
+    <inputs>
+        
+          <param name="input_structure1" type="data" format="pdb"  optional="False" label="input PDB file" help="Input structure 1 file path. Format: [input].pdb"/> 
+        
+          <param name="input_structure2" type="data" format="pdb"  optional="False" label="input PDB file" help="Input structure 2 file path. Format: [input].pdb"/> 
+        
+        
+          <param name="outname_output_structure_path" type="text" value="mycat_pdb.pdb" 
+              optional="False" label="output PDB name" 
+              help="Output protein file path Format: [output].pdb "/>
+        
+        
+    </inputs>
+    <outputs>
+        
+        
+          <data name="output_structure_path" format="pdb" label="${outname_output_structure_path}"/>
+        
+    </outputs>
+    <tests>
+        <test>
+        </test>
+    </tests>    
+    <help>
+.. class:: infomark
+        
+Check the syntax for the tool parameters at the original library documentation: https://biobb_structure_utils.readthedocs.io/en/latest
+
+-----
+
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png    
+    :width: 150
+
+**https://mmb.irbbarcelona.org/biobb**
+        
+.. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
+        :width: 150
+        
+**https://bioexcel.eu**
+   </help>
+
+    <citations>
+        <citation type="bibtex">
+            @misc{githubbiobb,
+            author = {Andrio P, Bayarri, G., Hospital A, Gelpi JL},
+            year = {2019-21},
+            title = {biobb: BioExcel building blocks },
+            publisher = {GitHub},
+            journal = {GitHub repository},
+            url = {https://github.com/bioexcel/biobb_structure_utils},
+            }
+        </citation>
+        <citation type="doi">10.1038/s41597-019-0177-4</citation>
+    </citations>
+</tool>

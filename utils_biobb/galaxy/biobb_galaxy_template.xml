@@ -1,7 +1,11 @@
 <tool id="{{ tool_id }}_ext" name="{{ display_name }}" version="{{ version }}" >
     <description>: {{ description }}</description>
     <requirements>
-        <requirement type="package">{{biobb_group}}</requirement>
+        <requirement type="package"
+        {% if version -%}
+          version="{{ version }}"
+        {%- endif %}
+        >{{biobb_group}}</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
         {% for k in files['input'] %}
@@ -50,7 +54,9 @@
           <param name="{{ k }}" type="data" format="{{ v['format']}}"  optional="{{v['optional']}}" label="{{ v['label'] }} file" help="{{ v['description']}}. Format: [input].{{ v['help_format']}}"/> 
         {% endfor %}
         {% for k, v in files['output'].items() %}
-          <param name="outname_{{ k }}" type="text" value="my{{name}}.{{v['file_types'][0]}}" optional="{{v['optional']}}" label="{{v['label']}} name" help="{{v['description']}} Format: [output].{{v['help_format']}} "/>
+          <param name="outname_{{ k }}" type="text" value="my{{name}}.{{v['file_types'][0]}}" 
+              optional="{{v['optional']}}" label="{{v['label']}} name" 
+              help="{{v['description']}} Format: [output].{{v['help_format']}} "/>
         {% endfor %}
         {% if props -%}
           <conditional name="config">

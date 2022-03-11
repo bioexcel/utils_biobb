@@ -1,6 +1,7 @@
 """ Utility to generate Galaxy automated tool definitions (XML) from biobb json_schemas """
 
 import argparse
+from itertools import count
 import json
 import os
 import re
@@ -22,18 +23,22 @@ def main():
                       [--id ID] [--display_name DISPLAY_NAME] [--create_dir]
                       base_biobb_dir
         positional arguments:                                                                    
-            * group_schema (**str**)      Path to Json schema from biobb group
+            * base_biobb_dir (**str**)      Path to biobb's folder
         optional arguments:
             * --template (**str**)  Path to Template for XML galaxy adapter (xml) (default: biobb_galaxy_template.xml)
             * --xml_dir (**str**) Path to directory to place XML output files. 
             * --create_dir (**bool**)  Create biobb group adapter directory (default False)
+            * --file_types (**bool**)  Add discovered file types to logs
+            * --tools_xml (**bool**) Generate tools panel XML
     """
     parser = argparse.ArgumentParser(description='Build galaxy adapters.')
     parser.add_argument("--template", default=TEMPL, help="Template for XML galaxy adapter")
     parser.add_argument("--xml_dir", default=XML_DIR, help="Path to place output XML recipes")
     parser.add_argument("--create_dir", action="store_true", help="Create biobb directory")
     parser.add_argument(dest="base_biobb_dir", help="Json schema from building blocks group")
-
+    parser.add_argument("--file_types", action="store_true", help="Get File Types list")
+    parser.add_argument("--tools_xml", action="store_true", help="Generate tools panel XML")
+        
     args = parser.parse_args()
     
     # Extracting data directory 
@@ -44,7 +49,7 @@ def main():
     
     if not template_dir:
         template_dir='.'
-
+             
     for group in os.listdir(args.base_biobb_dir):
         if not re.search('^biobb', group):
             continue
@@ -57,7 +62,6 @@ def main():
         except IOError as err:
             print(err)
             continue
-        
         base_path = os.path.dirname(group_schema)
 
         group_data = {
@@ -72,7 +76,7 @@ def main():
             if 'exec' not in block:
                 print(" ERROR: Block name (exec) not found in", block)
                 continue
-            print("  - Building {} XML definition".format(block['exec']))
+            print(f"  - Building {block['exec']} XML definition")
             schema_file = opj(base_path, block['exec'] + '.json')    
             try:
                 with open(schema_file, 'r') as schema_json:
@@ -90,18 +94,17 @@ def main():
             data['display_name'] = tool_name(data['name'])
 
             data['biobb_group'] = group_data['id']
+            data['version'] = group_data['version']
 
-            data['tool_id'] = data['biobb_group'] + "_" + data['name']
+            data['tool_id'] = f"{data['biobb_group']}_{data['name']}"
             
-            if 'version' in schema_group_data:
-                data['version'] = schema_group_data['version']
-            else:
-                data['version'] = '0.1.0'
-                
             data['description'] = schema_data['title']
             
             multiple_formats_required = []
-
+    
+            if args.file_types:
+                file_types = {'input':set(), 'output': set()}
+                
             for f in schema_data['properties']:
                 if f != 'properties':
                     # Parsing input and output files
@@ -116,7 +119,10 @@ def main():
                         for v in schema_data['properties'][f]['enum']:
                             m = re.search(r"\w+", v)
                             tool_data['file_types'].append(m.group(0))
-                    
+                    if args.file_types: 
+                        for ty in tool_data['file_types']:
+                            file_types[schema_data['properties'][f]['filetype']].add(ty)
+                     
                     tool_data['format'] = ','.join(tool_data['file_types'])
                     
                     if len(tool_data['file_types']) > 1:
@@ -220,9 +226,13 @@ def main():
                 output_path_dir = opj(args.xml_dir, data['biobb_group'])
                 if not os.path.isdir(output_path_dir):
                     os.mkdir(output_path_dir)
-                output_path = opj(output_path_dir, "biobb_" + data['name'] + ".xml")
+                output_path = opj(output_path_dir, f"biobb_{data['name']}.xml")
             with open(output_path, "w") as xml_file:
                 xml_file.write(templ.render(data))
         
+    if args.file_types:
+        for io in file_types:
+            for ty in file_types[io]:
+                print(f"#TYP {ty}\t{io}\t{data['tool_id']}")
 if __name__ == '__main__':
     main()
