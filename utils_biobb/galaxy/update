@@ -1,0 +1,1 @@
+python json2galaxy2.py --template biobb_galaxy_template.xml --create_dir --file_types ../../../ 
