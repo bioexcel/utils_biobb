@@ -1,8 +1,8 @@
-<tool id="biobb_structure_utils_structure_check_ext" name="StructureCheck" version="3.7.4" >
+<tool id="biobb_structure_utils_structure_check_ext" name="StructureCheck" version="3.7.6" >
     <description>: This class is a wrapper of the Structure Checking tool to generate summary checking results on a json file.</description>
     <requirements>
         <requirement type="package"
-        version="3.7.4"
+        version="3.7.6"
         >biobb_structure_utils</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config "__oc____dq__features__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.features)}__dq____cb__,__dq__check_structure_path__dq__:__dq__${properties.check_structure_path}__dq____cc__"
+            --config "__oc____dq__features__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.features)}__dq____cb__,__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__"
           #end if
         
           #if str($input_structure_path) != 'None':
@@ -43,7 +43,7 @@
     </command>
     <inputs>
         
-          <param name="input_structure_path" type="data" format="pdb"  optional="False" label="input PDB file" help="Input structure file path. Format: [input].pdb"/> 
+          <param name="input_structure_path" type="data" format="pdb,pdbqt"  optional="False" label="input PDB,PDBQT file" help="Input structure file path. Format: [input].[format]"/> 
         
         
           <param name="outname_output_summary_path" type="text" value="mystructure_check.json" 
@@ -115,7 +115,7 @@
                   
                 </param>
             
-              <param name="check_structure_path" type="text" label="check_structure_path" help="path to the check_structure application" optional="false"
+              <param name="binary_path" type="text" label="binary_path" help="path to the check_structure application" optional="false"
                   value="check_structure"
                 />
                     

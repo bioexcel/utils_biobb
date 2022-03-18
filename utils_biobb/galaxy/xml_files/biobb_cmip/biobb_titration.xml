@@ -1,8 +1,8 @@
-<tool id="biobb_cmip_titration_ext" name="Titration" version="3.7.6" >
+<tool id="biobb_cmip_titration_ext" name="Titration" version="3.7.7" >
     <description>: Wrapper class for the CMIP titration module.</description>
     <requirements>
         <requirement type="package"
-        version="3.7.6"
+        version="3.7.7"
         >biobb_cmip</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -24,7 +24,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config "__oc____dq__params__dq__:${properties.params},__dq__energy_cutoff__dq__:${properties.energy_cutoff},__dq__num_wats__dq__:${properties.num_wats},__dq__neutral__dq__:${properties.neutral},__dq__num_positive_ions__dq__:${properties.num_positive_ions},__dq__num_negative_ions__dq__:${properties.num_negative_ions},__dq__titration_path__dq__:__dq__${properties.titration_path}__dq____cc__"
+            --config "__oc____dq__params__dq__:${properties.params},__dq__energy_cutoff__dq__:${properties.energy_cutoff},__dq__num_wats__dq__:${properties.num_wats},__dq__neutral__dq__:${properties.neutral},__dq__num_positive_ions__dq__:${properties.num_positive_ions},__dq__num_negative_ions__dq__:${properties.num_negative_ions},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__"
           #end if
         
           #if str($input_pdb_path) != 'None':
@@ -114,7 +114,7 @@
                   
                   label="num_negative_ions" help="Number of negative ions to be added (Tipatom IM=Cl-)." optional="false"/>
             
-              <param name="titration_path" type="text" label="titration_path" help="Path to the CMIP Titration executable binary." optional="false"
+              <param name="binary_path" type="text" label="binary_path" help="Path to the CMIP Titration executable binary." optional="false"
                   value="titration"
                 />
                     

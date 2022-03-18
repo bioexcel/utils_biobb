@@ -1,8 +1,8 @@
-<tool id="biobb_cmip_cmip_ext" name="Cmip" version="3.7.6" >
+<tool id="biobb_cmip_cmip_ext" name="Cmip" version="3.7.7" >
     <description>: Wrapper class for the CMIP cmip module.</description>
     <requirements>
         <requirement type="package"
-        version="3.7.6"
+        version="3.7.7"
         >biobb_cmip</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -15,6 +15,8 @@
         
           ln -f -s ${input_params_path} ${input_params_path}.${input_params_path.ext};
         
+          ln -f -s ${input_json_box_path} ${input_json_box_path}.${input_json_box_path.ext};
+        
         #if $config.sele == "option1":
             ln -s -f ${config.properties} ${config.properties}.${config.properties.ext};
           #end if
@@ -26,7 +28,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config "__oc____dq__execution_type__dq__:__dq__${properties.execution_type}__dq__,__dq__params__dq__:${properties.params},__dq__cmip_path__dq__:__dq__${properties.cmip_path}__dq____cc__"
+            --config "__oc____dq__execution_type__dq__:__dq__${properties.execution_type}__dq__,__dq__box_size_factor__dq__:${properties.box_size_factor},__dq__params__dq__:${properties.params},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__"
           #end if
         
           #if str($input_pdb_path) != 'None':
@@ -45,6 +47,10 @@
             --input_params_path ${input_params_path}.${input_params_path.ext}
           #end if
         
+          #if str($input_json_box_path) != 'None':
+            --input_json_box_path ${input_json_box_path}.${input_json_box_path.ext}
+          #end if
+        
         
           --output_pdb_path $__new_file_path__/$outname_output_pdb_path
         
@@ -57,6 +63,8 @@
           --output_byat_path $__new_file_path__/$outname_output_byat_path
         
           --output_log_path $__new_file_path__/$outname_output_log_path
+        
+          --output_json_box_path $__new_file_path__/$outname_output_json_box_path
         ;          
         #if $config.sele == "option1":
             rm -f ${config.properties}.${config.properties.ext};
@@ -69,6 +77,8 @@
           rm -f ${input_vdw_params_path}.${input_vdw_params_path.ext};
         
           rm -f ${input_params_path}.${input_params_path.ext};
+        
+          rm -f ${input_json_box_path}.${input_json_box_path.ext};
         
         
           if test -f $__new_file_path__/$outname_output_pdb_path; then mv $__new_file_path__/$outname_output_pdb_path $output_pdb_path; fi;
@@ -83,6 +93,8 @@
         
           if test -f $__new_file_path__/$outname_output_log_path; then mv $__new_file_path__/$outname_output_log_path $output_log_path; fi;
         
+          if test -f $__new_file_path__/$outname_output_json_box_path; then mv $__new_file_path__/$outname_output_json_box_path $output_json_box_path; fi;
+        
     ]]>
     </command>
     <inputs>
@@ -94,6 +106,8 @@
           <param name="input_vdw_params_path" type="data" format="txt"  optional="True" label="input TXT file" help="Path to the CMIP input Van der Waals force parameters, if not provided the CMIP conda installation one is used (&#34;$CONDA_PREFIX/share/cmip/dat/vdwprm&#34;). Format: [input].txt"/> 
         
           <param name="input_params_path" type="data" format="txt"  optional="True" label="input TXT file" help="Path to the CMIP input parameters file. Format: [input].txt"/> 
+        
+          <param name="input_json_box_path" type="data" format="json"  optional="False" label="input JSON file" help="Path to the input CMIP box in JSON format. Format: [input].json"/> 
         
         
           <param name="outname_output_pdb_path" type="text" value="mycmip.pdb" 
@@ -120,6 +134,10 @@
               optional="False" label="output LOG name" 
               help="Path to the output CMIP log file LOG Format: [output].log "/>
         
+          <param name="outname_output_json_box_path" type="text" value="mycmip.json" 
+              optional="False" label="output JSON name" 
+              help="Path to the output CMIP box in JSON format Format: [output].json "/>
+        
         <conditional name="config">
             <param name="sele" type="select" label="Take tool settings:" help="Select where tool settings are to be read from">
               <option value="option3">Manual Input</option>
@@ -138,6 +156,10 @@
           <section name="properties" title="Properties Input">
             
               <param name="execution_type" type="select" label="execution_type" help="Default options for the params file, each one creates a different params file. " multiple="">
+                  
+                    <option value="check_only" 
+                      
+                    >check_only - Dry Run of CMIP</option>
                   
                     <option value="mip_pos" 
                       selected="true"
@@ -169,9 +191,14 @@
                   
                 </param>
             
+              <param name="box_size_factor" type="float" 
+                  value="1.0"
+                  
+                  label="box_size_factor" help="If optional output **output_json_box_path** is used the box size will be multiplied by this factor." optional="false"/>
+            
               <param name="params" type="text" label="params" help="CMIP options specification. (Json)" value="{}" />
             
-              <param name="cmip_path" type="text" label="cmip_path" help="Path to the CMIP cmip executable binary." optional="false"
+              <param name="binary_path" type="text" label="binary_path" help="Path to the CMIP cmip executable binary." optional="false"
                   value="cmip"
                 />
                     
@@ -196,6 +223,9 @@
         
         
           <data name="output_log_path" format="log" label="${outname_output_log_path}"/>
+        
+        
+          <data name="output_json_box_path" format="json" label="${outname_output_json_box_path}"/>
         
     </outputs>
     <tests>

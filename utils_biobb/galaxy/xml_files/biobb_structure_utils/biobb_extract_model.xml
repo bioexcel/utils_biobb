@@ -1,8 +1,8 @@
-<tool id="biobb_structure_utils_extract_model_ext" name="ExtractModel" version="3.7.4" >
+<tool id="biobb_structure_utils_extract_model_ext" name="ExtractModel" version="3.7.6" >
     <description>: This class is a wrapper of the Structure Checking tool to extract a model from a 3D structure.</description>
     <requirements>
         <requirement type="package"
-        version="3.7.4"
+        version="3.7.6"
         >biobb_structure_utils</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config "__oc____dq__models__dq__:${properties.models},__dq__check_structure_path__dq__:__dq__${properties.check_structure_path}__dq____cc__"
+            --config "__oc____dq__models__dq__:${properties.models},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__"
           #end if
         
           #if str($input_structure_path) != 'None':
@@ -43,12 +43,12 @@
     </command>
     <inputs>
         
-          <param name="input_structure_path" type="data" format="pdb"  optional="False" label="input PDB file" help="Input structure file path. Format: [input].pdb"/> 
+          <param name="input_structure_path" type="data" format="pdb,pdbqt"  optional="False" label="input PDB,PDBQT file" help="Input structure file path. Format: [input].[format]"/> 
         
         
           <param name="outname_output_structure_path" type="text" value="myextract_model.pdb" 
-              optional="False" label="output PDB name" 
-              help="Output structure file path Format: [output].pdb "/>
+              optional="False" label="output PDB,PDBQT name" 
+              help="Output structure file path Format: [output].[format] "/>
         
         <conditional name="config">
             <param name="sele" type="select" label="Take tool settings:" help="Select where tool settings are to be read from">
@@ -69,16 +69,35 @@
             
               <param name="models" type="text" label="models" help="List of models to be extracted from the input_structure_path file. If empty, all the models of the structure will be returned. (Json)" value="[]" />
             
-              <param name="check_structure_path" type="text" label="check_structure_path" help="path to the check_structure application" optional="false"
+              <param name="binary_path" type="text" label="binary_path" help="path to the check_structure application" optional="false"
                   value="check_structure"
                 />
+            
+              <param name="output_format" type="select" label="output_format" help="Format of the output file" multiple="">
+                  
+                    <option value="pdb" 
+                      
+                    >pdb - </option>
+                  
+                    <option value="pdbqt" 
+                      
+                    >pdbqt - </option>
+                  
+                </param>
                     
           </section>
     </inputs>
     <outputs>
         
-        
-          <data name="output_structure_path" format="pdb" label="${outname_output_structure_path}"/>
+        <data name="output_structure_path" format="text" label="${outname_output_structure_path}">
+            <change_format>
+            
+            <when input="properties.output_format" value="pdb" format="pdb" />
+            
+            <when input="properties.output_format" value="pdbqt" format="pdbqt" />
+            
+            </change_format>
+          </data>
         
     </outputs>
     <tests>
