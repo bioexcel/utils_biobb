@@ -71,6 +71,7 @@
             
               <param name="binary_path" type="text" label="binary_path" help="path to the check_structure application" optional="false"
                   value="check_structure"
+                  <sanitize><valid initial="string.printable"/></sanitize>
                 />
             
               <param name="output_format" type="select" label="output_format" help="Format of the output file" multiple="">

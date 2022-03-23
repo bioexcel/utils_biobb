@@ -87,6 +87,7 @@
             
               <param name="helpar_name" type="text" label="helpar_name" help="helical parameter name." optional="false"
                   value="Optional"
+                  <sanitize><valid initial="string.printable"/></sanitize>
                 />
             
               <param name="confidence_level" type="float" 

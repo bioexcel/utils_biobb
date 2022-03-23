@@ -79,6 +79,7 @@
             
               <param name="bases" type="text" label="bases" help="sequence of bases to be searched for in the I/P data (default is blank, meaning no specified sequence)." optional="true"
                   
+                  <sanitize><valid initial="string.printable"/></sanitize>
                 />
             
               <param name="itst" type="integer" 
@@ -108,6 +109,7 @@
             
               <param name="nastr" type="text" label="nastr" help="character string used to indicate missing data in .ser files." optional="false"
                   value="NA"
+                  <sanitize><valid initial="string.printable"/></sanitize>
                 />
             
               <param name="cormin" type="float" 
@@ -117,22 +119,27 @@
             
               <param name="series" type="text" label="series" help="if True then output spatial or time series data. Only possible for the analysis of single structures or single trajectories." optional="false"
                   value="False"
+                  <sanitize><valid initial="string.printable"/></sanitize>
                 />
             
               <param name="histo" type="text" label="histo" help="if True then output histogram data." optional="false"
                   value="False"
+                  <sanitize><valid initial="string.printable"/></sanitize>
                 />
             
               <param name="corr" type="text" label="corr" help="if True than output linear correlation coefficients between all variables." optional="false"
                   value="False"
+                  <sanitize><valid initial="string.printable"/></sanitize>
                 />
             
               <param name="sequence" type="text" label="sequence" help="sequence of the first strand of the corresponding DNA fragment, for each .cda file. If not given it will be parsed from .lis file." optional="false"
                   value="Optional"
+                  <sanitize><valid initial="string.printable"/></sanitize>
                 />
             
               <param name="canal_exec" type="text" label="canal_exec" help="Path to Canal executable, otherwise the program wil look for Canal executable in the binaries folder." optional="false"
                   value="Canal"
+                  <sanitize><valid initial="string.printable"/></sanitize>
                 />
                     
           </section>

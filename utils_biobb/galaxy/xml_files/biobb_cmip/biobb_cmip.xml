@@ -216,6 +216,7 @@
             
               <param name="binary_path" type="text" label="binary_path" help="Path to the CMIP cmip executable binary." optional="false"
                   value="cmip"
+                  <sanitize><valid initial="string.printable"/></sanitize>
                 />
                     
           </section>

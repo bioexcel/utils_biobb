@@ -59,6 +59,7 @@
             
               <param name="drugbank_id" type="text" label="drugbank_id" help="Drugbank component id." optional="true"
                   
+                  <sanitize><valid initial="string.printable"/></sanitize>
                 />
                     
           </section>

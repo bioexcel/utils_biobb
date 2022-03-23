@@ -164,10 +164,12 @@
             
               <param name="fix_remd" type="text" label="fix_remd" help="This option will trigger cphstats to reassemble the titration data into pH-specific ensembles. This is an exclusive mode of the program, no other analyses will be done." optional="true"
                   
+                  <sanitize><valid initial="string.printable"/></sanitize>
                 />
             
               <param name="conditional" type="text" label="conditional" help="Evaluates conditional probabilities. CONDITIONAL should be a string of the format: &lt;resid&gt;:&lt;state&gt;,&lt;resid&gt;:&lt;state&gt;,... or &lt;resid&gt;:PROT,&lt;resid&gt;:DEPROT,... or &lt;resid&gt;:&lt;state1&gt;;&lt;state2&gt;,&lt;resid&gt;:PROT,... where &lt;resid&gt; is the residue number in the prmtop and &lt;state&gt; is either the state number or -p-rotonated or -d-eprotonated, case-insensitive." optional="true"
                   
+                  <sanitize><valid initial="string.printable"/></sanitize>
                 />
             
               <param name="output_dat_path_format" type="select" label="output_dat_path_format" help="Format of the output file" multiple="">

@@ -369,6 +369,7 @@
             
               <param name="gmx_path" type="text" label="gmx_path" help="Path to the GROMACS executable binary." optional="false"
                   value="gmx"
+                  <sanitize><valid initial="string.printable"/></sanitize>
                 />
             
               <param name="output_format" type="select" label="output_format" help="Format of the output file" multiple="">

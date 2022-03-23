@@ -146,6 +146,7 @@
             
               <param name="cpptraj_path" type="text" label="cpptraj_path" help="Path to the cpptraj executable binary." optional="false"
                   value="cpptraj"
+                  <sanitize><valid initial="string.printable"/></sanitize>
                 />
             
               <param name="output_format" type="select" label="output_format" help="Format of the output file" multiple="">

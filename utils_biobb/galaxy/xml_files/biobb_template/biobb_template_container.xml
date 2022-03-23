@@ -84,6 +84,7 @@
             
               <param name="executable_binary_property" type="text" label="executable_binary_property" help="Example of executable binary property." optional="false"
                   value="zip"
+                  <sanitize><valid initial="string.printable"/></sanitize>
                 />
                     
           </section>

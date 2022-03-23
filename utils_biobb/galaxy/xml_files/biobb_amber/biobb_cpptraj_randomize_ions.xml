@@ -87,10 +87,12 @@
             
               <param name="ion_mask" type="text" label="ion_mask" help="Ions to be randomized. Cpptraj mask syntax can be found at the official Cpptraj manual." optional="false"
                   value=":K+,Cl-,Na+"
+                  <sanitize><valid initial="string.printable"/></sanitize>
                 />
             
               <param name="solute_mask" type="text" label="solute_mask" help="Solute (or set of atoms) around which the ions can get no closer than the distance specified. Cpptraj mask syntax can be found at the official Cpptraj manual." optional="false"
                   value=":DA,DC,DG,DT,D?3,D?5"
+                  <sanitize><valid initial="string.printable"/></sanitize>
                 />
             
               <param name="distance" type="float" 

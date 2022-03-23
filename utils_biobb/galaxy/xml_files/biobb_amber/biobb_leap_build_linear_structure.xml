@@ -59,6 +59,7 @@
             
               <param name="sequence" type="text" label="sequence" help="Aminoacid sequence to convert to a linear 3D structure. Aminoacids should be written in 3-letter code, with a blank space between them." optional="false"
                   value="ALA GLY SER PRO ARG ALA PRO GLY"
+                  <sanitize><valid initial="string.printable"/></sanitize>
                 />
             
               <param name="forcefield" type="select" label="forcefield" help="Forcefield to be used for the structure generation. " multiple="True">

@@ -69,6 +69,7 @@
             
               <param name="reduce_path" type="text" label="reduce_path" help="Path to the reduce executable binary." optional="false"
                   value="reduce"
+                  <sanitize><valid initial="string.printable"/></sanitize>
                 />
                     
           </section>

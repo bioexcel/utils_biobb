@@ -204,14 +204,17 @@
             
               <param name="mpi_bin" type="text" label="mpi_bin" help="Path to the MPI runner. Usually &#34;mpirun&#34; or &#34;srun&#34;." optional="true"
                   
+                  <sanitize><valid initial="string.printable"/></sanitize>
                 />
             
               <param name="mpi_np" type="text" label="mpi_np" help="Number of MPI processes. Usually an integer bigger than 1." optional="true"
                   
+                  <sanitize><valid initial="string.printable"/></sanitize>
                 />
             
               <param name="mpi_hostlist" type="text" label="mpi_hostlist" help="Path to the MPI hostlist file." optional="true"
                   
+                  <sanitize><valid initial="string.printable"/></sanitize>
                 />
             
               <param name="checkpoint_time" type="integer" 
@@ -226,18 +229,22 @@
             
               <param name="gpu_id" type="text" label="gpu_id" help="List of unique GPU device IDs available to use." optional="true"
                   
+                  <sanitize><valid initial="string.printable"/></sanitize>
                 />
             
               <param name="gpu_tasks" type="text" label="gpu_tasks" help="List of GPU device IDs, mapping each PP task on each node to a device." optional="true"
                   
+                  <sanitize><valid initial="string.printable"/></sanitize>
                 />
             
               <param name="gmx_lib" type="text" label="gmx_lib" help="Path set GROMACS GMXLIB environment variable." optional="true"
                   
+                  <sanitize><valid initial="string.printable"/></sanitize>
                 />
             
               <param name="gmx_path" type="text" label="gmx_path" help="Path to the GROMACS executable binary." optional="false"
                   value="gmx"
+                  <sanitize><valid initial="string.printable"/></sanitize>
                 />
                     
           </section>

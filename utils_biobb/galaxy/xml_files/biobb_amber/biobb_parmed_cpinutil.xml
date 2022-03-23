@@ -151,6 +151,7 @@
             
               <param name="system" type="text" label="system" help="Name of system to titrate." optional="false"
                   value="Unknown"
+                  <sanitize><valid initial="string.printable"/></sanitize>
                 />
             
               <param name="output_format" type="select" label="output_format" help="Format of the output file" multiple="">

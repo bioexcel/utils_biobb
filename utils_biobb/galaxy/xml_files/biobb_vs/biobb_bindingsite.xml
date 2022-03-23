@@ -79,6 +79,7 @@
             
               <param name="ligand" type="text" label="ligand" help="Ligand to be found in the protein structure. If no ligand provided, the largest one will be selected, if more than one." optional="true"
                   
+                  <sanitize><valid initial="string.printable"/></sanitize>
                 />
             
               <param name="radius" type="float" 

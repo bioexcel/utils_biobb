@@ -69,6 +69,7 @@
             
               <param name="residue_list" type="text" label="residue_list" help="Residue list in the format &#34;Chain:Resnum&#34; (no spaces between the elements) separated by commas. If no chain is provided all the residues in the pdb file will be market. ie: &#34;A:3&#34;." optional="true"
                   
+                  <sanitize><valid initial="string.printable"/></sanitize>
                 />
             
               <param name="ignore_all" type="boolean" 

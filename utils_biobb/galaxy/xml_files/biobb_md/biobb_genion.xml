@@ -97,6 +97,7 @@
             
               <param name="replaced_group" type="text" label="replaced_group" help="Group of molecules that will be replaced by the solvent." optional="false"
                   value="SOL"
+                  <sanitize><valid initial="string.printable"/></sanitize>
                 />
             
               <param name="neutral" type="boolean" 
@@ -116,10 +117,12 @@
             
               <param name="gmx_lib" type="text" label="gmx_lib" help="Path set GROMACS GMXLIB environment variable." optional="true"
                   
+                  <sanitize><valid initial="string.printable"/></sanitize>
                 />
             
               <param name="gmx_path" type="text" label="gmx_path" help="Path to the GROMACS executable binary." optional="false"
                   value="gmx"
+                  <sanitize><valid initial="string.printable"/></sanitize>
                 />
                     
           </section>

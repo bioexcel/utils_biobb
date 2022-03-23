@@ -79,14 +79,17 @@
             
               <param name="selection" type="text" label="selection" help="Heavy atoms. Atom selection string." optional="false"
                   value="a CA C N O"
+                  <sanitize><valid initial="string.printable"/></sanitize>
                 />
             
               <param name="gmx_lib" type="text" label="gmx_lib" help="Path set GROMACS GMXLIB environment variable." optional="true"
                   
+                  <sanitize><valid initial="string.printable"/></sanitize>
                 />
             
               <param name="gmx_path" type="text" label="gmx_path" help="Path to the GROMACS executable binary." optional="false"
                   value="gmx"
+                  <sanitize><valid initial="string.printable"/></sanitize>
                 />
                     
           </section>

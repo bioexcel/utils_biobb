@@ -151,6 +151,7 @@
             
               <param name="pmemd_path" type="text" label="pmemd_path" help="pmemd binary path to be used." optional="false"
                   value="pmemd"
+                  <sanitize><valid initial="string.printable"/></sanitize>
                 />
             
               <param name="simulation_type" type="select" label="simulation_type" help="Default options for the mdin file. Each creates a different mdin file. " multiple="">
@@ -189,6 +190,7 @@
             
               <param name="mpi_bin" type="text" label="mpi_bin" help="Path to the MPI runner. Usually &#34;mpirun&#34; or &#34;srun&#34;." optional="true"
                   
+                  <sanitize><valid initial="string.printable"/></sanitize>
                 />
             
               <param name="mpi_np" type="integer" 
@@ -198,6 +200,7 @@
             
               <param name="mpi_flags" type="text" label="mpi_flags" help="Path to the MPI hostlist file." optional="true"
                   
+                  <sanitize><valid initial="string.printable"/></sanitize>
                 />
             
               <param name="output_log_path_format" type="select" label="output_log_path_format" help="Format of the output file" multiple="">
