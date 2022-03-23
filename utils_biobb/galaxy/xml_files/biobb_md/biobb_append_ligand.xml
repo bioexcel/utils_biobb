@@ -89,8 +89,9 @@
             
               <param name="posres_name" type="text" label="posres_name" help="String to be included in the ifdef clause." optional="false"
                   value="POSRES_LIGAND"
+                >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
-                />
+                </param>
                     
           </section>
     </inputs>

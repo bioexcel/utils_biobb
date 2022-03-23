@@ -89,13 +89,15 @@
             
               <param name="bases" type="text" label="bases" help="Sequence of bases to be analyzed (default is blank, meaning no specified sequence)." optional="true"
                   
+                >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
-                />
+                </param>
             
               <param name="type" type="text" label="type" help="Ions (or atoms) to be analyzed. Options are &#39;Na+&#39;, &#39;K&#39;, &#39;K+&#39;, &#39;Cl&#39;, &#39;Cl-&#39;, &#39;CL&#39;, &#39;P&#39;, &#39;C1*&#39;, &#39;NH1&#39;, &#39;NH2&#39;, &#39;NZ&#39;, &#39;1&#39; for all cations, &#39;-1&#39; for all anions, &#39;0&#39; for neutral species or &#39;*&#39; for all available data." optional="false"
                   value="*"
+                >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
-                />
+                </param>
             
               <param name="dlow" type="float" 
                   
@@ -154,8 +156,9 @@
             
               <param name="canion_exec" type="text" label="canion_exec" help="Path to Canion executable, otherwise the program wil look for Canion executable in the binaries folder." optional="false"
                   value="Canion"
+                >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
-                />
+                </param>
                     
           </section>
     </inputs>

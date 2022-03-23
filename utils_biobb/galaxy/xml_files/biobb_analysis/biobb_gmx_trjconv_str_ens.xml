@@ -227,8 +227,9 @@
             
               <param name="output_name" type="text" label="output_name" help="File name for ensemble of output files." optional="false"
                   value="output"
+                >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
-                />
+                </param>
             
               <param name="output_type" type="select" label="output_type" help="File type for ensemble of output files. " multiple="">
                   
@@ -254,8 +255,9 @@
             
               <param name="gmx_path" type="text" label="gmx_path" help="Path to the GROMACS executable binary." optional="false"
                   value="gmx"
+                >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
-                />
+                </param>
                     
           </section>
     </inputs>

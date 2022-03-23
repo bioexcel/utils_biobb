@@ -154,8 +154,9 @@
             
               <param name="reduce_path" type="text" label="reduce_path" help="Path to the reduce executable binary." optional="false"
                   value="reduce"
+                >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
-                />
+                </param>
                     
           </section>
     </inputs>

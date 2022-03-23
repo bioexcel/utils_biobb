@@ -95,18 +95,21 @@
             
               <param name="s1range" type="text" label="s1range" help="Range of first strand. Must be specified in the form &#34;start:end&#34;." optional="true"
                   
+                >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
-                />
+                </param>
             
               <param name="s2range" type="text" label="s2range" help="Range of second strand. Must be specified in the form &#34;start:end&#34;." optional="true"
                   
+                >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
-                />
+                </param>
             
               <param name="stdlib_path" type="text" label="stdlib_path" help="Path to Curves&#39; standard library files for nucleotides. If not specified will look for &#39;standard&#39; files in current directory." optional="false"
                   value="standard"
+                >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
-                />
+                </param>
             
               <param name="itst" type="integer" 
                   
@@ -150,8 +153,9 @@
             
               <param name="curves_exec" type="text" label="curves_exec" help="Path to Curves+ executable, otherwise the program wil look for Cur+ executable in the binaries folder." optional="false"
                   value="Cur+"
+                >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
-                />
+                </param>
                     
           </section>
     </inputs>

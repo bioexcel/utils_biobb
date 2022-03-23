@@ -127,8 +127,9 @@
             
               <param name="basepair" type="text" label="basepair" help="Name of basepair analyzed." optional="true"
                   
+                >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
-                />
+                </param>
                     
           </section>
     </inputs>

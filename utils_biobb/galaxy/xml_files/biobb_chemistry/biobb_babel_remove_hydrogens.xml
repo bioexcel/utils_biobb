@@ -332,8 +332,9 @@
             
               <param name="obabel_path" type="text" label="obabel_path" help="Path to the obabel executable binary." optional="false"
                   value="obabel"
+                >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
-                />
+                </param>
                     
           </section>
     </inputs>

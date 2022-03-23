@@ -114,8 +114,9 @@
             
               <param name="fpocket_path" type="text" label="fpocket_path" help="path to fpocket in your local computer." optional="false"
                   value="fpocket"
+                >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
-                />
+                </param>
                     
           </section>
     </inputs>

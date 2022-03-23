@@ -97,8 +97,9 @@
             
               <param name="vina_path" type="text" label="vina_path" help="path to vina in your local computer." optional="false"
                   value="vina"
+                >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
-                />
+                </param>
                     
           </section>
     </inputs>

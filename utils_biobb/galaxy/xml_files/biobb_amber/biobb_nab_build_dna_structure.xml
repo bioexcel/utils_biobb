@@ -59,8 +59,9 @@
             
               <param name="sequence" type="text" label="sequence" help="Nucleotide sequence to convert to a 3D structure. Nucleotides should be written in 1-letter code, with no spaces between them." optional="false"
                   value="GCGCGGCTGATAAACGAAAGC"
+                >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
-                />
+                </param>
             
               <param name="helix_type" type="select" label="helix_type" help="DNA/RNA helix type. " multiple="">
                   
@@ -104,13 +105,15 @@
             
               <param name="compiler" type="text" label="compiler" help="Alternative C compiler for nab." optional="false"
                   value="gcc"
+                >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
-                />
+                </param>
             
               <param name="linker" type="text" label="linker" help="Alternative Fortran linker for nab." optional="false"
                   value="gfortran"
+                >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
-                />
+                </param>
                     
           </section>
     </inputs>

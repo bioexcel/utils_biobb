@@ -79,13 +79,15 @@
             
               <param name="force_constants" type="text" label="force_constants" help="Array of three floats defining the force constants." optional="false"
                   value="500 500 500"
+                >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
-                />
+                </param>
             
               <param name="ref_rest_chain_triplet_list" type="text" label="ref_rest_chain_triplet_list" help="Triplet list composed by (reference group, restrain group, chain) list." optional="true"
                   
+                >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
-                />
+                </param>
                     
           </section>
     </inputs>

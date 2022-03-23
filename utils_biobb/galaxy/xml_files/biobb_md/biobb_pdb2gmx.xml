@@ -216,8 +216,9 @@
             
               <param name="his" type="text" label="his" help="Histidine protonation array." optional="true"
                   
+                >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
-                />
+                </param>
             
               <param name="merge" type="boolean" 
                   
@@ -226,13 +227,15 @@
             
               <param name="gmx_lib" type="text" label="gmx_lib" help="Path set GROMACS GMXLIB environment variable." optional="true"
                   
+                >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
-                />
+                </param>
             
               <param name="gmx_path" type="text" label="gmx_path" help="Path to the GROMACS executable binary." optional="false"
                   value="gmx"
+                >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
-                />
+                </param>
                     
           </section>
     </inputs>

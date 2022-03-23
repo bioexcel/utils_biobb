@@ -59,8 +59,9 @@
             
               <param name="pdb_code" type="text" label="pdb_code" help="RSCB PDB four letter code." optional="true"
                   
+                >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
-                />
+                </param>
                     
           </section>
     </inputs>

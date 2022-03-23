@@ -139,8 +139,9 @@
             
               <param name="binary_path" type="text" label="binary_path" help="path to the check_structure application" optional="false"
                   value="check_structure"
+                >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
-                />
+                </param>
                     
           </section>
     </inputs>

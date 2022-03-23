@@ -127,8 +127,9 @@
             
               <param name="base" type="text" label="base" help="Name of base analyzed." optional="true"
                   
+                >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
-                />
+                </param>
                     
           </section>
     </inputs>

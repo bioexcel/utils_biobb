@@ -59,8 +59,9 @@
             
               <param name="pdb_code" type="text" label="pdb_code" help="RSCB PDB code." optional="true"
                   
+                >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
-                />
+                </param>
             
               <param name="api_id" type="select" label="api_id" help="Identifier of the PDB REST API from which the PDB structure will be downloaded. " multiple="">
                   

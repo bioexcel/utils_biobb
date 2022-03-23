@@ -79,8 +79,9 @@
             
               <param name="bases" type="text" label="bases" help="sequence of bases to be searched for in the I/P data (default is blank, meaning no specified sequence)." optional="true"
                   
+                >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
-                />
+                </param>
             
               <param name="itst" type="integer" 
                   
@@ -109,8 +110,9 @@
             
               <param name="nastr" type="text" label="nastr" help="character string used to indicate missing data in .ser files." optional="false"
                   value="NA"
+                >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
-                />
+                </param>
             
               <param name="cormin" type="float" 
                   value="0.6"
@@ -119,28 +121,33 @@
             
               <param name="series" type="text" label="series" help="if True then output spatial or time series data. Only possible for the analysis of single structures or single trajectories." optional="false"
                   value="False"
+                >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
-                />
+                </param>
             
               <param name="histo" type="text" label="histo" help="if True then output histogram data." optional="false"
                   value="False"
+                >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
-                />
+                </param>
             
               <param name="corr" type="text" label="corr" help="if True than output linear correlation coefficients between all variables." optional="false"
                   value="False"
+                >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
-                />
+                </param>
             
               <param name="sequence" type="text" label="sequence" help="sequence of the first strand of the corresponding DNA fragment, for each .cda file. If not given it will be parsed from .lis file." optional="false"
                   value="Optional"
+                >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
-                />
+                </param>
             
               <param name="canal_exec" type="text" label="canal_exec" help="Path to Canal executable, otherwise the program wil look for Canal executable in the binaries folder." optional="false"
                   value="Canal"
+                >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
-                />
+                </param>
                     
           </section>
     </inputs>

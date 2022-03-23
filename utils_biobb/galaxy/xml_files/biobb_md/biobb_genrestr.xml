@@ -79,23 +79,27 @@
             
               <param name="restrained_group" type="text" label="restrained_group" help="Index group that will be restrained." optional="false"
                   value="system"
+                >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
-                />
+                </param>
             
               <param name="force_constants" type="text" label="force_constants" help="Array of three floats defining the force constants" optional="false"
                   value="500 500 500"
+                >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
-                />
+                </param>
             
               <param name="gmx_lib" type="text" label="gmx_lib" help="Path set GROMACS GMXLIB environment variable." optional="true"
                   
+                >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
-                />
+                </param>
             
               <param name="gmx_path" type="text" label="gmx_path" help="Path to the GROMACS executable binary." optional="false"
                   value="gmx"
+                >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
-                />
+                </param>
                     
           </section>
     </inputs>

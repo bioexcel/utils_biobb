@@ -59,13 +59,15 @@
             
               <param name="pdb_code" type="text" label="pdb_code" help="RSCB PDB code." optional="true"
                   
+                >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
-                />
+                </param>
             
               <param name="filter" type="text" label="filter" help="Array of groups to be kept. If value is None or False no filter will be applied. All the possible values are defined in the official PDB specification (http://www.wwpdb.org/documentation/file-format-content/format33/v3.3.html)" optional="false"
                   value="[ATOM, MODEL, ENDMDL]"
+                >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
-                />
+                </param>
             
               <param name="cluster" type="select" label="cluster" help="Sequence Similarity Cutoff. " multiple="">
                   

@@ -79,8 +79,9 @@
             
               <param name="target" type="text" label="target" help="Dependent variable or column from your dataset you want to predict." optional="true"
                   
+                >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
-                />
+                </param>
             
               <param name="metric" type="select" label="metric" help="The distance metric to use for the tree. " multiple="">
                   
