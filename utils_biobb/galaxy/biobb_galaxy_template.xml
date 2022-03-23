@@ -25,7 +25,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config "{{config_str|safe}}"
+            --config '{{config_str|safe}}'
           #end if
         {%- endif %}
         {% for k in files['input'] %}
@@ -81,8 +81,9 @@
                   {% if v['default'] -%}
                     value="{{ v['default']}}" 
                   {%- endif %}
-                  <sanitize><valid initial="string.printable"/></sanitize>
-                /> 
+                >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param> 
               {%- elif v['type'] == 'float' or v['type'] == 'integer' -%}
                 <param name="{{ k }}" type="{{v['type']}}" 
                   {% if v['default'] -%}
