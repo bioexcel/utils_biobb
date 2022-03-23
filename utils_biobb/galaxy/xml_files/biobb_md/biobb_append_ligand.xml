@@ -24,7 +24,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config "__oc____dq__posres_name__dq__:__dq__${properties.posres_name}__dq____cc__"
+            --config '__oc____dq__posres_name__dq__:__dq__${properties.posres_name}__dq____cc__'
           #end if
         
           #if str($input_top_zip_path) != 'None':

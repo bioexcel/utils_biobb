@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config "__oc____dq__charges__dq__:${properties.charges},__dq__mode__dq__:__dq__${properties.mode}__dq__,__dq__ph__dq__:${properties.ph},__dq__list__dq__:__dq__${properties.list}__dq__,__dq__keep_canonical_resnames__dq__:${properties.keep_canonical_resnames},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__"
+            --config '__oc____dq__charges__dq__:${properties.charges},__dq__mode__dq__:__dq__${properties.mode}__dq__,__dq__ph__dq__:${properties.ph},__dq__list__dq__:__dq__${properties.list}__dq__,__dq__keep_canonical_resnames__dq__:${properties.keep_canonical_resnames},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
           #end if
         
           #if str($input_structure_path) != 'None':

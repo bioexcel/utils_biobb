@@ -28,7 +28,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config "__oc____dq__forcefield__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.forcefield)}__dq____cb____cc__"
+            --config '__oc____dq__forcefield__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.forcefield)}__dq____cb____cc__'
           #end if
         
           #if str($input_pdb_path) != 'None':

@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config "__oc____dq__independent_vars__dq__:${properties.independent_vars},__dq__target__dq__:${properties.target},__dq__weight__dq__:${properties.weight},__dq__random_state_train_test__dq__:${properties.random_state_train_test},__dq__degree__dq__:${properties.degree},__dq__test_size__dq__:${properties.test_size},__dq__scale__dq__:${properties.scale}__cc__"
+            --config '__oc____dq__independent_vars__dq__:${properties.independent_vars},__dq__target__dq__:${properties.target},__dq__weight__dq__:${properties.weight},__dq__random_state_train_test__dq__:${properties.random_state_train_test},__dq__degree__dq__:${properties.degree},__dq__test_size__dq__:${properties.test_size},__dq__scale__dq__:${properties.scale}__cc__'
           #end if
         
           #if str($input_dataset_path) != 'None':

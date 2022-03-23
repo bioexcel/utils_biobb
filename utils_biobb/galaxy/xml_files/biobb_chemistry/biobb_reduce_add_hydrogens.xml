@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config "__oc____dq__flip__dq__:${properties.flip},__dq__noflip__dq__:${properties.noflip},__dq__nuclear__dq__:${properties.nuclear},__dq__nooh__dq__:${properties.nooh},__dq__oh__dq__:${properties.oh},__dq__his__dq__:${properties.his},__dq__noheth__dq__:${properties.noheth},__dq__rotnh3__dq__:${properties.rotnh3},__dq__norotnh3__dq__:${properties.norotnh3},__dq__rotexist__dq__:${properties.rotexist},__dq__rotexoh__dq__:${properties.rotexoh},__dq__allalt__dq__:${properties.allalt},__dq__onlya__dq__:${properties.onlya},__dq__charges__dq__:${properties.charges},__dq__dorotmet__dq__:${properties.dorotmet},__dq__noadjust__dq__:${properties.noadjust},__dq__build__dq__:${properties.build},__dq__reduce_path__dq__:__dq__${properties.reduce_path}__dq____cc__"
+            --config '__oc____dq__flip__dq__:${properties.flip},__dq__noflip__dq__:${properties.noflip},__dq__nuclear__dq__:${properties.nuclear},__dq__nooh__dq__:${properties.nooh},__dq__oh__dq__:${properties.oh},__dq__his__dq__:${properties.his},__dq__noheth__dq__:${properties.noheth},__dq__rotnh3__dq__:${properties.rotnh3},__dq__norotnh3__dq__:${properties.norotnh3},__dq__rotexist__dq__:${properties.rotexist},__dq__rotexoh__dq__:${properties.rotexoh},__dq__allalt__dq__:${properties.allalt},__dq__onlya__dq__:${properties.onlya},__dq__charges__dq__:${properties.charges},__dq__dorotmet__dq__:${properties.dorotmet},__dq__noadjust__dq__:${properties.noadjust},__dq__build__dq__:${properties.build},__dq__reduce_path__dq__:__dq__${properties.reduce_path}__dq____cc__'
           #end if
         
           #if str($input_path) != 'None':

@@ -24,7 +24,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config "__oc____dq__selection__dq__:__dq__${properties.selection}__dq__,__dq__skip__dq__:${properties.skip},__dq__start__dq__:${properties.start},__dq__end__dq__:${properties.end},__dq__dt__dq__:${properties.dt},__dq__output_name__dq__:__dq__${properties.output_name}__dq__,__dq__output_type__dq__:__dq__${properties.output_type}__dq__,__dq__gmx_path__dq__:__dq__${properties.gmx_path}__dq____cc__"
+            --config '__oc____dq__selection__dq__:__dq__${properties.selection}__dq__,__dq__skip__dq__:${properties.skip},__dq__start__dq__:${properties.start},__dq__end__dq__:${properties.end},__dq__dt__dq__:${properties.dt},__dq__output_name__dq__:__dq__${properties.output_name}__dq__,__dq__output_type__dq__:__dq__${properties.output_type}__dq__,__dq__gmx_path__dq__:__dq__${properties.gmx_path}__dq____cc__'
           #end if
         
           #if str($input_traj_path) != 'None':

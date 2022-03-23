@@ -30,7 +30,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config "__oc____dq__sequence__dq__:__dq__${properties.sequence}__dq__,__dq__seqpos__dq__:${properties.seqpos}__cc__"
+            --config '__oc____dq__sequence__dq__:__dq__${properties.sequence}__dq__,__dq__seqpos__dq__:${properties.seqpos}__cc__'
           #end if
         
           #if str($input_filename_shift) != 'None':

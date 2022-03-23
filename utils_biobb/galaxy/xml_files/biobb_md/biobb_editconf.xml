@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config "__oc____dq__distance_to_molecule__dq__:${properties.distance_to_molecule},__dq__box_type__dq__:__dq__${properties.box_type}__dq__,__dq__center_molecule__dq__:${properties.center_molecule},__dq__gmx_lib__dq__:__dq__${properties.gmx_lib}__dq__,__dq__gmx_path__dq__:__dq__${properties.gmx_path}__dq____cc__"
+            --config '__oc____dq__distance_to_molecule__dq__:${properties.distance_to_molecule},__dq__box_type__dq__:__dq__${properties.box_type}__dq__,__dq__center_molecule__dq__:${properties.center_molecule},__dq__gmx_lib__dq__:__dq__${properties.gmx_lib}__dq__,__dq__gmx_path__dq__:__dq__${properties.gmx_path}__dq____cc__'
           #end if
         
           #if str($input_gro_path) != 'None':

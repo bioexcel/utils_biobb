@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config "__oc____dq__remove_water__dq__:${properties.remove_water},__dq__add_hydrogen__dq__:${properties.add_hydrogen},__dq__keep_hydrogen__dq__:${properties.keep_hydrogen},__dq__fix_sidechains__dq__:${properties.fix_sidechains},__dq__fix_backbone_atoms__dq__:${properties.fix_backbone_atoms}__cc__"
+            --config '__oc____dq__remove_water__dq__:${properties.remove_water},__dq__add_hydrogen__dq__:${properties.add_hydrogen},__dq__keep_hydrogen__dq__:${properties.keep_hydrogen},__dq__fix_sidechains__dq__:${properties.fix_sidechains},__dq__fix_backbone_atoms__dq__:${properties.fix_backbone_atoms}__cc__'
           #end if
         
           #if str($input_pdb_path) != 'None':

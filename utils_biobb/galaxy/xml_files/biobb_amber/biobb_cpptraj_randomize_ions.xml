@@ -22,7 +22,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config "__oc____dq__ion_mask__dq__:__dq__${properties.ion_mask}__dq__,__dq__solute_mask__dq__:__dq__${properties.solute_mask}__dq__,__dq__distance__dq__:${properties.distance},__dq__overlap__dq__:${properties.overlap}__cc__"
+            --config '__oc____dq__ion_mask__dq__:__dq__${properties.ion_mask}__dq__,__dq__solute_mask__dq__:__dq__${properties.solute_mask}__dq__,__dq__distance__dq__:${properties.distance},__dq__overlap__dq__:${properties.overlap}__cc__'
           #end if
         
           #if str($input_top_path) != 'None':

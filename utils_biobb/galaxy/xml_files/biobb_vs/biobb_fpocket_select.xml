@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config "__oc____dq__pocket__dq__:${properties.pocket}__cc__"
+            --config '__oc____dq__pocket__dq__:${properties.pocket}__cc__'
           #end if
         
           #if str($input_pockets_zip) != 'None':

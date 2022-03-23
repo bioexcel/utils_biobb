@@ -22,7 +22,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config "__oc____dq__score__dq__:${properties.score},__dq__druggability_score__dq__:${properties.druggability_score},__dq__volume__dq__:${properties.volume}__cc__"
+            --config '__oc____dq__score__dq__:${properties.score},__dq__druggability_score__dq__:${properties.druggability_score},__dq__volume__dq__:${properties.volume}__cc__'
           #end if
         
           #if str($input_pockets_zip) != 'None':

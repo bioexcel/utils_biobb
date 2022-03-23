@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config "__oc____dq__heteroatoms__dq__:${properties.heteroatoms},__dq__water__dq__:${properties.water}__cc__"
+            --config '__oc____dq__heteroatoms__dq__:${properties.heteroatoms},__dq__water__dq__:${properties.water}__cc__'
           #end if
         
           #if str($input_structure_path) != 'None':

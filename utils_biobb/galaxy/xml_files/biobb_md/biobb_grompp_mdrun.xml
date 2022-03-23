@@ -28,7 +28,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config "__oc____dq__mdp__dq__:${properties.mdp},__dq__simulation_type__dq__:__dq__${properties.simulation_type}__dq__,__dq__maxwarn__dq__:${properties.maxwarn},__dq__mpi_bin__dq__:__dq__${properties.mpi_bin}__dq__,__dq__mpi_np__dq__:__dq__${properties.mpi_np}__dq__,__dq__mpi_hostlist__dq__:__dq__${properties.mpi_hostlist}__dq__,__dq__checkpoint_time__dq__:${properties.checkpoint_time},__dq__use_gpu__dq__:${properties.use_gpu},__dq__gpu_id__dq__:__dq__${properties.gpu_id}__dq__,__dq__gpu_tasks__dq__:__dq__${properties.gpu_tasks}__dq__,__dq__gmx_lib__dq__:__dq__${properties.gmx_lib}__dq__,__dq__gmx_path__dq__:__dq__${properties.gmx_path}__dq____cc__"
+            --config '__oc____dq__mdp__dq__:${properties.mdp},__dq__simulation_type__dq__:__dq__${properties.simulation_type}__dq__,__dq__maxwarn__dq__:${properties.maxwarn},__dq__mpi_bin__dq__:__dq__${properties.mpi_bin}__dq__,__dq__mpi_np__dq__:__dq__${properties.mpi_np}__dq__,__dq__mpi_hostlist__dq__:__dq__${properties.mpi_hostlist}__dq__,__dq__checkpoint_time__dq__:${properties.checkpoint_time},__dq__use_gpu__dq__:${properties.use_gpu},__dq__gpu_id__dq__:__dq__${properties.gpu_id}__dq__,__dq__gpu_tasks__dq__:__dq__${properties.gpu_tasks}__dq__,__dq__gmx_lib__dq__:__dq__${properties.gmx_lib}__dq__,__dq__gmx_path__dq__:__dq__${properties.gmx_path}__dq____cc__'
           #end if
         
           #if str($input_gro_path) != 'None':

@@ -24,7 +24,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config "__oc____dq__xvg__dq__:__dq__${properties.xvg}__dq__,__dq__selection__dq__:__dq__${properties.selection}__dq__,__dq__gmx_path__dq__:__dq__${properties.gmx_path}__dq____cc__"
+            --config '__oc____dq__xvg__dq__:__dq__${properties.xvg}__dq__,__dq__selection__dq__:__dq__${properties.selection}__dq__,__dq__gmx_path__dq__:__dq__${properties.gmx_path}__dq____cc__'
           #end if
         
           #if str($input_structure_path) != 'None':

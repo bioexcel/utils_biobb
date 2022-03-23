@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config "__oc____dq__method__dq__:__dq__${properties.method}__dq__,__dq__type__dq__:__dq__${properties.type}__dq__,__dq__target__dq__:${properties.target},__dq__evaluate__dq__:${properties.evaluate},__dq__evaluate_splits__dq__:${properties.evaluate_splits},__dq__evaluate_repeats__dq__:${properties.evaluate_repeats},__dq__n_bins__dq__:${properties.n_bins},__dq__balanced_binning__dq__:${properties.balanced_binning},__dq__sampling_strategy__dq__:${properties.sampling_strategy},__dq__k_neighbors__dq__:${properties.k_neighbors},__dq__random_state_method__dq__:${properties.random_state_method},__dq__random_state_evaluate__dq__:${properties.random_state_evaluate}__cc__"
+            --config '__oc____dq__method__dq__:__dq__${properties.method}__dq__,__dq__type__dq__:__dq__${properties.type}__dq__,__dq__target__dq__:${properties.target},__dq__evaluate__dq__:${properties.evaluate},__dq__evaluate_splits__dq__:${properties.evaluate_splits},__dq__evaluate_repeats__dq__:${properties.evaluate_repeats},__dq__n_bins__dq__:${properties.n_bins},__dq__balanced_binning__dq__:${properties.balanced_binning},__dq__sampling_strategy__dq__:${properties.sampling_strategy},__dq__k_neighbors__dq__:${properties.k_neighbors},__dq__random_state_method__dq__:${properties.random_state_method},__dq__random_state_evaluate__dq__:${properties.random_state_evaluate}__cc__'
           #end if
         
           #if str($input_dataset_path) != 'None':

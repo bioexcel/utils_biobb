@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config "__oc____dq__offset__dq__:${properties.offset},__dq__box_coordinates__dq__:${properties.box_coordinates}__cc__"
+            --config '__oc____dq__offset__dq__:${properties.offset},__dq__box_coordinates__dq__:${properties.box_coordinates}__cc__'
           #end if
         
           #if str($input_pdb_path) != 'None':

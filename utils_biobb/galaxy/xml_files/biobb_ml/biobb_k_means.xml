@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config "__oc____dq__predictors__dq__:${properties.predictors},__dq__clusters__dq__:${properties.clusters},__dq__plots__dq__:${properties.plots},__dq__random_state_method__dq__:${properties.random_state_method},__dq__scale__dq__:${properties.scale}__cc__"
+            --config '__oc____dq__predictors__dq__:${properties.predictors},__dq__clusters__dq__:${properties.clusters},__dq__plots__dq__:${properties.plots},__dq__random_state_method__dq__:${properties.random_state_method},__dq__scale__dq__:${properties.scale}__cc__'
           #end if
         
           #if str($input_dataset_path) != 'None':

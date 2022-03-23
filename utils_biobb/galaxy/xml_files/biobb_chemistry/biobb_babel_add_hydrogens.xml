@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config "__oc____dq__input_format__dq__:__dq__${properties.input_format}__dq__,__dq__output_format__dq__:__dq__${properties.output_format}__dq__,__dq__coordinates__dq__:__dq__${properties.coordinates}__dq__,__dq__ph__dq__:${properties.ph},__dq__obabel_path__dq__:__dq__${properties.obabel_path}__dq____cc__"
+            --config '__oc____dq__input_format__dq__:__dq__${properties.input_format}__dq__,__dq__output_format__dq__:__dq__${properties.output_format}__dq__,__dq__coordinates__dq__:__dq__${properties.coordinates}__dq__,__dq__ph__dq__:${properties.ph},__dq__obabel_path__dq__:__dq__${properties.obabel_path}__dq____cc__'
           #end if
         
           #if str($input_path) != 'None':

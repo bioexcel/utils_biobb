@@ -22,7 +22,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config "__oc____dq__method__dq__:__dq__${properties.method}__dq__,__dq__temperature__dq__:${properties.temperature},__dq__nboots__dq__:${properties.nboots},__dq__nblocks__dq__:${properties.nblocks},__dq__integ_only__dq__:${properties.integ_only},__dq__reverseB__dq__:${properties.reverseB},__dq__skip__dq__:${properties.skip},__dq__slice__dq__:__dq__${properties.slice}__dq__,__dq__rand__dq__:${properties.rand},__dq__index__dq__:__dq__${properties.index}__dq__,__dq__prec__dq__:${properties.prec},__dq__units__dq__:__dq__${properties.units}__dq__,__dq__no_ks__dq__:${properties.no_ks},__dq__nbins__dq__:${properties.nbins},__dq__dpi__dq__:${properties.dpi},__dq__pmx_path__dq__:__dq__${properties.pmx_path}__dq____cc__"
+            --config '__oc____dq__method__dq__:__dq__${properties.method}__dq__,__dq__temperature__dq__:${properties.temperature},__dq__nboots__dq__:${properties.nboots},__dq__nblocks__dq__:${properties.nblocks},__dq__integ_only__dq__:${properties.integ_only},__dq__reverseB__dq__:${properties.reverseB},__dq__skip__dq__:${properties.skip},__dq__slice__dq__:__dq__${properties.slice}__dq__,__dq__rand__dq__:${properties.rand},__dq__index__dq__:__dq__${properties.index}__dq__,__dq__prec__dq__:${properties.prec},__dq__units__dq__:__dq__${properties.units}__dq__,__dq__no_ks__dq__:${properties.no_ks},__dq__nbins__dq__:${properties.nbins},__dq__dpi__dq__:${properties.dpi},__dq__pmx_path__dq__:__dq__${properties.pmx_path}__dq____cc__'
           #end if
         
           #if str($input_a_xvg_zip_path) != 'None':

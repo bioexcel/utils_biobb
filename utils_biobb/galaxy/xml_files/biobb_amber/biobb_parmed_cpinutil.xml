@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config "__oc____dq__resnames__dq__:__dq__${properties.resnames}__dq__,__dq__igb__dq__:__dq__${properties.igb}__dq__,__dq__system__dq__:__dq__${properties.system}__dq____cc__"
+            --config '__oc____dq__resnames__dq__:__dq__${properties.resnames}__dq__,__dq__igb__dq__:__dq__${properties.igb}__dq__,__dq__system__dq__:__dq__${properties.system}__dq____cc__'
           #end if
         
           #if str($input_top_path) != 'None':

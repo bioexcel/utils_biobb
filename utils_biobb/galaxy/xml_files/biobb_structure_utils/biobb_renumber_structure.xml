@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config "__oc____dq__renumber_residues__dq__:${properties.renumber_residues},__dq__renumber_residues_per_chain__dq__:${properties.renumber_residues_per_chain}__cc__"
+            --config '__oc____dq__renumber_residues__dq__:${properties.renumber_residues},__dq__renumber_residues_per_chain__dq__:${properties.renumber_residues_per_chain}__cc__'
           #end if
         
           #if str($input_structure_path) != 'None':

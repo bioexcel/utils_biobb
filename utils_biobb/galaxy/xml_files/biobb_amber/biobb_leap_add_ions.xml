@@ -28,7 +28,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config "__oc____dq__forcefield__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.forcefield)}__dq____cb__,__dq__water_type__dq__:__dq__${properties.water_type}__dq__,__dq__box_type__dq__:__dq__${properties.box_type}__dq__,__dq__ions_type__dq__:__dq__${properties.ions_type}__dq__,__dq__neutralise__dq__:${properties.neutralise},__dq__ionic_concentration__dq__:${properties.ionic_concentration},__dq__positive_ions_number__dq__:${properties.positive_ions_number},__dq__negative_ions_number__dq__:${properties.negative_ions_number},__dq__positive_ions_type__dq__:__dq__${properties.positive_ions_type}__dq__,__dq__negative_ions_type__dq__:__dq__${properties.negative_ions_type}__dq____cc__"
+            --config '__oc____dq__forcefield__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.forcefield)}__dq____cb__,__dq__water_type__dq__:__dq__${properties.water_type}__dq__,__dq__box_type__dq__:__dq__${properties.box_type}__dq__,__dq__ions_type__dq__:__dq__${properties.ions_type}__dq__,__dq__neutralise__dq__:${properties.neutralise},__dq__ionic_concentration__dq__:${properties.ionic_concentration},__dq__positive_ions_number__dq__:${properties.positive_ions_number},__dq__negative_ions_number__dq__:${properties.negative_ions_number},__dq__positive_ions_type__dq__:__dq__${properties.positive_ions_type}__dq__,__dq__negative_ions_type__dq__:__dq__${properties.negative_ions_type}__dq____cc__'
           #end if
         
           #if str($input_pdb_path) != 'None':

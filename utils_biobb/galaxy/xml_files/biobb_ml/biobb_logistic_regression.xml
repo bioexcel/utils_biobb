@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config "__oc____dq__independent_vars__dq__:${properties.independent_vars},__dq__target__dq__:${properties.target},__dq__weight__dq__:${properties.weight},__dq__solver__dq__:__dq__${properties.solver}__dq__,__dq__c_parameter__dq__:${properties.c_parameter},__dq__normalize_cm__dq__:${properties.normalize_cm},__dq__random_state_method__dq__:${properties.random_state_method},__dq__random_state_train_test__dq__:${properties.random_state_train_test},__dq__test_size__dq__:${properties.test_size},__dq__scale__dq__:${properties.scale}__cc__"
+            --config '__oc____dq__independent_vars__dq__:${properties.independent_vars},__dq__target__dq__:${properties.target},__dq__weight__dq__:${properties.weight},__dq__solver__dq__:__dq__${properties.solver}__dq__,__dq__c_parameter__dq__:${properties.c_parameter},__dq__normalize_cm__dq__:${properties.normalize_cm},__dq__random_state_method__dq__:${properties.random_state_method},__dq__random_state_train_test__dq__:${properties.random_state_train_test},__dq__test_size__dq__:${properties.test_size},__dq__scale__dq__:${properties.scale}__cc__'
           #end if
         
           #if str($input_dataset_path) != 'None':

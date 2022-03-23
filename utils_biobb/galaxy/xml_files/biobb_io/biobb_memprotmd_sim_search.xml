@@ -18,7 +18,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config "__oc____dq__collection_name__dq__:__dq__${properties.collection_name}__dq__,__dq__keyword__dq__:__dq__${properties.keyword}__dq____cc__"
+            --config '__oc____dq__collection_name__dq__:__dq__${properties.collection_name}__dq__,__dq__keyword__dq__:__dq__${properties.keyword}__dq____cc__'
           #end if
         
         

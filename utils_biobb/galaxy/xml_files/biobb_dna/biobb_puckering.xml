@@ -22,7 +22,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config "__oc____dq__sequence__dq__:__dq__${properties.sequence}__dq__,__dq__helpar_name__dq__:__dq__${properties.helpar_name}__dq__,__dq__stride__dq__:${properties.stride},__dq__seqpos__dq__:${properties.seqpos}__cc__"
+            --config '__oc____dq__sequence__dq__:__dq__${properties.sequence}__dq__,__dq__helpar_name__dq__:__dq__${properties.helpar_name}__dq__,__dq__stride__dq__:${properties.stride},__dq__seqpos__dq__:${properties.seqpos}__cc__'
           #end if
         
           #if str($input_phaseC_path) != 'None':
