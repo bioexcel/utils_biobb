@@ -99,7 +99,7 @@
                         selected="true"
                       {%- endif %}
                     >{{ opt }}
-                       {% if v['property_formats'][opt] -%}
+                       {% if v['property_formats'][opt] and v['property_formats'][opt] != 'None' -%}
                           - {{ v['property_formats'][opt] }}
                        {%- endif %}
                     </option>
