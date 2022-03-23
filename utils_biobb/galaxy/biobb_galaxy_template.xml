@@ -81,6 +81,7 @@
                   {% if v['default'] -%}
                     value="{{ v['default']}}" 
                   {%- endif %}
+                  <sanitize><valid initial="string.printable"/></sanitize>
                 /> 
               {%- elif v['type'] == 'float' or v['type'] == 'integer' -%}
                 <param name="{{ k }}" type="{{v['type']}}" 
