@@ -82,12 +82,12 @@
             
               <param name="sequence" type="text" label="sequence" help="Nucleic acid sequence corresponding to the input .ser file. Length of sequence is expected to be the same as the total number of columns in the .ser file, minus the index column (even if later on a subset of columns is selected with the *usecols* option)." optional="true"
                   
-                  <sanitize><valid initial="string.printable"/></sanitize>
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
                 />
             
               <param name="helpar_name" type="text" label="helpar_name" help="helical parameter name." optional="true"
                   
-                  <sanitize><valid initial="string.printable"/></sanitize>
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
                 />
             
               <param name="seqpos" type="text" label="seqpos" help="list of sequence positions (columns indices starting by 0) to analyze.  If not specified it will analyse the complete sequence. (Json)" value="[]" />

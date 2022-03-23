@@ -139,7 +139,7 @@
             
               <param name="slice" type="text" label="slice" help="Subset of trajectories to analyze. Provide list slice, e.g. &#34;10 50&#34; will result in selecting dhdl_files[10:50]." optional="true"
                   
-                  <sanitize><valid initial="string.printable"/></sanitize>
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
                 />
             
               <param name="rand" type="integer" 
@@ -149,7 +149,7 @@
             
               <param name="index" type="text" label="index" help="Zero-based index of files to analyze (e.g. &#34;0 10 20 50 60&#34;). It keeps the dhdl.xvg files according to their position in the list, sorted according to the filenames." optional="true"
                   
-                  <sanitize><valid initial="string.printable"/></sanitize>
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
                 />
             
               <param name="prec" type="integer" 
@@ -196,7 +196,7 @@
             
               <param name="pmx_path" type="text" label="pmx_path" help="Path to the PMX command line interface." optional="false"
                   value="pmx"
-                  <sanitize><valid initial="string.printable"/></sanitize>
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
                 />
                     
           </section>

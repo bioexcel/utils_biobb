@@ -69,7 +69,7 @@
             
               <param name="force_field" type="text" label="force_field" help="Force field to use. If **input_top_zip_path** is a top file, it&#39;s not necessary to specify the forcefield, as it will be determined automatically. If **input_top_zip_path** is an itp file, then it&#39;s needed." optional="false"
                   value="amber99sb-star-ildn-mut"
-                  <sanitize><valid initial="string.printable"/></sanitize>
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
                 />
             
               <param name="split" type="boolean" 
@@ -84,12 +84,12 @@
             
               <param name="gmx_lib" type="text" label="gmx_lib" help="Path to the GMXLIB folder in your computer." optional="false"
                   value="$CONDA_PREFIX/lib/python3.7/site-packages/pmx/data/mutff45/"
-                  <sanitize><valid initial="string.printable"/></sanitize>
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
                 />
             
               <param name="pmx_path" type="text" label="pmx_path" help="Path to the PMX command line interface." optional="false"
                   value="pmx"
-                  <sanitize><valid initial="string.printable"/></sanitize>
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
                 />
                     
           </section>

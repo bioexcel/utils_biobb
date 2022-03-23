@@ -85,7 +85,7 @@
             
               <param name="basename" type="text" label="basename" help="A basename for the project (folder and output files)." optional="false"
                   value="BBB"
-                  <sanitize><valid initial="string.printable"/></sanitize>
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
                 />
             
               <param name="charge" type="integer" 
@@ -95,7 +95,7 @@
             
               <param name="acpype_path" type="text" label="acpype_path" help="Path to the acpype executable binary." optional="false"
                   value="acpype"
-                  <sanitize><valid initial="string.printable"/></sanitize>
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
                 />
                     
           </section>

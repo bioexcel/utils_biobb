@@ -116,7 +116,7 @@
             
               <param name="binary_path" type="text" label="binary_path" help="Path to the CMIP Titration executable binary." optional="false"
                   value="titration"
-                  <sanitize><valid initial="string.printable"/></sanitize>
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
                 />
                     
           </section>

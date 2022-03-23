@@ -59,7 +59,7 @@
             
               <param name="ligand_code" type="text" label="ligand_code" help="RSCB PDB ligand code." optional="true"
                   
-                  <sanitize><valid initial="string.printable"/></sanitize>
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
                 />
             
               <param name="api_id" type="select" label="api_id" help="Identifier of the PDB REST API from which the SDF structure will be downloaded. " multiple="">

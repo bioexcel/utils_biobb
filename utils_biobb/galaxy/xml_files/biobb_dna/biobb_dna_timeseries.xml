@@ -69,7 +69,7 @@
             
               <param name="sequence" type="text" label="sequence" help="Nucleic acid sequence corresponding to the input .ser file. Length of sequence is expected to be the same as the total number of columns in the .ser file, minus the index column (even if later on a subset of columns is selected with the *usecols* option)." optional="true"
                   
-                  <sanitize><valid initial="string.printable"/></sanitize>
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
                 />
             
               <param name="bins" type="integer" 
@@ -79,7 +79,7 @@
             
               <param name="helpar_name" type="text" label="helpar_name" help="helical parameter name." optional="false"
                   value="Optional"
-                  <sanitize><valid initial="string.printable"/></sanitize>
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
                 />
             
               <param name="stride" type="integer" 

@@ -101,7 +101,7 @@
             
               <param name="list" type="text" label="list" help="List of residues to modify separated by commas (i.e HISA234HID,HISB33HIE). Only in case mode list selected." optional="true"
                   
-                  <sanitize><valid initial="string.printable"/></sanitize>
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
                 />
             
               <param name="keep_canonical_resnames" type="boolean" 
@@ -111,7 +111,7 @@
             
               <param name="binary_path" type="text" label="binary_path" help="path to the check_structure application" optional="false"
                   value="check_structure"
-                  <sanitize><valid initial="string.printable"/></sanitize>
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
                 />
             
               <param name="output_format" type="select" label="output_format" help="Format of the output file" multiple="">

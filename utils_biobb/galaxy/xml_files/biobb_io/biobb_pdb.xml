@@ -59,12 +59,12 @@
             
               <param name="pdb_code" type="text" label="pdb_code" help="RSCB PDB code." optional="true"
                   
-                  <sanitize><valid initial="string.printable"/></sanitize>
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
                 />
             
               <param name="filter" type="text" label="filter" help="Array of groups to be kept. If value is None or False no filter will be applied. All the possible values are defined in the official PDB specification." optional="false"
                   value="[ATOM, MODEL, ENDMDL]"
-                  <sanitize><valid initial="string.printable"/></sanitize>
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
                 />
             
               <param name="api_id" type="select" label="api_id" help="Identifier of the PDB REST API from which the PDB structure will be downloaded. " multiple="">
