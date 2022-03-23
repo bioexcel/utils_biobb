@@ -93,11 +93,15 @@
                   
                     <option value="gini" 
                       selected="true"
-                    >gini - for the Gini impurity</option>
+                    >gini
+                       - for the Gini impurity
+                    </option>
                   
                     <option value="entropy" 
                       
-                    >entropy - for the information gain</option>
+                    >entropy
+                       - for the information gain
+                    </option>
                   
                 </param>
             

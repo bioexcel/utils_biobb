@@ -107,15 +107,21 @@
                   
                     <option value="crd" 
                       
-                    >crd - </option>
+                    >crd
+                       
+                    </option>
                   
                     <option value="mdcrd" 
                       
-                    >mdcrd - </option>
+                    >mdcrd
+                       
+                    </option>
                   
                     <option value="inpcrd" 
                       
-                    >inpcrd - </option>
+                    >inpcrd
+                       
+                    </option>
                   
                 </param>
                     

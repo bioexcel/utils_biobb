@@ -106,35 +106,51 @@
                   
                     <option value="Adadelta" 
                       
-                    >Adadelta - Adadelta optimization is a stochastic gradient descent method that is based on adaptive learning rate per dimension to address two drawbacks: the continual decay of learning rates throughout training and the need for a manually selected global learning rate</option>
+                    >Adadelta
+                       - Adadelta optimization is a stochastic gradient descent method that is based on adaptive learning rate per dimension to address two drawbacks: the continual decay of learning rates throughout training and the need for a manually selected global learning rate
+                    </option>
                   
                     <option value="Adagrad" 
                       
-                    >Adagrad - Adagrad is an optimizer with parameter-specific learning rates; which are adapted relative to how frequently a parameter gets updated during training. The more updates a parameter receives; the smaller the updates</option>
+                    >Adagrad
+                       - Adagrad is an optimizer with parameter-specific learning rates; which are adapted relative to how frequently a parameter gets updated during training. The more updates a parameter receives; the smaller the updates
+                    </option>
                   
                     <option value="Adam" 
                       selected="true"
-                    >Adam - Adam optimization is a stochastic gradient descent method that is based on adaptive estimation of first-order and second-order moments</option>
+                    >Adam
+                       - Adam optimization is a stochastic gradient descent method that is based on adaptive estimation of first-order and second-order moments
+                    </option>
                   
                     <option value="Adamax" 
                       
-                    >Adamax - It is a variant of Adam based on the infinity norm. Default parameters follow those provided in the paper. Adamax is sometimes superior to adam; specially in models with embeddings</option>
+                    >Adamax
+                       - It is a variant of Adam based on the infinity norm. Default parameters follow those provided in the paper. Adamax is sometimes superior to adam; specially in models with embeddings
+                    </option>
                   
                     <option value="Ftrl" 
                       
-                    >Ftrl - Optimizer that implements the FTRL algorithm</option>
+                    >Ftrl
+                       - Optimizer that implements the FTRL algorithm
+                    </option>
                   
                     <option value="Nadam" 
                       
-                    >Nadam - Much like Adam is essentially RMSprop with momentum; Nadam is Adam with Nesterov momentum</option>
+                    >Nadam
+                       - Much like Adam is essentially RMSprop with momentum; Nadam is Adam with Nesterov momentum
+                    </option>
                   
                     <option value="RMSprop" 
                       
-                    >RMSprop - Optimizer that implements the RMSprop algorithm</option>
+                    >RMSprop
+                       - Optimizer that implements the RMSprop algorithm
+                    </option>
                   
                     <option value="SGD" 
                       
-                    >SGD - Gradient descent -with momentum- optimizer</option>
+                    >SGD
+                       - Gradient descent -with momentum- optimizer
+                    </option>
                   
                 </param>
             

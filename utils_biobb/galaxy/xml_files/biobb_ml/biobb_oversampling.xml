@@ -71,23 +71,33 @@
                   
                     <option value="random" 
                       
-                    >random - RandomOverSampler: Object to over-sample the minority classes by picking samples at random with replacement</option>
+                    >random
+                       - RandomOverSampler: Object to over-sample the minority classes by picking samples at random with replacement
+                    </option>
                   
                     <option value="smote" 
                       
-                    >smote - SMOTE: This object is an implementation of SMOTE - Synthetic Minority Over-sampling Technique</option>
+                    >smote
+                       - SMOTE: This object is an implementation of SMOTE - Synthetic Minority Over-sampling Technique
+                    </option>
                   
                     <option value="borderline" 
                       
-                    >borderline - BorderlineSMOTE: This algorithm is a variant of the original SMOTE algorithm. Borderline samples will be detected and used to generate new synthetic samples</option>
+                    >borderline
+                       - BorderlineSMOTE: This algorithm is a variant of the original SMOTE algorithm. Borderline samples will be detected and used to generate new synthetic samples
+                    </option>
                   
                     <option value="svmsmote" 
                       
-                    >svmsmote - SVMSMOTE: Variant of SMOTE algorithm which use an SVM algorithm to detect sample to use for generating new synthetic samples</option>
+                    >svmsmote
+                       - SVMSMOTE: Variant of SMOTE algorithm which use an SVM algorithm to detect sample to use for generating new synthetic samples
+                    </option>
                   
                     <option value="adasyn" 
                       
-                    >adasyn - ADASYN: Perform over-sampling using Adaptive Synthetic -ADASYN- sampling approach for imbalanced datasets</option>
+                    >adasyn
+                       - ADASYN: Perform over-sampling using Adaptive Synthetic -ADASYN- sampling approach for imbalanced datasets
+                    </option>
                   
                 </param>
             
@@ -95,11 +105,15 @@
                   
                     <option value="regression" 
                       
-                    >regression - the oversampling will be applied on a continuous dataset</option>
+                    >regression
+                       - the oversampling will be applied on a continuous dataset
+                    </option>
                   
                     <option value="classification" 
                       
-                    >classification - the oversampling will be applied on a classified dataset</option>
+                    >classification
+                       - the oversampling will be applied on a classified dataset
+                    </option>
                   
                 </param>
             

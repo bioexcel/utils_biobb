@@ -89,15 +89,21 @@
                   
                     <option value="CGI" 
                       
-                    >CGI - Crooks Gaussian Intersection</option>
+                    >CGI
+                       - Crooks Gaussian Intersection
+                    </option>
                   
                     <option value="BAR" 
                       
-                    >BAR - Bennet Acceptance Ratio</option>
+                    >BAR
+                       - Bennet Acceptance Ratio
+                    </option>
                   
                     <option value="JARZ" 
                       
-                    >JARZ - Jarzynski&#39;s estimator</option>
+                    >JARZ
+                       - Jarzynski&#39;s estimator
+                    </option>
                   
                 </param>
             
@@ -153,15 +159,21 @@
                   
                     <option value="kJ" 
                       selected="true"
-                    >kJ - Kilojoules</option>
+                    >kJ
+                       - Kilojoules
+                    </option>
                   
                     <option value="kcal" 
                       
-                    >kcal - Kilocalories</option>
+                    >kcal
+                       - Kilocalories
+                    </option>
                   
                     <option value="kT" 
                       
-                    >kT - the product of the Boltzmann constant k and the temperature</option>
+                    >kT
+                       - the product of the Boltzmann constant k and the temperature
+                    </option>
                   
                 </param>
             

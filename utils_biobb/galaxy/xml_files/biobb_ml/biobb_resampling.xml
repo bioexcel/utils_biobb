@@ -71,11 +71,15 @@
                   
                     <option value="smotetomek" 
                       
-                    >smotetomek - SMOTETomek: Class to perform over-sampling using SMOTE and cleaning using Tomek links</option>
+                    >smotetomek
+                       - SMOTETomek: Class to perform over-sampling using SMOTE and cleaning using Tomek links
+                    </option>
                   
                     <option value="smotenn" 
                       
-                    >smotenn - SMOTEENN: Class to perform over-sampling using SMOTE and cleaning using ENN</option>
+                    >smotenn
+                       - SMOTEENN: Class to perform over-sampling using SMOTE and cleaning using ENN
+                    </option>
                   
                 </param>
             
@@ -83,11 +87,15 @@
                   
                     <option value="regression" 
                       
-                    >regression - the oversampling will be applied on a continuous dataset</option>
+                    >regression
+                       - the oversampling will be applied on a continuous dataset
+                    </option>
                   
                     <option value="classification" 
                       
-                    >classification - the oversampling will be applied on a classified dataset</option>
+                    >classification
+                       - the oversampling will be applied on a classified dataset
+                    </option>
                   
                 </param>
             

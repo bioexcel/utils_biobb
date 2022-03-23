@@ -93,23 +93,33 @@
                   
                     <option value="linear" 
                       
-                    >linear - It&#39;s used when the data is Linearly separable; that is; it can be separated using a single Line</option>
+                    >linear
+                       - It&#39;s used when the data is Linearly separable; that is; it can be separated using a single Line
+                    </option>
                   
                     <option value="poly" 
                       
-                    >poly - Represents the similarity of vectors -training samples- in a feature space over polynomials of the original variables; allowing learning of non-linear models</option>
+                    >poly
+                       - Represents the similarity of vectors -training samples- in a feature space over polynomials of the original variables; allowing learning of non-linear models
+                    </option>
                   
                     <option value="rbf" 
                       selected="true"
-                    >rbf - It&#39;s a function whose value depends on the distance from the origin or from some point</option>
+                    >rbf
+                       - It&#39;s a function whose value depends on the distance from the origin or from some point
+                    </option>
                   
                     <option value="sigmoid" 
                       
-                    >sigmoid - In Neural Networks field the bipolar sigmoid function is often used as an activation function for artificial neurons</option>
+                    >sigmoid
+                       - In Neural Networks field the bipolar sigmoid function is often used as an activation function for artificial neurons
+                    </option>
                   
                     <option value="precomputed" 
                       
-                    >precomputed - Precomputed kernel</option>
+                    >precomputed
+                       - Precomputed kernel
+                    </option>
                   
                 </param>
             

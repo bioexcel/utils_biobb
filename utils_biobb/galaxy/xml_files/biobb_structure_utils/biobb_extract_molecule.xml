@@ -71,27 +71,39 @@
                   
                     <option value="all" 
                       selected="true"
-                    >all - None</option>
+                    >all
+                       
+                    </option>
                   
                     <option value="protein" 
                       
-                    >protein - None</option>
+                    >protein
+                       
+                    </option>
                   
                     <option value="na" 
                       
-                    >na - None</option>
+                    >na
+                       
+                    </option>
                   
                     <option value="dna" 
                       
-                    >dna - None</option>
+                    >dna
+                       
+                    </option>
                   
                     <option value="rna" 
                       
-                    >rna - None</option>
+                    >rna
+                       
+                    </option>
                   
                     <option value="chains" 
                       
-                    >chains - None</option>
+                    >chains
+                       
+                    </option>
                   
                 </param>
             
@@ -105,11 +117,15 @@
                   
                     <option value="pdb" 
                       
-                    >pdb - </option>
+                    >pdb
+                       
+                    </option>
                   
                     <option value="pdbqt" 
                       
-                    >pdbqt - </option>
+                    >pdbqt
+                       
+                    </option>
                   
                 </param>
                     

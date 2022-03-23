@@ -153,27 +153,39 @@
                   
                     <option value="minimization" 
                       selected="true"
-                    >minimization - Runs an energy minimization</option>
+                    >minimization
+                       - Runs an energy minimization
+                    </option>
                   
                     <option value="min_vacuo" 
                       
-                    >min_vacuo - Runs an energy minimization in vacuo</option>
+                    >min_vacuo
+                       - Runs an energy minimization in vacuo
+                    </option>
                   
                     <option value="NVT" 
                       
-                    >NVT - Runs an NVT equilibration</option>
+                    >NVT
+                       - Runs an NVT equilibration
+                    </option>
                   
                     <option value="npt" 
                       
-                    >npt - Runs an NPT equilibration</option>
+                    >npt
+                       - Runs an NPT equilibration
+                    </option>
                   
                     <option value="free" 
                       
-                    >free - Runs a MD simulation</option>
+                    >free
+                       - Runs a MD simulation
+                    </option>
                   
                     <option value="heat" 
                       
-                    >heat - Heats the MD system</option>
+                    >heat
+                       - Heats the MD system
+                    </option>
                   
                 </param>
             
@@ -198,19 +210,27 @@
                   
                     <option value="log" 
                       
-                    >log - </option>
+                    >log
+                       
+                    </option>
                   
                     <option value="out" 
                       
-                    >out - </option>
+                    >out
+                       
+                    </option>
                   
                     <option value="txt" 
                       
-                    >txt - </option>
+                    >txt
+                       
+                    </option>
                   
                     <option value="o" 
                       
-                    >o - </option>
+                    >o
+                       
+                    </option>
                   
                 </param>
             
@@ -218,27 +238,39 @@
                   
                     <option value="trj" 
                       
-                    >trj - </option>
+                    >trj
+                       
+                    </option>
                   
                     <option value="crd" 
                       
-                    >crd - </option>
+                    >crd
+                       
+                    </option>
                   
                     <option value="mdcrd" 
                       
-                    >mdcrd - </option>
+                    >mdcrd
+                       
+                    </option>
                   
                     <option value="x" 
                       
-                    >x - </option>
+                    >x
+                       
+                    </option>
                   
                     <option value="netcdf" 
                       
-                    >netcdf - </option>
+                    >netcdf
+                       
+                    </option>
                   
                     <option value="nc" 
                       
-                    >nc - </option>
+                    >nc
+                       
+                    </option>
                   
                 </param>
             
@@ -246,23 +278,33 @@
                   
                     <option value="rst" 
                       
-                    >rst - </option>
+                    >rst
+                       
+                    </option>
                   
                     <option value="rst7" 
                       
-                    >rst7 - </option>
+                    >rst7
+                       
+                    </option>
                   
                     <option value="netcdf" 
                       
-                    >netcdf - </option>
+                    >netcdf
+                       
+                    </option>
                   
                     <option value="nc" 
                       
-                    >nc - </option>
+                    >nc
+                       
+                    </option>
                   
                     <option value="ncrst" 
                       
-                    >ncrst - </option>
+                    >ncrst
+                       
+                    </option>
                   
                 </param>
             
@@ -270,15 +312,21 @@
                   
                     <option value="cprst" 
                       
-                    >cprst - </option>
+                    >cprst
+                       
+                    </option>
                   
                     <option value="rst" 
                       
-                    >rst - </option>
+                    >rst
+                       
+                    </option>
                   
                     <option value="rst7" 
                       
-                    >rst7 - </option>
+                    >rst7
+                       
+                    </option>
                   
                 </param>
                     

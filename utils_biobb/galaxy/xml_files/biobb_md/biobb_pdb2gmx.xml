@@ -79,27 +79,39 @@
                   
                     <option value="spc" 
                       
-                    >spc - None</option>
+                    >spc
+                       
+                    </option>
                   
                     <option value="spce" 
                       selected="true"
-                    >spce - None</option>
+                    >spce
+                       
+                    </option>
                   
                     <option value="tip3p" 
                       
-                    >tip3p - None</option>
+                    >tip3p
+                       
+                    </option>
                   
                     <option value="tip4p" 
                       
-                    >tip4p - None</option>
+                    >tip4p
+                       
+                    </option>
                   
                     <option value="tip5p" 
                       
-                    >tip5p - None</option>
+                    >tip5p
+                       
+                    </option>
                   
                     <option value="tips3p" 
                       
-                    >tips3p - None</option>
+                    >tips3p
+                       
+                    </option>
                   
                 </param>
             
@@ -107,63 +119,93 @@
                   
                     <option value="gromos45a3" 
                       
-                    >gromos45a3 - None</option>
+                    >gromos45a3
+                       
+                    </option>
                   
                     <option value="charmm27" 
                       
-                    >charmm27 - None</option>
+                    >charmm27
+                       
+                    </option>
                   
                     <option value="gromos53a6" 
                       
-                    >gromos53a6 - None</option>
+                    >gromos53a6
+                       
+                    </option>
                   
                     <option value="amber96" 
                       
-                    >amber96 - None</option>
+                    >amber96
+                       
+                    </option>
                   
                     <option value="amber99" 
                       
-                    >amber99 - None</option>
+                    >amber99
+                       
+                    </option>
                   
                     <option value="gromos43a2" 
                       
-                    >gromos43a2 - None</option>
+                    >gromos43a2
+                       
+                    </option>
                   
                     <option value="gromos54a7" 
                       
-                    >gromos54a7 - None</option>
+                    >gromos54a7
+                       
+                    </option>
                   
                     <option value="gromos43a1" 
                       
-                    >gromos43a1 - None</option>
+                    >gromos43a1
+                       
+                    </option>
                   
                     <option value="amberGS" 
                       
-                    >amberGS - None</option>
+                    >amberGS
+                       
+                    </option>
                   
                     <option value="gromos53a5" 
                       
-                    >gromos53a5 - None</option>
+                    >gromos53a5
+                       
+                    </option>
                   
                     <option value="amber99sb" 
                       
-                    >amber99sb - None</option>
+                    >amber99sb
+                       
+                    </option>
                   
                     <option value="amber03" 
                       
-                    >amber03 - None</option>
+                    >amber03
+                       
+                    </option>
                   
                     <option value="amber99sb-ildn" 
                       selected="true"
-                    >amber99sb-ildn - None</option>
+                    >amber99sb-ildn
+                       
+                    </option>
                   
                     <option value="oplsaa" 
                       
-                    >oplsaa - None</option>
+                    >oplsaa
+                       
+                    </option>
                   
                     <option value="amber94" 
                       
-                    >amber94 - None</option>
+                    >amber94
+                       
+                    </option>
                   
                 </param>
             

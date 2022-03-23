@@ -79,27 +79,39 @@
                   
                     <option value="AS4" 
                       
-                    >AS4 - None</option>
+                    >AS4
+                       
+                    </option>
                   
                     <option value="GL4" 
                       
-                    >GL4 - None</option>
+                    >GL4
+                       
+                    </option>
                   
                     <option value="HIP" 
                       
-                    >HIP - None</option>
+                    >HIP
+                       
+                    </option>
                   
                     <option value="CYS" 
                       
-                    >CYS - None</option>
+                    >CYS
+                       
+                    </option>
                   
                     <option value="LYS" 
                       
-                    >LYS - None</option>
+                    >LYS
+                       
+                    </option>
                   
                     <option value="TYR" 
                       
-                    >TYR - None</option>
+                    >TYR
+                       
+                    </option>
                   
                 </param>
             
@@ -107,23 +119,33 @@
                   
                     <option value="1" 
                       
-                    >1 - None</option>
+                    >1
+                       
+                    </option>
                   
                     <option value="2" 
                       selected="true"
-                    >2 - None</option>
+                    >2
+                       
+                    </option>
                   
                     <option value="5" 
                       
-                    >5 - None</option>
+                    >5
+                       
+                    </option>
                   
                     <option value="7" 
                       
-                    >7 - None</option>
+                    >7
+                       
+                    </option>
                   
                     <option value="8" 
                       
-                    >8 - None</option>
+                    >8
+                       
+                    </option>
                   
                 </param>
             
@@ -135,15 +157,21 @@
                   
                     <option value="top" 
                       
-                    >top - </option>
+                    >top
+                       
+                    </option>
                   
                     <option value="parmtop" 
                       
-                    >parmtop - </option>
+                    >parmtop
+                       
+                    </option>
                   
                     <option value="prmtop" 
                       
-                    >prmtop - </option>
+                    >prmtop
+                       
+                    </option>
                   
                 </param>
                     

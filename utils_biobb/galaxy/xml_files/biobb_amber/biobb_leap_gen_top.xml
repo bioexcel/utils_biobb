@@ -127,27 +127,39 @@
                   
                     <option value="protein.ff14SB" 
                       
-                    >protein.ff14SB - None</option>
+                    >protein.ff14SB
+                       
+                    </option>
                   
                     <option value="protein.ff19SB" 
                       
-                    >protein.ff19SB - None</option>
+                    >protein.ff19SB
+                       
+                    </option>
                   
                     <option value="DNA.bsc1" 
                       
-                    >DNA.bsc1 - None</option>
+                    >DNA.bsc1
+                       
+                    </option>
                   
                     <option value="DNA.OL15" 
                       
-                    >DNA.OL15 - None</option>
+                    >DNA.OL15
+                       
+                    </option>
                   
                     <option value="RNA.OL3" 
                       
-                    >RNA.OL3 - None</option>
+                    >RNA.OL3
+                       
+                    </option>
                   
                     <option value="gaff" 
                       
-                    >gaff - None</option>
+                    >gaff
+                       
+                    </option>
                   
                 </param>
             
@@ -155,15 +167,21 @@
                   
                     <option value="top" 
                       
-                    >top - </option>
+                    >top
+                       
+                    </option>
                   
                     <option value="parmtop" 
                       
-                    >parmtop - </option>
+                    >parmtop
+                       
+                    </option>
                   
                     <option value="prmtop" 
                       
-                    >prmtop - </option>
+                    >prmtop
+                       
+                    </option>
                   
                 </param>
             
@@ -171,15 +189,21 @@
                   
                     <option value="crd" 
                       
-                    >crd - </option>
+                    >crd
+                       
+                    </option>
                   
                     <option value="mdcrd" 
                       
-                    >mdcrd - </option>
+                    >mdcrd
+                       
+                    </option>
                   
                     <option value="inpcrd" 
                       
-                    >inpcrd - </option>
+                    >inpcrd
+                       
+                    </option>
                   
                 </param>
                     

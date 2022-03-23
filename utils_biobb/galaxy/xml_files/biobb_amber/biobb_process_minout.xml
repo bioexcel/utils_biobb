@@ -71,63 +71,93 @@
                   
                     <option value="ANGLE" 
                       
-                    >ANGLE - None</option>
+                    >ANGLE
+                       
+                    </option>
                   
                     <option value="BOND" 
                       
-                    >BOND - None</option>
+                    >BOND
+                       
+                    </option>
                   
                     <option value="DIHEDRAL" 
                       
-                    >DIHEDRAL - None</option>
+                    >DIHEDRAL
+                       
+                    </option>
                   
                     <option value="EEL" 
                       
-                    >EEL - None</option>
+                    >EEL
+                       
+                    </option>
                   
                     <option value="EEL14" 
                       
-                    >EEL14 - None</option>
+                    >EEL14
+                       
+                    </option>
                   
                     <option value="ENERGY" 
                       
-                    >ENERGY - None</option>
+                    >ENERGY
+                       
+                    </option>
                   
                     <option value="GMAX" 
                       
-                    >GMAX - None</option>
+                    >GMAX
+                       
+                    </option>
                   
                     <option value="HBOND" 
                       
-                    >HBOND - None</option>
+                    >HBOND
+                       
+                    </option>
                   
                     <option value="NAME" 
                       
-                    >NAME - None</option>
+                    >NAME
+                       
+                    </option>
                   
                     <option value="NSTEP" 
                       
-                    >NSTEP - None</option>
+                    >NSTEP
+                       
+                    </option>
                   
                     <option value="NUMBER" 
                       
-                    >NUMBER - None</option>
+                    >NUMBER
+                       
+                    </option>
                   
                     <option value="RESTRAINT" 
                       
-                    >RESTRAINT - None</option>
+                    >RESTRAINT
+                       
+                    </option>
                   
                     <option value="RMS" 
                       
-                    >RMS - None</option>
+                    >RMS
+                       
+                    </option>
                   
                     <option value="VDW14" 
                       
-                    >VDW14 - None</option>
+                    >VDW14
+                       
+                    </option>
                   
                     <option value="VDWAALS" 
                       
-                    >VDWAALS - None</option>
+                    >VDWAALS
+                       
+                    </option>
                   
                 </param>
             
@@ -135,15 +165,21 @@
                   
                     <option value="dat" 
                       
-                    >dat - </option>
+                    >dat
+                       
+                    </option>
                   
                     <option value="txt" 
                       
-                    >txt - </option>
+                    >txt
+                       
+                    </option>
                   
                     <option value="csv" 
                       
-                    >csv - </option>
+                    >csv
+                       
+                    </option>
                   
                 </param>
                     

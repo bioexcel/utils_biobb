@@ -81,11 +81,15 @@
                   
                     <option value="pdb" 
                       
-                    >pdb - </option>
+                    >pdb
+                       
+                    </option>
                   
                     <option value="pdbqt" 
                       
-                    >pdbqt - </option>
+                    >pdbqt
+                       
+                    </option>
                   
                 </param>
                     

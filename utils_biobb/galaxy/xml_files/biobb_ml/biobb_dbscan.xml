@@ -91,95 +91,141 @@
                   
                     <option value="cityblock" 
                       
-                    >cityblock - Compute the City Block -Manhattan- distance</option>
+                    >cityblock
+                       - Compute the City Block -Manhattan- distance
+                    </option>
                   
                     <option value="cosine" 
                       
-                    >cosine - Compute the Cosine distance between 1-D arrays</option>
+                    >cosine
+                       - Compute the Cosine distance between 1-D arrays
+                    </option>
                   
                     <option value="euclidean" 
                       selected="true"
-                    >euclidean - Computes the Euclidean distance between two 1-D arrays</option>
+                    >euclidean
+                       - Computes the Euclidean distance between two 1-D arrays
+                    </option>
                   
                     <option value="l1" 
                       
-                    >l1 - None</option>
+                    >l1
+                       
+                    </option>
                   
                     <option value="l2" 
                       
-                    >l2 - None</option>
+                    >l2
+                       
+                    </option>
                   
                     <option value="manhattan" 
                       
-                    >manhattan - Compute the Manhattan distance</option>
+                    >manhattan
+                       - Compute the Manhattan distance
+                    </option>
                   
                     <option value="braycurtis" 
                       
-                    >braycurtis - Compute the Bray-Curtis distance between two 1-D arrays</option>
+                    >braycurtis
+                       - Compute the Bray-Curtis distance between two 1-D arrays
+                    </option>
                   
                     <option value="canberra" 
                       
-                    >canberra - Compute the Canberra distance between two 1-D arrays</option>
+                    >canberra
+                       - Compute the Canberra distance between two 1-D arrays
+                    </option>
                   
                     <option value="chebyshev" 
                       
-                    >chebyshev - Compute the Chebyshev distance</option>
+                    >chebyshev
+                       - Compute the Chebyshev distance
+                    </option>
                   
                     <option value="correlation" 
                       
-                    >correlation - Compute the correlation distance between two 1-D arrays</option>
+                    >correlation
+                       - Compute the correlation distance between two 1-D arrays
+                    </option>
                   
                     <option value="dice" 
                       
-                    >dice - Compute the Dice dissimilarity between two boolean 1-D arrays</option>
+                    >dice
+                       - Compute the Dice dissimilarity between two boolean 1-D arrays
+                    </option>
                   
                     <option value="hamming" 
                       
-                    >hamming - Compute the Hamming distance between two 1-D arrays</option>
+                    >hamming
+                       - Compute the Hamming distance between two 1-D arrays
+                    </option>
                   
                     <option value="jaccard" 
                       
-                    >jaccard - Compute the Jaccard-Needham dissimilarity between two boolean 1-D arrays</option>
+                    >jaccard
+                       - Compute the Jaccard-Needham dissimilarity between two boolean 1-D arrays
+                    </option>
                   
                     <option value="kulsinski" 
                       
-                    >kulsinski - Compute the Kulsinski dissimilarity between two boolean 1-D arrays</option>
+                    >kulsinski
+                       - Compute the Kulsinski dissimilarity between two boolean 1-D arrays
+                    </option>
                   
                     <option value="mahalanobis" 
                       
-                    >mahalanobis - Compute the Mahalanobis distance between two 1-D arrays</option>
+                    >mahalanobis
+                       - Compute the Mahalanobis distance between two 1-D arrays
+                    </option>
                   
                     <option value="minkowski" 
                       
-                    >minkowski - Compute the Minkowski distance between two 1-D arrays</option>
+                    >minkowski
+                       - Compute the Minkowski distance between two 1-D arrays
+                    </option>
                   
                     <option value="rogerstanimoto" 
                       
-                    >rogerstanimoto - Compute the Rogers-Tanimoto dissimilarity between two boolean 1-D arrays</option>
+                    >rogerstanimoto
+                       - Compute the Rogers-Tanimoto dissimilarity between two boolean 1-D arrays
+                    </option>
                   
                     <option value="russellrao" 
                       
-                    >russellrao - Compute the Russell-Rao dissimilarity between two boolean 1-D arrays</option>
+                    >russellrao
+                       - Compute the Russell-Rao dissimilarity between two boolean 1-D arrays
+                    </option>
                   
                     <option value="seuclidean" 
                       
-                    >seuclidean - Return the standardized Euclidean distance between two 1-D arrays</option>
+                    >seuclidean
+                       - Return the standardized Euclidean distance between two 1-D arrays
+                    </option>
                   
                     <option value="sokalmichener" 
                       
-                    >sokalmichener - Compute the Sokal-Michener dissimilarity between two boolean 1-D arrays</option>
+                    >sokalmichener
+                       - Compute the Sokal-Michener dissimilarity between two boolean 1-D arrays
+                    </option>
                   
                     <option value="sokalsneath" 
                       
-                    >sokalsneath - Compute the Sokal-Sneath dissimilarity between two boolean 1-D arrays</option>
+                    >sokalsneath
+                       - Compute the Sokal-Sneath dissimilarity between two boolean 1-D arrays
+                    </option>
                   
                     <option value="sqeuclidean" 
                       
-                    >sqeuclidean - Compute the squared Euclidean distance between two 1-D arrays</option>
+                    >sqeuclidean
+                       - Compute the squared Euclidean distance between two 1-D arrays
+                    </option>
                   
                     <option value="yule" 
                       
-                    >yule - Compute the Yule dissimilarity between two boolean 1-D arrays</option>
+                    >yule
+                       - Compute the Yule dissimilarity between two boolean 1-D arrays
+                    </option>
                   
                 </param>
             

@@ -112,11 +112,15 @@
                   
                     <option value="gro" 
                       
-                    >gro - </option>
+                    >gro
+                       
+                    </option>
                   
                     <option value="pdb" 
                       
-                    >pdb - </option>
+                    >pdb
+                       
+                    </option>
                   
                 </param>
                     

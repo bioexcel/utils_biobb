@@ -71,47 +71,69 @@
                   
                     <option value="VOLUME" 
                       
-                    >VOLUME - None</option>
+                    >VOLUME
+                       
+                    </option>
                   
                     <option value="TSOLVENT" 
                       
-                    >TSOLVENT - None</option>
+                    >TSOLVENT
+                       
+                    </option>
                   
                     <option value="TSOLUTE" 
                       
-                    >TSOLUTE - None</option>
+                    >TSOLUTE
+                       
+                    </option>
                   
                     <option value="TEMP" 
                       
-                    >TEMP - None</option>
+                    >TEMP
+                       
+                    </option>
                   
                     <option value="PRES" 
                       
-                    >PRES - None</option>
+                    >PRES
+                       
+                    </option>
                   
                     <option value="ETOT" 
                       
-                    >ETOT - None</option>
+                    >ETOT
+                       
+                    </option>
                   
                     <option value="ESCF" 
                       
-                    >ESCF - None</option>
+                    >ESCF
+                       
+                    </option>
                   
                     <option value="EPTOT" 
                       
-                    >EPTOT - None</option>
+                    >EPTOT
+                       
+                    </option>
                   
                     <option value="EKTOT" 
                       
-                    >EKTOT - None</option>
+                    >EKTOT
+                       
+                    </option>
                   
                     <option value="EKCMT" 
                       
-                    >EKCMT - None</option>
+                    >EKCMT
+                       
+                    </option>
                   
                     <option value="DENSITY" 
                       
-                    >DENSITY - None</option>
+                    >DENSITY
+                       
+                    </option>
                   
                 </param>
             
@@ -119,15 +141,21 @@
                   
                     <option value="dat" 
                       
-                    >dat - </option>
+                    >dat
+                       
+                    </option>
                   
                     <option value="txt" 
                       
-                    >txt - </option>
+                    >txt
+                       
+                    </option>
                   
                     <option value="csv" 
                       
-                    >csv - </option>
+                    >csv
+                       
+                    </option>
                   
                 </param>
                     

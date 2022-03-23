@@ -86,19 +86,27 @@
                   
                     <option value="nearest_neighbors" 
                       
-                    >nearest_neighbors - construct the affinity matrix by computing a graph of nearest neighbors</option>
+                    >nearest_neighbors
+                       - construct the affinity matrix by computing a graph of nearest neighbors
+                    </option>
                   
                     <option value="rbf" 
                       selected="true"
-                    >rbf - construct the affinity matrix using a radial basis function -RBF- kernel</option>
+                    >rbf
+                       - construct the affinity matrix using a radial basis function -RBF- kernel
+                    </option>
                   
                     <option value="precomputed" 
                       
-                    >precomputed - interpret X as a precomputed affinity matrix</option>
+                    >precomputed
+                       - interpret X as a precomputed affinity matrix
+                    </option>
                   
                     <option value="precomputed_nearest_neighbors" 
                       
-                    >precomputed_nearest_neighbors - interpret X as a sparse graph of precomputed nearest neighbors and constructs the affinity matrix by selecting the n_neighbors nearest neighbors</option>
+                    >precomputed_nearest_neighbors
+                       - interpret X as a sparse graph of precomputed nearest neighbors and constructs the affinity matrix by selecting the n_neighbors nearest neighbors
+                    </option>
                   
                 </param>
             

@@ -71,15 +71,21 @@
                   
                     <option value="top" 
                       
-                    >top - </option>
+                    >top
+                       
+                    </option>
                   
                     <option value="parmtop" 
                       
-                    >parmtop - </option>
+                    >parmtop
+                       
+                    </option>
                   
                     <option value="prmtop" 
                       
-                    >prmtop - </option>
+                    >prmtop
+                       
+                    </option>
                   
                 </param>
                     

@@ -76,11 +76,15 @@
                   
                     <option value="cg" 
                       selected="true"
-                    >cg - conjugate gradients algorithm</option>
+                    >cg
+                       - conjugate gradients algorithm
+                    </option>
                   
                     <option value="sd" 
                       
-                    >sd - steepest descent algorithm</option>
+                    >sd
+                       - steepest descent algorithm
+                    </option>
                   
                 </param>
             
@@ -88,23 +92,33 @@
                   
                     <option value="GAFF" 
                       
-                    >GAFF - General Amber Force Field</option>
+                    >GAFF
+                       - General Amber Force Field
+                    </option>
                   
                     <option value="Ghemical" 
                       
-                    >Ghemical - Ghemical force field</option>
+                    >Ghemical
+                       - Ghemical force field
+                    </option>
                   
                     <option value="MMFF94" 
                       
-                    >MMFF94 - MMFF94 force field</option>
+                    >MMFF94
+                       - MMFF94 force field
+                    </option>
                   
                     <option value="MMFF94s" 
                       
-                    >MMFF94s - MMFF94s force field</option>
+                    >MMFF94s
+                       - MMFF94s force field
+                    </option>
                   
                     <option value="UFF" 
                       
-                    >UFF - Universal Force Field</option>
+                    >UFF
+                       - Universal Force Field
+                    </option>
                   
                 </param>
             
@@ -146,11 +160,15 @@
                   
                     <option value="pdb" 
                       
-                    >pdb - </option>
+                    >pdb
+                       
+                    </option>
                   
                     <option value="mol2" 
                       
-                    >mol2 - </option>
+                    >mol2
+                       
+                    </option>
                   
                 </param>
                     

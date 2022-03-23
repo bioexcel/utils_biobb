@@ -127,27 +127,39 @@
                   
                     <option value="protein.ff14SB" 
                       
-                    >protein.ff14SB - None</option>
+                    >protein.ff14SB
+                       
+                    </option>
                   
                     <option value="protein.ff19SB" 
                       
-                    >protein.ff19SB - None</option>
+                    >protein.ff19SB
+                       
+                    </option>
                   
                     <option value="DNA.bsc1" 
                       
-                    >DNA.bsc1 - None</option>
+                    >DNA.bsc1
+                       
+                    </option>
                   
                     <option value="DNA.OL15" 
                       
-                    >DNA.OL15 - None</option>
+                    >DNA.OL15
+                       
+                    </option>
                   
                     <option value="RNA.OL3" 
                       
-                    >RNA.OL3 - None</option>
+                    >RNA.OL3
+                       
+                    </option>
                   
                     <option value="gaff" 
                       
-                    >gaff - None</option>
+                    >gaff
+                       
+                    </option>
                   
                 </param>
             
@@ -155,47 +167,69 @@
                   
                     <option value="POL3BOX" 
                       
-                    >POL3BOX - None</option>
+                    >POL3BOX
+                       
+                    </option>
                   
                     <option value="QSPCFWBOX" 
                       
-                    >QSPCFWBOX - None</option>
+                    >QSPCFWBOX
+                       
+                    </option>
                   
                     <option value="SPCBOX" 
                       
-                    >SPCBOX - None</option>
+                    >SPCBOX
+                       
+                    </option>
                   
                     <option value="SPCFWBOX" 
                       
-                    >SPCFWBOX - None</option>
+                    >SPCFWBOX
+                       
+                    </option>
                   
                     <option value="TIP3PBOX" 
                       selected="true"
-                    >TIP3PBOX - None</option>
+                    >TIP3PBOX
+                       
+                    </option>
                   
                     <option value="TIP3PFBOX" 
                       
-                    >TIP3PFBOX - None</option>
+                    >TIP3PFBOX
+                       
+                    </option>
                   
                     <option value="TIP4PBOX" 
                       
-                    >TIP4PBOX - None</option>
+                    >TIP4PBOX
+                       
+                    </option>
                   
                     <option value="TIP4PEWBOX" 
                       
-                    >TIP4PEWBOX - None</option>
+                    >TIP4PEWBOX
+                       
+                    </option>
                   
                     <option value="OPCBOX" 
                       
-                    >OPCBOX - None</option>
+                    >OPCBOX
+                       
+                    </option>
                   
                     <option value="OPC3BOX" 
                       
-                    >OPC3BOX - None</option>
+                    >OPC3BOX
+                       
+                    </option>
                   
                     <option value="TIP5PBOX" 
                       
-                    >TIP5PBOX - None</option>
+                    >TIP5PBOX
+                       
+                    </option>
                   
                 </param>
             
@@ -203,11 +237,15 @@
                   
                     <option value="cubic" 
                       
-                    >cubic - None</option>
+                    >cubic
+                       
+                    </option>
                   
                     <option value="truncated_octahedron" 
                       selected="true"
-                    >truncated_octahedron - None</option>
+                    >truncated_octahedron
+                       
+                    </option>
                   
                 </param>
             
@@ -215,27 +253,39 @@
                   
                     <option value="ionsjc_tip3p" 
                       selected="true"
-                    >ionsjc_tip3p - None</option>
+                    >ionsjc_tip3p
+                       
+                    </option>
                   
                     <option value="ionsjc_spce" 
                       
-                    >ionsjc_spce - None</option>
+                    >ionsjc_spce
+                       
+                    </option>
                   
                     <option value="ionsff99_tip3p" 
                       
-                    >ionsff99_tip3p - None</option>
+                    >ionsff99_tip3p
+                       
+                    </option>
                   
                     <option value="ions_charmm22" 
                       
-                    >ions_charmm22 - None</option>
+                    >ions_charmm22
+                       
+                    </option>
                   
                     <option value="ionsjc_tip4pew" 
                       
-                    >ionsjc_tip4pew - None</option>
+                    >ionsjc_tip4pew
+                       
+                    </option>
                   
                     <option value="None" 
                       
-                    >None - None</option>
+                    >None
+                       
+                    </option>
                   
                 </param>
             
@@ -263,11 +313,15 @@
                   
                     <option value="Na+" 
                       selected="true"
-                    >Na+ - None</option>
+                    >Na+
+                       
+                    </option>
                   
                     <option value="K+" 
                       
-                    >K+ - None</option>
+                    >K+
+                       
+                    </option>
                   
                 </param>
             
@@ -275,7 +329,9 @@
                   
                     <option value="Cl-" 
                       selected="true"
-                    >Cl- - None</option>
+                    >Cl-
+                       
+                    </option>
                   
                 </param>
             
@@ -283,15 +339,21 @@
                   
                     <option value="top" 
                       
-                    >top - </option>
+                    >top
+                       
+                    </option>
                   
                     <option value="parmtop" 
                       
-                    >parmtop - </option>
+                    >parmtop
+                       
+                    </option>
                   
                     <option value="prmtop" 
                       
-                    >prmtop - </option>
+                    >prmtop
+                       
+                    </option>
                   
                 </param>
             
@@ -299,15 +361,21 @@
                   
                     <option value="crd" 
                       
-                    >crd - </option>
+                    >crd
+                       
+                    </option>
                   
                     <option value="mdcrd" 
                       
-                    >mdcrd - </option>
+                    >mdcrd
+                       
+                    </option>
                   
                     <option value="inpcrd" 
                       
-                    >inpcrd - </option>
+                    >inpcrd
+                       
+                    </option>
                   
                 </param>
                     

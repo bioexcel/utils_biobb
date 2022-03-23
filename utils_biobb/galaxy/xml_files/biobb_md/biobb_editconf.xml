@@ -76,19 +76,27 @@
                   
                     <option value="cubic" 
                       selected="true"
-                    >cubic - rectangular box with all sides equal</option>
+                    >cubic
+                       - rectangular box with all sides equal
+                    </option>
                   
                     <option value="triclinic" 
                       
-                    >triclinic - triclinic box</option>
+                    >triclinic
+                       - triclinic box
+                    </option>
                   
                     <option value="dodecahedron" 
                       
-                    >dodecahedron - rhombic dodecahedron</option>
+                    >dodecahedron
+                       - rhombic dodecahedron
+                    </option>
                   
                     <option value="octahedron" 
                       
-                    >octahedron - truncated octahedron</option>
+                    >octahedron
+                       - truncated octahedron
+                    </option>
                   
                 </param>
             
@@ -109,11 +117,15 @@
                   
                     <option value="pdb" 
                       
-                    >pdb - </option>
+                    >pdb
+                       
+                    </option>
                   
                     <option value="gro" 
                       
-                    >gro - </option>
+                    >gro
+                       
+                    </option>
                   
                 </param>
                     

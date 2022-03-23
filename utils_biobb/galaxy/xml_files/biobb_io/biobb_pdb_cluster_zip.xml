@@ -69,19 +69,27 @@
                   
                     <option value="50" 
                       
-                    >50 - structures having less than 50% sequence identity to each other</option>
+                    >50
+                       - structures having less than 50% sequence identity to each other
+                    </option>
                   
                     <option value="70" 
                       
-                    >70 - structures having less than 70% sequence identity to each other</option>
+                    >70
+                       - structures having less than 70% sequence identity to each other
+                    </option>
                   
                     <option value="90" 
                       selected="true"
-                    >90 - structures having less than 90% sequence identity to each other</option>
+                    >90
+                       - structures having less than 90% sequence identity to each other
+                    </option>
                   
                     <option value="95" 
                       
-                    >95 - structures having less than 95% sequence identity to each other</option>
+                    >95
+                       - structures having less than 95% sequence identity to each other
+                    </option>
                   
                 </param>
             
@@ -89,15 +97,21 @@
                   
                     <option value="pdbe" 
                       selected="true"
-                    >pdbe - PDB in Europe REST API</option>
+                    >pdbe
+                       - PDB in Europe REST API
+                    </option>
                   
                     <option value="pdb" 
                       
-                    >pdb - RCSB PDB REST API</option>
+                    >pdb
+                       - RCSB PDB REST API
+                    </option>
                   
                     <option value="mmb" 
                       
-                    >mmb - MMB PDB mirror API</option>
+                    >mmb
+                       - MMB PDB mirror API
+                    </option>
                   
                 </param>
                     

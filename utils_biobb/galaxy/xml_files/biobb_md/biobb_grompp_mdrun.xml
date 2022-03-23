@@ -161,27 +161,39 @@
                   
                     <option value="minimization" 
                       selected="true"
-                    >minimization - Energy minimization using steepest descent algorithm is used</option>
+                    >minimization
+                       - Energy minimization using steepest descent algorithm is used
+                    </option>
                   
                     <option value="nvt" 
                       
-                    >nvt - substance N Volume V and Temperature T are conserved</option>
+                    >nvt
+                       - substance N Volume V and Temperature T are conserved
+                    </option>
                   
                     <option value="npt" 
                       
-                    >npt - substance N pressure P and Temperature T are conserved</option>
+                    >npt
+                       - substance N pressure P and Temperature T are conserved
+                    </option>
                   
                     <option value="free" 
                       
-                    >free - No design constraints applied; Free MD</option>
+                    >free
+                       - No design constraints applied; Free MD
+                    </option>
                   
                     <option value="ions" 
                       
-                    >ions - Synonym of minimization</option>
+                    >ions
+                       - Synonym of minimization
+                    </option>
                   
                     <option value="index" 
                       
-                    >index - Creates an empty mdp file</option>
+                    >index
+                       - Creates an empty mdp file
+                    </option>
                   
                 </param>
             

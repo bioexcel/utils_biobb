@@ -1,8 +1,8 @@
-<tool id="biobb_cmip_prepare_pdb_ext" name="PreparePdb" version="3.7.7" >
+<tool id="biobb_cmip_prepare_pdb_ext" name="PreparePdb" version="3.7.8" >
     <description>: Class to add CMIP charges and atom types.</description>
     <requirements>
         <requirement type="package"
-        version="3.7.7"
+        version="3.7.8"
         >biobb_cmip</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[

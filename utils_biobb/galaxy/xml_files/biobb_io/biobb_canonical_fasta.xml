@@ -65,15 +65,21 @@
                   
                     <option value="pdbe" 
                       selected="true"
-                    >pdbe - PDB in Europe REST API</option>
+                    >pdbe
+                       - PDB in Europe REST API
+                    </option>
                   
                     <option value="pdb" 
                       
-                    >pdb - RCSB PDB REST API</option>
+                    >pdb
+                       - RCSB PDB REST API
+                    </option>
                   
                     <option value="mmb" 
                       
-                    >mmb - MMB PDB mirror API</option>
+                    >mmb
+                       - MMB PDB mirror API
+                    </option>
                   
                 </param>
                     

@@ -93,23 +93,33 @@
                   
                     <option value="newton-cg" 
                       
-                    >newton-cg - Recall the motivation for gradient descent step at x: we minimize the quadratic function</option>
+                    >newton-cg
+                       - Recall the motivation for gradient descent step at x: we minimize the quadratic function
+                    </option>
                   
                     <option value="lbfgs" 
                       
-                    >lbfgs - It&#39;s analogue of the Newton&#39;s Method but here the Hessian matrix is approximated using updates specified by gradient evaluations</option>
+                    >lbfgs
+                       - It&#39;s analogue of the Newton&#39;s Method but here the Hessian matrix is approximated using updates specified by gradient evaluations
+                    </option>
                   
                     <option value="liblinear" 
                       selected="true"
-                    >liblinear - It&#39;s a linear classification that supports logistic regression and linear support vector machines</option>
+                    >liblinear
+                       - It&#39;s a linear classification that supports logistic regression and linear support vector machines
+                    </option>
                   
                     <option value="sag" 
                       
-                    >sag - SAG method optimizes the sum of a finite number of smooth convex functions</option>
+                    >sag
+                       - SAG method optimizes the sum of a finite number of smooth convex functions
+                    </option>
                   
                     <option value="saga" 
                       
-                    >saga - It&#39;s a variant of SAG that also supports the non-smooth penalty=l1 option</option>
+                    >saga
+                       - It&#39;s a variant of SAG that also supports the non-smooth penalty=l1 option
+                    </option>
                   
                 </param>
             

@@ -106,35 +106,51 @@
                   
                     <option value="c-alpha" 
                       
-                    >c-alpha - All c-alpha atoms; protein only</option>
+                    >c-alpha
+                       - All c-alpha atoms; protein only
+                    </option>
                   
                     <option value="backbone" 
                       
-                    >backbone - Backbone atoms</option>
+                    >backbone
+                       - Backbone atoms
+                    </option>
                   
                     <option value="all-atoms" 
                       selected="true"
-                    >all-atoms - All system atoms</option>
+                    >all-atoms
+                       - All system atoms
+                    </option>
                   
                     <option value="heavy-atoms" 
                       
-                    >heavy-atoms - System heavy atoms; not hydrogen</option>
+                    >heavy-atoms
+                       - System heavy atoms; not hydrogen
+                    </option>
                   
                     <option value="side-chain" 
                       
-                    >side-chain - All not backbone atoms</option>
+                    >side-chain
+                       - All not backbone atoms
+                    </option>
                   
                     <option value="solute" 
                       
-                    >solute - All system atoms except solvent atoms</option>
+                    >solute
+                       - All system atoms except solvent atoms
+                    </option>
                   
                     <option value="ions" 
                       
-                    >ions - All ion molecules</option>
+                    >ions
+                       - All ion molecules
+                    </option>
                   
                     <option value="solvent" 
                       
-                    >solvent - All solvent atoms</option>
+                    >solvent
+                       - All solvent atoms
+                    </option>
                   
                 </param>
             
@@ -142,15 +158,21 @@
                   
                     <option value="first" 
                       selected="true"
-                    >first - Use the first trajectory frame as reference</option>
+                    >first
+                       - Use the first trajectory frame as reference
+                    </option>
                   
                     <option value="average" 
                       
-                    >average - Use the average of all trajectory frames as reference</option>
+                    >average
+                       - Use the average of all trajectory frames as reference
+                    </option>
                   
                     <option value="experimental" 
                       
-                    >experimental - Use the experimental structure as reference</option>
+                    >experimental
+                       - Use the experimental structure as reference
+                    </option>
                   
                 </param>
             
@@ -162,19 +184,27 @@
                   
                     <option value="dat" 
                       
-                    >dat - </option>
+                    >dat
+                       
+                    </option>
                   
                     <option value="agr" 
                       
-                    >agr - </option>
+                    >agr
+                       
+                    </option>
                   
                     <option value="xmgr" 
                       
-                    >xmgr - </option>
+                    >xmgr
+                       
+                    </option>
                   
                     <option value="gnu" 
                       
-                    >gnu - </option>
+                    >gnu
+                       
+                    </option>
                   
                 </param>
                     

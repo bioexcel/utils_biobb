@@ -85,31 +85,45 @@
                   
                     <option value="euclidean" 
                       
-                    >euclidean - Computes the Euclidean distance between two 1-D arrays</option>
+                    >euclidean
+                       - Computes the Euclidean distance between two 1-D arrays
+                    </option>
                   
                     <option value="manhattan" 
                       
-                    >manhattan - Compute the Manhattan distance</option>
+                    >manhattan
+                       - Compute the Manhattan distance
+                    </option>
                   
                     <option value="chebyshev" 
                       
-                    >chebyshev - Compute the Chebyshev distance</option>
+                    >chebyshev
+                       - Compute the Chebyshev distance
+                    </option>
                   
                     <option value="minkowski" 
                       selected="true"
-                    >minkowski - Compute the Minkowski distance between two 1-D arrays</option>
+                    >minkowski
+                       - Compute the Minkowski distance between two 1-D arrays
+                    </option>
                   
                     <option value="wminkowski" 
                       
-                    >wminkowski - Compute the weighted Minkowski distance between two 1-D arrays</option>
+                    >wminkowski
+                       - Compute the weighted Minkowski distance between two 1-D arrays
+                    </option>
                   
                     <option value="seuclidean" 
                       
-                    >seuclidean - Return the standardized Euclidean distance between two 1-D arrays</option>
+                    >seuclidean
+                       - Return the standardized Euclidean distance between two 1-D arrays
+                    </option>
                   
                     <option value="mahalanobi" 
                       
-                    >mahalanobi - Compute the Mahalanobis distance between two 1-D arrays</option>
+                    >mahalanobi
+                       - Compute the Mahalanobis distance between two 1-D arrays
+                    </option>
                   
                 </param>
             

@@ -1,8 +1,8 @@
-<tool id="biobb_cmip_cmip_ext" name="Cmip" version="3.7.7" >
+<tool id="biobb_cmip_cmip_ext" name="Cmip" version="3.7.8" >
     <description>: Wrapper class for the CMIP cmip module.</description>
     <requirements>
         <requirement type="package"
-        version="3.7.7"
+        version="3.7.8"
         >biobb_cmip</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -107,7 +107,7 @@
         
           <param name="input_params_path" type="data" format="txt"  optional="True" label="input TXT file" help="Path to the CMIP input parameters file. Format: [input].txt"/> 
         
-          <param name="input_json_box_path" type="data" format="json"  optional="False" label="input JSON file" help="Path to the input CMIP box in JSON format. Format: [input].json"/> 
+          <param name="input_json_box_path" type="data" format="json"  optional="True" label="input JSON file" help="Path to the input CMIP box in JSON format. Format: [input].json"/> 
         
         
           <param name="outname_output_pdb_path" type="text" value="mycmip.pdb" 
@@ -131,11 +131,11 @@
               help="Path to the output atom by atom energy file Format: [output].txt "/>
         
           <param name="outname_output_log_path" type="text" value="mycmip.log" 
-              optional="False" label="output LOG name" 
+              optional="True" label="output LOG name" 
               help="Path to the output CMIP log file LOG Format: [output].log "/>
         
           <param name="outname_output_json_box_path" type="text" value="mycmip.json" 
-              optional="False" label="output JSON name" 
+              optional="True" label="output JSON name" 
               help="Path to the output CMIP box in JSON format Format: [output].json "/>
         
         <conditional name="config">
@@ -159,35 +159,51 @@
                   
                     <option value="check_only" 
                       
-                    >check_only - Dry Run of CMIP</option>
+                    >check_only
+                       - Dry Run of CMIP
+                    </option>
                   
                     <option value="mip_pos" 
                       selected="true"
-                    >mip_pos - MIP O+  Mehler Solmajer dielectric</option>
+                    >mip_pos
+                       - MIP O+  Mehler Solmajer dielectric
+                    </option>
                   
                     <option value="mip_neg" 
                       
-                    >mip_neg - MIP O-  Mehler Solmajer dielectric</option>
+                    >mip_neg
+                       - MIP O-  Mehler Solmajer dielectric
+                    </option>
                   
                     <option value="mip_neu" 
                       
-                    >mip_neu - MIP Oxygen Mehler Solmajer dielectric</option>
+                    >mip_neu
+                       - MIP Oxygen Mehler Solmajer dielectric
+                    </option>
                   
                     <option value="solvation" 
                       
-                    >solvation - Solvation &amp; MEP</option>
+                    >solvation
+                       - Solvation &amp; MEP
+                    </option>
                   
                     <option value="energy" 
                       
-                    >energy - Docking Interaction energy calculation. PB electrostatics</option>
+                    >energy
+                       - Docking Interaction energy calculation. PB electrostatics
+                    </option>
                   
                     <option value="docking" 
                       
-                    >docking - Docking Mehler Solmajer dielectric</option>
+                    >docking
+                       - Docking Mehler Solmajer dielectric
+                    </option>
                   
                     <option value="docking_rst" 
                       
-                    >docking_rst - Docking from restart file</option>
+                    >docking_rst
+                       - Docking from restart file
+                    </option>
                   
                 </param>
             

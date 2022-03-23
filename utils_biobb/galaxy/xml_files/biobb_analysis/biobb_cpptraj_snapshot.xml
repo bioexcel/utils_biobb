@@ -86,35 +86,51 @@
                   
                     <option value="c-alpha" 
                       
-                    >c-alpha - All c-alpha atoms; protein only</option>
+                    >c-alpha
+                       - All c-alpha atoms; protein only
+                    </option>
                   
                     <option value="backbone" 
                       
-                    >backbone - Backbone atoms</option>
+                    >backbone
+                       - Backbone atoms
+                    </option>
                   
                     <option value="all-atoms" 
                       selected="true"
-                    >all-atoms - All system atoms</option>
+                    >all-atoms
+                       - All system atoms
+                    </option>
                   
                     <option value="heavy-atoms" 
                       
-                    >heavy-atoms - System heavy atoms; not hydrogen</option>
+                    >heavy-atoms
+                       - System heavy atoms; not hydrogen
+                    </option>
                   
                     <option value="side-chain" 
                       
-                    >side-chain - All not backbone atoms</option>
+                    >side-chain
+                       - All not backbone atoms
+                    </option>
                   
                     <option value="solute" 
                       
-                    >solute - All system atoms except solvent atoms</option>
+                    >solute
+                       - All system atoms except solvent atoms
+                    </option>
                   
                     <option value="ions" 
                       
-                    >ions - All ion molecules</option>
+                    >ions
+                       - All ion molecules
+                    </option>
                   
                     <option value="solvent" 
                       
-                    >solvent - All solvent atoms</option>
+                    >solvent
+                       - All solvent atoms
+                    </option>
                   
                 </param>
             
@@ -122,83 +138,123 @@
                   
                     <option value="crd" 
                       
-                    >crd - AMBER trajectory format</option>
+                    >crd
+                       - AMBER trajectory format
+                    </option>
                   
                     <option value="cdf" 
                       
-                    >cdf - Format used by netCDF software library for writing and reading chromatography-MS data files</option>
+                    >cdf
+                       - Format used by netCDF software library for writing and reading chromatography-MS data files
+                    </option>
                   
                     <option value="netcdf" 
                       selected="true"
-                    >netcdf - Format used by netCDF software library for writing and reading chromatography-MS data files</option>
+                    >netcdf
+                       - Format used by netCDF software library for writing and reading chromatography-MS data files
+                    </option>
                   
                     <option value="restart" 
                       
-                    >restart - AMBER coordinate/restart file with 6 coordinates per line</option>
+                    >restart
+                       - AMBER coordinate/restart file with 6 coordinates per line
+                    </option>
                   
                     <option value="ncrestart" 
                       
-                    >ncrestart - AMBER coordinate/restart file with 6 coordinates per line</option>
+                    >ncrestart
+                       - AMBER coordinate/restart file with 6 coordinates per line
+                    </option>
                   
                     <option value="restartnc" 
                       
-                    >restartnc - AMBER coordinate/restart file with 6 coordinates per line</option>
+                    >restartnc
+                       - AMBER coordinate/restart file with 6 coordinates per line
+                    </option>
                   
                     <option value="dcd" 
                       
-                    >dcd - AMBER trajectory format</option>
+                    >dcd
+                       - AMBER trajectory format
+                    </option>
                   
                     <option value="charmm" 
                       
-                    >charmm - Format of CHARMM Residue Topology Files (RTF)</option>
+                    >charmm
+                       - Format of CHARMM Residue Topology Files (RTF)
+                    </option>
                   
                     <option value="cor" 
                       
-                    >cor - Charmm COR</option>
+                    >cor
+                       - Charmm COR
+                    </option>
                   
                     <option value="pdb" 
                       
-                    >pdb - Protein Data Bank format</option>
+                    >pdb
+                       - Protein Data Bank format
+                    </option>
                   
                     <option value="mol2" 
                       
-                    >mol2 - Complete and portable representation of a SYBYL molecule</option>
+                    >mol2
+                       - Complete and portable representation of a SYBYL molecule
+                    </option>
                   
                     <option value="trr" 
                       
-                    >trr - Trajectory of a simulation experiment used by GROMACS</option>
+                    >trr
+                       - Trajectory of a simulation experiment used by GROMACS
+                    </option>
                   
                     <option value="gro" 
                       
-                    >gro - GROMACS structure</option>
+                    >gro
+                       - GROMACS structure
+                    </option>
                   
                     <option value="binpos" 
                       
-                    >binpos - Translation of the ASCII atom coordinate format to binary code</option>
+                    >binpos
+                       - Translation of the ASCII atom coordinate format to binary code
+                    </option>
                   
                     <option value="xtc" 
                       
-                    >xtc - Portable binary format for trajectories produced by GROMACS package</option>
+                    >xtc
+                       - Portable binary format for trajectories produced by GROMACS package
+                    </option>
                   
                     <option value="cif" 
                       
-                    >cif - Entry format of PDB database in mmCIF format</option>
+                    >cif
+                       - Entry format of PDB database in mmCIF format
+                    </option>
                   
                     <option value="arc" 
                       
-                    >arc - Tinker ARC</option>
+                    >arc
+                       - Tinker ARC
+                    </option>
                   
                     <option value="sqm" 
                       
-                    >sqm - SQM Input</option>
+                    >sqm
+                       - SQM Input
+                    </option>
                   
                     <option value="sdf" 
                       
-                    >sdf - One of a family of chemical-data file formats developed by MDL Information Systems</option>
+                    >sdf
+                       - One of a family of chemical-data file formats developed by MDL Information Systems
+                    </option>
                   
                     <option value="conflib" 
                       
-                    >conflib - LMOD Conflib</option>
+                    >conflib
+                       - LMOD Conflib
+                    </option>
                   
                 </param>
             
@@ -210,51 +266,75 @@
                   
                     <option value="mdcrd" 
                       
-                    >mdcrd - </option>
+                    >mdcrd
+                       
+                    </option>
                   
                     <option value="crd" 
                       
-                    >crd - </option>
+                    >crd
+                       
+                    </option>
                   
                     <option value="netcdf" 
                       
-                    >netcdf - </option>
+                    >netcdf
+                       
+                    </option>
                   
                     <option value="rst7" 
                       
-                    >rst7 - </option>
+                    >rst7
+                       
+                    </option>
                   
                     <option value="ncrst" 
                       
-                    >ncrst - </option>
+                    >ncrst
+                       
+                    </option>
                   
                     <option value="dcd" 
                       
-                    >dcd - </option>
+                    >dcd
+                       
+                    </option>
                   
                     <option value="pdb" 
                       
-                    >pdb - </option>
+                    >pdb
+                       
+                    </option>
                   
                     <option value="mol2" 
                       
-                    >mol2 - </option>
+                    >mol2
+                       
+                    </option>
                   
                     <option value="binpos" 
                       
-                    >binpos - </option>
+                    >binpos
+                       
+                    </option>
                   
                     <option value="trr" 
                       
-                    >trr - </option>
+                    >trr
+                       
+                    </option>
                   
                     <option value="xtc" 
                       
-                    >xtc - </option>
+                    >xtc
+                       
+                    </option>
                   
                     <option value="sqm" 
                       
-                    >sqm - </option>
+                    >sqm
+                       
+                    </option>
                   
                 </param>
                     

@@ -1,8 +1,8 @@
-<tool id="biobb_cmip_titration_ext" name="Titration" version="3.7.7" >
+<tool id="biobb_cmip_titration_ext" name="Titration" version="3.7.8" >
     <description>: Wrapper class for the CMIP titration module.</description>
     <requirements>
         <requirement type="package"
-        version="3.7.7"
+        version="3.7.8"
         >biobb_cmip</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[

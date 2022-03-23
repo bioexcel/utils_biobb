@@ -91,79 +91,117 @@
                   
                     <option value="System" 
                       selected="true"
-                    >System - all atoms in the system</option>
+                    >System
+                       - all atoms in the system
+                    </option>
                   
                     <option value="Protein" 
                       
-                    >Protein - all protein atoms</option>
+                    >Protein
+                       - all protein atoms
+                    </option>
                   
                     <option value="Protein-H" 
                       
-                    >Protein-H - protein atoms excluding hydrogens</option>
+                    >Protein-H
+                       - protein atoms excluding hydrogens
+                    </option>
                   
                     <option value="C-alpha" 
                       
-                    >C-alpha - C-alpha atoms</option>
+                    >C-alpha
+                       - C-alpha atoms
+                    </option>
                   
                     <option value="Backbone" 
                       
-                    >Backbone - protein backbone atoms: N; C-alpha and C</option>
+                    >Backbone
+                       - protein backbone atoms: N; C-alpha and C
+                    </option>
                   
                     <option value="MainChain" 
                       
-                    >MainChain - protein main chain atoms: N; C-alpha; C and O; including oxygens in C-terminus</option>
+                    >MainChain
+                       - protein main chain atoms: N; C-alpha; C and O; including oxygens in C-terminus
+                    </option>
                   
                     <option value="MainChain+Cb" 
                       
-                    >MainChain+Cb - protein main chain atoms including C-beta</option>
+                    >MainChain+Cb
+                       - protein main chain atoms including C-beta
+                    </option>
                   
                     <option value="MainChain+H" 
                       
-                    >MainChain+H - protein main chain atoms including backbone amide hydrogens and hydrogens on the N-terminus</option>
+                    >MainChain+H
+                       - protein main chain atoms including backbone amide hydrogens and hydrogens on the N-terminus
+                    </option>
                   
                     <option value="SideChain" 
                       
-                    >SideChain - protein side chain atoms: that is all atoms except N; C-alpha; C; O; backbone amide hydrogens and oxygens in C-terminus and hydrogens on the N-terminus</option>
+                    >SideChain
+                       - protein side chain atoms: that is all atoms except N; C-alpha; C; O; backbone amide hydrogens and oxygens in C-terminus and hydrogens on the N-terminus
+                    </option>
                   
                     <option value="SideChain-H" 
                       
-                    >SideChain-H - protein side chain atoms excluding all hydrogens</option>
+                    >SideChain-H
+                       - protein side chain atoms excluding all hydrogens
+                    </option>
                   
                     <option value="Prot-Masses" 
                       
-                    >Prot-Masses - protein atoms excluding dummy masses</option>
+                    >Prot-Masses
+                       - protein atoms excluding dummy masses
+                    </option>
                   
                     <option value="non-Protein" 
                       
-                    >non-Protein - all non-protein atoms</option>
+                    >non-Protein
+                       - all non-protein atoms
+                    </option>
                   
                     <option value="Water" 
                       
-                    >Water - water molecules</option>
+                    >Water
+                       - water molecules
+                    </option>
                   
                     <option value="SOL" 
                       
-                    >SOL - water molecules</option>
+                    >SOL
+                       - water molecules
+                    </option>
                   
                     <option value="non-Water" 
                       
-                    >non-Water - anything not covered by the Water group</option>
+                    >non-Water
+                       - anything not covered by the Water group
+                    </option>
                   
                     <option value="Ion" 
                       
-                    >Ion - any name matching an Ion entry in residuetypes.dat</option>
+                    >Ion
+                       - any name matching an Ion entry in residuetypes.dat
+                    </option>
                   
                     <option value="NA" 
                       
-                    >NA - all NA atoms</option>
+                    >NA
+                       - all NA atoms
+                    </option>
                   
                     <option value="CL" 
                       
-                    >CL - all CL atoms</option>
+                    >CL
+                       - all CL atoms
+                    </option>
                   
                     <option value="Water_and_ions" 
                       
-                    >Water_and_ions - combination of the Water and Ions groups</option>
+                    >Water_and_ions
+                       - combination of the Water and Ions groups
+                    </option>
                   
                 </param>
             
@@ -195,15 +233,21 @@
                   
                     <option value="gro" 
                       
-                    >gro - Contains a molecular structure in Gromos87 format</option>
+                    >gro
+                       - Contains a molecular structure in Gromos87 format
+                    </option>
                   
                     <option value="g96" 
                       
-                    >g96 - Can be a GROMOS-96 initial/final configuration file or a coordinate trajectory file or a combination of both</option>
+                    >g96
+                       - Can be a GROMOS-96 initial/final configuration file or a coordinate trajectory file or a combination of both
+                    </option>
                   
                     <option value="pdb" 
                       selected="true"
-                    >pdb - Molecular structure files in the protein databank file format</option>
+                    >pdb
+                       - Molecular structure files in the protein databank file format
+                    </option>
                   
                 </param>
             
