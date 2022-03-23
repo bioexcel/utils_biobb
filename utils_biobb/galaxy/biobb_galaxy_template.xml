@@ -98,7 +98,11 @@
                       {% if opt == v['default'] -%}
                         selected="true"
                       {%- endif %}
-                    >{{ opt }} - {{ v['property_formats'][opt] }}</option>
+                    >{{ opt }}
+                       {% if v['property_formats'][opt] -%}
+                          - {{ v['property_formats'][opt] }}
+                       {%- endif %}
+                    </option>
                   {% endfor %}
                 </param>
               {%- elif v['type'] == 'boolean' -%}
