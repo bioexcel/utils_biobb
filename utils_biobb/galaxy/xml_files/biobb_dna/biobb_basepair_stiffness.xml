@@ -130,7 +130,9 @@
                   
                   label="KT" help="Value of Boltzmann temperature factor." optional="false"/>
             
-              <param name="scaling" type="text" label="scaling" help="Values by which to scale stiffness. Positions correspond to helical parameters in the order: shift, slide, rise, tilt, roll, twist. (Json)" value="[]" />
+              <param name="scaling" type="text" label="scaling" help="Values by which to scale stiffness. Positions correspond to helical parameters in the order: shift, slide, rise, tilt, roll, twist. (Json)" value="[]" >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
                     
           </section>
     </inputs>

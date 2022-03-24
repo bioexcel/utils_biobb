@@ -87,7 +87,9 @@
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
             
-              <param name="seqpos" type="text" label="seqpos" help="list of sequence positions (columns indices starting by 0) to analyze.  If not specified it will analyse the complete sequence. (Json)" value="[]" />
+              <param name="seqpos" type="text" label="seqpos" help="list of sequence positions (columns indices starting by 0) to analyze.  If not specified it will analyse the complete sequence. (Json)" value="[]" >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
                     
           </section>
     </inputs>

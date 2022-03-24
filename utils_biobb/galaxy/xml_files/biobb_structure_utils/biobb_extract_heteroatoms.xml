@@ -67,7 +67,9 @@
           </conditional>
           <section name="properties" title="Properties Input">
             
-              <param name="heteroatoms" type="text" label="heteroatoms" help="List of dictionaries with the name | res_id | chain | model of the heteroatoms to be extracted. Format: [{&#34;name&#34;: &#34;ZZ7&#34;, &#34;res_id&#34;: &#34;302&#34;, &#34;chain&#34;: &#34;B&#34;, &#34;model&#34;: &#34;1&#34;}]. If empty, all the heteroatoms of the structure will be returned. (Json)" value="[]" />
+              <param name="heteroatoms" type="text" label="heteroatoms" help="List of dictionaries with the name | res_id | chain | model of the heteroatoms to be extracted. Format: [{&#34;name&#34;: &#34;ZZ7&#34;, &#34;res_id&#34;: &#34;302&#34;, &#34;chain&#34;: &#34;B&#34;, &#34;model&#34;: &#34;1&#34;}]. If empty, all the heteroatoms of the structure will be returned. (Json)" value="[]" >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
             
               <param name="water" type="boolean" 
                   

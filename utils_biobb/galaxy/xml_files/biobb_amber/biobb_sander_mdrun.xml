@@ -147,7 +147,9 @@
           </conditional>
           <section name="properties" title="Properties Input">
             
-              <param name="mdin" type="text" label="mdin" help="Sander MD run options specification. (Used if *input_mdin_path* is None) (Json)" value="{}" />
+              <param name="mdin" type="text" label="mdin" help="Sander MD run options specification. (Used if *input_mdin_path* is None) (Json)" value="{}">
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
             
               <param name="simulation_type" type="select" label="simulation_type" help="Default options for the mdin file. Each creates a different mdin file. " multiple="">
                   

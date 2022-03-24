@@ -77,11 +77,17 @@
           </conditional>
           <section name="properties" title="Properties Input">
             
-              <param name="score" type="text" label="score" help="List of two float numbers between 0 and 1 indicating the score range. Indicates the fpocket score after the evaluation of pocket prediction accuracy as defined in the fpocket paper. (Json)" value="[]" />
+              <param name="score" type="text" label="score" help="List of two float numbers between 0 and 1 indicating the score range. Indicates the fpocket score after the evaluation of pocket prediction accuracy as defined in the fpocket paper. (Json)" value="[]" >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
             
-              <param name="druggability_score" type="text" label="druggability_score" help="List of two float numbers between 0 and 1 indicating the druggability_score range. It&#39;s a value between 0 and 1, 0 signifying that the pocket is likely to not bind a drug like molecule and 1, that it is very likely to bind the latter. (Json)" value="[]" />
+              <param name="druggability_score" type="text" label="druggability_score" help="List of two float numbers between 0 and 1 indicating the druggability_score range. It&#39;s a value between 0 and 1, 0 signifying that the pocket is likely to not bind a drug like molecule and 1, that it is very likely to bind the latter. (Json)" value="[]" >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
             
-              <param name="volume" type="text" label="volume" help="List of two float numbers indicating the volume range. Indicates the pocket volume. (Json)" value="[]" />
+              <param name="volume" type="text" label="volume" help="List of two float numbers indicating the volume range. Indicates the pocket volume. (Json)" value="[]" >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
                     
           </section>
     </inputs>

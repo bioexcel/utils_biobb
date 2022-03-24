@@ -67,7 +67,9 @@
           </conditional>
           <section name="properties" title="Properties Input">
             
-              <param name="resid_list" type="text" label="resid_list" help="List with all the residue numbers to form a cavity or binding site. Mandatory property. (Json)" value="[]" />
+              <param name="resid_list" type="text" label="resid_list" help="List with all the residue numbers to form a cavity or binding site. Mandatory property. (Json)" value="[]" >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
             
               <param name="offset" type="float" 
                   value="2.0"
