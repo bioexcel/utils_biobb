@@ -7,16 +7,16 @@
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
         
-          ln -f -s ${input_epsilC_path} ${input_epsilC_path}.${input_epsilC_path.ext};
+          ln -f -s ${input_epsilC_path} ${input_epsilC_path}_`echo $$`.${input_epsilC_path.ext};
         
-          ln -f -s ${input_epsilW_path} ${input_epsilW_path}.${input_epsilW_path.ext};
+          ln -f -s ${input_epsilW_path} ${input_epsilW_path}_`echo $$`.${input_epsilW_path.ext};
         
-          ln -f -s ${input_zetaC_path} ${input_zetaC_path}.${input_zetaC_path.ext};
+          ln -f -s ${input_zetaC_path} ${input_zetaC_path}_`echo $$`.${input_zetaC_path.ext};
         
-          ln -f -s ${input_zetaW_path} ${input_zetaW_path}.${input_zetaW_path.ext};
+          ln -f -s ${input_zetaW_path} ${input_zetaW_path}_`echo $$`.${input_zetaW_path.ext};
         
         #if $config.sele == "option1":
-            ln -s -f ${config.properties} ${config.properties}.${config.properties.ext};
+            ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
         
         bipopulations
@@ -30,19 +30,19 @@
           #end if
         
           #if str($input_epsilC_path) != 'None':
-            --input_epsilC_path ${input_epsilC_path}.${input_epsilC_path.ext}
+            --input_epsilC_path ${input_epsilC_path}_`echo $$`.${input_epsilC_path.ext}
           #end if
         
           #if str($input_epsilW_path) != 'None':
-            --input_epsilW_path ${input_epsilW_path}.${input_epsilW_path.ext}
+            --input_epsilW_path ${input_epsilW_path}_`echo $$`.${input_epsilW_path.ext}
           #end if
         
           #if str($input_zetaC_path) != 'None':
-            --input_zetaC_path ${input_zetaC_path}.${input_zetaC_path.ext}
+            --input_zetaC_path ${input_zetaC_path}_`echo $$`.${input_zetaC_path.ext}
           #end if
         
           #if str($input_zetaW_path) != 'None':
-            --input_zetaW_path ${input_zetaW_path}.${input_zetaW_path.ext}
+            --input_zetaW_path ${input_zetaW_path}_`echo $$`.${input_zetaW_path.ext}
           #end if
         
         
@@ -51,16 +51,16 @@
           --output_jpg_path $__new_file_path__/$outname_output_jpg_path
         ;          
         #if $config.sele == "option1":
-            rm -f ${config.properties}.${config.properties.ext};
+            rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
         
-          rm -f ${input_epsilC_path}.${input_epsilC_path.ext};
+          rm -f ${input_epsilC_path}_`echo $$`.${input_epsilC_path.ext};
         
-          rm -f ${input_epsilW_path}.${input_epsilW_path.ext};
+          rm -f ${input_epsilW_path}_`echo $$`.${input_epsilW_path.ext};
         
-          rm -f ${input_zetaC_path}.${input_zetaC_path.ext};
+          rm -f ${input_zetaC_path}_`echo $$`.${input_zetaC_path.ext};
         
-          rm -f ${input_zetaW_path}.${input_zetaW_path.ext};
+          rm -f ${input_zetaW_path}_`echo $$`.${input_zetaW_path.ext};
         
         
           if test -f $__new_file_path__/$outname_output_csv_path; then mv $__new_file_path__/$outname_output_csv_path $output_csv_path; fi;

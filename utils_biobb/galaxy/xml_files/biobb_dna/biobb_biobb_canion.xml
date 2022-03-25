@@ -7,14 +7,14 @@
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
         
-          ln -f -s ${input_cdi_path} ${input_cdi_path}.${input_cdi_path.ext};
+          ln -f -s ${input_cdi_path} ${input_cdi_path}_`echo $$`.${input_cdi_path.ext};
         
-          ln -f -s ${input_afr_path} ${input_afr_path}.${input_afr_path.ext};
+          ln -f -s ${input_afr_path} ${input_afr_path}_`echo $$`.${input_afr_path.ext};
         
-          ln -f -s ${input_avg_struc_path} ${input_avg_struc_path}.${input_avg_struc_path.ext};
+          ln -f -s ${input_avg_struc_path} ${input_avg_struc_path}_`echo $$`.${input_avg_struc_path.ext};
         
         #if $config.sele == "option1":
-            ln -s -f ${config.properties} ${config.properties}.${config.properties.ext};
+            ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
         
         biobb_canion
@@ -28,29 +28,29 @@
           #end if
         
           #if str($input_cdi_path) != 'None':
-            --input_cdi_path ${input_cdi_path}.${input_cdi_path.ext}
+            --input_cdi_path ${input_cdi_path}_`echo $$`.${input_cdi_path.ext}
           #end if
         
           #if str($input_afr_path) != 'None':
-            --input_afr_path ${input_afr_path}.${input_afr_path.ext}
+            --input_afr_path ${input_afr_path}_`echo $$`.${input_afr_path.ext}
           #end if
         
           #if str($input_avg_struc_path) != 'None':
-            --input_avg_struc_path ${input_avg_struc_path}.${input_avg_struc_path.ext}
+            --input_avg_struc_path ${input_avg_struc_path}_`echo $$`.${input_avg_struc_path.ext}
           #end if
         
         
           --output_zip_path $__new_file_path__/$outname_output_zip_path
         ;          
         #if $config.sele == "option1":
-            rm -f ${config.properties}.${config.properties.ext};
+            rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
         
-          rm -f ${input_cdi_path}.${input_cdi_path.ext};
+          rm -f ${input_cdi_path}_`echo $$`.${input_cdi_path.ext};
         
-          rm -f ${input_afr_path}.${input_afr_path.ext};
+          rm -f ${input_afr_path}_`echo $$`.${input_afr_path.ext};
         
-          rm -f ${input_avg_struc_path}.${input_avg_struc_path.ext};
+          rm -f ${input_avg_struc_path}_`echo $$`.${input_avg_struc_path.ext};
         
         
           if test -f $__new_file_path__/$outname_output_zip_path; then mv $__new_file_path__/$outname_output_zip_path $output_zip_path; fi;

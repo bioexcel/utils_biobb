@@ -7,20 +7,20 @@
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
         
-          ln -f -s ${input_filename_shear} ${input_filename_shear}.${input_filename_shear.ext};
+          ln -f -s ${input_filename_shear} ${input_filename_shear}_`echo $$`.${input_filename_shear.ext};
         
-          ln -f -s ${input_filename_stretch} ${input_filename_stretch}.${input_filename_stretch.ext};
+          ln -f -s ${input_filename_stretch} ${input_filename_stretch}_`echo $$`.${input_filename_stretch.ext};
         
-          ln -f -s ${input_filename_stagger} ${input_filename_stagger}.${input_filename_stagger.ext};
+          ln -f -s ${input_filename_stagger} ${input_filename_stagger}_`echo $$`.${input_filename_stagger.ext};
         
-          ln -f -s ${input_filename_buckle} ${input_filename_buckle}.${input_filename_buckle.ext};
+          ln -f -s ${input_filename_buckle} ${input_filename_buckle}_`echo $$`.${input_filename_buckle.ext};
         
-          ln -f -s ${input_filename_propel} ${input_filename_propel}.${input_filename_propel.ext};
+          ln -f -s ${input_filename_propel} ${input_filename_propel}_`echo $$`.${input_filename_propel.ext};
         
-          ln -f -s ${input_filename_opening} ${input_filename_opening}.${input_filename_opening.ext};
+          ln -f -s ${input_filename_opening} ${input_filename_opening}_`echo $$`.${input_filename_opening.ext};
         
         #if $config.sele == "option1":
-            ln -s -f ${config.properties} ${config.properties}.${config.properties.ext};
+            ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
         
         intrabpcorr
@@ -34,27 +34,27 @@
           #end if
         
           #if str($input_filename_shear) != 'None':
-            --input_filename_shear ${input_filename_shear}.${input_filename_shear.ext}
+            --input_filename_shear ${input_filename_shear}_`echo $$`.${input_filename_shear.ext}
           #end if
         
           #if str($input_filename_stretch) != 'None':
-            --input_filename_stretch ${input_filename_stretch}.${input_filename_stretch.ext}
+            --input_filename_stretch ${input_filename_stretch}_`echo $$`.${input_filename_stretch.ext}
           #end if
         
           #if str($input_filename_stagger) != 'None':
-            --input_filename_stagger ${input_filename_stagger}.${input_filename_stagger.ext}
+            --input_filename_stagger ${input_filename_stagger}_`echo $$`.${input_filename_stagger.ext}
           #end if
         
           #if str($input_filename_buckle) != 'None':
-            --input_filename_buckle ${input_filename_buckle}.${input_filename_buckle.ext}
+            --input_filename_buckle ${input_filename_buckle}_`echo $$`.${input_filename_buckle.ext}
           #end if
         
           #if str($input_filename_propel) != 'None':
-            --input_filename_propel ${input_filename_propel}.${input_filename_propel.ext}
+            --input_filename_propel ${input_filename_propel}_`echo $$`.${input_filename_propel.ext}
           #end if
         
           #if str($input_filename_opening) != 'None':
-            --input_filename_opening ${input_filename_opening}.${input_filename_opening.ext}
+            --input_filename_opening ${input_filename_opening}_`echo $$`.${input_filename_opening.ext}
           #end if
         
         
@@ -63,20 +63,20 @@
           --output_jpg_path $__new_file_path__/$outname_output_jpg_path
         ;          
         #if $config.sele == "option1":
-            rm -f ${config.properties}.${config.properties.ext};
+            rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
         
-          rm -f ${input_filename_shear}.${input_filename_shear.ext};
+          rm -f ${input_filename_shear}_`echo $$`.${input_filename_shear.ext};
         
-          rm -f ${input_filename_stretch}.${input_filename_stretch.ext};
+          rm -f ${input_filename_stretch}_`echo $$`.${input_filename_stretch.ext};
         
-          rm -f ${input_filename_stagger}.${input_filename_stagger.ext};
+          rm -f ${input_filename_stagger}_`echo $$`.${input_filename_stagger.ext};
         
-          rm -f ${input_filename_buckle}.${input_filename_buckle.ext};
+          rm -f ${input_filename_buckle}_`echo $$`.${input_filename_buckle.ext};
         
-          rm -f ${input_filename_propel}.${input_filename_propel.ext};
+          rm -f ${input_filename_propel}_`echo $$`.${input_filename_propel.ext};
         
-          rm -f ${input_filename_opening}.${input_filename_opening.ext};
+          rm -f ${input_filename_opening}_`echo $$`.${input_filename_opening.ext};
         
         
           if test -f $__new_file_path__/$outname_output_csv_path; then mv $__new_file_path__/$outname_output_csv_path $output_csv_path; fi;

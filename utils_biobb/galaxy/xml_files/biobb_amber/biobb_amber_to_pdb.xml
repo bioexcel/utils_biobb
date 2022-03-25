@@ -7,9 +7,9 @@
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
         
-          ln -f -s ${input_top_path} ${input_top_path}.${input_top_path.ext};
+          ln -f -s ${input_top_path} ${input_top_path}_`echo $$`.${input_top_path.ext};
         
-          ln -f -s ${input_crd_path} ${input_crd_path}.${input_crd_path.ext};
+          ln -f -s ${input_crd_path} ${input_crd_path}_`echo $$`.${input_crd_path.ext};
         
         
         
@@ -18,11 +18,11 @@
         
         
           #if str($input_top_path) != 'None':
-            --input_top_path ${input_top_path}.${input_top_path.ext}
+            --input_top_path ${input_top_path}_`echo $$`.${input_top_path.ext}
           #end if
         
           #if str($input_crd_path) != 'None':
-            --input_crd_path ${input_crd_path}.${input_crd_path.ext}
+            --input_crd_path ${input_crd_path}_`echo $$`.${input_crd_path.ext}
           #end if
         
         
@@ -30,9 +30,9 @@
         ;          
         
         
-          rm -f ${input_top_path}.${input_top_path.ext};
+          rm -f ${input_top_path}_`echo $$`.${input_top_path.ext};
         
-          rm -f ${input_crd_path}.${input_crd_path.ext};
+          rm -f ${input_crd_path}_`echo $$`.${input_crd_path.ext};
         
         
           if test -f $__new_file_path__/$outname_output_pdb_path; then mv $__new_file_path__/$outname_output_pdb_path $output_pdb_path; fi;

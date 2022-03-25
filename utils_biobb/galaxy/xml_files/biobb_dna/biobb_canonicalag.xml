@@ -7,16 +7,16 @@
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
         
-          ln -f -s ${input_alphaC_path} ${input_alphaC_path}.${input_alphaC_path.ext};
+          ln -f -s ${input_alphaC_path} ${input_alphaC_path}_`echo $$`.${input_alphaC_path.ext};
         
-          ln -f -s ${input_alphaW_path} ${input_alphaW_path}.${input_alphaW_path.ext};
+          ln -f -s ${input_alphaW_path} ${input_alphaW_path}_`echo $$`.${input_alphaW_path.ext};
         
-          ln -f -s ${input_gammaC_path} ${input_gammaC_path}.${input_gammaC_path.ext};
+          ln -f -s ${input_gammaC_path} ${input_gammaC_path}_`echo $$`.${input_gammaC_path.ext};
         
-          ln -f -s ${input_gammaW_path} ${input_gammaW_path}.${input_gammaW_path.ext};
+          ln -f -s ${input_gammaW_path} ${input_gammaW_path}_`echo $$`.${input_gammaW_path.ext};
         
         #if $config.sele == "option1":
-            ln -s -f ${config.properties} ${config.properties}.${config.properties.ext};
+            ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
         
         canonicalag
@@ -30,19 +30,19 @@
           #end if
         
           #if str($input_alphaC_path) != 'None':
-            --input_alphaC_path ${input_alphaC_path}.${input_alphaC_path.ext}
+            --input_alphaC_path ${input_alphaC_path}_`echo $$`.${input_alphaC_path.ext}
           #end if
         
           #if str($input_alphaW_path) != 'None':
-            --input_alphaW_path ${input_alphaW_path}.${input_alphaW_path.ext}
+            --input_alphaW_path ${input_alphaW_path}_`echo $$`.${input_alphaW_path.ext}
           #end if
         
           #if str($input_gammaC_path) != 'None':
-            --input_gammaC_path ${input_gammaC_path}.${input_gammaC_path.ext}
+            --input_gammaC_path ${input_gammaC_path}_`echo $$`.${input_gammaC_path.ext}
           #end if
         
           #if str($input_gammaW_path) != 'None':
-            --input_gammaW_path ${input_gammaW_path}.${input_gammaW_path.ext}
+            --input_gammaW_path ${input_gammaW_path}_`echo $$`.${input_gammaW_path.ext}
           #end if
         
         
@@ -51,16 +51,16 @@
           --output_jpg_path $__new_file_path__/$outname_output_jpg_path
         ;          
         #if $config.sele == "option1":
-            rm -f ${config.properties}.${config.properties.ext};
+            rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
         
-          rm -f ${input_alphaC_path}.${input_alphaC_path.ext};
+          rm -f ${input_alphaC_path}_`echo $$`.${input_alphaC_path.ext};
         
-          rm -f ${input_alphaW_path}.${input_alphaW_path.ext};
+          rm -f ${input_alphaW_path}_`echo $$`.${input_alphaW_path.ext};
         
-          rm -f ${input_gammaC_path}.${input_gammaC_path.ext};
+          rm -f ${input_gammaC_path}_`echo $$`.${input_gammaC_path.ext};
         
-          rm -f ${input_gammaW_path}.${input_gammaW_path.ext};
+          rm -f ${input_gammaW_path}_`echo $$`.${input_gammaW_path.ext};
         
         
           if test -f $__new_file_path__/$outname_output_csv_path; then mv $__new_file_path__/$outname_output_csv_path $output_csv_path; fi;

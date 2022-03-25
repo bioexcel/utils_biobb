@@ -7,20 +7,20 @@
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
         
-          ln -f -s ${input_filename_shift} ${input_filename_shift}.${input_filename_shift.ext};
+          ln -f -s ${input_filename_shift} ${input_filename_shift}_`echo $$`.${input_filename_shift.ext};
         
-          ln -f -s ${input_filename_slide} ${input_filename_slide}.${input_filename_slide.ext};
+          ln -f -s ${input_filename_slide} ${input_filename_slide}_`echo $$`.${input_filename_slide.ext};
         
-          ln -f -s ${input_filename_rise} ${input_filename_rise}.${input_filename_rise.ext};
+          ln -f -s ${input_filename_rise} ${input_filename_rise}_`echo $$`.${input_filename_rise.ext};
         
-          ln -f -s ${input_filename_tilt} ${input_filename_tilt}.${input_filename_tilt.ext};
+          ln -f -s ${input_filename_tilt} ${input_filename_tilt}_`echo $$`.${input_filename_tilt.ext};
         
-          ln -f -s ${input_filename_roll} ${input_filename_roll}.${input_filename_roll.ext};
+          ln -f -s ${input_filename_roll} ${input_filename_roll}_`echo $$`.${input_filename_roll.ext};
         
-          ln -f -s ${input_filename_twist} ${input_filename_twist}.${input_filename_twist.ext};
+          ln -f -s ${input_filename_twist} ${input_filename_twist}_`echo $$`.${input_filename_twist.ext};
         
         #if $config.sele == "option1":
-            ln -s -f ${config.properties} ${config.properties}.${config.properties.ext};
+            ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
         
         basepair_stiffness
@@ -34,27 +34,27 @@
           #end if
         
           #if str($input_filename_shift) != 'None':
-            --input_filename_shift ${input_filename_shift}.${input_filename_shift.ext}
+            --input_filename_shift ${input_filename_shift}_`echo $$`.${input_filename_shift.ext}
           #end if
         
           #if str($input_filename_slide) != 'None':
-            --input_filename_slide ${input_filename_slide}.${input_filename_slide.ext}
+            --input_filename_slide ${input_filename_slide}_`echo $$`.${input_filename_slide.ext}
           #end if
         
           #if str($input_filename_rise) != 'None':
-            --input_filename_rise ${input_filename_rise}.${input_filename_rise.ext}
+            --input_filename_rise ${input_filename_rise}_`echo $$`.${input_filename_rise.ext}
           #end if
         
           #if str($input_filename_tilt) != 'None':
-            --input_filename_tilt ${input_filename_tilt}.${input_filename_tilt.ext}
+            --input_filename_tilt ${input_filename_tilt}_`echo $$`.${input_filename_tilt.ext}
           #end if
         
           #if str($input_filename_roll) != 'None':
-            --input_filename_roll ${input_filename_roll}.${input_filename_roll.ext}
+            --input_filename_roll ${input_filename_roll}_`echo $$`.${input_filename_roll.ext}
           #end if
         
           #if str($input_filename_twist) != 'None':
-            --input_filename_twist ${input_filename_twist}.${input_filename_twist.ext}
+            --input_filename_twist ${input_filename_twist}_`echo $$`.${input_filename_twist.ext}
           #end if
         
         
@@ -63,20 +63,20 @@
           --output_jpg_path $__new_file_path__/$outname_output_jpg_path
         ;          
         #if $config.sele == "option1":
-            rm -f ${config.properties}.${config.properties.ext};
+            rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
         
-          rm -f ${input_filename_shift}.${input_filename_shift.ext};
+          rm -f ${input_filename_shift}_`echo $$`.${input_filename_shift.ext};
         
-          rm -f ${input_filename_slide}.${input_filename_slide.ext};
+          rm -f ${input_filename_slide}_`echo $$`.${input_filename_slide.ext};
         
-          rm -f ${input_filename_rise}.${input_filename_rise.ext};
+          rm -f ${input_filename_rise}_`echo $$`.${input_filename_rise.ext};
         
-          rm -f ${input_filename_tilt}.${input_filename_tilt.ext};
+          rm -f ${input_filename_tilt}_`echo $$`.${input_filename_tilt.ext};
         
-          rm -f ${input_filename_roll}.${input_filename_roll.ext};
+          rm -f ${input_filename_roll}_`echo $$`.${input_filename_roll.ext};
         
-          rm -f ${input_filename_twist}.${input_filename_twist.ext};
+          rm -f ${input_filename_twist}_`echo $$`.${input_filename_twist.ext};
         
         
           if test -f $__new_file_path__/$outname_output_csv_path; then mv $__new_file_path__/$outname_output_csv_path $output_csv_path; fi;

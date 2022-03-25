@@ -7,14 +7,14 @@
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
         
-          ln -f -s ${input_pdb_path} ${input_pdb_path}.${input_pdb_path.ext};
+          ln -f -s ${input_pdb_path} ${input_pdb_path}_`echo $$`.${input_pdb_path.ext};
         
-          ln -f -s ${input_vdw_params_path} ${input_vdw_params_path}.${input_vdw_params_path.ext};
+          ln -f -s ${input_vdw_params_path} ${input_vdw_params_path}_`echo $$`.${input_vdw_params_path.ext};
         
-          ln -f -s ${input_params_path} ${input_params_path}.${input_params_path.ext};
+          ln -f -s ${input_params_path} ${input_params_path}_`echo $$`.${input_params_path.ext};
         
         #if $config.sele == "option1":
-            ln -s -f ${config.properties} ${config.properties}.${config.properties.ext};
+            ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
         
         titration
@@ -28,29 +28,29 @@
           #end if
         
           #if str($input_pdb_path) != 'None':
-            --input_pdb_path ${input_pdb_path}.${input_pdb_path.ext}
+            --input_pdb_path ${input_pdb_path}_`echo $$`.${input_pdb_path.ext}
           #end if
         
           #if str($input_vdw_params_path) != 'None':
-            --input_vdw_params_path ${input_vdw_params_path}.${input_vdw_params_path.ext}
+            --input_vdw_params_path ${input_vdw_params_path}_`echo $$`.${input_vdw_params_path.ext}
           #end if
         
           #if str($input_params_path) != 'None':
-            --input_params_path ${input_params_path}.${input_params_path.ext}
+            --input_params_path ${input_params_path}_`echo $$`.${input_params_path.ext}
           #end if
         
         
           --output_pdb_path $__new_file_path__/$outname_output_pdb_path
         ;          
         #if $config.sele == "option1":
-            rm -f ${config.properties}.${config.properties.ext};
+            rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
         
-          rm -f ${input_pdb_path}.${input_pdb_path.ext};
+          rm -f ${input_pdb_path}_`echo $$`.${input_pdb_path.ext};
         
-          rm -f ${input_vdw_params_path}.${input_vdw_params_path.ext};
+          rm -f ${input_vdw_params_path}_`echo $$`.${input_vdw_params_path.ext};
         
-          rm -f ${input_params_path}.${input_params_path.ext};
+          rm -f ${input_params_path}_`echo $$`.${input_params_path.ext};
         
         
           if test -f $__new_file_path__/$outname_output_pdb_path; then mv $__new_file_path__/$outname_output_pdb_path $output_pdb_path; fi;

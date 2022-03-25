@@ -8,7 +8,7 @@
     <command detect_errors="aggressive"><![CDATA[
         
         #if $config.sele == "option1":
-            ln -s -f ${config.properties} ${config.properties}.${config.properties.ext};
+            ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
         
         leap_build_linear_structure
@@ -25,7 +25,7 @@
           --output_pdb_path $__new_file_path__/$outname_output_pdb_path
         ;          
         #if $config.sele == "option1":
-            rm -f ${config.properties}.${config.properties.ext};
+            rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
         
         

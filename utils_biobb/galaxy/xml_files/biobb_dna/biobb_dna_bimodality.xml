@@ -7,12 +7,12 @@
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
         
-          ln -f -s ${input_csv_file} ${input_csv_file}.${input_csv_file.ext};
+          ln -f -s ${input_csv_file} ${input_csv_file}_`echo $$`.${input_csv_file.ext};
         
-          ln -f -s ${input_zip_file} ${input_zip_file}.${input_zip_file.ext};
+          ln -f -s ${input_zip_file} ${input_zip_file}_`echo $$`.${input_zip_file.ext};
         
         #if $config.sele == "option1":
-            ln -s -f ${config.properties} ${config.properties}.${config.properties.ext};
+            ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
         
         dna_bimodality
@@ -26,11 +26,11 @@
           #end if
         
           #if str($input_csv_file) != 'None':
-            --input_csv_file ${input_csv_file}.${input_csv_file.ext}
+            --input_csv_file ${input_csv_file}_`echo $$`.${input_csv_file.ext}
           #end if
         
           #if str($input_zip_file) != 'None':
-            --input_zip_file ${input_zip_file}.${input_zip_file.ext}
+            --input_zip_file ${input_zip_file}_`echo $$`.${input_zip_file.ext}
           #end if
         
         
@@ -39,12 +39,12 @@
           --output_jpg_path $__new_file_path__/$outname_output_jpg_path
         ;          
         #if $config.sele == "option1":
-            rm -f ${config.properties}.${config.properties.ext};
+            rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
         
-          rm -f ${input_csv_file}.${input_csv_file.ext};
+          rm -f ${input_csv_file}_`echo $$`.${input_csv_file.ext};
         
-          rm -f ${input_zip_file}.${input_zip_file.ext};
+          rm -f ${input_zip_file}_`echo $$`.${input_zip_file.ext};
         
         
           if test -f $__new_file_path__/$outname_output_csv_path; then mv $__new_file_path__/$outname_output_csv_path $output_csv_path; fi;

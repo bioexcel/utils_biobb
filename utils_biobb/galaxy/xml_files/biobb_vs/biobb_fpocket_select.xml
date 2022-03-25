@@ -7,10 +7,10 @@
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
         
-          ln -f -s ${input_pockets_zip} ${input_pockets_zip}.${input_pockets_zip.ext};
+          ln -f -s ${input_pockets_zip} ${input_pockets_zip}_`echo $$`.${input_pockets_zip.ext};
         
         #if $config.sele == "option1":
-            ln -s -f ${config.properties} ${config.properties}.${config.properties.ext};
+            ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
         
         fpocket_select
@@ -24,7 +24,7 @@
           #end if
         
           #if str($input_pockets_zip) != 'None':
-            --input_pockets_zip ${input_pockets_zip}.${input_pockets_zip.ext}
+            --input_pockets_zip ${input_pockets_zip}_`echo $$`.${input_pockets_zip.ext}
           #end if
         
         
@@ -33,10 +33,10 @@
           --output_pocket_pqr $__new_file_path__/$outname_output_pocket_pqr
         ;          
         #if $config.sele == "option1":
-            rm -f ${config.properties}.${config.properties.ext};
+            rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
         
-          rm -f ${input_pockets_zip}.${input_pockets_zip.ext};
+          rm -f ${input_pockets_zip}_`echo $$`.${input_pockets_zip.ext};
         
         
           if test -f $__new_file_path__/$outname_output_pocket_pdb; then mv $__new_file_path__/$outname_output_pocket_pdb $output_pocket_pdb; fi;

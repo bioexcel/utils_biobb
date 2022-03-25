@@ -7,10 +7,10 @@
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
         
-          ln -f -s ${input_gro_path} ${input_gro_path}.${input_gro_path.ext};
+          ln -f -s ${input_gro_path} ${input_gro_path}_`echo $$`.${input_gro_path.ext};
         
         #if $config.sele == "option1":
-            ln -s -f ${config.properties} ${config.properties}.${config.properties.ext};
+            ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
         
         editconf
@@ -24,17 +24,17 @@
           #end if
         
           #if str($input_gro_path) != 'None':
-            --input_gro_path ${input_gro_path}.${input_gro_path.ext}
+            --input_gro_path ${input_gro_path}_`echo $$`.${input_gro_path.ext}
           #end if
         
         
           --output_gro_path $__new_file_path__/$outname_output_gro_path
         ;          
         #if $config.sele == "option1":
-            rm -f ${config.properties}.${config.properties.ext};
+            rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
         
-          rm -f ${input_gro_path}.${input_gro_path.ext};
+          rm -f ${input_gro_path}_`echo $$`.${input_gro_path.ext};
         
         
           if test -f $__new_file_path__/$outname_output_gro_path; then mv $__new_file_path__/$outname_output_gro_path $output_gro_path; fi;

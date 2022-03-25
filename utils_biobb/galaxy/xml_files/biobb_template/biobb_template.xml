@@ -7,12 +7,12 @@
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
         
-          ln -f -s ${input_file_path1} ${input_file_path1}.${input_file_path1.ext};
+          ln -f -s ${input_file_path1} ${input_file_path1}_`echo $$`.${input_file_path1.ext};
         
-          ln -f -s ${input_file_path2} ${input_file_path2}.${input_file_path2.ext};
+          ln -f -s ${input_file_path2} ${input_file_path2}_`echo $$`.${input_file_path2.ext};
         
         #if $config.sele == "option1":
-            ln -s -f ${config.properties} ${config.properties}.${config.properties.ext};
+            ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
         
         template
@@ -26,23 +26,23 @@
           #end if
         
           #if str($input_file_path1) != 'None':
-            --input_file_path1 ${input_file_path1}.${input_file_path1.ext}
+            --input_file_path1 ${input_file_path1}_`echo $$`.${input_file_path1.ext}
           #end if
         
           #if str($input_file_path2) != 'None':
-            --input_file_path2 ${input_file_path2}.${input_file_path2.ext}
+            --input_file_path2 ${input_file_path2}_`echo $$`.${input_file_path2.ext}
           #end if
         
         
           --output_file_path $__new_file_path__/$outname_output_file_path
         ;          
         #if $config.sele == "option1":
-            rm -f ${config.properties}.${config.properties.ext};
+            rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
         
-          rm -f ${input_file_path1}.${input_file_path1.ext};
+          rm -f ${input_file_path1}_`echo $$`.${input_file_path1.ext};
         
-          rm -f ${input_file_path2}.${input_file_path2.ext};
+          rm -f ${input_file_path2}_`echo $$`.${input_file_path2.ext};
         
         
           if test -f $__new_file_path__/$outname_output_file_path; then mv $__new_file_path__/$outname_output_file_path $output_file_path; fi;

@@ -7,12 +7,12 @@
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
         
-          ln -f -s ${input_phaseC_path} ${input_phaseC_path}.${input_phaseC_path.ext};
+          ln -f -s ${input_phaseC_path} ${input_phaseC_path}_`echo $$`.${input_phaseC_path.ext};
         
-          ln -f -s ${input_phaseW_path} ${input_phaseW_path}.${input_phaseW_path.ext};
+          ln -f -s ${input_phaseW_path} ${input_phaseW_path}_`echo $$`.${input_phaseW_path.ext};
         
         #if $config.sele == "option1":
-            ln -s -f ${config.properties} ${config.properties}.${config.properties.ext};
+            ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
         
         puckering
@@ -26,11 +26,11 @@
           #end if
         
           #if str($input_phaseC_path) != 'None':
-            --input_phaseC_path ${input_phaseC_path}.${input_phaseC_path.ext}
+            --input_phaseC_path ${input_phaseC_path}_`echo $$`.${input_phaseC_path.ext}
           #end if
         
           #if str($input_phaseW_path) != 'None':
-            --input_phaseW_path ${input_phaseW_path}.${input_phaseW_path.ext}
+            --input_phaseW_path ${input_phaseW_path}_`echo $$`.${input_phaseW_path.ext}
           #end if
         
         
@@ -39,12 +39,12 @@
           --output_jpg_path $__new_file_path__/$outname_output_jpg_path
         ;          
         #if $config.sele == "option1":
-            rm -f ${config.properties}.${config.properties.ext};
+            rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
         
-          rm -f ${input_phaseC_path}.${input_phaseC_path.ext};
+          rm -f ${input_phaseC_path}_`echo $$`.${input_phaseC_path.ext};
         
-          rm -f ${input_phaseW_path}.${input_phaseW_path.ext};
+          rm -f ${input_phaseW_path}_`echo $$`.${input_phaseW_path.ext};
         
         
           if test -f $__new_file_path__/$outname_output_csv_path; then mv $__new_file_path__/$outname_output_csv_path $output_csv_path; fi;

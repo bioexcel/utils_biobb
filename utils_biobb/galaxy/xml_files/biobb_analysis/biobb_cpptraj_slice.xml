@@ -7,12 +7,12 @@
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
         
-          ln -f -s ${input_top_path} ${input_top_path}.${input_top_path.ext};
+          ln -f -s ${input_top_path} ${input_top_path}_`echo $$`.${input_top_path.ext};
         
-          ln -f -s ${input_traj_path} ${input_traj_path}.${input_traj_path.ext};
+          ln -f -s ${input_traj_path} ${input_traj_path}_`echo $$`.${input_traj_path.ext};
         
         #if $config.sele == "option1":
-            ln -s -f ${config.properties} ${config.properties}.${config.properties.ext};
+            ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
         
         cpptraj_slice
@@ -26,23 +26,23 @@
           #end if
         
           #if str($input_top_path) != 'None':
-            --input_top_path ${input_top_path}.${input_top_path.ext}
+            --input_top_path ${input_top_path}_`echo $$`.${input_top_path.ext}
           #end if
         
           #if str($input_traj_path) != 'None':
-            --input_traj_path ${input_traj_path}.${input_traj_path.ext}
+            --input_traj_path ${input_traj_path}_`echo $$`.${input_traj_path.ext}
           #end if
         
         
           --output_cpptraj_path $__new_file_path__/$outname_output_cpptraj_path
         ;          
         #if $config.sele == "option1":
-            rm -f ${config.properties}.${config.properties.ext};
+            rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
         
-          rm -f ${input_top_path}.${input_top_path.ext};
+          rm -f ${input_top_path}_`echo $$`.${input_top_path.ext};
         
-          rm -f ${input_traj_path}.${input_traj_path.ext};
+          rm -f ${input_traj_path}_`echo $$`.${input_traj_path.ext};
         
         
           if test -f $__new_file_path__/$outname_output_cpptraj_path; then mv $__new_file_path__/$outname_output_cpptraj_path $output_cpptraj_path; fi;

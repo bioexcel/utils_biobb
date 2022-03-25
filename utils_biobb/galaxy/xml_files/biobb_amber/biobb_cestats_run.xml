@@ -7,12 +7,12 @@
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
         
-          ln -f -s ${input_cein_path} ${input_cein_path}.${input_cein_path.ext};
+          ln -f -s ${input_cein_path} ${input_cein_path}_`echo $$`.${input_cein_path.ext};
         
-          ln -f -s ${input_ceout_path} ${input_ceout_path}.${input_ceout_path.ext};
+          ln -f -s ${input_ceout_path} ${input_ceout_path}_`echo $$`.${input_ceout_path.ext};
         
         #if $config.sele == "option1":
-            ln -s -f ${config.properties} ${config.properties}.${config.properties.ext};
+            ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
         
         cestats_run
@@ -26,11 +26,11 @@
           #end if
         
           #if str($input_cein_path) != 'None':
-            --input_cein_path ${input_cein_path}.${input_cein_path.ext}
+            --input_cein_path ${input_cein_path}_`echo $$`.${input_cein_path.ext}
           #end if
         
           #if str($input_ceout_path) != 'None':
-            --input_ceout_path ${input_ceout_path}.${input_ceout_path.ext}
+            --input_ceout_path ${input_ceout_path}_`echo $$`.${input_ceout_path.ext}
           #end if
         
         
@@ -47,12 +47,12 @@
           --output_chunk_conditional_path $__new_file_path__/$outname_output_chunk_conditional_path
         ;          
         #if $config.sele == "option1":
-            rm -f ${config.properties}.${config.properties.ext};
+            rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
         
-          rm -f ${input_cein_path}.${input_cein_path.ext};
+          rm -f ${input_cein_path}_`echo $$`.${input_cein_path.ext};
         
-          rm -f ${input_ceout_path}.${input_ceout_path.ext};
+          rm -f ${input_ceout_path}_`echo $$`.${input_ceout_path.ext};
         
         
           if test -f $__new_file_path__/$outname_output_dat_path; then mv $__new_file_path__/$outname_output_dat_path $output_dat_path; fi;

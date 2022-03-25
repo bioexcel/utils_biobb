@@ -7,12 +7,12 @@
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
         
-          ln -f -s ${input_tpr_path} ${input_tpr_path}.${input_tpr_path.ext};
+          ln -f -s ${input_tpr_path} ${input_tpr_path}_`echo $$`.${input_tpr_path.ext};
         
-          ln -f -s ${input_cpt_path} ${input_cpt_path}.${input_cpt_path.ext};
+          ln -f -s ${input_cpt_path} ${input_cpt_path}_`echo $$`.${input_cpt_path.ext};
         
         #if $config.sele == "option1":
-            ln -s -f ${config.properties} ${config.properties}.${config.properties.ext};
+            ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
         
         mdrun
@@ -26,11 +26,11 @@
           #end if
         
           #if str($input_tpr_path) != 'None':
-            --input_tpr_path ${input_tpr_path}.${input_tpr_path.ext}
+            --input_tpr_path ${input_tpr_path}_`echo $$`.${input_tpr_path.ext}
           #end if
         
           #if str($input_cpt_path) != 'None':
-            --input_cpt_path ${input_cpt_path}.${input_cpt_path.ext}
+            --input_cpt_path ${input_cpt_path}_`echo $$`.${input_cpt_path.ext}
           #end if
         
         
@@ -49,12 +49,12 @@
           --output_dhdl_path $__new_file_path__/$outname_output_dhdl_path
         ;          
         #if $config.sele == "option1":
-            rm -f ${config.properties}.${config.properties.ext};
+            rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
         
-          rm -f ${input_tpr_path}.${input_tpr_path.ext};
+          rm -f ${input_tpr_path}_`echo $$`.${input_tpr_path.ext};
         
-          rm -f ${input_cpt_path}.${input_cpt_path.ext};
+          rm -f ${input_cpt_path}_`echo $$`.${input_cpt_path.ext};
         
         
           if test -f $__new_file_path__/$outname_output_trr_path; then mv $__new_file_path__/$outname_output_trr_path $output_trr_path; fi;

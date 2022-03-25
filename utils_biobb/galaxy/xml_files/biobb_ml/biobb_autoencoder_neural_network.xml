@@ -7,12 +7,12 @@
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
         
-          ln -f -s ${input_decode_path} ${input_decode_path}.${input_decode_path.ext};
+          ln -f -s ${input_decode_path} ${input_decode_path}_`echo $$`.${input_decode_path.ext};
         
-          ln -f -s ${input_predict_path} ${input_predict_path}.${input_predict_path.ext};
+          ln -f -s ${input_predict_path} ${input_predict_path}_`echo $$`.${input_predict_path.ext};
         
         #if $config.sele == "option1":
-            ln -s -f ${config.properties} ${config.properties}.${config.properties.ext};
+            ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
         
         autoencoder_neural_network
@@ -26,11 +26,11 @@
           #end if
         
           #if str($input_decode_path) != 'None':
-            --input_decode_path ${input_decode_path}.${input_decode_path.ext}
+            --input_decode_path ${input_decode_path}_`echo $$`.${input_decode_path.ext}
           #end if
         
           #if str($input_predict_path) != 'None':
-            --input_predict_path ${input_predict_path}.${input_predict_path.ext}
+            --input_predict_path ${input_predict_path}_`echo $$`.${input_predict_path.ext}
           #end if
         
         
@@ -41,12 +41,12 @@
           --output_test_predict_path $__new_file_path__/$outname_output_test_predict_path
         ;          
         #if $config.sele == "option1":
-            rm -f ${config.properties}.${config.properties.ext};
+            rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
         
-          rm -f ${input_decode_path}.${input_decode_path.ext};
+          rm -f ${input_decode_path}_`echo $$`.${input_decode_path.ext};
         
-          rm -f ${input_predict_path}.${input_predict_path.ext};
+          rm -f ${input_predict_path}_`echo $$`.${input_predict_path.ext};
         
         
           if test -f $__new_file_path__/$outname_output_model_path; then mv $__new_file_path__/$outname_output_model_path $output_model_path; fi;

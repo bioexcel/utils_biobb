@@ -7,18 +7,18 @@
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
         
-          ln -f -s ${input_gro_path} ${input_gro_path}.${input_gro_path.ext};
+          ln -f -s ${input_gro_path} ${input_gro_path}_`echo $$`.${input_gro_path.ext};
         
-          ln -f -s ${input_top_zip_path} ${input_top_zip_path}.${input_top_zip_path.ext};
+          ln -f -s ${input_top_zip_path} ${input_top_zip_path}_`echo $$`.${input_top_zip_path.ext};
         
-          ln -f -s ${input_cpt_path} ${input_cpt_path}.${input_cpt_path.ext};
+          ln -f -s ${input_cpt_path} ${input_cpt_path}_`echo $$`.${input_cpt_path.ext};
         
-          ln -f -s ${input_ndx_path} ${input_ndx_path}.${input_ndx_path.ext};
+          ln -f -s ${input_ndx_path} ${input_ndx_path}_`echo $$`.${input_ndx_path.ext};
         
-          ln -f -s ${input_mdp_path} ${input_mdp_path}.${input_mdp_path.ext};
+          ln -f -s ${input_mdp_path} ${input_mdp_path}_`echo $$`.${input_mdp_path.ext};
         
         #if $config.sele == "option1":
-            ln -s -f ${config.properties} ${config.properties}.${config.properties.ext};
+            ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
         
         grompp_mdrun
@@ -32,23 +32,23 @@
           #end if
         
           #if str($input_gro_path) != 'None':
-            --input_gro_path ${input_gro_path}.${input_gro_path.ext}
+            --input_gro_path ${input_gro_path}_`echo $$`.${input_gro_path.ext}
           #end if
         
           #if str($input_top_zip_path) != 'None':
-            --input_top_zip_path ${input_top_zip_path}.${input_top_zip_path.ext}
+            --input_top_zip_path ${input_top_zip_path}_`echo $$`.${input_top_zip_path.ext}
           #end if
         
           #if str($input_cpt_path) != 'None':
-            --input_cpt_path ${input_cpt_path}.${input_cpt_path.ext}
+            --input_cpt_path ${input_cpt_path}_`echo $$`.${input_cpt_path.ext}
           #end if
         
           #if str($input_ndx_path) != 'None':
-            --input_ndx_path ${input_ndx_path}.${input_ndx_path.ext}
+            --input_ndx_path ${input_ndx_path}_`echo $$`.${input_ndx_path.ext}
           #end if
         
           #if str($input_mdp_path) != 'None':
-            --input_mdp_path ${input_mdp_path}.${input_mdp_path.ext}
+            --input_mdp_path ${input_mdp_path}_`echo $$`.${input_mdp_path.ext}
           #end if
         
         
@@ -67,18 +67,18 @@
           --output_dhdl_path $__new_file_path__/$outname_output_dhdl_path
         ;          
         #if $config.sele == "option1":
-            rm -f ${config.properties}.${config.properties.ext};
+            rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
         
-          rm -f ${input_gro_path}.${input_gro_path.ext};
+          rm -f ${input_gro_path}_`echo $$`.${input_gro_path.ext};
         
-          rm -f ${input_top_zip_path}.${input_top_zip_path.ext};
+          rm -f ${input_top_zip_path}_`echo $$`.${input_top_zip_path.ext};
         
-          rm -f ${input_cpt_path}.${input_cpt_path.ext};
+          rm -f ${input_cpt_path}_`echo $$`.${input_cpt_path.ext};
         
-          rm -f ${input_ndx_path}.${input_ndx_path.ext};
+          rm -f ${input_ndx_path}_`echo $$`.${input_ndx_path.ext};
         
-          rm -f ${input_mdp_path}.${input_mdp_path.ext};
+          rm -f ${input_mdp_path}_`echo $$`.${input_mdp_path.ext};
         
         
           if test -f $__new_file_path__/$outname_output_trr_path; then mv $__new_file_path__/$outname_output_trr_path $output_trr_path; fi;

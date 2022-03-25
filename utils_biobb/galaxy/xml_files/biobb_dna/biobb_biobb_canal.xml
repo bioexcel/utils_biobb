@@ -7,12 +7,12 @@
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
         
-          ln -f -s ${input_cda_file} ${input_cda_file}.${input_cda_file.ext};
+          ln -f -s ${input_cda_file} ${input_cda_file}_`echo $$`.${input_cda_file.ext};
         
-          ln -f -s ${input_lis_file} ${input_lis_file}.${input_lis_file.ext};
+          ln -f -s ${input_lis_file} ${input_lis_file}_`echo $$`.${input_lis_file.ext};
         
         #if $config.sele == "option1":
-            ln -s -f ${config.properties} ${config.properties}.${config.properties.ext};
+            ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
         
         biobb_canal
@@ -26,23 +26,23 @@
           #end if
         
           #if str($input_cda_file) != 'None':
-            --input_cda_file ${input_cda_file}.${input_cda_file.ext}
+            --input_cda_file ${input_cda_file}_`echo $$`.${input_cda_file.ext}
           #end if
         
           #if str($input_lis_file) != 'None':
-            --input_lis_file ${input_lis_file}.${input_lis_file.ext}
+            --input_lis_file ${input_lis_file}_`echo $$`.${input_lis_file.ext}
           #end if
         
         
           --output_zip_path $__new_file_path__/$outname_output_zip_path
         ;          
         #if $config.sele == "option1":
-            rm -f ${config.properties}.${config.properties.ext};
+            rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
         
-          rm -f ${input_cda_file}.${input_cda_file.ext};
+          rm -f ${input_cda_file}_`echo $$`.${input_cda_file.ext};
         
-          rm -f ${input_lis_file}.${input_lis_file.ext};
+          rm -f ${input_lis_file}_`echo $$`.${input_lis_file.ext};
         
         
           if test -f $__new_file_path__/$outname_output_zip_path; then mv $__new_file_path__/$outname_output_zip_path $output_zip_path; fi;
