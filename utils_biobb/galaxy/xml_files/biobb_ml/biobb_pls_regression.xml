@@ -75,9 +75,13 @@
           </conditional>
           <section name="properties" title="Properties Input">
             
-              <param name="features" type="text" label="features" help="Features or columns from your dataset you want to use for fitting. You can specify either a list of columns names from your input dataset, a list of columns indexes or a range of columns indexes. Formats: { &#34;columns&#34;: [&#34;column1&#34;, &#34;column2&#34;] } or { &#34;indexes&#34;: [0, 2, 3, 10, 11, 17] } or { &#34;range&#34;: [[0, 20], [50, 102]] }. In case of mulitple formats, the first one will be picked. (Json)" value="{}" />
+              <param name="features" type="text" label="features" help="Features or columns from your dataset you want to use for fitting. You can specify either a list of columns names from your input dataset, a list of columns indexes or a range of columns indexes. Formats: { &#34;columns&#34;: [&#34;column1&#34;, &#34;column2&#34;] } or { &#34;indexes&#34;: [0, 2, 3, 10, 11, 17] } or { &#34;range&#34;: [[0, 20], [50, 102]] }. In case of mulitple formats, the first one will be picked. (Json)" value="{}">
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
             
-              <param name="target" type="text" label="target" help="Dependent variable you want to predict from your dataset. You can specify either a column name or a column index. Formats: { &#34;column&#34;: &#34;column3&#34; } or { &#34;index&#34;: 21 }. In case of mulitple formats, the first one will be picked. (Json)" value="{}" />
+              <param name="target" type="text" label="target" help="Dependent variable you want to predict from your dataset. You can specify either a column name or a column index. Formats: { &#34;column&#34;: &#34;column3&#34; } or { &#34;index&#34;: 21 }. In case of mulitple formats, the first one will be picked. (Json)" value="{}">
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
             
               <param name="n_components" type="integer" 
                   value="5"

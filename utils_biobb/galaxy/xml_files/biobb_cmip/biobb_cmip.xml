@@ -212,7 +212,9 @@
                   
                   label="box_size_factor" help="If optional output **output_json_box_path** is used the box size will be multiplied by this factor." optional="false"/>
             
-              <param name="params" type="text" label="params" help="CMIP options specification. (Json)" value="{}" />
+              <param name="params" type="text" label="params" help="CMIP options specification. (Json)" value="{}">
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
             
               <param name="binary_path" type="text" label="binary_path" help="Path to the CMIP cmip executable binary." optional="false"
                   value="cmip"

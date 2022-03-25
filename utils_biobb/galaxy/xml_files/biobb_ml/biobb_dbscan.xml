@@ -75,7 +75,9 @@
           </conditional>
           <section name="properties" title="Properties Input">
             
-              <param name="predictors" type="text" label="predictors" help="Features or columns from your dataset you want to use for fitting. You can specify either a list of columns names from your input dataset, a list of columns indexes or a range of columns indexes. Formats: { &#34;columns&#34;: [&#34;column1&#34;, &#34;column2&#34;] } or { &#34;indexes&#34;: [0, 2, 3, 10, 11, 17] } or { &#34;range&#34;: [[0, 20], [50, 102]] }. In case of mulitple formats, the first one will be picked. (Json)" value="{}" />
+              <param name="predictors" type="text" label="predictors" help="Features or columns from your dataset you want to use for fitting. You can specify either a list of columns names from your input dataset, a list of columns indexes or a range of columns indexes. Formats: { &#34;columns&#34;: [&#34;column1&#34;, &#34;column2&#34;] } or { &#34;indexes&#34;: [0, 2, 3, 10, 11, 17] } or { &#34;range&#34;: [[0, 20], [50, 102]] }. In case of mulitple formats, the first one will be picked. (Json)" value="{}">
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
             
               <param name="eps" type="float" 
                   value="0.5"
@@ -229,7 +231,9 @@
                   
                 </param>
             
-              <param name="plots" type="text" label="plots" help="List of dictionaries with all plots you want to generate. Only 2D or 3D plots accepted. Format: [ { &#39;title&#39;: &#39;Plot 1&#39;, &#39;features&#39;: [&#39;feat1&#39;, &#39;feat2&#39;] } ]. (Json)" value="[]" />
+              <param name="plots" type="text" label="plots" help="List of dictionaries with all plots you want to generate. Only 2D or 3D plots accepted. Format: [ { &#39;title&#39;: &#39;Plot 1&#39;, &#39;features&#39;: [&#39;feat1&#39;, &#39;feat2&#39;] } ]. (Json)" value="[]" >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
             
               <param name="scale" type="boolean" 
                   

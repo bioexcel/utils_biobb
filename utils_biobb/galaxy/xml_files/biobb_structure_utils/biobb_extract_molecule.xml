@@ -107,7 +107,9 @@
                   
                 </param>
             
-              <param name="chains" type="text" label="chains" help="if chains selected in **molecule_type**, specify them here, e.g: [&#34;A&#34;, &#34;C&#34;, &#34;N&#34;]. (Json)" value="[]" />
+              <param name="chains" type="text" label="chains" help="if chains selected in **molecule_type**, specify them here, e.g: [&#34;A&#34;, &#34;C&#34;, &#34;N&#34;]. (Json)" value="[]" >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
             
               <param name="binary_path" type="text" label="binary_path" help="path to the check_structure application" optional="false"
                   value="check_structure"

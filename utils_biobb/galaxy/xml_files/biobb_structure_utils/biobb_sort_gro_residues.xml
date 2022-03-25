@@ -67,7 +67,9 @@
           </conditional>
           <section name="properties" title="Properties Input">
             
-              <param name="residue_name_list" type="text" label="residue_name_list" help="Ordered residue name list. (Json)" value="[]" />
+              <param name="residue_name_list" type="text" label="residue_name_list" help="Ordered residue name list. (Json)" value="[]" >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
                     
           </section>
     </inputs>

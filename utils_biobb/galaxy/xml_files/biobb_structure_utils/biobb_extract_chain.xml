@@ -67,7 +67,9 @@
           </conditional>
           <section name="properties" title="Properties Input">
             
-              <param name="chains" type="text" label="chains" help="List of chains to be extracted from the input_structure_path file. If empty, all the chains of the structure will be returned. (Json)" value="[]" />
+              <param name="chains" type="text" label="chains" help="List of chains to be extracted from the input_structure_path file. If empty, all the chains of the structure will be returned. (Json)" value="[]" >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
             
               <param name="permissive" type="boolean" 
                   

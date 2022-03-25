@@ -107,7 +107,9 @@
           </conditional>
           <section name="properties" title="Properties Input">
             
-              <param name="mdp" type="text" label="mdp" help="MDP options specification. (Json)" value="{}" />
+              <param name="mdp" type="text" label="mdp" help="MDP options specification. (Json)" value="{}">
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
             
               <param name="simulation_type" type="select" label="simulation_type" help="Default options for the mdp file. Each one creates a different mdp file. " multiple="">
                   

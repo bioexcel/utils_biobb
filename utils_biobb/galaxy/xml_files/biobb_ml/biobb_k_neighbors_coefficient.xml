@@ -75,7 +75,9 @@
           </conditional>
           <section name="properties" title="Properties Input">
             
-              <param name="independent_vars" type="text" label="independent_vars" help="Independent variables or columns from your dataset you want to train. (Json)" value="[]" />
+              <param name="independent_vars" type="text" label="independent_vars" help="Independent variables or columns from your dataset you want to train. (Json)" value="[]" >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
             
               <param name="target" type="text" label="target" help="Dependent variable or column from your dataset you want to predict." optional="true"
                   

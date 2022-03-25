@@ -87,7 +87,9 @@
           </conditional>
           <section name="properties" title="Properties Input">
             
-              <param name="params" type="text" label="params" help="CMIP options specification. (Json)" value="{}" />
+              <param name="params" type="text" label="params" help="CMIP options specification. (Json)" value="{}">
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
             
               <param name="energy_cutoff" type="float" 
                   value="9999.9"

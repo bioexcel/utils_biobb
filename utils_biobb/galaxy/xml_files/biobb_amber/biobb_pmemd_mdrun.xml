@@ -147,7 +147,9 @@
           </conditional>
           <section name="properties" title="Properties Input">
             
-              <param name="mdin" type="text" label="mdin" help="pmemd MD run options specification. (Used if *input_mdin_path* is None) (Json)" value="{}" />
+              <param name="mdin" type="text" label="mdin" help="pmemd MD run options specification. (Used if *input_mdin_path* is None) (Json)" value="{}">
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
             
               <param name="pmemd_path" type="text" label="pmemd_path" help="pmemd binary path to be used." optional="false"
                   value="pmemd"

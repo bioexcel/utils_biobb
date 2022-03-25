@@ -115,9 +115,13 @@
                   label="{{ k }}" help="{{ v['description'] }}" 
                 /> 
               {%- elif v['type'] == 'object'-%}
-                <param name="{{ k }}" type="text" label="{{ k }}" help="{{ v['description'] }} (Json)" value="{}" /> 
+                <param name="{{ k }}" type="text" label="{{ k }}" help="{{ v['description'] }} (Json)" value="{}">
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param> 
               {%- elif v['type'] == 'array' -%}
-                <param name="{{ k }}" type="text" label="{{ k }}" help="{{ v['description'] }} (Json)" value="[]" /> 
+                <param name="{{ k }}" type="text" label="{{ k }}" help="{{ v['description'] }} (Json)" value="[]" >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>  
               {%- endif %}
             {% endfor %}        
           </section>

@@ -83,7 +83,9 @@
           </conditional>
           <section name="properties" title="Properties Input">
             
-              <param name="target" type="text" label="target" help="Dependent variable you want to predict from your dataset. You can specify either a column name or a column index. Formats: { &#34;column&#34;: &#34;column3&#34; } or { &#34;index&#34;: 21 }. In case of mulitple formats, the first one will be picked. (Json)" value="{}" />
+              <param name="target" type="text" label="target" help="Dependent variable you want to predict from your dataset. You can specify either a column name or a column index. Formats: { &#34;column&#34;: &#34;column3&#34; } or { &#34;index&#34;: 21 }. In case of mulitple formats, the first one will be picked. (Json)" value="{}">
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
             
               <param name="validation_size" type="float" 
                   value="0.2"
@@ -100,7 +102,9 @@
                   
                   label="test_size" help="Represents the number of samples of the dataset to include in the test split." optional="false"/>
             
-              <param name="hidden_layers" type="text" label="hidden_layers" help="List of dictionaries with hidden layers values. Format: [ { &#39;size&#39;: 50, &#39;activation&#39;: &#39;relu&#39; } ]. (Json)" value="[]" />
+              <param name="hidden_layers" type="text" label="hidden_layers" help="List of dictionaries with hidden layers values. Format: [ { &#39;size&#39;: 50, &#39;activation&#39;: &#39;relu&#39; } ]. (Json)" value="[]" >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
             
               <param name="optimizer" type="select" label="optimizer" help="Name of optimizer instance. " multiple="">
                   

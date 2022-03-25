@@ -77,7 +77,9 @@
           </conditional>
           <section name="properties" title="Properties Input">
             
-              <param name="predictions" type="text" label="predictions" help="List of dictionaries with all values you want to predict targets. It will be taken into account only in case **input_dataset_path** is not provided. Format: [{ &#39;var1&#39;: 1.0, &#39;var2&#39;: 2.0 }, { &#39;var1&#39;: 4.0, &#39;var2&#39;: 2.7 }] for datasets with headers and [[ 1.0, 2.0 ], [ 4.0, 2.7 ]] for datasets without headers. (Json)" value="[]" />
+              <param name="predictions" type="text" label="predictions" help="List of dictionaries with all values you want to predict targets. It will be taken into account only in case **input_dataset_path** is not provided. Format: [{ &#39;var1&#39;: 1.0, &#39;var2&#39;: 2.0 }, { &#39;var1&#39;: 4.0, &#39;var2&#39;: 2.7 }] for datasets with headers and [[ 1.0, 2.0 ], [ 4.0, 2.7 ]] for datasets without headers. (Json)" value="[]" >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
                     
           </section>
     </inputs>

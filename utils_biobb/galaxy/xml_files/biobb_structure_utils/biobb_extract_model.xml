@@ -67,7 +67,9 @@
           </conditional>
           <section name="properties" title="Properties Input">
             
-              <param name="models" type="text" label="models" help="List of models to be extracted from the input_structure_path file. If empty, all the models of the structure will be returned. (Json)" value="[]" />
+              <param name="models" type="text" label="models" help="List of models to be extracted from the input_structure_path file. If empty, all the models of the structure will be returned. (Json)" value="[]" >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
             
               <param name="binary_path" type="text" label="binary_path" help="path to the check_structure application" optional="false"
                   value="check_structure"
