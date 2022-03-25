@@ -9,11 +9,11 @@
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
         {% for k in files['input'] %}
-          ln -f -s ${{ '{' }}{{ k }}} ${{ '{' }}{{ k }}}.${{'{'}}{{k}}.ext};
+          ln -f -s ${{ '{' }}{{ k }}} ${{ '{' }}{{ k }}}_`echo $$`.${{'{'}}{{k}}.ext};
         {% endfor %}
         {% if props -%}
           #if $config.sele == "option1":
-            ln -s -f ${config.properties} ${config.properties}.${config.properties.ext};
+            ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
         {%- endif %}
         
@@ -30,7 +30,7 @@
         {%- endif %}
         {% for k in files['input'] %}
           #if str(${{ k }}) != 'None':
-            --{{ k }} ${{ '{' }}{{ k }}}.${{'{'}}{{k}}.ext}
+            --{{ k }} ${{ '{' }}{{ k }}}_`echo $$`.${{'{'}}{{k}}.ext}
           #end if
         {% endfor %}
         {% for k in files['output'] %}
@@ -38,11 +38,11 @@
         {% endfor %};          
         {% if props -%}
           #if $config.sele == "option1":
-            rm -f ${config.properties}.${config.properties.ext};
+            rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
         {%- endif %}
         {% for k in files['input'] %}
-          rm -f ${{'{'}}{{ k }}}.${{'{'}}{{ k }}.ext};
+          rm -f ${{'{'}}{{ k }}}_`echo $$`.${{'{'}}{{ k }}.ext};
         {% endfor %}
         {% for k in files['output'] %}
           if test -f $__new_file_path__/$outname_{{ k }}; then mv $__new_file_path__/$outname_{{ k }} ${{ k }}; fi;
