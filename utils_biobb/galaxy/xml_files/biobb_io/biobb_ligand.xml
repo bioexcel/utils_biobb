@@ -6,8 +6,6 @@
         >biobb_io</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
-        export tmp_dir=$__new_file_path__\'biobb_tmp_'`echo $$
-        mkdir $tmp_dir
         
         #if $config.sele == "option1":
             ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
@@ -24,14 +22,14 @@
           #end if
         
         
-          --output_pdb_path \$tmp_dir/$outname_output_pdb_path
+          --output_pdb_path $outname_output_pdb_path
         ;          
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
         
         
-          if test -f \$tmp_dir/$outname_output_pdb_path; then mv \$tmp_dir/$outname_output_pdb_path $output_pdb_path; fi;
+          if test -f $outname_output_pdb_path; then mv $outname_output_pdb_path $output_pdb_path; fi;
         
     ]]>
     </command>
