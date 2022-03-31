@@ -34,7 +34,7 @@
           #end if
         {% endfor %}
         {% for k in files['output'] %}
-          --{{ k }} $__new_file_path__/$outname_{{ k }}
+          --{{ k }} $outname_{{ k }}
         {% endfor %};          
         {% if props -%}
           #if $config.sele == "option1":
@@ -45,7 +45,7 @@
           rm -f ${{'{'}}{{ k }}}_`echo $$`.${{'{'}}{{ k }}.ext};
         {% endfor %}
         {% for k in files['output'] %}
-          if test -f $__new_file_path__/$outname_{{ k }}; then mv $__new_file_path__/$outname_{{ k }} ${{ k }}; fi;
+          if test -f $outname_{{ k }}; then mv $outname_{{ k }} ${{ k }}; fi;
         {% endfor %}
     ]]>
     </command>
