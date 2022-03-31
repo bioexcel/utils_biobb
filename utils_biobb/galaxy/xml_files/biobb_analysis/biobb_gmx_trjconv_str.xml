@@ -40,7 +40,7 @@
           #end if
         
         
-          --output_str_path $__new_file_path__/$outname_output_str_path
+          --output_str_path $outname_output_str_path
         ;          
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
@@ -53,7 +53,7 @@
           rm -f ${input_index_path}_`echo $$`.${input_index_path.ext};
         
         
-          if test -f $__new_file_path__/$outname_output_str_path; then mv $__new_file_path__/$outname_output_str_path $output_str_path; fi;
+          if test -f $outname_output_str_path; then mv $outname_output_str_path $output_str_path; fi;
         
     ]]>
     </command>

@@ -52,19 +52,19 @@
           #end if
         
         
-          --output_pdb_path $__new_file_path__/$outname_output_pdb_path
+          --output_pdb_path $outname_output_pdb_path
         
-          --output_grd_path $__new_file_path__/$outname_output_grd_path
+          --output_grd_path $outname_output_grd_path
         
-          --output_cube_path $__new_file_path__/$outname_output_cube_path
+          --output_cube_path $outname_output_cube_path
         
-          --output_rst_path $__new_file_path__/$outname_output_rst_path
+          --output_rst_path $outname_output_rst_path
         
-          --output_byat_path $__new_file_path__/$outname_output_byat_path
+          --output_byat_path $outname_output_byat_path
         
-          --output_log_path $__new_file_path__/$outname_output_log_path
+          --output_log_path $outname_output_log_path
         
-          --output_json_box_path $__new_file_path__/$outname_output_json_box_path
+          --output_json_box_path $outname_output_json_box_path
         ;          
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
@@ -81,19 +81,19 @@
           rm -f ${input_json_box_path}_`echo $$`.${input_json_box_path.ext};
         
         
-          if test -f $__new_file_path__/$outname_output_pdb_path; then mv $__new_file_path__/$outname_output_pdb_path $output_pdb_path; fi;
+          if test -f $outname_output_pdb_path; then mv $outname_output_pdb_path $output_pdb_path; fi;
         
-          if test -f $__new_file_path__/$outname_output_grd_path; then mv $__new_file_path__/$outname_output_grd_path $output_grd_path; fi;
+          if test -f $outname_output_grd_path; then mv $outname_output_grd_path $output_grd_path; fi;
         
-          if test -f $__new_file_path__/$outname_output_cube_path; then mv $__new_file_path__/$outname_output_cube_path $output_cube_path; fi;
+          if test -f $outname_output_cube_path; then mv $outname_output_cube_path $output_cube_path; fi;
         
-          if test -f $__new_file_path__/$outname_output_rst_path; then mv $__new_file_path__/$outname_output_rst_path $output_rst_path; fi;
+          if test -f $outname_output_rst_path; then mv $outname_output_rst_path $output_rst_path; fi;
         
-          if test -f $__new_file_path__/$outname_output_byat_path; then mv $__new_file_path__/$outname_output_byat_path $output_byat_path; fi;
+          if test -f $outname_output_byat_path; then mv $outname_output_byat_path $output_byat_path; fi;
         
-          if test -f $__new_file_path__/$outname_output_log_path; then mv $__new_file_path__/$outname_output_log_path $output_log_path; fi;
+          if test -f $outname_output_log_path; then mv $outname_output_log_path $output_log_path; fi;
         
-          if test -f $__new_file_path__/$outname_output_json_box_path; then mv $__new_file_path__/$outname_output_json_box_path $output_json_box_path; fi;
+          if test -f $outname_output_json_box_path; then mv $outname_output_json_box_path $output_json_box_path; fi;
         
     ]]>
     </command>

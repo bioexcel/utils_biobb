@@ -34,7 +34,7 @@
           #end if
         
         
-          --output_pdb_path $__new_file_path__/$outname_output_pdb_path
+          --output_pdb_path $outname_output_pdb_path
         ;          
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
@@ -45,7 +45,7 @@
           rm -f ${input_clusters_zip}_`echo $$`.${input_clusters_zip.ext};
         
         
-          if test -f $__new_file_path__/$outname_output_pdb_path; then mv $__new_file_path__/$outname_output_pdb_path $output_pdb_path; fi;
+          if test -f $outname_output_pdb_path; then mv $outname_output_pdb_path $output_pdb_path; fi;
         
     ]]>
     </command>

@@ -34,11 +34,11 @@
           #end if
         
         
-          --output_cda_path $__new_file_path__/$outname_output_cda_path
+          --output_cda_path $outname_output_cda_path
         
-          --output_lis_path $__new_file_path__/$outname_output_lis_path
+          --output_lis_path $outname_output_lis_path
         
-          --output_zip_path $__new_file_path__/$outname_output_zip_path
+          --output_zip_path $outname_output_zip_path
         ;          
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
@@ -49,11 +49,11 @@
           rm -f ${input_top_path}_`echo $$`.${input_top_path.ext};
         
         
-          if test -f $__new_file_path__/$outname_output_cda_path; then mv $__new_file_path__/$outname_output_cda_path $output_cda_path; fi;
+          if test -f $outname_output_cda_path; then mv $outname_output_cda_path $output_cda_path; fi;
         
-          if test -f $__new_file_path__/$outname_output_lis_path; then mv $__new_file_path__/$outname_output_lis_path $output_lis_path; fi;
+          if test -f $outname_output_lis_path; then mv $outname_output_lis_path $output_lis_path; fi;
         
-          if test -f $__new_file_path__/$outname_output_zip_path; then mv $__new_file_path__/$outname_output_zip_path $output_zip_path; fi;
+          if test -f $outname_output_zip_path; then mv $outname_output_zip_path $output_zip_path; fi;
         
     ]]>
     </command>

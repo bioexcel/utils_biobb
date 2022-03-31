@@ -34,7 +34,7 @@
           #end if
         
         
-          --output_filter_pockets_zip $__new_file_path__/$outname_output_filter_pockets_zip
+          --output_filter_pockets_zip $outname_output_filter_pockets_zip
         ;          
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
@@ -45,7 +45,7 @@
           rm -f ${input_summary}_`echo $$`.${input_summary.ext};
         
         
-          if test -f $__new_file_path__/$outname_output_filter_pockets_zip; then mv $__new_file_path__/$outname_output_filter_pockets_zip $output_filter_pockets_zip; fi;
+          if test -f $outname_output_filter_pockets_zip; then mv $outname_output_filter_pockets_zip $output_filter_pockets_zip; fi;
         
     ]]>
     </command>

@@ -26,9 +26,9 @@
           #end if
         
         
-          --output_decode_path $__new_file_path__/$outname_output_decode_path
+          --output_decode_path $outname_output_decode_path
         
-          --output_predict_path $__new_file_path__/$outname_output_predict_path
+          --output_predict_path $outname_output_predict_path
         ;          
         
         
@@ -37,9 +37,9 @@
           rm -f ${input_model_path}_`echo $$`.${input_model_path.ext};
         
         
-          if test -f $__new_file_path__/$outname_output_decode_path; then mv $__new_file_path__/$outname_output_decode_path $output_decode_path; fi;
+          if test -f $outname_output_decode_path; then mv $outname_output_decode_path $output_decode_path; fi;
         
-          if test -f $__new_file_path__/$outname_output_predict_path; then mv $__new_file_path__/$outname_output_predict_path $output_predict_path; fi;
+          if test -f $outname_output_predict_path; then mv $outname_output_predict_path $output_predict_path; fi;
         
     ]]>
     </command>

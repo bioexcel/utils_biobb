@@ -28,9 +28,9 @@
           #end if
         
         
-          --output_pockets_zip $__new_file_path__/$outname_output_pockets_zip
+          --output_pockets_zip $outname_output_pockets_zip
         
-          --output_summary $__new_file_path__/$outname_output_summary
+          --output_summary $outname_output_summary
         ;          
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
@@ -39,9 +39,9 @@
           rm -f ${input_pdb_path}_`echo $$`.${input_pdb_path.ext};
         
         
-          if test -f $__new_file_path__/$outname_output_pockets_zip; then mv $__new_file_path__/$outname_output_pockets_zip $output_pockets_zip; fi;
+          if test -f $outname_output_pockets_zip; then mv $outname_output_pockets_zip $output_pockets_zip; fi;
         
-          if test -f $__new_file_path__/$outname_output_summary; then mv $__new_file_path__/$outname_output_summary $output_summary; fi;
+          if test -f $outname_output_summary; then mv $outname_output_summary $output_summary; fi;
         
     ]]>
     </command>

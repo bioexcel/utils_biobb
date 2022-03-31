@@ -34,17 +34,17 @@
           #end if
         
         
-          --output_dat_path $__new_file_path__/$outname_output_dat_path
+          --output_dat_path $outname_output_dat_path
         
-          --output_population_path $__new_file_path__/$outname_output_population_path
+          --output_population_path $outname_output_population_path
         
-          --output_chunk_path $__new_file_path__/$outname_output_chunk_path
+          --output_chunk_path $outname_output_chunk_path
         
-          --output_cumulative_path $__new_file_path__/$outname_output_cumulative_path
+          --output_cumulative_path $outname_output_cumulative_path
         
-          --output_conditional_path $__new_file_path__/$outname_output_conditional_path
+          --output_conditional_path $outname_output_conditional_path
         
-          --output_chunk_conditional_path $__new_file_path__/$outname_output_chunk_conditional_path
+          --output_chunk_conditional_path $outname_output_chunk_conditional_path
         ;          
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
@@ -55,17 +55,17 @@
           rm -f ${input_cpout_path}_`echo $$`.${input_cpout_path.ext};
         
         
-          if test -f $__new_file_path__/$outname_output_dat_path; then mv $__new_file_path__/$outname_output_dat_path $output_dat_path; fi;
+          if test -f $outname_output_dat_path; then mv $outname_output_dat_path $output_dat_path; fi;
         
-          if test -f $__new_file_path__/$outname_output_population_path; then mv $__new_file_path__/$outname_output_population_path $output_population_path; fi;
+          if test -f $outname_output_population_path; then mv $outname_output_population_path $output_population_path; fi;
         
-          if test -f $__new_file_path__/$outname_output_chunk_path; then mv $__new_file_path__/$outname_output_chunk_path $output_chunk_path; fi;
+          if test -f $outname_output_chunk_path; then mv $outname_output_chunk_path $output_chunk_path; fi;
         
-          if test -f $__new_file_path__/$outname_output_cumulative_path; then mv $__new_file_path__/$outname_output_cumulative_path $output_cumulative_path; fi;
+          if test -f $outname_output_cumulative_path; then mv $outname_output_cumulative_path $output_cumulative_path; fi;
         
-          if test -f $__new_file_path__/$outname_output_conditional_path; then mv $__new_file_path__/$outname_output_conditional_path $output_conditional_path; fi;
+          if test -f $outname_output_conditional_path; then mv $outname_output_conditional_path $output_conditional_path; fi;
         
-          if test -f $__new_file_path__/$outname_output_chunk_conditional_path; then mv $__new_file_path__/$outname_output_chunk_conditional_path $output_chunk_conditional_path; fi;
+          if test -f $outname_output_chunk_conditional_path; then mv $outname_output_chunk_conditional_path $output_chunk_conditional_path; fi;
         
     ]]>
     </command>

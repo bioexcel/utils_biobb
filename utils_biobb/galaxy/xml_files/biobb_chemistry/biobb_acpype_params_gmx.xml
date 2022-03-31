@@ -28,11 +28,11 @@
           #end if
         
         
-          --output_path_gro $__new_file_path__/$outname_output_path_gro
+          --output_path_gro $outname_output_path_gro
         
-          --output_path_itp $__new_file_path__/$outname_output_path_itp
+          --output_path_itp $outname_output_path_itp
         
-          --output_path_top $__new_file_path__/$outname_output_path_top
+          --output_path_top $outname_output_path_top
         ;          
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
@@ -41,11 +41,11 @@
           rm -f ${input_path}_`echo $$`.${input_path.ext};
         
         
-          if test -f $__new_file_path__/$outname_output_path_gro; then mv $__new_file_path__/$outname_output_path_gro $output_path_gro; fi;
+          if test -f $outname_output_path_gro; then mv $outname_output_path_gro $output_path_gro; fi;
         
-          if test -f $__new_file_path__/$outname_output_path_itp; then mv $__new_file_path__/$outname_output_path_itp $output_path_itp; fi;
+          if test -f $outname_output_path_itp; then mv $outname_output_path_itp $output_path_itp; fi;
         
-          if test -f $__new_file_path__/$outname_output_path_top; then mv $__new_file_path__/$outname_output_path_top $output_path_top; fi;
+          if test -f $outname_output_path_top; then mv $outname_output_path_top $output_path_top; fi;
         
     ]]>
     </command>

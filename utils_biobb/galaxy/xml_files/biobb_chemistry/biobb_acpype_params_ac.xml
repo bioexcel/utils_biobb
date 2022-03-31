@@ -28,13 +28,13 @@
           #end if
         
         
-          --output_path_frcmod $__new_file_path__/$outname_output_path_frcmod
+          --output_path_frcmod $outname_output_path_frcmod
         
-          --output_path_inpcrd $__new_file_path__/$outname_output_path_inpcrd
+          --output_path_inpcrd $outname_output_path_inpcrd
         
-          --output_path_lib $__new_file_path__/$outname_output_path_lib
+          --output_path_lib $outname_output_path_lib
         
-          --output_path_prmtop $__new_file_path__/$outname_output_path_prmtop
+          --output_path_prmtop $outname_output_path_prmtop
         ;          
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
@@ -43,13 +43,13 @@
           rm -f ${input_path}_`echo $$`.${input_path.ext};
         
         
-          if test -f $__new_file_path__/$outname_output_path_frcmod; then mv $__new_file_path__/$outname_output_path_frcmod $output_path_frcmod; fi;
+          if test -f $outname_output_path_frcmod; then mv $outname_output_path_frcmod $output_path_frcmod; fi;
         
-          if test -f $__new_file_path__/$outname_output_path_inpcrd; then mv $__new_file_path__/$outname_output_path_inpcrd $output_path_inpcrd; fi;
+          if test -f $outname_output_path_inpcrd; then mv $outname_output_path_inpcrd $output_path_inpcrd; fi;
         
-          if test -f $__new_file_path__/$outname_output_path_lib; then mv $__new_file_path__/$outname_output_path_lib $output_path_lib; fi;
+          if test -f $outname_output_path_lib; then mv $outname_output_path_lib $output_path_lib; fi;
         
-          if test -f $__new_file_path__/$outname_output_path_prmtop; then mv $__new_file_path__/$outname_output_path_prmtop $output_path_prmtop; fi;
+          if test -f $outname_output_path_prmtop; then mv $outname_output_path_prmtop $output_path_prmtop; fi;
         
     ]]>
     </command>
