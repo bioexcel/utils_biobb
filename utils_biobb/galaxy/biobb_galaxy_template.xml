@@ -86,7 +86,7 @@
                 </param> 
               {%- elif v['type'] == 'float' or v['type'] == 'integer' -%}
                 <param name="{{ k }}" type="{{v['type']}}" 
-                  {% if v['default'] -%}
+                  {% if v['default'] or v['default'] == 0-%}
                     value="{{ v['default']}}" 
                   {%- endif %}
                   {% if v['min'] -%}
