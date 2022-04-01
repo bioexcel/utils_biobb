@@ -300,12 +300,12 @@
                   label="ionic_concentration" help="Additional ionic concentration to include in the system box. Units in Mol/L." optional="false"/>
             
               <param name="positive_ions_number" type="integer" 
-                  
+                  value="0"
                   
                   label="positive_ions_number" help="Number of additional positive ions to include in the system box." optional="true"/>
             
               <param name="negative_ions_number" type="integer" 
-                  
+                  value="0"
                   
                   label="negative_ions_number" help="Number of additional negative ions to include in the system box." optional="true"/>
             

@@ -96,7 +96,7 @@
           <section name="properties" title="Properties Input">
             
               <param name="shell" type="float" 
-                  
+                  value="0.0"
                   
                   label="shell" help="Thickness in nanometers of optional water layer around solute." optional="true"/>
             

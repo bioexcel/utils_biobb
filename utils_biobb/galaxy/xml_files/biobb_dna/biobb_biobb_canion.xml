@@ -100,27 +100,27 @@
                 </param>
             
               <param name="dlow" type="float" 
-                  
+                  value="0.0"
                   
                   label="dlow" help="Select starting segment of the oglimer to analyze. If both dhig and dlow are 0, entire oglimer is analyzed." optional="true"/>
             
               <param name="dhig" type="float" 
-                  
+                  value="0.0"
                   
                   label="dhig" help="Select ending segment of the oglimer to analyze, being the maximum value the total number of base pairs in the oligomer. If both dhig and dlow are 0, entire oglimer is analyzed." optional="true"/>
             
               <param name="rlow" type="float" 
-                  
+                  value="0.0"
                   
                   label="rlow" help="Minimal distances from the helical axis taken into account in the analysis." optional="true"/>
             
               <param name="rhig" type="float" 
-                  
+                  value="0.0"
                   
                   label="rhig" help="Maximal distances from the helical axis taken into account in the analysis." optional="true"/>
             
               <param name="alow" type="float" 
-                  
+                  value="0.0"
                   
                   label="alow" help="Minimal angle range to analyze." optional="true"/>
             

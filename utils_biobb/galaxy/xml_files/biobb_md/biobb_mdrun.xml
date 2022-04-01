@@ -132,7 +132,7 @@
                 </param>
             
               <param name="mpi_np" type="integer" 
-                  
+                  value="0"
                   
                   label="mpi_np" help="Number of MPI processes. Usually an integer bigger than 1." optional="true"/>
             
@@ -148,22 +148,22 @@
                   label="checkpoint_time" help="Checkpoint writing interval in minutes. Only enabled if an output_cpt_path is provided." optional="false"/>
             
               <param name="num_threads" type="integer" 
-                  
+                  value="0"
                   
                   label="num_threads" help="Let GROMACS guess. The number of threads that are going to be used." optional="true"/>
             
               <param name="num_threads_mpi" type="integer" 
-                  
+                  value="0"
                   
                   label="num_threads_mpi" help="Let GROMACS guess. The number of GROMACS MPI threads that are going to be used." optional="true"/>
             
               <param name="num_threads_omp" type="integer" 
-                  
+                  value="0"
                   
                   label="num_threads_omp" help="Let GROMACS guess. The number of GROMACS OPENMP threads that are going to be used." optional="true"/>
             
               <param name="num_threads_omp_pme" type="integer" 
-                  
+                  value="0"
                   
                   label="num_threads_omp_pme" help="Let GROMACS guess. The number of GROMACS OPENMP_PME threads that are going to be used." optional="true"/>
             

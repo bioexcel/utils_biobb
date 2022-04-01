@@ -196,17 +196,17 @@
                 </param>
             
               <param name="start" type="integer" 
-                  
+                  value="0"
                   
                   label="start" help="Time of first frame to read from trajectory (default unit ps)." optional="true"/>
             
               <param name="end" type="integer" 
-                  
+                  value="0"
                   
                   label="end" help="Time of last frame to read from trajectory (default unit ps)." optional="true"/>
             
               <param name="dt" type="integer" 
-                  
+                  value="0"
                   
                   label="dt" help="Only write frame when t MOD dt = first time (ps)." optional="true"/>
             

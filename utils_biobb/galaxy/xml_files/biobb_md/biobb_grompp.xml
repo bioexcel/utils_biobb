@@ -152,7 +152,7 @@
                 </param>
             
               <param name="maxwarn" type="integer" 
-                  
+                  value="0"
                   
                   label="maxwarn" help="Maximum number of allowed warnings. If simulation_type is index default is 10." optional="true"/>
             

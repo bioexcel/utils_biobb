@@ -113,7 +113,7 @@
                   label="temperature" help="Temperature in Kelvin." optional="false"/>
             
               <param name="nboots" type="integer" 
-                  
+                  value="0"
                   
                   label="nboots" help="Number of bootstrap samples to use for the bootstrap estimate of the standard errors." optional="true"/>
             

@@ -198,7 +198,7 @@
                 </param>
             
               <param name="mpi_np" type="integer" 
-                  
+                  value="0"
                   
                   label="mpi_np" help="Number of MPI processes. Usually an integer bigger than 1." optional="true"/>
             

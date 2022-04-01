@@ -82,7 +82,7 @@
                 />
             
               <param name="residue_offset" type="integer" 
-                  
+                  value="0"
                   
                   label="residue_offset" help="Residue id offset." optional="true"/>
                     

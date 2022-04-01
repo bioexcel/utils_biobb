@@ -84,12 +84,12 @@
                 </param>
             
               <param name="itst" type="integer" 
-                  
+                  value="0"
                   
                   label="itst" help="Iteration start index." optional="true"/>
             
               <param name="itnd" type="integer" 
-                  
+                  value="0"
                   
                   label="itnd" help="Iteration end index." optional="true"/>
             
@@ -99,12 +99,12 @@
                   label="itdel" help="Iteration delimiter." optional="false"/>
             
               <param name="lev1" type="integer" 
-                  
+                  value="0"
                   
                   label="lev1" help="Lower base level limit (i.e. base pairs) used for analysis." optional="true"/>
             
               <param name="lev2" type="integer" 
-                  
+                  value="0"
                   
                   label="lev2" help="Upper base level limit used for analysis. If lev1 &gt; 0 and lev2 = 0, lev2 is set to lev1 (i.e. analyze lev1 only). If lev1=lev2=0, lev1 is set to 1 and lev2 is set to the length of the oligmer (i.e. analyze all levels)." optional="true"/>
             

@@ -112,12 +112,12 @@
                 </param>
             
               <param name="itst" type="integer" 
-                  
+                  value="0"
                   
                   label="itst" help="Iteration start index." optional="true"/>
             
               <param name="itnd" type="integer" 
-                  
+                  value="0"
                   
                   label="itnd" help="Iteration end index." optional="true"/>
             
