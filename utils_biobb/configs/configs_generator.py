@@ -18,15 +18,9 @@ def main():
     args = parser.parse_args()
 
     # clean output path
-    files = []
-    for (dirpath, dirnames, filenames) in walk(args.output):
-        files.extend(filenames)
-        break
-
-    # remove files from array of files
-    for f in files:
-        path = PurePath(args.output).joinpath(f)
-        Path(path).unlink()
+    for f in Path(args.output).glob("*"):
+        if f.is_file():
+            f.unlink()
 
     config = yaml.safe_load(open(args.input_conf_yaml))
 

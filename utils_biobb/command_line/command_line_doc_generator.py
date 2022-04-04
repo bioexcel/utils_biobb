@@ -100,8 +100,10 @@ def main():
                 else:
                     out.write(f"### {extension.upper()}\n")
                 config_file_name = 'config_'+block_name+'.'+extension
-                if not Path(config_path).joinpath(config_file_name).exists() and block_name=='cmip':
-                    config_file_name = 'config_' + block_name + '_mip.' + extension
+                if not Path(config_path).joinpath(config_file_name).exists():
+                    continue
+                #if not Path(config_path).joinpath(config_file_name).exists() and block_name=='cmip':
+                #    config_file_name = 'config_' + block_name + '_mip.' + extension
 
                 command_line_str = " ".join(['--config', config_file_name] + command_line_list)
                 out.write(f"#### [Common config file]({config_url+config_file_name})\n")

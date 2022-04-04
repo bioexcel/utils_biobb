@@ -24,7 +24,8 @@ pycompss_generator_script_path=/Users/pau/projects/utils_biobb/utils_biobb/pycom
 pycompss_template_path=/Users/pau/projects/utils_biobb/utils_biobb/pycompss/pycompss_wrapper.tmpl
 
 # list of biobbs to be executed
-biobb_list="biobb_analysis biobb_chemistry biobb_cmip biobb_io biobb_md biobb_model biobb_pmx biobb_structure_utils biobb_vs biobb_ml biobb_amber biobb_dna"
+#biobb_list="biobb_analysis biobb_chemistry biobb_cmip biobb_io biobb_md biobb_model biobb_pmx biobb_structure_utils biobb_vs biobb_ml biobb_amber biobb_dna"
+biobb_list="biobb_cmip"
 if [ $# -gt 0 ]; then
     biobb_list="$@"
 fi
