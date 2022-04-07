@@ -179,7 +179,7 @@ def main():
                         if 'enum' in v:
                             v['values'] = v['enum']
                             if v['type'] == 'array':
-                                v['multiple'] = True
+                                v['multiple'] = "true"
                             v['type'] = 'select'
                         elif 'description' in v:
                             m = re.search('(.*) Valid values: (.*)', v['description'])
@@ -206,6 +206,8 @@ def main():
                             v['property_formats'] = dum
                         else:
                             v['property_formats'] = []
+                        if 'multiple' not in v or not v['multiple']:
+                            v['multiple'] = 'false'
                         data['props'][k] = v
                         #
                         
@@ -240,7 +242,8 @@ def main():
                                     'enum': tool['file_types'],
                                     'property_formats': {},
                                     'values': tool['file_types'],
-                                    'optional': 'true'
+                                    'optional': 'true',
+                                    'multiple': 'false'
                                 }
                                 data['files']['output'][tool['name']]['multiple_format'] = param_name
                                 print(f"WARNING: added {param_name} property due to {tool['name']}")
