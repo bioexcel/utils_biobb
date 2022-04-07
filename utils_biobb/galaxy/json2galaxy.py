@@ -7,12 +7,28 @@ import os
 import re
 import sys
 from os.path import join as opj
+from tkinter import W
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from jinja2.exceptions import TemplateSyntaxError
 
-TEMPL = "biobb_galaxy_template.xml"
+TEMPL = "biobb_galaxy_tool_template.xml"
 XML_DIR = "./xml_files"
+SERVER_BASE_DIR = "dev_biobb"
+SECTIONS = {
+    'biobb_io': 'Get Data',
+    'biobb_structure_utils': 'Structure Utils',
+    'biobb_model': 'Modelling',
+    'biobb_cmip' : 'CMIP',
+    'biobb_md': 'Setup and Simulation (GROMACS)',
+    'biobb_amber': 'Setup and Simulation (AMBER)',
+    'biobb_analysis': 'Trajectory analysis',
+    'biobb_dna': 'Nucleic Acids Trajectory analysis',
+    'biobb_chemistry': 'Small molecules',
+    'biobb_pmx': 'PMX Free Energy calculation',
+    'biobb_vs': 'Virtual Screening / Docking',
+    'biobb_ml': 'Machile Learning'
+}
 
 def tool_name(orig):
     data = re.split('_', orig)
@@ -29,7 +45,7 @@ def main():
             * --xml_dir (**str**) Path to directory to place XML output files. 
             * --create_dir (**bool**)  Create biobb group adapter directory (default False)
             * --file_types (**bool**)  Add discovered file types to logs
-            * --tools_xml (**bool**) Generate tools panel XML
+            * --tools_xml (**str**) Generate tools panel XML
     """
     parser = argparse.ArgumentParser(description='Build galaxy adapters.')
     parser.add_argument("--template", default=TEMPL, help="Template for XML galaxy adapter")
@@ -37,7 +53,7 @@ def main():
     parser.add_argument("--create_dir", action="store_true", help="Create biobb package directory if not exists")
     parser.add_argument(dest="base_biobb_dir", help="Json schema from building blocks group")
     parser.add_argument("--file_types", action="store_true", help="List required File Types on log")
-    #parser.add_argument("--tools_xml", action="store_true", help="Generate tools panel XML")
+    parser.add_argument("--tools_xml", action="store", help="Generate tools panel XML")
         
     args = parser.parse_args()
     
@@ -49,11 +65,24 @@ def main():
     
     if not template_dir:
         template_dir='.'
+    
+    if args.tools_xml:
+        try:
+            tools_xml = open(args.tools_xml, "w")
+        except IOError as e:
+            print(e)
+            print("Skipping tools_conf file")
+            args.tools_xml = None
              
     for group in os.listdir(args.base_biobb_dir):
+        write_conf = args.tools_xml and group in SECTIONS
         if not re.search('^biobb', group):
             continue
         print('Building group', group)
+        
+        if write_conf:
+            tools_xml.write(f"<section id=\"{group}\" text=\"{SECTIONS[group]}\" \n")
+        
         # Parsing json schemas
         group_schema = opj(args.base_biobb_dir, group, group, 'json_schemas', group + '.json')
         try:
@@ -215,7 +244,6 @@ def main():
                                 }
                                 data['files']['output'][tool['name']]['multiple_format'] = param_name
                                 print(f"WARNING: added {param_name} property due to {tool['name']}")
-
             env = Environment(
                 loader=FileSystemLoader(template_dir),
                 autoescape=select_autoescape(['xml'])
@@ -229,10 +257,18 @@ def main():
                 output_path = opj(output_path_dir, f"biobb_{data['name']}.xml")
             with open(output_path, "w") as xml_file:
                 xml_file.write(templ.render(data))
-        
-    if args.file_types:
-        for io in file_types:
-            for ty in file_types[io]:
-                print(f"#TYP {ty}\t{io}\t{data['tool_id']}")
+            if write_conf:
+                tools_xml.write(f"  <tool file=\"{SERVER_BASE_DIR}/{group}/biobb_{data['name']}.xml\" />\n")
+            if args.file_types:
+                for io in file_types:
+                    for ty in file_types[io]:
+                        print(f"#TYP {ty}\t{io}\t{data['tool_id']}")
+
+        if write_conf:
+            tools_xml.write("</section>\n")    
+    
+    if args.tools_xml:
+        tools_xml.close()
+            
 if __name__ == '__main__':
     main()
