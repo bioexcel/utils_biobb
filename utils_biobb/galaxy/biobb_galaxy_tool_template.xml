@@ -1,0 +1,180 @@
+<tool id="{{ tool_id }}_ext" name="{{ display_name }}" version="{{ version }}" >
+    <description>: {{ description }}</description>
+    <requirements>
+        <requirement type="package"
+        {% if version -%}
+          version="{{ version }}"
+        {%- endif %}
+        >{{biobb_group}}</requirement>
+    </requirements>
+    <command detect_errors="aggressive"><![CDATA[
+        {% for k in files['input'] %}
+          ln -f -s ${{ '{' }}{{ k }}} ${{ '{' }}{{ k }}}_`echo $$`.${{'{'}}{{k}}.ext};
+        {% endfor %}
+        {% if props -%}
+          #if $config.sele == "option1":
+            ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
+          #end if
+        {%- endif %}
+        
+        {{ name }}
+
+        {% if props -%}
+          #if $config.sele == "option1":
+            --config ${config.properties}.${config.properties.ext}
+          #else if $config.sele == "option2":
+            --config '${config.jsonstr}'
+          #else if $config.sele == "option3":
+            --config '{{config_str|safe}}'
+          #end if
+        {%- endif %}
+        {% for k in files['input'] %}
+          #if str(${{ k }}) != 'None':
+            --{{ k }} ${{ '{' }}{{ k }}}_`echo $$`.${{'{'}}{{k}}.ext}
+          #end if
+        {% endfor %}
+        {% for k in files['output'] %}
+          --{{ k }} $outname_{{ k }}
+        {% endfor %};          
+        {% if props -%}
+          #if $config.sele == "option1":
+            rm -f ${config.properties}_`echo $$`.${config.properties.ext};
+          #end if
+        {%- endif %}
+        {% for k in files['input'] %}
+          rm -f ${{'{'}}{{ k }}}_`echo $$`.${{'{'}}{{ k }}.ext};
+        {% endfor %}
+        {% for k in files['output'] %}
+          if test -f $outname_{{ k }}; then mv $outname_{{ k }} ${{ k }}; fi;
+        {% endfor %}
+    ]]>
+    </command>
+    <inputs>
+        {% for k, v in files['input'].items() %}
+          <param name="{{ k }}" type="data" format="{{ v['format']}}"  optional="{{v['optional']}}" label="{{ v['label'] }} file" help="{{ v['description']}}. Format: [input].{{ v['help_format']}}"/> 
+        {% endfor %}
+        {% for k, v in files['output'].items() %}
+          <param name="outname_{{ k }}" type="text" value="my{{name}}.{{v['file_types'][0]}}" 
+              optional="{{v['optional']}}" label="{{v['label']}} name" 
+              help="{{v['description']}} Format: [output].{{v['help_format']}} "/>
+        {% endfor %}
+        {% if props -%}
+          <conditional name="config">
+            <param name="sele" type="select" label="Take tool settings:" help="Select where tool settings are to be read from">
+              <option value="option3">Manual Input</option>
+              <option value="option1">from configuration file</option>
+              <option value="option2">from JSON string</option>
+            </param>
+            <when value="option1">
+              <param name="properties" type="data" format="yml,json" optional="false" label="Configuration file" help="File containing tool settings. See below for the syntax"/>
+            </when>
+            <when value="option2">
+              <param name="jsonstr" type="text" value="{}" optional="false" label="JSON string" help="JSON string containing tool settings. See below for the syntax"/>
+            </when>
+            <when value="option3">
+            </when>
+          </conditional>
+          <section name="properties" title="Properties Input">
+            {% for k, v in props.items() %}
+              {% if v['type'] == 'string' or v['type'] == 'list' -%}
+                <param name="{{ k }}" type="text" label="{{ k }}" help="{{ v['description'] }}" optional="{{v['optional']}}"
+                  {% if v['default'] -%}
+                    value="{{ v['default']}}" 
+                  {%- endif %}
+                >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param> 
+              {%- elif v['type'] == 'float' or v['type'] == 'integer' -%}
+                <param name="{{ k }}" type="{{v['type']}}" 
+                  {% if v['default'] or v['default'] == 0-%}
+                    value="{{ v['default']}}" 
+                  {%- endif %}
+                  {% if v['min'] -%}
+                    min="{{ v['min'] }}" max="{{ v['max'] }}" 
+                  {%- endif %}
+                  label="{{ k }}" help="{{ v['description']}}" optional="{{v['optional']}}"/> 
+              {%- elif v['type'] == 'select' -%}
+                <param name="{{ k }}" type="select" label="{{ k }}" help="{{ v['description'] }}" multiple="{{v['multiple']}}">
+                  {% for opt in v['values'] %}
+                    <option value="{{ opt }}" 
+                      {% if opt == v['default'] -%}
+                        selected="true"
+                      {%- endif %}
+                    >{{ opt }}
+                       {% if v['property_formats'][opt] and v['property_formats'][opt] != 'None' -%}
+                          - {{ v['property_formats'][opt] }}
+                       {%- endif %}
+                    </option>
+                  {% endfor %}
+                </param>
+              {%- elif v['type'] == 'boolean' -%}
+                <param name="{{ k }}" type="boolean" 
+                  {% if v['default'] == True -%}
+                    checked="true"
+                  {%- endif%}
+                  label="{{ k }}" help="{{ v['description'] }}" 
+                /> 
+              {%- elif v['type'] == 'object'-%}
+                <param name="{{ k }}" type="text" label="{{ k }}" help="{{ v['description'] }} (Json)" value="{}">
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param> 
+              {%- elif v['type'] == 'array' -%}
+                <param name="{{ k }}" type="text" label="{{ k }}" help="{{ v['description'] }} (Json)" value="[]" >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>  
+              {%- endif %}
+            {% endfor %}        
+          </section>
+       {%- endif %}
+    </inputs>
+    <outputs>
+        {% for k, v in files['output'].items() %}
+        {% if not v['multiple_format'] %}
+          <data name="{{ k }}" format="{{ v['format'] }}" label="${outname_{{ k }}}"/>
+        {%- else -%}
+          <data name="{{ k }}" format="text" label="${outname_{{ k }}}">
+            <change_format>
+            {% for f in v['format'].split(',') %}
+            <when input="properties.{{ v['multiple_format'] }}" value="{{ f }}" format="{{ f }}" />
+            {% endfor %}
+            </change_format>
+          </data>
+        {%- endif %}
+        {% endfor %}
+    </outputs>
+    <tests>
+        <test>
+        </test>
+    </tests>    
+    <help>
+.. class:: infomark
+        
+Check the syntax for the tool parameters at the original library documentation: https://{{ biobb_group }}.readthedocs.io/en/latest
+
+-----
+
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png    
+    :width: 150
+
+**https://mmb.irbbarcelona.org/biobb**
+        
+.. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
+        :width: 150
+        
+**https://bioexcel.eu**
+   </help>
+
+    <citations>
+        <citation type="bibtex">
+            @misc{githubbiobb,
+            author = {Andrio P, Bayarri, G., Hospital A, Gelpi JL},
+            year = {2019-21},
+            title = {biobb: BioExcel building blocks },
+            publisher = {GitHub},
+            journal = {GitHub repository},
+            url = {https://github.com/bioexcel/{{ biobb_group }}},
+            }
+        </citation>
+        <citation type="doi">10.1038/s41597-019-0177-4</citation>
+    </citations>
+</tool>
