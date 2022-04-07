@@ -34,10 +34,10 @@ def main():
     parser = argparse.ArgumentParser(description='Build galaxy adapters.')
     parser.add_argument("--template", default=TEMPL, help="Template for XML galaxy adapter")
     parser.add_argument("--xml_dir", default=XML_DIR, help="Path to place output XML recipes")
-    parser.add_argument("--create_dir", action="store_true", help="Create biobb directory")
+    parser.add_argument("--create_dir", action="store_true", help="Create biobb package directory if not exists")
     parser.add_argument(dest="base_biobb_dir", help="Json schema from building blocks group")
-    parser.add_argument("--file_types", action="store_true", help="Get File Types list")
-    parser.add_argument("--tools_xml", action="store_true", help="Generate tools panel XML")
+    parser.add_argument("--file_types", action="store_true", help="List required File Types on log")
+    #parser.add_argument("--tools_xml", action="store_true", help="Generate tools panel XML")
         
     args = parser.parse_args()
     
