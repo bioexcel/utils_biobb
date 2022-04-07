@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__features__dq__:${properties.features},__dq__target__dq__:${properties.target},__dq__weight__dq__:${properties.weight},__dq__validation_size__dq__:${properties.validation_size},__dq__test_size__dq__:${properties.test_size},__dq__hidden_layers__dq__:${properties.hidden_layers},__dq__output_layer_activation__dq__:__dq__${properties.output_layer_activation}__dq__,__dq__optimizer__dq__:__dq__${properties.optimizer}__dq__,__dq__learning_rate__dq__:${properties.learning_rate},__dq__batch_size__dq__:${properties.batch_size},__dq__max_epochs__dq__:${properties.max_epochs},__dq__normalize_cm__dq__:${properties.normalize_cm},__dq__random_state__dq__:${properties.random_state},__dq__scale__dq__:${properties.scale}__cc__'
+            --config '__oc____dq__features__dq__:${properties.features},__dq__target__dq__:${properties.target},__dq__weight__dq__:${properties.weight},__dq__validation_size__dq__:${properties.validation_size},__dq__test_size__dq__:${properties.test_size},__dq__hidden_layers__dq__:${properties.hidden_layers},__dq__output_layer_activation__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.output_layer_activation)}__dq____cb__,__dq__optimizer__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.optimizer)}__dq____cb__,__dq__learning_rate__dq__:${properties.learning_rate},__dq__batch_size__dq__:${properties.batch_size},__dq__max_epochs__dq__:${properties.max_epochs},__dq__normalize_cm__dq__:${properties.normalize_cm},__dq__random_state__dq__:${properties.random_state},__dq__scale__dq__:${properties.scale}__cc__'
           #end if
         
           #if str($input_dataset_path) != 'None':
@@ -109,7 +109,7 @@
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
             
-              <param name="output_layer_activation" type="select" label="output_layer_activation" help="Activation function to use in the output layer. " multiple="">
+              <param name="output_layer_activation" type="select" label="output_layer_activation" help="Activation function to use in the output layer. " multiple="false">
                   
                     <option value="sigmoid" 
                       
@@ -137,7 +137,7 @@
                   
                 </param>
             
-              <param name="optimizer" type="select" label="optimizer" help="Name of optimizer instance. " multiple="">
+              <param name="optimizer" type="select" label="optimizer" help="Name of optimizer instance. " multiple="false">
                   
                     <option value="Adadelta" 
                       

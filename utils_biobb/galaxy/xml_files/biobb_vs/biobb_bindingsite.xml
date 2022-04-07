@@ -22,7 +22,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__ligand__dq__:__dq__${properties.ligand}__dq__,__dq__radius__dq__:${properties.radius},__dq__max_num_ligands__dq__:${properties.max_num_ligands},__dq__matrix_name__dq__:__dq__${properties.matrix_name}__dq__,__dq__gap_open__dq__:${properties.gap_open},__dq__gap_extend__dq__:${properties.gap_extend}__cc__'
+            --config '__oc____dq__ligand__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.ligand)}__dq____cb__,__dq__radius__dq__:${properties.radius},__dq__max_num_ligands__dq__:${properties.max_num_ligands},__dq__matrix_name__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.matrix_name)}__dq____cb__,__dq__gap_open__dq__:${properties.gap_open},__dq__gap_extend__dq__:${properties.gap_extend}__cc__'
           #end if
         
           #if str($input_pdb_path) != 'None':
@@ -93,7 +93,7 @@
                   
                   label="max_num_ligands" help="Total number of superimposed ligands to be extracted from the identity cluster. For populated clusters, the restriction avoids to superimpose redundant structures. If 0, all ligands extracted will be considered." optional="false"/>
             
-              <param name="matrix_name" type="select" label="matrix_name" help="Substitution matrices for use in alignments. " multiple="">
+              <param name="matrix_name" type="select" label="matrix_name" help="Substitution matrices for use in alignments. " multiple="false">
                   
                     <option value="benner6" 
                       

@@ -28,7 +28,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__execution_type__dq__:__dq__${properties.execution_type}__dq__,__dq__box_size_factor__dq__:${properties.box_size_factor},__dq__params__dq__:${properties.params},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
+            --config '__oc____dq__execution_type__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.execution_type)}__dq____cb__,__dq__box_size_factor__dq__:${properties.box_size_factor},__dq__params__dq__:${properties.params},__dq__binary_path__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.binary_path)}__dq____cb____cc__'
           #end if
         
           #if str($input_pdb_path) != 'None':
@@ -155,7 +155,7 @@
           </conditional>
           <section name="properties" title="Properties Input">
             
-              <param name="execution_type" type="select" label="execution_type" help="Default options for the params file, each one creates a different params file. " multiple="">
+              <param name="execution_type" type="select" label="execution_type" help="Default options for the params file, each one creates a different params file. " multiple="false">
                   
                     <option value="check_only" 
                       

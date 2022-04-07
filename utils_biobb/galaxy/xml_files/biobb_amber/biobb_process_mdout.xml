@@ -67,7 +67,7 @@
           </conditional>
           <section name="properties" title="Properties Input">
             
-              <param name="terms" type="select" label="terms" help="Statistics descriptors. " multiple="True">
+              <param name="terms" type="select" label="terms" help="Statistics descriptors. " multiple="true">
                   
                     <option value="VOLUME" 
                       
@@ -137,7 +137,7 @@
                   
                 </param>
             
-              <param name="output_format" type="select" label="output_format" help="Format of the output file" multiple="">
+              <param name="output_format" type="select" label="output_format" help="Format of the output file" multiple="false">
                   
                     <option value="dat" 
                       

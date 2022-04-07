@@ -123,7 +123,7 @@
           </conditional>
           <section name="properties" title="Properties Input">
             
-              <param name="forcefield" type="select" label="forcefield" help="Forcefield to be used for the structure generation. " multiple="True">
+              <param name="forcefield" type="select" label="forcefield" help="Forcefield to be used for the structure generation. " multiple="true">
                   
                     <option value="protein.ff14SB" 
                       
@@ -163,7 +163,7 @@
                   
                 </param>
             
-              <param name="output_top_path_format" type="select" label="output_top_path_format" help="Format of the output file" multiple="">
+              <param name="output_top_path_format" type="select" label="output_top_path_format" help="Format of the output file" multiple="false">
                   
                     <option value="top" 
                       
@@ -185,7 +185,7 @@
                   
                 </param>
             
-              <param name="output_crd_path_format" type="select" label="output_crd_path_format" help="Format of the output file" multiple="">
+              <param name="output_crd_path_format" type="select" label="output_crd_path_format" help="Format of the output file" multiple="false">
                   
                     <option value="crd" 
                       

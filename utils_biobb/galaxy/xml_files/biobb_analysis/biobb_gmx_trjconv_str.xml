@@ -24,7 +24,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__selection__dq__:__dq__${properties.selection}__dq__,__dq__gmx_path__dq__:__dq__${properties.gmx_path}__dq____cc__'
+            --config '__oc____dq__selection__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.selection)}__dq____cb__,__dq__gmx_path__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.gmx_path)}__dq____cb____cc__'
           #end if
         
           #if str($input_structure_path) != 'None':
@@ -87,7 +87,7 @@
           </conditional>
           <section name="properties" title="Properties Input">
             
-              <param name="selection" type="select" label="selection" help="Group where the trjconv will be performed. If **input_index_path** provided, check the file for the accepted values. " multiple="">
+              <param name="selection" type="select" label="selection" help="Group where the trjconv will be performed. If **input_index_path** provided, check the file for the accepted values. " multiple="false">
                   
                     <option value="System" 
                       selected="true"
@@ -211,7 +211,7 @@
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
             
-              <param name="output_format" type="select" label="output_format" help="Format of the output file" multiple="">
+              <param name="output_format" type="select" label="output_format" help="Format of the output file" multiple="false">
                   
                     <option value="pdb" 
                       

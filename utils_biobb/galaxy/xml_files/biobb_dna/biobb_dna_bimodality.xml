@@ -22,7 +22,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__helpar_name__dq__:__dq__${properties.helpar_name}__dq__,__dq__confidence_level__dq__:${properties.confidence_level},__dq__max_iter__dq__:${properties.max_iter},__dq__tol__dq__:${properties.tol}__cc__'
+            --config '__oc____dq__helpar_name__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.helpar_name)}__dq____cb__,__dq__confidence_level__dq__:${properties.confidence_level},__dq__max_iter__dq__:${properties.max_iter},__dq__tol__dq__:${properties.tol}__cc__'
           #end if
         
           #if str($input_csv_file) != 'None':

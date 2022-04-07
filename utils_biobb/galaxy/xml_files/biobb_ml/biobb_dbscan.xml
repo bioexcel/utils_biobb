@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__predictors__dq__:${properties.predictors},__dq__eps__dq__:${properties.eps},__dq__min_samples__dq__:${properties.min_samples},__dq__metric__dq__:__dq__${properties.metric}__dq__,__dq__plots__dq__:${properties.plots},__dq__scale__dq__:${properties.scale}__cc__'
+            --config '__oc____dq__predictors__dq__:${properties.predictors},__dq__eps__dq__:${properties.eps},__dq__min_samples__dq__:${properties.min_samples},__dq__metric__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.metric)}__dq____cb__,__dq__plots__dq__:${properties.plots},__dq__scale__dq__:${properties.scale}__cc__'
           #end if
         
           #if str($input_dataset_path) != 'None':
@@ -89,7 +89,7 @@
                   min="1" max="100"
                   label="min_samples" help="The number of samples (or total weight) in a neighborhood for a point to be considered as a core point. This includes the point itself." optional="false"/>
             
-              <param name="metric" type="select" label="metric" help="The metric to use when calculating distance between instances in a feature array. " multiple="">
+              <param name="metric" type="select" label="metric" help="The metric to use when calculating distance between instances in a feature array. " multiple="false">
                   
                     <option value="cityblock" 
                       

@@ -22,7 +22,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__boolean_property__dq__:${properties.boolean_property},__dq__executable_binary_property__dq__:__dq__${properties.executable_binary_property}__dq____cc__'
+            --config '__oc____dq__boolean_property__dq__:${properties.boolean_property},__dq__executable_binary_property__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.executable_binary_property)}__dq____cb____cc__'
           #end if
         
           #if str($input_file_path1) != 'None':

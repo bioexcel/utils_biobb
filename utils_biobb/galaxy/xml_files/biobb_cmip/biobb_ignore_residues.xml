@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__residue_list__dq__:__dq__${properties.residue_list}__dq__,__dq__ignore_all__dq__:${properties.ignore_all}__cc__'
+            --config '__oc____dq__residue_list__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.residue_list)}__dq____cb__,__dq__ignore_all__dq__:${properties.ignore_all}__cc__'
           #end if
         
           #if str($input_cmip_pdb_path) != 'None':

@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__min_radius__dq__:${properties.min_radius},__dq__max_radius__dq__:${properties.max_radius},__dq__num_spheres__dq__:${properties.num_spheres},__dq__sort_by__dq__:__dq__${properties.sort_by}__dq__,__dq__fpocket_path__dq__:__dq__${properties.fpocket_path}__dq____cc__'
+            --config '__oc____dq__min_radius__dq__:${properties.min_radius},__dq__max_radius__dq__:${properties.max_radius},__dq__num_spheres__dq__:${properties.num_spheres},__dq__sort_by__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.sort_by)}__dq____cb__,__dq__fpocket_path__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.fpocket_path)}__dq____cb____cc__'
           #end if
         
           #if str($input_pdb_path) != 'None':
@@ -90,7 +90,7 @@
                   min="1" max="1000"
                   label="num_spheres" help="Indicates how many alpha spheres a pocket must contain at least in order to figure in the results." optional="true"/>
             
-              <param name="sort_by" type="select" label="sort_by" help="From which property the output will be sorted. " multiple="">
+              <param name="sort_by" type="select" label="sort_by" help="From which property the output will be sorted. " multiple="false">
                   
                     <option value="druggability_score" 
                       selected="true"

@@ -18,7 +18,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__ligand_code__dq__:__dq__${properties.ligand_code}__dq__,__dq__api_id__dq__:__dq__${properties.api_id}__dq____cc__'
+            --config '__oc____dq__ligand_code__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.ligand_code)}__dq____cb__,__dq__api_id__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.api_id)}__dq____cb____cc__'
           #end if
         
         
@@ -63,7 +63,7 @@
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
             
-              <param name="api_id" type="select" label="api_id" help="Identifier of the PDB REST API from which the SDF structure will be downloaded. " multiple="">
+              <param name="api_id" type="select" label="api_id" help="Identifier of the PDB REST API from which the SDF structure will be downloaded. " multiple="false">
                   
                     <option value="pdbe" 
                       selected="true"

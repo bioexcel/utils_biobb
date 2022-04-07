@@ -28,7 +28,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__forcefield__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.forcefield)}__dq____cb__,__dq__water_type__dq__:__dq__${properties.water_type}__dq__,__dq__box_type__dq__:__dq__${properties.box_type}__dq__,__dq__ions_type__dq__:__dq__${properties.ions_type}__dq__,__dq__neutralise__dq__:${properties.neutralise},__dq__iso__dq__:${properties.iso},__dq__positive_ions_number__dq__:${properties.positive_ions_number},__dq__negative_ions_number__dq__:${properties.negative_ions_number},__dq__positive_ions_type__dq__:__dq__${properties.positive_ions_type}__dq__,__dq__negative_ions_type__dq__:__dq__${properties.negative_ions_type}__dq__,__dq__distance_to_molecule__dq__:${properties.distance_to_molecule},__dq__closeness__dq__:${properties.closeness}__cc__'
+            --config '__oc____dq__forcefield__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.forcefield)}__dq____cb__,__dq__water_type__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.water_type)}__dq____cb__,__dq__box_type__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.box_type)}__dq____cb__,__dq__ions_type__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.ions_type)}__dq____cb__,__dq__neutralise__dq__:${properties.neutralise},__dq__iso__dq__:${properties.iso},__dq__positive_ions_number__dq__:${properties.positive_ions_number},__dq__negative_ions_number__dq__:${properties.negative_ions_number},__dq__positive_ions_type__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.positive_ions_type)}__dq____cb__,__dq__negative_ions_type__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.negative_ions_type)}__dq____cb__,__dq__distance_to_molecule__dq__:${properties.distance_to_molecule},__dq__closeness__dq__:${properties.closeness}__cc__'
           #end if
         
           #if str($input_pdb_path) != 'None':
@@ -123,7 +123,7 @@
           </conditional>
           <section name="properties" title="Properties Input">
             
-              <param name="forcefield" type="select" label="forcefield" help="Forcefield to be used for the structure generation. " multiple="True">
+              <param name="forcefield" type="select" label="forcefield" help="Forcefield to be used for the structure generation. " multiple="true">
                   
                     <option value="protein.ff14SB" 
                       
@@ -163,7 +163,7 @@
                   
                 </param>
             
-              <param name="water_type" type="select" label="water_type" help="Water molecule parameters to be used for the topology. " multiple="">
+              <param name="water_type" type="select" label="water_type" help="Water molecule parameters to be used for the topology. " multiple="false">
                   
                     <option value="POL3BOX" 
                       
@@ -233,7 +233,7 @@
                   
                 </param>
             
-              <param name="box_type" type="select" label="box_type" help="Type for the MD system box. " multiple="">
+              <param name="box_type" type="select" label="box_type" help="Type for the MD system box. " multiple="false">
                   
                     <option value="cubic" 
                       
@@ -249,7 +249,7 @@
                   
                 </param>
             
-              <param name="ions_type" type="select" label="ions_type" help="Ions type. " multiple="">
+              <param name="ions_type" type="select" label="ions_type" help="Ions type. " multiple="false">
                   
                     <option value="ionsjc_tip3p" 
                       selected="true"
@@ -309,7 +309,7 @@
                   
                   label="negative_ions_number" help="Number of additional negative ions to include in the system box." optional="true"/>
             
-              <param name="positive_ions_type" type="select" label="positive_ions_type" help="Type of additional positive ions to include in the system box. " multiple="">
+              <param name="positive_ions_type" type="select" label="positive_ions_type" help="Type of additional positive ions to include in the system box. " multiple="false">
                   
                     <option value="Na+" 
                       selected="true"
@@ -325,7 +325,7 @@
                   
                 </param>
             
-              <param name="negative_ions_type" type="select" label="negative_ions_type" help="Type of additional negative ions to include in the system box. " multiple="">
+              <param name="negative_ions_type" type="select" label="negative_ions_type" help="Type of additional negative ions to include in the system box. " multiple="false">
                   
                     <option value="Cl-" 
                       selected="true"
@@ -345,7 +345,7 @@
                   
                   label="closeness" help="How close, in Å, solvent ATOMs may come to solute ATOMs." optional="false"/>
             
-              <param name="output_top_path_format" type="select" label="output_top_path_format" help="Format of the output file" multiple="">
+              <param name="output_top_path_format" type="select" label="output_top_path_format" help="Format of the output file" multiple="false">
                   
                     <option value="top" 
                       
@@ -367,7 +367,7 @@
                   
                 </param>
             
-              <param name="output_crd_path_format" type="select" label="output_crd_path_format" help="Format of the output file" multiple="">
+              <param name="output_crd_path_format" type="select" label="output_crd_path_format" help="Format of the output file" multiple="false">
                   
                     <option value="crd" 
                       

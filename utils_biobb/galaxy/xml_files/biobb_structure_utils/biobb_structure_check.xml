@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__features__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.features)}__dq____cb__,__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
+            --config '__oc____dq__features__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.features)}__dq____cb__,__dq__binary_path__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.binary_path)}__dq____cb____cc__'
           #end if
         
           #if str($input_structure_path) != 'None':
@@ -67,7 +67,7 @@
           </conditional>
           <section name="properties" title="Properties Input">
             
-              <param name="features" type="select" label="features" help="Features to summarize. If None, all the features will be computed. " multiple="True">
+              <param name="features" type="select" label="features" help="Features to summarize. If None, all the features will be computed. " multiple="true">
                   
                     <option value="models" 
                       

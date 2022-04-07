@@ -28,7 +28,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__mdin__dq__:${properties.mdin},__dq__simulation_type__dq__:__dq__${properties.simulation_type}__dq__,__dq__sander_path__dq__:__dq__${properties.sander_path}__dq__,__dq__mpi_bin__dq__:__dq__${properties.mpi_bin}__dq__,__dq__mpi_np__dq__:${properties.mpi_np},__dq__mpi_flags__dq__:__dq__${properties.mpi_flags}__dq____cc__'
+            --config '__oc____dq__mdin__dq__:${properties.mdin},__dq__simulation_type__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.simulation_type)}__dq____cb__,__dq__sander_path__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.sander_path)}__dq____cb__,__dq__mpi_bin__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.mpi_bin)}__dq____cb__,__dq__mpi_np__dq__:${properties.mpi_np},__dq__mpi_flags__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.mpi_flags)}__dq____cb____cc__'
           #end if
         
           #if str($input_top_path) != 'None':
@@ -151,7 +151,7 @@
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
             
-              <param name="simulation_type" type="select" label="simulation_type" help="Default options for the mdin file. Each creates a different mdin file. " multiple="">
+              <param name="simulation_type" type="select" label="simulation_type" help="Default options for the mdin file. Each creates a different mdin file. " multiple="false">
                   
                     <option value="minimization" 
                       selected="true"
@@ -214,7 +214,7 @@
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
             
-              <param name="output_log_path_format" type="select" label="output_log_path_format" help="Format of the output file" multiple="">
+              <param name="output_log_path_format" type="select" label="output_log_path_format" help="Format of the output file" multiple="false">
                   
                     <option value="log" 
                       
@@ -242,7 +242,7 @@
                   
                 </param>
             
-              <param name="output_traj_path_format" type="select" label="output_traj_path_format" help="Format of the output file" multiple="">
+              <param name="output_traj_path_format" type="select" label="output_traj_path_format" help="Format of the output file" multiple="false">
                   
                     <option value="trj" 
                       
@@ -282,7 +282,7 @@
                   
                 </param>
             
-              <param name="output_rst_path_format" type="select" label="output_rst_path_format" help="Format of the output file" multiple="">
+              <param name="output_rst_path_format" type="select" label="output_rst_path_format" help="Format of the output file" multiple="false">
                   
                     <option value="rst" 
                       
@@ -316,7 +316,7 @@
                   
                 </param>
             
-              <param name="output_cprst_path_format" type="select" label="output_cprst_path_format" help="Format of the output file" multiple="">
+              <param name="output_cprst_path_format" type="select" label="output_cprst_path_format" help="Format of the output file" multiple="false">
                   
                     <option value="cprst" 
                       
