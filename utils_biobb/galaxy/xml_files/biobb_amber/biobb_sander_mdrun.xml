@@ -28,7 +28,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__mdin__dq__:${properties.mdin},__dq__simulation_type__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.simulation_type)}__dq____cb__,__dq__sander_path__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.sander_path)}__dq____cb__,__dq__mpi_bin__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.mpi_bin)}__dq____cb__,__dq__mpi_np__dq__:${properties.mpi_np},__dq__mpi_flags__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.mpi_flags)}__dq____cb____cc__'
+            --config '__oc____dq__mdin__dq__:${properties.mdin},__dq__simulation_type__dq__:__dq__${properties.simulation_type}__dq__,__dq__sander_path__dq__:__dq__${properties.sander_path}__dq__,__dq__mpi_bin__dq__:__dq__${properties.mpi_bin}__dq__,__dq__mpi_np__dq__:${properties.mpi_np},__dq__mpi_flags__dq__:__dq__${properties.mpi_flags}__dq____cc__'
           #end if
         
           #if str($input_top_path) != 'None':

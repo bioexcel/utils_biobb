@@ -24,7 +24,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__bases__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.bases)}__dq____cb__,__dq__type__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.type)}__dq____cb__,__dq__dlow__dq__:${properties.dlow},__dq__dhig__dq__:${properties.dhig},__dq__rlow__dq__:${properties.rlow},__dq__rhig__dq__:${properties.rhig},__dq__alow__dq__:${properties.alow},__dq__ahig__dq__:${properties.ahig},__dq__itst__dq__:${properties.itst},__dq__itnd__dq__:${properties.itnd},__dq__itdel__dq__:${properties.itdel},__dq__rmsf__dq__:${properties.rmsf},__dq__circ__dq__:${properties.circ},__dq__canion_exec__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.canion_exec)}__dq____cb____cc__'
+            --config '__oc____dq__bases__dq__:__dq__${properties.bases}__dq__,__dq__type__dq__:__dq__${properties.type}__dq__,__dq__dlow__dq__:${properties.dlow},__dq__dhig__dq__:${properties.dhig},__dq__rlow__dq__:${properties.rlow},__dq__rhig__dq__:${properties.rhig},__dq__alow__dq__:${properties.alow},__dq__ahig__dq__:${properties.ahig},__dq__itst__dq__:${properties.itst},__dq__itnd__dq__:${properties.itnd},__dq__itdel__dq__:${properties.itdel},__dq__rmsf__dq__:${properties.rmsf},__dq__circ__dq__:${properties.circ},__dq__canion_exec__dq__:__dq__${properties.canion_exec}__dq____cc__'
           #end if
         
           #if str($input_cdi_path) != 'None':

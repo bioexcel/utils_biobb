@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__predictors__dq__:${properties.predictors},__dq__max_clusters__dq__:${properties.max_clusters},__dq__affinity__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.affinity)}__dq____cb__,__dq__linkage__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.linkage)}__dq____cb__,__dq__scale__dq__:${properties.scale}__cc__'
+            --config '__oc____dq__predictors__dq__:${properties.predictors},__dq__max_clusters__dq__:${properties.max_clusters},__dq__affinity__dq__:__dq__${properties.affinity}__dq__,__dq__linkage__dq__:__dq__${properties.linkage}__dq__,__dq__scale__dq__:${properties.scale}__cc__'
           #end if
         
           #if str($input_dataset_path) != 'None':

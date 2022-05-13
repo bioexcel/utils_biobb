@@ -22,7 +22,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__s1range__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.s1range)}__dq____cb__,__dq__s2range__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.s2range)}__dq____cb__,__dq__stdlib_path__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.stdlib_path)}__dq____cb__,__dq__itst__dq__:${properties.itst},__dq__itnd__dq__:${properties.itnd},__dq__itdel__dq__:${properties.itdel},__dq__ions__dq__:${properties.ions},__dq__test__dq__:${properties.test},__dq__line__dq__:${properties.line},__dq__fit__dq__:${properties.fit},__dq__axfrm__dq__:${properties.axfrm},__dq__curves_exec__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.curves_exec)}__dq____cb____cc__'
+            --config '__oc____dq__s1range__dq__:__dq__${properties.s1range}__dq__,__dq__s2range__dq__:__dq__${properties.s2range}__dq__,__dq__stdlib_path__dq__:__dq__${properties.stdlib_path}__dq__,__dq__itst__dq__:${properties.itst},__dq__itnd__dq__:${properties.itnd},__dq__itdel__dq__:${properties.itdel},__dq__ions__dq__:${properties.ions},__dq__test__dq__:${properties.test},__dq__line__dq__:${properties.line},__dq__fit__dq__:${properties.fit},__dq__axfrm__dq__:${properties.axfrm},__dq__curves_exec__dq__:__dq__${properties.curves_exec}__dq____cc__'
           #end if
         
           #if str($input_struc_path) != 'None':

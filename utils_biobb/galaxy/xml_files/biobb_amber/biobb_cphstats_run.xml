@@ -22,7 +22,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__timestep__dq__:${properties.timestep},__dq__verbose__dq__:${properties.verbose},__dq__interval__dq__:${properties.interval},__dq__protonated__dq__:${properties.protonated},__dq__pka__dq__:${properties.pka},__dq__calcpka__dq__:${properties.calcpka},__dq__running_avg_window__dq__:${properties.running_avg_window},__dq__chunk_window__dq__:${properties.chunk_window},__dq__cumulative__dq__:${properties.cumulative},__dq__fix_remd__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.fix_remd)}__dq____cb__,__dq__conditional__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.conditional)}__dq____cb____cc__'
+            --config '__oc____dq__timestep__dq__:${properties.timestep},__dq__verbose__dq__:${properties.verbose},__dq__interval__dq__:${properties.interval},__dq__protonated__dq__:${properties.protonated},__dq__pka__dq__:${properties.pka},__dq__calcpka__dq__:${properties.calcpka},__dq__running_avg_window__dq__:${properties.running_avg_window},__dq__chunk_window__dq__:${properties.chunk_window},__dq__cumulative__dq__:${properties.cumulative},__dq__fix_remd__dq__:__dq__${properties.fix_remd}__dq__,__dq__conditional__dq__:__dq__${properties.conditional}__dq____cc__'
           #end if
         
           #if str($input_cpin_path) != 'None':

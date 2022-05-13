@@ -22,7 +22,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__mutation_list__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.mutation_list)}__dq____cb__,__dq__force_field__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.force_field)}__dq____cb__,__dq__resinfo__dq__:${properties.resinfo},__dq__gmx_lib__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.gmx_lib)}__dq____cb__,__dq__pmx_path__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.pmx_path)}__dq____cb____cc__'
+            --config '__oc____dq__mutation_list__dq__:__dq__${properties.mutation_list}__dq__,__dq__force_field__dq__:__dq__${properties.force_field}__dq__,__dq__resinfo__dq__:${properties.resinfo},__dq__gmx_lib__dq__:__dq__${properties.gmx_lib}__dq__,__dq__pmx_path__dq__:__dq__${properties.pmx_path}__dq____cc__'
           #end if
         
           #if str($input_structure_path) != 'None':

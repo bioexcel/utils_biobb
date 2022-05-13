@@ -18,7 +18,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__sequence__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.sequence)}__dq____cb__,__dq__helix_type__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.helix_type)}__dq____cb__,__dq__compiler__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.compiler)}__dq____cb__,__dq__linker__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.linker)}__dq____cb____cc__'
+            --config '__oc____dq__sequence__dq__:__dq__${properties.sequence}__dq__,__dq__helix_type__dq__:__dq__${properties.helix_type}__dq__,__dq__compiler__dq__:__dq__${properties.compiler}__dq__,__dq__linker__dq__:__dq__${properties.linker}__dq____cc__'
           #end if
         
         
