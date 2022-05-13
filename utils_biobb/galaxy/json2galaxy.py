@@ -81,7 +81,7 @@ def main():
         print('Building group', group)
         
         if write_conf:
-            tools_xml.write(f"<section id=\"{group}\" text=\"{SECTIONS[group]}\" \n")
+            tools_xml.write(f"<section id=\"{group}\" name=\"{SECTIONS[group]}\" >\n")
         
         # Parsing json schemas
         group_schema = opj(args.base_biobb_dir, group, group, 'json_schemas', group + '.json')
@@ -210,10 +210,9 @@ def main():
                             v['multiple'] = 'false'
                         data['props'][k] = v
                         #
-                        
                         # Generating "galaxyfied" Json string for config parameter
                         if v['type'] in ('string', 'select'):
-                            if 'multiple' in v and v['multiple']:
+                            if 'multiple' in v and v['multiple'] != 'false':
                                 # ["${'","'.join($properties.k)}"]
                                 txt = "__ob____dq__${'__dq__,__dq__'.join($properties." + k + ")}__dq____cb__" 
                             else:
