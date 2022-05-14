@@ -14,7 +14,7 @@ from jinja2.exceptions import TemplateSyntaxError
 
 TEMPL = "biobb_galaxy_tool_template.xml"
 XML_DIR = "./xml_files"
-SERVER_BASE_DIR = "dev_biobb"
+SERVER_BASE_DIR = "biobb"
 SECTIONS = {
     'biobb_io': 'Get Data',
     'biobb_structure_utils': 'Structure Utils',
