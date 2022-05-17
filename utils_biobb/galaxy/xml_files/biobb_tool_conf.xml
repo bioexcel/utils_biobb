@@ -1,4 +1,4 @@
-<section id="biobb_vs" HHHname="Virtual Screening / Docking" DDD\>
+<section id="biobb_vs" name="Virtual Screening / Docking" >
   <tool file="biobb/biobb_vs/biobb_autodock_vina_run.xml" />
   <tool file="biobb/biobb_vs/biobb_bindingsite.xml" />
   <tool file="biobb/biobb_vs/biobb_box.xml" />
@@ -8,7 +8,7 @@
   <tool file="biobb/biobb_vs/biobb_fpocket_filter.xml" />
   <tool file="biobb/biobb_vs/biobb_fpocket_select.xml" />
 </section>
-<section id="biobb_io" HHHname="Get Data" DDD\>
+<section id="biobb_io" name="Get Data" >
   <tool file="biobb/biobb_io/biobb_drugbank.xml" />
   <tool file="biobb/biobb_io/biobb_ligand.xml" />
   <tool file="biobb/biobb_io/biobb_pdb.xml" />
@@ -23,7 +23,7 @@
   <tool file="biobb/biobb_io/biobb_ideal_sdf.xml" />
   <tool file="biobb/biobb_io/biobb_structure_info.xml" />
 </section>
-<section id="biobb_ml" HHHname="Machile Learning" DDD\>
+<section id="biobb_ml" name="Machile Learning" >
   <tool file="biobb/biobb_ml/biobb_linear_regression.xml" />
   <tool file="biobb/biobb_ml/biobb_polynomial_regression.xml" />
   <tool file="biobb/biobb_ml/biobb_random_forest_regressor.xml" />
@@ -63,7 +63,7 @@
   <tool file="biobb/biobb_ml/biobb_resampling.xml" />
   <tool file="biobb/biobb_ml/biobb_undersampling.xml" />
 </section>
-<section id="biobb_amber" HHHname="Setup and Simulation (AMBER)" DDD\>
+<section id="biobb_amber" name="Setup and Simulation (AMBER)" >
   <tool file="biobb/biobb_amber/biobb_cpptraj_randomize_ions.xml" />
   <tool file="biobb/biobb_amber/biobb_amber_to_pdb.xml" />
   <tool file="biobb/biobb_amber/biobb_leap_add_ions.xml" />
@@ -81,12 +81,12 @@
   <tool file="biobb/biobb_amber/biobb_cestats_run.xml" />
   <tool file="biobb/biobb_amber/biobb_cphstats_run.xml" />
 </section>
-<section id="biobb_pmx" HHHname="PMX Free Energy calculation" DDD\>
+<section id="biobb_pmx" name="PMX Free Energy calculation" >
   <tool file="biobb/biobb_pmx/biobb_pmxmutate.xml" />
   <tool file="biobb/biobb_pmx/biobb_pmxgentop.xml" />
   <tool file="biobb/biobb_pmx/biobb_pmxanalyse.xml" />
 </section>
-<section id="biobb_chemistry" HHHname="Small molecules" DDD\>
+<section id="biobb_chemistry" name="Small molecules" >
   <tool file="biobb/biobb_chemistry/biobb_acpype_params_ac.xml" />
   <tool file="biobb/biobb_chemistry/biobb_acpype_params_cns.xml" />
   <tool file="biobb/biobb_chemistry/biobb_acpype_params_gmx.xml" />
@@ -98,7 +98,7 @@
   <tool file="biobb/biobb_chemistry/biobb_reduce_add_hydrogens.xml" />
   <tool file="biobb/biobb_chemistry/biobb_reduce_remove_hydrogens.xml" />
 </section>
-<section id="biobb_dna" HHHname="Nucleic Acids Trajectory analysis" DDD\>
+<section id="biobb_dna" name="Nucleic Acids Trajectory analysis" >
   <tool file="biobb/biobb_dna/biobb_biobb_curves.xml" />
   <tool file="biobb/biobb_dna/biobb_biobb_canal.xml" />
   <tool file="biobb/biobb_dna/biobb_biobb_canion.xml" />
@@ -117,14 +117,14 @@
   <tool file="biobb/biobb_dna/biobb_intrahpcorr.xml" />
   <tool file="biobb/biobb_dna/biobb_intraseqcorr.xml" />
 </section>
-<section id="biobb_cmip" HHHname="CMIP" DDD\>
+<section id="biobb_cmip" name="CMIP" >
   <tool file="biobb/biobb_cmip/biobb_cmip.xml" />
   <tool file="biobb/biobb_cmip/biobb_titration.xml" />
   <tool file="biobb/biobb_cmip/biobb_prepare_structure.xml" />
   <tool file="biobb/biobb_cmip/biobb_prepare_pdb.xml" />
   <tool file="biobb/biobb_cmip/biobb_ignore_residues.xml" />
 </section>
-<section id="biobb_structure_utils" HHHname="Structure Utils" DDD\>
+<section id="biobb_structure_utils" name="Structure Utils" >
   <tool file="biobb/biobb_structure_utils/biobb_cat_pdb.xml" />
   <tool file="biobb/biobb_structure_utils/biobb_extract_atoms.xml" />
   <tool file="biobb/biobb_structure_utils/biobb_extract_chain.xml" />
@@ -139,7 +139,7 @@
   <tool file="biobb/biobb_structure_utils/biobb_str_check_add_hydrogens.xml" />
   <tool file="biobb/biobb_structure_utils/biobb_structure_check.xml" />
 </section>
-<section id="biobb_analysis" HHHname="Trajectory analysis" DDD\>
+<section id="biobb_analysis" name="Trajectory analysis" >
   <tool file="biobb/biobb_analysis/biobb_gmx_cluster.xml" />
   <tool file="biobb/biobb_analysis/biobb_gmx_rms.xml" />
   <tool file="biobb/biobb_analysis/biobb_gmx_rgyr.xml" />
@@ -161,7 +161,7 @@
   <tool file="biobb/biobb_analysis/biobb_cpptraj_mask.xml" />
   <tool file="biobb/biobb_analysis/biobb_cpptraj_image.xml" />
 </section>
-<section id="biobb_md" HHHname="Setup and Simulation (GROMACS)" DDD\>
+<section id="biobb_md" name="Setup and Simulation (GROMACS)" >
   <tool file="biobb/biobb_md/biobb_pdb2gmx.xml" />
   <tool file="biobb/biobb_md/biobb_editconf.xml" />
   <tool file="biobb/biobb_md/biobb_genion.xml" />
@@ -175,7 +175,7 @@
   <tool file="biobb/biobb_md/biobb_ndx2resttop.xml" />
   <tool file="biobb/biobb_md/biobb_append_ligand.xml" />
 </section>
-<section id="biobb_model" HHHname="Modelling" DDD\>
+<section id="biobb_model" name="Modelling" >
   <tool file="biobb/biobb_model/biobb_fix_side_chain.xml" />
   <tool file="biobb/biobb_model/biobb_fix_backbone.xml" />
   <tool file="biobb/biobb_model/biobb_mutate.xml" />
