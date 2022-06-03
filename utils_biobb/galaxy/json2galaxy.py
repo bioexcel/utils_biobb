@@ -188,16 +188,19 @@ def main():
                                   [f]['filetype']][f] = tool_data
                     if f in test_conf[data['name']]['paths']:
                         if schema_data['properties'][f]['filetype'] == 'input':
-                            test_prefix = 'param'
-                            dir = ''
+                            data['test']['param'].append (
+                                {
+                                    'name': f, 
+                                    'value': opj(group, test_conf[data['name']]['paths'][f].replace('file:test_data_dir/',''))
+                                }
+                            )
                         else:
-                            test_prefix = 'output'
-                            dir = data['name']
-                        data['test'][test_prefix].append (
-                            {
-                                'name': f, 
-                                'value': opj(group, dir, test_conf[data['name']]['paths'][f].replace('file:test_data_dir/',''))}
-                        )
+                            data['test']['output'].append (
+                                {
+                                    'name': f, 
+                                    'file': opj(group, data['tool'], test_conf[data['name']]['paths'][f])
+                                }
+                            )
 
 
                 else:
