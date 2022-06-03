@@ -1,2 +1,2 @@
-python json2galaxy.py --template biobb_galaxy_tool_template.xml --tools_xml xml_files/biobb_tool_conf.xml --create_dir --file_types ../../../ > update.log
+python json2galaxy.py --template biobb_galaxy_tool_template.xml --tools_xml xml_files/biobb_tool_conf.xml --file_types ../../../ > update.log
 grep '#TYP' update.log > data_types.log 
