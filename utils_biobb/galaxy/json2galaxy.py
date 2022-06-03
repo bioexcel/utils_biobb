@@ -3,6 +3,8 @@
 import argparse
 from itertools import count
 import json
+import yaml
+from yaml import Loader
 import os
 import re
 import sys
@@ -41,7 +43,7 @@ def main():
                       [--id ID] [--display_name DISPLAY_NAME] [--create_dir]
                       base_biobb_dir
         positional arguments:                                                                    
-            * base_biobb_dir (**str**)      Path to biobb's folder
+            * base_biobb_dir (**str**)      Path to biobb's root folder
         optional arguments:
             * --template (**str**)  Path to Template for XML galaxy adapter (xml) (default: biobb_galaxy_template.xml)
             * --xml_dir (**str**) Path to directory to place XML output files. 
@@ -107,6 +109,14 @@ def main():
             'version': schema_group_data['version'],
             'blocks': schema_group_data['tools']
         }
+        # loading Test Conf file
+        test_conf_file = opj(args.base_biobb_dir, group, group, 'test', 'conf.yml')
+        try:
+            with open(test_conf_file, 'r') as test_yaml:
+                test_conf = yaml.load(test_yaml, Loader=Loader)
+        except IOError as err:
+            print(err, file=sys.stderr)
+            continue
 
         for block in group_data['blocks']:
             if 'exec' not in block:
@@ -123,10 +133,11 @@ def main():
 
             # Getting data components from schema
 
-            data = {'files': {'input': {}, 'output': {}}, 'props': {}}
+            data = {'files': {'input': {}, 'output': {}}, 'props': {}, 'test': {'param':[], 'output':[]}}
 
             # Extracting tool name and group from schema $id to generate defaults
             data['name'] = block['exec']
+            data['tool'] = block['tool']
             data['display_name'] = tool_name(data['name'])
 
             data['biobb_group'] = group_data['id']
@@ -140,7 +151,7 @@ def main():
 
             if args.file_types:
                 file_types = {'input': set(), 'output': set()}
-
+            
             for f in schema_data['properties']:
                 if f != 'properties':
                     # Parsing input and output files
@@ -175,6 +186,19 @@ def main():
 
                     data['files'][schema_data['properties']
                                   [f]['filetype']][f] = tool_data
+                    if f in test_conf[data['name']]['paths']:
+                        if schema_data['properties'][f]['filetype'] == 'input':
+                            test_prefix = 'param'
+                            dir = ''
+                        else:
+                            test_prefix = 'output'
+                            dir = data['name']
+                        data['test'][test_prefix].append (
+                            {
+                                'name': f, 
+                                'value': opj(group, dir, test_conf[data['name']]['paths'][f].replace('file:test_data_dir/',''))}
+                        )
+
 
                 else:
                     # Parsing properties
@@ -236,6 +260,10 @@ def main():
                         else:
                             props_str.append(
                                 "__dq__" + k + "__dq__:${properties." + k + "}")
+                        if k in test_conf[data['name']]['properties']:
+                            data['test']['param'].append (
+                            {'name': k, 'value': test_conf[data['name']]['properties'][k]}
+                        )
 
                     data['config_str'] = "__oc__" + \
                         ",".join(props_str) + "__cc__"
@@ -263,6 +291,9 @@ def main():
                                                         ]['multiple_format'] = param_name
                                 print(
                                     f"WARNING: added {param_name} property due to {tool['name']}")
+
+                #Tests
+            print(data['test'])
             env = Environment(
                 loader=FileSystemLoader(template_dir),
                 autoescape=select_autoescape(['xml'])

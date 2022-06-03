@@ -144,6 +144,12 @@
     </outputs>
     <tests>
         <test>
+        {% for prm in test['param'] %}
+        <param name="{{ prm['name'] }}" value="{{ prm['value']}}" />
+        {% endfor %}
+        {% for out in test['output'] %}
+        <output name="{{ out['name'] }}" value="{{ out['value']}}" />
+        {% endfor %}
         </test>
     </tests>    
     <help>
