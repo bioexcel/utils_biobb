@@ -32,6 +32,10 @@ SECTIONS = {
     'biobb_ml': 'Machile Learning'
 }
 
+TRANS_TOOLS = {
+    'API Call' : 'api'
+}
+
 
 def tool_name(orig):
     data = re.split('_', orig)
@@ -138,6 +142,9 @@ def main():
             # Extracting tool name and group from schema $id to generate defaults
             data['name'] = block['exec']
             data['tool'] = block['tool']
+            if data['tool'] in TRANS_TOOLS:
+                data['tool'] = TRANS_TOOLS[data['tool']]
+                                           
             data['display_name'] = tool_name(data['name'])
 
             data['biobb_group'] = group_data['id']
@@ -186,21 +193,47 @@ def main():
 
                     data['files'][schema_data['properties']
                                   [f]['filetype']][f] = tool_data
-                    if f in test_conf[data['name']]['paths']:
-                        if schema_data['properties'][f]['filetype'] == 'input':
-                            data['test']['param'].append (
-                                {
-                                    'name': f, 
-                                    'value': opj(group, test_conf[data['name']]['paths'][f].replace('file:test_data_dir/',''))
-                                }
-                            )
-                        else:
+                    if f in test_conf[data['name']]['paths'] and schema_data['properties'][f]['filetype'] == 'input':
+                        data['test']['param'].append (
+                            {
+                                'name': f, 
+                                'value': opj(group, test_conf[data['name']]['paths'][f].replace('file:test_data_dir/',''))
+                            }
+                        )
+                    if schema_data['properties'][f]['filetype'] == 'output':
+                        
+
+                        if 'ref_' + f in test_conf[data['name']]['paths']:
                             data['test']['output'].append (
                                 {
                                     'name': f, 
-                                    'file': opj(group, data['tool'], test_conf[data['name']]['paths'][f])
+                                    'file': opj(
+                                            group, 
+                                            test_conf[data['name']]['paths']['ref_' + f].replace('file:test_reference_dir/', '')
+                                    )
                                 }
                             )
+                        if 'reference_' + f in test_conf[data['name']]['paths']:
+                            data['test']['output'].append (
+                                {
+                                    'name': f, 
+                                    'file': opj(
+                                            group, 
+                                            test_conf[data['name']]['paths']['reference_' + f].replace('file:test_reference_dir/', '')
+                                    )
+                                }
+                            )
+                        elif f in test_conf[data['name']]['paths']:
+                            data['test']['output'].append (
+                                {
+                                    'name': f, 
+                                    'file': opj(
+                                        group, 
+                                        data['tool'], 
+                                        test_conf[data['name']]['paths'][f]
+                                    )
+                                }
+                        ) 
 
 
                 else:
@@ -295,8 +328,6 @@ def main():
                                 print(
                                     f"WARNING: added {param_name} property due to {tool['name']}")
 
-                #Tests
-            print(data['test'])
             env = Environment(
                 loader=FileSystemLoader(template_dir),
                 autoescape=select_autoescape(['xml'])
