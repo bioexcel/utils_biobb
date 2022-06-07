@@ -13,10 +13,11 @@ set galaxy=`pwd`
 set test_data=$galaxy/test-data
 cd $root_dir
 foreach f (biobb*)
-  if (-e $f/$f/test) then
+  if (-e $f/$f/test/data) then
     rsync -a --exclude=config $root_dir/$f/$f/test/data/ $test_data/$f
     rsync -a $root_dir/$f/$f/test/reference/ $test_data/$f
   endif
 end
 cd $galaxy
+echo "Done"
 
