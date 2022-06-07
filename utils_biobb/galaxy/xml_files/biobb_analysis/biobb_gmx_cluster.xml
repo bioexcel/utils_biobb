@@ -446,6 +446,28 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_structure_path" value="biobb_analysis/gromacs/topology.tpr" />
+        
+        <param name="input_traj_path" value="biobb_analysis/gromacs/trajectory.trr" />
+        
+        <param name="input_index_path" value="biobb_analysis/gromacs/index.ndx" />
+        
+        <param name="fit_selection" value="System" />
+        
+        <param name="output_selection" value="System" />
+        
+        <param name="dista" value="False" />
+        
+        <param name="method" value="linkage" />
+        
+        <param name="cutoff" value="0.1" />
+        
+        
+        <output name="output_pdb_path" file="biobb_analysis/gromacs/ref_cluster.pdb" />
+        
+        <output name="output_pdb_path" file="biobb_analysis/gmx cluster/output_pdb.pdb" />
+        
         </test>
     </tests>    
     <help>

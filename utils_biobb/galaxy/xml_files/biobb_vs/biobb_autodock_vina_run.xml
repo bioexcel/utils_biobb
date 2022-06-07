@@ -114,6 +114,22 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_ligand_pdbqt_path" value="biobb_vs/vina/vina_ligand.pdbqt" />
+        
+        <param name="input_receptor_pdbqt_path" value="biobb_vs/vina/vina_receptor.pdbqt" />
+        
+        <param name="input_box_path" value="biobb_vs/vina/vina_box.pdb" />
+        
+        
+        <output name="output_pdbqt_path" file="biobb_vs/vina/ref_output_vina.pdbqt" />
+        
+        <output name="output_pdbqt_path" file="biobb_vs/AutoDock Vina/output_pdbqt_path.pdbqt" />
+        
+        <output name="output_log_path" file="biobb_vs/vina/ref_output_vina.log" />
+        
+        <output name="output_log_path" file="biobb_vs/AutoDock Vina/output_log_path.log" />
+        
         </test>
     </tests>    
     <help>

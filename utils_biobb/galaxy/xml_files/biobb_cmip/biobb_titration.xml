@@ -132,6 +132,16 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_pdb_path" value="biobb_cmip/cmip/1kim_h.pdb" />
+        
+        <param name="neutral" value="True" />
+        
+        
+        <output name="output_pdb_path" file="biobb_cmip/cmip/titration.pdb" />
+        
+        <output name="output_pdb_path" file="biobb_cmip/CMIP titration/output_pdb.pdb" />
+        
         </test>
     </tests>    
     <help>

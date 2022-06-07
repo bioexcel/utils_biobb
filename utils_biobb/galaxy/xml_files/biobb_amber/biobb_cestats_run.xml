@@ -433,6 +433,16 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_cein_path" value="biobb_amber/cphstats/structure.cein" />
+        
+        <param name="input_ceout_path" value="biobb_amber/cphstats/sander.ceout.gz" />
+        
+        
+        <output name="output_dat_path" file="biobb_amber/cphstats/cestats.dat" />
+        
+        <output name="output_dat_path" file="biobb_amber/cestats/output.dat" />
+        
         </test>
     </tests>    
     <help>

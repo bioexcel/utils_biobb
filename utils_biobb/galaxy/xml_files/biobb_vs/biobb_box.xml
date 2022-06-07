@@ -87,6 +87,18 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_pdb_path" value="biobb_vs/utils/input_box.pqr" />
+        
+        <param name="offset" value="2" />
+        
+        <param name="box_coordinates" value="True" />
+        
+        
+        <output name="output_pdb_path" file="biobb_vs/utils/ref_output_box.pdb" />
+        
+        <output name="output_pdb_path" file="biobb_vs/in house/output_box.pdb" />
+        
         </test>
     </tests>    
     <help>

@@ -141,6 +141,24 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_tpr_path" value="biobb_md/gromacs/genion.tpr" />
+        
+        <param name="input_top_zip_path" value="biobb_md/gromacs/genion.zip" />
+        
+        <param name="replaced_group" value="SOL" />
+        
+        <param name="concentration" value="0.05" />
+        
+        
+        <output name="output_gro_path" file="biobb_md/gromacs/ref_genion.gro" />
+        
+        <output name="output_gro_path" file="biobb_md/gmx genion/output_gro.gro" />
+        
+        <output name="output_top_zip_path" file="biobb_md/gromacs/ref_genion.zip" />
+        
+        <output name="output_top_zip_path" file="biobb_md/gmx genion/output_top_zip.zip" />
+        
         </test>
     </tests>    
     <help>

@@ -269,6 +269,30 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_traj_path" value="biobb_analysis/gromacs/trajectory.trr" />
+        
+        <param name="input_top_path" value="biobb_analysis/gromacs/topology.tpr" />
+        
+        <param name="input_index_path" value="biobb_analysis/gromacs/index.ndx" />
+        
+        <param name="selection" value="System" />
+        
+        <param name="start" value="0" />
+        
+        <param name="end" value="10" />
+        
+        <param name="dt" value="1" />
+        
+        <param name="output_name" value="output" />
+        
+        <param name="output_type" value="pdb" />
+        
+        
+        <output name="output_str_ens_path" file="biobb_analysis/gromacs/ref_trjconv.str.ens.zip" />
+        
+        <output name="output_str_ens_path" file="biobb_analysis/gmx trjconv/output.zip" />
+        
         </test>
     </tests>    
     <help>

@@ -148,6 +148,22 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_solute_gro_path" value="biobb_md/gromacs/solvate.gro" />
+        
+        <param name="input_top_zip_path" value="biobb_md/gromacs/solvate.zip" />
+        
+        <param name="gmx_path" value="gmx" />
+        
+        
+        <output name="output_gro_path" file="biobb_md/gromacs/ref_solvate.gro" />
+        
+        <output name="output_gro_path" file="biobb_md/gmx solvate/output_gro.gro" />
+        
+        <output name="output_top_zip_path" file="biobb_md/gromacs/ref_solvate.zip" />
+        
+        <output name="output_top_zip_path" file="biobb_md/gmx solvate/output_top_zip.zip" />
+        
         </test>
     </tests>    
     <help>

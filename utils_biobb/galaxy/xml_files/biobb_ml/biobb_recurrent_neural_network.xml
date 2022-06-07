@@ -194,6 +194,40 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_dataset_path" value="biobb_ml/neural_networks/dataset_recurrent.csv" />
+        
+        <param name="target" value="{&#39;index&#39;: 1}" />
+        
+        <param name="validation_size" value="0.2" />
+        
+        <param name="window_size" value="5" />
+        
+        <param name="test_size" value="12" />
+        
+        <param name="hidden_layers" value="[{&#39;size&#39;: 100, &#39;activation&#39;: &#39;relu&#39;}, {&#39;size&#39;: 50, &#39;activation&#39;: &#39;relu&#39;}, {&#39;size&#39;: 50, &#39;activation&#39;: &#39;relu&#39;}]" />
+        
+        <param name="optimizer" value="Adam" />
+        
+        <param name="learning_rate" value="0.01" />
+        
+        <param name="batch_size" value="32" />
+        
+        <param name="max_epochs" value="50" />
+        
+        
+        <output name="output_model_path" file="biobb_ml/neural_networks/ref_output_model_recurrent.h5" />
+        
+        <output name="output_model_path" file="biobb_ml/tf.keras.layers.LSTM/output_model.h5" />
+        
+        <output name="output_test_table_path" file="biobb_ml/neural_networks/ref_output_test_recurrent.csv" />
+        
+        <output name="output_test_table_path" file="biobb_ml/tf.keras.layers.LSTM/output_test.csv" />
+        
+        <output name="output_plot_path" file="biobb_ml/neural_networks/ref_output_plot_recurrent.png" />
+        
+        <output name="output_plot_path" file="biobb_ml/tf.keras.layers.LSTM/output_plot.png" />
+        
         </test>
     </tests>    
     <help>

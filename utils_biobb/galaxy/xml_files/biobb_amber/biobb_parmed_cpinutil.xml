@@ -199,6 +199,20 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_top_path" value="biobb_amber/parmed/cln025.prmtop" />
+        
+        <param name="resnames" value="AS4 GL4" />
+        
+        <param name="igb" value="2" />
+        
+        <param name="system" value="cln025" />
+        
+        
+        <output name="output_cpin_path" file="biobb_amber/parmed/cln025.cpin" />
+        
+        <output name="output_cpin_path" file="biobb_amber/parmed/output.pH.cpin" />
+        
         </test>
     </tests>    
     <help>

@@ -1,8 +1,8 @@
-<tool id="biobb_structure_utils_extract_model_ext" name="ExtractModel" version="3.7.6" >
+<tool id="biobb_structure_utils_extract_model_ext" name="ExtractModel" version="3.7.4" >
     <description>: This class is a wrapper of the Structure Checking tool to extract a model from a 3D structure.</description>
     <requirements>
         <requirement type="package"
-        version="3.7.6"
+        version="3.7.4"
         >biobb_structure_utils</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__models__dq__:${properties.models},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
+            --config '__oc____dq__models__dq__:${properties.models},__dq__check_structure_path__dq__:__dq__${properties.check_structure_path}__dq____cc__'
           #end if
         
           #if str($input_structure_path) != 'None':
@@ -47,8 +47,8 @@
         
         
           <param name="outname_output_structure_path" type="text" value="myextract_model.pdb" 
-              optional="False" label="output PDB,PDBQT name" 
-              help="Output structure file path Format: [output].[format] "/>
+              optional="False" label="output PDB name" 
+              help="Output structure file path Format: [output].pdb "/>
         
         <conditional name="config">
             <param name="sele" type="select" label="Take tool settings:" help="Select where tool settings are to be read from">
@@ -71,45 +71,32 @@
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
             
-              <param name="binary_path" type="text" label="binary_path" help="path to the check_structure application" optional="false"
+              <param name="check_structure_path" type="text" label="check_structure_path" help="path to the check_structure application" optional="false"
                   value="check_structure"
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
-                </param>
-            
-              <param name="output_format" type="select" label="output_format" help="Format of the output file" multiple="false">
-                  
-                    <option value="pdb" 
-                      
-                    >pdb
-                       
-                    </option>
-                  
-                    <option value="pdbqt" 
-                      
-                    >pdbqt
-                       
-                    </option>
-                  
                 </param>
                     
           </section>
     </inputs>
     <outputs>
         
-        <data name="output_structure_path" format="text" label="${outname_output_structure_path}">
-            <change_format>
-            
-            <when input="properties.output_format" value="pdb" format="pdb" />
-            
-            <when input="properties.output_format" value="pdbqt" format="pdbqt" />
-            
-            </change_format>
-          </data>
+        
+          <data name="output_structure_path" format="pdb" label="${outname_output_structure_path}"/>
         
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_structure_path" value="biobb_structure_utils/utils/extract_model.pdb" />
+        
+        <param name="models" value="[1, 4]" />
+        
+        
+        <output name="output_structure_path" file="biobb_structure_utils/utils/ref_extract_model.pdb" />
+        
+        <output name="output_structure_path" file="biobb_structure_utils/Structure Checking from MDWeb/output_structure_path.pdb" />
+        
         </test>
     </tests>    
     <help>

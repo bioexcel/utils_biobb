@@ -81,6 +81,16 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_dataset_path" value="biobb_ml/utils/dataset_dummy_variables.csv" />
+        
+        <param name="targets" value="{&#39;columns&#39;: [&#39;view&#39;]}" />
+        
+        
+        <output name="output_dataset_path" file="biobb_ml/utils/ref_output_dataset_dummy_variables.csv" />
+        
+        <output name="output_dataset_path" file="biobb_ml/In house/output_dataset.csv" />
+        
         </test>
     </tests>    
     <help>

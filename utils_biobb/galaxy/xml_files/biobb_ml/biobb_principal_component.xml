@@ -110,6 +110,26 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_dataset_path" value="biobb_ml/dimensionality_reduction/dataset_principal_component.csv" />
+        
+        <param name="features" value="{&#39;columns&#39;: [&#39;sepal_length&#39;, &#39;sepal_width&#39;, &#39;petal_length&#39;, &#39;petal_width&#39;]}" />
+        
+        <param name="target" value="{&#39;column&#39;: &#39;target&#39;}" />
+        
+        <param name="n_components" value="{&#39;value&#39;: 2}" />
+        
+        <param name="scale" value="True" />
+        
+        
+        <output name="output_results_path" file="biobb_ml/dimensionality_reduction/ref_output_results_principal_component.csv" />
+        
+        <output name="output_results_path" file="biobb_ml/sklearn.decomposition.PCA/output_results.csv" />
+        
+        <output name="output_plot_path" file="biobb_ml/dimensionality_reduction/ref_output_plot_principal_component.png" />
+        
+        <output name="output_plot_path" file="biobb_ml/sklearn.decomposition.PCA/output_plot.png" />
+        
         </test>
     </tests>    
     <help>

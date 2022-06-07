@@ -413,6 +413,36 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_pdb_path" value="biobb_amber/leap/structure.ions.input.pdb" />
+        
+        <param name="forcefield" value="[&#39;protein.ff14SB&#39;, &#39;DNA.bsc1&#39;]" />
+        
+        <param name="water_type" value="TIP3PBOX" />
+        
+        <param name="box_type" value="truncated_octahedron" />
+        
+        <param name="neutralise" value="True" />
+        
+        <param name="ionic_concentration" value="150" />
+        
+        <param name="positive_ions_type" value="K+" />
+        
+        <param name="negative_ions_type" value="Cl-" />
+        
+        
+        <output name="output_pdb_path" file="biobb_amber/leap/structure.ions.pdb" />
+        
+        <output name="output_pdb_path" file="biobb_amber/tLeap/output.solv.pdb" />
+        
+        <output name="output_top_path" file="biobb_amber/leap/structure.ions.top" />
+        
+        <output name="output_top_path" file="biobb_amber/tLeap/output.solv.top" />
+        
+        <output name="output_crd_path" file="biobb_amber/leap/structure.ions.crd" />
+        
+        <output name="output_crd_path" file="biobb_amber/tLeap/output.solv.crd" />
+        
         </test>
     </tests>    
     <help>

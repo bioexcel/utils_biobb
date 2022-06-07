@@ -175,6 +175,26 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_dataset_path" value="biobb_ml/resampling/dataset_resampling.csv" />
+        
+        <param name="method" value="random" />
+        
+        <param name="type" value="regression" />
+        
+        <param name="target" value="{&#39;column&#39;: &#39;VALUE&#39;}" />
+        
+        <param name="evaluate" value="True" />
+        
+        <param name="n_bins" value="10" />
+        
+        <param name="sampling_strategy" value="{&#39;target&#39;: &#39;minority&#39;}" />
+        
+        
+        <output name="output_dataset_path" file="biobb_ml/resampling/ref_output_oversampling.csv" />
+        
+        <output name="output_dataset_path" file="biobb_ml/imblearn.over_sampling/output_results.csv" />
+        
         </test>
     </tests>    
     <help>

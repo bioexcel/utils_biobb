@@ -118,6 +118,16 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="pdb_code" value="2VGB" />
+        
+        <param name="api_id" value="pdbe" />
+        
+        
+        <output name="output_mmcif_path" file="biobb_io/api/ref_output.mmcif" />
+        
+        <output name="output_mmcif_path" file="biobb_io/api/output_mmcif_path.mmcif" />
+        
         </test>
     </tests>    
     <help>

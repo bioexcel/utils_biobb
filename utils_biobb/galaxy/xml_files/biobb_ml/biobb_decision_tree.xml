@@ -157,6 +157,36 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_dataset_path" value="biobb_ml/classification/dataset_decision_tree.csv" />
+        
+        <param name="independent_vars" value="{&#39;columns&#39;: [&#39;interest_rate&#39;, &#39;credit&#39;, &#39;march&#39;, &#39;previous&#39;, &#39;duration&#39;]}" />
+        
+        <param name="target" value="{&#39;column&#39;: &#39;y&#39;}" />
+        
+        <param name="criterion" value="entropy" />
+        
+        <param name="max_depth" value="4" />
+        
+        <param name="normalize_cm" value="False" />
+        
+        <param name="test_size" value="0.2" />
+        
+        <param name="scale" value="True" />
+        
+        
+        <output name="output_model_path" file="biobb_ml/classification/ref_output_model_decision_tree.pkl" />
+        
+        <output name="output_model_path" file="biobb_ml/sklearn.model.DecisionTreeClassifier/output_model.pkl" />
+        
+        <output name="output_test_table_path" file="biobb_ml/classification/ref_output_test_decision_tree.csv" />
+        
+        <output name="output_test_table_path" file="biobb_ml/sklearn.model.DecisionTreeClassifier/output_test.csv" />
+        
+        <output name="output_plot_path" file="biobb_ml/classification/ref_output_plot_decision_tree.png" />
+        
+        <output name="output_plot_path" file="biobb_ml/sklearn.model.DecisionTreeClassifier/output_plot.png" />
+        
         </test>
     </tests>    
     <help>

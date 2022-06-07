@@ -178,6 +178,20 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_gro_path" value="biobb_md/gromacs/grompp.gro" />
+        
+        <param name="input_top_zip_path" value="biobb_md/gromacs/grompp.zip" />
+        
+        <param name="mdp" value="{&#39;ld-seed&#39;: &#39;1&#39;}" />
+        
+        <param name="maxwarn" value="1" />
+        
+        
+        <output name="output_tpr_path" file="biobb_md/gromacs/ref_grompp.tpr" />
+        
+        <output name="output_tpr_path" file="biobb_md/gmx grompp/output_tpr.tpr" />
+        
         </test>
     </tests>    
     <help>

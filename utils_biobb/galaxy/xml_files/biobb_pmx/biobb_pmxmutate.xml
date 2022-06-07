@@ -139,6 +139,18 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_structure_path" value="biobb_pmx/pmx/frame99.pdb" />
+        
+        <param name="mutation_list" value="2Ala, 3Val" />
+        
+        <param name="force_field" value="amber99sb-star-ildn-mut" />
+        
+        
+        <output name="output_structure_path" file="biobb_pmx/pmx/ref_output_structure.pdb" />
+        
+        <output name="output_structure_path" file="biobb_pmx/pmx/output_structure.pdb" />
+        
         </test>
     </tests>    
     <help>

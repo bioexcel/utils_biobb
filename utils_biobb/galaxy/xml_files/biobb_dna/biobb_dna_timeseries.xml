@@ -103,6 +103,18 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_ser_path" value="biobb_dna/dna/canal_output_shift.ser" />
+        
+        <param name="sequence" value="CGCGAATTCGCG" />
+        
+        <param name="seqpos" value="[4, 5]" />
+        
+        
+        <output name="output_zip_path" file="biobb_dna/dna/timeseries_output.zip" />
+        
+        <output name="output_zip_path" file="biobb_dna/In House/timeseries_output.zip" />
+        
         </test>
     </tests>    
     <help>

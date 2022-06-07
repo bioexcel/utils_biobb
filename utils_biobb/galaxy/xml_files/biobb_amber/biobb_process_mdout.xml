@@ -178,6 +178,16 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_log_path" value="biobb_amber/process/sander.heat.log" />
+        
+        <param name="terms" value="[&#39;TEMP&#39;]" />
+        
+        
+        <output name="output_dat_path" file="biobb_amber/process/sander.md.temp.dat" />
+        
+        <output name="output_dat_path" file="biobb_amber/process/output.dat" />
+        
         </test>
     </tests>    
     <help>

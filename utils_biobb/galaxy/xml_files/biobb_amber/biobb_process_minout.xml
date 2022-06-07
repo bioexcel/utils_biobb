@@ -202,6 +202,14 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_log_path" value="biobb_amber/process/sander.min.log" />
+        
+        
+        <output name="output_dat_path" file="biobb_amber/process/sander.min.energy.dat" />
+        
+        <output name="output_dat_path" file="biobb_amber/process/output.dat" />
+        
         </test>
     </tests>    
     <help>

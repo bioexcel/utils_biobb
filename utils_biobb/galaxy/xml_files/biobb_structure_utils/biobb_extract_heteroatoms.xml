@@ -1,8 +1,8 @@
-<tool id="biobb_structure_utils_extract_heteroatoms_ext" name="ExtractHeteroatoms" version="3.7.6" >
+<tool id="biobb_structure_utils_extract_heteroatoms_ext" name="ExtractHeteroatoms" version="3.7.4" >
     <description>: Class to extract hetero-atoms from a 3D structure using Biopython.</description>
     <requirements>
         <requirement type="package"
-        version="3.7.6"
+        version="3.7.4"
         >biobb_structure_utils</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -43,12 +43,12 @@
     </command>
     <inputs>
         
-          <param name="input_structure_path" type="data" format="pdb,pdbqt"  optional="False" label="input PDB,PDBQT file" help="Input structure file path. Format: [input].[format]"/> 
+          <param name="input_structure_path" type="data" format="pdb"  optional="False" label="input PDB file" help="Input structure file path. Format: [input].pdb"/> 
         
         
           <param name="outname_output_heteroatom_path" type="text" value="myextract_heteroatoms.pdb" 
-              optional="False" label="output PDB,PDBQT name" 
-              help="Output heteroatom file path Format: [output].[format] "/>
+              optional="False" label="output PDB name" 
+              help="Output heteroatom file path Format: [output].pdb "/>
         
         <conditional name="config">
             <param name="sele" type="select" label="Take tool settings:" help="Select where tool settings are to be read from">
@@ -75,40 +75,27 @@
                   
                   label="water" help="Add or not waters." 
                 />
-            
-              <param name="output_format" type="select" label="output_format" help="Format of the output file" multiple="false">
-                  
-                    <option value="pdb" 
-                      
-                    >pdb
-                       
-                    </option>
-                  
-                    <option value="pdbqt" 
-                      
-                    >pdbqt
-                       
-                    </option>
-                  
-                </param>
                     
           </section>
     </inputs>
     <outputs>
         
-        <data name="output_heteroatom_path" format="text" label="${outname_output_heteroatom_path}">
-            <change_format>
-            
-            <when input="properties.output_format" value="pdb" format="pdb" />
-            
-            <when input="properties.output_format" value="pdbqt" format="pdbqt" />
-            
-            </change_format>
-          </data>
+        
+          <data name="output_heteroatom_path" format="pdb" label="${outname_output_heteroatom_path}"/>
         
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_structure_path" value="biobb_structure_utils/utils/extract_heteroatom.pdb" />
+        
+        <param name="heteroatoms" value="[{&#39;name&#39;: &#39;TA1&#39;, &#39;model&#39;: &#39;1&#39;}, {&#39;name&#39;: &#39;ADP&#39;}]" />
+        
+        
+        <output name="output_heteroatom_path" file="biobb_structure_utils/utils/ref_extract_heteroatom.pdb" />
+        
+        <output name="output_heteroatom_path" file="biobb_structure_utils/in house using biopython/output_heteroatom_path.pdb" />
+        
         </test>
     </tests>    
     <help>

@@ -108,6 +108,14 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_top_path" value="biobb_amber/parmed/input.hmass.prmtop" />
+        
+        
+        <output name="output_top_path" file="biobb_amber/parmed/output.hmass.prmtop" />
+        
+        <output name="output_top_path" file="biobb_amber/parmed/output.prmtop" />
+        
         </test>
     </tests>    
     <help>

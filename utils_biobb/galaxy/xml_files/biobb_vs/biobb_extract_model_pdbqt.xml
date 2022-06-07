@@ -82,6 +82,16 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_pdbqt_path" value="biobb_vs/utils/models.pdbqt" />
+        
+        <param name="model" value="1" />
+        
+        
+        <output name="output_pdbqt_path" file="biobb_vs/utils/ref_extract_model.pdbqt" />
+        
+        <output name="output_pdbqt_path" file="biobb_vs/in house using biopython/output_extract.pdbqt" />
+        
         </test>
     </tests>    
     <help>

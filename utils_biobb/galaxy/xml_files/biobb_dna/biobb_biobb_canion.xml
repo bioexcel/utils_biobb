@@ -170,6 +170,28 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_cdi_path" value="biobb_dna/curvesplus/THGA_K.cdi" />
+        
+        <param name="input_afr_path" value="biobb_dna/curvesplus/THGA.afr" />
+        
+        <param name="input_avg_struc_path" value="biobb_dna/curvesplus/THGA_avg.pdb" />
+        
+        <param name="type" value="K+" />
+        
+        <param name="dlow" value="5.8" />
+        
+        <param name="dhig" value="7.2" />
+        
+        <param name="rlow" value="0" />
+        
+        <param name="rhig" value="18" />
+        
+        
+        <output name="output_zip_path" file="biobb_dna/curvesplus/canion_output.zip" />
+        
+        <output name="output_zip_path" file="biobb_dna/Canion/canion_output.zip" />
+        
         </test>
     </tests>    
     <help>

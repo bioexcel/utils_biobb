@@ -241,6 +241,24 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_pdb_path" value="biobb_amber/leap/structure.leapin.pdb" />
+        
+        <param name="forcefield" value="[&#39;protein.ff14SB&#39;]" />
+        
+        
+        <output name="output_pdb_path" file="biobb_amber/leap/structure.leap.pdb" />
+        
+        <output name="output_pdb_path" file="biobb_amber/tLeap/output.leap.pdb" />
+        
+        <output name="output_top_path" file="biobb_amber/leap/structure.leap.top" />
+        
+        <output name="output_top_path" file="biobb_amber/tLeap/output.leap.top" />
+        
+        <output name="output_crd_path" file="biobb_amber/leap/structure.leap.crd" />
+        
+        <output name="output_crd_path" file="biobb_amber/tLeap/output.leap.crd" />
+        
         </test>
     </tests>    
     <help>

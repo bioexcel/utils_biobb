@@ -125,6 +125,14 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="sequence" value="GCGCGGCTGATAAACGAAAGC" />
+        
+        
+        <output name="output_pdb_path" file="biobb_amber/nab/ref_nab_build_dna_structure.pdb" />
+        
+        <output name="output_pdb_path" file="biobb_amber/nab/output.pdb" />
+        
         </test>
     </tests>    
     <help>

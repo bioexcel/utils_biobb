@@ -257,6 +257,16 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="collection_name" value="refs" />
+        
+        <param name="keyword" value="porin" />
+        
+        
+        <output name="output_simulations" file="biobb_io/api/output_sim_search.json" />
+        
+        <output name="output_simulations" file="biobb_io/api/output_simulations.json" />
+        
         </test>
     </tests>    
     <help>

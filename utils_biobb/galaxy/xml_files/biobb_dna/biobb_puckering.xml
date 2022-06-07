@@ -119,6 +119,18 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_phaseC_path" value="biobb_dna/backbone/canal_output_phaseC.ser" />
+        
+        <param name="input_phaseW_path" value="biobb_dna/backbone/canal_output_phaseW.ser" />
+        
+        <param name="sequence" value="CGCGAATTCGCG" />
+        
+        
+        <output name="output_csv_path" file="biobb_dna/In House/puckering.csv" />
+        
+        <output name="output_jpg_path" file="biobb_dna/In House/puckering.jpg" />
+        
         </test>
     </tests>    
     <help>

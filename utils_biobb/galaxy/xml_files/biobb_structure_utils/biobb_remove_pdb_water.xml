@@ -1,8 +1,8 @@
-<tool id="biobb_structure_utils_remove_pdb_water_ext" name="RemovePdbWater" version="3.7.6" >
+<tool id="biobb_structure_utils_remove_pdb_water_ext" name="RemovePdbWater" version="3.7.4" >
     <description>: This class is a wrapper of the Structure Checking tool to remove water molecules from PDB 3D structures.</description>
     <requirements>
         <requirement type="package"
-        version="3.7.6"
+        version="3.7.4"
         >biobb_structure_utils</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
+            --config '__oc____dq__check_structure_path__dq__:__dq__${properties.check_structure_path}__dq____cc__'
           #end if
         
           #if str($input_pdb_path) != 'None':
@@ -43,7 +43,7 @@
     </command>
     <inputs>
         
-          <param name="input_pdb_path" type="data" format="pdb"  optional="False" label="input PDB file" help="Input PDB file path. Format: [input].pdb"/> 
+          <param name="input_pdb_path" type="data" format="pdb,pdbqt"  optional="False" label="input PDB,PDBQT file" help="Input PDB file path. Format: [input].[format]"/> 
         
         
           <param name="outname_output_pdb_path" type="text" value="myremove_pdb_water.pdb" 
@@ -67,7 +67,7 @@
           </conditional>
           <section name="properties" title="Properties Input">
             
-              <param name="binary_path" type="text" label="binary_path" help="path to the check_structure application" optional="false"
+              <param name="check_structure_path" type="text" label="check_structure_path" help="path to the check_structure application" optional="false"
                   value="check_structure"
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
@@ -83,6 +83,14 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_pdb_path" value="biobb_structure_utils/utils/WT_aq4_md_WAT.pdb" />
+        
+        
+        <output name="output_pdb_path" file="biobb_structure_utils/utils/WT_apo_no_wat.pdb" />
+        
+        <output name="output_pdb_path" file="biobb_structure_utils/Structure Checking from MDWeb/output_pdb_path.pdb" />
+        
         </test>
     </tests>    
     <help>

@@ -92,6 +92,14 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_pdb_path" value="biobb_amber/pdb4amber/1aki_fixed.pdb" />
+        
+        
+        <output name="output_pdb_path" file="biobb_amber/pdb4amber/structure.pdb4amber.pdb" />
+        
+        <output name="output_pdb_path" file="biobb_amber/pdb4amber/output.pdb" />
+        
         </test>
     </tests>    
     <help>

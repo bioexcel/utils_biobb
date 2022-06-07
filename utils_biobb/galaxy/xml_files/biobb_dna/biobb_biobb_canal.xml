@@ -159,6 +159,18 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_cda_file" value="biobb_dna/curvesplus/curves_output.cda" />
+        
+        <param name="series" value="True" />
+        
+        <param name="sequence" value="CGCGAATTCGCG" />
+        
+        
+        <output name="output_zip_path" file="biobb_dna/curvesplus/canal_output.zip" />
+        
+        <output name="output_zip_path" file="biobb_dna/Canal/canal_output.zip" />
+        
         </test>
     </tests>    
     <help>

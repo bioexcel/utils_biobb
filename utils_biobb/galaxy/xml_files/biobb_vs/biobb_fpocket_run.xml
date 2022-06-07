@@ -131,6 +131,26 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_pdb_path" value="biobb_vs/fpocket/fpocket_input.pdb" />
+        
+        <param name="min_radius" value="3" />
+        
+        <param name="max_radius" value="6" />
+        
+        <param name="num_spheres" value="35" />
+        
+        <param name="sort_by" value="druggability_score" />
+        
+        
+        <output name="output_pockets_zip" file="biobb_vs/fpocket/ref_output_pockets.zip" />
+        
+        <output name="output_pockets_zip" file="biobb_vs/fpocket/output_pockets.zip" />
+        
+        <output name="output_summary" file="biobb_vs/fpocket/ref_output_summary.json" />
+        
+        <output name="output_summary" file="biobb_vs/fpocket/output_summary.json" />
+        
         </test>
     </tests>    
     <help>

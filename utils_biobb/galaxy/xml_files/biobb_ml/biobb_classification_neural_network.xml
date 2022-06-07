@@ -235,6 +235,44 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_dataset_path" value="biobb_ml/neural_networks/dataset_classification.csv" />
+        
+        <param name="features" value="{&#39;columns&#39;: [&#39;mean radius&#39;, &#39;mean texture&#39;, &#39;mean perimeter&#39;, &#39;mean area&#39;, &#39;mean smoothness&#39;, &#39;mean compactness&#39;, &#39;mean concavity&#39;, &#39;mean concave points&#39;, &#39;mean symmetry&#39;, &#39;mean fractal dimension&#39;, &#39;radius error&#39;, &#39;texture error&#39;, &#39;perimeter error&#39;, &#39;area error&#39;, &#39;smoothness error&#39;, &#39;compactness error&#39;, &#39;concavity error&#39;, &#39;concave points error&#39;, &#39;symmetry error&#39;, &#39;fractal dimension error&#39;, &#39;worst radius&#39;, &#39;worst texture&#39;, &#39;worst perimeter&#39;, &#39;worst area&#39;, &#39;worst smoothness&#39;, &#39;worst compactness&#39;, &#39;worst concavity&#39;, &#39;worst concave points&#39;, &#39;worst symmetry&#39;, &#39;worst fractal dimension&#39;]}" />
+        
+        <param name="target" value="{&#39;column&#39;: &#39;benign&#39;}" />
+        
+        <param name="validation_size" value="0.2" />
+        
+        <param name="test_size" value="0.1" />
+        
+        <param name="hidden_layers" value="[{&#39;size&#39;: 50, &#39;activation&#39;: &#39;relu&#39;}, {&#39;size&#39;: 50, &#39;activation&#39;: &#39;relu&#39;}]" />
+        
+        <param name="output_layer_activation" value="softmax" />
+        
+        <param name="optimizer" value="Adam" />
+        
+        <param name="learning_rate" value="0.02" />
+        
+        <param name="batch_size" value="100" />
+        
+        <param name="max_epochs" value="100" />
+        
+        <param name="scale" value="True" />
+        
+        
+        <output name="output_model_path" file="biobb_ml/neural_networks/ref_output_model_classification.h5" />
+        
+        <output name="output_model_path" file="biobb_ml/tf.keras.Sequential/output_model.h5" />
+        
+        <output name="output_test_table_path" file="biobb_ml/neural_networks/ref_output_test_classification.csv" />
+        
+        <output name="output_test_table_path" file="biobb_ml/tf.keras.Sequential/output_test.csv" />
+        
+        <output name="output_plot_path" file="biobb_ml/neural_networks/ref_output_plot_classification.png" />
+        
+        <output name="output_plot_path" file="biobb_ml/tf.keras.Sequential/output_plot.png" />
+        
         </test>
     </tests>    
     <help>

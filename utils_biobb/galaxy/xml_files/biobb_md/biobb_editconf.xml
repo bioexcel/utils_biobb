@@ -150,6 +150,18 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_gro_path" value="biobb_md/gromacs/editconf.gro" />
+        
+        <param name="distance_to_molecule" value="1.0" />
+        
+        <param name="box_type" value="cubic" />
+        
+        
+        <output name="output_gro_path" file="biobb_md/gromacs/ref_editconf.gro" />
+        
+        <output name="output_gro_path" file="biobb_md/gmx editconf/output_gro.gro" />
+        
         </test>
     </tests>    
     <help>

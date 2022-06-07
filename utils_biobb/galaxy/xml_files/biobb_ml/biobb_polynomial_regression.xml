@@ -131,6 +131,32 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_dataset_path" value="biobb_ml/regression/dataset_polynomial_regression.csv" />
+        
+        <param name="independent_vars" value="{&#39;columns&#39;: [&#39;LSTAT&#39;, &#39;RM&#39;, &#39;ZN&#39;, &#39;AGE&#39;]}" />
+        
+        <param name="target" value="{&#39;column&#39;: &#39;MEDV&#39;}" />
+        
+        <param name="degree" value="2" />
+        
+        <param name="test_size" value="0.2" />
+        
+        <param name="scale" value="True" />
+        
+        
+        <output name="output_model_path" file="biobb_ml/regression/ref_output_model_polynomial_regression.pkl" />
+        
+        <output name="output_model_path" file="biobb_ml/sklearn.linear_model.LinearRegression/output_model.pkl" />
+        
+        <output name="output_test_table_path" file="biobb_ml/regression/ref_output_test_polynomial_regression.csv" />
+        
+        <output name="output_test_table_path" file="biobb_ml/sklearn.linear_model.LinearRegression/output_test.csv" />
+        
+        <output name="output_plot_path" file="biobb_ml/regression/ref_output_plot_polynomial_regression.png" />
+        
+        <output name="output_plot_path" file="biobb_ml/sklearn.linear_model.LinearRegression/output_plot.png" />
+        
         </test>
     </tests>    
     <help>

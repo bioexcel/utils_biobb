@@ -141,6 +141,34 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_dataset_path" value="biobb_ml/regression/dataset_random_forest_regressor.csv" />
+        
+        <param name="independent_vars" value="{&#39;range&#39;: [[0, 5], [7, 12]]}" />
+        
+        <param name="target" value="{&#39;index&#39;: 13}" />
+        
+        <param name="n_estimators" value="10" />
+        
+        <param name="max_depth" value="5" />
+        
+        <param name="test_size" value="0.2" />
+        
+        <param name="scale" value="True" />
+        
+        
+        <output name="output_model_path" file="biobb_ml/regression/ref_output_model_random_forest_regressor.pkl" />
+        
+        <output name="output_model_path" file="biobb_ml/sklearn.ensemble.RandomForestRegressor/output_model.pkl" />
+        
+        <output name="output_test_table_path" file="biobb_ml/regression/ref_output_test_random_forest_regressor.csv" />
+        
+        <output name="output_test_table_path" file="biobb_ml/sklearn.ensemble.RandomForestRegressor/output_test.csv" />
+        
+        <output name="output_plot_path" file="biobb_ml/regression/ref_output_plot_random_forest_regressor.png" />
+        
+        <output name="output_plot_path" file="biobb_ml/sklearn.ensemble.RandomForestRegressor/output_plot.png" />
+        
         </test>
     </tests>    
     <help>

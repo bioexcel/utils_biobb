@@ -176,6 +176,32 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_decode_path" value="biobb_ml/neural_networks/dataset_autoencoder_decode.csv" />
+        
+        <param name="input_predict_path" value="biobb_ml/neural_networks/dataset_autoencoder_predict.csv" />
+        
+        <param name="optimizer" value="Adam" />
+        
+        <param name="learning_rate" value="0.01" />
+        
+        <param name="batch_size" value="32" />
+        
+        <param name="max_epochs" value="300" />
+        
+        
+        <output name="output_model_path" file="biobb_ml/neural_networks/ref_output_model_autoencoder.h5" />
+        
+        <output name="output_model_path" file="biobb_ml/tf.keras.layers.LSTM/output_model.h5" />
+        
+        <output name="output_test_decode_path" file="biobb_ml/neural_networks/ref_output_test_decode_autoencoder.csv" />
+        
+        <output name="output_test_decode_path" file="biobb_ml/tf.keras.layers.LSTM/output_test_decode.csv" />
+        
+        <output name="output_test_predict_path" file="biobb_ml/neural_networks/ref_output_test_predict_autoencoder.csv" />
+        
+        <output name="output_test_predict_path" file="biobb_ml/tf.keras.layers.LSTM/output_test_predict.csv" />
+        
         </test>
     </tests>    
     <help>

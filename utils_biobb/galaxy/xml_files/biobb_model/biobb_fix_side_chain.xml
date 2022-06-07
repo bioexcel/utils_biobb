@@ -1,8 +1,8 @@
-<tool id="biobb_model_fix_side_chain_ext" name="FixSideChain" version="3.7.0" >
+<tool id="biobb_model_fix_side_chain_ext" name="FixSideChain" version="3.0.1" >
     <description>: Class to model the missing atoms in amino acid side chains of a PDB.</description>
     <requirements>
         <requirement type="package"
-        version="3.7.0"
+        version="3.0.1"
         >biobb_model</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__use_modeller__dq__:${properties.use_modeller}__cc__'
+            --config '__oc____dq__rebuild__dq__:${properties.rebuild}__cc__'
           #end if
         
           #if str($input_pdb_path) != 'None':
@@ -67,9 +67,9 @@
           </conditional>
           <section name="properties" title="Properties Input">
             
-              <param name="use_modeller" type="boolean" 
+              <param name="rebuild" type="boolean" 
                   
-                  label="use_modeller" help="Use Modeller suite to rebuild the missing side chain atoms." 
+                  label="rebuild" help="Rebuilds side chain completely using Modeller" 
                 />
                     
           </section>
@@ -82,6 +82,14 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_pdb_path" value="biobb_model/model/2ki5.pdb" />
+        
+        
+        <output name="output_pdb_path" file="biobb_model/model/output_pdb_path.pdb" />
+        
+        <output name="output_pdb_path" file="biobb_model/in house using biobb_structure_checking/output_pdb_path.pdb" />
+        
         </test>
     </tests>    
     <help>

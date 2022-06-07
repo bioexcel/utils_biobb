@@ -101,6 +101,18 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="pdb_code" value="2VGB" />
+        
+        <param name="filter" value="[&#39;ATOM&#39;, &#39;HETATM&#39;]" />
+        
+        <param name="api_id" value="mmb" />
+        
+        
+        <output name="output_pdb_path" file="biobb_io/api/output_pdb.pdb" />
+        
+        <output name="output_pdb_path" file="biobb_io/api/output_pdb_path.pdb" />
+        
         </test>
     </tests>    
     <help>

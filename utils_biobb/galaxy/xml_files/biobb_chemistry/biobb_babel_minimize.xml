@@ -191,6 +191,30 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_path" value="biobb_chemistry/babel/babel.minimize.pdb" />
+        
+        <param name="criteria" value="1e-6" />
+        
+        <param name="method" value="cg" />
+        
+        <param name="force_field" value="GAFF" />
+        
+        <param name="hydrogens" value="True" />
+        
+        <param name="steps" value="2500" />
+        
+        <param name="cutoff" value="True" />
+        
+        <param name="rvdw" value="6.0" />
+        
+        <param name="rele" value="10.0" />
+        
+        <param name="frequency" value="10" />
+        
+        
+        <output name="output_path" file="biobb_chemistry/OpenBabel/output.pdb" />
+        
         </test>
     </tests>    
     <help>

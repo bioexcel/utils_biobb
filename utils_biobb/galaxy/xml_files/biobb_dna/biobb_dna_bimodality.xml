@@ -119,6 +119,22 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_csv_file" value="biobb_dna/dna/series_shift_AT.csv" />
+        
+        <param name="helpar_name" value="shift" />
+        
+        <param name="confidence_level" value="5.0" />
+        
+        <param name="max_iter" value="400" />
+        
+        <param name="tol" value="1e-05" />
+        
+        
+        <output name="output_csv_path" file="biobb_dna/In House/bimod_out.csv" />
+        
+        <output name="output_jpg_path" file="biobb_dna/In House/bimod_out.jpg" />
+        
         </test>
     </tests>    
     <help>

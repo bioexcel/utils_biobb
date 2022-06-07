@@ -182,6 +182,36 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_dataset_path" value="biobb_ml/classification/dataset_k_neighbors.csv" />
+        
+        <param name="independent_vars" value="{&#39;columns&#39;: [&#39;interest_rate&#39;, &#39;credit&#39;, &#39;march&#39;, &#39;previous&#39;, &#39;duration&#39;]}" />
+        
+        <param name="target" value="{&#39;column&#39;: &#39;y&#39;}" />
+        
+        <param name="metric" value="minkowski" />
+        
+        <param name="n_neighbors" value="5" />
+        
+        <param name="normalize_cm" value="False" />
+        
+        <param name="test_size" value="0.2" />
+        
+        <param name="scale" value="True" />
+        
+        
+        <output name="output_model_path" file="biobb_ml/classification/ref_output_model_k_neighbors.pkl" />
+        
+        <output name="output_model_path" file="biobb_ml/sklearn.neighbors.KNeighborsClassifier/output_model.pkl" />
+        
+        <output name="output_test_table_path" file="biobb_ml/classification/ref_output_test_k_neighbors.csv" />
+        
+        <output name="output_test_table_path" file="biobb_ml/sklearn.neighbors.KNeighborsClassifier/output_test.csv" />
+        
+        <output name="output_plot_path" file="biobb_ml/classification/ref_output_plot_k_neighbors.png" />
+        
+        <output name="output_plot_path" file="biobb_ml/sklearn.neighbors.KNeighborsClassifier/output_plot.png" />
+        
         </test>
     </tests>    
     <help>

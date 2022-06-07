@@ -144,6 +144,24 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_filename_shear" value="biobb_dna/correlation/series_shear_A.csv" />
+        
+        <param name="input_filename_stretch" value="biobb_dna/correlation/series_stretch_A.csv" />
+        
+        <param name="input_filename_stagger" value="biobb_dna/correlation/series_stagger_A.csv" />
+        
+        <param name="input_filename_buckle" value="biobb_dna/correlation/series_buckle_A.csv" />
+        
+        <param name="input_filename_propel" value="biobb_dna/correlation/series_propel_A.csv" />
+        
+        <param name="input_filename_opening" value="biobb_dna/correlation/series_opening_A.csv" />
+        
+        
+        <output name="output_csv_path" file="biobb_dna/In House/intra_hpcorr.csv" />
+        
+        <output name="output_jpg_path" file="biobb_dna/In House/intra_hpcorr.jpg" />
+        
         </test>
     </tests>    
     <help>

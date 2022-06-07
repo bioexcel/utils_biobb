@@ -1,8 +1,8 @@
-<tool id="biobb_structure_utils_remove_ligand_ext" name="RemoveLigand" version="3.7.6" >
+<tool id="biobb_structure_utils_remove_ligand_ext" name="RemoveLigand" version="3.7.4" >
     <description>: Class to remove the selected ligand atoms from a 3D structure.</description>
     <requirements>
         <requirement type="package"
-        version="3.7.6"
+        version="3.7.4"
         >biobb_structure_utils</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -106,6 +106,14 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_structure_path" value="biobb_structure_utils/utils/WT_aq4_md_1.pdb" />
+        
+        <param name="ligand" value="AQ4" />
+        
+        
+        <output name="output_structure_path" file="biobb_structure_utils/in house/output_structure_path.pdb" />
+        
         </test>
     </tests>    
     <help>

@@ -93,6 +93,20 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_pockets_zip" value="biobb_vs/fpocket/input_pockets.zip" />
+        
+        <param name="pocket" value="4" />
+        
+        
+        <output name="output_pocket_pdb" file="biobb_vs/fpocket/ref_output_pocket.pdb" />
+        
+        <output name="output_pocket_pdb" file="biobb_vs/in house/output_pocket.pdb" />
+        
+        <output name="output_pocket_pqr" file="biobb_vs/fpocket/ref_output_pocket.pqr" />
+        
+        <output name="output_pocket_pqr" file="biobb_vs/in house/output_pocket.pqr" />
+        
         </test>
     </tests>    
     <help>

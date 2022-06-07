@@ -110,6 +110,16 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_structure_path" value="biobb_md/gromacs/make_ndx.tpr" />
+        
+        <param name="selection" value="&#34;Mynewgroup&#34; group &#34;Protein-H&#34; and not same residue as within 0.4 of resname ARG" />
+        
+        
+        <output name="output_ndx_path" file="biobb_md/gromacs/ref_select.ndx" />
+        
+        <output name="output_ndx_path" file="biobb_md/gmx select/output_ndx.ndx" />
+        
         </test>
     </tests>    
     <help>

@@ -151,6 +151,20 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_top_path" value="biobb_amber/cpptraj/structure.ions.parmtop" />
+        
+        <param name="input_crd_path" value="biobb_amber/cpptraj/structure.ions.crd" />
+        
+        
+        <output name="output_pdb_path" file="biobb_amber/cpptraj/structure.randIons.pdb" />
+        
+        <output name="output_pdb_path" file="biobb_amber/cpptraj/output.pdb" />
+        
+        <output name="output_crd_path" file="biobb_amber/cpptraj/structure.randIons.crd" />
+        
+        <output name="output_crd_path" file="biobb_amber/cpptraj/output.crd" />
+        
         </test>
     </tests>    
     <help>

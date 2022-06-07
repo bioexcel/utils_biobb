@@ -103,6 +103,18 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_top_zip_path" value="biobb_md/gromacs_extra/ndx2resttop.zip" />
+        
+        <param name="input_itp_path" value="biobb_md/gromacs_extra/pep_ligand.itp" />
+        
+        <param name="posres_name" value="POSRES_LIGAND" />
+        
+        
+        <output name="output_top_zip_path" file="biobb_md/gromacs_extra/ref_appendligand.zip" />
+        
+        <output name="output_top_zip_path" file="biobb_md/in house/output_top_zip.zip" />
+        
         </test>
     </tests>    
     <help>

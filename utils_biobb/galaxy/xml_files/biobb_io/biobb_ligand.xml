@@ -89,6 +89,16 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="ligand_code" value="IBP" />
+        
+        <param name="api_id" value="pdbe" />
+        
+        
+        <output name="output_pdb_path" file="biobb_io/api/output_ligand.pdb" />
+        
+        <output name="output_pdb_path" file="biobb_io/api/output_pdb_path.pdb" />
+        
         </test>
     </tests>    
     <help>

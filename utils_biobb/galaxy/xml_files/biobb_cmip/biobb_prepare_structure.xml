@@ -60,6 +60,12 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_pdb_path" value="biobb_cmip/cmip/1aki.pdb" />
+        
+        
+        <output name="output_cmip_pdb_path" file="biobb_cmip/Prepare Structure/1aki_cmip.pdb" />
+        
         </test>
     </tests>    
     <help>

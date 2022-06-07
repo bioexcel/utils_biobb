@@ -633,6 +633,32 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_traj_path" value="biobb_analysis/gromacs/trajectory.trr" />
+        
+        <param name="input_top_path" value="biobb_analysis/gromacs/topology.tpr" />
+        
+        <param name="input_index_path" value="biobb_analysis/gromacs/index.ndx" />
+        
+        <param name="fit_selection" value="System" />
+        
+        <param name="center_selection" value="System" />
+        
+        <param name="output_selection" value="System" />
+        
+        <param name="pbc" value="mol" />
+        
+        <param name="center" value="True" />
+        
+        <param name="ur" value="compact" />
+        
+        <param name="fit" value="rot+trans" />
+        
+        
+        <output name="output_traj_path" file="biobb_analysis/gromacs/ref_image.xtc" />
+        
+        <output name="output_traj_path" file="biobb_analysis/gmx trjconv/output.xtc" />
+        
         </test>
     </tests>    
     <help>

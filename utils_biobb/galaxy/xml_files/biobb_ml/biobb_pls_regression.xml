@@ -111,6 +111,28 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_dataset_path" value="biobb_ml/dimensionality_reduction/dataset_pls_regression.csv" />
+        
+        <param name="features" value="{&#39;range&#39;: [[0, 29]]}" />
+        
+        <param name="target" value="{&#39;index&#39;: 30}" />
+        
+        <param name="n_components" value="12" />
+        
+        <param name="cv" value="10" />
+        
+        <param name="scale" value="True" />
+        
+        
+        <output name="output_results_path" file="biobb_ml/dimensionality_reduction/ref_output_results_pls_regression.csv" />
+        
+        <output name="output_results_path" file="biobb_ml/sklearn.cross_decomposition.PLSRegression/output_results.csv" />
+        
+        <output name="output_plot_path" file="biobb_ml/dimensionality_reduction/ref_output_plot_pls_regression.png" />
+        
+        <output name="output_plot_path" file="biobb_ml/sklearn.cross_decomposition.PLSRegression/output_plot.png" />
+        
         </test>
     </tests>    
     <help>

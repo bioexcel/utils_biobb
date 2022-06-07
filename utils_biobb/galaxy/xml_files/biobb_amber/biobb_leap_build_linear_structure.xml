@@ -118,6 +118,18 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="sequence" value="ALA PRO SER ARG LYS ASP GLU GLY GLY ALA" />
+        
+        <param name="forcefield" value="[&#39;protein.ff14SB&#39;]" />
+        
+        <param name="build_library" value="False" />
+        
+        
+        <output name="output_pdb_path" file="biobb_amber/leap/structure.pdb" />
+        
+        <output name="output_pdb_path" file="biobb_amber/tLeap/output.pdb" />
+        
         </test>
     </tests>    
     <help>

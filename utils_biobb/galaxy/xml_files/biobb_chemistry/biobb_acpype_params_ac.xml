@@ -127,6 +127,22 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_path" value="biobb_chemistry/acpype/acpype.params.mol2" />
+        
+        <param name="basename" value="BBB" />
+        
+        <param name="charge" value="0" />
+        
+        
+        <output name="output_path_frcmod" file="biobb_chemistry/ACPype/output.frcmod" />
+        
+        <output name="output_path_inpcrd" file="biobb_chemistry/ACPype/output.inpcrd" />
+        
+        <output name="output_path_lib" file="biobb_chemistry/ACPype/output.lib" />
+        
+        <output name="output_path_prmtop" file="biobb_chemistry/ACPype/output.prmtop" />
+        
         </test>
     </tests>    
     <help>

@@ -128,6 +128,22 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_epsilC_path" value="biobb_dna/backbone/canal_output_epsilC.ser" />
+        
+        <param name="input_epsilW_path" value="biobb_dna/backbone/canal_output_epsilW.ser" />
+        
+        <param name="input_zetaC_path" value="biobb_dna/backbone/canal_output_zetaC.ser" />
+        
+        <param name="input_zetaW_path" value="biobb_dna/backbone/canal_output_zetaW.ser" />
+        
+        <param name="sequence" value="CGCGAATTCGCG" />
+        
+        
+        <output name="output_csv_path" file="biobb_dna/In House/bipop.csv" />
+        
+        <output name="output_jpg_path" file="biobb_dna/In House/bipop.jpg" />
+        
         </test>
     </tests>    
     <help>

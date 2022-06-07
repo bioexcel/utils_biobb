@@ -170,6 +170,34 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_dataset_path" value="biobb_ml/classification/dataset_support_vector_machine.csv" />
+        
+        <param name="independent_vars" value="{&#39;range&#39;: [[0, 2], [4, 5]]}" />
+        
+        <param name="target" value="{&#39;index&#39;: 6}" />
+        
+        <param name="kernel" value="rbf" />
+        
+        <param name="normalize_cm" value="False" />
+        
+        <param name="test_size" value="0.2" />
+        
+        <param name="scale" value="True" />
+        
+        
+        <output name="output_model_path" file="biobb_ml/classification/ref_output_model_support_vector_machine.pkl" />
+        
+        <output name="output_model_path" file="biobb_ml/sklearn.svm.SVC/output_model.pkl" />
+        
+        <output name="output_test_table_path" file="biobb_ml/classification/ref_output_test_support_vector_machine.csv" />
+        
+        <output name="output_test_table_path" file="biobb_ml/sklearn.svm.SVC/output_test.csv" />
+        
+        <output name="output_plot_path" file="biobb_ml/classification/ref_output_plot_support_vector_machine.png" />
+        
+        <output name="output_plot_path" file="biobb_ml/sklearn.svm.SVC/output_plot.png" />
+        
         </test>
     </tests>    
     <help>

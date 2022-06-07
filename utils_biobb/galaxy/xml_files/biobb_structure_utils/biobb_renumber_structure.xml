@@ -1,8 +1,8 @@
-<tool id="biobb_structure_utils_renumber_structure_ext" name="RenumberStructure" version="3.7.6" >
+<tool id="biobb_structure_utils_renumber_structure_ext" name="RenumberStructure" version="3.7.4" >
     <description>: Class to renumber atomic indexes from a 3D structure.</description>
     <requirements>
         <requirement type="package"
-        version="3.7.6"
+        version="3.7.4"
         >biobb_structure_utils</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -121,6 +121,18 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_structure_path" value="biobb_structure_utils/utils/cl3.noH.pdb" />
+        
+        <param name="renumber_residues" value="True" />
+        
+        
+        <output name="output_structure_path" file="biobb_structure_utils/in house/output_structure_path.pdb" />
+        
+        <output name="output_mapping_json_path" file="biobb_structure_utils/utils/cl3_output_mapping_json_path.json" />
+        
+        <output name="output_mapping_json_path" file="biobb_structure_utils/in house/output_mapping_json_path.json" />
+        
         </test>
     </tests>    
     <help>

@@ -146,6 +146,36 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_dataset_path" value="biobb_ml/classification/dataset_random_forest_classifier.csv" />
+        
+        <param name="independent_vars" value="{&#39;indexes&#39;: [0, 1, 2, 3, 4]}" />
+        
+        <param name="target" value="{&#39;index&#39;: 5}" />
+        
+        <param name="n_estimators" value="100" />
+        
+        <param name="bootstrap" value="True" />
+        
+        <param name="normalize_cm" value="False" />
+        
+        <param name="test_size" value="0.2" />
+        
+        <param name="scale" value="True" />
+        
+        
+        <output name="output_model_path" file="biobb_ml/classification/ref_output_model_random_forest_classifier.pkl" />
+        
+        <output name="output_model_path" file="biobb_ml/sklearn.ensemble.RandomForestClassifier/output_model.pkl" />
+        
+        <output name="output_test_table_path" file="biobb_ml/classification/ref_output_test_random_forest_classifier.csv" />
+        
+        <output name="output_test_table_path" file="biobb_ml/sklearn.ensemble.RandomForestClassifier/output_test.csv" />
+        
+        <output name="output_plot_path" file="biobb_ml/classification/ref_output_plot_random_forest_classifier.png" />
+        
+        <output name="output_plot_path" file="biobb_ml/sklearn.ensemble.RandomForestClassifier/output_plot.png" />
+        
         </test>
     </tests>    
     <help>

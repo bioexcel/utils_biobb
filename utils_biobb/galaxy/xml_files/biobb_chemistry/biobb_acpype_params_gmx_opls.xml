@@ -105,6 +105,18 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_path" value="biobb_chemistry/acpype/acpype.params.mol2" />
+        
+        <param name="basename" value="BBB" />
+        
+        <param name="charge" value="0" />
+        
+        
+        <output name="output_path_itp" file="biobb_chemistry/ACPype/ref_acpype.gmx.opls.itp" />
+        
+        <output name="output_path_top" file="biobb_chemistry/ACPype/ref_acpype.gmx.opls.top" />
+        
         </test>
     </tests>    
     <help>

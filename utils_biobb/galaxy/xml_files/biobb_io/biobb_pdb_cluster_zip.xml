@@ -129,6 +129,20 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="pdb_code" value="2vgb" />
+        
+        <param name="filter" value="[&#39;ATOM&#39;, &#39;MODEL&#39;, &#39;ENDMDL&#39;]" />
+        
+        <param name="cluster" value="90" />
+        
+        <param name="api_id" value="pdbe" />
+        
+        
+        <output name="output_pdb_zip_path" file="biobb_io/api/output_pdb_cluster.zip" />
+        
+        <output name="output_pdb_zip_path" file="biobb_io/api/output_pdb_zip_path.zip" />
+        
         </test>
     </tests>    
     <help>

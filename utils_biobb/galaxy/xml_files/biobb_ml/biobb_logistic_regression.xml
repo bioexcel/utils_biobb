@@ -175,6 +175,36 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_dataset_path" value="biobb_ml/classification/dataset_logistic_regression.csv" />
+        
+        <param name="independent_vars" value="{&#39;columns&#39;: [&#39;mean area&#39;, &#39;mean compactness&#39;]}" />
+        
+        <param name="target" value="{&#39;column&#39;: &#39;benign&#39;}" />
+        
+        <param name="solver" value="liblinear" />
+        
+        <param name="c_parameter" value="0.01" />
+        
+        <param name="normalize_cm" value="False" />
+        
+        <param name="test_size" value="0.2" />
+        
+        <param name="scale" value="True" />
+        
+        
+        <output name="output_model_path" file="biobb_ml/classification/ref_output_model_logistic_regression.pkl" />
+        
+        <output name="output_model_path" file="biobb_ml/sklearn.linear_model.LogisticRegression/output_model.pkl" />
+        
+        <output name="output_test_table_path" file="biobb_ml/classification/ref_output_test_logistic_regression.csv" />
+        
+        <output name="output_test_table_path" file="biobb_ml/sklearn.linear_model.LogisticRegression/output_test.csv" />
+        
+        <output name="output_plot_path" file="biobb_ml/classification/ref_output_plot_logistic_regression.png" />
+        
+        <output name="output_plot_path" file="biobb_ml/sklearn.linear_model.LogisticRegression/output_plot.png" />
+        
         </test>
     </tests>    
     <help>

@@ -1,8 +1,8 @@
-<tool id="biobb_structure_utils_structure_check_ext" name="StructureCheck" version="3.7.6" >
+<tool id="biobb_structure_utils_structure_check_ext" name="StructureCheck" version="3.7.4" >
     <description>: This class is a wrapper of the Structure Checking tool to generate summary checking results on a json file.</description>
     <requirements>
         <requirement type="package"
-        version="3.7.6"
+        version="3.7.4"
         >biobb_structure_utils</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__features__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.features)}__dq____cb__,__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
+            --config '__oc____dq__features__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.features)}__dq____cb__,__dq__check_structure_path__dq__:__dq__${properties.check_structure_path}__dq____cc__'
           #end if
         
           #if str($input_structure_path) != 'None':
@@ -137,7 +137,7 @@
                   
                 </param>
             
-              <param name="binary_path" type="text" label="binary_path" help="path to the check_structure application" optional="false"
+              <param name="check_structure_path" type="text" label="check_structure_path" help="path to the check_structure application" optional="false"
                   value="check_structure"
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
@@ -153,6 +153,16 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_structure_path" value="biobb_structure_utils/utils/2vgb.pdb" />
+        
+        <param name="features" value="[&#39;chains&#39;, &#39;models&#39;]" />
+        
+        
+        <output name="output_summary_path" file="biobb_structure_utils/utils/summary.json" />
+        
+        <output name="output_summary_path" file="biobb_structure_utils/Structure Checking from MDWeb/output_summary_path.json" />
+        
         </test>
     </tests>    
     <help>

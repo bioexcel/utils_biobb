@@ -91,6 +91,16 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_model_path" value="biobb_ml/classification/model_classification_predict.pkl" />
+        
+        <param name="input_dataset_path" value="biobb_ml/classification/input_classification_predict.csv" />
+        
+        
+        <output name="output_results_path" file="biobb_ml/classification/ref_output_classification_predict.csv" />
+        
+        <output name="output_results_path" file="biobb_ml/In house using sklearn/output_results.csv" />
+        
         </test>
     </tests>    
     <help>

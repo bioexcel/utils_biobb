@@ -215,6 +215,26 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_a_xvg_zip_path" value="biobb_pmx/pmx/xvg_A.zip" />
+        
+        <param name="input_b_xvg_zip_path" value="biobb_pmx/pmx/xvg_B.zip" />
+        
+        <param name="method" value="CGI BAR JARZ" />
+        
+        <param name="temperature" value="298.15" />
+        
+        <param name="dpi" value="600" />
+        
+        
+        <output name="output_result_path" file="biobb_pmx/pmx/ref_result.txt" />
+        
+        <output name="output_result_path" file="biobb_pmx/pmx/result.txt" />
+        
+        <output name="output_work_plot_path" file="biobb_pmx/pmx/ref_plot.png" />
+        
+        <output name="output_work_plot_path" file="biobb_pmx/pmx/plot.png" />
+        
         </test>
     </tests>    
     <help>

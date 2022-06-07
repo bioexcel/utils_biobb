@@ -357,6 +357,28 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_pdb_path" value="biobb_vs/utils/bindingsite.pdb" />
+        
+        <param name="input_clusters_zip" value="biobb_vs/utils/bindingsite.zip" />
+        
+        <param name="ligand" value="PGA" />
+        
+        <param name="radius" value="5" />
+        
+        <param name="max_num_ligands" value="15" />
+        
+        <param name="matrix_name" value="blosum62" />
+        
+        <param name="gap_open" value="-10.0" />
+        
+        <param name="gap_extend" value="-0.5" />
+        
+        
+        <output name="output_pdb_path" file="biobb_vs/utils/ref_output_bindingsite.pdb" />
+        
+        <output name="output_pdb_path" file="biobb_vs/in house using biopython/output_bindingsite.pdb" />
+        
         </test>
     </tests>    
     <help>

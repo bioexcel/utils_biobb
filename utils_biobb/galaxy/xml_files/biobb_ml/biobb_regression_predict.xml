@@ -91,6 +91,16 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_model_path" value="biobb_ml/regression/model_regression_predict.pkl" />
+        
+        <param name="predictions" value="[{&#39;LSTAT&#39;: 4.98, &#39;ZN&#39;: 18.0, &#39;RM&#39;: 6.575, &#39;AGE&#39;: 65.2}, {&#39;LSTAT&#39;: 9.14, &#39;ZN&#39;: 0.0, &#39;RM&#39;: 6.421, &#39;AGE&#39;: 78.9}]" />
+        
+        
+        <output name="output_results_path" file="biobb_ml/regression/ref_output_regression_predict.csv" />
+        
+        <output name="output_results_path" file="biobb_ml/In house using sklearn/output_results.csv" />
+        
         </test>
     </tests>    
     <help>

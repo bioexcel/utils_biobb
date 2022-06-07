@@ -107,6 +107,24 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_dataset_path" value="biobb_ml/clustering/dataset_spectral_coefficient.csv" />
+        
+        <param name="predictors" value="{&#39;columns&#39;: [&#39;sepal_length&#39;, &#39;sepal_width&#39;]}" />
+        
+        <param name="max_clusters" value="10" />
+        
+        <param name="scale" value="True" />
+        
+        
+        <output name="output_results_path" file="biobb_ml/clustering/ref_output_results_spectral_coefficient.csv" />
+        
+        <output name="output_results_path" file="biobb_ml/klearn.cluster.SpectralClustering/output_results.csv" />
+        
+        <output name="output_plot_path" file="biobb_ml/clustering/ref_output_plot_spectral_coefficient.png" />
+        
+        <output name="output_plot_path" file="biobb_ml/klearn.cluster.SpectralClustering/output_plot.png" />
+        
         </test>
     </tests>    
     <help>

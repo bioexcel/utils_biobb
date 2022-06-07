@@ -387,6 +387,26 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_top_path" value="biobb_analysis/ambertools/cpptraj.parm.top" />
+        
+        <param name="input_traj_path" value="biobb_analysis/ambertools/cpptraj.traj.dcd" />
+        
+        <param name="start" value="1" />
+        
+        <param name="end" value="-1" />
+        
+        <param name="steps" value="1" />
+        
+        <param name="mask" value="c-alpha" />
+        
+        <param name="format" value="pdb" />
+        
+        
+        <output name="output_cpptraj_path" file="biobb_analysis/ambertools/ref_cpptraj.average.pdb" />
+        
+        <output name="output_cpptraj_path" file="biobb_analysis/Ambertools cpptraj/output.pdb" />
+        
         </test>
     </tests>    
     <help>

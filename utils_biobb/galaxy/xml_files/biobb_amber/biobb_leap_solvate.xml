@@ -423,6 +423,30 @@
     </outputs>
     <tests>
         <test>
+        
+        <param name="input_pdb_path" value="biobb_amber/leap/structure.leapin.pdb" />
+        
+        <param name="forcefield" value="[&#39;protein.ff14SB&#39;]" />
+        
+        <param name="water_type" value="TIP3PBOX" />
+        
+        <param name="box_type" value="truncated_octahedron" />
+        
+        <param name="distance_to_molecule" value="9.0" />
+        
+        
+        <output name="output_pdb_path" file="biobb_amber/leap/structure.solv.pdb" />
+        
+        <output name="output_pdb_path" file="biobb_amber/tLeap/output.solv.pdb" />
+        
+        <output name="output_top_path" file="biobb_amber/leap/structure.solv.top" />
+        
+        <output name="output_top_path" file="biobb_amber/tLeap/output.solv.top" />
+        
+        <output name="output_crd_path" file="biobb_amber/leap/structure.solv.crd" />
+        
+        <output name="output_crd_path" file="biobb_amber/tLeap/output.solv.crd" />
+        
         </test>
     </tests>    
     <help>
