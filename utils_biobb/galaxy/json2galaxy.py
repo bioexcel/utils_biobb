@@ -29,7 +29,7 @@ SECTIONS = {
     'biobb_chemistry': 'Small molecules',
     'biobb_pmx': 'PMX Free Energy calculation',
     'biobb_vs': 'Virtual Screening / Docking',
-    'biobb_ml': 'Machile Learning'
+    'biobb_ml': 'Machine Learning'
 }
 
 TRANS_TOOLS = {
