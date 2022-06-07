@@ -1,2 +1,22 @@
-python json2galaxy.py --template biobb_galaxy_tool_template.xml --tools_xml xml_files/biobb_tool_conf.xml --file_types ../../../ > update.log
+#!/bin/csh
+python json2galaxy.py --template biobb_galaxy_tool_template.xml --tools_xml xml_files/biobb_tool_conf.xml --file_types $1 > update.log
 grep '#TYP' update.log > data_types.log 
+foreach x (xml_files/biobb*/*xml)
+echo "linting "$x
+planemo l $x > $x.lint.log
+grep ERROR $x.lint.log
+grep WARNING $x.lint.log
+end
+echo "Updating test data..."
+set root_dir=$1
+set galaxy=`pwd`
+set test_data=$galaxy/test-data
+cd $root_dir
+foreach f (biobb*)
+  if (-e $f/$f/test) then
+    rsync -a --exclude=config $root_dir/$f/$f/test/data/ $test_data/$f
+    rsync -a $root_dir/$f/$f/test/reference/ $test_data/$f
+  endif
+end
+cd $galaxy
+
