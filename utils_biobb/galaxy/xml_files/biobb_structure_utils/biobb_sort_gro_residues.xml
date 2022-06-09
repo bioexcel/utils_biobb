@@ -1,8 +1,8 @@
-<tool id="biobb_structure_utils_sort_gro_residues_ext" name="SortGroResidues" version="3.7.4" >
+<tool id="biobb_structure_utils_sort_gro_residues_ext" name="SortGroResidues" version="3.7.6" >
     <description>: Class to sort the selected residues from a GRO 3D structure.</description>
     <requirements>
         <requirement type="package"
-        version="3.7.4"
+        version="3.7.6"
         >biobb_structure_utils</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -82,14 +82,12 @@
     <tests>
         <test>
         
-        <param name="input_gro_path" value="biobb_structure_utils/utils/WT_aq4_md_1.gro" />
+	<param name="input_gro_path" value="biobb_structure_utils/utils/WT_aq4_md_1.gro" ftype="gro" />
         
-        <param name="residue_name_list" value="[&#39;NA&#39;, &#39;CL&#39;, &#39;SOL&#39;]" />
+	<param name="residue_name_list" value="[&#39;NA&#39;, &#39;CL&#39;, &#39;SOL&#39;]" ftype="" />
         
         
         <output name="output_gro_path" file="biobb_structure_utils/utils/WT_aq4_md_sorted.gro" />
-        
-        <output name="output_gro_path" file="biobb_structure_utils/in house/output_gro_path.gro" />
         
         </test>
     </tests>    

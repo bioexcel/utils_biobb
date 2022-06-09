@@ -285,17 +285,17 @@
     <tests>
         <test>
         
-        <param name="input_gro_path" value="biobb_md/gromacs/grompp.gro" />
+	<param name="input_gro_path" value="biobb_md/gromacs/grompp.gro" ftype="gro" />
         
-        <param name="input_top_zip_path" value="biobb_md/gromacs/grompp.zip" />
+	<param name="input_top_zip_path" value="biobb_md/gromacs/grompp.zip" ftype="zip" />
         
-        <param name="mdp" value="{&#39;ld-seed&#39;: &#39;1&#39;, &#39;dt&#39;: 0.0001}" />
+	<param name="mdp" value="{&#39;ld-seed&#39;: &#39;1&#39;, &#39;dt&#39;: 0.0001}" ftype="" />
         
-        <param name="simulation_type" value="free" />
+	<param name="simulation_type" value="free" ftype="" />
         
-        <param name="maxwarn" value="1" />
+	<param name="maxwarn" value="1" ftype="" />
         
-        <param name="gmx_path" value="gmx" />
+	<param name="gmx_path" value="gmx" ftype="" />
         
         
         <output name="output_trr_path" file="biobb_md/gromacs/ref_grompp_mdrun.trr" />

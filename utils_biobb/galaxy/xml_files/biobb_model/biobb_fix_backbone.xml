@@ -92,6 +92,16 @@
     </outputs>
     <tests>
         <test>
+        
+	<param name="input_pdb_path" value="biobb_model/model/2ki5.pdb" ftype="pdb" />
+        
+	<param name="input_fasta_canonical_sequence_path" value="biobb_model/model/2ki5.fasta" ftype="fasta" />
+        
+	<param name="add_caps" value="True" ftype="" />
+        
+        
+        <output name="output_pdb_path" file="biobb_model/model/output_fixbackbone_pdb_path.pdb" />
+        
         </test>
     </tests>    
     <help>

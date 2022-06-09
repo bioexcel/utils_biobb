@@ -112,17 +112,17 @@
     <tests>
         <test>
         
-        <param name="input_dataset_path" value="biobb_ml/dimensionality_reduction/dataset_pls_regression.csv" />
+	<param name="input_dataset_path" value="biobb_ml/dimensionality_reduction/dataset_pls_regression.csv" ftype="csv" />
         
-        <param name="features" value="{&#39;range&#39;: [[0, 29]]}" />
+	<param name="features" value="{&#39;range&#39;: [[0, 29]]}" ftype="" />
         
-        <param name="target" value="{&#39;index&#39;: 30}" />
+	<param name="target" value="{&#39;index&#39;: 30}" ftype="" />
         
-        <param name="n_components" value="12" />
+	<param name="n_components" value="12" ftype="" />
         
-        <param name="cv" value="10" />
+	<param name="cv" value="10" ftype="" />
         
-        <param name="scale" value="True" />
+	<param name="scale" value="True" ftype="" />
         
         
         <output name="output_results_path" file="biobb_ml/dimensionality_reduction/ref_output_results_pls_regression.csv" />

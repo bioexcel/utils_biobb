@@ -106,9 +106,9 @@
     <tests>
         <test>
         
-        <param name="input_top_zip_path" value="biobb_pmx/pmx/mut_gmx.top.zip" />
+	<param name="input_top_zip_path" value="biobb_pmx/pmx/mut_gmx.top.zip" ftype="zip" />
         
-        <param name="force_field" value="amber99sb-star-ildn-mut" />
+	<param name="force_field" value="amber99sb-star-ildn-mut" ftype="" />
         
         
         <output name="output_top_zip_path" file="biobb_pmx/pmx/ref_mut_gmx_hybrid_top.zip" />

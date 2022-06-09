@@ -92,9 +92,9 @@
     <tests>
         <test>
         
-        <param name="input_model_path" value="biobb_ml/neural_networks/input_model_predict.h5" />
+	<param name="input_model_path" value="biobb_ml/neural_networks/input_model_predict.h5" ftype="h5" />
         
-        <param name="predictions" value="[{&#39;ZN&#39;: 18.0, &#39;RM&#39;: 6.575, &#39;AGE&#39;: 65.2, &#39;LSTAT&#39;: 4.98}, {&#39;ZN&#39;: 0.0, &#39;RM&#39;: 6.421, &#39;AGE&#39;: 78.9, &#39;LSTAT&#39;: 9.14}, {&#39;ZN&#39;: 0.0, &#39;RM&#39;: 7.185, &#39;AGE&#39;: 61.1, &#39;LSTAT&#39;: 4.03}]" />
+	<param name="predictions" value="[{&#39;ZN&#39;: 18.0, &#39;RM&#39;: 6.575, &#39;AGE&#39;: 65.2, &#39;LSTAT&#39;: 4.98}, {&#39;ZN&#39;: 0.0, &#39;RM&#39;: 6.421, &#39;AGE&#39;: 78.9, &#39;LSTAT&#39;: 9.14}, {&#39;ZN&#39;: 0.0, &#39;RM&#39;: 7.185, &#39;AGE&#39;: 61.1, &#39;LSTAT&#39;: 4.03}]" ftype="" />
         
         
         <output name="output_results_path" file="biobb_ml/neural_networks/ref_output_predict.csv" />

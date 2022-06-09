@@ -61,9 +61,9 @@
     <tests>
         <test>
         
-        <param name="input_top_path" value="biobb_amber/ambpdb/structure.leap.top" />
+	<param name="input_top_path" value="biobb_amber/ambpdb/structure.leap.top" ftype="top" />
         
-        <param name="input_crd_path" value="biobb_amber/ambpdb/structure.leap.crd" />
+	<param name="input_crd_path" value="biobb_amber/ambpdb/structure.leap.crd" ftype="crd" />
         
         
         <output name="output_pdb_path" file="biobb_amber/ambpdb/structure.ambpdb.pdb" />

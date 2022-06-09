@@ -108,13 +108,13 @@
     <tests>
         <test>
         
-        <param name="input_dataset_path" value="biobb_ml/clustering/dataset_spectral_coefficient.csv" />
+	<param name="input_dataset_path" value="biobb_ml/clustering/dataset_spectral_coefficient.csv" ftype="csv" />
         
-        <param name="predictors" value="{&#39;columns&#39;: [&#39;sepal_length&#39;, &#39;sepal_width&#39;]}" />
+	<param name="predictors" value="{&#39;columns&#39;: [&#39;sepal_length&#39;, &#39;sepal_width&#39;]}" ftype="" />
         
-        <param name="max_clusters" value="10" />
+	<param name="max_clusters" value="10" ftype="" />
         
-        <param name="scale" value="True" />
+	<param name="scale" value="True" ftype="" />
         
         
         <output name="output_results_path" file="biobb_ml/clustering/ref_output_results_spectral_coefficient.csv" />

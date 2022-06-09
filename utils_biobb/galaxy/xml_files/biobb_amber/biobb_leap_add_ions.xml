@@ -414,21 +414,21 @@
     <tests>
         <test>
         
-        <param name="input_pdb_path" value="biobb_amber/leap/structure.ions.input.pdb" />
+	<param name="input_pdb_path" value="biobb_amber/leap/structure.ions.input.pdb" ftype="pdb" />
         
-        <param name="forcefield" value="[&#39;protein.ff14SB&#39;, &#39;DNA.bsc1&#39;]" />
+	<param name="forcefield" value="[&#39;protein.ff14SB&#39;, &#39;DNA.bsc1&#39;]" ftype="" />
         
-        <param name="water_type" value="TIP3PBOX" />
+	<param name="water_type" value="TIP3PBOX" ftype="" />
         
-        <param name="box_type" value="truncated_octahedron" />
+	<param name="box_type" value="truncated_octahedron" ftype="" />
         
-        <param name="neutralise" value="True" />
+	<param name="neutralise" value="True" ftype="" />
         
-        <param name="ionic_concentration" value="150" />
+	<param name="ionic_concentration" value="150" ftype="" />
         
-        <param name="positive_ions_type" value="K+" />
+	<param name="positive_ions_type" value="K+" ftype="" />
         
-        <param name="negative_ions_type" value="Cl-" />
+	<param name="negative_ions_type" value="Cl-" ftype="" />
         
         
         <output name="output_pdb_path" file="biobb_amber/leap/structure.ions.pdb" />

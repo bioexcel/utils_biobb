@@ -231,25 +231,25 @@
     <tests>
         <test>
         
-        <param name="input_dataset_path" value="biobb_ml/neural_networks/dataset_regression.csv" />
+	<param name="input_dataset_path" value="biobb_ml/neural_networks/dataset_regression.csv" ftype="csv" />
         
-        <param name="features" value="{&#39;columns&#39;: [&#39;ZN&#39;, &#39;RM&#39;, &#39;AGE&#39;, &#39;LSTAT&#39;]}" />
+	<param name="features" value="{&#39;columns&#39;: [&#39;ZN&#39;, &#39;RM&#39;, &#39;AGE&#39;, &#39;LSTAT&#39;]}" ftype="" />
         
-        <param name="target" value="{&#39;column&#39;: &#39;MEDV&#39;}" />
+	<param name="target" value="{&#39;column&#39;: &#39;MEDV&#39;}" ftype="" />
         
-        <param name="validation_size" value="0.2" />
+	<param name="validation_size" value="0.2" ftype="" />
         
-        <param name="test_size" value="0.2" />
+	<param name="test_size" value="0.2" ftype="" />
         
-        <param name="hidden_layers" value="[{&#39;size&#39;: 10, &#39;activation&#39;: &#39;relu&#39;}, {&#39;size&#39;: 8, &#39;activation&#39;: &#39;relu&#39;}]" />
+	<param name="hidden_layers" value="[{&#39;size&#39;: 10, &#39;activation&#39;: &#39;relu&#39;}, {&#39;size&#39;: 8, &#39;activation&#39;: &#39;relu&#39;}]" ftype="" />
         
-        <param name="optimizer" value="Adam" />
+	<param name="optimizer" value="Adam" ftype="" />
         
-        <param name="learning_rate" value="0.01" />
+	<param name="learning_rate" value="0.01" ftype="" />
         
-        <param name="batch_size" value="32" />
+	<param name="batch_size" value="32" ftype="" />
         
-        <param name="max_epochs" value="150" />
+	<param name="max_epochs" value="150" ftype="" />
         
         
         <output name="output_model_path" file="biobb_ml/neural_networks/ref_output_model_regression.h5" />

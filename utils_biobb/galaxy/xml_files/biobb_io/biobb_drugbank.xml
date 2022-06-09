@@ -74,12 +74,10 @@
     <tests>
         <test>
         
-        <param name="drugbank_id" value="DB00530" />
+	<param name="drugbank_id" value="DB00530" ftype="" />
         
         
         <output name="output_sdf_path" file="biobb_io/api/output_drugbank.sdf" />
-        
-        <output name="output_sdf_path" file="biobb_io/api/output_sdf_path.sdf" />
         
         </test>
     </tests>    

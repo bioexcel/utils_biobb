@@ -133,9 +133,9 @@
     <tests>
         <test>
         
-        <param name="input_pdb_path" value="biobb_cmip/cmip/1kim_h.pdb" />
+	<param name="input_pdb_path" value="biobb_cmip/cmip/1kim_h.pdb" ftype="pdb" />
         
-        <param name="neutral" value="True" />
+	<param name="neutral" value="True" ftype="" />
         
         
         <output name="output_pdb_path" file="biobb_cmip/cmip/titration.pdb" />

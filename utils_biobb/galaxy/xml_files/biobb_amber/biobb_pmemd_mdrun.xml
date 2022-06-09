@@ -406,13 +406,13 @@
     <tests>
         <test>
         
-        <param name="input_top_path" value="biobb_amber/sander/cln025.prmtop" />
+	<param name="input_top_path" value="biobb_amber/sander/cln025.prmtop" ftype="prmtop" />
         
-        <param name="input_crd_path" value="biobb_amber/sander/cln025.inpcrd" />
+	<param name="input_crd_path" value="biobb_amber/sander/cln025.inpcrd" ftype="inpcrd" />
         
-        <param name="mdin" value="{&#39;maxcyc&#39;: 500, &#39;ntwx&#39;: 100, &#39;ioutfm&#39;: 0}" />
+	<param name="mdin" value="{&#39;maxcyc&#39;: 500, &#39;ntwx&#39;: 100, &#39;ioutfm&#39;: 0}" ftype="" />
         
-        <param name="simulation_type" value="minimization" />
+	<param name="simulation_type" value="minimization" ftype="" />
         
         
         <output name="output_log_path" file="biobb_amber/pmemd/pmemd.log" />

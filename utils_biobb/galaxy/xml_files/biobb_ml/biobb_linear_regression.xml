@@ -127,15 +127,15 @@
     <tests>
         <test>
         
-        <param name="input_dataset_path" value="biobb_ml/regression/dataset_linear_regression.csv" />
+	<param name="input_dataset_path" value="biobb_ml/regression/dataset_linear_regression.csv" ftype="csv" />
         
-        <param name="independent_vars" value="{&#39;columns&#39;: [&#39;size&#39;, &#39;year&#39;, &#39;view&#39;]}" />
+	<param name="independent_vars" value="{&#39;columns&#39;: [&#39;size&#39;, &#39;year&#39;, &#39;view&#39;]}" ftype="" />
         
-        <param name="target" value="{&#39;column&#39;: &#39;price&#39;}" />
+	<param name="target" value="{&#39;column&#39;: &#39;price&#39;}" ftype="" />
         
-        <param name="test_size" value="0.2" />
+	<param name="test_size" value="0.2" ftype="" />
         
-        <param name="scale" value="True" />
+	<param name="scale" value="True" ftype="" />
         
         
         <output name="output_model_path" file="biobb_ml/regression/ref_output_model_linear_regression.pkl" />

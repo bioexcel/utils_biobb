@@ -169,9 +169,9 @@
     <tests>
         <test>
         
-        <param name="input_path" value="biobb_chemistry/ambertools/reduce.no.H.pdb" />
+	<param name="input_path" value="biobb_chemistry/ambertools/reduce.no.H.pdb" ftype="pdb" />
         
-        <param name="nooh" value="True" />
+	<param name="nooh" value="True" ftype="" />
         
         
         <output name="output_path" file="biobb_chemistry/AmberTools Reduce/output.pdb" />

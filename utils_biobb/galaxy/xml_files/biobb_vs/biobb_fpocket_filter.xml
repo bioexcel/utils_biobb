@@ -100,15 +100,15 @@
     <tests>
         <test>
         
-        <param name="input_pockets_zip" value="biobb_vs/fpocket/input_pockets.zip" />
+	<param name="input_pockets_zip" value="biobb_vs/fpocket/input_pockets.zip" ftype="zip" />
         
-        <param name="input_summary" value="biobb_vs/fpocket/input_summary.json" />
+	<param name="input_summary" value="biobb_vs/fpocket/input_summary.json" ftype="json" />
         
-        <param name="score" value="[0.2, 1]" />
+	<param name="score" value="[0.2, 1]" ftype="" />
         
-        <param name="druggability_score" value="[0.2, 0.9]" />
+	<param name="druggability_score" value="[0.2, 0.9]" ftype="" />
         
-        <param name="volume" value="[100, 600]" />
+	<param name="volume" value="[100, 600]" ftype="" />
         
         
         <output name="output_filter_pockets_zip" file="biobb_vs/fpocket/ref_output_filter_pockets.zip" />

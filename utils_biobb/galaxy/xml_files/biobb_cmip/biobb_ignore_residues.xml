@@ -89,9 +89,9 @@
     <tests>
         <test>
         
-        <param name="input_cmip_pdb_path" value="biobb_cmip/cmip/input_ignore_res.pdb" />
+	<param name="input_cmip_pdb_path" value="biobb_cmip/cmip/input_ignore_res.pdb" ftype="pdb" />
         
-        <param name="residue_list" value="3" />
+	<param name="residue_list" value="3" ftype="" />
         
         
         <output name="output_cmip_pdb_path" file="biobb_cmip/Ignore Residues/ignore_residues_output.pdb" />

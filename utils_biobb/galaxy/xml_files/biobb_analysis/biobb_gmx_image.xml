@@ -634,25 +634,25 @@
     <tests>
         <test>
         
-        <param name="input_traj_path" value="biobb_analysis/gromacs/trajectory.trr" />
+	<param name="input_traj_path" value="biobb_analysis/gromacs/trajectory.trr" ftype="trr" />
         
-        <param name="input_top_path" value="biobb_analysis/gromacs/topology.tpr" />
+	<param name="input_top_path" value="biobb_analysis/gromacs/topology.tpr" ftype="tpr" />
         
-        <param name="input_index_path" value="biobb_analysis/gromacs/index.ndx" />
+	<param name="input_index_path" value="biobb_analysis/gromacs/index.ndx" ftype="ndx" />
         
-        <param name="fit_selection" value="System" />
+	<param name="fit_selection" value="System" ftype="" />
         
-        <param name="center_selection" value="System" />
+	<param name="center_selection" value="System" ftype="" />
         
-        <param name="output_selection" value="System" />
+	<param name="output_selection" value="System" ftype="" />
         
-        <param name="pbc" value="mol" />
+	<param name="pbc" value="mol" ftype="" />
         
-        <param name="center" value="True" />
+	<param name="center" value="True" ftype="" />
         
-        <param name="ur" value="compact" />
+	<param name="ur" value="compact" ftype="" />
         
-        <param name="fit" value="rot+trans" />
+	<param name="fit" value="rot+trans" ftype="" />
         
         
         <output name="output_traj_path" file="biobb_analysis/gromacs/ref_image.xtc" />

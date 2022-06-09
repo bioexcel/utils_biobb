@@ -126,7 +126,7 @@
     <tests>
         <test>
         
-        <param name="sequence" value="GCGCGGCTGATAAACGAAAGC" />
+	<param name="sequence" value="GCGCGGCTGATAAACGAAAGC" ftype="" />
         
         
         <output name="output_pdb_path" file="biobb_amber/nab/ref_nab_build_dna_structure.pdb" />

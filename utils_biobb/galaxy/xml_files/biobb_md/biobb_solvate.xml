@@ -149,11 +149,11 @@
     <tests>
         <test>
         
-        <param name="input_solute_gro_path" value="biobb_md/gromacs/solvate.gro" />
+	<param name="input_solute_gro_path" value="biobb_md/gromacs/solvate.gro" ftype="gro" />
         
-        <param name="input_top_zip_path" value="biobb_md/gromacs/solvate.zip" />
+	<param name="input_top_zip_path" value="biobb_md/gromacs/solvate.zip" ftype="zip" />
         
-        <param name="gmx_path" value="gmx" />
+	<param name="gmx_path" value="gmx" ftype="" />
         
         
         <output name="output_gro_path" file="biobb_md/gromacs/ref_solvate.gro" />

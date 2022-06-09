@@ -50,6 +50,12 @@
     </outputs>
     <tests>
         <test>
+        
+	<param name="input_pdb_path" value="biobb_model/model/3e2y.pdb" ftype="pdb" />
+        
+        
+        <output name="output_pdb_path" file="biobb_model/model/output_chirality_pdb_path.pdb" />
+        
         </test>
     </tests>    
     <help>

@@ -1,8 +1,8 @@
-<tool id="biobb_structure_utils_extract_atoms_ext" name="ExtractAtoms" version="3.7.4" >
+<tool id="biobb_structure_utils_extract_atoms_ext" name="ExtractAtoms" version="3.7.6" >
     <description>: Class to extract atoms from a 3D structure.</description>
     <requirements>
         <requirement type="package"
-        version="3.7.4"
+        version="3.7.6"
         >biobb_structure_utils</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -107,9 +107,9 @@
     <tests>
         <test>
         
-        <param name="input_structure_path" value="biobb_structure_utils/utils/2vgb.pdb" />
+	<param name="input_structure_path" value="biobb_structure_utils/utils/2vgb.pdb" ftype="pdb" />
         
-        <param name="regular_expression_pattern" value="OE2" />
+	<param name="regular_expression_pattern" value="OE2" ftype="" />
         
         
         <output name="output_structure_path" file="biobb_structure_utils/in house/output_structure_path.pdb" />

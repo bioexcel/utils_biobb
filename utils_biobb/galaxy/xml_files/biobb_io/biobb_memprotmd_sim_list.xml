@@ -44,8 +44,6 @@
         
         <output name="output_simulations" file="biobb_io/api/output_sim_list.json" />
         
-        <output name="output_simulations" file="biobb_io/api/output_simulations.json" />
-        
         </test>
     </tests>    
     <help>

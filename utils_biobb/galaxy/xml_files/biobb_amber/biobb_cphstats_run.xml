@@ -434,9 +434,9 @@
     <tests>
         <test>
         
-        <param name="input_cpin_path" value="biobb_amber/cphstats/structure.cpin" />
+	<param name="input_cpin_path" value="biobb_amber/cphstats/structure.cpin" ftype="cpin" />
         
-        <param name="input_cpout_path" value="biobb_amber/cphstats/sander.pH.cpout" />
+	<param name="input_cpout_path" value="biobb_amber/cphstats/sander.pH.cpout" ftype="cpout" />
         
         
         <output name="output_dat_path" file="biobb_amber/cphstats/cphstats.pH.dat" />

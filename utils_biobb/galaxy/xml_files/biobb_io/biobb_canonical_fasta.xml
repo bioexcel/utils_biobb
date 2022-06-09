@@ -96,14 +96,12 @@
     <tests>
         <test>
         
-        <param name="pdb_code" value="4i23" />
+	<param name="pdb_code" value="4i23" ftype="" />
         
-        <param name="api_id" value="pdbe" />
+	<param name="api_id" value="pdbe" ftype="" />
         
         
         <output name="output_fasta_path" file="biobb_io/api/canonical_fasta.fasta" />
-        
-        <output name="output_fasta_path" file="biobb_io/api/output_fasta_path.fasta" />
         
         </test>
     </tests>    

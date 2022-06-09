@@ -416,9 +416,9 @@
     <tests>
         <test>
         
-        <param name="input_energy_path" value="biobb_analysis/gromacs/energy.edr" />
+	<param name="input_energy_path" value="biobb_analysis/gromacs/energy.edr" ftype="edr" />
         
-        <param name="terms" value="[&#39;Potential&#39;, &#39;Pressure&#39;]" />
+	<param name="terms" value="[&#39;Potential&#39;, &#39;Pressure&#39;]" ftype="" />
         
         
         <output name="output_xvg_path" file="biobb_analysis/gromacs/ref_energy.xvg" />

@@ -225,11 +225,11 @@
     <tests>
         <test>
         
-        <param name="input_tpr_path" value="biobb_md/gromacs/mdrun.tpr" />
+	<param name="input_tpr_path" value="biobb_md/gromacs/mdrun.tpr" ftype="tpr" />
         
-        <param name="num_threads" value="0" />
+	<param name="num_threads" value="0" ftype="" />
         
-        <param name="gmx_path" value="gmx" />
+	<param name="gmx_path" value="gmx" ftype="" />
         
         
         <output name="output_trr_path" file="biobb_md/gromacs/ref_mdrun.trr" />

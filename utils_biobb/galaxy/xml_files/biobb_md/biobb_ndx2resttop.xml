@@ -100,11 +100,11 @@
     <tests>
         <test>
         
-        <param name="input_ndx_path" value="biobb_md/gromacs_extra/ndx2resttop.ndx" />
+	<param name="input_ndx_path" value="biobb_md/gromacs_extra/ndx2resttop.ndx" ftype="ndx" />
         
-        <param name="input_top_zip_path" value="biobb_md/gromacs_extra/ndx2resttop.zip" />
+	<param name="input_top_zip_path" value="biobb_md/gromacs_extra/ndx2resttop.zip" ftype="zip" />
         
-        <param name="ref_rest_chain_triplet_list" value="( Chain_A, Chain_A_noMut, A ), ( Chain_B, Chain_B_noMut, B ), ( Chain_C, Chain_C_noMut, C ), ( Chain_D, Chain_D_noMut, D )" />
+	<param name="ref_rest_chain_triplet_list" value="( Chain_A, Chain_A_noMut, A ), ( Chain_B, Chain_B_noMut, B ), ( Chain_C, Chain_C_noMut, C ), ( Chain_D, Chain_D_noMut, D )" ftype="" />
         
         
         <output name="output_top_zip_path" file="biobb_md/gromacs_extra/ref_ndx2resttop.zip" />

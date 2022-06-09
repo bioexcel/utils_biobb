@@ -251,11 +251,11 @@
     <tests>
         <test>
         
-        <param name="input_pdb_path" value="biobb_cmip/cmip/RBD-hACE2.hACE2.cmip.pdb" />
+	<param name="input_pdb_path" value="biobb_cmip/cmip/RBD-hACE2.hACE2.cmip.pdb" ftype="pdb" />
         
-        <param name="input_probe_pdb_path" value="biobb_cmip/cmip/RBD-hACE2.RBD.cmip.pdb" />
+	<param name="input_probe_pdb_path" value="biobb_cmip/cmip/RBD-hACE2.RBD.cmip.pdb" ftype="pdb" />
         
-        <param name="execution_type" value="energy" />
+	<param name="execution_type" value="energy" ftype="" />
         
         
         <output name="output_byat_path" file="biobb_cmip/cmip/RBD.energies.byat.out" />

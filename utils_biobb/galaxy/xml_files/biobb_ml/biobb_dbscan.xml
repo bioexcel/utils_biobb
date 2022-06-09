@@ -254,17 +254,17 @@
     <tests>
         <test>
         
-        <param name="input_dataset_path" value="biobb_ml/clustering/dataset_dbscan.csv" />
+	<param name="input_dataset_path" value="biobb_ml/clustering/dataset_dbscan.csv" ftype="csv" />
         
-        <param name="predictors" value="{&#39;columns&#39;: [&#39;sepal_length&#39;, &#39;sepal_width&#39;, &#39;petal_length&#39;, &#39;petal_width&#39;]}" />
+	<param name="predictors" value="{&#39;columns&#39;: [&#39;sepal_length&#39;, &#39;sepal_width&#39;, &#39;petal_length&#39;, &#39;petal_width&#39;]}" ftype="" />
         
-        <param name="eps" value="1.4" />
+	<param name="eps" value="1.4" ftype="" />
         
-        <param name="min_samples" value="3" />
+	<param name="min_samples" value="3" ftype="" />
         
-        <param name="plots" value="[{&#39;title&#39;: &#39;Plot 1&#39;, &#39;features&#39;: [&#39;sepal_length&#39;, &#39;sepal_width&#39;]}, {&#39;title&#39;: &#39;Plot 2&#39;, &#39;features&#39;: [&#39;petal_length&#39;, &#39;petal_width&#39;]}, {&#39;title&#39;: &#39;Plot 3&#39;, &#39;features&#39;: [&#39;sepal_length&#39;, &#39;sepal_width&#39;, &#39;petal_length&#39;]}, {&#39;title&#39;: &#39;Plot 4&#39;, &#39;features&#39;: [&#39;petal_length&#39;, &#39;petal_width&#39;, &#39;sepal_width&#39;]}, {&#39;title&#39;: &#39;Plot 5&#39;, &#39;features&#39;: [&#39;sepal_length&#39;, &#39;petal_width&#39;]}]" />
+	<param name="plots" value="[{&#39;title&#39;: &#39;Plot 1&#39;, &#39;features&#39;: [&#39;sepal_length&#39;, &#39;sepal_width&#39;]}, {&#39;title&#39;: &#39;Plot 2&#39;, &#39;features&#39;: [&#39;petal_length&#39;, &#39;petal_width&#39;]}, {&#39;title&#39;: &#39;Plot 3&#39;, &#39;features&#39;: [&#39;sepal_length&#39;, &#39;sepal_width&#39;, &#39;petal_length&#39;]}, {&#39;title&#39;: &#39;Plot 4&#39;, &#39;features&#39;: [&#39;petal_length&#39;, &#39;petal_width&#39;, &#39;sepal_width&#39;]}, {&#39;title&#39;: &#39;Plot 5&#39;, &#39;features&#39;: [&#39;sepal_length&#39;, &#39;petal_width&#39;]}]" ftype="" />
         
-        <param name="scale" value="True" />
+	<param name="scale" value="True" ftype="" />
         
         
         <output name="output_results_path" file="biobb_ml/clustering/ref_output_results_dbscan.csv" />

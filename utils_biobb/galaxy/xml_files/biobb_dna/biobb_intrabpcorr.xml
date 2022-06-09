@@ -149,19 +149,19 @@
     <tests>
         <test>
         
-        <param name="input_filename_shear" value="biobb_dna/correlation/canal_output_shear.ser" />
+	<param name="input_filename_shear" value="biobb_dna/correlation/canal_output_shear.ser" ftype="ser" />
         
-        <param name="input_filename_stretch" value="biobb_dna/correlation/canal_output_stretch.ser" />
+	<param name="input_filename_stretch" value="biobb_dna/correlation/canal_output_stretch.ser" ftype="ser" />
         
-        <param name="input_filename_stagger" value="biobb_dna/correlation/canal_output_stagger.ser" />
+	<param name="input_filename_stagger" value="biobb_dna/correlation/canal_output_stagger.ser" ftype="ser" />
         
-        <param name="input_filename_buckle" value="biobb_dna/correlation/canal_output_buckle.ser" />
+	<param name="input_filename_buckle" value="biobb_dna/correlation/canal_output_buckle.ser" ftype="ser" />
         
-        <param name="input_filename_propel" value="biobb_dna/correlation/canal_output_propel.ser" />
+	<param name="input_filename_propel" value="biobb_dna/correlation/canal_output_propel.ser" ftype="ser" />
         
-        <param name="input_filename_opening" value="biobb_dna/correlation/canal_output_opening.ser" />
+	<param name="input_filename_opening" value="biobb_dna/correlation/canal_output_opening.ser" ftype="ser" />
         
-        <param name="sequence" value="CGCGAATTCGCG" />
+	<param name="sequence" value="CGCGAATTCGCG" ftype="" />
         
         
         <output name="output_csv_path" file="biobb_dna/In House/intra_bpcorr.csv" />

@@ -74,12 +74,10 @@
     <tests>
         <test>
         
-        <param name="pdb_code" value="2vgb" />
+	<param name="pdb_code" value="2vgb" ftype="" />
         
         
         <output name="output_mutations_list_txt" file="biobb_io/api/output_pdb_variants.txt" />
-        
-        <output name="output_mutations_list_txt" file="biobb_io/api/output_mutations_list_txt.txt" />
         
         </test>
     </tests>    

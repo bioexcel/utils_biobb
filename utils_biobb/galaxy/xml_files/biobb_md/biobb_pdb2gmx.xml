@@ -257,9 +257,9 @@
     <tests>
         <test>
         
-        <param name="input_pdb_path" value="biobb_md/gromacs/egfr.pdb" />
+	<param name="input_pdb_path" value="biobb_md/gromacs/egfr.pdb" ftype="pdb" />
         
-        <param name="his" value="0 0 1 1 0 0 0" />
+	<param name="his" value="0 0 1 1 0 0 0" ftype="" />
         
         
         <output name="output_gro_path" file="biobb_md/gromacs/ref_pdb2gmx.gro" />

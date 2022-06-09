@@ -82,9 +82,9 @@
     <tests>
         <test>
         
-        <param name="input_dataset_path" value="biobb_ml/utils/dataset_drop.csv" />
+	<param name="input_dataset_path" value="biobb_ml/utils/dataset_drop.csv" ftype="csv" />
         
-        <param name="targets" value="{&#39;columns&#39;: [&#39;WEIGHT&#39;, &#39;SCORE&#39;]}" />
+	<param name="targets" value="{&#39;columns&#39;: [&#39;WEIGHT&#39;, &#39;SCORE&#39;]}" ftype="" />
         
         
         <output name="output_dataset_path" file="biobb_ml/utils/ref_output_drop.csv" />

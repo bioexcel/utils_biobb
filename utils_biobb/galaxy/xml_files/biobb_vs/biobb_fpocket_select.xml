@@ -94,9 +94,9 @@
     <tests>
         <test>
         
-        <param name="input_pockets_zip" value="biobb_vs/fpocket/input_pockets.zip" />
+	<param name="input_pockets_zip" value="biobb_vs/fpocket/input_pockets.zip" ftype="zip" />
         
-        <param name="pocket" value="4" />
+	<param name="pocket" value="4" ftype="" />
         
         
         <output name="output_pocket_pdb" file="biobb_vs/fpocket/ref_output_pocket.pdb" />

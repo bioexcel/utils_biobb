@@ -215,19 +215,19 @@
     <tests>
         <test>
         
-        <param name="input_dataset_path" value="biobb_ml/resampling/dataset_resampling.csv" />
+	<param name="input_dataset_path" value="biobb_ml/resampling/dataset_resampling.csv" ftype="csv" />
         
-        <param name="method" value="enn" />
+	<param name="method" value="enn" ftype="" />
         
-        <param name="type" value="regression" />
+	<param name="type" value="regression" ftype="" />
         
-        <param name="target" value="{&#39;column&#39;: &#39;VALUE&#39;}" />
+	<param name="target" value="{&#39;column&#39;: &#39;VALUE&#39;}" ftype="" />
         
-        <param name="evaluate" value="True" />
+	<param name="evaluate" value="True" ftype="" />
         
-        <param name="n_bins" value="10" />
+	<param name="n_bins" value="10" ftype="" />
         
-        <param name="n_neighbors" value="3" />
+	<param name="n_neighbors" value="3" ftype="" />
         
         
         <output name="output_dataset_path" file="biobb_ml/resampling/ref_output_undersampling.csv" />

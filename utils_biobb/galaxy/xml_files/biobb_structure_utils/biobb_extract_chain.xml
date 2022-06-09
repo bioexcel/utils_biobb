@@ -1,8 +1,8 @@
-<tool id="biobb_structure_utils_extract_chain_ext" name="ExtractChain" version="3.7.4" >
+<tool id="biobb_structure_utils_extract_chain_ext" name="ExtractChain" version="3.7.6" >
     <description>: This class is a wrapper of the Structure Checking tool to extract a chain from a 3D structure.</description>
     <requirements>
         <requirement type="package"
-        version="3.7.4"
+        version="3.7.6"
         >biobb_structure_utils</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__chains__dq__:${properties.chains},__dq__check_structure_path__dq__:__dq__${properties.check_structure_path}__dq____cc__'
+            --config '__oc____dq__chains__dq__:${properties.chains},__dq__permissive__dq__:${properties.permissive},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
           #end if
         
           #if str($input_structure_path) != 'None':
@@ -47,8 +47,8 @@
         
         
           <param name="outname_output_structure_path" type="text" value="myextract_chain.pdb" 
-              optional="False" label="output PDB name" 
-              help="Output structure file path Format: [output].pdb "/>
+              optional="False" label="output PDB,PDBQT name" 
+              help="Output structure file path Format: [output].[format] "/>
         
         <conditional name="config">
             <param name="sele" type="select" label="Take tool settings:" help="Select where tool settings are to be read from">
@@ -71,31 +71,59 @@
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
             
-              <param name="check_structure_path" type="text" label="check_structure_path" help="path to the check_structure application" optional="false"
+              <param name="permissive" type="boolean" 
+                  
+                  label="permissive" help="Use non standard PDB files." 
+                />
+            
+              <param name="binary_path" type="text" label="binary_path" help="path to the check_structure application" optional="false"
                   value="check_structure"
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+              <param name="output_format" type="select" label="output_format" help="Format of the output file" multiple="false">
+                  
+                    <option value="pdb" 
+                      
+                    >pdb
+                       
+                    </option>
+                  
+                    <option value="pdbqt" 
+                      
+                    >pdbqt
+                       
+                    </option>
+                  
                 </param>
                     
           </section>
     </inputs>
     <outputs>
         
-        
-          <data name="output_structure_path" format="pdb" label="${outname_output_structure_path}"/>
+        <data name="output_structure_path" format="text" label="${outname_output_structure_path}">
+            <change_format>
+            
+            <when input="properties.output_format" value="pdb" format="pdb" />
+            
+            <when input="properties.output_format" value="pdbqt" format="pdbqt" />
+            
+            </change_format>
+          </data>
         
     </outputs>
     <tests>
         <test>
         
-        <param name="input_structure_path" value="biobb_structure_utils/utils/extract_chain.pdb" />
+	<param name="input_structure_path" value="biobb_structure_utils/utils/extract_chain.pdb" ftype="pdb" />
         
-        <param name="chains" value="[&#39;B&#39;, &#39;C&#39;]" />
+	<param name="chains" value="[&#39;B&#39;, &#39;C&#39;]" ftype="" />
+        
+	<param name="permissive" value="True" ftype="" />
         
         
         <output name="output_structure_path" file="biobb_structure_utils/utils/ref_extract_chain.pdb" />
-        
-        <output name="output_structure_path" file="biobb_structure_utils/Structure Checking from MDWeb/output_structure_path.pdb" />
         
         </test>
     </tests>    

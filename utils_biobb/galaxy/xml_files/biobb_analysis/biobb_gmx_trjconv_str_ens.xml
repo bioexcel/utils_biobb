@@ -270,23 +270,23 @@
     <tests>
         <test>
         
-        <param name="input_traj_path" value="biobb_analysis/gromacs/trajectory.trr" />
+	<param name="input_traj_path" value="biobb_analysis/gromacs/trajectory.trr" ftype="trr" />
         
-        <param name="input_top_path" value="biobb_analysis/gromacs/topology.tpr" />
+	<param name="input_top_path" value="biobb_analysis/gromacs/topology.tpr" ftype="tpr" />
         
-        <param name="input_index_path" value="biobb_analysis/gromacs/index.ndx" />
+	<param name="input_index_path" value="biobb_analysis/gromacs/index.ndx" ftype="ndx" />
         
-        <param name="selection" value="System" />
+	<param name="selection" value="System" ftype="" />
         
-        <param name="start" value="0" />
+	<param name="start" value="0" ftype="" />
         
-        <param name="end" value="10" />
+	<param name="end" value="10" ftype="" />
         
-        <param name="dt" value="1" />
+	<param name="dt" value="1" ftype="" />
         
-        <param name="output_name" value="output" />
+	<param name="output_name" value="output" ftype="" />
         
-        <param name="output_type" value="pdb" />
+	<param name="output_type" value="pdb" ftype="" />
         
         
         <output name="output_str_ens_path" file="biobb_analysis/gromacs/ref_trjconv.str.ens.zip" />

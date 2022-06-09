@@ -50,6 +50,12 @@
     </outputs>
     <tests>
         <test>
+        
+	<param name="input_pdb_path" value="biobb_model/model/2ki5.pdb" ftype="pdb" />
+        
+        
+        <output name="output_log_path" file="biobb_model/model/checking.log" />
+        
         </test>
     </tests>    
     <help>

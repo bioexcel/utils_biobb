@@ -105,9 +105,9 @@
     <tests>
         <test>
         
-        <param name="input_ser_path" value="biobb_dna/correlation/canal_output_roll.ser" />
+	<param name="input_ser_path" value="biobb_dna/correlation/canal_output_roll.ser" ftype="ser" />
         
-        <param name="sequence" value="CGCGAATTCGCG" />
+	<param name="sequence" value="CGCGAATTCGCG" ftype="" />
         
         
         <output name="output_csv_path" file="biobb_dna/In House/inter_seqcorr.csv" />

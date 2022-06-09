@@ -388,19 +388,19 @@
     <tests>
         <test>
         
-        <param name="input_top_path" value="biobb_analysis/ambertools/cpptraj.parm.top" />
+	<param name="input_top_path" value="biobb_analysis/ambertools/cpptraj.parm.top" ftype="top" />
         
-        <param name="input_traj_path" value="biobb_analysis/ambertools/cpptraj.traj.dcd" />
+	<param name="input_traj_path" value="biobb_analysis/ambertools/cpptraj.traj.dcd" ftype="dcd" />
         
-        <param name="start" value="1" />
+	<param name="start" value="1" ftype="" />
         
-        <param name="end" value="-1" />
+	<param name="end" value="-1" ftype="" />
         
-        <param name="steps" value="1" />
+	<param name="steps" value="1" ftype="" />
         
-        <param name="mask" value="c-alpha" />
+	<param name="mask" value="c-alpha" ftype="" />
         
-        <param name="format" value="netcdf" />
+	<param name="format" value="netcdf" ftype="" />
         
         
         <output name="output_cpptraj_path" file="biobb_analysis/ambertools/ref_cpptraj.strip.netcdf" />

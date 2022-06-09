@@ -92,9 +92,9 @@
     <tests>
         <test>
         
-        <param name="input_model_path" value="biobb_ml/clustering/model_clustering_predict.pkl" />
+	<param name="input_model_path" value="biobb_ml/clustering/model_clustering_predict.pkl" ftype="pkl" />
         
-        <param name="predictions" value="[{&#39;sepal_length&#39;: 5.1, &#39;sepal_width&#39;: 3.5, &#39;petal_length&#39;: 1.4, &#39;petal_width&#39;: 0.2}, {&#39;sepal_length&#39;: 6.7, &#39;sepal_width&#39;: 3.0, &#39;petal_length&#39;: 5.2, &#39;petal_width&#39;: 2.3}, {&#39;sepal_length&#39;: 6.3, &#39;sepal_width&#39;: 2.5, &#39;petal_length&#39;: 5.0, &#39;petal_width&#39;: 1.9}]" />
+	<param name="predictions" value="[{&#39;sepal_length&#39;: 5.1, &#39;sepal_width&#39;: 3.5, &#39;petal_length&#39;: 1.4, &#39;petal_width&#39;: 0.2}, {&#39;sepal_length&#39;: 6.7, &#39;sepal_width&#39;: 3.0, &#39;petal_length&#39;: 5.2, &#39;petal_width&#39;: 2.3}, {&#39;sepal_length&#39;: 6.3, &#39;sepal_width&#39;: 2.5, &#39;petal_length&#39;: 5.0, &#39;petal_width&#39;: 1.9}]" ftype="" />
         
         
         <output name="output_results_path" file="biobb_ml/clustering/ref_output_clustering_predict.csv" />

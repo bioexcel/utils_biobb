@@ -72,9 +72,9 @@
     <tests>
         <test>
         
-        <param name="input_decode_path" value="biobb_ml/neural_networks/dataset_decoder.csv" />
+	<param name="input_decode_path" value="biobb_ml/neural_networks/dataset_decoder.csv" ftype="csv" />
         
-        <param name="input_model_path" value="biobb_ml/neural_networks/input_model_decoder.h5" />
+	<param name="input_model_path" value="biobb_ml/neural_networks/input_model_decoder.h5" ftype="h5" />
         
         
         <output name="output_decode_path" file="biobb_ml/neural_networks/ref_output_decode_decoder.csv" />

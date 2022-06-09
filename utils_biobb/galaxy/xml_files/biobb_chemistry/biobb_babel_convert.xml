@@ -384,15 +384,15 @@
     <tests>
         <test>
         
-        <param name="input_path" value="biobb_chemistry/babel/babel.smi" />
+	<param name="input_path" value="biobb_chemistry/babel/babel.smi" ftype="smi" />
         
-        <param name="input_format" value="smi" />
+	<param name="input_format" value="smi" ftype="" />
         
-        <param name="output_format" value="mol2" />
+	<param name="output_format" value="mol2" ftype="" />
         
-        <param name="coordinates" value="2" />
+	<param name="coordinates" value="2" ftype="" />
         
-        <param name="ph" value="7.4" />
+	<param name="ph" value="7.4" ftype="" />
         
         
         <output name="output_path" file="biobb_chemistry/OpenBabel/output.mol2" />

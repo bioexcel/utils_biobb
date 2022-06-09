@@ -90,14 +90,12 @@
     <tests>
         <test>
         
-        <param name="ligand_code" value="IBP" />
+	<param name="ligand_code" value="IBP" ftype="" />
         
-        <param name="api_id" value="pdbe" />
+	<param name="api_id" value="pdbe" ftype="" />
         
         
         <output name="output_pdb_path" file="biobb_io/api/output_ligand.pdb" />
-        
-        <output name="output_pdb_path" file="biobb_io/api/output_pdb_path.pdb" />
         
         </test>
     </tests>    

@@ -102,16 +102,14 @@
     <tests>
         <test>
         
-        <param name="pdb_code" value="2VGB" />
+	<param name="pdb_code" value="2VGB" ftype="" />
         
-        <param name="filter" value="[&#39;ATOM&#39;, &#39;HETATM&#39;]" />
+	<param name="filter" value="[&#39;ATOM&#39;, &#39;HETATM&#39;]" ftype="" />
         
-        <param name="api_id" value="mmb" />
+	<param name="api_id" value="mmb" ftype="" />
         
         
         <output name="output_pdb_path" file="biobb_io/api/output_pdb.pdb" />
-        
-        <output name="output_pdb_path" file="biobb_io/api/output_pdb_path.pdb" />
         
         </test>
     </tests>    

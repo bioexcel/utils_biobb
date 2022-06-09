@@ -74,12 +74,10 @@
     <tests>
         <test>
         
-        <param name="pdb_code" value="1hzx" />
+	<param name="pdb_code" value="1hzx" ftype="" />
         
         
         <output name="output_simulation" file="biobb_io/api/output_sim.zip" />
-        
-        <output name="output_simulation" file="biobb_io/api/output_simulation.zip" />
         
         </test>
     </tests>    

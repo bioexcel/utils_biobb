@@ -142,13 +142,13 @@
     <tests>
         <test>
         
-        <param name="input_tpr_path" value="biobb_md/gromacs/genion.tpr" />
+	<param name="input_tpr_path" value="biobb_md/gromacs/genion.tpr" ftype="tpr" />
         
-        <param name="input_top_zip_path" value="biobb_md/gromacs/genion.zip" />
+	<param name="input_top_zip_path" value="biobb_md/gromacs/genion.zip" ftype="zip" />
         
-        <param name="replaced_group" value="SOL" />
+	<param name="replaced_group" value="SOL" ftype="" />
         
-        <param name="concentration" value="0.05" />
+	<param name="concentration" value="0.05" ftype="" />
         
         
         <output name="output_gro_path" file="biobb_md/gromacs/ref_genion.gro" />

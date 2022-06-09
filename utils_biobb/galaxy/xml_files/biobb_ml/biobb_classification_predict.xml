@@ -92,9 +92,9 @@
     <tests>
         <test>
         
-        <param name="input_model_path" value="biobb_ml/classification/model_classification_predict.pkl" />
+	<param name="input_model_path" value="biobb_ml/classification/model_classification_predict.pkl" ftype="pkl" />
         
-        <param name="input_dataset_path" value="biobb_ml/classification/input_classification_predict.csv" />
+	<param name="input_dataset_path" value="biobb_ml/classification/input_classification_predict.csv" ftype="csv" />
         
         
         <output name="output_results_path" file="biobb_ml/classification/ref_output_classification_predict.csv" />

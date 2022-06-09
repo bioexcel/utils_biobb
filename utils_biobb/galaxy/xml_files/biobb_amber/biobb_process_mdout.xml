@@ -179,9 +179,9 @@
     <tests>
         <test>
         
-        <param name="input_log_path" value="biobb_amber/process/sander.heat.log" />
+	<param name="input_log_path" value="biobb_amber/process/sander.heat.log" ftype="log" />
         
-        <param name="terms" value="[&#39;TEMP&#39;]" />
+	<param name="terms" value="[&#39;TEMP&#39;]" ftype="" />
         
         
         <output name="output_dat_path" file="biobb_amber/process/sander.md.temp.dat" />

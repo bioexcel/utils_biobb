@@ -174,11 +174,11 @@
     <tests>
         <test>
         
-        <param name="input_struc_path" value="biobb_dna/curvesplus/structure.stripped.trj" />
+	<param name="input_struc_path" value="biobb_dna/curvesplus/structure.stripped.trj" ftype="trj" />
         
-        <param name="input_top_path" value="biobb_dna/curvesplus/structure.stripped.top" />
+	<param name="input_top_path" value="biobb_dna/curvesplus/structure.stripped.top" ftype="top" />
         
-        <param name="s1range" value="1:12" />
+	<param name="s1range" value="1:12" ftype="" />
         
         
         <output name="output_cda_path" file="biobb_dna/Curves/curves_output.cda" />

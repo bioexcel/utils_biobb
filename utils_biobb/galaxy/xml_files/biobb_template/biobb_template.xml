@@ -98,6 +98,18 @@
     </outputs>
     <tests>
         <test>
+        
+	<param name="input_file_path1" value="biobb_template/template/topology.top" ftype="top" />
+        
+	<param name="input_file_path2" value="biobb_template/template/trajectory.dcd" ftype="dcd" />
+        
+	<param name="boolean_property" value="False" ftype="" />
+        
+        
+        <output name="output_file_path" file="biobb_template/template/output.zip" />
+        
+        <output name="output_file_path" file="biobb_template/zip/output.zip" />
+        
         </test>
     </tests>    
     <help>

@@ -112,13 +112,13 @@
     <tests>
         <test>
         
-        <param name="input_structure_path" value="biobb_md/gromacs/genrestr.gro" />
+	<param name="input_structure_path" value="biobb_md/gromacs/genrestr.gro" ftype="gro" />
         
-        <param name="input_ndx_path" value="biobb_md/gromacs/genrestr.ndx" />
+	<param name="input_ndx_path" value="biobb_md/gromacs/genrestr.ndx" ftype="ndx" />
         
-        <param name="restrained_group" value="system" />
+	<param name="restrained_group" value="system" ftype="" />
         
-        <param name="force_constants" value="500 500 500" />
+	<param name="force_constants" value="500 500 500" ftype="" />
         
         
         <output name="output_itp_path" file="biobb_md/gromacs/ref_genrestr.itp" />

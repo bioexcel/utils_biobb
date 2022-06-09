@@ -74,12 +74,10 @@
     <tests>
         <test>
         
-        <param name="pdb_code" value="2VGB" />
+	<param name="pdb_code" value="2VGB" ftype="" />
         
         
         <output name="output_json_path" file="biobb_io/api/ref_str_info.json" />
-        
-        <output name="output_json_path" file="biobb_io/api/output_json_path.json" />
         
         </test>
     </tests>    

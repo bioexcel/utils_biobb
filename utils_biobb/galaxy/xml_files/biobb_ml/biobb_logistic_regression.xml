@@ -176,21 +176,21 @@
     <tests>
         <test>
         
-        <param name="input_dataset_path" value="biobb_ml/classification/dataset_logistic_regression.csv" />
+	<param name="input_dataset_path" value="biobb_ml/classification/dataset_logistic_regression.csv" ftype="csv" />
         
-        <param name="independent_vars" value="{&#39;columns&#39;: [&#39;mean area&#39;, &#39;mean compactness&#39;]}" />
+	<param name="independent_vars" value="{&#39;columns&#39;: [&#39;mean area&#39;, &#39;mean compactness&#39;]}" ftype="" />
         
-        <param name="target" value="{&#39;column&#39;: &#39;benign&#39;}" />
+	<param name="target" value="{&#39;column&#39;: &#39;benign&#39;}" ftype="" />
         
-        <param name="solver" value="liblinear" />
+	<param name="solver" value="liblinear" ftype="" />
         
-        <param name="c_parameter" value="0.01" />
+	<param name="c_parameter" value="0.01" ftype="" />
         
-        <param name="normalize_cm" value="False" />
+	<param name="normalize_cm" value="False" ftype="" />
         
-        <param name="test_size" value="0.2" />
+	<param name="test_size" value="0.2" ftype="" />
         
-        <param name="scale" value="True" />
+	<param name="scale" value="True" ftype="" />
         
         
         <output name="output_model_path" file="biobb_ml/classification/ref_output_model_logistic_regression.pkl" />

@@ -117,19 +117,19 @@
     <tests>
         <test>
         
-        <param name="input_dataset_path" value="biobb_ml/dimensionality_reduction/dataset_pls_components.csv" />
+	<param name="input_dataset_path" value="biobb_ml/dimensionality_reduction/dataset_pls_components.csv" ftype="csv" />
         
-        <param name="features" value="{&#39;range&#39;: [[0, 29]]}" />
+	<param name="features" value="{&#39;range&#39;: [[0, 29]]}" ftype="" />
         
-        <param name="target" value="{&#39;index&#39;: 30}" />
+	<param name="target" value="{&#39;index&#39;: 30}" ftype="" />
         
-        <param name="optimise" value="False" />
+	<param name="optimise" value="False" ftype="" />
         
-        <param name="max_components" value="30" />
+	<param name="max_components" value="30" ftype="" />
         
-        <param name="cv" value="10" />
+	<param name="cv" value="10" ftype="" />
         
-        <param name="scale" value="True" />
+	<param name="scale" value="True" ftype="" />
         
         
         <output name="output_results_path" file="biobb_ml/dimensionality_reduction/ref_output_results_pls_components.csv" />

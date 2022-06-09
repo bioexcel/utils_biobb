@@ -285,13 +285,13 @@
     <tests>
         <test>
         
-        <param name="input_structure_path" value="biobb_analysis/gromacs/trajectory.trr" />
+	<param name="input_structure_path" value="biobb_analysis/gromacs/trajectory.trr" ftype="trr" />
         
-        <param name="input_top_path" value="biobb_analysis/gromacs/topology.tpr" />
+	<param name="input_top_path" value="biobb_analysis/gromacs/topology.tpr" ftype="tpr" />
         
-        <param name="input_index_path" value="biobb_analysis/gromacs/index.ndx" />
+	<param name="input_index_path" value="biobb_analysis/gromacs/index.ndx" ftype="ndx" />
         
-        <param name="selection" value="System" />
+	<param name="selection" value="System" ftype="" />
         
         
         <output name="output_str_path" file="biobb_analysis/gromacs/ref_trjconv.str.pdb" />

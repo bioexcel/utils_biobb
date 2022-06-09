@@ -192,25 +192,25 @@
     <tests>
         <test>
         
-        <param name="input_path" value="biobb_chemistry/babel/babel.minimize.pdb" />
+	<param name="input_path" value="biobb_chemistry/babel/babel.minimize.pdb" ftype="pdb" />
         
-        <param name="criteria" value="1e-6" />
+	<param name="criteria" value="1e-6" ftype="" />
         
-        <param name="method" value="cg" />
+	<param name="method" value="cg" ftype="" />
         
-        <param name="force_field" value="GAFF" />
+	<param name="force_field" value="GAFF" ftype="" />
         
-        <param name="hydrogens" value="True" />
+	<param name="hydrogens" value="True" ftype="" />
         
-        <param name="steps" value="2500" />
+	<param name="steps" value="2500" ftype="" />
         
-        <param name="cutoff" value="True" />
+	<param name="cutoff" value="True" ftype="" />
         
-        <param name="rvdw" value="6.0" />
+	<param name="rvdw" value="6.0" ftype="" />
         
-        <param name="rele" value="10.0" />
+	<param name="rele" value="10.0" ftype="" />
         
-        <param name="frequency" value="10" />
+	<param name="frequency" value="10" ftype="" />
         
         
         <output name="output_path" file="biobb_chemistry/OpenBabel/output.pdb" />

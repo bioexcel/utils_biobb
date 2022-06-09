@@ -447,21 +447,21 @@
     <tests>
         <test>
         
-        <param name="input_structure_path" value="biobb_analysis/gromacs/topology.tpr" />
+	<param name="input_structure_path" value="biobb_analysis/gromacs/topology.tpr" ftype="tpr" />
         
-        <param name="input_traj_path" value="biobb_analysis/gromacs/trajectory.trr" />
+	<param name="input_traj_path" value="biobb_analysis/gromacs/trajectory.trr" ftype="trr" />
         
-        <param name="input_index_path" value="biobb_analysis/gromacs/index.ndx" />
+	<param name="input_index_path" value="biobb_analysis/gromacs/index.ndx" ftype="ndx" />
         
-        <param name="fit_selection" value="System" />
+	<param name="fit_selection" value="System" ftype="" />
         
-        <param name="output_selection" value="System" />
+	<param name="output_selection" value="System" ftype="" />
         
-        <param name="dista" value="False" />
+	<param name="dista" value="False" ftype="" />
         
-        <param name="method" value="linkage" />
+	<param name="method" value="linkage" ftype="" />
         
-        <param name="cutoff" value="0.1" />
+	<param name="cutoff" value="0.1" ftype="" />
         
         
         <output name="output_pdb_path" file="biobb_analysis/gromacs/ref_cluster.pdb" />

@@ -119,11 +119,11 @@
     <tests>
         <test>
         
-        <param name="sequence" value="ALA PRO SER ARG LYS ASP GLU GLY GLY ALA" />
+	<param name="sequence" value="ALA PRO SER ARG LYS ASP GLU GLY GLY ALA" ftype="" />
         
-        <param name="forcefield" value="[&#39;protein.ff14SB&#39;]" />
+	<param name="forcefield" value="[&#39;protein.ff14SB&#39;]" ftype="" />
         
-        <param name="build_library" value="False" />
+	<param name="build_library" value="False" ftype="" />
         
         
         <output name="output_pdb_path" file="biobb_amber/leap/structure.pdb" />

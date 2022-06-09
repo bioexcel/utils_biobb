@@ -82,9 +82,9 @@
     <tests>
         <test>
         
-        <param name="input_dataset_path" value="biobb_ml/utils/dataset_dendrogram.csv" />
+	<param name="input_dataset_path" value="biobb_ml/utils/dataset_dendrogram.csv" ftype="csv" />
         
-        <param name="features" value="{&#39;columns&#39;: [&#39;Satisfaction&#39;, &#39;Loyalty&#39;]}" />
+	<param name="features" value="{&#39;columns&#39;: [&#39;Satisfaction&#39;, &#39;Loyalty&#39;]}" ftype="" />
         
         
         <output name="output_plot_path" file="biobb_ml/utils/ref_output_plot_dendrogram.png" />

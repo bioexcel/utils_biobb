@@ -177,17 +177,17 @@
     <tests>
         <test>
         
-        <param name="input_decode_path" value="biobb_ml/neural_networks/dataset_autoencoder_decode.csv" />
+	<param name="input_decode_path" value="biobb_ml/neural_networks/dataset_autoencoder_decode.csv" ftype="csv" />
         
-        <param name="input_predict_path" value="biobb_ml/neural_networks/dataset_autoencoder_predict.csv" />
+	<param name="input_predict_path" value="biobb_ml/neural_networks/dataset_autoencoder_predict.csv" ftype="csv" />
         
-        <param name="optimizer" value="Adam" />
+	<param name="optimizer" value="Adam" ftype="" />
         
-        <param name="learning_rate" value="0.01" />
+	<param name="learning_rate" value="0.01" ftype="" />
         
-        <param name="batch_size" value="32" />
+	<param name="batch_size" value="32" ftype="" />
         
-        <param name="max_epochs" value="300" />
+	<param name="max_epochs" value="300" ftype="" />
         
         
         <output name="output_model_path" file="biobb_ml/neural_networks/ref_output_model_autoencoder.h5" />

@@ -378,15 +378,15 @@
     <tests>
         <test>
         
-        <param name="input_top_path" value="biobb_analysis/ambertools/cpptraj.parm.top" />
+	<param name="input_top_path" value="biobb_analysis/ambertools/cpptraj.parm.top" ftype="top" />
         
-        <param name="input_traj_path" value="biobb_analysis/ambertools/cpptraj.traj.dcd" />
+	<param name="input_traj_path" value="biobb_analysis/ambertools/cpptraj.traj.dcd" ftype="dcd" />
         
-        <param name="snapshot" value="12" />
+	<param name="snapshot" value="12" ftype="" />
         
-        <param name="mask" value="c-alpha" />
+	<param name="mask" value="c-alpha" ftype="" />
         
-        <param name="format" value="pdb" />
+	<param name="format" value="pdb" ftype="" />
         
         
         <output name="output_cpptraj_path" file="biobb_analysis/ambertools/ref_cpptraj.snapshot.pdb" />

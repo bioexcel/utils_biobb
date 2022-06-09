@@ -165,19 +165,19 @@
     <tests>
         <test>
         
-        <param name="input_dataset_path" value="biobb_ml/classification/dataset_k_neighbors_coefficient.csv" />
+	<param name="input_dataset_path" value="biobb_ml/classification/dataset_k_neighbors_coefficient.csv" ftype="csv" />
         
-        <param name="independent_vars" value="{&#39;columns&#39;: [&#39;region&#39;, &#39;tenure&#39;, &#39;age&#39;, &#39;marital&#39;, &#39;address&#39;, &#39;income&#39;, &#39;ed&#39;, &#39;employ&#39;, &#39;retire&#39;, &#39;gender&#39;, &#39;reside&#39;]}" />
+	<param name="independent_vars" value="{&#39;columns&#39;: [&#39;region&#39;, &#39;tenure&#39;, &#39;age&#39;, &#39;marital&#39;, &#39;address&#39;, &#39;income&#39;, &#39;ed&#39;, &#39;employ&#39;, &#39;retire&#39;, &#39;gender&#39;, &#39;reside&#39;]}" ftype="" />
         
-        <param name="target" value="{&#39;column&#39;: &#39;custcat&#39;}" />
+	<param name="target" value="{&#39;column&#39;: &#39;custcat&#39;}" ftype="" />
         
-        <param name="metric" value="minkowski" />
+	<param name="metric" value="minkowski" ftype="" />
         
-        <param name="max_neighbors" value="15" />
+	<param name="max_neighbors" value="15" ftype="" />
         
-        <param name="test_size" value="0.2" />
+	<param name="test_size" value="0.2" ftype="" />
         
-        <param name="scale" value="True" />
+	<param name="scale" value="True" ftype="" />
         
         
         <output name="output_results_path" file="biobb_ml/classification/ref_output_test_k_neighbors_coefficient.csv" />

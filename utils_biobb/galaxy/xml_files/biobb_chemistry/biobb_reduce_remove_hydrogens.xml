@@ -84,7 +84,7 @@
     <tests>
         <test>
         
-        <param name="input_path" value="biobb_chemistry/ambertools/reduce.H.pdb" />
+	<param name="input_path" value="biobb_chemistry/ambertools/reduce.H.pdb" ftype="pdb" />
         
         
         <output name="output_path" file="biobb_chemistry/AmberTools Reduce/output.pdb" />

@@ -157,21 +157,21 @@
     <tests>
         <test>
         
-        <param name="input_dataset_path" value="biobb_ml/resampling/dataset_resampling.csv" />
+	<param name="input_dataset_path" value="biobb_ml/resampling/dataset_resampling.csv" ftype="csv" />
         
-        <param name="method" value="smotenn" />
+	<param name="method" value="smotenn" ftype="" />
         
-        <param name="type" value="regression" />
+	<param name="type" value="regression" ftype="" />
         
-        <param name="target" value="{&#39;column&#39;: &#39;VALUE&#39;}" />
+	<param name="target" value="{&#39;column&#39;: &#39;VALUE&#39;}" ftype="" />
         
-        <param name="evaluate" value="True" />
+	<param name="evaluate" value="True" ftype="" />
         
-        <param name="n_bins" value="10" />
+	<param name="n_bins" value="10" ftype="" />
         
-        <param name="sampling_strategy_over" value="{&#39;dict&#39;: {4: 1000, 5: 1000, 6: 1000, 7: 1000}}" />
+	<param name="sampling_strategy_over" value="{&#39;dict&#39;: {4: 1000, 5: 1000, 6: 1000, 7: 1000}}" ftype="" />
         
-        <param name="sampling_strategy_under" value="{&#39;list&#39;: [0, 1]}" />
+	<param name="sampling_strategy_under" value="{&#39;list&#39;: [0, 1]}" ftype="" />
         
         
         <output name="output_dataset_path" file="biobb_ml/resampling/ref_output_resampling.csv" />

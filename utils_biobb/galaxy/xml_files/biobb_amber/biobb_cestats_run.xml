@@ -434,9 +434,9 @@
     <tests>
         <test>
         
-        <param name="input_cein_path" value="biobb_amber/cphstats/structure.cein" />
+	<param name="input_cein_path" value="biobb_amber/cphstats/structure.cein" ftype="cein" />
         
-        <param name="input_ceout_path" value="biobb_amber/cphstats/sander.ceout.gz" />
+	<param name="input_ceout_path" value="biobb_amber/cphstats/sander.ceout.gz" ftype="gz" />
         
         
         <output name="output_dat_path" file="biobb_amber/cphstats/cestats.dat" />

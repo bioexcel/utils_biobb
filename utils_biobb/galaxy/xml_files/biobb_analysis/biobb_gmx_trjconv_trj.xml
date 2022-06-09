@@ -290,17 +290,17 @@
     <tests>
         <test>
         
-        <param name="input_traj_path" value="biobb_analysis/gromacs/trajectory.trr" />
+	<param name="input_traj_path" value="biobb_analysis/gromacs/trajectory.trr" ftype="trr" />
         
-        <param name="input_index_path" value="biobb_analysis/gromacs/index.ndx" />
+	<param name="input_index_path" value="biobb_analysis/gromacs/index.ndx" ftype="ndx" />
         
-        <param name="selection" value="System" />
+	<param name="selection" value="System" ftype="" />
         
-        <param name="start" value="0" />
+	<param name="start" value="0" ftype="" />
         
-        <param name="end" value="0" />
+	<param name="end" value="0" ftype="" />
         
-        <param name="dt" value="0" />
+	<param name="dt" value="0" ftype="" />
         
         
         <output name="output_traj_path" file="biobb_analysis/gromacs/ref_trjconv.trj.xtc" />

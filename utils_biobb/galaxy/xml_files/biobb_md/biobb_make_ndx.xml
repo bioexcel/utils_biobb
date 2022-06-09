@@ -106,9 +106,9 @@
     <tests>
         <test>
         
-        <param name="input_structure_path" value="biobb_md/gromacs/make_ndx.tpr" />
+	<param name="input_structure_path" value="biobb_md/gromacs/make_ndx.tpr" ftype="tpr" />
         
-        <param name="selection" value="a CA C N O" />
+	<param name="selection" value="a CA C N O" ftype="" />
         
         
         <output name="output_ndx_path" file="biobb_md/gromacs/ref_make_ndx.ndx" />

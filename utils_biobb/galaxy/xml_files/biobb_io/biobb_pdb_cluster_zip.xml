@@ -130,18 +130,16 @@
     <tests>
         <test>
         
-        <param name="pdb_code" value="2vgb" />
+	<param name="pdb_code" value="2vgb" ftype="" />
         
-        <param name="filter" value="[&#39;ATOM&#39;, &#39;MODEL&#39;, &#39;ENDMDL&#39;]" />
+	<param name="filter" value="[&#39;ATOM&#39;, &#39;MODEL&#39;, &#39;ENDMDL&#39;]" ftype="" />
         
-        <param name="cluster" value="90" />
+	<param name="cluster" value="90" ftype="" />
         
-        <param name="api_id" value="pdbe" />
+	<param name="api_id" value="pdbe" ftype="" />
         
         
         <output name="output_pdb_zip_path" file="biobb_io/api/output_pdb_cluster.zip" />
-        
-        <output name="output_pdb_zip_path" file="biobb_io/api/output_pdb_zip_path.zip" />
         
         </test>
     </tests>    

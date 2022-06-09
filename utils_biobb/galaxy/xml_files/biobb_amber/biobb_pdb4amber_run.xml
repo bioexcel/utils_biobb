@@ -93,7 +93,7 @@
     <tests>
         <test>
         
-        <param name="input_pdb_path" value="biobb_amber/pdb4amber/1aki_fixed.pdb" />
+	<param name="input_pdb_path" value="biobb_amber/pdb4amber/1aki_fixed.pdb" ftype="pdb" />
         
         
         <output name="output_pdb_path" file="biobb_amber/pdb4amber/structure.pdb4amber.pdb" />

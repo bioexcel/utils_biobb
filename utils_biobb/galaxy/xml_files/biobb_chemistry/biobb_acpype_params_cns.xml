@@ -117,11 +117,11 @@
     <tests>
         <test>
         
-        <param name="input_path" value="biobb_chemistry/acpype/acpype.params.mol2" />
+	<param name="input_path" value="biobb_chemistry/acpype/acpype.params.mol2" ftype="mol2" />
         
-        <param name="basename" value="BBB" />
+	<param name="basename" value="BBB" ftype="" />
         
-        <param name="charge" value="0" />
+	<param name="charge" value="0" ftype="" />
         
         
         <output name="output_path_par" file="biobb_chemistry/ACPype/output.par" />

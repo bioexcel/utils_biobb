@@ -83,9 +83,9 @@
     <tests>
         <test>
         
-        <param name="input_pdbqt_path" value="biobb_vs/utils/models.pdbqt" />
+	<param name="input_pdbqt_path" value="biobb_vs/utils/models.pdbqt" ftype="pdbqt" />
         
-        <param name="model" value="1" />
+	<param name="model" value="1" ftype="" />
         
         
         <output name="output_pdbqt_path" file="biobb_vs/utils/ref_extract_model.pdbqt" />

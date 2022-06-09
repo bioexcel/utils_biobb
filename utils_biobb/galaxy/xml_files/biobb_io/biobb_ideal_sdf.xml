@@ -90,14 +90,12 @@
     <tests>
         <test>
         
-        <param name="ligand_code" value="HYZ" />
+	<param name="ligand_code" value="HYZ" ftype="" />
         
-        <param name="api_id" value="pdbe" />
+	<param name="api_id" value="pdbe" ftype="" />
         
         
         <output name="output_sdf_path" file="biobb_io/api/ref_output.sdf" />
-        
-        <output name="output_sdf_path" file="biobb_io/api/output_sdf_path.sdf" />
         
         </test>
     </tests>    

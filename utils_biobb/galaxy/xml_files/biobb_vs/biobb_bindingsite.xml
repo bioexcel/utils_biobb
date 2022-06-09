@@ -358,21 +358,21 @@
     <tests>
         <test>
         
-        <param name="input_pdb_path" value="biobb_vs/utils/bindingsite.pdb" />
+	<param name="input_pdb_path" value="biobb_vs/utils/bindingsite.pdb" ftype="pdb" />
         
-        <param name="input_clusters_zip" value="biobb_vs/utils/bindingsite.zip" />
+	<param name="input_clusters_zip" value="biobb_vs/utils/bindingsite.zip" ftype="zip" />
         
-        <param name="ligand" value="PGA" />
+	<param name="ligand" value="PGA" ftype="" />
         
-        <param name="radius" value="5" />
+	<param name="radius" value="5" ftype="" />
         
-        <param name="max_num_ligands" value="15" />
+	<param name="max_num_ligands" value="15" ftype="" />
         
-        <param name="matrix_name" value="blosum62" />
+	<param name="matrix_name" value="blosum62" ftype="" />
         
-        <param name="gap_open" value="-10.0" />
+	<param name="gap_open" value="-10.0" ftype="" />
         
-        <param name="gap_extend" value="-0.5" />
+	<param name="gap_extend" value="-0.5" ftype="" />
         
         
         <output name="output_pdb_path" file="biobb_vs/utils/ref_output_bindingsite.pdb" />
