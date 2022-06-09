@@ -145,7 +145,7 @@
     <tests>
         <test>
         {% for prm in test['param'] %}
-        <param name="{{ prm['name'] }}" value="{{ prm['value']}}" />
+	<param name="{{ prm['name'] }}" value="{{ prm['value']}}" ftype="{{ prm['ftype'] }}" />
         {% endfor %}
         {% for out in test['output'] %}
         <output name="{{ out['name'] }}" file="{{ out['file']}}" />

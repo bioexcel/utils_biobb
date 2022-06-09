@@ -194,33 +194,31 @@ def main():
                     data['files'][schema_data['properties']
                                   [f]['filetype']][f] = tool_data
                     if f in test_conf[data['name']]['paths'] and schema_data['properties'][f]['filetype'] == 'input':
+                        fn = test_conf[data['name']]['paths'][f].replace('file:test_data_dir/','')
                         data['test']['param'].append (
                             {
                                 'name': f, 
-                                'value': opj(group, test_conf[data['name']]['paths'][f].replace('file:test_data_dir/',''))
+                                'value': opj(group, fn),
+                                'ftype': os.path.splitext(fn)[1][1:]
                             }
                         )
                     if schema_data['properties'][f]['filetype'] == 'output':
                         
 
                         if 'ref_' + f in test_conf[data['name']]['paths']:
+                            fn = test_conf[data['name']]['paths']['ref_' + f].replace('file:test_reference_dir/','')
                             data['test']['output'].append (
                                 {
                                     'name': f, 
-                                    'file': opj(
-                                            group, 
-                                            test_conf[data['name']]['paths']['ref_' + f].replace('file:test_reference_dir/', '')
-                                    )
+                                    'file': opj(group, fn)
                                 }
                             )
                         if 'reference_' + f in test_conf[data['name']]['paths']:
+                            fn = test_conf[data['name']]['paths']['reference_' + f].replace('file:test_reference_dir/','')
                             data['test']['output'].append (
                                 {
                                     'name': f, 
-                                    'file': opj(
-                                            group, 
-                                            test_conf[data['name']]['paths']['reference_' + f].replace('file:test_reference_dir/', '')
-                                    )
+                                    'file': opj(group, fn)
                                 }
                             )
                         elif f in test_conf[data['name']]['paths']:
