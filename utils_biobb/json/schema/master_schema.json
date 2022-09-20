@@ -28,7 +28,7 @@
                         "license": {
                             "description": "Software license",
                             "type": "string",
-                            "enum": ["LGPL 2.1", "MIT", "Apache", "Apache-2.0", "BSD 3-Clause", "Creative Commons", "GNU", "other"]
+                            "enum": ["LGPL 2.1", "MIT", "Apache", "Apache-2.0", "BSD 3-Clause", "Creative Commons", "GNU", "GPL-2.0", "other"]
                         }
                     }
                 },

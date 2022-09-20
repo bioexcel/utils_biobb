@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 
-#Usage: ./new_py_version.sh
+#Usage: ./new_conda_version.sh
 #Activate conda
 ide=atom
-path_user=/Users/pau/
-path_biobb=/Users/pau/projects/
-path_json_schemas=/Users/pau/projects/utils_biobb/utils_biobb/json/
+path_user=/path/to/usr/
+path_biobb=/path/to/usr/projects/
+path_json_schemas=/path/to/usr/projects/utils_biobb/utils_biobb/json/
 conda=biobb
 echo "******************************************************"
 echo "Be sure of having activated $conda conda environment!"
@@ -54,35 +54,35 @@ cp -v $path_biobb$REPOSITORY/README.md $path_biobb$REPOSITORY/$REPOSITORY/docs/s
 git status
 git add .
 git commit -m "$message"
-read -p "Only github [Y/n]?" github
-if [ $github == 'y' -o $github == 'Y'  ]
-then
-	git push
-	git tag -a v$version -m "$message"
-	git push origin v$version
-else
-	git push
-	git push bioexcel
-	git tag -a v$version -m "$message"
-	git push origin v$version
-	git push bioexcel v$version
-fi
-python3 setup.py sdist bdist_wheel; python3 -m twine upload dist/* <<< andriopau
+#read -p "Only github [Y/n]?" github
+#if [ $github == 'y' -o $github == 'Y'  ]
+#then
+git push
+git tag -a v$version -m "$message"
+git push origin v$version
+#else
+	#git push
+	#git push bioexcel
+	#git tag -a v$version -m "$message"
+	#git push origin v$version
+	#git push bioexcel v$version
+#fi
+python3 setup.py sdist bdist_wheel; python3 -m twine upload dist/* #<<< in_case_of_user_keyring
 rm -rfv $REPOSITORY.egg-info dist build
 
 # Conda skeleton
-# rm -rf $path_user$REPOSITORY 2> /dev/null
-# retval=1
-# while [ $retval -ne 0 ]
-# do
-#   echo "Sleeping for 5 seconds..."
-#   sleep 5
-#   cd ~; conda skeleton pypi $REPOSITORY --version $version
-#   retval=$?
-# done
-# $ide $path_user$REPOSITORY/meta.yaml
-# read -p "Copy the headers (lines that starts with {%) from  ~/$REPOSITORY/meta.yaml and press any key..." -n1 -s
-# echo ""
+rm -rf $path_user$REPOSITORY 2> /dev/null
+retval=1
+while [ $retval -ne 0 ]
+do
+  echo "Sleeping for 5 seconds..."
+  sleep 5
+  cd ~; conda skeleton pypi $REPOSITORY --version $version --python-version 3.6
+  retval=$?
+done
+$ide $path_user$REPOSITORY/meta.yaml
+read -p "Copy the headers (lines that starts with {%) from  ~/$REPOSITORY/meta.yaml and press any key..." -n1 -s
+echo ""
 
 read -p "Copy the sha256 hash of the tgz file and press any key..." -n1 -s
 open https://pypi.org/project/$REPOSITORY
@@ -95,10 +95,10 @@ read -p "Modify recipes/$REPOSITORY/build.sh and press any key..." -n1 -s
 echo ""
 read -p "Modify recipes/$REPOSITORY/meta.yaml paste the headers and check if some dependency has changed from ~/$REPOSITORY/meta.yaml and press any key..." -n1 -s
 echo ""
-git status; git add .
-git commit -m "$message"
+git status; git add recipes/$REPOSITORY/*
+git commit -m "[$REPOSITORY] update $version"
 git push -u origin $REPOSITORY
 # open in chrome
-#google-chrome https://github.com/bioconda/bioconda-recipes/pull/new/$REPOSITORY
+# google-chrome https://github.com/bioconda/bioconda-recipes/pull/new/$REPOSITORY
 # open in safari
 open https://github.com/bioconda/bioconda-recipes/pull/new/$REPOSITORY
