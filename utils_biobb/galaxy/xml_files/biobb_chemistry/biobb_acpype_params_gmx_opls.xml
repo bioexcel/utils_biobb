@@ -1,8 +1,8 @@
-<tool id="biobb_chemistry_acpype_params_gmx_opls_ext" name="AcpypeParamsGmxOpls" version="3.7.0" >
+<tool id="biobb_chemistry_acpype_params_gmx_opls_ext" name="AcpypeParamsGmxOpls" version="3.8.0" >
     <description>: This class is a wrapper of Acpype tool for generation of topologies for OPLS/AA.</description>
     <requirements>
         <requirement type="package"
-        version="3.7.0"
+        version="3.8.0"
         >biobb_chemistry</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__basename__dq__:__dq__${properties.basename}__dq__,__dq__charge__dq__:${properties.charge},__dq__acpype_path__dq__:__dq__${properties.acpype_path}__dq____cc__'
+            --config '__oc____dq__basename__dq__:__dq__${properties.basename}__dq__,__dq__charge__dq__:${properties.charge},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
           #end if
         
           #if str($input_path) != 'None':
@@ -86,7 +86,7 @@
                   min="-20" max="20"
                   label="charge" help="Net molecular charge, for gas default is 0. If None the charge is guessed by acpype." optional="true"/>
             
-              <param name="acpype_path" type="text" label="acpype_path" help="Path to the acpype executable binary." optional="false"
+              <param name="binary_path" type="text" label="binary_path" help="Path to the acpype executable binary." optional="false"
                   value="acpype"
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>

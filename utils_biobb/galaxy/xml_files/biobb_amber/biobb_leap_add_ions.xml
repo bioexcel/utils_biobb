@@ -1,8 +1,8 @@
-<tool id="biobb_amber_leap_add_ions_ext" name="LeapAddIons" version="3.7.1" >
+<tool id="biobb_amber_leap_add_ions_ext" name="LeapAddIons" version="3.8.0" >
     <description>: Wrapper of the AmberTools (AMBER MD Package) leap tool module.</description>
     <requirements>
         <requirement type="package"
-        version="3.7.1"
+        version="3.8.0"
         >biobb_amber</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -28,7 +28,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__forcefield__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.forcefield)}__dq____cb__,__dq__water_type__dq__:__dq__${properties.water_type}__dq__,__dq__box_type__dq__:__dq__${properties.box_type}__dq__,__dq__ions_type__dq__:__dq__${properties.ions_type}__dq__,__dq__neutralise__dq__:${properties.neutralise},__dq__ionic_concentration__dq__:${properties.ionic_concentration},__dq__positive_ions_number__dq__:${properties.positive_ions_number},__dq__negative_ions_number__dq__:${properties.negative_ions_number},__dq__positive_ions_type__dq__:__dq__${properties.positive_ions_type}__dq__,__dq__negative_ions_type__dq__:__dq__${properties.negative_ions_type}__dq____cc__'
+            --config '__oc____dq__forcefield__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.forcefield)}__dq____cb__,__dq__water_type__dq__:__dq__${properties.water_type}__dq__,__dq__box_type__dq__:__dq__${properties.box_type}__dq__,__dq__ions_type__dq__:__dq__${properties.ions_type}__dq__,__dq__neutralise__dq__:${properties.neutralise},__dq__ionic_concentration__dq__:${properties.ionic_concentration},__dq__positive_ions_number__dq__:${properties.positive_ions_number},__dq__negative_ions_number__dq__:${properties.negative_ions_number},__dq__positive_ions_type__dq__:__dq__${properties.positive_ions_type}__dq__,__dq__negative_ions_type__dq__:__dq__${properties.negative_ions_type}__dq__,__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
           #end if
         
           #if str($input_pdb_path) != 'None':
@@ -333,6 +333,12 @@
                        
                     </option>
                   
+                </param>
+            
+              <param name="binary_path" type="text" label="binary_path" help="Path to the tleap executable binary." optional="false"
+                  value="tleap"
+                >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
             
               <param name="output_top_path_format" type="select" label="output_top_path_format" help="Format of the output file" multiple="false">

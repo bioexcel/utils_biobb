@@ -1,8 +1,8 @@
-<tool id="biobb_io_pdb_cluster_zip_ext" name="PdbClusterZip" version="3.7.0" >
+<tool id="biobb_io_pdb_cluster_zip_ext" name="PdbClusterZip" version="3.8.0" >
     <description>: This class is a wrapper for downloading a PDB cluster from the Protein Data Bank.</description>
     <requirements>
         <requirement type="package"
-        version="3.7.0"
+        version="3.8.0"
         >biobb_io</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[

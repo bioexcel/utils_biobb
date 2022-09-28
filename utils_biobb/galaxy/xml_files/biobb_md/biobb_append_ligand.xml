@@ -1,8 +1,8 @@
-<tool id="biobb_md_append_ligand_ext" name="AppendLigand" version="3.7.1" >
+<tool id="biobb_md_append_ligand_ext" name="AppendLigand" version="3.7.2" >
     <description>: This class takes a ligand ITP file and inserts it in a topology.</description>
     <requirements>
         <requirement type="package"
-        version="3.7.1"
+        version="3.7.2"
         >biobb_md</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[

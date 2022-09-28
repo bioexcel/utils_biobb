@@ -12,6 +12,7 @@
   <tool file="biobb/biobb_io/biobb_drugbank.xml" />
   <tool file="biobb/biobb_io/biobb_ligand.xml" />
   <tool file="biobb/biobb_io/biobb_pdb.xml" />
+  <tool file="biobb/biobb_io/biobb_alphafold.xml" />
   <tool file="biobb/biobb_io/biobb_pdb_variants.xml" />
   <tool file="biobb/biobb_io/biobb_pdb_cluster_zip.xml" />
   <tool file="biobb/biobb_io/biobb_memprotmd_sim_list.xml" />
@@ -85,6 +86,10 @@
   <tool file="biobb/biobb_pmx/biobb_pmxmutate.xml" />
   <tool file="biobb/biobb_pmx/biobb_pmxgentop.xml" />
   <tool file="biobb/biobb_pmx/biobb_pmxanalyse.xml" />
+  <tool file="biobb/biobb_pmx/biobb_pmxatom_mapping.xml" />
+  <tool file="biobb/biobb_pmx/biobb_pmxcreate_top.xml" />
+  <tool file="biobb/biobb_pmx/biobb_pmxligand_hybrid.xml" />
+  <tool file="biobb/biobb_pmx/biobb_pmxmerge_ff.xml" />
 </section>
 <section id="biobb_chemistry" name="Small molecules" >
   <tool file="biobb/biobb_chemistry/biobb_acpype_params_ac.xml" />
@@ -130,6 +135,8 @@
   <tool file="biobb/biobb_structure_utils/biobb_extract_chain.xml" />
   <tool file="biobb/biobb_structure_utils/biobb_extract_heteroatoms.xml" />
   <tool file="biobb/biobb_structure_utils/biobb_extract_residues.xml" />
+  <tool file="biobb/biobb_structure_utils/biobb_closest_residues.xml" />
+  <tool file="biobb/biobb_structure_utils/biobb_remove_molecules.xml" />
   <tool file="biobb/biobb_structure_utils/biobb_extract_model.xml" />
   <tool file="biobb/biobb_structure_utils/biobb_extract_molecule.xml" />
   <tool file="biobb/biobb_structure_utils/biobb_remove_ligand.xml" />
@@ -182,4 +189,6 @@
   <tool file="biobb/biobb_model/biobb_fix_amides.xml" />
   <tool file="biobb/biobb_model/biobb_fix_chirality.xml" />
   <tool file="biobb/biobb_model/biobb_checking_log.xml" />
+  <tool file="biobb/biobb_model/biobb_fix_altlocs.xml" />
+  <tool file="biobb/biobb_model/biobb_fix_ssbonds.xml" />
 </section>

@@ -1,8 +1,8 @@
-<tool id="biobb_structure_utils_extract_heteroatoms_ext" name="ExtractHeteroatoms" version="3.7.6" >
+<tool id="biobb_structure_utils_extract_heteroatoms_ext" name="ExtractHeteroatoms" version="3.8.0" >
     <description>: Class to extract hetero-atoms from a 3D structure using Biopython.</description>
     <requirements>
         <requirement type="package"
-        version="3.7.6"
+        version="3.8.0"
         >biobb_structure_utils</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[

@@ -1,8 +1,8 @@
-<tool id="biobb_analysis_gmx_energy_ext" name="GmxEnergy" version="3.7.0" >
+<tool id="biobb_analysis_gmx_energy_ext" name="GmxEnergy" version="3.8.0" >
     <description>: Wrapper of the GROMACS energy module for extracting energy components from a given GROMACS energy file.</description>
     <requirements>
         <requirement type="package"
-        version="3.7.0"
+        version="3.8.0"
         >biobb_analysis</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__xvg__dq__:__dq__${properties.xvg}__dq__,__dq__terms__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.terms)}__dq____cb__,__dq__gmx_path__dq__:__dq__${properties.gmx_path}__dq____cc__'
+            --config '__oc____dq__xvg__dq__:__dq__${properties.xvg}__dq__,__dq__terms__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.terms)}__dq____cb__,__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
           #end if
         
           #if str($input_energy_path) != 'None':
@@ -399,7 +399,7 @@
                   
                 </param>
             
-              <param name="gmx_path" type="text" label="gmx_path" help="Path to the GROMACS executable binary." optional="false"
+              <param name="binary_path" type="text" label="binary_path" help="Path to the GROMACS executable binary." optional="false"
                   value="gmx"
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>

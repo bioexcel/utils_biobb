@@ -1,8 +1,8 @@
-<tool id="biobb_io_api_binding_site_ext" name="ApiBindingSite" version="3.7.0" >
+<tool id="biobb_io_api_binding_site_ext" name="ApiBindingSite" version="3.8.0" >
     <description>: This class is a wrapper for the PDBe REST API Binding Sites endpoint.</description>
     <requirements>
         <requirement type="package"
-        version="3.7.0"
+        version="3.8.0"
         >biobb_io</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[

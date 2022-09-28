@@ -1,8 +1,8 @@
-<tool id="biobb_template_template_container_ext" name="TemplateContainer" version="2.0.0" >
+<tool id="biobb_template_template_container_ext" name="TemplateContainer" version="4.0.0" >
     <description>: Short description for the template container module in Restructured Text (reST) syntax. Mandatory.</description>
     <requirements>
         <requirement type="package"
-        version="2.0.0"
+        version="4.0.0"
         >biobb_template</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -22,7 +22,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__boolean_property__dq__:${properties.boolean_property},__dq__executable_binary_property__dq__:__dq__${properties.executable_binary_property}__dq____cc__'
+            --config '__oc____dq__boolean_property__dq__:${properties.boolean_property},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
           #end if
         
           #if str($input_file_path1) != 'None':
@@ -82,7 +82,7 @@
                   label="boolean_property" help="Example of boolean property." 
                 />
             
-              <param name="executable_binary_property" type="text" label="executable_binary_property" help="Example of executable binary property." optional="false"
+              <param name="binary_path" type="text" label="binary_path" help="Example of executable binary property." optional="false"
                   value="zip"
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>

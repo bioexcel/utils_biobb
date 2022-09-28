@@ -1,8 +1,8 @@
-<tool id="biobb_md_make_ndx_ext" name="MakeNdx" version="3.7.1" >
+<tool id="biobb_md_make_ndx_ext" name="MakeNdx" version="3.7.2" >
     <description>: Wrapper of the GROMACS make_ndx module.</description>
     <requirements>
         <requirement type="package"
-        version="3.7.1"
+        version="3.7.2"
         >biobb_md</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[

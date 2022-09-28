@@ -1,8 +1,8 @@
-<tool id="biobb_dna_biobb_curves_ext" name="BiobbCurves" version="3.7.1" >
+<tool id="biobb_dna_biobb_curves_ext" name="BiobbCurves" version="3.8.2" >
     <description>: Wrapper for the Cur+ executable  that is part of the Curves+ software suite.</description>
     <requirements>
         <requirement type="package"
-        version="3.7.1"
+        version="3.8.2"
         >biobb_dna</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -22,7 +22,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__s1range__dq__:__dq__${properties.s1range}__dq__,__dq__s2range__dq__:__dq__${properties.s2range}__dq__,__dq__stdlib_path__dq__:__dq__${properties.stdlib_path}__dq__,__dq__itst__dq__:${properties.itst},__dq__itnd__dq__:${properties.itnd},__dq__itdel__dq__:${properties.itdel},__dq__ions__dq__:${properties.ions},__dq__test__dq__:${properties.test},__dq__line__dq__:${properties.line},__dq__fit__dq__:${properties.fit},__dq__axfrm__dq__:${properties.axfrm},__dq__curves_exec__dq__:__dq__${properties.curves_exec}__dq____cc__'
+            --config '__oc____dq__s1range__dq__:__dq__${properties.s1range}__dq__,__dq__s2range__dq__:__dq__${properties.s2range}__dq__,__dq__stdlib_path__dq__:__dq__${properties.stdlib_path}__dq__,__dq__itst__dq__:${properties.itst},__dq__itnd__dq__:${properties.itnd},__dq__itdel__dq__:${properties.itdel},__dq__ions__dq__:${properties.ions},__dq__test__dq__:${properties.test},__dq__line__dq__:${properties.line},__dq__fit__dq__:${properties.fit},__dq__axfrm__dq__:${properties.axfrm},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
           #end if
         
           #if str($input_struc_path) != 'None':
@@ -151,7 +151,7 @@
                   label="axfrm" help="if True, generates closely spaced helical axis frames as input for Canal and Canion." 
                 />
             
-              <param name="curves_exec" type="text" label="curves_exec" help="Path to Curves+ executable, otherwise the program wil look for Cur+ executable in the binaries folder." optional="false"
+              <param name="binary_path" type="text" label="binary_path" help="Path to Curves+ executable, otherwise the program wil look for Cur+ executable in the binaries folder." optional="false"
                   value="Cur+"
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>

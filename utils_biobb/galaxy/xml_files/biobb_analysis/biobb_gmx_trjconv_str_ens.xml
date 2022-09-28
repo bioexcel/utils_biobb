@@ -1,8 +1,8 @@
-<tool id="biobb_analysis_gmx_trjconv_str_ens_ext" name="GmxTrjconvStrEns" version="3.7.0" >
+<tool id="biobb_analysis_gmx_trjconv_str_ens_ext" name="GmxTrjconvStrEns" version="3.8.0" >
     <description>: Wrapper of the GROMACS trjconv module for extracting an ensemble of frames containing a selection of atoms from GROMACS compatible trajectory files.</description>
     <requirements>
         <requirement type="package"
-        version="3.7.0"
+        version="3.8.0"
         >biobb_analysis</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -24,7 +24,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__selection__dq__:__dq__${properties.selection}__dq__,__dq__skip__dq__:${properties.skip},__dq__start__dq__:${properties.start},__dq__end__dq__:${properties.end},__dq__dt__dq__:${properties.dt},__dq__output_name__dq__:__dq__${properties.output_name}__dq__,__dq__output_type__dq__:__dq__${properties.output_type}__dq__,__dq__gmx_path__dq__:__dq__${properties.gmx_path}__dq____cc__'
+            --config '__oc____dq__selection__dq__:__dq__${properties.selection}__dq__,__dq__skip__dq__:${properties.skip},__dq__start__dq__:${properties.start},__dq__end__dq__:${properties.end},__dq__dt__dq__:${properties.dt},__dq__output_name__dq__:__dq__${properties.output_name}__dq__,__dq__output_type__dq__:__dq__${properties.output_type}__dq__,__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
           #end if
         
           #if str($input_traj_path) != 'None':
@@ -203,6 +203,42 @@
                        - combination of the Water and Ions groups
                     </option>
                   
+                    <option value="DNA" 
+                      
+                    >DNA
+                       - all DNA atoms
+                    </option>
+                  
+                    <option value="RNA" 
+                      
+                    >RNA
+                       - all RNA atoms
+                    </option>
+                  
+                    <option value="Protein_DNA" 
+                      
+                    >Protein_DNA
+                       - all Protein-DNA complex atoms
+                    </option>
+                  
+                    <option value="Protein_RNA" 
+                      
+                    >Protein_RNA
+                       - all Protein-RNA complex atoms
+                    </option>
+                  
+                    <option value="Protein_DNA_RNA" 
+                      
+                    >Protein_DNA_RNA
+                       - all Protein-DNA-RNA complex atoms
+                    </option>
+                  
+                    <option value="DNA_RNA" 
+                      
+                    >DNA_RNA
+                       - all DNA-RNA complex atoms
+                    </option>
+                  
                 </param>
             
               <param name="skip" type="integer" 
@@ -253,7 +289,7 @@
                   
                 </param>
             
-              <param name="gmx_path" type="text" label="gmx_path" help="Path to the GROMACS executable binary." optional="false"
+              <param name="binary_path" type="text" label="binary_path" help="Path to the GROMACS executable binary." optional="false"
                   value="gmx"
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>

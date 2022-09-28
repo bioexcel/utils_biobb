@@ -1,8 +1,8 @@
-<tool id="biobb_md_editconf_ext" name="Editconf" version="3.7.1" >
+<tool id="biobb_md_editconf_ext" name="Editconf" version="3.7.2" >
     <description>: Wrapper class for the GROMACS editconf module.</description>
     <requirements>
         <requirement type="package"
-        version="3.7.1"
+        version="3.7.2"
         >biobb_md</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
