@@ -122,6 +122,20 @@
   <tool file="biobb/biobb_dna/biobb_intrahpcorr.xml" />
   <tool file="biobb/biobb_dna/biobb_intraseqcorr.xml" />
 </section>
+<section id="biobb_gromacs" name="Setup and Simulation (GROMACS)" >
+  <tool file="biobb/biobb_gromacs/biobb_pdb2gmx.xml" />
+  <tool file="biobb/biobb_gromacs/biobb_editconf.xml" />
+  <tool file="biobb/biobb_gromacs/biobb_genion.xml" />
+  <tool file="biobb/biobb_gromacs/biobb_genrestr.xml" />
+  <tool file="biobb/biobb_gromacs/biobb_grompp.xml" />
+  <tool file="biobb/biobb_gromacs/biobb_mdrun.xml" />
+  <tool file="biobb/biobb_gromacs/biobb_grompp_mdrun.xml" />
+  <tool file="biobb/biobb_gromacs/biobb_make_ndx.xml" />
+  <tool file="biobb/biobb_gromacs/biobb_gmxselect.xml" />
+  <tool file="biobb/biobb_gromacs/biobb_solvate.xml" />
+  <tool file="biobb/biobb_gromacs/biobb_ndx2resttop.xml" />
+  <tool file="biobb/biobb_gromacs/biobb_append_ligand.xml" />
+</section>
 <section id="biobb_cmip" name="CMIP" >
   <tool file="biobb/biobb_cmip/biobb_cmip.xml" />
   <tool file="biobb/biobb_cmip/biobb_titration.xml" />
@@ -167,20 +181,6 @@
   <tool file="biobb/biobb_analysis/biobb_cpptraj_convert.xml" />
   <tool file="biobb/biobb_analysis/biobb_cpptraj_mask.xml" />
   <tool file="biobb/biobb_analysis/biobb_cpptraj_image.xml" />
-</section>
-<section id="biobb_md" name="Setup and Simulation (GROMACS)" >
-  <tool file="biobb/biobb_md/biobb_pdb2gmx.xml" />
-  <tool file="biobb/biobb_md/biobb_editconf.xml" />
-  <tool file="biobb/biobb_md/biobb_genion.xml" />
-  <tool file="biobb/biobb_md/biobb_genrestr.xml" />
-  <tool file="biobb/biobb_md/biobb_grompp.xml" />
-  <tool file="biobb/biobb_md/biobb_mdrun.xml" />
-  <tool file="biobb/biobb_md/biobb_grompp_mdrun.xml" />
-  <tool file="biobb/biobb_md/biobb_make_ndx.xml" />
-  <tool file="biobb/biobb_md/biobb_gmxselect.xml" />
-  <tool file="biobb/biobb_md/biobb_solvate.xml" />
-  <tool file="biobb/biobb_md/biobb_ndx2resttop.xml" />
-  <tool file="biobb/biobb_md/biobb_append_ligand.xml" />
 </section>
 <section id="biobb_model" name="Modelling" >
   <tool file="biobb/biobb_model/biobb_fix_side_chain.xml" />

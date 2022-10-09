@@ -20,7 +20,7 @@ SECTIONS = {
     'biobb_structure_utils': 'Structure Utils',
     'biobb_model': 'Modelling',
     'biobb_cmip': 'CMIP',
-    'biobb_md': 'Setup and Simulation (GROMACS)',
+    'biobb_gromacs': 'Setup and Simulation (GROMACS)',
     'biobb_amber': 'Setup and Simulation (AMBER)',
     'biobb_analysis': 'Trajectory analysis',
     'biobb_dna': 'Nucleic Acids Trajectory analysis',
