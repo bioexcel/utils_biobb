@@ -138,7 +138,7 @@
 </section>
 <section id="biobb_cp2k" name="Setup and simulation of QM simulations (CP2K)" >
   <tool file="biobb/biobb_cp2k/biobb_cp2k_run.xml" />
-  <tool file="biobb/biobb_cp2k/biobb_cp2k_run.xml" />
+  <tool file="biobb/biobb_cp2k/biobb_cp2k_prep.xml" />
 </section>
 <section id="biobb_io" name="Get Data" >
   <tool file="biobb/biobb_io/biobb_drugbank.xml" />
