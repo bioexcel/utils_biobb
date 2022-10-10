@@ -1,8 +1,8 @@
-<tool id="biobb_model_mutate_ext" name="Mutate" version="3.8.0" >
+<tool id="biobb_model_mutate_ext" name="Mutate" version="3.0.1" >
     <description>: Class to mutate one amino acid by another in a 3d structure.</description>
     <requirements>
         <requirement type="package"
-        version="3.8.0"
+        version="3.0.1"
         >biobb_model</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__mutation_list__dq__:__dq__${properties.mutation_list}__dq__,__dq__use_modeller__dq__:${properties.use_modeller}__cc__'
+            --config '__oc____dq__mutation_list__dq__:__dq__${properties.mutation_list}__dq__,__dq__rebuild__dq__:${properties.rebuild}__cc__'
           #end if
         
           #if str($input_pdb_path) != 'None':
@@ -67,15 +67,15 @@
           </conditional>
           <section name="properties" title="Properties Input">
             
-              <param name="mutation_list" type="text" label="mutation_list" help="Mutation list in the format &#34;Chain:WT_AA_ThreeLeterCode Resnum MUT_AA_ThreeLeterCode&#34; (no spaces between the elements) separated by commas. If no chain is provided as chain code all the chains in the pdb file will be mutated. ie: &#34;A:ALA15CYS&#34;" optional="false"
+              <param name="mutation_list" type="text" label="mutation_list" help="separated by commas. If no chain is provided as chain code all the chains in the pdb file will be mutated. ie: &#34;A:ALA15CYS&#34;" optional="false"
                   value="A:Val2Ala"
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
             
-              <param name="use_modeller" type="boolean" 
+              <param name="rebuild" type="boolean" 
                   
-                  label="use_modeller" help="Use Modeller suite to optimize the side chains." 
+                  label="rebuild" help="Rebuilds side chain completely using Modeller" 
                 />
                     
           </section>
