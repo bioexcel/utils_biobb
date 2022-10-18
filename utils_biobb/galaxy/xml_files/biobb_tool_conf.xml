@@ -138,7 +138,7 @@
 </section>
 <section id="biobb_cp2k" name="Setup and simulation of QM simulations (CP2K)" >
   <tool file="biobb/biobb_cp2k/biobb_cp2k_run.xml" />
-  <tool file="biobb/biobb_cp2k/biobb_cp2k_prep.xml" />
+  <tool file="biobb/biobb_cp2k/biobb_cp2k_run.xml" />
 </section>
 <section id="biobb_io" name="Get Data" >
   <tool file="biobb/biobb_io/biobb_drugbank.xml" />
@@ -158,7 +158,13 @@
 </section>
 <section id="biobb_model" name="Modelling" >
   <tool file="biobb/biobb_model/biobb_fix_side_chain.xml" />
+  <tool file="biobb/biobb_model/biobb_fix_backbone.xml" />
   <tool file="biobb/biobb_model/biobb_mutate.xml" />
+  <tool file="biobb/biobb_model/biobb_fix_amides.xml" />
+  <tool file="biobb/biobb_model/biobb_fix_chirality.xml" />
+  <tool file="biobb/biobb_model/biobb_checking_log.xml" />
+  <tool file="biobb/biobb_model/biobb_fix_altlocs.xml" />
+  <tool file="biobb/biobb_model/biobb_fix_ssbonds.xml" />
 </section>
 <section id="biobb_chemistry" name="Small molecules" >
   <tool file="biobb/biobb_chemistry/biobb_acpype_params_ac.xml" />
