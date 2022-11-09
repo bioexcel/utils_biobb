@@ -1,8 +1,8 @@
-<tool id="biobb_structure_utils_extract_molecule_ext" name="ExtractMolecule" version="3.7.6" >
+<tool id="biobb_structure_utils_extract_molecule_ext" name="ExtractMolecule" version="3.8.0" >
     <description>: This class is a wrapper of the Structure Checking tool to extract a molecule from a 3D structure.</description>
     <requirements>
         <requirement type="package"
-        version="3.7.6"
+        version="3.8.0"
         >biobb_structure_utils</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[

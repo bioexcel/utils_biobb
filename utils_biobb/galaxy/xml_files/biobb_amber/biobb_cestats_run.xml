@@ -1,8 +1,8 @@
-<tool id="biobb_amber_cestats_run_ext" name="CestatsRun" version="3.7.1" >
+<tool id="biobb_amber_cestats_run_ext" name="CestatsRun" version="3.8.0" >
     <description>: Wrapper of the AmberTools (AMBER MD Package) cestats tool module.</description>
     <requirements>
         <requirement type="package"
-        version="3.7.1"
+        version="3.8.0"
         >biobb_amber</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -22,7 +22,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__timestep__dq__:${properties.timestep},__dq__verbose__dq__:${properties.verbose},__dq__interval__dq__:${properties.interval},__dq__reduced__dq__:${properties.reduced},__dq__eos__dq__:${properties.eos},__dq__calceo__dq__:${properties.calceo},__dq__running_avg_window__dq__:${properties.running_avg_window},__dq__chunk_window__dq__:${properties.chunk_window},__dq__cumulative__dq__:${properties.cumulative},__dq__fix_remd__dq__:__dq__${properties.fix_remd}__dq__,__dq__conditional__dq__:__dq__${properties.conditional}__dq____cc__'
+            --config '__oc____dq__timestep__dq__:${properties.timestep},__dq__verbose__dq__:${properties.verbose},__dq__interval__dq__:${properties.interval},__dq__reduced__dq__:${properties.reduced},__dq__eos__dq__:${properties.eos},__dq__calceo__dq__:${properties.calceo},__dq__running_avg_window__dq__:${properties.running_avg_window},__dq__chunk_window__dq__:${properties.chunk_window},__dq__cumulative__dq__:${properties.cumulative},__dq__fix_remd__dq__:__dq__${properties.fix_remd}__dq__,__dq__conditional__dq__:__dq__${properties.conditional}__dq__,__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
           #end if
         
           #if str($input_cein_path) != 'None':
@@ -170,6 +170,12 @@
             
               <param name="conditional" type="text" label="conditional" help="Evaluates conditional probabilities. CONDITIONAL should be a string of the format: &lt;resid&gt;:&lt;state&gt;,&lt;resid&gt;:&lt;state&gt;,... or &lt;resid&gt;:PROT,&lt;resid&gt;:DEPROT,... or &lt;resid&gt;:&lt;state1&gt;;&lt;state2&gt;,&lt;resid&gt;:PROT,... where &lt;resid&gt; is the residue number in the prmtop and &lt;state&gt; is either the state number or -p-rotonated or -d-eprotonated, case-insensitive." optional="true"
                   
+                >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+              <param name="binary_path" type="text" label="binary_path" help="Path to the cestats executable binary." optional="false"
+                  value="cestats"
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>

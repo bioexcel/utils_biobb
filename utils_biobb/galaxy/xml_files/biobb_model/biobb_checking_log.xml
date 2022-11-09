@@ -1,8 +1,8 @@
-<tool id="biobb_model_checking_log_ext" name="CheckingLog" version="3.7.0" >
+<tool id="biobb_model_checking_log_ext" name="CheckingLog" version="3.8.0" >
     <description>: Class to check the errors of a PDB structure.</description>
     <requirements>
         <requirement type="package"
-        version="3.7.0"
+        version="3.8.0"
         >biobb_model</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[

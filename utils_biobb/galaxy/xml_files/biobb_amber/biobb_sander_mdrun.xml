@@ -1,8 +1,8 @@
-<tool id="biobb_amber_sander_mdrun_ext" name="SanderMdrun" version="3.7.1" >
+<tool id="biobb_amber_sander_mdrun_ext" name="SanderMdrun" version="3.8.0" >
     <description>: Wrapper of the AmberTools (AMBER MD Package) sander tool module.</description>
     <requirements>
         <requirement type="package"
-        version="3.7.1"
+        version="3.8.0"
         >biobb_amber</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -28,7 +28,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__mdin__dq__:${properties.mdin},__dq__simulation_type__dq__:__dq__${properties.simulation_type}__dq__,__dq__sander_path__dq__:__dq__${properties.sander_path}__dq__,__dq__mpi_bin__dq__:__dq__${properties.mpi_bin}__dq__,__dq__mpi_np__dq__:${properties.mpi_np},__dq__mpi_flags__dq__:__dq__${properties.mpi_flags}__dq____cc__'
+            --config '__oc____dq__mdin__dq__:${properties.mdin},__dq__simulation_type__dq__:__dq__${properties.simulation_type}__dq__,__dq__binary_path__dq__:__dq__${properties.binary_path}__dq__,__dq__mpi_bin__dq__:__dq__${properties.mpi_bin}__dq__,__dq__mpi_np__dq__:${properties.mpi_np},__dq__mpi_flags__dq__:__dq__${properties.mpi_flags}__dq____cc__'
           #end if
         
           #if str($input_top_path) != 'None':
@@ -191,7 +191,7 @@
                   
                 </param>
             
-              <param name="sander_path" type="text" label="sander_path" help="sander binary path to be used." optional="false"
+              <param name="binary_path" type="text" label="binary_path" help="sander binary path to be used." optional="false"
                   value="sander"
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>

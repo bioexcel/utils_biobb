@@ -1,8 +1,8 @@
-<tool id="biobb_analysis_cpptraj_rms_ext" name="CpptrajRms" version="3.7.0" >
+<tool id="biobb_analysis_cpptraj_rms_ext" name="CpptrajRms" version="3.8.0" >
     <description>: Wrapper of the Ambertools Cpptraj module for calculating the Root Mean Square deviation (RMSd) of a given cpptraj compatible trajectory.</description>
     <requirements>
         <requirement type="package"
-        version="3.7.0"
+        version="3.8.0"
         >biobb_analysis</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -24,7 +24,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__start__dq__:${properties.start},__dq__end__dq__:${properties.end},__dq__steps__dq__:${properties.steps},__dq__mask__dq__:__dq__${properties.mask}__dq__,__dq__reference__dq__:__dq__${properties.reference}__dq__,__dq__cpptraj_path__dq__:__dq__${properties.cpptraj_path}__dq____cc__'
+            --config '__oc____dq__start__dq__:${properties.start},__dq__end__dq__:${properties.end},__dq__steps__dq__:${properties.steps},__dq__mask__dq__:__dq__${properties.mask}__dq__,__dq__reference__dq__:__dq__${properties.reference}__dq__,__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
           #end if
         
           #if str($input_top_path) != 'None':
@@ -61,7 +61,7 @@
         
           <param name="input_top_path" type="data" format="top,pdb,prmtop,parmtop,zip"  optional="False" label="input TOP,PDB,PRMTOP,PARMTOP,ZIP file" help="Path to the input structure or topology file. Format: [input].[format]"/> 
         
-          <param name="input_traj_path" type="data" format="mdcrd,crd,cdf,netcdf,restart,ncrestart,restartnc,dcd,charmm,cor,pdb,mol2,trr,gro,binpos,xtc,cif,arc,sqm,sdf,conflib"  optional="False" label="input MDCRD,CRD,CDF,NETCDF,RESTART,NCRESTART,RESTARTNC,DCD,CHARMM,COR,PDB,MOL2,TRR,GRO,BINPOS,XTC,CIF,ARC,SQM,SDF,CONFLIB file" help="Path to the input trajectory to be processed. Format: [input].[format]"/> 
+          <param name="input_traj_path" type="data" format="mdcrd,crd,cdf,netcdf,nc,restart,ncrestart,restartnc,dcd,charmm,cor,pdb,mol2,trr,gro,binpos,xtc,cif,arc,sqm,sdf,conflib"  optional="False" label="input MDCRD,CRD,CDF,NETCDF,NC,RESTART,NCRESTART,RESTARTNC,DCD,CHARMM,COR,PDB,MOL2,TRR,GRO,BINPOS,XTC,CIF,ARC,SQM,SDF,CONFLIB file" help="Path to the input trajectory to be processed. Format: [input].[format]"/> 
         
           <param name="input_exp_path" type="data" format="pdb"  optional="True" label="input PDB file" help="Path to the experimental reference file (required if reference = experimental). Format: [input].pdb"/> 
         
@@ -176,7 +176,7 @@
                   
                 </param>
             
-              <param name="cpptraj_path" type="text" label="cpptraj_path" help="Path to the cpptraj executable binary." optional="false"
+              <param name="binary_path" type="text" label="binary_path" help="Path to the cpptraj executable binary." optional="false"
                   value="cpptraj"
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>

@@ -1,8 +1,8 @@
-<tool id="biobb_md_mdrun_ext" name="Mdrun" version="3.7.1" >
+<tool id="biobb_md_mdrun_ext" name="Mdrun" version="3.7.2" >
     <description>: Wrapper of the GROMACS mdrun module.</description>
     <requirements>
         <requirement type="package"
-        version="3.7.1"
+        version="3.7.2"
         >biobb_md</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[

@@ -1,8 +1,8 @@
-<tool id="biobb_io_memprotmd_sim_ext" name="MemprotmdSim" version="3.7.0" >
+<tool id="biobb_io_memprotmd_sim_ext" name="MemprotmdSim" version="3.8.0" >
     <description>: This class is a wrapper of the MemProtMD to download a simulation using its REST API.</description>
     <requirements>
         <requirement type="package"
-        version="3.7.0"
+        version="3.8.0"
         >biobb_io</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[

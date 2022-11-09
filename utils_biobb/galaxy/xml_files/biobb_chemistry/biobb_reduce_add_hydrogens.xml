@@ -1,8 +1,8 @@
-<tool id="biobb_chemistry_reduce_add_hydrogens_ext" name="ReduceAddHydrogens" version="3.7.0" >
+<tool id="biobb_chemistry_reduce_add_hydrogens_ext" name="ReduceAddHydrogens" version="3.8.0" >
     <description>: This class is a wrapper of the Ambertools reduce module for adding hydrogens to a given structure.</description>
     <requirements>
         <requirement type="package"
-        version="3.7.0"
+        version="3.8.0"
         >biobb_chemistry</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__flip__dq__:${properties.flip},__dq__noflip__dq__:${properties.noflip},__dq__nuclear__dq__:${properties.nuclear},__dq__nooh__dq__:${properties.nooh},__dq__oh__dq__:${properties.oh},__dq__his__dq__:${properties.his},__dq__noheth__dq__:${properties.noheth},__dq__rotnh3__dq__:${properties.rotnh3},__dq__norotnh3__dq__:${properties.norotnh3},__dq__rotexist__dq__:${properties.rotexist},__dq__rotexoh__dq__:${properties.rotexoh},__dq__allalt__dq__:${properties.allalt},__dq__onlya__dq__:${properties.onlya},__dq__charges__dq__:${properties.charges},__dq__dorotmet__dq__:${properties.dorotmet},__dq__noadjust__dq__:${properties.noadjust},__dq__build__dq__:${properties.build},__dq__reduce_path__dq__:__dq__${properties.reduce_path}__dq____cc__'
+            --config '__oc____dq__flip__dq__:${properties.flip},__dq__noflip__dq__:${properties.noflip},__dq__nuclear__dq__:${properties.nuclear},__dq__nooh__dq__:${properties.nooh},__dq__oh__dq__:${properties.oh},__dq__his__dq__:${properties.his},__dq__noheth__dq__:${properties.noheth},__dq__rotnh3__dq__:${properties.rotnh3},__dq__norotnh3__dq__:${properties.norotnh3},__dq__rotexist__dq__:${properties.rotexist},__dq__rotexoh__dq__:${properties.rotexoh},__dq__allalt__dq__:${properties.allalt},__dq__onlya__dq__:${properties.onlya},__dq__charges__dq__:${properties.charges},__dq__dorotmet__dq__:${properties.dorotmet},__dq__noadjust__dq__:${properties.noadjust},__dq__metal_bump__dq__:${properties.metal_bump},__dq__non_metal_bump__dq__:${properties.non_metal_bump},__dq__build__dq__:${properties.build},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
           #end if
         
           #if str($input_path) != 'None':
@@ -147,12 +147,22 @@
                   label="noadjust" help="do not process any rot or flip adjustments" 
                 />
             
+              <param name="metal_bump" type="float" 
+                  
+                  
+                  label="metal_bump" help="H &#39;bumps&#39; metals at radius plus this" optional="true"/>
+            
+              <param name="non_metal_bump" type="float" 
+                  
+                  
+                  label="non_metal_bump" help="&#39;bumps&#39; nonmetal at radius plus this" optional="true"/>
+            
               <param name="build" type="boolean" 
                   
                   label="build" help="add H, including His sc NH, then rotate and flip groups (except for pre-existing methionine methyl hydrogens)" 
                 />
             
-              <param name="reduce_path" type="text" label="reduce_path" help="Path to the reduce executable binary." optional="false"
+              <param name="binary_path" type="text" label="binary_path" help="Path to the reduce executable binary." optional="false"
                   value="reduce"
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>

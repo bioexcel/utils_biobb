@@ -1,8 +1,8 @@
-<tool id="biobb_vs_autodock_vina_run_ext" name="AutodockVinaRun" version="3.7.1" >
+<tool id="biobb_vs_autodock_vina_run_ext" name="AutodockVinaRun" version="3.8.1" >
     <description>: Wrapper of the AutoDock Vina software.</description>
     <requirements>
         <requirement type="package"
-        version="3.7.1"
+        version="3.8.1"
         >biobb_vs</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -24,7 +24,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__vina_path__dq__:__dq__${properties.vina_path}__dq____cc__'
+            --config '__oc____dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
           #end if
         
           #if str($input_ligand_pdbqt_path) != 'None':
@@ -95,7 +95,7 @@
           </conditional>
           <section name="properties" title="Properties Input">
             
-              <param name="vina_path" type="text" label="vina_path" help="path to vina in your local computer." optional="false"
+              <param name="binary_path" type="text" label="binary_path" help="path to vina in your local computer." optional="false"
                   value="vina"
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>

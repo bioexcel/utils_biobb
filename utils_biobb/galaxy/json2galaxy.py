@@ -20,14 +20,15 @@ SECTIONS = {
     'biobb_structure_utils': 'Structure Utils',
     'biobb_model': 'Modelling',
     'biobb_cmip': 'CMIP',
-    'biobb_md': 'Setup and Simulation (GROMACS)',
+    'biobb_gromacs': 'Setup and Simulation (GROMACS)',
     'biobb_amber': 'Setup and Simulation (AMBER)',
     'biobb_analysis': 'Trajectory analysis',
     'biobb_dna': 'Nucleic Acids Trajectory analysis',
     'biobb_chemistry': 'Small molecules',
     'biobb_pmx': 'PMX Free Energy calculation',
     'biobb_vs': 'Virtual Screening / Docking',
-    'biobb_ml': 'Machile Learning'
+    'biobb_ml': 'Machile Learning',
+    'biobb_cp2k': 'Setup and simulation of QM simulations (CP2K)'
 }
 
 
@@ -40,11 +41,11 @@ def main():
     """ Usage: json2galaxy.py [-h] [--template TEMPLATE] [--xml_dir XML_DIR]
                       [--id ID] [--display_name DISPLAY_NAME] [--create_dir]
                       base_biobb_dir
-        positional arguments:                                                                    
+        positional arguments:
             * base_biobb_dir (**str**)      Path to biobb's folder
         optional arguments:
             * --template (**str**)  Path to Template for XML galaxy adapter (xml) (default: biobb_galaxy_template.xml)
-            * --xml_dir (**str**) Path to directory to place XML output files. 
+            * --xml_dir (**str**) Path to directory to place XML output files.
             * --file_types (**bool**)  Add discovered file types to logs
             * --tools_xml (**str**) Generate tools panel XML
     """

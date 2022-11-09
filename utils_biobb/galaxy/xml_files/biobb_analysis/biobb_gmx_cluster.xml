@@ -1,8 +1,8 @@
-<tool id="biobb_analysis_gmx_cluster_ext" name="GmxCluster" version="3.7.0" >
+<tool id="biobb_analysis_gmx_cluster_ext" name="GmxCluster" version="3.8.0" >
     <description>: Wrapper of the GROMACS cluster module for clustering structures from a given GROMACS compatible trajectory.</description>
     <requirements>
         <requirement type="package"
-        version="3.7.0"
+        version="3.8.0"
         >biobb_analysis</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -24,7 +24,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__fit_selection__dq__:__dq__${properties.fit_selection}__dq__,__dq__output_selection__dq__:__dq__${properties.output_selection}__dq__,__dq__dista__dq__:${properties.dista},__dq__method__dq__:__dq__${properties.method}__dq__,__dq__cutoff__dq__:${properties.cutoff},__dq__gmx_path__dq__:__dq__${properties.gmx_path}__dq____cc__'
+            --config '__oc____dq__fit_selection__dq__:__dq__${properties.fit_selection}__dq__,__dq__output_selection__dq__:__dq__${properties.output_selection}__dq__,__dq__dista__dq__:${properties.dista},__dq__method__dq__:__dq__${properties.method}__dq__,__dq__cutoff__dq__:${properties.cutoff},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
           #end if
         
           #if str($input_structure_path) != 'None':
@@ -367,7 +367,7 @@
                   
                   label="cutoff" help="RMSD cut-off (nm) for two structures to be neighbor." optional="false"/>
             
-              <param name="gmx_path" type="text" label="gmx_path" help="Path to the GROMACS executable binary." optional="false"
+              <param name="binary_path" type="text" label="binary_path" help="Path to the GROMACS executable binary." optional="false"
                   value="gmx"
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>

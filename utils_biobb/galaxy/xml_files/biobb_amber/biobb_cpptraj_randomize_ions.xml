@@ -1,8 +1,8 @@
-<tool id="biobb_amber_cpptraj_randomize_ions_ext" name="CpptrajRandomizeIons" version="3.7.1" >
+<tool id="biobb_amber_cpptraj_randomize_ions_ext" name="CpptrajRandomizeIons" version="3.8.0" >
     <description>: Wrapper of the AmberTools (AMBER MD Package) cpptraj tool module.</description>
     <requirements>
         <requirement type="package"
-        version="3.7.1"
+        version="3.8.0"
         >biobb_amber</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -22,7 +22,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__ion_mask__dq__:__dq__${properties.ion_mask}__dq__,__dq__solute_mask__dq__:__dq__${properties.solute_mask}__dq__,__dq__distance__dq__:${properties.distance},__dq__overlap__dq__:${properties.overlap}__cc__'
+            --config '__oc____dq__ion_mask__dq__:__dq__${properties.ion_mask}__dq__,__dq__solute_mask__dq__:__dq__${properties.solute_mask}__dq__,__dq__distance__dq__:${properties.distance},__dq__overlap__dq__:${properties.overlap},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
           #end if
         
           #if str($input_top_path) != 'None':
@@ -106,6 +106,12 @@
                   value="3.5"
                   
                   label="overlap" help="Minimum distance between ions." optional="false"/>
+            
+              <param name="binary_path" type="text" label="binary_path" help="Path to the cpptraj executable binary." optional="false"
+                  value="cpptraj"
+                >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
             
               <param name="output_format" type="select" label="output_format" help="Format of the output file" multiple="false">
                   

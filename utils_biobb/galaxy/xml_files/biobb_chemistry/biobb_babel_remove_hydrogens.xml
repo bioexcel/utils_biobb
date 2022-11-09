@@ -1,8 +1,8 @@
-<tool id="biobb_chemistry_babel_remove_hydrogens_ext" name="BabelRemoveHydrogens" version="3.7.0" >
+<tool id="biobb_chemistry_babel_remove_hydrogens_ext" name="BabelRemoveHydrogens" version="3.8.0" >
     <description>: This class is a wrapper of the Open Babel tool.</description>
     <requirements>
         <requirement type="package"
-        version="3.7.0"
+        version="3.8.0"
         >biobb_chemistry</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__input_format__dq__:__dq__${properties.input_format}__dq__,__dq__output_format__dq__:__dq__${properties.output_format}__dq__,__dq__coordinates__dq__:__dq__${properties.coordinates}__dq__,__dq__ph__dq__:${properties.ph},__dq__obabel_path__dq__:__dq__${properties.obabel_path}__dq____cc__'
+            --config '__oc____dq__input_format__dq__:__dq__${properties.input_format}__dq__,__dq__output_format__dq__:__dq__${properties.output_format}__dq__,__dq__coordinates__dq__:__dq__${properties.coordinates}__dq__,__dq__ph__dq__:${properties.ph},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
           #end if
         
           #if str($input_path) != 'None':
@@ -330,7 +330,7 @@
                   
                   label="ph" help="Add hydrogens appropriate for pH." optional="false"/>
             
-              <param name="obabel_path" type="text" label="obabel_path" help="Path to the obabel executable binary." optional="false"
+              <param name="binary_path" type="text" label="binary_path" help="Path to the obabel executable binary." optional="false"
                   value="obabel"
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>

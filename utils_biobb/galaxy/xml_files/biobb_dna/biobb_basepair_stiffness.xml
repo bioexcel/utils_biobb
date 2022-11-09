@@ -1,8 +1,8 @@
-<tool id="biobb_dna_basepair_stiffness_ext" name="BasepairStiffness" version="3.7.1" >
+<tool id="biobb_dna_basepair_stiffness_ext" name="BasepairStiffness" version="3.8.2" >
     <description>: Calculate stiffness constants matrix between all six helical parameters for a single base pair step.</description>
     <requirements>
         <requirement type="package"
-        version="3.7.1"
+        version="3.8.2"
         >biobb_dna</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[

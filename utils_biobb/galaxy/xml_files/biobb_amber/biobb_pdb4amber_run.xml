@@ -1,8 +1,8 @@
-<tool id="biobb_amber_pdb4amber_run_ext" name="Pdb4amberRun" version="3.7.1" >
+<tool id="biobb_amber_pdb4amber_run_ext" name="Pdb4amberRun" version="3.8.0" >
     <description>: Wrapper of the AmberTools (AMBER MD Package) pdb4amber tool module.</description>
     <requirements>
         <requirement type="package"
-        version="3.7.1"
+        version="3.8.0"
         >biobb_amber</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__remove_hydrogens__dq__:${properties.remove_hydrogens},__dq__remove_waters__dq__:${properties.remove_waters},__dq__constant_pH__dq__:${properties.constant_pH}__cc__'
+            --config '__oc____dq__remove_hydrogens__dq__:${properties.remove_hydrogens},__dq__remove_waters__dq__:${properties.remove_waters},__dq__constant_pH__dq__:${properties.constant_pH},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
           #end if
         
           #if str($input_pdb_path) != 'None':
@@ -81,6 +81,12 @@
                   
                   label="constant_pH" help="Rename ionizable residues e.g. GLU,ASP,HIS for constant pH simulation." 
                 />
+            
+              <param name="binary_path" type="text" label="binary_path" help="Path to the pdb4amber executable binary." optional="false"
+                  value="pdb4amber"
+                >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
                     
           </section>
     </inputs>

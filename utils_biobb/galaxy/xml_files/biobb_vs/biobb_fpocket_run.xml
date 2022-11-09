@@ -1,8 +1,8 @@
-<tool id="biobb_vs_fpocket_run_ext" name="FpocketRun" version="3.7.1" >
+<tool id="biobb_vs_fpocket_run_ext" name="FpocketRun" version="3.8.1" >
     <description>: Wrapper of the fpocket software.</description>
     <requirements>
         <requirement type="package"
-        version="3.7.1"
+        version="3.8.1"
         >biobb_vs</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__min_radius__dq__:${properties.min_radius},__dq__max_radius__dq__:${properties.max_radius},__dq__num_spheres__dq__:${properties.num_spheres},__dq__sort_by__dq__:__dq__${properties.sort_by}__dq__,__dq__fpocket_path__dq__:__dq__${properties.fpocket_path}__dq____cc__'
+            --config '__oc____dq__min_radius__dq__:${properties.min_radius},__dq__max_radius__dq__:${properties.max_radius},__dq__num_spheres__dq__:${properties.num_spheres},__dq__sort_by__dq__:__dq__${properties.sort_by}__dq__,__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
           #end if
         
           #if str($input_pdb_path) != 'None':
@@ -112,7 +112,7 @@
                   
                 </param>
             
-              <param name="fpocket_path" type="text" label="fpocket_path" help="path to fpocket in your local computer." optional="false"
+              <param name="binary_path" type="text" label="binary_path" help="path to fpocket in your local computer." optional="false"
                   value="fpocket"
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>

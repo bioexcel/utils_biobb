@@ -17,6 +17,8 @@
         
           ln -f -s ${input_json_box_path} ${input_json_box_path}_`echo $$`.${input_json_box_path.ext};
         
+          ln -f -s ${input_json_external_box_path} ${input_json_external_box_path}_`echo $$`.${input_json_external_box_path.ext};
+        
         #if $config.sele == "option1":
             ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
@@ -51,6 +53,10 @@
             --input_json_box_path ${input_json_box_path}_`echo $$`.${input_json_box_path.ext}
           #end if
         
+          #if str($input_json_external_box_path) != 'None':
+            --input_json_external_box_path ${input_json_external_box_path}_`echo $$`.${input_json_external_box_path.ext}
+          #end if
+        
         
           --output_pdb_path $outname_output_pdb_path
         
@@ -80,6 +86,8 @@
         
           rm -f ${input_json_box_path}_`echo $$`.${input_json_box_path.ext};
         
+          rm -f ${input_json_external_box_path}_`echo $$`.${input_json_external_box_path.ext};
+        
         
           if test -f $outname_output_pdb_path; then mv $outname_output_pdb_path $output_pdb_path; fi;
         
@@ -108,6 +116,8 @@
           <param name="input_params_path" type="data" format="txt"  optional="True" label="input TXT file" help="Path to the CMIP input parameters file. Format: [input].txt"/> 
         
           <param name="input_json_box_path" type="data" format="json"  optional="True" label="input JSON file" help="Path to the input CMIP box in JSON format. Format: [input].json"/> 
+        
+          <param name="input_json_external_box_path" type="data" format="json"  optional="True" label="input JSON file" help="Path to the input CMIP box in JSON format. Format: [input].json"/> 
         
         
           <param name="outname_output_pdb_path" type="text" value="mycmip.pdb" 
