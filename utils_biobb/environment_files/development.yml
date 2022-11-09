@@ -14,7 +14,7 @@ dependencies:
   - cp2k=7.1.0
   - conda
   - curves=3.0.0
-  - gfortran=9.3.0
+  - gfortran=9.5.0
   - gromacs=2022.2
   - ipywidgets==7.6.6
   - nb_conda_kernels
