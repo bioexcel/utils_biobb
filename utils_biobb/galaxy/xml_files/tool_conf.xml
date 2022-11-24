@@ -1,0 +1,353 @@
+<?xml version='1.0' encoding='utf-8'?>
+<toolbox monitor="true">
+  <section id="getext" name="Get Data">
+    <tool file="data_source/upload.xml" />
+    <tool file="data_source/ucsc_tablebrowser.xml" />
+    <!-- <tool file="data_source/ucsc_tablebrowser_test.xml" /> -->
+    <tool file="data_source/ucsc_tablebrowser_archaea.xml" />
+    <tool file="data_source/ncbi_datasets.xml" />
+    <tool file="data_source/sra.xml" />
+    <tool file="data_source/ebi_sra.xml" />
+    <tool file="data_source/fly_modencode.xml" />
+    <tool file="data_source/intermine.xml" />
+    <tool file="data_source/flymine.xml" />
+    <!-- <tool file="data_source/flymine_test.xml" /> -->
+    <tool file="data_source/modmine.xml" />
+    <tool file="data_source/mousemine.xml" />
+    <tool file="data_source/ratmine.xml" />
+    <tool file="data_source/yeastmine.xml" />
+    <tool file="data_source/worm_modencode.xml" />
+    <tool file="data_source/wormbase.xml" />
+    <!-- <tool file="data_source/wormbase_test.xml" /> -->
+    <tool file="data_source/zebrafishmine.xml" />
+    <tool file="data_source/eupathdb.xml" />
+    <tool file="data_source/hbvar.xml" />
+  </section>
+  <section id="send" name="Send Data">
+    <tool file="data_export/send.xml" />
+    <tool file="data_export/export_remote.xml" />
+  </section>
+  <section id="collection_operations" name="Collection Operations">
+    <tool file="${model_tools_path}/unzip_collection.xml" />
+    <tool file="${model_tools_path}/zip_collection.xml" />
+    <tool file="${model_tools_path}/filter_failed_collection.xml" />
+    <tool file="${model_tools_path}/filter_empty_collection.xml" />
+    <tool file="${model_tools_path}/flatten_collection.xml" />
+    <tool file="${model_tools_path}/merge_collection.xml" />
+    <tool file="${model_tools_path}/relabel_from_file.xml" />
+    <tool file="${model_tools_path}/filter_from_file.xml" />
+    <tool file="${model_tools_path}/sort_collection_list.xml" />
+    <tool file="${model_tools_path}/tag_collection_from_file.xml" />
+    <tool file="${model_tools_path}/apply_rules.xml" />
+    <tool file="${model_tools_path}/build_list.xml" />
+    <tool file="${model_tools_path}/build_list_1.2.0.xml" />
+    <tool file="${model_tools_path}/extract_dataset.xml" />
+  </section>
+  <!--  <section id="expression_tools" name="Expression Tools">
+    <tool file="expression_tools/parse_values_from_file.xml"/>
+  </section>
+  <section id="liftOver" name="Lift-Over">
+    <tool file="extract/liftOver_wrapper.xml" />
+	  </section>-->
+  <section id="textutil" name="Text Manipulation">
+    <tool file="filters/fixedValueColumn.xml" />
+    <tool file="filters/catWrapper.xml" />
+    <tool file="filters/cutWrapper.xml" />
+    <tool file="filters/mergeCols.xml" />
+    <tool file="filters/convert_characters.xml" />
+    <tool file="filters/CreateInterval.xml" />
+    <tool file="filters/cutWrapper.xml" />
+    <tool file="filters/changeCase.xml" />
+    <tool file="filters/pasteWrapper.xml" />
+    <tool file="filters/remove_beginning.xml" />
+    <tool file="filters/randomlines.xml" />
+    <tool file="filters/headWrapper.xml" />
+    <tool file="filters/tailWrapper.xml" />
+    <tool file="filters/trimmer.xml" />
+    <tool file="filters/wc_gnu.xml" />
+    <tool file="filters/secure_hash_message_digest.xml" />
+  </section>
+  <section id="convert" name="Convert Formats">
+    <tool file="filters/bed2gff.xml" />
+    <tool file="filters/gff2bed.xml" />
+    <tool file="maf/maf_to_bed.xml" />
+    <tool file="maf/maf_to_interval.xml" />
+    <tool file="maf/maf_to_fasta.xml" />
+    <tool file="filters/sff_extractor.xml" />
+    <tool file="filters/wig_to_bigwig.xml" />
+    <tool file="filters/bed_to_bigbed.xml" />
+  </section>
+  <section id="filter" name="Filter and Sort">
+    <tool file="stats/filtering.xml" />
+    <tool file="filters/sorter.xml" />
+    <tool file="filters/grep.xml" />
+    <tool file="filters/grep_1.0.1.xml"/>
+    <label id="gff" name="GFF" />
+    <tool file="filters/gff/extract_GFF_Features.xml" />
+    <tool file="filters/gff/gff_filter_by_attribute.xml" />
+    <tool file="filters/gff/gff_filter_by_feature_count.xml" />
+    <tool file="filters/gff/gtf_filter_by_attribute_values_list.xml" />
+  </section>
+  <section id="group" name="Join, Subtract and Group">
+    <tool file="filters/joiner.xml" />
+    <tool file="filters/compare.xml" />
+    <tool file="stats/grouping.xml" />
+  </section>
+  <section id="fetchAlignSeq" name="Fetch Alignments/Sequences">
+    <tool file="maf/interval2maf_pairwise.xml" />
+    <tool file="maf/interval2maf.xml" />
+    <tool file="maf/maf_split_by_species.xml" />
+    <tool file="maf/interval_maf_to_merged_fasta.xml" />
+    <tool file="maf/genebed_maf_to_fasta.xml" />
+    <tool file="maf/maf_stats.xml" />
+    <tool file="maf/maf_thread_for_species.xml" />
+    <tool file="maf/maf_limit_to_species.xml" />
+    <tool file="maf/maf_limit_size.xml" />
+    <tool file="maf/maf_by_block_number.xml" />
+    <tool file="maf/maf_reverse_complement.xml" />
+    <tool file="maf/maf_filter.xml" />
+  </section>
+  <!--
+  <section id="bxops" name="Operate on Genomic Intervals" version="">
+    <tool file="filters/wiggle_to_simple.xml" />
+    <tool file="stats/aggregate_binned_scores_in_intervals.xml" />
+    <tool file="filters/ucsc_gene_bed_to_exon_bed.xml" />
+	  </section>
+  -->
+  <section id="stats" name="Statistics">
+    <tool file="stats/gsummary.xml" />
+    <tool file="filters/uniq.xml" />
+  </section>
+  <section id="plots" name="Graph/Display Data">
+    <tool file="maf/vcf_to_maf_customtrack.xml" />
+  </section>
+  <!--
+  <section id="hgv" name="Phenotype Association">
+    <tool file="evolution/codingSnps.xml" />
+    <tool file="evolution/add_scores.xml" />
+    <tool file="phenotype_association/sift.xml" />
+    <tool file="phenotype_association/linkToGProfile.xml" />
+    <tool file="phenotype_association/linkToDavid.xml" />
+    <tool file="phenotype_association/ldtools.xml" />
+    <tool file="phenotype_association/master2pg.xml" />
+	  </section>
+  -->
+  <!--section id="interactivetools" name="Interactive tools">
+    <tool file="interactive/codingSnps.xml" />
+    <tool file="interactive/interactivetool_askomics.xml" />
+    <tool file="interactive/interactivetool_bam_iobio.xml" />
+    <tool file="interactive/interactivetool_cellxgene.xml" />
+    <tool file="interactive/interactivetool_ethercalc.xml" />
+    <tool file="interactive/interactivetool_hicbrowser.xml" />
+    <tool file="interactive/interactivetool_jupyter_notebook.xml" />
+    <tool file="interactive/interactivetool_neo4j.xml" />
+    <tool file="interactive/interactivetool_phinch.xml" />
+  </section-->
+
+<label text="BioExcel Building Blocks" id="biobb_tools" />
+
+<section id="biobb_io" name="Get Data" >
+  <tool file="biobb/biobb_io/biobb_drugbank.xml" />
+  <tool file="biobb/biobb_io/biobb_ligand.xml" />
+  <tool file="biobb/biobb_io/biobb_pdb.xml" />
+  <tool file="biobb/biobb_io/biobb_alphafold.xml" />
+  <tool file="biobb/biobb_io/biobb_pdb_variants.xml" />
+  <tool file="biobb/biobb_io/biobb_pdb_cluster_zip.xml" />
+  <tool file="biobb/biobb_io/biobb_memprotmd_sim_list.xml" />
+  <tool file="biobb/biobb_io/biobb_memprotmd_sim_search.xml" />
+  <tool file="biobb/biobb_io/biobb_memprotmd_sim.xml" />
+  <tool file="biobb/biobb_io/biobb_api_binding_site.xml" />
+  <tool file="biobb/biobb_io/biobb_canonical_fasta.xml" />
+  <tool file="biobb/biobb_io/biobb_mmcif.xml" />
+  <tool file="biobb/biobb_io/biobb_ideal_sdf.xml" />
+  <tool file="biobb/biobb_io/biobb_structure_info.xml" />
+</section>
+<section id="biobb_structure_utils" name="Structure Utils" >
+  <tool file="biobb/biobb_structure_utils/biobb_cat_pdb.xml" />
+  <tool file="biobb/biobb_structure_utils/biobb_extract_atoms.xml" />
+  <tool file="biobb/biobb_structure_utils/biobb_extract_chain.xml" />
+  <tool file="biobb/biobb_structure_utils/biobb_extract_heteroatoms.xml" />
+  <tool file="biobb/biobb_structure_utils/biobb_extract_residues.xml" />
+  <tool file="biobb/biobb_structure_utils/biobb_closest_residues.xml" />
+  <tool file="biobb/biobb_structure_utils/biobb_remove_molecules.xml" />
+  <tool file="biobb/biobb_structure_utils/biobb_extract_model.xml" />
+  <tool file="biobb/biobb_structure_utils/biobb_extract_molecule.xml" />
+  <tool file="biobb/biobb_structure_utils/biobb_remove_ligand.xml" />
+  <tool file="biobb/biobb_structure_utils/biobb_remove_pdb_water.xml" />
+  <tool file="biobb/biobb_structure_utils/biobb_renumber_structure.xml" />
+  <tool file="biobb/biobb_structure_utils/biobb_sort_gro_residues.xml" />
+  <tool file="biobb/biobb_structure_utils/biobb_str_check_add_hydrogens.xml" />
+  <tool file="biobb/biobb_structure_utils/biobb_structure_check.xml" />
+</section>
+
+<section id="biobb_model" name="Modelling" >
+  <tool file="biobb/biobb_model/biobb_fix_side_chain.xml" />
+  <tool file="biobb/biobb_model/biobb_fix_backbone.xml" />
+  <tool file="biobb/biobb_model/biobb_mutate.xml" />
+  <tool file="biobb/biobb_model/biobb_fix_amides.xml" />
+  <tool file="biobb/biobb_model/biobb_fix_chirality.xml" />
+  <tool file="biobb/biobb_model/biobb_checking_log.xml" />
+  <tool file="biobb/biobb_model/biobb_fix_altlocs.xml" />
+  <tool file="biobb/biobb_model/biobb_fix_ssbonds.xml" />
+</section>
+
+<section id="biobb_amber" name="Setup and Simulation (AMBER)" >
+  <tool file="biobb/biobb_amber/biobb_cpptraj_randomize_ions.xml" />
+  <tool file="biobb/biobb_amber/biobb_amber_to_pdb.xml" />
+  <tool file="biobb/biobb_amber/biobb_leap_add_ions.xml" />
+  <tool file="biobb/biobb_amber/biobb_leap_gen_top.xml" />
+  <tool file="biobb/biobb_amber/biobb_leap_solvate.xml" />
+  <tool file="biobb/biobb_amber/biobb_leap_build_linear_structure.xml" />
+  <tool file="biobb/biobb_amber/biobb_nab_build_dna_structure.xml" />
+  <tool file="biobb/biobb_amber/biobb_parmed_cpinutil.xml" />
+  <tool file="biobb/biobb_amber/biobb_parmed_hmassrepartition.xml" />
+  <tool file="biobb/biobb_amber/biobb_pdb4amber_run.xml" />
+  <tool file="biobb/biobb_amber/biobb_pmemd_mdrun.xml" />
+  <tool file="biobb/biobb_amber/biobb_process_minout.xml" />
+  <tool file="biobb/biobb_amber/biobb_process_mdout.xml" />
+  <tool file="biobb/biobb_amber/biobb_sander_mdrun.xml" />
+  <tool file="biobb/biobb_amber/biobb_cestats_run.xml" />
+  <tool file="biobb/biobb_amber/biobb_cphstats_run.xml" />
+</section>
+
+<section id="biobb_gromacs" name="Setup and Simulation (GROMACS)" >
+  <tool file="biobb/biobb_gromacs/biobb_pdb2gmx.xml" />
+  <tool file="biobb/biobb_gromacs/biobb_editconf.xml" />
+  <tool file="biobb/biobb_gromacs/biobb_genion.xml" />
+  <tool file="biobb/biobb_gromacs/biobb_genrestr.xml" />
+  <tool file="biobb/biobb_gromacs/biobb_grompp.xml" />
+  <tool file="biobb/biobb_gromacs/biobb_mdrun.xml" />
+  <tool file="biobb/biobb_gromacs/biobb_grompp_mdrun.xml" />
+  <tool file="biobb/biobb_gromacs/biobb_make_ndx.xml" />
+  <tool file="biobb/biobb_gromacs/biobb_gmxselect.xml" />
+  <tool file="biobb/biobb_gromacs/biobb_solvate.xml" />
+  <tool file="biobb/biobb_gromacs/biobb_ndx2resttop.xml" />
+  <tool file="biobb/biobb_gromacs/biobb_append_ligand.xml" />
+</section>
+
+<section id="biobb_chemistry" name="Small molecules" >
+  <tool file="biobb/biobb_chemistry/biobb_acpype_params_ac.xml" />
+  <tool file="biobb/biobb_chemistry/biobb_acpype_params_cns.xml" />
+  <tool file="biobb/biobb_chemistry/biobb_acpype_params_gmx.xml" />
+  <tool file="biobb/biobb_chemistry/biobb_acpype_params_gmx_opls.xml" />
+  <tool file="biobb/biobb_chemistry/biobb_babel_convert.xml" />
+  <tool file="biobb/biobb_chemistry/biobb_babel_add_hydrogens.xml" />
+  <tool file="biobb/biobb_chemistry/biobb_babel_remove_hydrogens.xml" />
+  <tool file="biobb/biobb_chemistry/biobb_babel_minimize.xml" />
+  <tool file="biobb/biobb_chemistry/biobb_reduce_add_hydrogens.xml" />
+  <tool file="biobb/biobb_chemistry/biobb_reduce_remove_hydrogens.xml" />
+</section>
+
+section id="biobb_analysis" name="Trajectory analysis" >
+  <tool file="biobb/biobb_analysis/biobb_gmx_cluster.xml" />
+  <tool file="biobb/biobb_analysis/biobb_gmx_rms.xml" />
+  <tool file="biobb/biobb_analysis/biobb_gmx_rgyr.xml" />
+  <tool file="biobb/biobb_analysis/biobb_gmx_energy.xml" />
+  <tool file="biobb/biobb_analysis/biobb_gmx_image.xml" />
+  <tool file="biobb/biobb_analysis/biobb_gmx_trjconv_str.xml" />
+  <tool file="biobb/biobb_analysis/biobb_gmx_trjconv_str_ens.xml" />
+  <tool file="biobb/biobb_analysis/biobb_gmx_trjconv_trj.xml" />
+  <tool file="biobb/biobb_analysis/biobb_cpptraj_average.xml" />
+  <tool file="biobb/biobb_analysis/biobb_cpptraj_bfactor.xml" />
+  <tool file="biobb/biobb_analysis/biobb_cpptraj_rms.xml" />
+  <tool file="biobb/biobb_analysis/biobb_cpptraj_rmsf.xml" />
+  <tool file="biobb/biobb_analysis/biobb_cpptraj_rgyr.xml" />
+  <tool file="biobb/biobb_analysis/biobb_cpptraj_dry.xml" />
+  <tool file="biobb/biobb_analysis/biobb_cpptraj_strip.xml" />
+  <tool file="biobb/biobb_analysis/biobb_cpptraj_snapshot.xml" />
+  <tool file="biobb/biobb_analysis/biobb_cpptraj_slice.xml" />
+  <tool file="biobb/biobb_analysis/biobb_cpptraj_convert.xml" />
+  <tool file="biobb/biobb_analysis/biobb_cpptraj_mask.xml" />
+  <tool file="biobb/biobb_analysis/biobb_cpptraj_image.xml" />
+</section>
+
+<section id="biobb_dna" name="Nucleic Acids Trajectory analysis" >
+  <tool file="biobb/biobb_dna/biobb_biobb_curves.xml" />
+  <tool file="biobb/biobb_dna/biobb_biobb_canal.xml" />
+  <tool file="biobb/biobb_dna/biobb_biobb_canion.xml" />
+  <tool file="biobb/biobb_dna/biobb_bipopulations.xml" />
+  <tool file="biobb/biobb_dna/biobb_canonicalag.xml" />
+  <tool file="biobb/biobb_dna/biobb_puckering.xml" />
+  <tool file="biobb/biobb_dna/biobb_dna_averages.xml" />
+  <tool file="biobb/biobb_dna/biobb_dna_timeseries.xml" />
+  <tool file="biobb/biobb_dna/biobb_dna_bimodality.xml" />
+  <tool file="biobb/biobb_dna/biobb_average_stiffness.xml" />
+  <tool file="biobb/biobb_dna/biobb_basepair_stiffness.xml" />
+  <tool file="biobb/biobb_dna/biobb_interbpcorr.xml" />
+  <tool file="biobb/biobb_dna/biobb_interhpcorr.xml" />
+  <tool file="biobb/biobb_dna/biobb_interseqcorr.xml" />
+  <tool file="biobb/biobb_dna/biobb_intrabpcorr.xml" />
+  <tool file="biobb/biobb_dna/biobb_intrahpcorr.xml" />
+  <tool file="biobb/biobb_dna/biobb_intraseqcorr.xml" />
+</section>
+
+<section id="biobb_cmip" name="Molecular Interaction Potentials" >
+  <tool file="biobb/biobb_cmip/biobb_cmip.xml" />
+  <tool file="biobb/biobb_cmip/biobb_titration.xml" />
+  <tool file="biobb/biobb_cmip/biobb_prepare_structure.xml" />
+  <tool file="biobb/biobb_cmip/biobb_prepare_pdb.xml" />
+  <tool file="biobb/biobb_cmip/biobb_ignore_residues.xml" />
+</section>
+
+<section id="biobb_pmx" name="PMX Free Energy calculation" >
+  <tool file="biobb/biobb_pmx/biobb_pmxmutate.xml" />
+  <tool file="biobb/biobb_pmx/biobb_pmxgentop.xml" />
+  <tool file="biobb/biobb_pmx/biobb_pmxanalyse.xml" />
+  <tool file="biobb/biobb_pmx/biobb_pmxatom_mapping.xml" />
+  <tool file="biobb/biobb_pmx/biobb_pmxcreate_top.xml" />
+  <tool file="biobb/biobb_pmx/biobb_pmxligand_hybrid.xml" />
+  <tool file="biobb/biobb_pmx/biobb_pmxmerge_ff.xml" />
+</section>
+
+<section id="biobb_vs" name="Virtual Screening / Docking" >
+  <tool file="biobb/biobb_vs/biobb_autodock_vina_run.xml" />
+  <tool file="biobb/biobb_vs/biobb_bindingsite.xml" />
+  <tool file="biobb/biobb_vs/biobb_box.xml" />
+  <tool file="biobb/biobb_vs/biobb_box_residues.xml" />
+  <tool file="biobb/biobb_vs/biobb_extract_model_pdbqt.xml" />
+  <tool file="biobb/biobb_vs/biobb_fpocket_run.xml" />
+  <tool file="biobb/biobb_vs/biobb_fpocket_filter.xml" />
+  <tool file="biobb/biobb_vs/biobb_fpocket_select.xml" />
+</section>
+
+<section id="biobb_ml" name="Machile Learning" >
+  <tool file="biobb/biobb_ml/biobb_linear_regression.xml" />
+  <tool file="biobb/biobb_ml/biobb_polynomial_regression.xml" />
+  <tool file="biobb/biobb_ml/biobb_random_forest_regressor.xml" />
+  <tool file="biobb/biobb_ml/biobb_regression_predict.xml" />
+  <tool file="biobb/biobb_ml/biobb_decision_tree.xml" />
+  <tool file="biobb/biobb_ml/biobb_k_neighbors_coefficient.xml" />
+  <tool file="biobb/biobb_ml/biobb_k_neighbors.xml" />
+  <tool file="biobb/biobb_ml/biobb_logistic_regression.xml" />
+  <tool file="biobb/biobb_ml/biobb_random_forest_classifier.xml" />
+  <tool file="biobb/biobb_ml/biobb_support_vector_machine.xml" />
+  <tool file="biobb/biobb_ml/biobb_classification_predict.xml" />
+  <tool file="biobb/biobb_ml/biobb_agglomerative_coefficient.xml" />
+  <tool file="biobb/biobb_ml/biobb_agglomerative_clustering.xml" />
+  <tool file="biobb/biobb_ml/biobb_dbscan.xml" />
+  <tool file="biobb/biobb_ml/biobb_k_means_coefficient.xml" />
+  <tool file="biobb/biobb_ml/biobb_k_means.xml" />
+  <tool file="biobb/biobb_ml/biobb_spectral_coefficient.xml" />
+  <tool file="biobb/biobb_ml/biobb_spectral_clustering.xml" />
+  <tool file="biobb/biobb_ml/biobb_clustering_predict.xml" />
+  <tool file="biobb/biobb_ml/biobb_correlation_matrix.xml" />
+  <tool file="biobb/biobb_ml/biobb_dendrogram.xml" />
+  <tool file="biobb/biobb_ml/biobb_drop_columns.xml" />
+  <tool file="biobb/biobb_ml/biobb_dummy_variables.xml" />
+  <tool file="biobb/biobb_ml/biobb_map_variables.xml" />
+  <tool file="biobb/biobb_ml/biobb_pairwise_comparison.xml" />
+  <tool file="biobb/biobb_ml/biobb_scale_columns.xml" />
+  <tool file="biobb/biobb_ml/biobb_autoencoder_neural_network.xml" />
+  <tool file="biobb/biobb_ml/biobb_classification_neural_network.xml" />
+  <tool file="biobb/biobb_ml/biobb_recurrent_neural_network.xml" />
+  <tool file="biobb/biobb_ml/biobb_regression_neural_network.xml" />
+  <tool file="biobb/biobb_ml/biobb_neural_network_decode.xml" />
+  <tool file="biobb/biobb_ml/biobb_neural_network_predict.xml" />
+  <tool file="biobb/biobb_ml/biobb_pls_components.xml" />
+  <tool file="biobb/biobb_ml/biobb_pls_regression.xml" />
+  <tool file="biobb/biobb_ml/biobb_principal_component.xml" />
+  <tool file="biobb/biobb_ml/biobb_oversampling.xml" />
+  <tool file="biobb/biobb_ml/biobb_resampling.xml" />
+  <tool file="biobb/biobb_ml/biobb_undersampling.xml" />
+</section>
+</toolbox>

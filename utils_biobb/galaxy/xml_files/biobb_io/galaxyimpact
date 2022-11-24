@@ -1,54 +1,44 @@
-<tool id="biobb_model_checking_log_ext" name="CheckingLog" version="3.8.1" >
-    <description>: Class to check the errors of a PDB structure.</description>
+<tool id="biobb_io_pdb_ext" name="Pdb" version="3.7.0" >
+    <description>: This class is a wrapper for downloading a PDB structure from the Protein Data Bank.</description>
     <requirements>
         <requirement type="package"
-        version="3.8.1"
-        >biobb_model</requirement>
+        version="3.7.0"
+        >biobb_io</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
-        
-          ln -f -s ${input_pdb_path} ${input_pdb_path}_`echo $$`.${input_pdb_path.ext};
         
         #if $config.sele == "option1":
             ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
         
-        checking_log
+        pdb
 
         #if $config.sele == "option1":
             --config ${config.properties}.${config.properties.ext}
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__modeller_key__dq__:__dq__${properties.modeller_key}__dq__,__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
-          #end if
-        
-          #if str($input_pdb_path) != 'None':
-            --input_pdb_path ${input_pdb_path}_`echo $$`.${input_pdb_path.ext}
+            --config '__oc____dq__pdb_code__dq__:__dq__${properties.pdb_code}__dq__,__dq__filter__dq__:__dq__${properties.filter}__dq__,__dq__api_id__dq__:__dq__${properties.api_id}__dq____cc__'
           #end if
         
         
-          --output_log_path $outname_output_log_path
+          --output_pdb_path $outname_output_pdb_path
         ;          
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
         
-          rm -f ${input_pdb_path}_`echo $$`.${input_pdb_path.ext};
         
-        
-          if test -f $outname_output_log_path; then mv $outname_output_log_path $output_log_path; fi;
+          if test -f $outname_output_pdb_path; then mv $outname_output_pdb_path $output_pdb_path; fi;
         
     ]]>
     </command>
     <inputs>
         
-          <param name="input_pdb_path" type="data" format="pdb"  optional="False" label="input PDB file" help="Input PDB file path. Format: [input].pdb"/> 
         
-        
-          <param name="outname_output_log_path" type="text" value="mychecking_log.log" 
-              optional="False" label="output LOG name" 
-              help="Output report log file path Format: [output].log "/>
+          <param name="outname_output_pdb_path" type="text" value="mypdb.pdb" 
+              optional="False" label="output PDB name" 
+              help="Path to the output PDB file Format: [output].pdb "/>
         
         <conditional name="config">
             <param name="sele" type="select" label="Take tool settings:" help="Select where tool settings are to be read from">
@@ -67,16 +57,38 @@
           </conditional>
           <section name="properties" title="Properties Input">
             
-              <param name="modeller_key" type="text" label="modeller_key" help="Modeller license key." optional="true"
+              <param name="pdb_code" type="text" label="pdb_code" help="RSCB PDB code." optional="true"
                   
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
             
-              <param name="binary_path" type="text" label="binary_path" help="Path to the check_structure executable binary." optional="false"
-                  value="check_structure"
+              <param name="filter" type="text" label="filter" help="Array of groups to be kept. If value is None or False no filter will be applied. All the possible values are defined in the official PDB specification." optional="false"
+                  value="[ATOM, MODEL, ENDMDL]"
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+              <param name="api_id" type="select" label="api_id" help="Identifier of the PDB REST API from which the PDB structure will be downloaded. " multiple="false">
+                  
+                    <option value="pdbe" 
+                      selected="true"
+                    >pdbe
+                       - PDB in Europe REST API
+                    </option>
+                  
+                    <option value="pdb" 
+                      
+                    >pdb
+                       - RCSB PDB REST API
+                    </option>
+                  
+                    <option value="mmb" 
+                      
+                    >mmb
+                       - MMB PDB mirror API
+                    </option>
+                  
                 </param>
                     
           </section>
@@ -84,7 +96,7 @@
     <outputs>
         
         
-          <data name="output_log_path" format="log" label="${outname_output_log_path}"/>
+          <data name="output_pdb_path" format="pdb" label="${outname_output_pdb_path}"/>
         
     </outputs>
     <tests>
@@ -94,7 +106,7 @@
     <help>
 .. class:: infomark
         
-Check the syntax for the tool parameters at the original library documentation: https://biobb_model.readthedocs.io/en/latest
+Check the syntax for the tool parameters at the original library documentation: https://biobb_io.readthedocs.io/en/latest
 
 -----
 
@@ -117,7 +129,7 @@ Check the syntax for the tool parameters at the original library documentation: 
             title = {biobb: BioExcel building blocks },
             publisher = {GitHub},
             journal = {GitHub repository},
-            url = {https://github.com/bioexcel/biobb_model},
+            url = {https://github.com/bioexcel/biobb_io},
             }
         </citation>
         <citation type="doi">10.1038/s41597-019-0177-4</citation>

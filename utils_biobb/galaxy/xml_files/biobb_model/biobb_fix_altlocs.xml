@@ -1,8 +1,8 @@
-<tool id="biobb_model_fix_altlocs_ext" name="FixAltlocs" version="3.8.0" >
+<tool id="biobb_model_fix_altlocs_ext" name="FixAltlocs" version="3.8.1" >
     <description>: Fix alternate locations from residues.</description>
     <requirements>
         <requirement type="package"
-        version="3.8.0"
+        version="3.8.1"
         >biobb_model</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__altlocs__dq__:${properties.altlocs}__cc__'
+            --config '__oc____dq__altlocs__dq__:${properties.altlocs},__dq__modeller_key__dq__:__dq__${properties.modeller_key}__dq__,__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
           #end if
         
           #if str($input_pdb_path) != 'None':
@@ -68,6 +68,18 @@
           <section name="properties" title="Properties Input">
             
               <param name="altlocs" type="text" label="altlocs" help="List of alternate locations to fix. Format: [&#34;A339:A&#34;, &#34;A171:B&#34;, &#34;A768:A&#34;]; where for each residue the format is as follows: &#34;&lt;chain&gt;&lt;residue id&gt;:&lt;chosen alternate location&gt;&#34;. If empty, no action will be executed. (Json)" value="[]" >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+              <param name="modeller_key" type="text" label="modeller_key" help="Modeller license key." optional="true"
+                  
+                >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+              <param name="binary_path" type="text" label="binary_path" help="Path to the check_structure executable binary." optional="false"
+                  value="check_structure"
+                >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
                     

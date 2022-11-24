@@ -9,6 +9,8 @@
         
           ln -f -s ${input_traj_path} ${input_traj_path}_`echo $$`.${input_traj_path.ext};
         
+          ln -f -s ${input_top_path} ${input_top_path}_`echo $$`.${input_top_path.ext};
+        
           ln -f -s ${input_index_path} ${input_index_path}_`echo $$`.${input_index_path.ext};
         
         #if $config.sele == "option1":
@@ -29,6 +31,10 @@
             --input_traj_path ${input_traj_path}_`echo $$`.${input_traj_path.ext}
           #end if
         
+          #if str($input_top_path) != 'None':
+            --input_top_path ${input_top_path}_`echo $$`.${input_top_path.ext}
+          #end if
+        
           #if str($input_index_path) != 'None':
             --input_index_path ${input_index_path}_`echo $$`.${input_index_path.ext}
           #end if
@@ -42,6 +48,8 @@
         
           rm -f ${input_traj_path}_`echo $$`.${input_traj_path.ext};
         
+          rm -f ${input_top_path}_`echo $$`.${input_top_path.ext};
+        
           rm -f ${input_index_path}_`echo $$`.${input_index_path.ext};
         
         
@@ -52,6 +60,8 @@
     <inputs>
         
           <param name="input_traj_path" type="data" format="xtc,trr,cpt,gro,g96,pdb,tng"  optional="False" label="input XTC,TRR,CPT,GRO,G96,PDB,TNG file" help="Path to the GROMACS trajectory file. Format: [input].[format]"/> 
+        
+          <param name="input_top_path" type="data" format="tpr,gro,g96,pdb,brk,ent"  optional="True" label="input TPR,GRO,G96,PDB,BRK,ENT file" help="Path to the GROMACS input topology file. Format: [input].[format]"/> 
         
           <param name="input_index_path" type="data" format="ndx"  optional="True" label="input NDX file" help="Path to the GROMACS index file. Format: [input].ndx"/> 
         
