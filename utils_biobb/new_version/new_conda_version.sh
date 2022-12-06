@@ -3,9 +3,9 @@
 #Usage: ./new_conda_version.sh
 #Activate conda
 ide=atom
-path_user=/path/to/usr/
-path_biobb=/path/to/usr/projects/
-path_json_schemas=/path/to/usr/projects/utils_biobb/utils_biobb/json/
+path_user=/Users/pau/
+path_biobb=/Users/pau/projects/
+path_json_schemas=/Users/pau/projecs/projects/utils_biobb/utils_biobb/json/
 conda=biobb
 echo "******************************************************"
 echo "Be sure of having activated $conda conda environment!"
@@ -26,6 +26,7 @@ if [ $json_schemas == 'y' -o $json_schemas == 'Y'  ]
 then
 	python3 ${path_json_schemas}json_generator.py -p $REPOSITORY -o $path_biobb$REPOSITORY/$REPOSITORY
 fi
+
 read -p "Before opening setup.py remember to check if some dependency has changed. Press any key to continue..." -n1 -s
 echo ""
 $ide $path_biobb$REPOSITORY/setup.py
@@ -54,35 +55,13 @@ cp -v $path_biobb$REPOSITORY/README.md $path_biobb$REPOSITORY/$REPOSITORY/docs/s
 git status
 git add .
 git commit -m "$message"
-#read -p "Only github [Y/n]?" github
-#if [ $github == 'y' -o $github == 'Y'  ]
-#then
+
 git push
 git tag -a v$version -m "$message"
 git push origin v$version
-#else
-	#git push
-	#git push bioexcel
-	#git tag -a v$version -m "$message"
-	#git push origin v$version
-	#git push bioexcel v$version
-#fi
-python3 setup.py sdist bdist_wheel; python3 -m twine upload dist/* #<<< in_case_of_user_keyring
-rm -rfv $REPOSITORY.egg-info dist build
 
-# Conda skeleton
-rm -rf $path_user$REPOSITORY 2> /dev/null
-retval=1
-while [ $retval -ne 0 ]
-do
-  echo "Sleeping for 5 seconds..."
-  sleep 5
-  cd ~; conda skeleton pypi $REPOSITORY --version $version --python-version 3.6
-  retval=$?
-done
-$ide $path_user$REPOSITORY/meta.yaml
-read -p "Copy the headers (lines that starts with {%) from  ~/$REPOSITORY/meta.yaml and press any key..." -n1 -s
-echo ""
+python3 setup.py sdist bdist_wheel; python3 -m twine upload dist/* 
+rm -rfv $REPOSITORY.egg-info dist build
 
 read -p "Copy the sha256 hash of the tgz file and press any key..." -n1 -s
 open https://pypi.org/project/$REPOSITORY

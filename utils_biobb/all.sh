@@ -1,7 +1,19 @@
 #!/usr/bin/env bash
 
+
 #Usage: ./all.sh [names_of_biobb_packages]
 #Activate conda
+
+want_to_exit(){
+  if [ $1 -ne 0 ]; then
+      read -p "Last command has failed do you want to continue [Y/n]? " continue_script
+      if [ $continue_script == 'y' -o $continue_script == 'Y'  ]; then
+	        exit 1
+      fi
+  fi
+}
+
+
 ide=atom
 path_user=/Users/pau/
 biobbs_dir=/Users/pau/projects/
@@ -48,39 +60,46 @@ for biobb in ${biobb_list}
   git config pull.rebase false
   echo "    git pull"
   git pull
+  want_to_exit $?
 
   # JSON
   echo ""
   echo "  ${biobb} Create jsons:"
   echo "    python3 ${json_generator_script_path} -p ${biobb} -o ${biobb_path}/${biobb}/"
   python3 ${json_generator_script_path} -p ${biobb} -o ${biobb_path}/${biobb}/
+  want_to_exit $?
   echo ""
   echo "    python3 ${json_validator_script_path} -p ${biobb} -i ${biobb_path}/${biobb}/json_schemas/ -s ${json_master_schema_path}"
   python3 ${json_validator_script_path} -p ${biobb} -i ${biobb_path}/${biobb}/json_schemas/ -s ${json_master_schema_path}
+  want_to_exit $?
 
   # CONFIGS
   echo ""
   echo "  ${biobb} Create configs:"
   echo "    python3 ${configs_generator_script_path} -i ${biobb_path}/${biobb}/test/conf.yml -o ${biobb_path}/${biobb}/test/data/config/"
   python3 ${configs_generator_script_path} -i ${biobb_path}/${biobb}/test/conf.yml -o ${biobb_path}/${biobb}/test/data/config/
+  want_to_exit $?
 
   # COMMAND_LINE.MD
   echo ""
   echo "  ${biobb} Create command_line.md:"
   echo "    python3 ${command_line_generator_script_path} -j ${biobb_path}/${biobb}/json_schemas/ -c ${biobb_path}/${biobb}/test/data/config/ -b ${biobb} -o ${biobb_path}/${biobb}/docs/source/command_line.md"
   python3 ${command_line_generator_script_path} -j ${biobb_path}/${biobb}/json_schemas/ -c ${biobb_path}/${biobb}/test/data/config/ -b ${biobb} -o ${biobb_path}/${biobb}/docs/source/command_line.md
+  want_to_exit $?
 
   # CWL
   echo ""
   echo "  ${biobb} Create CWL adapters:"
   echo "    python3 ${cwl_generator_script_path} -p ${biobb} -i ${biobb_path}/${biobb}/json_schemas/ -o ${biobb_adapters_path}/biobb_adapters/cwl/${biobb}"
   python3 ${cwl_generator_script_path} -p ${biobb} -i ${biobb_path}/${biobb}/json_schemas/ -o ${biobb_adapters_path}/biobb_adapters/cwl/${biobb}
+  want_to_exit $?
 
   # PYCOMPSS
   echo ""
   echo "  ${biobb} Create pycompss adapters:"
   echo "    python3 ${pycompss_generator_script_path} -p ${biobb} -o ${biobb_adapters_path}/biobb_adapters/pycompss/"
   python3 ${pycompss_generator_script_path} -p ${biobb} -o ${biobb_adapters_path}/biobb_adapters/pycompss/
+  want_to_exit $?
 
  done
 
