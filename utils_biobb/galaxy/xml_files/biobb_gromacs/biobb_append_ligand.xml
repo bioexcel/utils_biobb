@@ -1,8 +1,8 @@
-<tool id="biobb_gromacs_append_ligand_ext" name="AppendLigand" version="3.8.0" >
+<tool id="biobb_gromacs_append_ligand_ext" name="AppendLigand" version="3.8.1" >
     <description>: This class takes a ligand ITP file and inserts it in a topology.</description>
     <requirements>
         <requirement type="package"
-        version="3.8.0"
+        version="3.8.1"
         >biobb_gromacs</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[

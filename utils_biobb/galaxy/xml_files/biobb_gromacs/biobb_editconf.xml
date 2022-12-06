@@ -1,8 +1,8 @@
-<tool id="biobb_gromacs_editconf_ext" name="Editconf" version="3.8.0" >
+<tool id="biobb_gromacs_editconf_ext" name="Editconf" version="3.8.1" >
     <description>: Wrapper class for the GROMACS editconf module.</description>
     <requirements>
         <requirement type="package"
-        version="3.8.0"
+        version="3.8.1"
         >biobb_gromacs</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__distance_to_molecule__dq__:${properties.distance_to_molecule},__dq__box_type__dq__:__dq__${properties.box_type}__dq__,__dq__center_molecule__dq__:${properties.center_molecule},__dq__gmx_lib__dq__:__dq__${properties.gmx_lib}__dq__,__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
+            --config '__oc____dq__distance_to_molecule__dq__:${properties.distance_to_molecule},__dq__box_vector_lenghts__dq__:__dq__${properties.box_vector_lenghts}__dq__,__dq__box_type__dq__:__dq__${properties.box_type}__dq__,__dq__center_molecule__dq__:${properties.center_molecule},__dq__gmx_lib__dq__:__dq__${properties.gmx_lib}__dq__,__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
           #end if
         
           #if str($input_gro_path) != 'None':
@@ -71,6 +71,12 @@
                   value="1.0"
                   
                   label="distance_to_molecule" help="Distance of the box from the outermost atom in nm. ie 1.0nm = 10 Angstroms." optional="false"/>
+            
+              <param name="box_vector_lenghts" type="text" label="box_vector_lenghts" help="Array of floats defining the box vector lenghts ie &#34;0.5 0.5 0.5&#34;. If this option is used the distance_to_molecule property will be ignored." optional="true"
+                  
+                >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
             
               <param name="box_type" type="select" label="box_type" help="Geometrical shape of the solvent box. " multiple="false">
                   
