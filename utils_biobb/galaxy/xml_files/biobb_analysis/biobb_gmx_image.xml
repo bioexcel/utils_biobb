@@ -24,7 +24,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__fit_selection__dq__:__dq__${properties.fit_selection}__dq__,__dq__center_selection__dq__:__dq__${properties.center_selection}__dq__,__dq__output_selection__dq__:__dq__${properties.output_selection}__dq__,__dq__pbc__dq__:__dq__${properties.pbc}__dq__,__dq__center__dq__:${properties.center},__dq__ur__dq__:__dq__${properties.ur}__dq__,__dq__fit__dq__:__dq__${properties.fit}__dq__,__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
+            --config '__oc____dq__fit_selection__dq__:__dq__${properties.fit_selection}__dq__,__dq__center_selection__dq__:__dq__${properties.center_selection}__dq__,__dq__cluster_selection__dq__:__dq__${properties.cluster_selection}__dq__,__dq__output_selection__dq__:__dq__${properties.output_selection}__dq__,__dq__pbc__dq__:__dq__${properties.pbc}__dq__,__dq__center__dq__:${properties.center},__dq__ur__dq__:__dq__${properties.ur}__dq__,__dq__fit__dq__:__dq__${properties.fit}__dq__,__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
           #end if
         
           #if str($input_traj_path) != 'None':
@@ -242,6 +242,160 @@
                 </param>
             
               <param name="center_selection" type="select" label="center_selection" help="Group where the trjconv will be performed. If **input_index_path** provided, check the file for the accepted values. " multiple="false">
+                  
+                    <option value="System" 
+                      selected="true"
+                    >System
+                       - all atoms in the system
+                    </option>
+                  
+                    <option value="Protein" 
+                      
+                    >Protein
+                       - all protein atoms
+                    </option>
+                  
+                    <option value="Protein-H" 
+                      
+                    >Protein-H
+                       - protein atoms excluding hydrogens
+                    </option>
+                  
+                    <option value="C-alpha" 
+                      
+                    >C-alpha
+                       - C-alpha atoms
+                    </option>
+                  
+                    <option value="Backbone" 
+                      
+                    >Backbone
+                       - protein backbone atoms: N; C-alpha and C
+                    </option>
+                  
+                    <option value="MainChain" 
+                      
+                    >MainChain
+                       - protein main chain atoms: N; C-alpha; C and O; including oxygens in C-terminus
+                    </option>
+                  
+                    <option value="MainChain+Cb" 
+                      
+                    >MainChain+Cb
+                       - protein main chain atoms including C-beta
+                    </option>
+                  
+                    <option value="MainChain+H" 
+                      
+                    >MainChain+H
+                       - protein main chain atoms including backbone amide hydrogens and hydrogens on the N-terminus
+                    </option>
+                  
+                    <option value="SideChain" 
+                      
+                    >SideChain
+                       - protein side chain atoms: that is all atoms except N; C-alpha; C; O; backbone amide hydrogens and oxygens in C-terminus and hydrogens on the N-terminus
+                    </option>
+                  
+                    <option value="SideChain-H" 
+                      
+                    >SideChain-H
+                       - protein side chain atoms excluding all hydrogens
+                    </option>
+                  
+                    <option value="Prot-Masses" 
+                      
+                    >Prot-Masses
+                       - protein atoms excluding dummy masses
+                    </option>
+                  
+                    <option value="non-Protein" 
+                      
+                    >non-Protein
+                       - all non-protein atoms
+                    </option>
+                  
+                    <option value="Water" 
+                      
+                    >Water
+                       - water molecules
+                    </option>
+                  
+                    <option value="SOL" 
+                      
+                    >SOL
+                       - water molecules
+                    </option>
+                  
+                    <option value="non-Water" 
+                      
+                    >non-Water
+                       - anything not covered by the Water group
+                    </option>
+                  
+                    <option value="Ion" 
+                      
+                    >Ion
+                       - any name matching an Ion entry in residuetypes.dat
+                    </option>
+                  
+                    <option value="NA" 
+                      
+                    >NA
+                       - all NA atoms
+                    </option>
+                  
+                    <option value="CL" 
+                      
+                    >CL
+                       - all CL atoms
+                    </option>
+                  
+                    <option value="Water_and_ions" 
+                      
+                    >Water_and_ions
+                       - combination of the Water and Ions groups
+                    </option>
+                  
+                    <option value="DNA" 
+                      
+                    >DNA
+                       - all DNA atoms
+                    </option>
+                  
+                    <option value="RNA" 
+                      
+                    >RNA
+                       - all RNA atoms
+                    </option>
+                  
+                    <option value="Protein_DNA" 
+                      
+                    >Protein_DNA
+                       - all Protein-DNA complex atoms
+                    </option>
+                  
+                    <option value="Protein_RNA" 
+                      
+                    >Protein_RNA
+                       - all Protein-RNA complex atoms
+                    </option>
+                  
+                    <option value="Protein_DNA_RNA" 
+                      
+                    >Protein_DNA_RNA
+                       - all Protein-DNA-RNA complex atoms
+                    </option>
+                  
+                    <option value="DNA_RNA" 
+                      
+                    >DNA_RNA
+                       - all DNA-RNA complex atoms
+                    </option>
+                  
+                </param>
+            
+              <param name="cluster_selection" type="select" label="cluster_selection" help="Group assigned to be the cluster, onto which all atoms are wrapped around the box, such that they are closest to the center of mass of the cluster, which is iteratively updated. If **input_index_path** provided, check the file for the accepted values. " multiple="false">
                   
                     <option value="System" 
                       selected="true"
