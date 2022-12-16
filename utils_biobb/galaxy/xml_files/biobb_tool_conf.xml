@@ -8,6 +8,15 @@
   <tool file="biobb/biobb_vs/biobb_fpocket_filter.xml" />
   <tool file="biobb/biobb_vs/biobb_fpocket_select.xml" />
 </section>
+<section id="biobb_haddock" name="Haddock" >
+  <tool file="biobb/biobb_haddock/biobb_capri_eval.xml" />
+  <tool file="biobb/biobb_haddock/biobb_clust_fcc.xml" />
+  <tool file="biobb/biobb_haddock/biobb_em_ref.xml" />
+  <tool file="biobb/biobb_haddock/biobb_flex_ref.xml" />
+  <tool file="biobb/biobb_haddock/biobb_rigid_body.xml" />
+  <tool file="biobb/biobb_haddock/biobb_sele_top.xml" />
+  <tool file="biobb/biobb_haddock/biobb_topology.xml" />
+</section>
 <section id="biobb_io" name="Get Data" >
   <tool file="biobb/biobb_io/biobb_drugbank.xml" />
   <tool file="biobb/biobb_io/biobb_ligand.xml" />
