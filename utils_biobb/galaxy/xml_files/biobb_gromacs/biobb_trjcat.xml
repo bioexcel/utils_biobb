@@ -1,8 +1,8 @@
-<tool id="biobb_gromacs_trjcat_ext" name="Trjcat" version="3.8.1" >
+<tool id="biobb_gromacs_trjcat_ext" name="Trjcat" version="3.9.0" >
     <description>: Wrapper class for the GROMACS trjcat module.</description>
     <requirements>
         <requirement type="package"
-        version="3.8.1"
+        version="3.9.0"
         >biobb_gromacs</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[

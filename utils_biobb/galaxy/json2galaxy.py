@@ -28,7 +28,8 @@ SECTIONS = {
     'biobb_pmx': 'PMX Free Energy calculation',
     'biobb_vs': 'Virtual Screening / Docking',
     'biobb_ml': 'Machile Learning',
-    'biobb_cp2k': 'Setup and simulation of QM simulations (CP2K)'
+    'biobb_cp2k': 'Setup and simulation of QM simulations (CP2K)',
+    'biobb_haddock': 'Haddock' 
 }
 
 
