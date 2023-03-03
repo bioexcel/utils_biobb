@@ -60,7 +60,7 @@ git push
 git tag -a v$version -m "$message"
 git push origin v$version
 
-python3 setup.py sdist bdist_wheel; python3 -m twine upload dist/* 
+python3 setup.py sdist bdist_wheel; python3 -m twine upload dist/* <<< andriopau
 rm -rfv $REPOSITORY.egg-info dist build
 
 read -p "Copy the sha256 hash of the tgz file and press any key..." -n1 -s

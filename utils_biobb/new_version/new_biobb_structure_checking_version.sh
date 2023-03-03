@@ -10,7 +10,7 @@ conda=biobb
 echo "******************************************************"
 echo "Be sure of having activated $conda conda environment!"
 echo "******************************************************"
-read -p "Repository name ie biobb_md : " REPOSITORY
+REPOSITORY=biobb_structure_checking
 read -p "Version number ie 0.1.2 : " version
 read -p "Commit message ie 2019.4 : " message
 echo "Repository: $REPOSITORY"

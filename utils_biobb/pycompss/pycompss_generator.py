@@ -25,11 +25,11 @@ class PycompssGenerator:
             with open(module_json) as f_json:
                 json_dict = json.load(f_json)
                 module_name = module_json.name.rsplit('.')[0]
-                module_info['module_name']= module_name
-                module_info['iclass']= json_dict.get('name').split()[-1]
+                module_info['module_name'] = module_name
+                module_info['iclass'] = json_dict.get('name').split()[-1]
                 module_info['module_dot_path'] = sub_paths_dict.get(module_name).replace('/', '.')+'.'+module_name
                 module_info['mpi'] = json_dict.get('info').get('wrapped_software').get('multinode')
-                #print(f'module_info["mpi"]: {module_info["mpi"]}')
+                # print(f'module_info["mpi"]: {module_info["mpi"]}')
                 module_info['required'] = json_dict.get('required')
                 module_info['arguments'] = []
                 not_required = []
