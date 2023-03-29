@@ -1,8 +1,8 @@
-<tool id="biobb_cmip_cmip_ext" name="Cmip" version="3.7.8" >
+<tool id="biobb_cmip_cmip_ext" name="Cmip" version="3.9.0" >
     <description>: Wrapper class for the CMIP cmip module.</description>
     <requirements>
         <requirement type="package"
-        version="3.7.8"
+        version="3.9.0"
         >biobb_cmip</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -30,7 +30,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__execution_type__dq__:__dq__${properties.execution_type}__dq__,__dq__box_size_factor__dq__:${properties.box_size_factor},__dq__params__dq__:${properties.params},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
+            --config '__oc____dq__execution_type__dq__:__dq__${properties.execution_type}__dq__,__dq__params__dq__:${properties.params},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
           #end if
         
           #if str($input_pdb_path) != 'None':
@@ -66,11 +66,15 @@
         
           --output_rst_path $outname_output_rst_path
         
+          --input_rst_path $outname_input_rst_path
+        
           --output_byat_path $outname_output_byat_path
         
           --output_log_path $outname_output_log_path
         
           --output_json_box_path $outname_output_json_box_path
+        
+          --output_json_external_box_path $outname_output_json_external_box_path
         ;          
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
@@ -97,11 +101,15 @@
         
           if test -f $outname_output_rst_path; then mv $outname_output_rst_path $output_rst_path; fi;
         
+          if test -f $outname_input_rst_path; then mv $outname_input_rst_path $input_rst_path; fi;
+        
           if test -f $outname_output_byat_path; then mv $outname_output_byat_path $output_byat_path; fi;
         
           if test -f $outname_output_log_path; then mv $outname_output_log_path $output_log_path; fi;
         
           if test -f $outname_output_json_box_path; then mv $outname_output_json_box_path $output_json_box_path; fi;
+        
+          if test -f $outname_output_json_external_box_path; then mv $outname_output_json_external_box_path $output_json_external_box_path; fi;
         
     ]]>
     </command>
@@ -136,9 +144,13 @@
               optional="True" label="output TXT name" 
               help="Path to the output restart file Format: [output].txt "/>
         
-          <param name="outname_output_byat_path" type="text" value="mycmip.txt" 
+          <param name="outname_input_rst_path" type="text" value="mycmip.txt" 
               optional="True" label="output TXT name" 
-              help="Path to the output atom by atom energy file Format: [output].txt "/>
+              help="Path to the input restart file Format: [output].txt "/>
+        
+          <param name="outname_output_byat_path" type="text" value="mycmip.txt" 
+              optional="True" label="output TXT,OUT name" 
+              help="Path to the output atom by atom energy file Format: [output].[format] "/>
         
           <param name="outname_output_log_path" type="text" value="mycmip.log" 
               optional="True" label="output LOG name" 
@@ -147,6 +159,10 @@
           <param name="outname_output_json_box_path" type="text" value="mycmip.json" 
               optional="True" label="output JSON name" 
               help="Path to the output CMIP box in JSON format Format: [output].json "/>
+        
+          <param name="outname_output_json_external_box_path" type="text" value="mycmip.json" 
+              optional="True" label="output JSON name" 
+              help="Path to the output external CMIP box in JSON format Format: [output].json "/>
         
         <conditional name="config">
             <param name="sele" type="select" label="Take tool settings:" help="Select where tool settings are to be read from">
@@ -197,9 +213,9 @@
                        - Solvation &amp; MEP
                     </option>
                   
-                    <option value="energy" 
+                    <option value="pb_interaction_energy" 
                       
-                    >energy
+                    >pb_interaction_energy
                        - Docking Interaction energy calculation. PB electrostatics
                     </option>
                   
@@ -217,11 +233,6 @@
                   
                 </param>
             
-              <param name="box_size_factor" type="float" 
-                  value="1.0"
-                  
-                  label="box_size_factor" help="If optional output **output_json_box_path** is used the box size will be multiplied by this factor." optional="false"/>
-            
               <param name="params" type="text" label="params" help="CMIP options specification. (Json)" value="{}">
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
@@ -230,6 +241,22 @@
                   value="cmip"
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+              <param name="output_format" type="select" label="output_format" help="Format of the output file" multiple="false">
+                  
+                    <option value="txt" 
+                      
+                    >txt
+                       
+                    </option>
+                  
+                    <option value="out" 
+                      
+                    >out
+                       
+                    </option>
+                  
                 </param>
                     
           </section>
@@ -249,13 +276,26 @@
           <data name="output_rst_path" format="txt" label="${outname_output_rst_path}"/>
         
         
-          <data name="output_byat_path" format="txt" label="${outname_output_byat_path}"/>
+          <data name="input_rst_path" format="txt" label="${outname_input_rst_path}"/>
+        
+        <data name="output_byat_path" format="text" label="${outname_output_byat_path}">
+            <change_format>
+            
+            <when input="properties.output_format" value="txt" format="txt" />
+            
+            <when input="properties.output_format" value="out" format="out" />
+            
+            </change_format>
+          </data>
         
         
           <data name="output_log_path" format="log" label="${outname_output_log_path}"/>
         
         
           <data name="output_json_box_path" format="json" label="${outname_output_json_box_path}"/>
+        
+        
+          <data name="output_json_external_box_path" format="json" label="${outname_output_json_external_box_path}"/>
         
     </outputs>
     <tests>

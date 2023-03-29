@@ -1,8 +1,8 @@
-<tool id="biobb_dna_biobb_curves_ext" name="BiobbCurves" version="3.8.2" >
+<tool id="biobb_dna_biobb_curves_ext" name="BiobbCurves" version="3.9.0" >
     <description>: Wrapper for the Cur+ executable  that is part of the Curves+ software suite.</description>
     <requirements>
         <requirement type="package"
-        version="3.8.2"
+        version="3.9.0"
         >biobb_dna</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -142,7 +142,7 @@
                 />
             
               <param name="fit" type="boolean" 
-                  
+                  checked="true"
                   label="fit" help="if True, fit a standard bases to the input coordinates (important for MD snapshots to avoid base distortions leading to noisy helical parameters)." 
                 />
             

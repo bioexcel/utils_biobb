@@ -1,8 +1,8 @@
-<tool id="biobb_model_fix_backbone_ext" name="FixBackbone" version="3.8.1" >
+<tool id="biobb_model_fix_backbone_ext" name="FixBackbone" version="3.9.0" >
     <description>: Class to model the missing atoms in the backbone of a PDB structure.</description>
     <requirements>
         <requirement type="package"
-        version="3.8.1"
+        version="3.9.0"
         >biobb_model</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[

@@ -1,8 +1,8 @@
-<tool id="biobb_chemistry_acpype_params_gmx_ext" name="AcpypeParamsGmx" version="3.8.0" >
+<tool id="biobb_chemistry_acpype_params_gmx_ext" name="AcpypeParamsGmx" version="3.9.0" >
     <description>: This class is a wrapper of Acpype tool for generation of topologies for GROMACS.</description>
     <requirements>
         <requirement type="package"
-        version="3.8.0"
+        version="3.9.0"
         >biobb_chemistry</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[

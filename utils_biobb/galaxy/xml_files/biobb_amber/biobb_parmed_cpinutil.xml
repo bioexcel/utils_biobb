@@ -1,8 +1,8 @@
-<tool id="biobb_amber_parmed_cpinutil_ext" name="ParmedCpinutil" version="3.8.0" >
+<tool id="biobb_amber_parmed_cpinutil_ext" name="ParmedCpinutil" version="3.9.0" >
     <description>: Wrapper of the AmberTools (AMBER MD Package) parmed tool module.</description>
     <requirements>
         <requirement type="package"
-        version="3.8.0"
+        version="3.9.0"
         >biobb_amber</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[

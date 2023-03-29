@@ -1,8 +1,8 @@
-<tool id="biobb_cmip_ignore_residues_ext" name="IgnoreResidues" version="3.7.8" >
+<tool id="biobb_cmip_ignore_residues_ext" name="IgnoreResidues" version="3.9.0" >
     <description>: Class to ignore residues in CMIP potential calculations.</description>
     <requirements>
         <requirement type="package"
-        version="3.7.8"
+        version="3.9.0"
         >biobb_cmip</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[

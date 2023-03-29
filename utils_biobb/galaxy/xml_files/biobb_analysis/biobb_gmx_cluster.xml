@@ -1,8 +1,8 @@
-<tool id="biobb_analysis_gmx_cluster_ext" name="GmxCluster" version="3.8.0" >
+<tool id="biobb_analysis_gmx_cluster_ext" name="GmxCluster" version="3.9.0" >
     <description>: Wrapper of the GROMACS cluster module for clustering structures from a given GROMACS compatible trajectory.</description>
     <requirements>
         <requirement type="package"
-        version="3.8.0"
+        version="3.9.0"
         >biobb_analysis</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[

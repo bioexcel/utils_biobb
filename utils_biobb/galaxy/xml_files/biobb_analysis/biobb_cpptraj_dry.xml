@@ -1,8 +1,8 @@
-<tool id="biobb_analysis_cpptraj_dry_ext" name="CpptrajDry" version="3.8.0" >
+<tool id="biobb_analysis_cpptraj_dry_ext" name="CpptrajDry" version="3.9.0" >
     <description>: Wrapper of the Ambertools Cpptraj module for dehydrating a given cpptraj compatible trajectory stripping out solvent molecules and ions.</description>
     <requirements>
         <requirement type="package"
-        version="3.8.0"
+        version="3.9.0"
         >biobb_analysis</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -140,6 +140,12 @@
                       
                     >solvent
                        - All solvent atoms
+                    </option>
+                  
+                    <option value="AnyAmberFromatMask" 
+                      
+                    >AnyAmberFromatMask
+                       - Amber atom selection syntax like `@*`
                     </option>
                   
                 </param>

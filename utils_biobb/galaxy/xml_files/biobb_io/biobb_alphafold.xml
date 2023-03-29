@@ -1,8 +1,8 @@
-<tool id="biobb_io_alphafold_ext" name="Alphafold" version="3.8.0" >
+<tool id="biobb_io_alphafold_ext" name="Alphafold" version="3.9.0" >
     <description>: This class is a wrapper for downloading a PDB structure from the AlphaFold Protein Structure Database.</description>
     <requirements>
         <requirement type="package"
-        version="3.8.0"
+        version="3.9.0"
         >biobb_io</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[

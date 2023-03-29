@@ -1,8 +1,8 @@
-<tool id="biobb_ml_polynomial_regression_ext" name="PolynomialRegression" version="3.8.0" >
+<tool id="biobb_ml_polynomial_regression_ext" name="PolynomialRegression" version="3.9.0" >
     <description>: Wrapper of the scikit-learn LinearRegression method with PolynomialFeatures.</description>
     <requirements>
         <requirement type="package"
-        version="3.8.0"
+        version="3.9.0"
         >biobb_ml</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[

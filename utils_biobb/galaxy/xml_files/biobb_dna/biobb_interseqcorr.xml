@@ -1,8 +1,8 @@
-<tool id="biobb_dna_interseqcorr_ext" name="Interseqcorr" version="3.8.2" >
+<tool id="biobb_dna_interseqcorr_ext" name="Interseqcorr" version="3.9.0" >
     <description>: Calculate correlation between all base pairs of a single sequence and for a single helical parameter.</description>
     <requirements>
         <requirement type="package"
-        version="3.8.2"
+        version="3.9.0"
         >biobb_dna</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[

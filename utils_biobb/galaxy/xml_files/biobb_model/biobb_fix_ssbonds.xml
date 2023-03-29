@@ -1,8 +1,8 @@
-<tool id="biobb_model_fix_ssbonds_ext" name="FixSsbonds" version="3.8.1" >
+<tool id="biobb_model_fix_ssbonds_ext" name="FixSsbonds" version="3.9.0" >
     <description>: Fix SS bonds from residues.</description>
     <requirements>
         <requirement type="package"
-        version="3.8.1"
+        version="3.9.0"
         >biobb_model</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[

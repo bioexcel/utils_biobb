@@ -1,8 +1,8 @@
-<tool id="biobb_structure_utils_closest_residues_ext" name="ClosestResidues" version="3.8.0" >
+<tool id="biobb_structure_utils_closest_residues_ext" name="ClosestResidues" version="3.9.0" >
     <description>: Class to search closest residues from a 3D structure using Biopython.</description>
     <requirements>
         <requirement type="package"
-        version="3.8.0"
+        version="3.9.0"
         >biobb_structure_utils</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__residues__dq__:${properties.residues},__dq__radius__dq__:${properties.radius},__dq__preserve_residues__dq__:${properties.preserve_residues}__cc__'
+            --config '__oc____dq__residues__dq__:${properties.residues},__dq__radius__dq__:${properties.radius},__dq__preserve_target__dq__:${properties.preserve_target}__cc__'
           #end if
         
           #if str($input_structure_path) != 'None':
@@ -76,9 +76,9 @@
                   
                   label="radius" help="Distance in Ångströms to neighbours of the given list of residues." optional="false"/>
             
-              <param name="preserve_residues" type="boolean" 
+              <param name="preserve_target" type="boolean" 
                   checked="true"
-                  label="preserve_residues" help="Whether or not to preserve the given residues in the output structure." 
+                  label="preserve_target" help="Whether or not to preserve the target residues in the output structure." 
                 />
             
               <param name="output_format" type="select" label="output_format" help="Format of the output file" multiple="false">
