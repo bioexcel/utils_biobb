@@ -1,8 +1,8 @@
-<tool id="biobb_ml_classification_predict_ext" name="ClassificationPredict" version="3.9.0" >
+<tool id="biobb_ml_classification_predict_ext" name="ClassificationPredict" version="4.0.0" >
     <description>: Makes predictions from an input dataset and a given classification model.</description>
     <requirements>
         <requirement type="package"
-        version="3.9.0"
+        version="4.0.0"
         >biobb_ml</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[

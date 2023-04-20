@@ -1,8 +1,8 @@
-<tool id="biobb_amber_pdb4amber_run_ext" name="Pdb4amberRun" version="3.9.0" >
+<tool id="biobb_amber_pdb4amber_run_ext" name="Pdb4amberRun" version="4.0.0" >
     <description>: Wrapper of the AmberTools (AMBER MD Package) pdb4amber tool module.</description>
     <requirements>
         <requirement type="package"
-        version="3.9.0"
+        version="4.0.0"
         >biobb_amber</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[

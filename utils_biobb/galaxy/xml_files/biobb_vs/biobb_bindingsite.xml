@@ -1,8 +1,8 @@
-<tool id="biobb_vs_bindingsite_ext" name="Bindingsite" version="3.9.0" >
+<tool id="biobb_vs_bindingsite_ext" name="Bindingsite" version="4.0.0" >
     <description>: This class finds the binding site of the input_pdb.</description>
     <requirements>
         <requirement type="package"
-        version="3.9.0"
+        version="4.0.0"
         >biobb_vs</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[

@@ -1,8 +1,8 @@
-<tool id="biobb_model_mutate_ext" name="Mutate" version="3.9.0" >
+<tool id="biobb_model_mutate_ext" name="Mutate" version="4.0.0" >
     <description>: Class to mutate one amino acid by another in a 3d structure.</description>
     <requirements>
         <requirement type="package"
-        version="3.9.0"
+        version="4.0.0"
         >biobb_model</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -67,8 +67,8 @@
           </conditional>
           <section name="properties" title="Properties Input">
             
-              <param name="mutation_list" type="text" label="mutation_list" help="Mutation list in the format &#34;Chain:WT_AA_ThreeLeterCode Resnum MUT_AA_ThreeLeterCode&#34; (no spaces between the elements) separated by commas. If no chain is provided as chain code all the chains in the pdb file will be mutated. ie: &#34;A:ALA15CYS&#34;" optional="false"
-                  value="A:Val2Ala"
+              <param name="mutation_list" type="text" label="mutation_list" help="Mutation list in the format &#34;Chain:WT_AA_ThreeLeterCode Resnum MUT_AA_ThreeLeterCode&#34; (no spaces between the elements) separated by commas. If no chain is provided as chain code all the chains in the pdb file will be mutated. ie: &#34;A:ALA15CYS&#34;" optional="true"
+                  
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>

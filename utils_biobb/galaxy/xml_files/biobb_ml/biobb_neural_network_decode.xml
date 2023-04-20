@@ -1,8 +1,8 @@
-<tool id="biobb_ml_neural_network_decode_ext" name="NeuralNetworkDecode" version="3.9.0" >
+<tool id="biobb_ml_neural_network_decode_ext" name="NeuralNetworkDecode" version="4.0.0" >
     <description>: Wrapper of the TensorFlow Keras LSTM method for decoding.</description>
     <requirements>
         <requirement type="package"
-        version="3.9.0"
+        version="4.0.0"
         >biobb_ml</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
