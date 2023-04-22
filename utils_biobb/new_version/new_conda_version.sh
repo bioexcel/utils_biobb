@@ -2,7 +2,7 @@
 
 #Usage: ./new_conda_version.sh
 #Activate conda
-ide=atom
+ide=code
 path_user=/Users/pau/
 path_biobb=/Users/pau/projects/
 path_json_schemas=/Users/pau/projecs/projects/utils_biobb/utils_biobb/json/

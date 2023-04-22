@@ -30,7 +30,7 @@ class BinSoftlinkGenerator:
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Creates pycompss adapters.",
+    parser = argparse.ArgumentParser(description="Creates softlinks in your anaconda environment.",
                                      formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999),
                                      epilog='''Examples: \ncreate_bin_softlinks.py -p biobb_package  -o path/to/env/bin''')
     required_args = parser.add_argument_group('required arguments')

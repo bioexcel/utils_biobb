@@ -39,7 +39,9 @@ pycompss_template_path=/Users/pau/projects/utils_biobb/utils_biobb/pycompss/pyco
 if [ $# -gt 0 ]; then
     biobb_list="$@"
 else
-    biobb_list="biobb_analysis biobb_chemistry biobb_cmip biobb_io biobb_gromacs biobb_model biobb_pmx biobb_structure_utils biobb_vs biobb_ml biobb_amber biobb_dna"
+    # biobb_ml
+    # biobb_flexserv
+    biobb_list="biobb_analysis biobb_amber biobb_model biobb_cmip biobb_chemistry biobb_vs biobb_gromacs biobb_dna biobb_structure_utils biobb_pmx biobb_io"
 fi
 echo "List of packages where the script will be executed:"
 echo "$biobb_list"
