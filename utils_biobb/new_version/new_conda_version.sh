@@ -32,6 +32,9 @@ echo ""
 $ide $path_biobb$REPOSITORY/setup.py
 read -p "Modify setup.py with the new version number and press any key..." -n1 -s
 echo ""
+$ide $path_biobb$REPOSITORY/.github/env.yaml
+read -p "Modify env.yaml with the new dependencies versions and press any key..." -n1 -s
+echo ""
 $ide $path_biobb$REPOSITORY/$REPOSITORY/__init__.py
 read -p "Modify __init__.py adding the new version number: __version__ = \"$version\"" -n1 -s
 echo ""

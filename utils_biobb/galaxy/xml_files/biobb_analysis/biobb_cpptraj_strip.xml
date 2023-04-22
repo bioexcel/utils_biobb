@@ -1,8 +1,8 @@
-<tool id="biobb_analysis_cpptraj_strip_ext" name="CpptrajStrip" version="3.8.0" >
+<tool id="biobb_analysis_cpptraj_strip_ext" name="CpptrajStrip" version="4.0.0" >
     <description>: Wrapper of the Ambertools Cpptraj module for stripping a defined set of atoms (mask) from a given cpptraj compatible trajectory.</description>
     <requirements>
         <requirement type="package"
-        version="3.8.0"
+        version="4.0.0"
         >biobb_analysis</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -140,6 +140,12 @@
                       
                     >solvent
                        - All solvent atoms
+                    </option>
+                  
+                    <option value="AnyAmberFromatMask" 
+                      
+                    >AnyAmberFromatMask
+                       - Amber atom selection syntax like `@*`
                     </option>
                   
                 </param>

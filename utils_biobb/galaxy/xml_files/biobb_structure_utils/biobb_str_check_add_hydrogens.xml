@@ -1,8 +1,8 @@
-<tool id="biobb_structure_utils_str_check_add_hydrogens_ext" name="StrCheckAddHydrogens" version="3.8.0" >
+<tool id="biobb_structure_utils_str_check_add_hydrogens_ext" name="StrCheckAddHydrogens" version="4.0.0" >
     <description>: This class is a wrapper of the Structure Checking tool to add hydrogens to a 3D structure.</description>
     <requirements>
         <requirement type="package"
-        version="3.8.0"
+        version="4.0.0"
         >biobb_structure_utils</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[

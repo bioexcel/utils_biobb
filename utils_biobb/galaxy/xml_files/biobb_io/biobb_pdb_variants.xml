@@ -1,8 +1,8 @@
-<tool id="biobb_io_pdb_variants_ext" name="PdbVariants" version="3.8.0" >
+<tool id="biobb_io_pdb_variants_ext" name="PdbVariants" version="4.0.0" >
     <description>: This class creates a text file containing a list of all the variants mapped to a PDB code from the corresponding UNIPROT entries.</description>
     <requirements>
         <requirement type="package"
-        version="3.8.0"
+        version="4.0.0"
         >biobb_io</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[

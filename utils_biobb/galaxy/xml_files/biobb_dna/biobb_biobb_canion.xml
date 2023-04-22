@@ -1,8 +1,8 @@
-<tool id="biobb_dna_biobb_canion_ext" name="BiobbCanion" version="3.8.2" >
+<tool id="biobb_dna_biobb_canion_ext" name="BiobbCanion" version="3.9.0" >
     <description>: Wrapper for the Canion executable  that is part of the Curves+ software suite.</description>
     <requirements>
         <requirement type="package"
-        version="3.8.2"
+        version="3.9.0"
         >biobb_dna</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[

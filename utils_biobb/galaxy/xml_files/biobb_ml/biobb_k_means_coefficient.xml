@@ -1,8 +1,8 @@
-<tool id="biobb_ml_k_means_coefficient_ext" name="KMeansCoefficient" version="3.8.0" >
+<tool id="biobb_ml_k_means_coefficient_ext" name="KMeansCoefficient" version="4.0.0" >
     <description>: Wrapper of the scikit-learn KMeans method.</description>
     <requirements>
         <requirement type="package"
-        version="3.8.0"
+        version="4.0.0"
         >biobb_ml</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[

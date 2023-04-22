@@ -1,8 +1,8 @@
-<tool id="biobb_chemistry_acpype_params_cns_ext" name="AcpypeParamsCns" version="3.8.0" >
+<tool id="biobb_chemistry_acpype_params_cns_ext" name="AcpypeParamsCns" version="4.0.0" >
     <description>: This class is a wrapper of Acpype tool for small molecule parameterization for CNS/XPLOR MD package.</description>
     <requirements>
         <requirement type="package"
-        version="3.8.0"
+        version="4.0.0"
         >biobb_chemistry</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[

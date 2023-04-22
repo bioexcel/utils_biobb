@@ -1,8 +1,8 @@
-<tool id="biobb_analysis_cpptraj_bfactor_ext" name="CpptrajBfactor" version="3.8.0" >
+<tool id="biobb_analysis_cpptraj_bfactor_ext" name="CpptrajBfactor" version="4.0.0" >
     <description>: Wrapper of the Ambertools Cpptraj module for calculating the Bfactor fluctuations of a given cpptraj compatible trajectory.</description>
     <requirements>
         <requirement type="package"
-        version="3.8.0"
+        version="4.0.0"
         >biobb_analysis</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -150,6 +150,12 @@
                       
                     >solvent
                        - All solvent atoms
+                    </option>
+                  
+                    <option value="AnyAmberFromatMask" 
+                      
+                    >AnyAmberFromatMask
+                       - Amber atom selection syntax like `@*`
                     </option>
                   
                 </param>

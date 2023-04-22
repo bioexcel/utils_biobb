@@ -1,8 +1,8 @@
-<tool id="biobb_structure_utils_remove_pdb_water_ext" name="RemovePdbWater" version="3.8.0" >
+<tool id="biobb_structure_utils_remove_pdb_water_ext" name="RemovePdbWater" version="4.0.0" >
     <description>: This class is a wrapper of the Structure Checking tool to remove water molecules from PDB 3D structures.</description>
     <requirements>
         <requirement type="package"
-        version="3.8.0"
+        version="4.0.0"
         >biobb_structure_utils</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
