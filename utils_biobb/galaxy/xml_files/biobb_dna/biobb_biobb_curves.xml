@@ -1,8 +1,8 @@
-<tool id="biobb_dna_biobb_curves_ext" name="BiobbCurves" version="3.9.0" >
+<tool id="biobb_dna_biobb_curves_ext" name="BiobbCurves" version="4.0.0" >
     <description>: Wrapper for the Cur+ executable  that is part of the Curves+ software suite.</description>
     <requirements>
         <requirement type="package"
-        version="3.9.0"
+        version="4.0.0"
         >biobb_dna</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -59,7 +59,7 @@
     </command>
     <inputs>
         
-          <param name="input_struc_path" type="data" format="trj,pdb"  optional="False" label="input TRJ,PDB file" help="Trajectory or PDB input file. Format: [input].[format]"/> 
+          <param name="input_struc_path" type="data" format="trj,pdb,netcdf,nc"  optional="False" label="input TRJ,PDB,NETCDF,NC file" help="Trajectory or PDB input file. Format: [input].[format]"/> 
         
           <param name="input_top_path" type="data" format="top"  optional="True" label="input TOP file" help="Topology file, needed along with .trj file (optional). Format: [input].top"/> 
         

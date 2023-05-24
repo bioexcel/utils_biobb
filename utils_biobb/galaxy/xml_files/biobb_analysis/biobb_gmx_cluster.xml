@@ -1,8 +1,8 @@
-<tool id="biobb_analysis_gmx_cluster_ext" name="GmxCluster" version="4.0.0" >
+<tool id="biobb_analysis_gmx_cluster_ext" name="GmxCluster" version="4.0.1" >
     <description>: Wrapper of the GROMACS cluster module for clustering structures from a given GROMACS compatible trajectory.</description>
     <requirements>
         <requirement type="package"
-        version="4.0.0"
+        version="4.0.1"
         >biobb_analysis</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -24,7 +24,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__fit_selection__dq__:__dq__${properties.fit_selection}__dq__,__dq__output_selection__dq__:__dq__${properties.output_selection}__dq__,__dq__dista__dq__:${properties.dista},__dq__method__dq__:__dq__${properties.method}__dq__,__dq__cutoff__dq__:${properties.cutoff},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
+            --config '__oc____dq__fit_selection__dq__:__dq__${properties.fit_selection}__dq__,__dq__output_selection__dq__:__dq__${properties.output_selection}__dq__,__dq__dista__dq__:${properties.dista},__dq__nofit__dq__:${properties.nofit},__dq__method__dq__:__dq__${properties.method}__dq__,__dq__cutoff__dq__:${properties.cutoff},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
           #end if
         
           #if str($input_structure_path) != 'None':
@@ -41,6 +41,12 @@
         
         
           --output_pdb_path $outname_output_pdb_path
+        
+          --output_cluster_log_path $outname_output_cluster_log_path
+        
+          --output_rmsd_cluster_xpm_path $outname_output_rmsd_cluster_xpm_path
+        
+          --output_rmsd_dist_xvg_path $outname_output_rmsd_dist_xvg_path
         ;          
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
@@ -54,6 +60,12 @@
         
         
           if test -f $outname_output_pdb_path; then mv $outname_output_pdb_path $output_pdb_path; fi;
+        
+          if test -f $outname_output_cluster_log_path; then mv $outname_output_cluster_log_path $output_cluster_log_path; fi;
+        
+          if test -f $outname_output_rmsd_cluster_xpm_path; then mv $outname_output_rmsd_cluster_xpm_path $output_rmsd_cluster_xpm_path; fi;
+        
+          if test -f $outname_output_rmsd_dist_xvg_path; then mv $outname_output_rmsd_dist_xvg_path $output_rmsd_dist_xvg_path; fi;
         
     ]]>
     </command>
@@ -69,6 +81,18 @@
           <param name="outname_output_pdb_path" type="text" value="mygmx_cluster.xtc" 
               optional="False" label="output XTC,TRR,CPT,GRO,G96,PDB,TNG name" 
               help="Path to the output cluster file Format: [output].[format] "/>
+        
+          <param name="outname_output_cluster_log_path" type="text" value="mygmx_cluster.log" 
+              optional="True" label="output LOG name" 
+              help="Path to the output log file Format: [output].log "/>
+        
+          <param name="outname_output_rmsd_cluster_xpm_path" type="text" value="mygmx_cluster.xpm" 
+              optional="True" label="output XPM name" 
+              help="Path to the output X PixMap compatible matrix file Format: [output].xpm "/>
+        
+          <param name="outname_output_rmsd_dist_xvg_path" type="text" value="mygmx_cluster.xvg" 
+              optional="True" label="output XVG name" 
+              help="Path to xvgr/xmgr file Format: [output].xvg "/>
         
         <conditional name="config">
             <param name="sele" type="select" label="Take tool settings:" help="Select where tool settings are to be read from">
@@ -328,6 +352,11 @@
                   label="dista" help="Use RMSD of distances instead of RMS deviation." 
                 />
             
+              <param name="nofit" type="boolean" 
+                  
+                  label="nofit" help="Do not use least squares fitting before RMSD calculation." 
+                />
+            
               <param name="method" type="select" label="method" help="Method for cluster determination. " multiple="false">
                   
                     <option value="linkage" 
@@ -442,6 +471,15 @@
             
             </change_format>
           </data>
+        
+        
+          <data name="output_cluster_log_path" format="log" label="${outname_output_cluster_log_path}"/>
+        
+        
+          <data name="output_rmsd_cluster_xpm_path" format="xpm" label="${outname_output_rmsd_cluster_xpm_path}"/>
+        
+        
+          <data name="output_rmsd_dist_xvg_path" format="xvg" label="${outname_output_rmsd_dist_xvg_path}"/>
         
     </outputs>
     <tests>

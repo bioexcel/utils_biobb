@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__force_field__dq__:__dq__${properties.force_field}__dq__,__dq__split__dq__:${properties.split},__dq__scale_mass__dq__:${properties.scale_mass},__dq__gmx_lib__dq__:__dq__${properties.gmx_lib}__dq__,__dq__pmx_path__dq__:__dq__${properties.pmx_path}__dq____cc__'
+            --config '__oc____dq__force_field__dq__:__dq__${properties.force_field}__dq__,__dq__split__dq__:${properties.split},__dq__scale_mass__dq__:${properties.scale_mass},__dq__gmx_lib__dq__:__dq__${properties.gmx_lib}__dq__,__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
           #end if
         
           #if str($input_top_zip_path) != 'None':
@@ -89,7 +89,7 @@
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
             
-              <param name="pmx_path" type="text" label="pmx_path" help="Path to the PMX command line interface." optional="false"
+              <param name="binary_path" type="text" label="binary_path" help="Path to the PMX command line interface." optional="false"
                   value="pmx"
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
