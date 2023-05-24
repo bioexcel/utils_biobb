@@ -1,62 +1,64 @@
-<tool id="biobb_dna_interseqcorr_ext" name="Interseqcorr" version="4.0.0" >
-    <description>: Calculate correlation between all base pairs of a single sequence and for a single helical parameter.</description>
+<tool id="biobb_flexserv_pcz_zip_ext" name="PczZip" version="4.0.0" >
+    <description>: Wrapper of the pcazip tool from the PCAsuite FlexServ module.</description>
     <requirements>
         <requirement type="package"
         version="4.0.0"
-        >biobb_dna</requirement>
+        >biobb_flexserv</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
         
-          ln -f -s ${input_ser_path} ${input_ser_path}_`echo $$`.${input_ser_path.ext};
+          ln -f -s ${input_pdb_path} ${input_pdb_path}_`echo $$`.${input_pdb_path.ext};
+        
+          ln -f -s ${input_crd_path} ${input_crd_path}_`echo $$`.${input_crd_path.ext};
         
         #if $config.sele == "option1":
             ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
         
-        interseqcorr
+        pcz_zip
 
         #if $config.sele == "option1":
             --config ${config.properties}.${config.properties.ext}
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__sequence__dq__:__dq__${properties.sequence}__dq__,__dq__helpar_name__dq__:__dq__${properties.helpar_name}__dq__,__dq__seqpos__dq__:${properties.seqpos}__cc__'
+            --config '__oc____dq__binary_path__dq__:__dq__${properties.binary_path}__dq__,__dq__neigenv__dq__:${properties.neigenv},__dq__variance__dq__:${properties.variance},__dq__verbose__dq__:${properties.verbose},__dq__gauss_rmsd__dq__:${properties.gauss_rmsd}__cc__'
           #end if
         
-          #if str($input_ser_path) != 'None':
-            --input_ser_path ${input_ser_path}_`echo $$`.${input_ser_path.ext}
+          #if str($input_pdb_path) != 'None':
+            --input_pdb_path ${input_pdb_path}_`echo $$`.${input_pdb_path.ext}
+          #end if
+        
+          #if str($input_crd_path) != 'None':
+            --input_crd_path ${input_crd_path}_`echo $$`.${input_crd_path.ext}
           #end if
         
         
-          --output_csv_path $outname_output_csv_path
-        
-          --output_jpg_path $outname_output_jpg_path
+          --output_pcz_path $outname_output_pcz_path
         ;          
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
         
-          rm -f ${input_ser_path}_`echo $$`.${input_ser_path.ext};
+          rm -f ${input_pdb_path}_`echo $$`.${input_pdb_path.ext};
+        
+          rm -f ${input_crd_path}_`echo $$`.${input_crd_path.ext};
         
         
-          if test -f $outname_output_csv_path; then mv $outname_output_csv_path $output_csv_path; fi;
-        
-          if test -f $outname_output_jpg_path; then mv $outname_output_jpg_path $output_jpg_path; fi;
+          if test -f $outname_output_pcz_path; then mv $outname_output_pcz_path $output_pcz_path; fi;
         
     ]]>
     </command>
     <inputs>
         
-          <param name="input_ser_path" type="data" format="ser"  optional="False" label="input SER file" help="Path to .ser file with data for single helical parameter. Format: [input].ser"/> 
+          <param name="input_pdb_path" type="data" format="pdb"  optional="False" label="input PDB file" help="Input PDB file. Format: [input].pdb"/> 
+        
+          <param name="input_crd_path" type="data" format="crd,mdcrd,inpcrd"  optional="False" label="input CRD,MDCRD,INPCRD file" help="Input Trajectory file. Format: [input].[format]"/> 
         
         
-          <param name="outname_output_csv_path" type="text" value="myinterseqcorr.csv" 
-              optional="False" label="output CSV name" 
-              help="Path to directory where output is saved Format: [output].csv "/>
-        
-          <param name="outname_output_jpg_path" type="text" value="myinterseqcorr.jpg" 
-              optional="False" label="output JPG name" 
-              help="Path to .jpg file where output is saved Format: [output].jpg "/>
+          <param name="outname_output_pcz_path" type="text" value="mypcz_zip.pcz" 
+              optional="False" label="output PCZ name" 
+              help="Output compressed trajectory Format: [output].pcz "/>
         
         <conditional name="config">
             <param name="sele" type="select" label="Take tool settings:" help="Select where tool settings are to be read from">
@@ -75,31 +77,38 @@
           </conditional>
           <section name="properties" title="Properties Input">
             
-              <param name="sequence" type="text" label="sequence" help="Nucleic acid sequence for the input .ser file. Length of sequence is expected to be the same as the total number of columns in the .ser file, minus the index column (even if later on a subset of columns is selected with the *seqpos* option)." optional="true"
-                  
+              <param name="binary_path" type="text" label="binary_path" help="pcazip binary path to be used." optional="false"
+                  value="pcazip"
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
             
-              <param name="helpar_name" type="text" label="helpar_name" help="helical parameter name to add to plot title." optional="true"
+              <param name="neigenv" type="integer" 
+                  value="0"
                   
-                >
-                  <sanitizer><valid initial="string.printable"/></sanitizer>
-                </param>
+                  label="neigenv" help="Number of generated eigenvectors" optional="true"/>
             
-              <param name="seqpos" type="text" label="seqpos" help="list of sequence positions (columns indices starting by 0) to analyze.  If not specified it will analyse the complete sequence. (Json)" value="[]" >
-                  <sanitizer><valid initial="string.printable"/></sanitizer>
-                </param>
+              <param name="variance" type="integer" 
+                  value="90"
+                  
+                  label="variance" help="Percentage of variance captured by the final set of eigenvectors" optional="false"/>
+            
+              <param name="verbose" type="boolean" 
+                  
+                  label="verbose" help="Make output verbose" 
+                />
+            
+              <param name="gauss_rmsd" type="boolean" 
+                  
+                  label="gauss_rmsd" help="Use a gaussian RMSd for fitting" 
+                />
                     
           </section>
     </inputs>
     <outputs>
         
         
-          <data name="output_csv_path" format="csv" label="${outname_output_csv_path}"/>
-        
-        
-          <data name="output_jpg_path" format="jpg" label="${outname_output_jpg_path}"/>
+          <data name="output_pcz_path" format="pcz" label="${outname_output_pcz_path}"/>
         
     </outputs>
     <tests>
@@ -109,7 +118,7 @@
     <help>
 .. class:: infomark
         
-Check the syntax for the tool parameters at the original library documentation: https://biobb_dna.readthedocs.io/en/latest
+Check the syntax for the tool parameters at the original library documentation: https://biobb_flexserv.readthedocs.io/en/latest
 
 -----
 
@@ -132,7 +141,7 @@ Check the syntax for the tool parameters at the original library documentation: 
             title = {biobb: BioExcel building blocks },
             publisher = {GitHub},
             journal = {GitHub repository},
-            url = {https://github.com/bioexcel/biobb_dna},
+            url = {https://github.com/bioexcel/biobb_flexserv},
             }
         </citation>
         <citation type="doi">10.1038/s41597-019-0177-4</citation>

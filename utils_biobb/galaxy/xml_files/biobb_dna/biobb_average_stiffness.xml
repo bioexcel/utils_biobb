@@ -1,8 +1,8 @@
-<tool id="biobb_dna_average_stiffness_ext" name="AverageStiffness" version="3.9.0" >
+<tool id="biobb_dna_average_stiffness_ext" name="AverageStiffness" version="4.0.0" >
     <description>: Calculate average stiffness constants for each base pair of a trajectory&#39;s series.</description>
     <requirements>
         <requirement type="package"
-        version="3.9.0"
+        version="4.0.0"
         >biobb_dna</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[

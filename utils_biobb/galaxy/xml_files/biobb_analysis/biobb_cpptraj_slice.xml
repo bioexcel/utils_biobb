@@ -1,8 +1,8 @@
-<tool id="biobb_analysis_cpptraj_slice_ext" name="CpptrajSlice" version="4.0.0" >
+<tool id="biobb_analysis_cpptraj_slice_ext" name="CpptrajSlice" version="4.0.1" >
     <description>: Wrapper of the Ambertools Cpptraj module for extracting a particular trajectory slice from a given cpptraj compatible trajectory.</description>
     <requirements>
         <requirement type="package"
-        version="4.0.0"
+        version="4.0.1"
         >biobb_analysis</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
