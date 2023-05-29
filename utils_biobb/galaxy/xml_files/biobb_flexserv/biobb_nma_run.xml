@@ -76,7 +76,7 @@
           <section name="properties" title="Properties Input">
             
               <param name="binary_path" type="text" label="binary_path" help="BD binary path to be used." optional="false"
-                  value="bd"
+                  value="diaghess"
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>

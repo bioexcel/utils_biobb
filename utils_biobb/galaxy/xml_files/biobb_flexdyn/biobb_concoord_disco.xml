@@ -1,8 +1,8 @@
-<tool id="biobb_flexdyn_concoord_disco_ext" name="ConcoordDisco" version="4.0.1" >
+<tool id="biobb_flexdyn_concoord_disco_ext" name="ConcoordDisco" version="4.0.2" >
     <description>: Wrapper of the Disco tool from the Concoord package.</description>
     <requirements>
         <requirement type="package"
-        version="4.0.1"
+        version="4.0.2"
         >biobb_flexdyn</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
