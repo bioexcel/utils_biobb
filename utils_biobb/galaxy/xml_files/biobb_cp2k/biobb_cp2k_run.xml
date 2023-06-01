@@ -1,8 +1,8 @@
-<tool id="biobb_cp2k_cp2k_run_ext" name="Cp2kRun" version="3.8.3" >
+<tool id="biobb_cp2k_cp2k_run_ext" name="Cp2kRun" version="4.0.0" >
     <description>: Wrapper of the CP2K QM tool module.</description>
     <requirements>
         <requirement type="package"
-        version="3.8.3"
+        version="4.0.0"
         >biobb_cp2k</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
