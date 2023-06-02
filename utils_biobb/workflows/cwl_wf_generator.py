@@ -3,6 +3,8 @@ import json
 import yaml
 import shutil
 from pathlib import Path, PurePath
+from pymongo import MongoClient
+from settings import username, password, host, dbname
 
 ###
 # python3 cwl_wf_generator.py -y ../../../biobb_workflows/biobb_wf_flexdyn/python/workflow.yml -p ../../../biobb_workflows/biobb_wf_flexdyn/python/workflow.py -a ../../../biobb_adapters/biobb_adapters/cwl -o ../../../biobb_workflows/biobb_wf_flexdyn/cwl_test
@@ -10,6 +12,11 @@ from pathlib import Path, PurePath
 
 INPUT_DESCRIPTIONS = 'workflow_input_descriptions.yml'
 WORKFLOW = 'workflow.cwl'
+
+# connect to DB
+client = MongoClient('mongodb://%s:%s@%s' % (username, password, host))
+db = client[dbname]
+source = db['source']
 
 
 class CWLWFGenerator():
@@ -79,7 +86,23 @@ class CWLWFGenerator():
 
         print(f"{input_desc_path} has been properly generated")
 
-    def generateWorkflow(self, wf_dict):
+    def getToolsInfo(self, adapters_dict):
+        # generate dictionary with tools info
+        tools_info = {}
+        for pack in source.find():
+            tools_info[pack['_id']] = pack['tools']
+
+        tools_desc = []
+        for adapter in adapters_dict:
+            tool_desc = [d for d in tools_info[adapter['package']] if d['exec'] == adapter['tool']]
+            tool_adapter = [d for d in adapters_dict if d['tool'] == adapter['tool']]
+            tool = tool_adapter[0]
+            tool['desc'] = tool_desc[0]['desc']
+            tools_desc.append(tool)
+
+        return tools_desc
+
+    def generateWorkflow(self, wf_dict, adapters_dict):
         print(f'\n## Generating {WORKFLOW}')
         out_dict = {
             'cwlVersion': 'v1.0',
@@ -123,6 +146,7 @@ class CWLWFGenerator():
         out_dict['outputs'] = outputs_dict
 
         # steps
+        tools_info = self.getToolsInfo(adapters_dict)
         steps_dict = {}
         for k1 in wf_dict:
             inouts = {}
@@ -143,7 +167,7 @@ class CWLWFGenerator():
 
             steps_dict[k1] = {
                 'label': wf_dict[k1]['tool'],
-                'doc': f"Description for {wf_dict[k1]['tool']}",
+                'doc': [d for d in tools_info if d['tool'] == wf_dict[k1]['tool']][0]['desc'],
                 'run': f"biobb_adapters/{wf_dict[k1]['tool']}.cwl",
                 'in': inouts,
                 'out': outs
@@ -183,7 +207,7 @@ class CWLWFGenerator():
         self.generateInputDescriptions(wf_dict)
 
         # generate workflow.cwl file
-        self.generateWorkflow(wf_dict)
+        self.generateWorkflow(wf_dict, adapters_dict)
 
         # copy biobb_adapters
         self.copyBioBBAdapters(adapters_dict)

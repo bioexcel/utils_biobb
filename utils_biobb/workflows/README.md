@@ -4,7 +4,19 @@
 
 Script for generating BioBB CWL workflows. Passing the pure pyhon workflow YAML and Python files paths and the route to the biobb_adapters, the CWL version for the workflow will be automatically generated in the output folder.
 
-### Execute script
+### Step 1: connect to VPN
+
+In some occasions, the VPN must be connected in order to connect to MongoDB.
+
+### Step 2: activate environment
+
+Activate an environment with **pymongo**:
+
+```Shell
+conda activate biobb_env
+```
+
+### Step 3: execute script
 
 Run the python script passing the pure pyhon workflow YAML and Python files paths, the route to the biobb_adapters and the route where the CWL and YAML files must be saved:
 

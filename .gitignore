@@ -115,3 +115,5 @@ traj_comp.xtc
 
 # Pycharm
 .idea
+
+utils_biobb/workflows/settings.py
