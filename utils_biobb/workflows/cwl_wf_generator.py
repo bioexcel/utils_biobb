@@ -90,7 +90,7 @@ class CWLWFGenerator():
             'outputs': {},
             'steps': {}
         }
-        
+
         # inputs
         inputs_dict = {}
         for k1 in wf_dict:
