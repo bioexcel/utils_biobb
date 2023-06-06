@@ -7,7 +7,7 @@ from pymongo import MongoClient
 from settings import username, password, host, dbname
 
 ###
-# python3 cwl_wf_generator.py -y ../../../biobb_workflows/biobb_wf_flexdyn/python/workflow.yml -p ../../../biobb_workflows/biobb_wf_flexdyn/python/workflow.py -a ../../../biobb_adapters/biobb_adapters/cwl -o ../../../biobb_workflows/biobb_wf_flexdyn/cwl_test
+# python3 cwl_wf_generator.py -y ../../../biobb_workflows/biobb_wf_flexdyn/python/workflow.yml -p ../../../biobb_workflows/biobb_wf_flexdyn/python/workflow.py -b ../../../ -a ../../../biobb_adapters/biobb_adapters/cwl -o ../../../biobb_workflows/biobb_wf_flexdyn/cwl_test
 ###
 
 INPUT_DESCRIPTIONS = 'workflow_input_descriptions.yml'
@@ -21,19 +21,22 @@ source = db['source']
 
 class CWLWFGenerator():
 
-    def __init__(self, yml_input_path, python_input_path, adapters_path, output_path, **kwargs):
+    def __init__(self, yml_input_path, python_input_path, biobbs_path, adapters_path, output_path, **kwargs):
 
         # check if yml_input_path exists
         if not Path(yml_input_path).exists():
             raise SystemExit('Unexisting YAML input path')
-
         self.yml_input_path = yml_input_path
 
         # check if python_input_path exists
         if not Path(python_input_path).exists():
             raise SystemExit('Unexisting Python input path')
-
         self.python_input_path = python_input_path
+
+        # check if biobbs_path exists
+        if not Path(biobbs_path).exists():
+            raise SystemExit('Unexisting biobbs path')
+        self.biobbs_path = biobbs_path
 
         # check if adapters_path exists
         if not Path(adapters_path).exists():
@@ -102,6 +105,17 @@ class CWLWFGenerator():
 
         return tools_desc
 
+    def getPropDescFromJSON(self, t, p):
+        json_path = PurePath(self.biobbs_path).joinpath(f"{p}/{p}/json_schemas/{t}.json")
+
+        if not Path(json_path).exists():
+            raise SystemExit(f'Unexisting {json_path} path')
+
+        with open(json_path) as json_file:
+            json_dict = json.load(json_file)
+
+        return json_dict['properties']
+
     def generateWorkflow(self, wf_dict, adapters_dict):
         print(f'\n## Generating {WORKFLOW}')
         out_dict = {
@@ -114,30 +128,51 @@ class CWLWFGenerator():
             'steps': {}
         }
 
+        tools_info = self.getToolsInfo(adapters_dict)
+
         # inputs
         inputs_dict = {}
         for k1 in wf_dict:
+            t = wf_dict[k1]['tool']
+            p = [d for d in tools_info if d['tool'] == wf_dict[k1]['tool']][0]['package']
+            tool_props = self.getPropDescFromJSON(t, p)
+
             paths = wf_dict[k1]['paths']
             for k2 in paths:
+                prop_object = {}
                 if (k2.startswith('input_') and paths[k2].startswith('/path/to/inputs')):
-                    inputs_dict[f"{k1}_{k2}"] = 'File'
+                    prop_object['label'] = 'Input file'
+                    prop_object['doc'] = f"{tool_props[k2]['description']}."
+                    prop_object['type'] = 'File'
+                    inputs_dict[f"{k1}_{k2}"] = prop_object
                 elif (not k2.startswith('input_')):
-                    inputs_dict[f"{k1}_{k2}"] = 'string'
+                    prop_object['label'] = 'Output file'
+                    prop_object['doc'] = f"{tool_props[k2]['description']}."
+                    prop_object['type'] = 'string'
+                    inputs_dict[f"{k1}_{k2}"] = prop_object
+            prop_object = {}
             if ('properties' in wf_dict[k1]):
-                inputs_dict[f"{k1}_config"] = 'string'
+                prop_object['label'] = 'Config file'
+                prop_object['doc'] = f'Configuration file for {p}.{t} tool.'
+                prop_object['type'] = 'string'
+                inputs_dict[f"{k1}_config"] = prop_object
 
         out_dict['inputs'] = inputs_dict
 
         # outputs
         outputs_dict = {}
         for k1 in wf_dict:
+            t = wf_dict[k1]['tool']
+            p = [d for d in tools_info if d['tool'] == wf_dict[k1]['tool']][0]['package']
+            tool_props = self.getPropDescFromJSON(t, p)
+
             paths = wf_dict[k1]['paths']
             c = 1
             for k2 in paths:
                 if (k2.startswith('output_')):
                     outputs_dict[f"{k1}_out{c}"] = {
                         'label': k2,
-                        'doc': 'Path to the output file',
+                        'doc': f"{tool_props[k2]['description']}.",
                         'type': 'File',
                         'outputSource': f"{k1}/{k2}"
                     }
@@ -146,7 +181,6 @@ class CWLWFGenerator():
         out_dict['outputs'] = outputs_dict
 
         # steps
-        tools_info = self.getToolsInfo(adapters_dict)
         steps_dict = {}
         for k1 in wf_dict:
             inouts = {}
@@ -218,16 +252,17 @@ class CWLWFGenerator():
 def main():
     parser = argparse.ArgumentParser(description="Translates to CWL a given YAML workflow.",
                                      formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999),
-                                     epilog='''Examples: \ncwl_wf_generator.py -y path/to/yaml/workflow -p path/to/python/workflow -a path/to/biobb_adapters -o path/to/cwl/workflow\ncwl_wf_generator.py --yml_in path/to/yaml/workflow --python_in path/to/python/workflow --adapters path/to/biobb_adapters --output path/to/cwl/workflow''')
+                                     epilog='''Examples: \ncwl_wf_generator.py -y path/to/yaml/workflow -p path/to/python/workflow -b path/to/biobbs -a path/to/biobb_adapters -o path/to/cwl/workflow\ncwl_wf_generator.py --yml_in path/to/yaml/workflow --python_in path/to/python/workflow --biobbs path/to/biobbs --adapters path/to/biobb_adapters --output path/to/cwl/workflow''')
     required_args = parser.add_argument_group('required arguments')
-    required_args.add_argument('--yml_in', '-y', required=True, help='Path to the the original YAML file.')
-    required_args.add_argument('--python_in', '-p', required=True, help='Path to the the original Python file.')
+    required_args.add_argument('--yml_in', '-y', required=True, help='Path to the original YAML file.')
+    required_args.add_argument('--python_in', '-p', required=True, help='Path to the original Python file.')
+    required_args.add_argument('--biobbs', '-b', required=True, help='Path to the BioBB\'s folder.')
     required_args.add_argument('--adapters', '-a', required=True, help='Path to the folder from where the biobb_adapters needed for this workflow will be taken.')
     required_args.add_argument('--output', '-o', required=True, help='Output path to the CWL workflow folder.')
 
     args = parser.parse_args()
 
-    CWLWFGenerator(yml_input_path=args.yml_in, python_input_path=args.python_in, adapters_path=args.adapters, output_path=args.output).launch()
+    CWLWFGenerator(yml_input_path=args.yml_in, python_input_path=args.python_in, biobbs_path=args.biobbs, adapters_path=args.adapters, output_path=args.output).launch()
 
 
 if __name__ == '__main__':
