@@ -57,6 +57,8 @@ class CWLWFGenerator():
                 print(exc)
         wf_dict.pop("working_dir_path")
         wf_dict.pop("can_write_console_log")
+        if "run_md" in wf_dict:
+            wf_dict.pop("run_md")
 
         return wf_dict
 
