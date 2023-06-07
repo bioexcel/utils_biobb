@@ -46,7 +46,6 @@ class CWLWFGenerator():
         # check if output_path exists
         if not Path(output_path).exists():
             raise SystemExit('Unexisting output path')
-
         self.output_path = output_path
 
     def parseYAML(self):
@@ -252,7 +251,7 @@ class CWLWFGenerator():
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Translates to CWL a given YAML workflow.",
+    parser = argparse.ArgumentParser(description="Translates to CWL a given Python / YAML workflow.",
                                      formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999),
                                      epilog='''Examples: \ncwl_wf_generator.py -y path/to/yaml/workflow -p path/to/python/workflow -b path/to/biobbs -a path/to/biobb_adapters -o path/to/cwl/workflow\ncwl_wf_generator.py --yml_in path/to/yaml/workflow --python_in path/to/python/workflow --biobbs path/to/biobbs --adapters path/to/biobb_adapters --output path/to/cwl/workflow''')
     required_args = parser.add_argument_group('required arguments')
