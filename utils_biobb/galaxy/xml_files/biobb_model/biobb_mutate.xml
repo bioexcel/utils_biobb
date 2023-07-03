@@ -1,8 +1,8 @@
-<tool id="biobb_model_mutate_ext" name="Mutate" version="4.0.0" >
+<tool id="biobb_model_mutate_ext" name="Mutate" version="4.0.1" >
     <description>: Class to mutate one amino acid by another in a 3d structure.</description>
     <requirements>
         <requirement type="package"
-        version="4.0.0"
+        version="4.0.1"
         >biobb_model</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
