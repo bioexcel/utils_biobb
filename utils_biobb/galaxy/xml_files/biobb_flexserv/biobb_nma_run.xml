@@ -1,8 +1,8 @@
-<tool id="biobb_flexserv_nma_run_ext" name="NmaRun" version="4.0.0" >
+<tool id="biobb_flexserv_nma_run_ext" name="NmaRun" version="4.0.2" >
     <description>: Wrapper of the Normal Mode Analysis tool from the FlexServ module.</description>
     <requirements>
         <requirement type="package"
-        version="4.0.0"
+        version="4.0.2"
         >biobb_flexserv</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -75,8 +75,8 @@
           </conditional>
           <section name="properties" title="Properties Input">
             
-              <param name="binary_path" type="text" label="binary_path" help="BD binary path to be used." optional="false"
-                  value="bd"
+              <param name="binary_path" type="text" label="binary_path" help="NMA binary path to be used." optional="false"
+                  value="diaghess"
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>

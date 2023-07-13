@@ -2,7 +2,7 @@ import argparse
 import json
 import yaml
 import re
-from importlib import import_module
+#from importlib import import_module
 from pathlib import Path, PurePath
 from os import walk
 
@@ -29,7 +29,7 @@ class CWLGenerator():
 
         self.package = package
 
-        # check if output_path exists
+        # check if input_path exists
         if not Path(input_path).exists():
             raise SystemExit('Unexisting input path')
 

@@ -91,6 +91,10 @@
   <tool file="biobb/biobb_amber/biobb_cestats_run.xml" />
   <tool file="biobb/biobb_amber/biobb_cphstats_run.xml" />
 </section>
+<section id="biobb_cp2k" name="Setup and simulation of QM simulations (CP2K)" >
+  <tool file="biobb/biobb_cp2k/biobb_cp2k_run.xml" />
+  <tool file="biobb/biobb_cp2k/biobb_cp2k_run.xml" />
+</section>
 <section id="biobb_pmx" name="PMX Free Energy calculation" >
   <tool file="biobb/biobb_pmx/biobb_pmxmutate.xml" />
   <tool file="biobb/biobb_pmx/biobb_pmxgentop.xml" />

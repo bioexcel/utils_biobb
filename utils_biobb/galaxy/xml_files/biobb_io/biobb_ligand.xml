@@ -66,13 +66,13 @@
               <param name="api_id" type="select" label="api_id" help="Identifier of the PDB REST API from which the PDB structure will be downloaded. " multiple="false">
                   
                     <option value="pdbe" 
-                      
+                      selected="true"
                     >pdbe
                        - PDB in Europe REST API
                     </option>
                   
                     <option value="mmb" 
-                      selected="true"
+                      
                     >mmb
                        - MMB PDB mirror API
                     </option>

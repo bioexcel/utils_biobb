@@ -1,8 +1,8 @@
-<tool id="biobb_flexdyn_imod_imc_ext" name="ImodImc" version="4.0.1" >
+<tool id="biobb_flexdyn_imod_imc_ext" name="ImodImc" version="4.0.3" >
     <description>: Wrapper of the imc tool</description>
     <requirements>
         <requirement type="package"
-        version="4.0.1"
+        version="4.0.3"
         >biobb_flexdyn</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
