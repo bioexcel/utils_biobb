@@ -1,0 +1,38 @@
+name: biobb_400
+channels:
+  - conda-forge
+  - bioconda
+  - salilab
+dependencies:
+  - biobb_io==4.0.0
+  - biobb_model==4.0.0
+  - biobb_gromacs==4.0.0
+  - biobb_analysis==4.0.1
+  - biobb_structure_utils==4.0.0
+  - modeller
+  - conda
+
+# EXTRA STEPS
+
+# MODELLER KEY
+# conda install -c salilab modeller
+
+# MODELLER KEY
+# There's two ways of registering the Modeller Key:
+#         A. Through the config.py file:
+#            A.1. Edit:
+#                     [PATH_TO_CONDA_ENV]/lib/modeller-10.1/modlib/modeller/config.py
+#            A.2. Add line:
+#                     license = r'MY_MODELLER_KEY'
+#         B. Through the env variable KEY_MODELLER:
+#            B.1. Edit:
+#                     [PATH_TO_CONDA_ENV]/lib/modeller-10.1/modlib/modeller/config.py
+#            B.2. Comment line:
+#                     license = r'MY_MODELLER_KEY'
+#            B.3. Set the KEY_MODELLER env var:
+#                     export KEY_MODELLER="MY_MODELLER_KEY"
+
+
+
+# CURVES
+# locate .curvesplus folder in your environment folder

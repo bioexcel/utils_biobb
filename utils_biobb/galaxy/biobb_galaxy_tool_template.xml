@@ -16,12 +16,12 @@
             ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
         {%- endif %}
-        
+
         {{ name }}
 
         {% if props -%}
           #if $config.sele == "option1":
-            --config ${config.properties}.${config.properties.ext}
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
@@ -35,7 +35,7 @@
         {% endfor %}
         {% for k in files['output'] %}
           --{{ k }} $outname_{{ k }}
-        {% endfor %};          
+        {% endfor %};
         {% if props -%}
           #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
@@ -51,11 +51,11 @@
     </command>
     <inputs>
         {% for k, v in files['input'].items() %}
-          <param name="{{ k }}" type="data" format="{{ v['format']}}"  optional="{{v['optional']}}" label="{{ v['label'] }} file" help="{{ v['description']}}. Format: [input].{{ v['help_format']}}"/> 
+          <param name="{{ k }}" type="data" format="{{ v['format']}}"  optional="{{v['optional']}}" label="{{ v['label'] }} file" help="{{ v['description']}}. Format: [input].{{ v['help_format']}}"/>
         {% endfor %}
         {% for k, v in files['output'].items() %}
-          <param name="outname_{{ k }}" type="text" value="my{{name}}.{{v['file_types'][0]}}" 
-              optional="{{v['optional']}}" label="{{v['label']}} name" 
+          <param name="outname_{{ k }}" type="text" value="my{{name}}.{{v['file_types'][0]}}"
+              optional="{{v['optional']}}" label="{{v['label']}} name"
               help="{{v['description']}} Format: [output].{{v['help_format']}} "/>
         {% endfor %}
         {% if props -%}
@@ -79,24 +79,24 @@
               {% if v['type'] == 'string' or v['type'] == 'list' -%}
                 <param name="{{ k }}" type="text" label="{{ k }}" help="{{ v['description'] }}" optional="{{v['optional']}}"
                   {% if v['default'] -%}
-                    value="{{ v['default']}}" 
+                    value="{{ v['default']}}"
                   {%- endif %}
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
-                </param> 
+                </param>
               {%- elif v['type'] == 'float' or v['type'] == 'integer' -%}
-                <param name="{{ k }}" type="{{v['type']}}" 
+                <param name="{{ k }}" type="{{v['type']}}"
                   {% if v['default'] or v['default'] == 0-%}
-                    value="{{ v['default']}}" 
+                    value="{{ v['default']}}"
                   {%- endif %}
                   {% if v['min'] -%}
-                    min="{{ v['min'] }}" max="{{ v['max'] }}" 
+                    min="{{ v['min'] }}" max="{{ v['max'] }}"
                   {%- endif %}
-                  label="{{ k }}" help="{{ v['description']}}" optional="{{v['optional']}}"/> 
+                  label="{{ k }}" help="{{ v['description']}}" optional="{{v['optional']}}"/>
               {%- elif v['type'] == 'select' -%}
                 <param name="{{ k }}" type="select" label="{{ k }}" help="{{ v['description'] }}" multiple="{{v['multiple']}}">
                   {% for opt in v['values'] %}
-                    <option value="{{ opt }}" 
+                    <option value="{{ opt }}"
                       {% if opt == v['default'] -%}
                         selected="true"
                       {%- endif %}
@@ -108,22 +108,22 @@
                   {% endfor %}
                 </param>
               {%- elif v['type'] == 'boolean' -%}
-                <param name="{{ k }}" type="boolean" 
+                <param name="{{ k }}" type="boolean"
                   {% if v['default'] == True -%}
                     checked="true"
                   {%- endif%}
-                  label="{{ k }}" help="{{ v['description'] }}" 
-                /> 
+                  label="{{ k }}" help="{{ v['description'] }}"
+                />
               {%- elif v['type'] == 'object'-%}
                 <param name="{{ k }}" type="text" label="{{ k }}" help="{{ v['description'] }} (Json)" value="{}">
                   <sanitizer><valid initial="string.printable"/></sanitizer>
-                </param> 
+                </param>
               {%- elif v['type'] == 'array' -%}
                 <param name="{{ k }}" type="text" label="{{ k }}" help="{{ v['description'] }} (Json)" value="[]" >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
-                </param>  
+                </param>
               {%- endif %}
-            {% endfor %}        
+            {% endfor %}
           </section>
        {%- endif %}
     </inputs>
@@ -145,22 +145,22 @@
     <tests>
         <test>
         </test>
-    </tests>    
+    </tests>
     <help>
 .. class:: infomark
-        
+
 Check the syntax for the tool parameters at the original library documentation: https://{{ biobb_group }}.readthedocs.io/en/latest
 
 -----
 
-.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png    
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
     :width: 150
 
 **https://mmb.irbbarcelona.org/biobb**
-        
+
 .. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
         :width: 150
-        
+
 **https://bioexcel.eu**
    </help>
 

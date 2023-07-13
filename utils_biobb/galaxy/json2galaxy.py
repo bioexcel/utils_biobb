@@ -27,9 +27,10 @@ SECTIONS = {
     'biobb_chemistry': 'Small molecules',
     'biobb_pmx': 'PMX Free Energy calculation',
     'biobb_vs': 'Virtual Screening / Docking',
-    'biobb_ml': 'Machile Learning',
+    'biobb_ml': 'Machine Learning',
     'biobb_cp2k': 'Setup and simulation of QM simulations (CP2K)',
-    'biobb_haddock': 'Haddock' 
+    'biobb_haddock': 'Haddock',
+    'biobb_asitedesign': 'Asite Design'
 }
 
 

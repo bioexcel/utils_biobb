@@ -41,7 +41,7 @@ if [ $# -gt 0 ]; then
 else
     # biobb_ml
     # biobb_flexserv
-    biobb_list="biobb_analysis biobb_amber biobb_model biobb_cmip biobb_chemistry biobb_vs biobb_gromacs biobb_dna biobb_structure_utils biobb_pmx biobb_io"
+    biobb_list="biobb_analysis biobb_amber biobb_model biobb_cmip biobb_chemistry biobb_vs biobb_gromacs biobb_dna biobb_structure_utils biobb_pmx biobb_io biobb_flexserv biobb_flexdyn"
 fi
 echo "List of packages where the script will be executed:"
 echo "$biobb_list"
