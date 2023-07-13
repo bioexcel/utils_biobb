@@ -159,6 +159,8 @@
           <param name="sele" value="option1"/>
           <param name="properties" value="data/config/config_editconf.json"/>
           <param name="input_gro_path" value="data/gromacs/editconf.gro"/>
+          <param name="outname_output_gro_path" value="output_editconf.gro"/>
+          <param name="output_format" value="gro"/>
           <output name="output_gro_path" file="reference/gromacs/ref_editconf.gro" ftype="gro"/>
 
         </test>
