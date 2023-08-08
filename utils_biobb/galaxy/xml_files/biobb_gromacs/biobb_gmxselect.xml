@@ -14,11 +14,11 @@
         #if $config.sele == "option1":
             ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
-        
+
         gmxselect
 
         #if $config.sele == "option1":
-            --config ${config.properties}.${config.properties.ext}
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
@@ -35,7 +35,7 @@
         
         
           --output_ndx_path $outname_output_ndx_path
-        ;          
+        ;
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
@@ -51,13 +51,13 @@
     </command>
     <inputs>
         
-          <param name="input_structure_path" type="data" format="pdb,gro,tpr"  optional="False" label="input PDB,GRO,TPR file" help="Path to the input GRO/PDB/TPR file. Format: [input].[format]"/> 
+          <param name="input_structure_path" type="data" format="pdb,gro,tpr"  optional="False" label="input PDB,GRO,TPR file" help="Path to the input GRO/PDB/TPR file. Format: [input].[format]"/>
         
-          <param name="input_ndx_path" type="data" format="ndx"  optional="True" label="input NDX file" help="Path to the input index NDX file. Format: [input].ndx"/> 
+          <param name="input_ndx_path" type="data" format="ndx"  optional="True" label="input NDX file" help="Path to the input index NDX file. Format: [input].ndx"/>
         
         
-          <param name="outname_output_ndx_path" type="text" value="mygmxselect.ndx" 
-              optional="False" label="output NDX name" 
+          <param name="outname_output_ndx_path" type="text" value="mygmxselect.ndx"
+              optional="False" label="output NDX name"
               help="Path to the output index NDX file Format: [output].ndx "/>
         
         <conditional name="config">
@@ -83,9 +83,9 @@
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
             
-              <param name="append" type="boolean" 
+              <param name="append" type="boolean"
                   
-                  label="append" help="Append the content of the input_ndx_path to the output_ndx_path." 
+                  label="append" help="Append the content of the input_ndx_path to the output_ndx_path."
                 />
             
               <param name="binary_path" type="text" label="binary_path" help="Path to the GROMACS executable binary." optional="false"
@@ -99,7 +99,7 @@
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
-                    
+            
           </section>
     </inputs>
     <outputs>
@@ -111,22 +111,22 @@
     <tests>
         <test>
         </test>
-    </tests>    
+    </tests>
     <help>
 .. class:: infomark
-        
+
 Check the syntax for the tool parameters at the original library documentation: https://biobb_gromacs.readthedocs.io/en/latest
 
 -----
 
-.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png    
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
     :width: 150
 
 **https://mmb.irbbarcelona.org/biobb**
-        
+
 .. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
         :width: 150
-        
+
 **https://bioexcel.eu**
    </help>
 

@@ -1,8 +1,8 @@
-<tool id="biobb_pmx_pmxanalyse_ext" name="Pmxanalyse" version="3.8.1" >
+<tool id="biobb_pmx_pmxanalyse_ext" name="Pmxanalyse" version="4.0.0" >
     <description>: Wrapper class for the PMX analyse module.</description>
     <requirements>
         <requirement type="package"
-        version="3.8.1"
+        version="4.0.0"
         >biobb_pmx</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -14,15 +14,15 @@
         #if $config.sele == "option1":
             ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
-        
+
         pmxanalyse
 
         #if $config.sele == "option1":
-            --config ${config.properties}.${config.properties.ext}
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__method__dq__:__dq__${properties.method}__dq__,__dq__temperature__dq__:${properties.temperature},__dq__nboots__dq__:${properties.nboots},__dq__nblocks__dq__:${properties.nblocks},__dq__integ_only__dq__:${properties.integ_only},__dq__reverseB__dq__:${properties.reverseB},__dq__skip__dq__:${properties.skip},__dq__slice__dq__:__dq__${properties.slice}__dq__,__dq__rand__dq__:${properties.rand},__dq__index__dq__:__dq__${properties.index}__dq__,__dq__prec__dq__:${properties.prec},__dq__units__dq__:__dq__${properties.units}__dq__,__dq__no_ks__dq__:${properties.no_ks},__dq__nbins__dq__:${properties.nbins},__dq__dpi__dq__:${properties.dpi},__dq__pmx_path__dq__:__dq__${properties.pmx_path}__dq____cc__'
+            --config '__oc____dq__method__dq__:__dq__${properties.method}__dq__,__dq__temperature__dq__:${properties.temperature},__dq__nboots__dq__:${properties.nboots},__dq__nblocks__dq__:${properties.nblocks},__dq__integ_only__dq__:${properties.integ_only},__dq__reverseB__dq__:${properties.reverseB},__dq__skip__dq__:${properties.skip},__dq__slice__dq__:__dq__${properties.slice}__dq__,__dq__rand__dq__:${properties.rand},__dq__index__dq__:__dq__${properties.index}__dq__,__dq__prec__dq__:${properties.prec},__dq__units__dq__:__dq__${properties.units}__dq__,__dq__no_ks__dq__:${properties.no_ks},__dq__nbins__dq__:${properties.nbins},__dq__dpi__dq__:${properties.dpi},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
           #end if
         
           #if str($input_a_xvg_zip_path) != 'None':
@@ -37,7 +37,7 @@
           --output_result_path $outname_output_result_path
         
           --output_work_plot_path $outname_output_work_plot_path
-        ;          
+        ;
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
@@ -55,17 +55,17 @@
     </command>
     <inputs>
         
-          <param name="input_a_xvg_zip_path" type="data" format="zip"  optional="False" label="input ZIP file" help="Path the zip file containing the dgdl.xvg files of the A state. Format: [input].zip"/> 
+          <param name="input_a_xvg_zip_path" type="data" format="zip"  optional="False" label="input ZIP file" help="Path the zip file containing the dgdl.xvg files of the A state. Format: [input].zip"/>
         
-          <param name="input_b_xvg_zip_path" type="data" format="zip"  optional="False" label="input ZIP file" help="Path the zip file containing the dgdl.xvg files of the B state. Format: [input].zip"/> 
+          <param name="input_b_xvg_zip_path" type="data" format="zip"  optional="False" label="input ZIP file" help="Path the zip file containing the dgdl.xvg files of the B state. Format: [input].zip"/>
         
         
-          <param name="outname_output_result_path" type="text" value="mypmxanalyse.txt" 
-              optional="False" label="output TXT name" 
+          <param name="outname_output_result_path" type="text" value="mypmxanalyse.txt"
+              optional="False" label="output TXT name"
               help="Path to the TXT results file Format: [output].txt "/>
         
-          <param name="outname_output_work_plot_path" type="text" value="mypmxanalyse.png" 
-              optional="False" label="output PNG name" 
+          <param name="outname_output_work_plot_path" type="text" value="mypmxanalyse.png"
+              optional="False" label="output PNG name"
               help="Path to the PNG plot results file Format: [output].png "/>
         
         <conditional name="config">
@@ -87,19 +87,19 @@
             
               <param name="method" type="select" label="method" help="Choose one or more estimators to use. " multiple="false">
                   
-                    <option value="CGI" 
+                    <option value="CGI"
                       
                     >CGI
                        - Crooks Gaussian Intersection
                     </option>
                   
-                    <option value="BAR" 
+                    <option value="BAR"
                       
                     >BAR
                        - Bennet Acceptance Ratio
                     </option>
                   
-                    <option value="JARZ" 
+                    <option value="JARZ"
                       
                     >JARZ
                        - Jarzynski&#39;s estimator
@@ -107,32 +107,32 @@
                   
                 </param>
             
-              <param name="temperature" type="float" 
+              <param name="temperature" type="float"
                   value="298.15"
                   
                   label="temperature" help="Temperature in Kelvin." optional="false"/>
             
-              <param name="nboots" type="integer" 
+              <param name="nboots" type="integer"
                   value="0"
                   
                   label="nboots" help="Number of bootstrap samples to use for the bootstrap estimate of the standard errors." optional="true"/>
             
-              <param name="nblocks" type="integer" 
+              <param name="nblocks" type="integer"
                   value="1"
                   
                   label="nblocks" help="Number of blocks to divide the data into for an estimate of the standard error." optional="false"/>
             
-              <param name="integ_only" type="boolean" 
+              <param name="integ_only" type="boolean"
                   
-                  label="integ_only" help="Whether to do integration only." 
+                  label="integ_only" help="Whether to do integration only."
                 />
             
-              <param name="reverseB" type="boolean" 
+              <param name="reverseB" type="boolean"
                   
-                  label="reverseB" help="Whether to reverse the work values for the backward (B-&gt;A) transformation." 
+                  label="reverseB" help="Whether to reverse the work values for the backward (B-&gt;A) transformation."
                 />
             
-              <param name="skip" type="integer" 
+              <param name="skip" type="integer"
                   value="1"
                   
                   label="skip" help="Skip files." optional="false"/>
@@ -143,7 +143,7 @@
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
             
-              <param name="rand" type="integer" 
+              <param name="rand" type="integer"
                   
                   
                   label="rand" help="Take a random subset of trajectories. Default is None (do not take random subset)." optional="true"/>
@@ -154,26 +154,26 @@
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
             
-              <param name="prec" type="integer" 
+              <param name="prec" type="integer"
                   value="2"
                   
                   label="prec" help="The decimal precision of the screen/file output." optional="false"/>
             
               <param name="units" type="select" label="units" help="The units of the output. " multiple="false">
                   
-                    <option value="kJ" 
+                    <option value="kJ"
                       selected="true"
                     >kJ
                        - Kilojoules
                     </option>
                   
-                    <option value="kcal" 
+                    <option value="kcal"
                       
                     >kcal
                        - Kilocalories
                     </option>
                   
-                    <option value="kT" 
+                    <option value="kT"
                       
                     >kT
                        - the product of the Boltzmann constant k and the temperature
@@ -181,27 +181,27 @@
                   
                 </param>
             
-              <param name="no_ks" type="boolean" 
+              <param name="no_ks" type="boolean"
                   
-                  label="no_ks" help="Whether to do a Kolmogorov-Smirnov test to check whether the Gaussian assumption for CGI holds." 
+                  label="no_ks" help="Whether to do a Kolmogorov-Smirnov test to check whether the Gaussian assumption for CGI holds."
                 />
             
-              <param name="nbins" type="integer" 
+              <param name="nbins" type="integer"
                   value="20"
                   
                   label="nbins" help="Number of histograms bins for the plot." optional="false"/>
             
-              <param name="dpi" type="integer" 
+              <param name="dpi" type="integer"
                   value="300"
                   min="72" max="2048"
                   label="dpi" help="Resolution of the plot." optional="false"/>
             
-              <param name="pmx_path" type="text" label="pmx_path" help="Path to the PMX command line interface." optional="false"
+              <param name="binary_path" type="text" label="binary_path" help="Path to the PMX command line interface." optional="false"
                   value="pmx"
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
-                    
+            
           </section>
     </inputs>
     <outputs>
@@ -216,22 +216,22 @@
     <tests>
         <test>
         </test>
-    </tests>    
+    </tests>
     <help>
 .. class:: infomark
-        
+
 Check the syntax for the tool parameters at the original library documentation: https://biobb_pmx.readthedocs.io/en/latest
 
 -----
 
-.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png    
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
     :width: 150
 
 **https://mmb.irbbarcelona.org/biobb**
-        
+
 .. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
         :width: 150
-        
+
 **https://bioexcel.eu**
    </help>
 

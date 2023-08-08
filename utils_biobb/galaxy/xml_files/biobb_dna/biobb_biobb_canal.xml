@@ -14,11 +14,11 @@
         #if $config.sele == "option1":
             ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
-        
+
         biobb_canal
 
         #if $config.sele == "option1":
-            --config ${config.properties}.${config.properties.ext}
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
@@ -35,7 +35,7 @@
         
         
           --output_zip_path $outname_output_zip_path
-        ;          
+        ;
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
@@ -51,13 +51,13 @@
     </command>
     <inputs>
         
-          <param name="input_cda_file" type="data" format="cda"  optional="False" label="input CDA file" help="Input cda file, from Cur+ output. Format: [input].cda"/> 
+          <param name="input_cda_file" type="data" format="cda"  optional="False" label="input CDA file" help="Input cda file, from Cur+ output. Format: [input].cda"/>
         
-          <param name="input_lis_file" type="data" format="lis"  optional="True" label="input LIS file" help="Input lis file, from Cur+ output. Format: [input].lis"/> 
+          <param name="input_lis_file" type="data" format="lis"  optional="True" label="input LIS file" help="Input lis file, from Cur+ output. Format: [input].lis"/>
         
         
-          <param name="outname_output_zip_path" type="text" value="mybiobb_canal.zip" 
-              optional="False" label="output ZIP name" 
+          <param name="outname_output_zip_path" type="text" value="mybiobb_canal.zip"
+              optional="False" label="output ZIP name"
               help="zip filename for output files Format: [output].zip "/>
         
         <conditional name="config">
@@ -83,27 +83,27 @@
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
             
-              <param name="itst" type="integer" 
+              <param name="itst" type="integer"
                   value="0"
                   
                   label="itst" help="Iteration start index." optional="true"/>
             
-              <param name="itnd" type="integer" 
+              <param name="itnd" type="integer"
                   value="0"
                   
                   label="itnd" help="Iteration end index." optional="true"/>
             
-              <param name="itdel" type="integer" 
+              <param name="itdel" type="integer"
                   value="1"
                   
                   label="itdel" help="Iteration delimiter." optional="false"/>
             
-              <param name="lev1" type="integer" 
+              <param name="lev1" type="integer"
                   value="0"
                   
                   label="lev1" help="Lower base level limit (i.e. base pairs) used for analysis." optional="true"/>
             
-              <param name="lev2" type="integer" 
+              <param name="lev2" type="integer"
                   value="0"
                   
                   label="lev2" help="Upper base level limit used for analysis. If lev1 &gt; 0 and lev2 = 0, lev2 is set to lev1 (i.e. analyze lev1 only). If lev1=lev2=0, lev1 is set to 1 and lev2 is set to the length of the oligmer (i.e. analyze all levels)." optional="true"/>
@@ -114,7 +114,7 @@
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
             
-              <param name="cormin" type="float" 
+              <param name="cormin" type="float"
                   value="0.6"
                   
                   label="cormin" help="minimal absolute value for printing linear correlation coefficients between pairs of analyzed variables." optional="false"/>
@@ -148,7 +148,7 @@
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
-                    
+            
           </section>
     </inputs>
     <outputs>
@@ -160,22 +160,22 @@
     <tests>
         <test>
         </test>
-    </tests>    
+    </tests>
     <help>
 .. class:: infomark
-        
+
 Check the syntax for the tool parameters at the original library documentation: https://biobb_dna.readthedocs.io/en/latest
 
 -----
 
-.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png    
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
     :width: 150
 
 **https://mmb.irbbarcelona.org/biobb**
-        
+
 .. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
         :width: 150
-        
+
 **https://bioexcel.eu**
    </help>
 

@@ -1,8 +1,8 @@
-<tool id="biobb_analysis_cpptraj_rms_ext" name="CpptrajRms" version="4.0.1" >
+<tool id="biobb_analysis_cpptraj_rms_ext" name="CpptrajRms" version="4.0.2" >
     <description>: Wrapper of the Ambertools Cpptraj module for calculating the Root Mean Square deviation (RMSd) of a given cpptraj compatible trajectory.</description>
     <requirements>
         <requirement type="package"
-        version="4.0.1"
+        version="4.0.2"
         >biobb_analysis</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -16,11 +16,11 @@
         #if $config.sele == "option1":
             ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
-        
+
         cpptraj_rms
 
         #if $config.sele == "option1":
-            --config ${config.properties}.${config.properties.ext}
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
@@ -43,7 +43,7 @@
           --output_cpptraj_path $outname_output_cpptraj_path
         
           --output_traj_path $outname_output_traj_path
-        ;          
+        ;
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
@@ -63,19 +63,19 @@
     </command>
     <inputs>
         
-          <param name="input_top_path" type="data" format="top,pdb,prmtop,parmtop,zip"  optional="False" label="input TOP,PDB,PRMTOP,PARMTOP,ZIP file" help="Path to the input structure or topology file. Format: [input].[format]"/> 
+          <param name="input_top_path" type="data" format="top,pdb,prmtop,parmtop,zip"  optional="False" label="input TOP,PDB,PRMTOP,PARMTOP,ZIP file" help="Path to the input structure or topology file. Format: [input].[format]"/>
         
-          <param name="input_traj_path" type="data" format="mdcrd,crd,cdf,netcdf,nc,restart,ncrestart,restartnc,dcd,charmm,cor,pdb,mol2,trr,gro,binpos,xtc,cif,arc,sqm,sdf,conflib"  optional="False" label="input MDCRD,CRD,CDF,NETCDF,NC,RESTART,NCRESTART,RESTARTNC,DCD,CHARMM,COR,PDB,MOL2,TRR,GRO,BINPOS,XTC,CIF,ARC,SQM,SDF,CONFLIB file" help="Path to the input trajectory to be processed. Format: [input].[format]"/> 
+          <param name="input_traj_path" type="data" format="mdcrd,crd,cdf,netcdf,nc,restart,ncrestart,restartnc,dcd,charmm,cor,pdb,mol2,trr,gro,binpos,xtc,cif,arc,sqm,sdf,conflib"  optional="False" label="input MDCRD,CRD,CDF,NETCDF,NC,RESTART,NCRESTART,RESTARTNC,DCD,CHARMM,COR,PDB,MOL2,TRR,GRO,BINPOS,XTC,CIF,ARC,SQM,SDF,CONFLIB file" help="Path to the input trajectory to be processed. Format: [input].[format]"/>
         
-          <param name="input_exp_path" type="data" format="pdb"  optional="True" label="input PDB file" help="Path to the experimental reference file (required if reference = experimental). Format: [input].pdb"/> 
+          <param name="input_exp_path" type="data" format="pdb"  optional="True" label="input PDB file" help="Path to the experimental reference file (required if reference = experimental). Format: [input].pdb"/>
         
         
-          <param name="outname_output_cpptraj_path" type="text" value="mycpptraj_rms.dat" 
-              optional="False" label="output DAT,AGR,XMGR,GNU name" 
+          <param name="outname_output_cpptraj_path" type="text" value="mycpptraj_rms.dat"
+              optional="False" label="output DAT,AGR,XMGR,GNU name"
               help="Path to the output processed analysis Format: [output].[format] "/>
         
-          <param name="outname_output_traj_path" type="text" value="mycpptraj_rms.mdcrd" 
-              optional="True" label="output MDCRD,CRD,CDF,NETCDF,NC,RESTART,NCRESTART,RESTARTNC,DCD,CHARMM,COR,PDB,MOL2,TRR,GRO,BINPOS,XTC,CIF,ARC,SQM,SDF,CONFLIB name" 
+          <param name="outname_output_traj_path" type="text" value="mycpptraj_rms.mdcrd"
+              optional="True" label="output MDCRD,CRD,CDF,NETCDF,NC,RESTART,NCRESTART,RESTARTNC,DCD,CHARMM,COR,PDB,MOL2,TRR,GRO,BINPOS,XTC,CIF,ARC,SQM,SDF,CONFLIB name"
               help="Path to the output processed trajectory Format: [output].[format] "/>
         
         <conditional name="config">
@@ -95,72 +95,72 @@
           </conditional>
           <section name="properties" title="Properties Input">
             
-              <param name="start" type="integer" 
+              <param name="start" type="integer"
                   value="1"
                   min="1" max="100000"
                   label="start" help="Starting frame for slicing" optional="false"/>
             
-              <param name="end" type="integer" 
+              <param name="end" type="integer"
                   value="-1"
                   min="-1" max="100000"
                   label="end" help="Ending frame for slicing" optional="false"/>
             
-              <param name="steps" type="integer" 
+              <param name="steps" type="integer"
                   value="1"
                   min="1" max="100000"
                   label="steps" help="Step for slicing" optional="false"/>
             
               <param name="mask" type="select" label="mask" help="Mask definition. " multiple="false">
                   
-                    <option value="c-alpha" 
+                    <option value="c-alpha"
                       
                     >c-alpha
                        - All c-alpha atoms; protein only
                     </option>
                   
-                    <option value="backbone" 
+                    <option value="backbone"
                       
                     >backbone
                        - Backbone atoms
                     </option>
                   
-                    <option value="all-atoms" 
+                    <option value="all-atoms"
                       selected="true"
                     >all-atoms
                        - All system atoms
                     </option>
                   
-                    <option value="heavy-atoms" 
+                    <option value="heavy-atoms"
                       
                     >heavy-atoms
                        - System heavy atoms; not hydrogen
                     </option>
                   
-                    <option value="side-chain" 
+                    <option value="side-chain"
                       
                     >side-chain
                        - All not backbone atoms
                     </option>
                   
-                    <option value="solute" 
+                    <option value="solute"
                       
                     >solute
                        - All system atoms except solvent atoms
                     </option>
                   
-                    <option value="ions" 
+                    <option value="ions"
                       
                     >ions
                        - All ion molecules
                     </option>
                   
-                    <option value="solvent" 
+                    <option value="solvent"
                       
                     >solvent
                        - All solvent atoms
                     </option>
                   
-                    <option value="AnyAmberFromatMask" 
+                    <option value="AnyAmberFromatMask"
                       
                     >AnyAmberFromatMask
                        - Amber atom selection syntax like `@*`
@@ -170,19 +170,19 @@
             
               <param name="reference" type="select" label="reference" help="Reference definition. " multiple="false">
                   
-                    <option value="first" 
+                    <option value="first"
                       selected="true"
                     >first
                        - Use the first trajectory frame as reference
                     </option>
                   
-                    <option value="average" 
+                    <option value="average"
                       
                     >average
                        - Use the average of all trajectory frames as reference
                     </option>
                   
-                    <option value="experimental" 
+                    <option value="experimental"
                       
                     >experimental
                        - Use the experimental structure as reference
@@ -190,19 +190,19 @@
                   
                 </param>
             
-              <param name="nofit" type="boolean" 
+              <param name="nofit" type="boolean"
                   
-                  label="nofit" help="Do not perform best-fit RMSD" 
+                  label="nofit" help="Do not perform best-fit RMSD"
                 />
             
-              <param name="norotate" type="boolean" 
+              <param name="norotate" type="boolean"
                   
-                  label="norotate" help="Translate but do not rotate coordinates" 
+                  label="norotate" help="Translate but do not rotate coordinates"
                 />
             
-              <param name="nomod" type="boolean" 
+              <param name="nomod" type="boolean"
                   
-                  label="nomod" help="Do not modify coordinates" 
+                  label="nomod" help="Do not modify coordinates"
                 />
             
               <param name="binary_path" type="text" label="binary_path" help="Path to the cpptraj executable binary." optional="false"
@@ -213,25 +213,25 @@
             
               <param name="output_cpptraj_path_format" type="select" label="output_cpptraj_path_format" help="Format of the output file" multiple="false">
                   
-                    <option value="dat" 
+                    <option value="dat"
                       
                     >dat
                        
                     </option>
                   
-                    <option value="agr" 
+                    <option value="agr"
                       
                     >agr
                        
                     </option>
                   
-                    <option value="xmgr" 
+                    <option value="xmgr"
                       
                     >xmgr
                        
                     </option>
                   
-                    <option value="gnu" 
+                    <option value="gnu"
                       
                     >gnu
                        
@@ -241,140 +241,140 @@
             
               <param name="output_traj_path_format" type="select" label="output_traj_path_format" help="Format of the output file" multiple="false">
                   
-                    <option value="mdcrd" 
+                    <option value="mdcrd"
                       
                     >mdcrd
                        
                     </option>
                   
-                    <option value="crd" 
+                    <option value="crd"
                       
                     >crd
                        
                     </option>
                   
-                    <option value="cdf" 
+                    <option value="cdf"
                       
                     >cdf
                        
                     </option>
                   
-                    <option value="netcdf" 
+                    <option value="netcdf"
                       
                     >netcdf
                        
                     </option>
                   
-                    <option value="nc" 
+                    <option value="nc"
                       
                     >nc
                        
                     </option>
                   
-                    <option value="restart" 
+                    <option value="restart"
                       
                     >restart
                        
                     </option>
                   
-                    <option value="ncrestart" 
+                    <option value="ncrestart"
                       
                     >ncrestart
                        
                     </option>
                   
-                    <option value="restartnc" 
+                    <option value="restartnc"
                       
                     >restartnc
                        
                     </option>
                   
-                    <option value="dcd" 
+                    <option value="dcd"
                       
                     >dcd
                        
                     </option>
                   
-                    <option value="charmm" 
+                    <option value="charmm"
                       
                     >charmm
                        
                     </option>
                   
-                    <option value="cor" 
+                    <option value="cor"
                       
                     >cor
                        
                     </option>
                   
-                    <option value="pdb" 
+                    <option value="pdb"
                       
                     >pdb
                        
                     </option>
                   
-                    <option value="mol2" 
+                    <option value="mol2"
                       
                     >mol2
                        
                     </option>
                   
-                    <option value="trr" 
+                    <option value="trr"
                       
                     >trr
                        
                     </option>
                   
-                    <option value="gro" 
+                    <option value="gro"
                       
                     >gro
                        
                     </option>
                   
-                    <option value="binpos" 
+                    <option value="binpos"
                       
                     >binpos
                        
                     </option>
                   
-                    <option value="xtc" 
+                    <option value="xtc"
                       
                     >xtc
                        
                     </option>
                   
-                    <option value="cif" 
+                    <option value="cif"
                       
                     >cif
                        
                     </option>
                   
-                    <option value="arc" 
+                    <option value="arc"
                       
                     >arc
                        
                     </option>
                   
-                    <option value="sqm" 
+                    <option value="sqm"
                       
                     >sqm
                        
                     </option>
                   
-                    <option value="sdf" 
+                    <option value="sdf"
                       
                     >sdf
                        
                     </option>
                   
-                    <option value="conflib" 
+                    <option value="conflib"
                       
                     >conflib
                        
                     </option>
                   
                 </param>
-                    
+            
           </section>
     </inputs>
     <outputs>
@@ -447,22 +447,22 @@
     <tests>
         <test>
         </test>
-    </tests>    
+    </tests>
     <help>
 .. class:: infomark
-        
+
 Check the syntax for the tool parameters at the original library documentation: https://biobb_analysis.readthedocs.io/en/latest
 
 -----
 
-.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png    
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
     :width: 150
 
 **https://mmb.irbbarcelona.org/biobb**
-        
+
 .. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
         :width: 150
-        
+
 **https://bioexcel.eu**
    </help>
 

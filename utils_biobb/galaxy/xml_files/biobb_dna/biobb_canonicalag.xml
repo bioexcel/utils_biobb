@@ -18,11 +18,11 @@
         #if $config.sele == "option1":
             ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
-        
+
         canonicalag
 
         #if $config.sele == "option1":
-            --config ${config.properties}.${config.properties.ext}
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
@@ -49,7 +49,7 @@
           --output_csv_path $outname_output_csv_path
         
           --output_jpg_path $outname_output_jpg_path
-        ;          
+        ;
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
@@ -71,21 +71,21 @@
     </command>
     <inputs>
         
-          <param name="input_alphaC_path" type="data" format="ser"  optional="False" label="input SER file" help="Path to .ser file for helical parameter &#39;alphaC&#39;. File type: input. Format: [input].ser"/> 
+          <param name="input_alphaC_path" type="data" format="ser"  optional="False" label="input SER file" help="Path to .ser file for helical parameter &#39;alphaC&#39;. File type: input. Format: [input].ser"/>
         
-          <param name="input_alphaW_path" type="data" format="ser"  optional="False" label="input SER file" help="Path to .ser file for helical parameter &#39;alphaW&#39;. File type: input. Format: [input].ser"/> 
+          <param name="input_alphaW_path" type="data" format="ser"  optional="False" label="input SER file" help="Path to .ser file for helical parameter &#39;alphaW&#39;. File type: input. Format: [input].ser"/>
         
-          <param name="input_gammaC_path" type="data" format="ser"  optional="False" label="input SER file" help="Path to .ser file for helical parameter &#39;gammaC&#39;. File type: input. Format: [input].ser"/> 
+          <param name="input_gammaC_path" type="data" format="ser"  optional="False" label="input SER file" help="Path to .ser file for helical parameter &#39;gammaC&#39;. File type: input. Format: [input].ser"/>
         
-          <param name="input_gammaW_path" type="data" format="ser"  optional="False" label="input SER file" help="Path to .ser file for helical parameter &#39;gammaW&#39;. File type: input. Format: [input].ser"/> 
+          <param name="input_gammaW_path" type="data" format="ser"  optional="False" label="input SER file" help="Path to .ser file for helical parameter &#39;gammaW&#39;. File type: input. Format: [input].ser"/>
         
         
-          <param name="outname_output_csv_path" type="text" value="mycanonicalag.csv" 
-              optional="False" label="output CSV name" 
+          <param name="outname_output_csv_path" type="text" value="mycanonicalag.csv"
+              optional="False" label="output CSV name"
               help="Path to .csv file where output is saved. File type: output Format: [output].csv "/>
         
-          <param name="outname_output_jpg_path" type="text" value="mycanonicalag.jpg" 
-              optional="False" label="output JPG name" 
+          <param name="outname_output_jpg_path" type="text" value="mycanonicalag.jpg"
+              optional="False" label="output JPG name"
               help="Path to .jpg file where output is saved. File type: output Format: [output].jpg "/>
         
         <conditional name="config">
@@ -114,7 +114,7 @@
               <param name="seqpos" type="text" label="seqpos" help="list of sequence positions (columns indices starting by 0) to analyze.  If not specified it will analyse the complete sequence. (Json)" value="[]" >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
-                    
+            
           </section>
     </inputs>
     <outputs>
@@ -129,22 +129,22 @@
     <tests>
         <test>
         </test>
-    </tests>    
+    </tests>
     <help>
 .. class:: infomark
-        
+
 Check the syntax for the tool parameters at the original library documentation: https://biobb_dna.readthedocs.io/en/latest
 
 -----
 
-.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png    
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
     :width: 150
 
 **https://mmb.irbbarcelona.org/biobb**
-        
+
 .. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
         :width: 150
-        
+
 **https://bioexcel.eu**
    </help>
 

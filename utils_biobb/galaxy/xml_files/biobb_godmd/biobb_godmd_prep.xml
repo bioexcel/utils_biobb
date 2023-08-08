@@ -1,8 +1,8 @@
-<tool id="biobb_godmd_godmd_prep_ext" name="GodmdPrep" version="4.0.0" >
+<tool id="biobb_godmd_godmd_prep_ext" name="GodmdPrep" version="4.0.2" >
     <description>: Helper bb to prepare inputs for the GOdMD tool module.</description>
     <requirements>
         <requirement type="package"
-        version="4.0.0"
+        version="4.0.2"
         >biobb_godmd</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -14,15 +14,15 @@
         #if $config.sele == "option1":
             ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
-        
+
         godmd_prep
 
         #if $config.sele == "option1":
-            --config ${config.properties}.${config.properties.ext}
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__gapopen__dq__:${properties.gapopen},__dq__gapextend__dq__:${properties.gapextend},__dq__datafile__dq__:__dq__${properties.datafile}__dq____cc__'
+            --config '__oc____dq__gapopen__dq__:${properties.gapopen},__dq__gapextend__dq__:${properties.gapextend},__dq__datafile__dq__:__dq__${properties.datafile}__dq__,__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
           #end if
         
           #if str($input_pdb_orig_path) != 'None':
@@ -37,7 +37,7 @@
           --output_aln_orig_path $outname_output_aln_orig_path
         
           --output_aln_target_path $outname_output_aln_target_path
-        ;          
+        ;
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
@@ -55,17 +55,17 @@
     </command>
     <inputs>
         
-          <param name="input_pdb_orig_path" type="data" format="pdb"  optional="False" label="input PDB file" help="Input PDB file to be used as origin in the conformational transition. Format: [input].pdb"/> 
+          <param name="input_pdb_orig_path" type="data" format="pdb"  optional="False" label="input PDB file" help="Input PDB file to be used as origin in the conformational transition. Format: [input].pdb"/>
         
-          <param name="input_pdb_target_path" type="data" format="pdb"  optional="False" label="input PDB file" help="Input PDB file to be used as target in the conformational transition. Format: [input].pdb"/> 
+          <param name="input_pdb_target_path" type="data" format="pdb"  optional="False" label="input PDB file" help="Input PDB file to be used as target in the conformational transition. Format: [input].pdb"/>
         
         
-          <param name="outname_output_aln_orig_path" type="text" value="mygodmd_prep.aln" 
-              optional="False" label="output ALN,TXT name" 
+          <param name="outname_output_aln_orig_path" type="text" value="mygodmd_prep.aln"
+              optional="False" label="output ALN,TXT name"
               help="Output GOdMD alignment file corresponding to the origin structure of the conformational transition Format: [output].[format] "/>
         
-          <param name="outname_output_aln_target_path" type="text" value="mygodmd_prep.aln" 
-              optional="False" label="output ALN,TXT name" 
+          <param name="outname_output_aln_target_path" type="text" value="mygodmd_prep.aln"
+              optional="False" label="output ALN,TXT name"
               help="Output GOdMD alignment file corresponding to the target structure of the conformational transition Format: [output].[format] "/>
         
         <conditional name="config">
@@ -85,12 +85,12 @@
           </conditional>
           <section name="properties" title="Properties Input">
             
-              <param name="gapopen" type="float" 
+              <param name="gapopen" type="float"
                   value="12.0"
                   
                   label="gapopen" help="Standard gap penalty: score taken away when a gap is created." optional="false"/>
             
-              <param name="gapextend" type="float" 
+              <param name="gapextend" type="float"
                   value="2.0"
                   
                   label="gapextend" help="Penalty added to the standard gap penalty for each base or residue in the gap." optional="false"/>
@@ -101,15 +101,21 @@
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
             
+              <param name="binary_path" type="text" label="binary_path" help="Binary path." optional="false"
+                  value="water"
+                >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
               <param name="output_aln_orig_path_format" type="select" label="output_aln_orig_path_format" help="Format of the output file" multiple="false">
                   
-                    <option value="aln" 
+                    <option value="aln"
                       
                     >aln
                        
                     </option>
                   
-                    <option value="txt" 
+                    <option value="txt"
                       
                     >txt
                        
@@ -119,20 +125,20 @@
             
               <param name="output_aln_target_path_format" type="select" label="output_aln_target_path_format" help="Format of the output file" multiple="false">
                   
-                    <option value="aln" 
+                    <option value="aln"
                       
                     >aln
                        
                     </option>
                   
-                    <option value="txt" 
+                    <option value="txt"
                       
                     >txt
                        
                     </option>
                   
                 </param>
-                    
+            
           </section>
     </inputs>
     <outputs>
@@ -161,22 +167,22 @@
     <tests>
         <test>
         </test>
-    </tests>    
+    </tests>
     <help>
 .. class:: infomark
-        
+
 Check the syntax for the tool parameters at the original library documentation: https://biobb_godmd.readthedocs.io/en/latest
 
 -----
 
-.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png    
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
     :width: 150
 
 **https://mmb.irbbarcelona.org/biobb**
-        
+
 .. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
         :width: 150
-        
+
 **https://bioexcel.eu**
    </help>
 

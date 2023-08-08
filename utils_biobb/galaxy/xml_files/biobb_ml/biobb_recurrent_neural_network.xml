@@ -12,11 +12,11 @@
         #if $config.sele == "option1":
             ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
-        
+
         recurrent_neural_network
 
         #if $config.sele == "option1":
-            --config ${config.properties}.${config.properties.ext}
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
@@ -33,7 +33,7 @@
           --output_test_table_path $outname_output_test_table_path
         
           --output_plot_path $outname_output_plot_path
-        ;          
+        ;
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
@@ -51,19 +51,19 @@
     </command>
     <inputs>
         
-          <param name="input_dataset_path" type="data" format="csv"  optional="False" label="input CSV file" help="Path to the input dataset. Format: [input].csv"/> 
+          <param name="input_dataset_path" type="data" format="csv"  optional="False" label="input CSV file" help="Path to the input dataset. Format: [input].csv"/>
         
         
-          <param name="outname_output_model_path" type="text" value="myrecurrent_neural_network.h5" 
-              optional="False" label="output H5 name" 
+          <param name="outname_output_model_path" type="text" value="myrecurrent_neural_network.h5"
+              optional="False" label="output H5 name"
               help="Path to the output model file Format: [output].h5 "/>
         
-          <param name="outname_output_test_table_path" type="text" value="myrecurrent_neural_network.csv" 
-              optional="True" label="output CSV name" 
+          <param name="outname_output_test_table_path" type="text" value="myrecurrent_neural_network.csv"
+              optional="True" label="output CSV name"
               help="Path to the test table file Format: [output].csv "/>
         
-          <param name="outname_output_plot_path" type="text" value="myrecurrent_neural_network.png" 
-              optional="True" label="output PNG name" 
+          <param name="outname_output_plot_path" type="text" value="myrecurrent_neural_network.png"
+              optional="True" label="output PNG name"
               help="Loss, accuracy and MSE plots Format: [output].png "/>
         
         <conditional name="config">
@@ -87,17 +87,17 @@
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
             
-              <param name="validation_size" type="float" 
+              <param name="validation_size" type="float"
                   value="0.2"
                   
                   label="validation_size" help="Represents the proportion of the dataset to include in the validation split. It should be between 0.0 and 1.0." optional="false"/>
             
-              <param name="window_size" type="integer" 
+              <param name="window_size" type="integer"
                   value="5"
                   
                   label="window_size" help="Number of steps for each window of training model." optional="false"/>
             
-              <param name="test_size" type="integer" 
+              <param name="test_size" type="integer"
                   value="5"
                   
                   label="test_size" help="Represents the number of samples of the dataset to include in the test split." optional="false"/>
@@ -108,49 +108,49 @@
             
               <param name="optimizer" type="select" label="optimizer" help="Name of optimizer instance. " multiple="false">
                   
-                    <option value="Adadelta" 
+                    <option value="Adadelta"
                       
                     >Adadelta
                        - Adadelta optimization is a stochastic gradient descent method that is based on adaptive learning rate per dimension to address two drawbacks: the continual decay of learning rates throughout training and the need for a manually selected global learning rate
                     </option>
                   
-                    <option value="Adagrad" 
+                    <option value="Adagrad"
                       
                     >Adagrad
                        - Adagrad is an optimizer with parameter-specific learning rates; which are adapted relative to how frequently a parameter gets updated during training. The more updates a parameter receives; the smaller the updates
                     </option>
                   
-                    <option value="Adam" 
+                    <option value="Adam"
                       selected="true"
                     >Adam
                        - Adam optimization is a stochastic gradient descent method that is based on adaptive estimation of first-order and second-order moments
                     </option>
                   
-                    <option value="Adamax" 
+                    <option value="Adamax"
                       
                     >Adamax
                        - It is a variant of Adam based on the infinity norm. Default parameters follow those provided in the paper. Adamax is sometimes superior to adam; specially in models with embeddings
                     </option>
                   
-                    <option value="Ftrl" 
+                    <option value="Ftrl"
                       
                     >Ftrl
                        - Optimizer that implements the FTRL algorithm
                     </option>
                   
-                    <option value="Nadam" 
+                    <option value="Nadam"
                       
                     >Nadam
                        - Much like Adam is essentially RMSprop with momentum; Nadam is Adam with Nesterov momentum
                     </option>
                   
-                    <option value="RMSprop" 
+                    <option value="RMSprop"
                       
                     >RMSprop
                        - Optimizer that implements the RMSprop algorithm
                     </option>
                   
-                    <option value="SGD" 
+                    <option value="SGD"
                       
                     >SGD
                        - Gradient descent -with momentum- optimizer
@@ -158,26 +158,26 @@
                   
                 </param>
             
-              <param name="learning_rate" type="float" 
+              <param name="learning_rate" type="float"
                   value="0.02"
                   
                   label="learning_rate" help="Determines the step size at each iteration while moving toward a minimum of a loss function" optional="false"/>
             
-              <param name="batch_size" type="integer" 
+              <param name="batch_size" type="integer"
                   value="100"
                   
                   label="batch_size" help="Number of samples per gradient update." optional="false"/>
             
-              <param name="max_epochs" type="integer" 
+              <param name="max_epochs" type="integer"
                   value="100"
                   
                   label="max_epochs" help="Number of epochs to train the model. As the early stopping is enabled, this is a maximum." optional="false"/>
             
-              <param name="normalize_cm" type="boolean" 
+              <param name="normalize_cm" type="boolean"
                   
-                  label="normalize_cm" help="Whether or not to normalize the confusion matrix." 
+                  label="normalize_cm" help="Whether or not to normalize the confusion matrix."
                 />
-                    
+            
           </section>
     </inputs>
     <outputs>
@@ -195,22 +195,22 @@
     <tests>
         <test>
         </test>
-    </tests>    
+    </tests>
     <help>
 .. class:: infomark
-        
+
 Check the syntax for the tool parameters at the original library documentation: https://biobb_ml.readthedocs.io/en/latest
 
 -----
 
-.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png    
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
     :width: 150
 
 **https://mmb.irbbarcelona.org/biobb**
-        
+
 .. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
         :width: 150
-        
+
 **https://bioexcel.eu**
    </help>
 

@@ -20,11 +20,11 @@
         #if $config.sele == "option1":
             ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
-        
+
         leap_solvate
 
         #if $config.sele == "option1":
-            --config ${config.properties}.${config.properties.ext}
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
@@ -57,7 +57,7 @@
           --output_top_path $outname_output_top_path
         
           --output_crd_path $outname_output_crd_path
-        ;          
+        ;
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
@@ -83,27 +83,27 @@
     </command>
     <inputs>
         
-          <param name="input_pdb_path" type="data" format="pdb"  optional="False" label="input PDB file" help="Input 3D structure PDB file. Format: [input].pdb"/> 
+          <param name="input_pdb_path" type="data" format="pdb"  optional="False" label="input PDB file" help="Input 3D structure PDB file. Format: [input].pdb"/>
         
-          <param name="input_lib_path" type="data" format="lib,zip"  optional="True" label="input LIB,ZIP file" help="Input ligand library parameters file. Format: [input].[format]"/> 
+          <param name="input_lib_path" type="data" format="lib,zip"  optional="True" label="input LIB,ZIP file" help="Input ligand library parameters file. Format: [input].[format]"/>
         
-          <param name="input_frcmod_path" type="data" format="frcmod,zip"  optional="True" label="input FRCMOD,ZIP file" help="Input ligand frcmod parameters file. Format: [input].[format]"/> 
+          <param name="input_frcmod_path" type="data" format="frcmod,zip"  optional="True" label="input FRCMOD,ZIP file" help="Input ligand frcmod parameters file. Format: [input].[format]"/>
         
-          <param name="input_params_path" type="data" format="in,leapin,txt,zip"  optional="True" label="input IN,LEAPIN,TXT,ZIP file" help="Additional leap parameter files to load with loadAmberParams Leap command. Format: [input].[format]"/> 
+          <param name="input_params_path" type="data" format="in,leapin,txt,zip"  optional="True" label="input IN,LEAPIN,TXT,ZIP file" help="Additional leap parameter files to load with loadAmberParams Leap command. Format: [input].[format]"/>
         
-          <param name="input_source_path" type="data" format="in,leapin,txt,zip"  optional="True" label="input IN,LEAPIN,TXT,ZIP file" help="Additional leap command files to load with source Leap command. Format: [input].[format]"/> 
+          <param name="input_source_path" type="data" format="in,leapin,txt,zip"  optional="True" label="input IN,LEAPIN,TXT,ZIP file" help="Additional leap command files to load with source Leap command. Format: [input].[format]"/>
         
         
-          <param name="outname_output_pdb_path" type="text" value="myleap_solvate.pdb" 
-              optional="False" label="output PDB name" 
+          <param name="outname_output_pdb_path" type="text" value="myleap_solvate.pdb"
+              optional="False" label="output PDB name"
               help="Output 3D structure PDB file matching the topology file Format: [output].pdb "/>
         
-          <param name="outname_output_top_path" type="text" value="myleap_solvate.top" 
-              optional="False" label="output TOP,PARMTOP,PRMTOP name" 
+          <param name="outname_output_top_path" type="text" value="myleap_solvate.top"
+              optional="False" label="output TOP,PARMTOP,PRMTOP name"
               help="Output topology file (AMBER ParmTop) Format: [output].[format] "/>
         
-          <param name="outname_output_crd_path" type="text" value="myleap_solvate.crd" 
-              optional="False" label="output CRD,MDCRD,INPCRD name" 
+          <param name="outname_output_crd_path" type="text" value="myleap_solvate.crd"
+              optional="False" label="output CRD,MDCRD,INPCRD name"
               help="Output coordinates file (AMBER crd) Format: [output].[format] "/>
         
         <conditional name="config">
@@ -125,37 +125,37 @@
             
               <param name="forcefield" type="select" label="forcefield" help="Forcefield to be used for the structure generation. " multiple="true">
                   
-                    <option value="protein.ff14SB" 
+                    <option value="protein.ff14SB"
                       
                     >protein.ff14SB
                        
                     </option>
                   
-                    <option value="protein.ff19SB" 
+                    <option value="protein.ff19SB"
                       
                     >protein.ff19SB
                        
                     </option>
                   
-                    <option value="DNA.bsc1" 
+                    <option value="DNA.bsc1"
                       
                     >DNA.bsc1
                        
                     </option>
                   
-                    <option value="DNA.OL15" 
+                    <option value="DNA.OL15"
                       
                     >DNA.OL15
                        
                     </option>
                   
-                    <option value="RNA.OL3" 
+                    <option value="RNA.OL3"
                       
                     >RNA.OL3
                        
                     </option>
                   
-                    <option value="gaff" 
+                    <option value="gaff"
                       
                     >gaff
                        
@@ -165,67 +165,67 @@
             
               <param name="water_type" type="select" label="water_type" help="Water molecule parameters to be used for the topology. " multiple="false">
                   
-                    <option value="POL3BOX" 
+                    <option value="POL3BOX"
                       
                     >POL3BOX
                        
                     </option>
                   
-                    <option value="QSPCFWBOX" 
+                    <option value="QSPCFWBOX"
                       
                     >QSPCFWBOX
                        
                     </option>
                   
-                    <option value="SPCBOX" 
+                    <option value="SPCBOX"
                       
                     >SPCBOX
                        
                     </option>
                   
-                    <option value="SPCFWBOX" 
+                    <option value="SPCFWBOX"
                       
                     >SPCFWBOX
                        
                     </option>
                   
-                    <option value="TIP3PBOX" 
+                    <option value="TIP3PBOX"
                       selected="true"
                     >TIP3PBOX
                        
                     </option>
                   
-                    <option value="TIP3PFBOX" 
+                    <option value="TIP3PFBOX"
                       
                     >TIP3PFBOX
                        
                     </option>
                   
-                    <option value="TIP4PBOX" 
+                    <option value="TIP4PBOX"
                       
                     >TIP4PBOX
                        
                     </option>
                   
-                    <option value="TIP4PEWBOX" 
+                    <option value="TIP4PEWBOX"
                       
                     >TIP4PEWBOX
                        
                     </option>
                   
-                    <option value="OPCBOX" 
+                    <option value="OPCBOX"
                       
                     >OPCBOX
                        
                     </option>
                   
-                    <option value="OPC3BOX" 
+                    <option value="OPC3BOX"
                       
                     >OPC3BOX
                        
                     </option>
                   
-                    <option value="TIP5PBOX" 
+                    <option value="TIP5PBOX"
                       
                     >TIP5PBOX
                        
@@ -235,13 +235,13 @@
             
               <param name="box_type" type="select" label="box_type" help="Type for the MD system box. " multiple="false">
                   
-                    <option value="cubic" 
+                    <option value="cubic"
                       
                     >cubic
                        
                     </option>
                   
-                    <option value="truncated_octahedron" 
+                    <option value="truncated_octahedron"
                       selected="true"
                     >truncated_octahedron
                        
@@ -251,37 +251,37 @@
             
               <param name="ions_type" type="select" label="ions_type" help="Ions type. " multiple="false">
                   
-                    <option value="ionsjc_tip3p" 
+                    <option value="ionsjc_tip3p"
                       selected="true"
                     >ionsjc_tip3p
                        
                     </option>
                   
-                    <option value="ionsjc_spce" 
+                    <option value="ionsjc_spce"
                       
                     >ionsjc_spce
                        
                     </option>
                   
-                    <option value="ionsff99_tip3p" 
+                    <option value="ionsff99_tip3p"
                       
                     >ionsff99_tip3p
                        
                     </option>
                   
-                    <option value="ions_charmm22" 
+                    <option value="ions_charmm22"
                       
                     >ions_charmm22
                        
                     </option>
                   
-                    <option value="ionsjc_tip4pew" 
+                    <option value="ionsjc_tip4pew"
                       
                     >ionsjc_tip4pew
                        
                     </option>
                   
-                    <option value="None" 
+                    <option value="None"
                       
                     >None
                        
@@ -289,35 +289,35 @@
                   
                 </param>
             
-              <param name="neutralise" type="boolean" 
+              <param name="neutralise" type="boolean"
                   
-                  label="neutralise" help="Energetically neutralise the system adding the necessary counterions." 
+                  label="neutralise" help="Energetically neutralise the system adding the necessary counterions."
                 />
             
-              <param name="iso" type="boolean" 
+              <param name="iso" type="boolean"
                   
-                  label="iso" help="Make the box isometric." 
+                  label="iso" help="Make the box isometric."
                 />
             
-              <param name="positive_ions_number" type="integer" 
+              <param name="positive_ions_number" type="integer"
                   value="0"
                   
                   label="positive_ions_number" help="Number of additional positive ions to include in the system box." optional="true"/>
             
-              <param name="negative_ions_number" type="integer" 
+              <param name="negative_ions_number" type="integer"
                   value="0"
                   
                   label="negative_ions_number" help="Number of additional negative ions to include in the system box." optional="true"/>
             
               <param name="positive_ions_type" type="select" label="positive_ions_type" help="Type of additional positive ions to include in the system box. " multiple="false">
                   
-                    <option value="Na+" 
+                    <option value="Na+"
                       selected="true"
                     >Na+
                        
                     </option>
                   
-                    <option value="K+" 
+                    <option value="K+"
                       
                     >K+
                        
@@ -327,7 +327,7 @@
             
               <param name="negative_ions_type" type="select" label="negative_ions_type" help="Type of additional negative ions to include in the system box. " multiple="false">
                   
-                    <option value="Cl-" 
+                    <option value="Cl-"
                       selected="true"
                     >Cl-
                        
@@ -335,12 +335,12 @@
                   
                 </param>
             
-              <param name="distance_to_molecule" type="float" 
+              <param name="distance_to_molecule" type="float"
                   value="8.0"
                   
                   label="distance_to_molecule" help="Size for the MD system box -in Angstroms-, defined such as the minimum distance between any atom originally present in solute and the edge of the periodic box is given by this distance parameter." optional="false"/>
             
-              <param name="closeness" type="float" 
+              <param name="closeness" type="float"
                   value="1.0"
                   
                   label="closeness" help="How close, in Å, solvent ATOMs may come to solute ATOMs." optional="false"/>
@@ -353,19 +353,19 @@
             
               <param name="output_top_path_format" type="select" label="output_top_path_format" help="Format of the output file" multiple="false">
                   
-                    <option value="top" 
+                    <option value="top"
                       
                     >top
                        
                     </option>
                   
-                    <option value="parmtop" 
+                    <option value="parmtop"
                       
                     >parmtop
                        
                     </option>
                   
-                    <option value="prmtop" 
+                    <option value="prmtop"
                       
                     >prmtop
                        
@@ -375,26 +375,26 @@
             
               <param name="output_crd_path_format" type="select" label="output_crd_path_format" help="Format of the output file" multiple="false">
                   
-                    <option value="crd" 
+                    <option value="crd"
                       
                     >crd
                        
                     </option>
                   
-                    <option value="mdcrd" 
+                    <option value="mdcrd"
                       
                     >mdcrd
                        
                     </option>
                   
-                    <option value="inpcrd" 
+                    <option value="inpcrd"
                       
                     >inpcrd
                        
                     </option>
                   
                 </param>
-                    
+            
           </section>
     </inputs>
     <outputs>
@@ -430,22 +430,22 @@
     <tests>
         <test>
         </test>
-    </tests>    
+    </tests>
     <help>
 .. class:: infomark
-        
+
 Check the syntax for the tool parameters at the original library documentation: https://biobb_amber.readthedocs.io/en/latest
 
 -----
 
-.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png    
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
     :width: 150
 
 **https://mmb.irbbarcelona.org/biobb**
-        
+
 .. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
         :width: 150
-        
+
 **https://bioexcel.eu**
    </help>
 

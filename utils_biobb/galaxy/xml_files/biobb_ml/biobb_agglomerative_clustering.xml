@@ -12,11 +12,11 @@
         #if $config.sele == "option1":
             ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
-        
+
         agglomerative_clustering
 
         #if $config.sele == "option1":
-            --config ${config.properties}.${config.properties.ext}
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
@@ -31,7 +31,7 @@
           --output_results_path $outname_output_results_path
         
           --output_plot_path $outname_output_plot_path
-        ;          
+        ;
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
@@ -47,15 +47,15 @@
     </command>
     <inputs>
         
-          <param name="input_dataset_path" type="data" format="csv"  optional="False" label="input CSV file" help="Path to the input dataset. Format: [input].csv"/> 
+          <param name="input_dataset_path" type="data" format="csv"  optional="False" label="input CSV file" help="Path to the input dataset. Format: [input].csv"/>
         
         
-          <param name="outname_output_results_path" type="text" value="myagglomerative_clustering.csv" 
-              optional="False" label="output CSV name" 
+          <param name="outname_output_results_path" type="text" value="myagglomerative_clustering.csv"
+              optional="False" label="output CSV name"
               help="Path to the clustered dataset Format: [output].csv "/>
         
-          <param name="outname_output_plot_path" type="text" value="myagglomerative_clustering.png" 
-              optional="True" label="output PNG name" 
+          <param name="outname_output_plot_path" type="text" value="myagglomerative_clustering.png"
+              optional="True" label="output PNG name"
               help="Path to the clustering plot Format: [output].png "/>
         
         <conditional name="config">
@@ -79,44 +79,44 @@
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
             
-              <param name="clusters" type="integer" 
+              <param name="clusters" type="integer"
                   value="3"
                   min="1" max="100"
                   label="clusters" help="The number of clusters to form as well as the number of centroids to generate." optional="false"/>
             
               <param name="affinity" type="select" label="affinity" help="Metric used to compute the linkage. If linkage is &#34;ward&#34;, only &#34;euclidean&#34; is accepted. " multiple="false">
                   
-                    <option value="euclidean" 
+                    <option value="euclidean"
                       selected="true"
                     >euclidean
                        - Computes the Euclidean distance between two 1-D arrays
                     </option>
                   
-                    <option value="l1" 
+                    <option value="l1"
                       
                     >l1
                        
                     </option>
                   
-                    <option value="l2" 
+                    <option value="l2"
                       
                     >l2
                        
                     </option>
                   
-                    <option value="manhattan" 
+                    <option value="manhattan"
                       
                     >manhattan
                        - Compute the Manhattan distance
                     </option>
                   
-                    <option value="cosine" 
+                    <option value="cosine"
                       
                     >cosine
                        - Compute the Cosine distance between 1-D arrays
                     </option>
                   
-                    <option value="precomputed" 
+                    <option value="precomputed"
                       
                     >precomputed
                        - means that the flatten array containing the upper triangular of the distance matrix of the original data is used
@@ -126,25 +126,25 @@
             
               <param name="linkage" type="select" label="linkage" help="The linkage criterion determines which distance to use between sets of observation. The algorithm will merge the pairs of cluster that minimize this criterion. " multiple="false">
                   
-                    <option value="ward" 
+                    <option value="ward"
                       selected="true"
                     >ward
                        - minimizes the variance of the clusters being merged
                     </option>
                   
-                    <option value="complete" 
+                    <option value="complete"
                       
                     >complete
                        - uses the maximum distances between all observations of the two sets
                     </option>
                   
-                    <option value="average" 
+                    <option value="average"
                       
                     >average
                        - uses the average of the distances of each observation of the two sets
                     </option>
                   
-                    <option value="single" 
+                    <option value="single"
                       
                     >single
                        - uses the minimum of the distances between all observations of the two sets
@@ -156,11 +156,11 @@
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
             
-              <param name="scale" type="boolean" 
+              <param name="scale" type="boolean"
                   
-                  label="scale" help="Whether or not to scale the input dataset." 
+                  label="scale" help="Whether or not to scale the input dataset."
                 />
-                    
+            
           </section>
     </inputs>
     <outputs>
@@ -175,22 +175,22 @@
     <tests>
         <test>
         </test>
-    </tests>    
+    </tests>
     <help>
 .. class:: infomark
-        
+
 Check the syntax for the tool parameters at the original library documentation: https://biobb_ml.readthedocs.io/en/latest
 
 -----
 
-.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png    
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
     :width: 150
 
 **https://mmb.irbbarcelona.org/biobb**
-        
+
 .. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
         :width: 150
-        
+
 **https://bioexcel.eu**
    </help>
 

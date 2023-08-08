@@ -12,11 +12,11 @@
         #if $config.sele == "option1":
             ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
-        
+
         extract_model_pdbqt
 
         #if $config.sele == "option1":
-            --config ${config.properties}.${config.properties.ext}
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
@@ -29,7 +29,7 @@
         
         
           --output_pdbqt_path $outname_output_pdbqt_path
-        ;          
+        ;
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
@@ -43,11 +43,11 @@
     </command>
     <inputs>
         
-          <param name="input_pdbqt_path" type="data" format="pdbqt"  optional="False" label="input PDBQT file" help="Input PDBQT file. Format: [input].pdbqt"/> 
+          <param name="input_pdbqt_path" type="data" format="pdbqt"  optional="False" label="input PDBQT file" help="Input PDBQT file. Format: [input].pdbqt"/>
         
         
-          <param name="outname_output_pdbqt_path" type="text" value="myextract_model_pdbqt.pdbqt" 
-              optional="False" label="output PDBQT name" 
+          <param name="outname_output_pdbqt_path" type="text" value="myextract_model_pdbqt.pdbqt"
+              optional="False" label="output PDBQT name"
               help="Output PDBQT file Format: [output].pdbqt "/>
         
         <conditional name="config">
@@ -67,11 +67,11 @@
           </conditional>
           <section name="properties" title="Properties Input">
             
-              <param name="model" type="integer" 
+              <param name="model" type="integer"
                   value="1"
                   
                   label="model" help="Model number to extract from input_pdbqt_path." optional="false"/>
-                    
+            
           </section>
     </inputs>
     <outputs>
@@ -83,22 +83,22 @@
     <tests>
         <test>
         </test>
-    </tests>    
+    </tests>
     <help>
 .. class:: infomark
-        
+
 Check the syntax for the tool parameters at the original library documentation: https://biobb_vs.readthedocs.io/en/latest
 
 -----
 
-.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png    
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
     :width: 150
 
 **https://mmb.irbbarcelona.org/biobb**
-        
+
 .. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
         :width: 150
-        
+
 **https://bioexcel.eu**
    </help>
 

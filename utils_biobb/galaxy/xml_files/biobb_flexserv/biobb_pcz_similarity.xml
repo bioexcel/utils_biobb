@@ -1,8 +1,8 @@
-<tool id="biobb_flexserv_pcz_similarity_ext" name="PczSimilarity" version="4.0.2" >
+<tool id="biobb_flexserv_pcz_similarity_ext" name="PczSimilarity" version="4.0.3" >
     <description>: Compute PCA similarity between two given compressed PCZ files.</description>
     <requirements>
         <requirement type="package"
-        version="4.0.2"
+        version="4.0.3"
         >biobb_flexserv</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -14,15 +14,15 @@
         #if $config.sele == "option1":
             ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
-        
+
         pcz_similarity
 
         #if $config.sele == "option1":
-            --config ${config.properties}.${config.properties.ext}
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
+            --config '__oc____dq__amplifying_factor__dq__:${properties.amplifying_factor},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
           #end if
         
           #if str($input_pcz_path1) != 'None':
@@ -35,7 +35,7 @@
         
         
           --output_json_path $outname_output_json_path
-        ;          
+        ;
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
@@ -51,13 +51,13 @@
     </command>
     <inputs>
         
-          <param name="input_pcz_path1" type="data" format="pcz"  optional="False" label="input PCZ file" help="Input compressed trajectory file 1. Format: [input].pcz"/> 
+          <param name="input_pcz_path1" type="data" format="pcz"  optional="False" label="input PCZ file" help="Input compressed trajectory file 1. Format: [input].pcz"/>
         
-          <param name="input_pcz_path2" type="data" format="pcz"  optional="False" label="input PCZ file" help="Input compressed trajectory file 2. Format: [input].pcz"/> 
+          <param name="input_pcz_path2" type="data" format="pcz"  optional="False" label="input PCZ file" help="Input compressed trajectory file 2. Format: [input].pcz"/>
         
         
-          <param name="outname_output_json_path" type="text" value="mypcz_similarity.json" 
-              optional="False" label="output JSON name" 
+          <param name="outname_output_json_path" type="text" value="mypcz_similarity.json"
+              optional="False" label="output JSON name"
               help="Output json file with PCA Similarity results Format: [output].json "/>
         
         <conditional name="config">
@@ -77,12 +77,17 @@
           </conditional>
           <section name="properties" title="Properties Input">
             
+              <param name="amplifying_factor" type="float"
+                  value="0.0"
+                  
+                  label="amplifying_factor" help="common displacement (dx) along the different eigenvectors. If 0, the result is the absolute similarity index (dot product)." optional="true"/>
+            
               <param name="binary_path" type="text" label="binary_path" help="pczdump binary path to be used." optional="false"
                   value="pczdump"
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
-                    
+            
           </section>
     </inputs>
     <outputs>
@@ -94,22 +99,22 @@
     <tests>
         <test>
         </test>
-    </tests>    
+    </tests>
     <help>
 .. class:: infomark
-        
+
 Check the syntax for the tool parameters at the original library documentation: https://biobb_flexserv.readthedocs.io/en/latest
 
 -----
 
-.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png    
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
     :width: 150
 
 **https://mmb.irbbarcelona.org/biobb**
-        
+
 .. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
         :width: 150
-        
+
 **https://bioexcel.eu**
    </help>
 

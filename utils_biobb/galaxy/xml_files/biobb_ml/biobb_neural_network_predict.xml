@@ -14,11 +14,11 @@
         #if $config.sele == "option1":
             ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
-        
+
         neural_network_predict
 
         #if $config.sele == "option1":
-            --config ${config.properties}.${config.properties.ext}
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
@@ -35,7 +35,7 @@
         
         
           --output_results_path $outname_output_results_path
-        ;          
+        ;
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
@@ -51,13 +51,13 @@
     </command>
     <inputs>
         
-          <param name="input_model_path" type="data" format="h5"  optional="False" label="input H5 file" help="Path to the input model. Format: [input].h5"/> 
+          <param name="input_model_path" type="data" format="h5"  optional="False" label="input H5 file" help="Path to the input model. Format: [input].h5"/>
         
-          <param name="input_dataset_path" type="data" format="csv"  optional="True" label="input CSV file" help="Path to the dataset to predict. Format: [input].csv"/> 
+          <param name="input_dataset_path" type="data" format="csv"  optional="True" label="input CSV file" help="Path to the dataset to predict. Format: [input].csv"/>
         
         
-          <param name="outname_output_results_path" type="text" value="myneural_network_predict.csv" 
-              optional="False" label="output CSV name" 
+          <param name="outname_output_results_path" type="text" value="myneural_network_predict.csv"
+              optional="False" label="output CSV name"
               help="Path to the output results file Format: [output].csv "/>
         
         <conditional name="config">
@@ -80,7 +80,7 @@
               <param name="predictions" type="text" label="predictions" help="List of dictionaries with all values you want to predict targets. It will be taken into account only in case **input_dataset_path** is not provided. Format: [{ &#39;var1&#39;: 1.0, &#39;var2&#39;: 2.0 }, { &#39;var1&#39;: 4.0, &#39;var2&#39;: 2.7 }] for datasets with headers and [[ 1.0, 2.0 ], [ 4.0, 2.7 ]] for datasets without headers. (Json)" value="[]" >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
-                    
+            
           </section>
     </inputs>
     <outputs>
@@ -92,22 +92,22 @@
     <tests>
         <test>
         </test>
-    </tests>    
+    </tests>
     <help>
 .. class:: infomark
-        
+
 Check the syntax for the tool parameters at the original library documentation: https://biobb_ml.readthedocs.io/en/latest
 
 -----
 
-.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png    
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
     :width: 150
 
 **https://mmb.irbbarcelona.org/biobb**
-        
+
 .. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
         :width: 150
-        
+
 **https://bioexcel.eu**
    </help>
 

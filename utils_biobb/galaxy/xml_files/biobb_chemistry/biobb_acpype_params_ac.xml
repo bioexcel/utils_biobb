@@ -12,11 +12,11 @@
         #if $config.sele == "option1":
             ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
-        
+
         acpype_params_ac
 
         #if $config.sele == "option1":
-            --config ${config.properties}.${config.properties.ext}
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
@@ -35,7 +35,7 @@
           --output_path_lib $outname_output_path_lib
         
           --output_path_prmtop $outname_output_path_prmtop
-        ;          
+        ;
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
@@ -55,23 +55,23 @@
     </command>
     <inputs>
         
-          <param name="input_path" type="data" format="pdb,mdl,mol2"  optional="False" label="input PDB,MDL,MOL2 file" help="Path to the input file. Format: [input].[format]"/> 
+          <param name="input_path" type="data" format="pdb,mdl,mol2"  optional="False" label="input PDB,MDL,MOL2 file" help="Path to the input file. Format: [input].[format]"/>
         
         
-          <param name="outname_output_path_frcmod" type="text" value="myacpype_params_ac.frcmod" 
-              optional="False" label="output FRCMOD name" 
+          <param name="outname_output_path_frcmod" type="text" value="myacpype_params_ac.frcmod"
+              optional="False" label="output FRCMOD name"
               help="Path to the FRCMOD output file Format: [output].frcmod "/>
         
-          <param name="outname_output_path_inpcrd" type="text" value="myacpype_params_ac.inpcrd" 
-              optional="False" label="output INPCRD name" 
+          <param name="outname_output_path_inpcrd" type="text" value="myacpype_params_ac.inpcrd"
+              optional="False" label="output INPCRD name"
               help="Path to the INPCRD output file Format: [output].inpcrd "/>
         
-          <param name="outname_output_path_lib" type="text" value="myacpype_params_ac.lib" 
-              optional="False" label="output LIB name" 
+          <param name="outname_output_path_lib" type="text" value="myacpype_params_ac.lib"
+              optional="False" label="output LIB name"
               help="Path to the LIB output file Format: [output].lib "/>
         
-          <param name="outname_output_path_prmtop" type="text" value="myacpype_params_ac.prmtop" 
-              optional="False" label="output PRMTOP name" 
+          <param name="outname_output_path_prmtop" type="text" value="myacpype_params_ac.prmtop"
+              optional="False" label="output PRMTOP name"
               help="Path to the PRMTOP output file Format: [output].prmtop "/>
         
         <conditional name="config">
@@ -97,7 +97,7 @@
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
             
-              <param name="charge" type="integer" 
+              <param name="charge" type="integer"
                   value="0"
                   min="-20" max="20"
                   label="charge" help="Net molecular charge, for gas default is 0. If None the charge is guessed by acpype." optional="true"/>
@@ -107,7 +107,7 @@
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
-                    
+            
           </section>
     </inputs>
     <outputs>
@@ -128,22 +128,22 @@
     <tests>
         <test>
         </test>
-    </tests>    
+    </tests>
     <help>
 .. class:: infomark
-        
+
 Check the syntax for the tool parameters at the original library documentation: https://biobb_chemistry.readthedocs.io/en/latest
 
 -----
 
-.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png    
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
     :width: 150
 
 **https://mmb.irbbarcelona.org/biobb**
-        
+
 .. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
         :width: 150
-        
+
 **https://bioexcel.eu**
    </help>
 

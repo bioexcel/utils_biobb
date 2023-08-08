@@ -1,0 +1,168 @@
+<tool id="biobb_cmip_cmip_titration_ext" name="CmipTitration" version="4.0.0" >
+    <description>: Wrapper class for the CMIP titration module.</description>
+    <requirements>
+        <requirement type="package"
+        version="4.0.0"
+        >biobb_cmip</requirement>
+    </requirements>
+    <command detect_errors="aggressive"><![CDATA[
+        
+          ln -f -s ${input_pdb_path} ${input_pdb_path}_`echo $$`.${input_pdb_path.ext};
+        
+          ln -f -s ${input_vdw_params_path} ${input_vdw_params_path}_`echo $$`.${input_vdw_params_path.ext};
+        
+          ln -f -s ${input_params_path} ${input_params_path}_`echo $$`.${input_params_path.ext};
+        
+        #if $config.sele == "option1":
+            ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
+          #end if
+
+        cmip_titration
+
+        #if $config.sele == "option1":
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
+          #else if $config.sele == "option2":
+            --config '${config.jsonstr}'
+          #else if $config.sele == "option3":
+            --config '__oc____dq__params__dq__:${properties.params},__dq__energy_cutoff__dq__:${properties.energy_cutoff},__dq__num_wats__dq__:${properties.num_wats},__dq__neutral__dq__:${properties.neutral},__dq__num_positive_ions__dq__:${properties.num_positive_ions},__dq__num_negative_ions__dq__:${properties.num_negative_ions},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
+          #end if
+        
+          #if str($input_pdb_path) != 'None':
+            --input_pdb_path ${input_pdb_path}_`echo $$`.${input_pdb_path.ext}
+          #end if
+        
+          #if str($input_vdw_params_path) != 'None':
+            --input_vdw_params_path ${input_vdw_params_path}_`echo $$`.${input_vdw_params_path.ext}
+          #end if
+        
+          #if str($input_params_path) != 'None':
+            --input_params_path ${input_params_path}_`echo $$`.${input_params_path.ext}
+          #end if
+        
+        
+          --output_pdb_path $outname_output_pdb_path
+        ;
+        #if $config.sele == "option1":
+            rm -f ${config.properties}_`echo $$`.${config.properties.ext};
+          #end if
+        
+          rm -f ${input_pdb_path}_`echo $$`.${input_pdb_path.ext};
+        
+          rm -f ${input_vdw_params_path}_`echo $$`.${input_vdw_params_path.ext};
+        
+          rm -f ${input_params_path}_`echo $$`.${input_params_path.ext};
+        
+        
+          if test -f $outname_output_pdb_path; then mv $outname_output_pdb_path $output_pdb_path; fi;
+        
+    ]]>
+    </command>
+    <inputs>
+        
+          <param name="input_pdb_path" type="data" format="pdb"  optional="False" label="input PDB file" help="Path to the input PDB file. Format: [input].pdb"/>
+        
+          <param name="input_vdw_params_path" type="data" format="txt"  optional="True" label="input TXT file" help="Path to the CMIP input Van der Waals force parameters, if not provided the CMIP conda installation one is used (&#34;$CONDA_PREFIX/share/cmip/dat/vdwprm&#34;). Format: [input].txt"/>
+        
+          <param name="input_params_path" type="data" format="txt"  optional="True" label="input TXT file" help="Path to the CMIP input parameters file. Format: [input].txt"/>
+        
+        
+          <param name="outname_output_pdb_path" type="text" value="mycmip_titration.pdb"
+              optional="False" label="output PDB name"
+              help="Path to the output PDB file Format: [output].pdb "/>
+        
+        <conditional name="config">
+            <param name="sele" type="select" label="Take tool settings:" help="Select where tool settings are to be read from">
+              <option value="option3">Manual Input</option>
+              <option value="option1">from configuration file</option>
+              <option value="option2">from JSON string</option>
+            </param>
+            <when value="option1">
+              <param name="properties" type="data" format="yml,json" optional="false" label="Configuration file" help="File containing tool settings. See below for the syntax"/>
+            </when>
+            <when value="option2">
+              <param name="jsonstr" type="text" value="{}" optional="false" label="JSON string" help="JSON string containing tool settings. See below for the syntax"/>
+            </when>
+            <when value="option3">
+            </when>
+          </conditional>
+          <section name="properties" title="Properties Input">
+            
+              <param name="params" type="text" label="params" help="CMIP options specification. (Json)" value="{}">
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+              <param name="energy_cutoff" type="float"
+                  value="9999.9"
+                  
+                  label="energy_cutoff" help="Energy cutoff, extremely hight value to enable the addition of all the ions and waters before reaching the cutoff." optional="false"/>
+            
+              <param name="num_wats" type="integer"
+                  value="10"
+                  
+                  label="num_wats" help="Number of water molecules to be added." optional="false"/>
+            
+              <param name="neutral" type="boolean"
+                  
+                  label="neutral" help="Neutralize the charge of the system. If selected *num_positive_ions* and *num_negative_ions* values will not be taken into account."
+                />
+            
+              <param name="num_positive_ions" type="integer"
+                  value="10"
+                  
+                  label="num_positive_ions" help="Number of positive ions to be added (Tipatom IP=Na+)." optional="false"/>
+            
+              <param name="num_negative_ions" type="integer"
+                  value="10"
+                  
+                  label="num_negative_ions" help="Number of negative ions to be added (Tipatom IM=Cl-)." optional="false"/>
+            
+              <param name="binary_path" type="text" label="binary_path" help="Path to the CMIP Titration executable binary." optional="false"
+                  value="titration"
+                >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+          </section>
+    </inputs>
+    <outputs>
+        
+        
+          <data name="output_pdb_path" format="pdb" label="${outname_output_pdb_path}"/>
+        
+    </outputs>
+    <tests>
+        <test>
+        </test>
+    </tests>
+    <help>
+.. class:: infomark
+
+Check the syntax for the tool parameters at the original library documentation: https://biobb_cmip.readthedocs.io/en/latest
+
+-----
+
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
+    :width: 150
+
+**https://mmb.irbbarcelona.org/biobb**
+
+.. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
+        :width: 150
+
+**https://bioexcel.eu**
+   </help>
+
+    <citations>
+        <citation type="bibtex">
+            @misc{githubbiobb,
+            author = {Andrio P, Bayarri, G., Hospital A, Gelpi JL},
+            year = {2019-21},
+            title = {biobb: BioExcel building blocks },
+            publisher = {GitHub},
+            journal = {GitHub repository},
+            url = {https://github.com/bioexcel/biobb_cmip},
+            }
+        </citation>
+        <citation type="doi">10.1038/s41597-019-0177-4</citation>
+    </citations>
+</tool>

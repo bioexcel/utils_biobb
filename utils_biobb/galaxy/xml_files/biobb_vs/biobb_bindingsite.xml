@@ -14,11 +14,11 @@
         #if $config.sele == "option1":
             ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
-        
+
         bindingsite
 
         #if $config.sele == "option1":
-            --config ${config.properties}.${config.properties.ext}
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
@@ -35,7 +35,7 @@
         
         
           --output_pdb_path $outname_output_pdb_path
-        ;          
+        ;
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
@@ -51,13 +51,13 @@
     </command>
     <inputs>
         
-          <param name="input_pdb_path" type="data" format="pdb"  optional="False" label="input PDB file" help="Path to the PDB structure where the binding site is to be found. Format: [input].pdb"/> 
+          <param name="input_pdb_path" type="data" format="pdb"  optional="False" label="input PDB file" help="Path to the PDB structure where the binding site is to be found. Format: [input].pdb"/>
         
-          <param name="input_clusters_zip" type="data" format="zip"  optional="False" label="input ZIP file" help="Path to the ZIP file with all the PDB members of the identity cluster. Format: [input].zip"/> 
+          <param name="input_clusters_zip" type="data" format="zip"  optional="False" label="input ZIP file" help="Path to the ZIP file with all the PDB members of the identity cluster. Format: [input].zip"/>
         
         
-          <param name="outname_output_pdb_path" type="text" value="mybindingsite.pdb" 
-              optional="False" label="output PDB name" 
+          <param name="outname_output_pdb_path" type="text" value="mybindingsite.pdb"
+              optional="False" label="output PDB name"
               help="Path to the PDB containig the residues belonging to the binding site Format: [output].pdb "/>
         
         <conditional name="config">
@@ -83,253 +83,253 @@
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
             
-              <param name="radius" type="float" 
+              <param name="radius" type="float"
                   value="5.0"
                   min="0.1" max="1000.0"
                   label="radius" help="Cut-off distance (Ångstroms) around ligand atoms to consider a protein atom as a binding site atom." optional="false"/>
             
-              <param name="max_num_ligands" type="integer" 
+              <param name="max_num_ligands" type="integer"
                   value="15"
                   
                   label="max_num_ligands" help="Total number of superimposed ligands to be extracted from the identity cluster. For populated clusters, the restriction avoids to superimpose redundant structures. If 0, all ligands extracted will be considered." optional="false"/>
             
               <param name="matrix_name" type="select" label="matrix_name" help="Substitution matrices for use in alignments. " multiple="false">
                   
-                    <option value="benner6" 
+                    <option value="benner6"
                       
                     >benner6
                        
                     </option>
                   
-                    <option value="benner22" 
+                    <option value="benner22"
                       
                     >benner22
                        
                     </option>
                   
-                    <option value="benner74" 
+                    <option value="benner74"
                       
                     >benner74
                        
                     </option>
                   
-                    <option value="blosum100" 
+                    <option value="blosum100"
                       
                     >blosum100
                        
                     </option>
                   
-                    <option value="blosum30" 
+                    <option value="blosum30"
                       
                     >blosum30
                        
                     </option>
                   
-                    <option value="blosum35" 
+                    <option value="blosum35"
                       
                     >blosum35
                        
                     </option>
                   
-                    <option value="blosum40" 
+                    <option value="blosum40"
                       
                     >blosum40
                        
                     </option>
                   
-                    <option value="blosum45" 
+                    <option value="blosum45"
                       
                     >blosum45
                        
                     </option>
                   
-                    <option value="blosum50" 
+                    <option value="blosum50"
                       
                     >blosum50
                        
                     </option>
                   
-                    <option value="blosum55" 
+                    <option value="blosum55"
                       
                     >blosum55
                        
                     </option>
                   
-                    <option value="blosum60" 
+                    <option value="blosum60"
                       
                     >blosum60
                        
                     </option>
                   
-                    <option value="blosum62" 
+                    <option value="blosum62"
                       selected="true"
                     >blosum62
                        
                     </option>
                   
-                    <option value="blosum65" 
+                    <option value="blosum65"
                       
                     >blosum65
                        
                     </option>
                   
-                    <option value="blosum70" 
+                    <option value="blosum70"
                       
                     >blosum70
                        
                     </option>
                   
-                    <option value="blosum75" 
+                    <option value="blosum75"
                       
                     >blosum75
                        
                     </option>
                   
-                    <option value="blosum80" 
+                    <option value="blosum80"
                       
                     >blosum80
                        
                     </option>
                   
-                    <option value="blosum85" 
+                    <option value="blosum85"
                       
                     >blosum85
                        
                     </option>
                   
-                    <option value="blosum90" 
+                    <option value="blosum90"
                       
                     >blosum90
                        
                     </option>
                   
-                    <option value="blosum95" 
+                    <option value="blosum95"
                       
                     >blosum95
                        
                     </option>
                   
-                    <option value="feng" 
+                    <option value="feng"
                       
                     >feng
                        
                     </option>
                   
-                    <option value="fitch" 
+                    <option value="fitch"
                       
                     >fitch
                        
                     </option>
                   
-                    <option value="genetic" 
+                    <option value="genetic"
                       
                     >genetic
                        
                     </option>
                   
-                    <option value="gonnet" 
+                    <option value="gonnet"
                       
                     >gonnet
                        
                     </option>
                   
-                    <option value="grant" 
+                    <option value="grant"
                       
                     >grant
                        
                     </option>
                   
-                    <option value="ident" 
+                    <option value="ident"
                       
                     >ident
                        
                     </option>
                   
-                    <option value="johnson" 
+                    <option value="johnson"
                       
                     >johnson
                        
                     </option>
                   
-                    <option value="levin" 
+                    <option value="levin"
                       
                     >levin
                        
                     </option>
                   
-                    <option value="mclach" 
+                    <option value="mclach"
                       
                     >mclach
                        
                     </option>
                   
-                    <option value="miyata" 
+                    <option value="miyata"
                       
                     >miyata
                        
                     </option>
                   
-                    <option value="nwsgappep" 
+                    <option value="nwsgappep"
                       
                     >nwsgappep
                        
                     </option>
                   
-                    <option value="pam120" 
+                    <option value="pam120"
                       
                     >pam120
                        
                     </option>
                   
-                    <option value="pam180" 
+                    <option value="pam180"
                       
                     >pam180
                        
                     </option>
                   
-                    <option value="pam250" 
+                    <option value="pam250"
                       
                     >pam250
                        
                     </option>
                   
-                    <option value="pam30" 
+                    <option value="pam30"
                       
                     >pam30
                        
                     </option>
                   
-                    <option value="pam300" 
+                    <option value="pam300"
                       
                     >pam300
                        
                     </option>
                   
-                    <option value="pam60" 
+                    <option value="pam60"
                       
                     >pam60
                        
                     </option>
                   
-                    <option value="pam90" 
+                    <option value="pam90"
                       
                     >pam90
                        
                     </option>
                   
-                    <option value="rao" 
+                    <option value="rao"
                       
                     >rao
                        
                     </option>
                   
-                    <option value="risler" 
+                    <option value="risler"
                       
                     >risler
                        
                     </option>
                   
-                    <option value="structure" 
+                    <option value="structure"
                       
                     >structure
                        
@@ -337,16 +337,16 @@
                   
                 </param>
             
-              <param name="gap_open" type="float" 
+              <param name="gap_open" type="float"
                   value="-10.0"
                   min="-1000.0" max="1000.0"
                   label="gap_open" help="Gap open penalty." optional="false"/>
             
-              <param name="gap_extend" type="float" 
+              <param name="gap_extend" type="float"
                   value="-0.5"
                   min="-1000.0" max="1000.0"
                   label="gap_extend" help="Gap extend penalty." optional="false"/>
-                    
+            
           </section>
     </inputs>
     <outputs>
@@ -358,22 +358,22 @@
     <tests>
         <test>
         </test>
-    </tests>    
+    </tests>
     <help>
 .. class:: infomark
-        
+
 Check the syntax for the tool parameters at the original library documentation: https://biobb_vs.readthedocs.io/en/latest
 
 -----
 
-.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png    
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
     :width: 150
 
 **https://mmb.irbbarcelona.org/biobb**
-        
+
 .. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
         :width: 150
-        
+
 **https://bioexcel.eu**
    </help>
 

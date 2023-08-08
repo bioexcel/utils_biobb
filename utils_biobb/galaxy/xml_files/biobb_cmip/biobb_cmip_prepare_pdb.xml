@@ -1,0 +1,138 @@
+<tool id="biobb_cmip_cmip_prepare_pdb_ext" name="CmipPreparePdb" version="4.0.0" >
+    <description>: Class to add CMIP charges and atom types.</description>
+    <requirements>
+        <requirement type="package"
+        version="4.0.0"
+        >biobb_cmip</requirement>
+    </requirements>
+    <command detect_errors="aggressive"><![CDATA[
+        
+          ln -f -s ${input_pdb_path} ${input_pdb_path}_`echo $$`.${input_pdb_path.ext};
+        
+        #if $config.sele == "option1":
+            ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
+          #end if
+
+        cmip_prepare_pdb
+
+        #if $config.sele == "option1":
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
+          #else if $config.sele == "option2":
+            --config '${config.jsonstr}'
+          #else if $config.sele == "option3":
+            --config '__oc____dq__remove_water__dq__:${properties.remove_water},__dq__add_hydrogen__dq__:${properties.add_hydrogen},__dq__keep_hydrogen__dq__:${properties.keep_hydrogen},__dq__fix_sidechains__dq__:${properties.fix_sidechains},__dq__fix_backbone_atoms__dq__:${properties.fix_backbone_atoms}__cc__'
+          #end if
+        
+          #if str($input_pdb_path) != 'None':
+            --input_pdb_path ${input_pdb_path}_`echo $$`.${input_pdb_path.ext}
+          #end if
+        
+        
+          --output_cmip_pdb_path $outname_output_cmip_pdb_path
+        ;
+        #if $config.sele == "option1":
+            rm -f ${config.properties}_`echo $$`.${config.properties.ext};
+          #end if
+        
+          rm -f ${input_pdb_path}_`echo $$`.${input_pdb_path.ext};
+        
+        
+          if test -f $outname_output_cmip_pdb_path; then mv $outname_output_cmip_pdb_path $output_cmip_pdb_path; fi;
+        
+    ]]>
+    </command>
+    <inputs>
+        
+          <param name="input_pdb_path" type="data" format="pdb"  optional="False" label="input PDB file" help="Input PDB file path. Format: [input].pdb"/>
+        
+        
+          <param name="outname_output_cmip_pdb_path" type="text" value="mycmip_prepare_pdb.pdb"
+              optional="False" label="output PDB name"
+              help="Output PDB file path Format: [output].pdb "/>
+        
+        <conditional name="config">
+            <param name="sele" type="select" label="Take tool settings:" help="Select where tool settings are to be read from">
+              <option value="option3">Manual Input</option>
+              <option value="option1">from configuration file</option>
+              <option value="option2">from JSON string</option>
+            </param>
+            <when value="option1">
+              <param name="properties" type="data" format="yml,json" optional="false" label="Configuration file" help="File containing tool settings. See below for the syntax"/>
+            </when>
+            <when value="option2">
+              <param name="jsonstr" type="text" value="{}" optional="false" label="JSON string" help="JSON string containing tool settings. See below for the syntax"/>
+            </when>
+            <when value="option3">
+            </when>
+          </conditional>
+          <section name="properties" title="Properties Input">
+            
+              <param name="remove_water" type="boolean"
+                  checked="true"
+                  label="remove_water" help="Remove Water molecules."
+                />
+            
+              <param name="add_hydrogen" type="boolean"
+                  checked="true"
+                  label="add_hydrogen" help="Add Hydrogen atoms to the structure."
+                />
+            
+              <param name="keep_hydrogen" type="boolean"
+                  
+                  label="keep_hydrogen" help="If **add_hydrogen** is True. All hydrogen atoms will be removed before adding the new ones unless this option is set True."
+                />
+            
+              <param name="fix_sidechains" type="boolean"
+                  checked="true"
+                  label="fix_sidechains" help="Complete side chains (heavy atoms, protein only)."
+                />
+            
+              <param name="fix_backbone_atoms" type="boolean"
+                  checked="true"
+                  label="fix_backbone_atoms" help="Add missing O, OXT backbone atoms."
+                />
+            
+          </section>
+    </inputs>
+    <outputs>
+        
+        
+          <data name="output_cmip_pdb_path" format="pdb" label="${outname_output_cmip_pdb_path}"/>
+        
+    </outputs>
+    <tests>
+        <test>
+        </test>
+    </tests>
+    <help>
+.. class:: infomark
+
+Check the syntax for the tool parameters at the original library documentation: https://biobb_cmip.readthedocs.io/en/latest
+
+-----
+
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
+    :width: 150
+
+**https://mmb.irbbarcelona.org/biobb**
+
+.. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
+        :width: 150
+
+**https://bioexcel.eu**
+   </help>
+
+    <citations>
+        <citation type="bibtex">
+            @misc{githubbiobb,
+            author = {Andrio P, Bayarri, G., Hospital A, Gelpi JL},
+            year = {2019-21},
+            title = {biobb: BioExcel building blocks },
+            publisher = {GitHub},
+            journal = {GitHub repository},
+            url = {https://github.com/bioexcel/biobb_cmip},
+            }
+        </citation>
+        <citation type="doi">10.1038/s41597-019-0177-4</citation>
+    </citations>
+</tool>

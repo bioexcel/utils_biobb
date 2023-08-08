@@ -12,11 +12,11 @@
         #if $config.sele == "option1":
             ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
-        
+
         random_forest_classifier
 
         #if $config.sele == "option1":
-            --config ${config.properties}.${config.properties.ext}
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
@@ -33,7 +33,7 @@
           --output_test_table_path $outname_output_test_table_path
         
           --output_plot_path $outname_output_plot_path
-        ;          
+        ;
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
@@ -51,19 +51,19 @@
     </command>
     <inputs>
         
-          <param name="input_dataset_path" type="data" format="csv"  optional="False" label="input CSV file" help="Path to the input dataset. Format: [input].csv"/> 
+          <param name="input_dataset_path" type="data" format="csv"  optional="False" label="input CSV file" help="Path to the input dataset. Format: [input].csv"/>
         
         
-          <param name="outname_output_model_path" type="text" value="myrandom_forest_classifier.pkl" 
-              optional="False" label="output PKL name" 
+          <param name="outname_output_model_path" type="text" value="myrandom_forest_classifier.pkl"
+              optional="False" label="output PKL name"
               help="Path to the output model file Format: [output].pkl "/>
         
-          <param name="outname_output_test_table_path" type="text" value="myrandom_forest_classifier.csv" 
-              optional="True" label="output CSV name" 
+          <param name="outname_output_test_table_path" type="text" value="myrandom_forest_classifier.csv"
+              optional="True" label="output CSV name"
               help="Path to the test table file Format: [output].csv "/>
         
-          <param name="outname_output_plot_path" type="text" value="myrandom_forest_classifier.png" 
-              optional="True" label="output PNG name" 
+          <param name="outname_output_plot_path" type="text" value="myrandom_forest_classifier.png"
+              optional="True" label="output PNG name"
               help="Path to the statistics plot. If target is binary it shows confusion matrix, distributions of the predicted probabilities of both classes and ROC curve. If target is non-binary it shows confusion matrix Format: [output].png "/>
         
         <conditional name="config">
@@ -95,41 +95,41 @@
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
             
-              <param name="n_estimators" type="integer" 
+              <param name="n_estimators" type="integer"
                   value="100"
                   
                   label="n_estimators" help="The number of trees in the forest." optional="false"/>
             
-              <param name="bootstrap" type="boolean" 
+              <param name="bootstrap" type="boolean"
                   checked="true"
-                  label="bootstrap" help="Whether bootstrap samples are used when building trees. If False, the whole dataset is used to build each tree." 
+                  label="bootstrap" help="Whether bootstrap samples are used when building trees. If False, the whole dataset is used to build each tree."
                 />
             
-              <param name="normalize_cm" type="boolean" 
+              <param name="normalize_cm" type="boolean"
                   
-                  label="normalize_cm" help="Whether or not to normalize the confusion matrix." 
+                  label="normalize_cm" help="Whether or not to normalize the confusion matrix."
                 />
             
-              <param name="random_state_method" type="integer" 
+              <param name="random_state_method" type="integer"
                   value="5"
                   min="1" max="1000"
                   label="random_state_method" help="Controls the randomness of the estimator." optional="false"/>
             
-              <param name="random_state_train_test" type="integer" 
+              <param name="random_state_train_test" type="integer"
                   value="5"
                   min="1" max="1000"
                   label="random_state_train_test" help="Controls the shuffling applied to the data before applying the split." optional="false"/>
             
-              <param name="test_size" type="float" 
+              <param name="test_size" type="float"
                   value="0.2"
                   
                   label="test_size" help="Represents the proportion of the dataset to include in the test split. It should be between 0.0 and 1.0." optional="false"/>
             
-              <param name="scale" type="boolean" 
+              <param name="scale" type="boolean"
                   
-                  label="scale" help="Whether or not to scale the input dataset." 
+                  label="scale" help="Whether or not to scale the input dataset."
                 />
-                    
+            
           </section>
     </inputs>
     <outputs>
@@ -147,22 +147,22 @@
     <tests>
         <test>
         </test>
-    </tests>    
+    </tests>
     <help>
 .. class:: infomark
-        
+
 Check the syntax for the tool parameters at the original library documentation: https://biobb_ml.readthedocs.io/en/latest
 
 -----
 
-.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png    
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
     :width: 150
 
 **https://mmb.irbbarcelona.org/biobb**
-        
+
 .. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
         :width: 150
-        
+
 **https://bioexcel.eu**
    </help>
 

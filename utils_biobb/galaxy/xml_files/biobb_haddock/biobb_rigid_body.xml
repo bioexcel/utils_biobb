@@ -16,11 +16,11 @@
         #if $config.sele == "option1":
             ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
-        
+
         rigid_body
 
         #if $config.sele == "option1":
-            --config ${config.properties}.${config.properties.ext}
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
@@ -43,7 +43,7 @@
           --docking_output_zip_path $outname_docking_output_zip_path
         
           --output_haddock_wf_data_zip $outname_output_haddock_wf_data_zip
-        ;          
+        ;
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
@@ -63,19 +63,19 @@
     </command>
     <inputs>
         
-          <param name="input_haddock_wf_data_zip" type="data" format="zip"  optional="False" label="input ZIP file" help="Path to the input zipball containing all the current Haddock workflow data. Format: [input].zip"/> 
+          <param name="input_haddock_wf_data_zip" type="data" format="zip"  optional="False" label="input ZIP file" help="Path to the input zipball containing all the current Haddock workflow data. Format: [input].zip"/>
         
-          <param name="" type="data" format="tbl"  optional="True" label="input TBL file" help="Path to the input TBL file containing a list of restraints for docking. Format: [input].tbl"/> 
+          <param name="" type="data" format="tbl"  optional="True" label="input TBL file" help="Path to the input TBL file containing a list of restraints for docking. Format: [input].tbl"/>
         
-          <param name="haddock_config_path" type="data" format="cfg"  optional="True" label="input CFG file" help="Haddock configuration CFG file path. Format: [input].cfg"/> 
+          <param name="haddock_config_path" type="data" format="cfg"  optional="True" label="input CFG file" help="Haddock configuration CFG file path. Format: [input].cfg"/>
         
         
-          <param name="outname_docking_output_zip_path" type="text" value="myrigid_body.zip" 
-              optional="False" label="output ZIP name" 
+          <param name="outname_docking_output_zip_path" type="text" value="myrigid_body.zip"
+              optional="False" label="output ZIP name"
               help="Path to the output PDB file collection in zip format Format: [output].zip "/>
         
-          <param name="outname_output_haddock_wf_data_zip" type="text" value="myrigid_body.zip" 
-              optional="True" label="output ZIP name" 
+          <param name="outname_output_haddock_wf_data_zip" type="text" value="myrigid_body.zip"
+              optional="True" label="output ZIP name"
               help="Path to the output zipball containing all the current Haddock workflow data Format: [output].zip "/>
         
         <conditional name="config">
@@ -104,7 +104,7 @@
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
-                    
+            
           </section>
     </inputs>
     <outputs>
@@ -119,22 +119,22 @@
     <tests>
         <test>
         </test>
-    </tests>    
+    </tests>
     <help>
 .. class:: infomark
-        
+
 Check the syntax for the tool parameters at the original library documentation: https://biobb_haddock.readthedocs.io/en/latest
 
 -----
 
-.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png    
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
     :width: 150
 
 **https://mmb.irbbarcelona.org/biobb**
-        
+
 .. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
         :width: 150
-        
+
 **https://bioexcel.eu**
    </help>
 

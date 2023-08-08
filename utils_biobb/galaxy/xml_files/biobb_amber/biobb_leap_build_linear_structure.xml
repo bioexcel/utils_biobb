@@ -10,11 +10,11 @@
         #if $config.sele == "option1":
             ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
-        
+
         leap_build_linear_structure
 
         #if $config.sele == "option1":
-            --config ${config.properties}.${config.properties.ext}
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
@@ -23,7 +23,7 @@
         
         
           --output_pdb_path $outname_output_pdb_path
-        ;          
+        ;
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
@@ -36,8 +36,8 @@
     <inputs>
         
         
-          <param name="outname_output_pdb_path" type="text" value="myleap_build_linear_structure.pdb" 
-              optional="False" label="output PDB name" 
+          <param name="outname_output_pdb_path" type="text" value="myleap_build_linear_structure.pdb"
+              optional="False" label="output PDB name"
               help="Linear (unfolded) 3D structure PDB file Format: [output].pdb "/>
         
         <conditional name="config">
@@ -65,37 +65,37 @@
             
               <param name="forcefield" type="select" label="forcefield" help="Forcefield to be used for the structure generation. " multiple="true">
                   
-                    <option value="protein.ff14SB" 
+                    <option value="protein.ff14SB"
                       
                     >protein.ff14SB
                        
                     </option>
                   
-                    <option value="protein.ff19SB" 
+                    <option value="protein.ff19SB"
                       
                     >protein.ff19SB
                        
                     </option>
                   
-                    <option value="DNA.bsc1" 
+                    <option value="DNA.bsc1"
                       
                     >DNA.bsc1
                        
                     </option>
                   
-                    <option value="DNA.OL15" 
+                    <option value="DNA.OL15"
                       
                     >DNA.OL15
                        
                     </option>
                   
-                    <option value="RNA.OL3" 
+                    <option value="RNA.OL3"
                       
                     >RNA.OL3
                        
                     </option>
                   
-                    <option value="gaff" 
+                    <option value="gaff"
                       
                     >gaff
                        
@@ -103,9 +103,9 @@
                   
                 </param>
             
-              <param name="build_library" type="boolean" 
+              <param name="build_library" type="boolean"
                   
-                  label="build_library" help="Generate AMBER lib file for the structure." 
+                  label="build_library" help="Generate AMBER lib file for the structure."
                 />
             
               <param name="binary_path" type="text" label="binary_path" help="Path to the tleap executable binary." optional="false"
@@ -113,7 +113,7 @@
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
-                    
+            
           </section>
     </inputs>
     <outputs>
@@ -125,22 +125,22 @@
     <tests>
         <test>
         </test>
-    </tests>    
+    </tests>
     <help>
 .. class:: infomark
-        
+
 Check the syntax for the tool parameters at the original library documentation: https://biobb_amber.readthedocs.io/en/latest
 
 -----
 
-.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png    
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
     :width: 150
 
 **https://mmb.irbbarcelona.org/biobb**
-        
+
 .. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
         :width: 150
-        
+
 **https://bioexcel.eu**
    </help>
 

@@ -12,11 +12,11 @@
         #if $config.sele == "option1":
             ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
-        
+
         pdb4amber_run
 
         #if $config.sele == "option1":
-            --config ${config.properties}.${config.properties.ext}
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
@@ -29,7 +29,7 @@
         
         
           --output_pdb_path $outname_output_pdb_path
-        ;          
+        ;
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
@@ -43,11 +43,11 @@
     </command>
     <inputs>
         
-          <param name="input_pdb_path" type="data" format="pdb"  optional="False" label="input PDB file" help="Input 3D structure PDB file. Format: [input].pdb"/> 
+          <param name="input_pdb_path" type="data" format="pdb"  optional="False" label="input PDB file" help="Input 3D structure PDB file. Format: [input].pdb"/>
         
         
-          <param name="outname_output_pdb_path" type="text" value="mypdb4amber_run.pdb" 
-              optional="False" label="output PDB name" 
+          <param name="outname_output_pdb_path" type="text" value="mypdb4amber_run.pdb"
+              optional="False" label="output PDB name"
               help="Output 3D structure PDB file Format: [output].pdb "/>
         
         <conditional name="config">
@@ -67,19 +67,19 @@
           </conditional>
           <section name="properties" title="Properties Input">
             
-              <param name="remove_hydrogens" type="boolean" 
+              <param name="remove_hydrogens" type="boolean"
                   
-                  label="remove_hydrogens" help="Remove hydrogen atoms from the PDB file." 
+                  label="remove_hydrogens" help="Remove hydrogen atoms from the PDB file."
                 />
             
-              <param name="remove_waters" type="boolean" 
+              <param name="remove_waters" type="boolean"
                   
-                  label="remove_waters" help="Remove water molecules from the PDB file." 
+                  label="remove_waters" help="Remove water molecules from the PDB file."
                 />
             
-              <param name="constant_pH" type="boolean" 
+              <param name="constant_pH" type="boolean"
                   
-                  label="constant_pH" help="Rename ionizable residues e.g. GLU,ASP,HIS for constant pH simulation." 
+                  label="constant_pH" help="Rename ionizable residues e.g. GLU,ASP,HIS for constant pH simulation."
                 />
             
               <param name="binary_path" type="text" label="binary_path" help="Path to the pdb4amber executable binary." optional="false"
@@ -87,7 +87,7 @@
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
-                    
+            
           </section>
     </inputs>
     <outputs>
@@ -99,22 +99,22 @@
     <tests>
         <test>
         </test>
-    </tests>    
+    </tests>
     <help>
 .. class:: infomark
-        
+
 Check the syntax for the tool parameters at the original library documentation: https://biobb_amber.readthedocs.io/en/latest
 
 -----
 
-.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png    
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
     :width: 150
 
 **https://mmb.irbbarcelona.org/biobb**
-        
+
 .. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
         :width: 150
-        
+
 **https://bioexcel.eu**
    </help>
 

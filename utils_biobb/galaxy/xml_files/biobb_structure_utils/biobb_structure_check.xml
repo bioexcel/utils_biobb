@@ -12,11 +12,11 @@
         #if $config.sele == "option1":
             ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
-        
+
         structure_check
 
         #if $config.sele == "option1":
-            --config ${config.properties}.${config.properties.ext}
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
@@ -29,7 +29,7 @@
         
         
           --output_summary_path $outname_output_summary_path
-        ;          
+        ;
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
@@ -43,11 +43,11 @@
     </command>
     <inputs>
         
-          <param name="input_structure_path" type="data" format="pdb,pdbqt"  optional="False" label="input PDB,PDBQT file" help="Input structure file path. Format: [input].[format]"/> 
+          <param name="input_structure_path" type="data" format="pdb,pdbqt"  optional="False" label="input PDB,PDBQT file" help="Input structure file path. Format: [input].[format]"/>
         
         
-          <param name="outname_output_summary_path" type="text" value="mystructure_check.json" 
-              optional="False" label="output JSON name" 
+          <param name="outname_output_summary_path" type="text" value="mystructure_check.json"
+              optional="False" label="output JSON name"
               help="Output summary checking results Format: [output].json "/>
         
         <conditional name="config">
@@ -69,67 +69,67 @@
             
               <param name="features" type="select" label="features" help="Features to summarize. If None, all the features will be computed. " multiple="true">
                   
-                    <option value="models" 
+                    <option value="models"
                       
                     >models
                        - multiple molecules or coordinate sets in a single file
                     </option>
                   
-                    <option value="chains" 
+                    <option value="chains"
                       
                     >chains
                        - multiple chains in a single file
                     </option>
                   
-                    <option value="altloc" 
+                    <option value="altloc"
                       
                     >altloc
                        - atom alternative conformation given an alternate location indicator and occupancy
                     </option>
                   
-                    <option value="metals" 
+                    <option value="metals"
                       
                     >metals
                        - metals present in the structure
                     </option>
                   
-                    <option value="ligands" 
+                    <option value="ligands"
                       
                     >ligands
                        - heteroatoms present in the structure
                     </option>
                   
-                    <option value="chiral" 
+                    <option value="chiral"
                       
                     >chiral
                        - to say that a structure is chiral is to say that its mirror image is not the same as it self
                     </option>
                   
-                    <option value="getss" 
+                    <option value="getss"
                       
                     >getss
                        - detect SS bonds or disulfides
                     </option>
                   
-                    <option value="cistransbck" 
+                    <option value="cistransbck"
                       
                     >cistransbck
                        - detact cis/trans backbone
                     </option>
                   
-                    <option value="backbone" 
+                    <option value="backbone"
                       
                     >backbone
                        - detect backbone breaks
                     </option>
                   
-                    <option value="amide" 
+                    <option value="amide"
                       
                     >amide
                        - detect too close amides
                     </option>
                   
-                    <option value="clashes" 
+                    <option value="clashes"
                       
                     >clashes
                        - detect clashes
@@ -142,7 +142,7 @@
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
-                    
+            
           </section>
     </inputs>
     <outputs>
@@ -154,22 +154,22 @@
     <tests>
         <test>
         </test>
-    </tests>    
+    </tests>
     <help>
 .. class:: infomark
-        
+
 Check the syntax for the tool parameters at the original library documentation: https://biobb_structure_utils.readthedocs.io/en/latest
 
 -----
 
-.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png    
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
     :width: 150
 
 **https://mmb.irbbarcelona.org/biobb**
-        
+
 .. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
         :width: 150
-        
+
 **https://bioexcel.eu**
    </help>
 

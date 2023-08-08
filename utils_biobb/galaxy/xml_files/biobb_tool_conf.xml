@@ -33,7 +33,7 @@
   <tool file="biobb/biobb_io/biobb_ideal_sdf.xml" />
   <tool file="biobb/biobb_io/biobb_structure_info.xml" />
 </section>
-<section id="biobb_ml" name="Machile Learning" >
+<section id="biobb_ml" name="Machine Learning" >
   <tool file="biobb/biobb_ml/biobb_linear_regression.xml" />
   <tool file="biobb/biobb_ml/biobb_polynomial_regression.xml" />
   <tool file="biobb/biobb_ml/biobb_random_forest_regressor.xml" />
@@ -93,7 +93,7 @@
 </section>
 <section id="biobb_cp2k" name="Setup and simulation of QM simulations (CP2K)" >
   <tool file="biobb/biobb_cp2k/biobb_cp2k_run.xml" />
-  <tool file="biobb/biobb_cp2k/biobb_cp2k_run.xml" />
+  <tool file="biobb/biobb_cp2k/biobb_cp2k_prep.xml" />
 </section>
 <section id="biobb_pmx" name="PMX Free Energy calculation" >
   <tool file="biobb/biobb_pmx/biobb_pmxmutate.xml" />
@@ -151,11 +151,11 @@
   <tool file="biobb/biobb_gromacs/biobb_append_ligand.xml" />
 </section>
 <section id="biobb_cmip" name="CMIP" >
-  <tool file="biobb/biobb_cmip/biobb_cmip.xml" />
-  <tool file="biobb/biobb_cmip/biobb_titration.xml" />
-  <tool file="biobb/biobb_cmip/biobb_prepare_structure.xml" />
-  <tool file="biobb/biobb_cmip/biobb_prepare_pdb.xml" />
-  <tool file="biobb/biobb_cmip/biobb_ignore_residues.xml" />
+  <tool file="biobb/biobb_cmip/biobb_cmip_run.xml" />
+  <tool file="biobb/biobb_cmip/biobb_cmip_titration.xml" />
+  <tool file="biobb/biobb_cmip/biobb_cmip_prepare_structure.xml" />
+  <tool file="biobb/biobb_cmip/biobb_cmip_prepare_pdb.xml" />
+  <tool file="biobb/biobb_cmip/biobb_cmip_ignore_residues.xml" />
 </section>
 <section id="biobb_structure_utils" name="Structure Utils" >
   <tool file="biobb/biobb_structure_utils/biobb_cat_pdb.xml" />

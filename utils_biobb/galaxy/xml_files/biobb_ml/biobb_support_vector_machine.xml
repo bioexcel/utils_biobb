@@ -12,11 +12,11 @@
         #if $config.sele == "option1":
             ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
-        
+
         support_vector_machine
 
         #if $config.sele == "option1":
-            --config ${config.properties}.${config.properties.ext}
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
@@ -33,7 +33,7 @@
           --output_test_table_path $outname_output_test_table_path
         
           --output_plot_path $outname_output_plot_path
-        ;          
+        ;
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
@@ -51,19 +51,19 @@
     </command>
     <inputs>
         
-          <param name="input_dataset_path" type="data" format="csv"  optional="False" label="input CSV file" help="Path to the input dataset. Format: [input].csv"/> 
+          <param name="input_dataset_path" type="data" format="csv"  optional="False" label="input CSV file" help="Path to the input dataset. Format: [input].csv"/>
         
         
-          <param name="outname_output_model_path" type="text" value="mysupport_vector_machine.pkl" 
-              optional="False" label="output PKL name" 
+          <param name="outname_output_model_path" type="text" value="mysupport_vector_machine.pkl"
+              optional="False" label="output PKL name"
               help="Path to the output model file Format: [output].pkl "/>
         
-          <param name="outname_output_test_table_path" type="text" value="mysupport_vector_machine.csv" 
-              optional="True" label="output CSV name" 
+          <param name="outname_output_test_table_path" type="text" value="mysupport_vector_machine.csv"
+              optional="True" label="output CSV name"
               help="Path to the test table file Format: [output].csv "/>
         
-          <param name="outname_output_plot_path" type="text" value="mysupport_vector_machine.png" 
-              optional="True" label="output PNG name" 
+          <param name="outname_output_plot_path" type="text" value="mysupport_vector_machine.png"
+              optional="True" label="output PNG name"
               help="Path to the statistics plot. If target is binary it shows confusion matrix, distributions of the predicted probabilities of both classes and ROC curve. If target is non-binary it shows confusion matrix Format: [output].png "/>
         
         <conditional name="config">
@@ -97,31 +97,31 @@
             
               <param name="kernel" type="select" label="kernel" help="Specifies the kernel type to be used in the algorithm. " multiple="false">
                   
-                    <option value="linear" 
+                    <option value="linear"
                       
                     >linear
                        - It&#39;s used when the data is Linearly separable; that is; it can be separated using a single Line
                     </option>
                   
-                    <option value="poly" 
+                    <option value="poly"
                       
                     >poly
                        - Represents the similarity of vectors -training samples- in a feature space over polynomials of the original variables; allowing learning of non-linear models
                     </option>
                   
-                    <option value="rbf" 
+                    <option value="rbf"
                       selected="true"
                     >rbf
                        - It&#39;s a function whose value depends on the distance from the origin or from some point
                     </option>
                   
-                    <option value="sigmoid" 
+                    <option value="sigmoid"
                       
                     >sigmoid
                        - In Neural Networks field the bipolar sigmoid function is often used as an activation function for artificial neurons
                     </option>
                   
-                    <option value="precomputed" 
+                    <option value="precomputed"
                       
                     >precomputed
                        - Precomputed kernel
@@ -129,31 +129,31 @@
                   
                 </param>
             
-              <param name="normalize_cm" type="boolean" 
+              <param name="normalize_cm" type="boolean"
                   
-                  label="normalize_cm" help="Whether or not to normalize the confusion matrix." 
+                  label="normalize_cm" help="Whether or not to normalize the confusion matrix."
                 />
             
-              <param name="random_state_method" type="integer" 
+              <param name="random_state_method" type="integer"
                   value="5"
                   min="1" max="1000"
                   label="random_state_method" help="Controls the randomness of the estimator." optional="false"/>
             
-              <param name="random_state_train_test" type="integer" 
+              <param name="random_state_train_test" type="integer"
                   value="5"
                   min="1" max="1000"
                   label="random_state_train_test" help="Controls the shuffling applied to the data before applying the split." optional="false"/>
             
-              <param name="test_size" type="float" 
+              <param name="test_size" type="float"
                   value="0.2"
                   
                   label="test_size" help="Represents the proportion of the dataset to include in the test split. It should be between 0.0 and 1.0." optional="false"/>
             
-              <param name="scale" type="boolean" 
+              <param name="scale" type="boolean"
                   
-                  label="scale" help="Whether or not to scale the input dataset." 
+                  label="scale" help="Whether or not to scale the input dataset."
                 />
-                    
+            
           </section>
     </inputs>
     <outputs>
@@ -171,22 +171,22 @@
     <tests>
         <test>
         </test>
-    </tests>    
+    </tests>
     <help>
 .. class:: infomark
-        
+
 Check the syntax for the tool parameters at the original library documentation: https://biobb_ml.readthedocs.io/en/latest
 
 -----
 
-.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png    
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
     :width: 150
 
 **https://mmb.irbbarcelona.org/biobb**
-        
+
 .. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
         :width: 150
-        
+
 **https://bioexcel.eu**
    </help>
 
