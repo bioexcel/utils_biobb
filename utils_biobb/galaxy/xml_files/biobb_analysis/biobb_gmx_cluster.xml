@@ -1,8 +1,8 @@
-<tool id="biobb_analysis_gmx_cluster_ext" name="GmxCluster" version="4.0.1" >
+<tool id="biobb_analysis_gmx_cluster_ext" name="GmxCluster" version="4.0.2" >
     <description>: Wrapper of the GROMACS cluster module for clustering structures from a given GROMACS compatible trajectory.</description>
     <requirements>
         <requirement type="package"
-        version="4.0.1"
+        version="4.0.2"
         >biobb_analysis</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -16,11 +16,11 @@
         #if $config.sele == "option1":
             ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
-        
+
         gmx_cluster
 
         #if $config.sele == "option1":
-            --config ${config.properties}.${config.properties.ext}
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
@@ -47,7 +47,7 @@
           --output_rmsd_cluster_xpm_path $outname_output_rmsd_cluster_xpm_path
         
           --output_rmsd_dist_xvg_path $outname_output_rmsd_dist_xvg_path
-        ;          
+        ;
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
@@ -71,27 +71,27 @@
     </command>
     <inputs>
         
-          <param name="input_structure_path" type="data" format="tpr,gro,g96,pdb,brk,ent"  optional="False" label="input TPR,GRO,G96,PDB,BRK,ENT file" help="Path to the input structure file. Format: [input].[format]"/> 
+          <param name="input_structure_path" type="data" format="tpr,gro,g96,pdb,brk,ent"  optional="False" label="input TPR,GRO,G96,PDB,BRK,ENT file" help="Path to the input structure file. Format: [input].[format]"/>
         
-          <param name="input_traj_path" type="data" format="xtc,trr,cpt,gro,g96,pdb,tng"  optional="False" label="input XTC,TRR,CPT,GRO,G96,PDB,TNG file" help="Path to the GROMACS trajectory file. Format: [input].[format]"/> 
+          <param name="input_traj_path" type="data" format="xtc,trr,cpt,gro,g96,pdb,tng"  optional="False" label="input XTC,TRR,CPT,GRO,G96,PDB,TNG file" help="Path to the GROMACS trajectory file. Format: [input].[format]"/>
         
-          <param name="input_index_path" type="data" format="ndx"  optional="True" label="input NDX file" help="Path to the GROMACS index file. Format: [input].ndx"/> 
+          <param name="input_index_path" type="data" format="ndx"  optional="True" label="input NDX file" help="Path to the GROMACS index file. Format: [input].ndx"/>
         
         
-          <param name="outname_output_pdb_path" type="text" value="mygmx_cluster.xtc" 
-              optional="False" label="output XTC,TRR,CPT,GRO,G96,PDB,TNG name" 
+          <param name="outname_output_pdb_path" type="text" value="mygmx_cluster.xtc"
+              optional="False" label="output XTC,TRR,CPT,GRO,G96,PDB,TNG name"
               help="Path to the output cluster file Format: [output].[format] "/>
         
-          <param name="outname_output_cluster_log_path" type="text" value="mygmx_cluster.log" 
-              optional="True" label="output LOG name" 
+          <param name="outname_output_cluster_log_path" type="text" value="mygmx_cluster.log"
+              optional="True" label="output LOG name"
               help="Path to the output log file Format: [output].log "/>
         
-          <param name="outname_output_rmsd_cluster_xpm_path" type="text" value="mygmx_cluster.xpm" 
-              optional="True" label="output XPM name" 
+          <param name="outname_output_rmsd_cluster_xpm_path" type="text" value="mygmx_cluster.xpm"
+              optional="True" label="output XPM name"
               help="Path to the output X PixMap compatible matrix file Format: [output].xpm "/>
         
-          <param name="outname_output_rmsd_dist_xvg_path" type="text" value="mygmx_cluster.xvg" 
-              optional="True" label="output XVG name" 
+          <param name="outname_output_rmsd_dist_xvg_path" type="text" value="mygmx_cluster.xvg"
+              optional="True" label="output XVG name"
               help="Path to xvgr/xmgr file Format: [output].xvg "/>
         
         <conditional name="config">
@@ -113,115 +113,115 @@
             
               <param name="fit_selection" type="select" label="fit_selection" help="Group where the fitting will be performed. If **input_index_path** provided, check the file for the accepted values. " multiple="false">
                   
-                    <option value="System" 
+                    <option value="System"
                       selected="true"
                     >System
                        - all atoms in the system
                     </option>
                   
-                    <option value="Protein" 
+                    <option value="Protein"
                       
                     >Protein
                        - all protein atoms
                     </option>
                   
-                    <option value="Protein-H" 
+                    <option value="Protein-H"
                       
                     >Protein-H
                        - protein atoms excluding hydrogens
                     </option>
                   
-                    <option value="C-alpha" 
+                    <option value="C-alpha"
                       
                     >C-alpha
                        - C-alpha atoms
                     </option>
                   
-                    <option value="Backbone" 
+                    <option value="Backbone"
                       
                     >Backbone
                        - protein backbone atoms: N; C-alpha and C
                     </option>
                   
-                    <option value="MainChain" 
+                    <option value="MainChain"
                       
                     >MainChain
                        - protein main chain atoms: N; C-alpha; C and O; including oxygens in C-terminus
                     </option>
                   
-                    <option value="MainChain+Cb" 
+                    <option value="MainChain+Cb"
                       
                     >MainChain+Cb
                        - protein main chain atoms including C-beta
                     </option>
                   
-                    <option value="MainChain+H" 
+                    <option value="MainChain+H"
                       
                     >MainChain+H
                        - protein main chain atoms including backbone amide hydrogens and hydrogens on the N-terminus
                     </option>
                   
-                    <option value="SideChain" 
+                    <option value="SideChain"
                       
                     >SideChain
                        - protein side chain atoms: that is all atoms except N; C-alpha; C; O; backbone amide hydrogens and oxygens in C-terminus and hydrogens on the N-terminus
                     </option>
                   
-                    <option value="SideChain-H" 
+                    <option value="SideChain-H"
                       
                     >SideChain-H
                        - protein side chain atoms excluding all hydrogens
                     </option>
                   
-                    <option value="Prot-Masses" 
+                    <option value="Prot-Masses"
                       
                     >Prot-Masses
                        - protein atoms excluding dummy masses
                     </option>
                   
-                    <option value="non-Protein" 
+                    <option value="non-Protein"
                       
                     >non-Protein
                        - all non-protein atoms
                     </option>
                   
-                    <option value="Water" 
+                    <option value="Water"
                       
                     >Water
                        - water molecules
                     </option>
                   
-                    <option value="SOL" 
+                    <option value="SOL"
                       
                     >SOL
                        - water molecules
                     </option>
                   
-                    <option value="non-Water" 
+                    <option value="non-Water"
                       
                     >non-Water
                        - anything not covered by the Water group
                     </option>
                   
-                    <option value="Ion" 
+                    <option value="Ion"
                       
                     >Ion
                        - any name matching an Ion entry in residuetypes.dat
                     </option>
                   
-                    <option value="NA" 
+                    <option value="NA"
                       
                     >NA
                        - all NA atoms
                     </option>
                   
-                    <option value="CL" 
+                    <option value="CL"
                       
                     >CL
                        - all CL atoms
                     </option>
                   
-                    <option value="Water_and_ions" 
+                    <option value="Water_and_ions"
                       
                     >Water_and_ions
                        - combination of the Water and Ions groups
@@ -231,115 +231,115 @@
             
               <param name="output_selection" type="select" label="output_selection" help="Group that is going to be written in the output trajectory. If **input_index_path** provided, check the file for the accepted values. " multiple="false">
                   
-                    <option value="System" 
+                    <option value="System"
                       selected="true"
                     >System
                        - all atoms in the system
                     </option>
                   
-                    <option value="Protein" 
+                    <option value="Protein"
                       
                     >Protein
                        - all protein atoms
                     </option>
                   
-                    <option value="Protein-H" 
+                    <option value="Protein-H"
                       
                     >Protein-H
                        - protein atoms excluding hydrogens
                     </option>
                   
-                    <option value="C-alpha" 
+                    <option value="C-alpha"
                       
                     >C-alpha
                        - C-alpha atoms
                     </option>
                   
-                    <option value="Backbone" 
+                    <option value="Backbone"
                       
                     >Backbone
                        - protein backbone atoms: N; C-alpha and C
                     </option>
                   
-                    <option value="MainChain" 
+                    <option value="MainChain"
                       
                     >MainChain
                        - protein main chain atoms: N; C-alpha; C and O; including oxygens in C-terminus
                     </option>
                   
-                    <option value="MainChain+Cb" 
+                    <option value="MainChain+Cb"
                       
                     >MainChain+Cb
                        - protein main chain atoms including C-beta
                     </option>
                   
-                    <option value="MainChain+H" 
+                    <option value="MainChain+H"
                       
                     >MainChain+H
                        - protein main chain atoms including backbone amide hydrogens and hydrogens on the N-terminus
                     </option>
                   
-                    <option value="SideChain" 
+                    <option value="SideChain"
                       
                     >SideChain
                        - protein side chain atoms: that is all atoms except N; C-alpha; C; O; backbone amide hydrogens and oxygens in C-terminus and hydrogens on the N-terminus
                     </option>
                   
-                    <option value="SideChain-H" 
+                    <option value="SideChain-H"
                       
                     >SideChain-H
                        - protein side chain atoms excluding all hydrogens
                     </option>
                   
-                    <option value="Prot-Masses" 
+                    <option value="Prot-Masses"
                       
                     >Prot-Masses
                        - protein atoms excluding dummy masses
                     </option>
                   
-                    <option value="non-Protein" 
+                    <option value="non-Protein"
                       
                     >non-Protein
                        - all non-protein atoms
                     </option>
                   
-                    <option value="Water" 
+                    <option value="Water"
                       
                     >Water
                        - water molecules
                     </option>
                   
-                    <option value="SOL" 
+                    <option value="SOL"
                       
                     >SOL
                        - water molecules
                     </option>
                   
-                    <option value="non-Water" 
+                    <option value="non-Water"
                       
                     >non-Water
                        - anything not covered by the Water group
                     </option>
                   
-                    <option value="Ion" 
+                    <option value="Ion"
                       
                     >Ion
                        - any name matching an Ion entry in residuetypes.dat
                     </option>
                   
-                    <option value="NA" 
+                    <option value="NA"
                       
                     >NA
                        - all NA atoms
                     </option>
                   
-                    <option value="CL" 
+                    <option value="CL"
                       
                     >CL
                        - all CL atoms
                     </option>
                   
-                    <option value="Water_and_ions" 
+                    <option value="Water_and_ions"
                       
                     >Water_and_ions
                        - combination of the Water and Ions groups
@@ -347,43 +347,43 @@
                   
                 </param>
             
-              <param name="dista" type="boolean" 
+              <param name="dista" type="boolean"
                   
-                  label="dista" help="Use RMSD of distances instead of RMS deviation." 
+                  label="dista" help="Use RMSD of distances instead of RMS deviation."
                 />
             
-              <param name="nofit" type="boolean" 
+              <param name="nofit" type="boolean"
                   
-                  label="nofit" help="Do not use least squares fitting before RMSD calculation." 
+                  label="nofit" help="Do not use least squares fitting before RMSD calculation."
                 />
             
               <param name="method" type="select" label="method" help="Method for cluster determination. " multiple="false">
                   
-                    <option value="linkage" 
+                    <option value="linkage"
                       selected="true"
                     >linkage
                        - Add a structure to a cluster when its distance to any element of the cluster is less than cutoff
                     </option>
                   
-                    <option value="jarvis-patrick" 
+                    <option value="jarvis-patrick"
                       
                     >jarvis-patrick
                        - Add a structure to a cluster when this structure and a structure in the cluster have each other as neighbors and they have a least P neighbors in common
                     </option>
                   
-                    <option value="monte-carlo" 
+                    <option value="monte-carlo"
                       
                     >monte-carlo
                        - Reorder the RMSD matrix using Monte Carlo such that the order of the frames is using the smallest possible increments
                     </option>
                   
-                    <option value="diagonalization" 
+                    <option value="diagonalization"
                       
                     >diagonalization
                        - Diagonalize the RMSD matrix
                     </option>
                   
-                    <option value="gromos" 
+                    <option value="gromos"
                       
                     >gromos
                        - Count number of neighbors using cut-off and take structure with largest number of neighbors with all its neighbors as cluster and eliminate it from the pool of clusters
@@ -391,7 +391,7 @@
                   
                 </param>
             
-              <param name="cutoff" type="float" 
+              <param name="cutoff" type="float"
                   value="0.1"
                   
                   label="cutoff" help="RMSD cut-off (nm) for two structures to be neighbor." optional="false"/>
@@ -404,50 +404,50 @@
             
               <param name="output_format" type="select" label="output_format" help="Format of the output file" multiple="false">
                   
-                    <option value="xtc" 
+                    <option value="xtc"
                       
                     >xtc
                        
                     </option>
                   
-                    <option value="trr" 
+                    <option value="trr"
                       
                     >trr
                        
                     </option>
                   
-                    <option value="cpt" 
+                    <option value="cpt"
                       
                     >cpt
                        
                     </option>
                   
-                    <option value="gro" 
+                    <option value="gro"
                       
                     >gro
                        
                     </option>
                   
-                    <option value="g96" 
+                    <option value="g96"
                       
                     >g96
                        
                     </option>
                   
-                    <option value="pdb" 
+                    <option value="pdb"
                       
                     >pdb
                        
                     </option>
                   
-                    <option value="tng" 
+                    <option value="tng"
                       
                     >tng
                        
                     </option>
                   
                 </param>
-                    
+            
           </section>
     </inputs>
     <outputs>
@@ -485,22 +485,22 @@
     <tests>
         <test>
         </test>
-    </tests>    
+    </tests>
     <help>
 .. class:: infomark
-        
+
 Check the syntax for the tool parameters at the original library documentation: https://biobb_analysis.readthedocs.io/en/latest
 
 -----
 
-.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png    
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
     :width: 150
 
 **https://mmb.irbbarcelona.org/biobb**
-        
+
 .. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
         :width: 150
-        
+
 **https://bioexcel.eu**
    </help>
 

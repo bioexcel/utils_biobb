@@ -12,11 +12,11 @@
         #if $config.sele == "option1":
             ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
-        
+
         prody_anm
 
         #if $config.sele == "option1":
-            --config ${config.properties}.${config.properties.ext}
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
@@ -29,7 +29,7 @@
         
         
           --output_pdb_path $outname_output_pdb_path
-        ;          
+        ;
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
@@ -43,11 +43,11 @@
     </command>
     <inputs>
         
-          <param name="input_pdb_path" type="data" format="pdb"  optional="False" label="input PDB file" help="Input PDB file. Format: [input].pdb"/> 
+          <param name="input_pdb_path" type="data" format="pdb"  optional="False" label="input PDB file" help="Input PDB file. Format: [input].pdb"/>
         
         
-          <param name="outname_output_pdb_path" type="text" value="myprody_anm.pdb" 
-              optional="False" label="output PDB name" 
+          <param name="outname_output_pdb_path" type="text" value="myprody_anm.pdb"
+              optional="False" label="output PDB name"
               help="Output multi-model PDB file with the generated ensemble Format: [output].pdb "/>
         
         <conditional name="config">
@@ -67,7 +67,7 @@
           </conditional>
           <section name="properties" title="Properties Input">
             
-              <param name="num_structs" type="integer" 
+              <param name="num_structs" type="integer"
                   value="500"
                   
                   label="num_structs" help="Number of structures to be generated" optional="false"/>
@@ -78,21 +78,21 @@
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
             
-              <param name="cutoff" type="float" 
+              <param name="cutoff" type="float"
                   value="15.0"
                   
                   label="cutoff" help="Cutoff distance (Å) for pairwise interactions, minimum is 4.0 Å" optional="false"/>
             
-              <param name="gamma" type="float" 
+              <param name="gamma" type="float"
                   value="1.0"
                   
                   label="gamma" help="Spring constant" optional="false"/>
             
-              <param name="rmsd" type="float" 
+              <param name="rmsd" type="float"
                   value="1.0"
                   
                   label="rmsd" help="Average RMSD that the conformations will have with respect to the initial conformation" optional="false"/>
-                    
+            
           </section>
     </inputs>
     <outputs>
@@ -104,22 +104,22 @@
     <tests>
         <test>
         </test>
-    </tests>    
+    </tests>
     <help>
 .. class:: infomark
-        
+
 Check the syntax for the tool parameters at the original library documentation: https://biobb_flexdyn.readthedocs.io/en/latest
 
 -----
 
-.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png    
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
     :width: 150
 
 **https://mmb.irbbarcelona.org/biobb**
-        
+
 .. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
         :width: 150
-        
+
 **https://bioexcel.eu**
    </help>
 

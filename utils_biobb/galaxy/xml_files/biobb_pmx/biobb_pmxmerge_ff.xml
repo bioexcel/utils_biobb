@@ -1,8 +1,8 @@
-<tool id="biobb_pmx_pmxmerge_ff_ext" name="PmxmergeFf" version="3.8.1" >
+<tool id="biobb_pmx_pmxmerge_ff_ext" name="PmxmergeFf" version="4.0.0" >
     <description>: Wrapper class for the PMX merge_ff module.</description>
     <requirements>
         <requirement type="package"
-        version="3.8.1"
+        version="4.0.0"
         >biobb_pmx</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -10,7 +10,7 @@
           ln -f -s ${input_topology_path} ${input_topology_path}_`echo $$`.${input_topology_path.ext};
         
         
-        
+
         pmxmerge_ff
 
         
@@ -21,7 +21,7 @@
         
         
           --output_topology_path $outname_output_topology_path
-        ;          
+        ;
         
         
           rm -f ${input_topology_path}_`echo $$`.${input_topology_path.ext};
@@ -33,11 +33,11 @@
     </command>
     <inputs>
         
-          <param name="input_topology_path" type="data" format="zip"  optional="False" label="input ZIP file" help="Path to the input ligand topologies as a zip file containing a list of itp files. Format: [input].zip"/> 
+          <param name="input_topology_path" type="data" format="zip"  optional="False" label="input ZIP file" help="Path to the input ligand topologies as a zip file containing a list of itp files. Format: [input].zip"/>
         
         
-          <param name="outname_output_topology_path" type="text" value="mypmxmerge_ff.itp" 
-              optional="False" label="output ITP name" 
+          <param name="outname_output_topology_path" type="text" value="mypmxmerge_ff.itp"
+              optional="False" label="output ITP name"
               help="Path to the merged ligand topology file Format: [output].itp "/>
         
         
@@ -51,22 +51,22 @@
     <tests>
         <test>
         </test>
-    </tests>    
+    </tests>
     <help>
 .. class:: infomark
-        
+
 Check the syntax for the tool parameters at the original library documentation: https://biobb_pmx.readthedocs.io/en/latest
 
 -----
 
-.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png    
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
     :width: 150
 
 **https://mmb.irbbarcelona.org/biobb**
-        
+
 .. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
         :width: 150
-        
+
 **https://bioexcel.eu**
    </help>
 

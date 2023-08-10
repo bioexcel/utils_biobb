@@ -12,11 +12,11 @@
         #if $config.sele == "option1":
             ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
-        
+
         fix_altlocs
 
         #if $config.sele == "option1":
-            --config ${config.properties}.${config.properties.ext}
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
@@ -29,7 +29,7 @@
         
         
           --output_pdb_path $outname_output_pdb_path
-        ;          
+        ;
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
@@ -43,11 +43,11 @@
     </command>
     <inputs>
         
-          <param name="input_pdb_path" type="data" format="pdb"  optional="False" label="input PDB file" help="Input PDB file path. Format: [input].pdb"/> 
+          <param name="input_pdb_path" type="data" format="pdb"  optional="False" label="input PDB file" help="Input PDB file path. Format: [input].pdb"/>
         
         
-          <param name="outname_output_pdb_path" type="text" value="myfix_altlocs.pdb" 
-              optional="False" label="output PDB name" 
+          <param name="outname_output_pdb_path" type="text" value="myfix_altlocs.pdb"
+              optional="False" label="output PDB name"
               help="Output PDB file path Format: [output].pdb "/>
         
         <conditional name="config">
@@ -82,7 +82,7 @@
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
-                    
+            
           </section>
     </inputs>
     <outputs>
@@ -94,22 +94,22 @@
     <tests>
         <test>
         </test>
-    </tests>    
+    </tests>
     <help>
 .. class:: infomark
-        
+
 Check the syntax for the tool parameters at the original library documentation: https://biobb_model.readthedocs.io/en/latest
 
 -----
 
-.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png    
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
     :width: 150
 
 **https://mmb.irbbarcelona.org/biobb**
-        
+
 .. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
         :width: 150
-        
+
 **https://bioexcel.eu**
    </help>
 

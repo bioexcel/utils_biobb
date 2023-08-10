@@ -14,11 +14,11 @@
         #if $config.sele == "option1":
             ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
-        
+
         template
 
         #if $config.sele == "option1":
-            --config ${config.properties}.${config.properties.ext}
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
@@ -35,7 +35,7 @@
         
         
           --output_file_path $outname_output_file_path
-        ;          
+        ;
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
@@ -51,13 +51,13 @@
     </command>
     <inputs>
         
-          <param name="input_file_path1" type="data" format="top"  optional="False" label="input TOP file" help="Description for the first input file path. Format: [input].top"/> 
+          <param name="input_file_path1" type="data" format="top"  optional="False" label="input TOP file" help="Description for the first input file path. Format: [input].top"/>
         
-          <param name="input_file_path2" type="data" format="dcd"  optional="True" label="input DCD file" help="Description for the second input file path (optional). Format: [input].dcd"/> 
+          <param name="input_file_path2" type="data" format="dcd"  optional="True" label="input DCD file" help="Description for the second input file path (optional). Format: [input].dcd"/>
         
         
-          <param name="outname_output_file_path" type="text" value="mytemplate.zip" 
-              optional="False" label="output ZIP name" 
+          <param name="outname_output_file_path" type="text" value="mytemplate.zip"
+              optional="False" label="output ZIP name"
               help="Description for the output file path Format: [output].zip "/>
         
         <conditional name="config">
@@ -77,9 +77,9 @@
           </conditional>
           <section name="properties" title="Properties Input">
             
-              <param name="boolean_property" type="boolean" 
+              <param name="boolean_property" type="boolean"
                   checked="true"
-                  label="boolean_property" help="Example of boolean property." 
+                  label="boolean_property" help="Example of boolean property."
                 />
             
               <param name="binary_path" type="text" label="binary_path" help="Example of executable binary property." optional="false"
@@ -87,7 +87,7 @@
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
-                    
+            
           </section>
     </inputs>
     <outputs>
@@ -99,22 +99,22 @@
     <tests>
         <test>
         </test>
-    </tests>    
+    </tests>
     <help>
 .. class:: infomark
-        
+
 Check the syntax for the tool parameters at the original library documentation: https://biobb_template.readthedocs.io/en/latest
 
 -----
 
-.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png    
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
     :width: 150
 
 **https://mmb.irbbarcelona.org/biobb**
-        
+
 .. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
         :width: 150
-        
+
 **https://bioexcel.eu**
    </help>
 

@@ -12,11 +12,11 @@
         #if $config.sele == "option1":
             ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
-        
+
         pls_components
 
         #if $config.sele == "option1":
-            --config ${config.properties}.${config.properties.ext}
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
@@ -31,7 +31,7 @@
           --output_results_path $outname_output_results_path
         
           --output_plot_path $outname_output_plot_path
-        ;          
+        ;
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
@@ -47,15 +47,15 @@
     </command>
     <inputs>
         
-          <param name="input_dataset_path" type="data" format="csv"  optional="False" label="input CSV file" help="Path to the input dataset. Format: [input].csv"/> 
+          <param name="input_dataset_path" type="data" format="csv"  optional="False" label="input CSV file" help="Path to the input dataset. Format: [input].csv"/>
         
         
-          <param name="outname_output_results_path" type="text" value="mypls_components.csv" 
-              optional="False" label="output CSV name" 
+          <param name="outname_output_results_path" type="text" value="mypls_components.csv"
+              optional="False" label="output CSV name"
               help="Table with R2 and MSE for calibration and cross-validation data for the best number of components Format: [output].csv "/>
         
-          <param name="outname_output_plot_path" type="text" value="mypls_components.png" 
-              optional="True" label="output PNG name" 
+          <param name="outname_output_plot_path" type="text" value="mypls_components.png"
+              optional="True" label="output PNG name"
               help="Path to the Mean Square Error plot Format: [output].png "/>
         
         <conditional name="config">
@@ -83,26 +83,26 @@
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
             
-              <param name="optimise" type="boolean" 
+              <param name="optimise" type="boolean"
                   
-                  label="optimise" help="Whether or not optimise the process of MSE calculation. Beware, if True selected, the process can take a long time depending on the **max_components** value." 
+                  label="optimise" help="Whether or not optimise the process of MSE calculation. Beware, if True selected, the process can take a long time depending on the **max_components** value."
                 />
             
-              <param name="max_components" type="integer" 
+              <param name="max_components" type="integer"
                   value="10"
                   min="1" max="1000"
                   label="max_components" help="Maximum number of components to use by default for PLS queries." optional="false"/>
             
-              <param name="cv" type="integer" 
+              <param name="cv" type="integer"
                   value="10"
                   min="1" max="10000"
                   label="cv" help="Specify the number of folds in the cross-validation splitting strategy. Value must be between 2 and number of samples in the dataset." optional="false"/>
             
-              <param name="scale" type="boolean" 
+              <param name="scale" type="boolean"
                   
-                  label="scale" help="Whether or not to scale the input dataset." 
+                  label="scale" help="Whether or not to scale the input dataset."
                 />
-                    
+            
           </section>
     </inputs>
     <outputs>
@@ -117,22 +117,22 @@
     <tests>
         <test>
         </test>
-    </tests>    
+    </tests>
     <help>
 .. class:: infomark
-        
+
 Check the syntax for the tool parameters at the original library documentation: https://biobb_ml.readthedocs.io/en/latest
 
 -----
 
-.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png    
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
     :width: 150
 
 **https://mmb.irbbarcelona.org/biobb**
-        
+
 .. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
         :width: 150
-        
+
 **https://bioexcel.eu**
    </help>
 

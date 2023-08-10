@@ -12,11 +12,11 @@
         #if $config.sele == "option1":
             ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
-        
+
         cp2k_run
 
         #if $config.sele == "option1":
-            --config ${config.properties}.${config.properties.ext}
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
@@ -33,7 +33,7 @@
           --output_outzip_path $outname_output_outzip_path
         
           --output_rst_path $outname_output_rst_path
-        ;          
+        ;
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
@@ -51,19 +51,19 @@
     </command>
     <inputs>
         
-          <param name="input_inp_path" type="data" format="inp,in,txt,wfn"  optional="False" label="input INP,IN,TXT,WFN file" help="Input configuration file (CP2K run options). Format: [input].[format]"/> 
+          <param name="input_inp_path" type="data" format="inp,in,txt,wfn"  optional="False" label="input INP,IN,TXT,WFN file" help="Input configuration file (CP2K run options). Format: [input].[format]"/>
         
         
-          <param name="outname_output_log_path" type="text" value="mycp2k_run.log" 
-              optional="False" label="output LOG,OUT,TXT,O name" 
+          <param name="outname_output_log_path" type="text" value="mycp2k_run.log"
+              optional="False" label="output LOG,OUT,TXT,O name"
               help="Output log file Format: [output].[format] "/>
         
-          <param name="outname_output_outzip_path" type="text" value="mycp2k_run.zip" 
-              optional="False" label="output ZIP,GZIP,GZ name" 
+          <param name="outname_output_outzip_path" type="text" value="mycp2k_run.zip"
+              optional="False" label="output ZIP,GZIP,GZ name"
               help="Output files Format: [output].[format] "/>
         
-          <param name="outname_output_rst_path" type="text" value="mycp2k_run.wfn" 
-              optional="False" label="output WFN name" 
+          <param name="outname_output_rst_path" type="text" value="mycp2k_run.wfn"
+              optional="False" label="output WFN name"
               help="Output restart file Format: [output].wfn "/>
         
         <conditional name="config">
@@ -101,7 +101,7 @@
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
             
-              <param name="mpi_np" type="integer" 
+              <param name="mpi_np" type="integer"
                   value="0"
                   
                   label="mpi_np" help="Number of MPI processes. Usually an integer bigger than 1." optional="true"/>
@@ -114,25 +114,25 @@
             
               <param name="output_log_path_format" type="select" label="output_log_path_format" help="Format of the output file" multiple="false">
                   
-                    <option value="log" 
+                    <option value="log"
                       
                     >log
                        
                     </option>
                   
-                    <option value="out" 
+                    <option value="out"
                       
                     >out
                        
                     </option>
                   
-                    <option value="txt" 
+                    <option value="txt"
                       
                     >txt
                        
                     </option>
                   
-                    <option value="o" 
+                    <option value="o"
                       
                     >o
                        
@@ -142,26 +142,26 @@
             
               <param name="output_outzip_path_format" type="select" label="output_outzip_path_format" help="Format of the output file" multiple="false">
                   
-                    <option value="zip" 
+                    <option value="zip"
                       
                     >zip
                        
                     </option>
                   
-                    <option value="gzip" 
+                    <option value="gzip"
                       
                     >gzip
                        
                     </option>
                   
-                    <option value="gz" 
+                    <option value="gz"
                       
                     >gz
                        
                     </option>
                   
                 </param>
-                    
+            
           </section>
     </inputs>
     <outputs>
@@ -199,22 +199,22 @@
     <tests>
         <test>
         </test>
-    </tests>    
+    </tests>
     <help>
 .. class:: infomark
-        
+
 Check the syntax for the tool parameters at the original library documentation: https://biobb_cp2k.readthedocs.io/en/latest
 
 -----
 
-.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png    
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
     :width: 150
 
 **https://mmb.irbbarcelona.org/biobb**
-        
+
 .. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
         :width: 150
-        
+
 **https://bioexcel.eu**
    </help>
 

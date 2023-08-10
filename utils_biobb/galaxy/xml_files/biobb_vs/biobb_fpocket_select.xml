@@ -12,11 +12,11 @@
         #if $config.sele == "option1":
             ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
-        
+
         fpocket_select
 
         #if $config.sele == "option1":
-            --config ${config.properties}.${config.properties.ext}
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
@@ -31,7 +31,7 @@
           --output_pocket_pdb $outname_output_pocket_pdb
         
           --output_pocket_pqr $outname_output_pocket_pqr
-        ;          
+        ;
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
@@ -47,15 +47,15 @@
     </command>
     <inputs>
         
-          <param name="input_pockets_zip" type="data" format="zip"  optional="False" label="input ZIP file" help="Path to the pockets found by fpocket. Format: [input].zip"/> 
+          <param name="input_pockets_zip" type="data" format="zip"  optional="False" label="input ZIP file" help="Path to the pockets found by fpocket. Format: [input].zip"/>
         
         
-          <param name="outname_output_pocket_pdb" type="text" value="myfpocket_select.pdb" 
-              optional="False" label="output PDB name" 
+          <param name="outname_output_pocket_pdb" type="text" value="myfpocket_select.pdb"
+              optional="False" label="output PDB name"
               help="Path to the PDB file with the cavity found by fpocket Format: [output].pdb "/>
         
-          <param name="outname_output_pocket_pqr" type="text" value="myfpocket_select.pqr" 
-              optional="False" label="output PQR name" 
+          <param name="outname_output_pocket_pqr" type="text" value="myfpocket_select.pqr"
+              optional="False" label="output PQR name"
               help="Path to the PQR file with the pocket found by fpocket Format: [output].pqr "/>
         
         <conditional name="config">
@@ -75,11 +75,11 @@
           </conditional>
           <section name="properties" title="Properties Input">
             
-              <param name="pocket" type="integer" 
+              <param name="pocket" type="integer"
                   value="1"
                   min="1" max="1000"
                   label="pocket" help="Pocket id from the summary json given by the fpocket building block." optional="false"/>
-                    
+            
           </section>
     </inputs>
     <outputs>
@@ -94,22 +94,22 @@
     <tests>
         <test>
         </test>
-    </tests>    
+    </tests>
     <help>
 .. class:: infomark
-        
+
 Check the syntax for the tool parameters at the original library documentation: https://biobb_vs.readthedocs.io/en/latest
 
 -----
 
-.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png    
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
     :width: 150
 
 **https://mmb.irbbarcelona.org/biobb**
-        
+
 .. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
         :width: 150
-        
+
 **https://bioexcel.eu**
    </help>
 

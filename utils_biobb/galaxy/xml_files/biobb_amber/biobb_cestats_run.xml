@@ -14,11 +14,11 @@
         #if $config.sele == "option1":
             ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
-        
+
         cestats_run
 
         #if $config.sele == "option1":
-            --config ${config.properties}.${config.properties.ext}
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
@@ -45,7 +45,7 @@
           --output_conditional_path $outname_output_conditional_path
         
           --output_chunk_conditional_path $outname_output_chunk_conditional_path
-        ;          
+        ;
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
@@ -71,33 +71,33 @@
     </command>
     <inputs>
         
-          <param name="input_cein_path" type="data" format="cein,cpein"  optional="False" label="input CEIN,CPEIN file" help="Input cein or cpein file (from pmemd or sander) with titrating residue information. Format: [input].[format]"/> 
+          <param name="input_cein_path" type="data" format="cein,cpein"  optional="False" label="input CEIN,CPEIN file" help="Input cein or cpein file (from pmemd or sander) with titrating residue information. Format: [input].[format]"/>
         
-          <param name="input_ceout_path" type="data" format="ceout,zip,gzip,gz"  optional="False" label="input CEOUT,ZIP,GZIP,GZ file" help="Output ceout file (AMBER ceout). Format: [input].[format]"/> 
+          <param name="input_ceout_path" type="data" format="ceout,zip,gzip,gz"  optional="False" label="input CEOUT,ZIP,GZIP,GZ file" help="Output ceout file (AMBER ceout). Format: [input].[format]"/>
         
         
-          <param name="outname_output_dat_path" type="text" value="mycestats_run.dat" 
-              optional="False" label="output DAT,OUT,TXT,O name" 
+          <param name="outname_output_dat_path" type="text" value="mycestats_run.dat"
+              optional="False" label="output DAT,OUT,TXT,O name"
               help="Output file to which the standard calceo-type statistics are written Format: [output].[format] "/>
         
-          <param name="outname_output_population_path" type="text" value="mycestats_run.dat" 
-              optional="True" label="output DAT,OUT,TXT,O name" 
+          <param name="outname_output_population_path" type="text" value="mycestats_run.dat"
+              optional="True" label="output DAT,OUT,TXT,O name"
               help="Output file where protonation state populations are printed for every state of every residue Format: [output].[format] "/>
         
-          <param name="outname_output_chunk_path" type="text" value="mycestats_run.dat" 
-              optional="True" label="output DAT,OUT,TXT,O name" 
+          <param name="outname_output_chunk_path" type="text" value="mycestats_run.dat"
+              optional="True" label="output DAT,OUT,TXT,O name"
               help="Output file where the time series data calculated over chunks of the simulation are printed Format: [output].[format] "/>
         
-          <param name="outname_output_cumulative_path" type="text" value="mycestats_run.dat" 
-              optional="True" label="output DAT,OUT,TXT,O name" 
+          <param name="outname_output_cumulative_path" type="text" value="mycestats_run.dat"
+              optional="True" label="output DAT,OUT,TXT,O name"
               help="Output file where the cumulative time series data is printed Format: [output].[format] "/>
         
-          <param name="outname_output_conditional_path" type="text" value="mycestats_run.dat" 
-              optional="True" label="output DAT,OUT,TXT,O name" 
+          <param name="outname_output_conditional_path" type="text" value="mycestats_run.dat"
+              optional="True" label="output DAT,OUT,TXT,O name"
               help="Output file with requested conditional probabilities Format: [output].[format] "/>
         
-          <param name="outname_output_chunk_conditional_path" type="text" value="mycestats_run.dat" 
-              optional="True" label="output DAT,OUT,TXT,O name" 
+          <param name="outname_output_chunk_conditional_path" type="text" value="mycestats_run.dat"
+              optional="True" label="output DAT,OUT,TXT,O name"
               help="Output file with a time series of the conditional probabilities over a trajectory split up into chunks Format: [output].[format] "/>
         
         <conditional name="config">
@@ -117,49 +117,49 @@
           </conditional>
           <section name="properties" title="Properties Input">
             
-              <param name="timestep" type="float" 
+              <param name="timestep" type="float"
                   value="0.002"
                   
                   label="timestep" help="Simulation time step -in ps-, used to print data as a function of time." optional="false"/>
             
-              <param name="verbose" type="boolean" 
+              <param name="verbose" type="boolean"
                   
-                  label="verbose" help="Controls how much information is printed to the calceo-style output file. Options are: False - Just print fraction protonated. True - Print everything calceo prints." 
+                  label="verbose" help="Controls how much information is printed to the calceo-style output file. Options are: False - Just print fraction protonated. True - Print everything calceo prints."
                 />
             
-              <param name="interval" type="integer" 
+              <param name="interval" type="integer"
                   value="1000"
                   
                   label="interval" help="Interval between which to print out time series data like chunks, cumulative data, and running averages. It is also used as the window of the conditional probability time series." optional="false"/>
             
-              <param name="reduced" type="boolean" 
+              <param name="reduced" type="boolean"
                   checked="true"
-                  label="reduced" help="Print out reduction fraction instead of oxidation fraction in time series data." 
+                  label="reduced" help="Print out reduction fraction instead of oxidation fraction in time series data."
                 />
             
-              <param name="eos" type="boolean" 
+              <param name="eos" type="boolean"
                   
-                  label="eos" help="Print predicted Eos -via Nernst equation- in place of fraction reduced or oxidized." 
+                  label="eos" help="Print predicted Eos -via Nernst equation- in place of fraction reduced or oxidized."
                 />
             
-              <param name="calceo" type="boolean" 
+              <param name="calceo" type="boolean"
                   checked="true"
-                  label="calceo" help="Triggers the calceo-style output." 
+                  label="calceo" help="Triggers the calceo-style output."
                 />
             
-              <param name="running_avg_window" type="integer" 
+              <param name="running_avg_window" type="integer"
                   value="100"
                   
                   label="running_avg_window" help="Defines a window size -in MD steps- for a moving, running average time series." optional="false"/>
             
-              <param name="chunk_window" type="integer" 
+              <param name="chunk_window" type="integer"
                   value="100"
                   
                   label="chunk_window" help="Computes the time series data over a chunk of the simulation of this specified size -window- time steps." optional="false"/>
             
-              <param name="cumulative" type="boolean" 
+              <param name="cumulative" type="boolean"
                   
-                  label="cumulative" help="Computes the cumulative average time series data over the course of the trajectory." 
+                  label="cumulative" help="Computes the cumulative average time series data over the course of the trajectory."
                 />
             
               <param name="fix_remd" type="text" label="fix_remd" help="This option will trigger cestats to reassemble the titration data into pH-specific ensembles. This is an exclusive mode of the program, no other analyses will be done." optional="true"
@@ -182,25 +182,25 @@
             
               <param name="output_dat_path_format" type="select" label="output_dat_path_format" help="Format of the output file" multiple="false">
                   
-                    <option value="dat" 
+                    <option value="dat"
                       
                     >dat
                        
                     </option>
                   
-                    <option value="out" 
+                    <option value="out"
                       
                     >out
                        
                     </option>
                   
-                    <option value="txt" 
+                    <option value="txt"
                       
                     >txt
                        
                     </option>
                   
-                    <option value="o" 
+                    <option value="o"
                       
                     >o
                        
@@ -210,25 +210,25 @@
             
               <param name="output_population_path_format" type="select" label="output_population_path_format" help="Format of the output file" multiple="false">
                   
-                    <option value="dat" 
+                    <option value="dat"
                       
                     >dat
                        
                     </option>
                   
-                    <option value="out" 
+                    <option value="out"
                       
                     >out
                        
                     </option>
                   
-                    <option value="txt" 
+                    <option value="txt"
                       
                     >txt
                        
                     </option>
                   
-                    <option value="o" 
+                    <option value="o"
                       
                     >o
                        
@@ -238,25 +238,25 @@
             
               <param name="output_chunk_path_format" type="select" label="output_chunk_path_format" help="Format of the output file" multiple="false">
                   
-                    <option value="dat" 
+                    <option value="dat"
                       
                     >dat
                        
                     </option>
                   
-                    <option value="out" 
+                    <option value="out"
                       
                     >out
                        
                     </option>
                   
-                    <option value="txt" 
+                    <option value="txt"
                       
                     >txt
                        
                     </option>
                   
-                    <option value="o" 
+                    <option value="o"
                       
                     >o
                        
@@ -266,25 +266,25 @@
             
               <param name="output_cumulative_path_format" type="select" label="output_cumulative_path_format" help="Format of the output file" multiple="false">
                   
-                    <option value="dat" 
+                    <option value="dat"
                       
                     >dat
                        
                     </option>
                   
-                    <option value="out" 
+                    <option value="out"
                       
                     >out
                        
                     </option>
                   
-                    <option value="txt" 
+                    <option value="txt"
                       
                     >txt
                        
                     </option>
                   
-                    <option value="o" 
+                    <option value="o"
                       
                     >o
                        
@@ -294,25 +294,25 @@
             
               <param name="output_conditional_path_format" type="select" label="output_conditional_path_format" help="Format of the output file" multiple="false">
                   
-                    <option value="dat" 
+                    <option value="dat"
                       
                     >dat
                        
                     </option>
                   
-                    <option value="out" 
+                    <option value="out"
                       
                     >out
                        
                     </option>
                   
-                    <option value="txt" 
+                    <option value="txt"
                       
                     >txt
                        
                     </option>
                   
-                    <option value="o" 
+                    <option value="o"
                       
                     >o
                        
@@ -322,32 +322,32 @@
             
               <param name="output_chunk_conditional_path_format" type="select" label="output_chunk_conditional_path_format" help="Format of the output file" multiple="false">
                   
-                    <option value="dat" 
+                    <option value="dat"
                       
                     >dat
                        
                     </option>
                   
-                    <option value="out" 
+                    <option value="out"
                       
                     >out
                        
                     </option>
                   
-                    <option value="txt" 
+                    <option value="txt"
                       
                     >txt
                        
                     </option>
                   
-                    <option value="o" 
+                    <option value="o"
                       
                     >o
                        
                     </option>
                   
                 </param>
-                    
+            
           </section>
     </inputs>
     <outputs>
@@ -440,22 +440,22 @@
     <tests>
         <test>
         </test>
-    </tests>    
+    </tests>
     <help>
 .. class:: infomark
-        
+
 Check the syntax for the tool parameters at the original library documentation: https://biobb_amber.readthedocs.io/en/latest
 
 -----
 
-.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png    
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
     :width: 150
 
 **https://mmb.irbbarcelona.org/biobb**
-        
+
 .. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
         :width: 150
-        
+
 **https://bioexcel.eu**
    </help>
 

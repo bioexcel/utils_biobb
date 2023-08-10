@@ -10,11 +10,11 @@
         #if $config.sele == "option1":
             ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
-        
+
         memprotmd_sim_search
 
         #if $config.sele == "option1":
-            --config ${config.properties}.${config.properties.ext}
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
@@ -23,7 +23,7 @@
         
         
           --output_simulations $outname_output_simulations
-        ;          
+        ;
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
@@ -36,8 +36,8 @@
     <inputs>
         
         
-          <param name="outname_output_simulations" type="text" value="mymemprotmd_sim_search.json" 
-              optional="False" label="output JSON name" 
+          <param name="outname_output_simulations" type="text" value="mymemprotmd_sim_search.json"
+              optional="False" label="output JSON name"
               help="Path to the output JSON file Format: [output].json "/>
         
         <conditional name="config">
@@ -65,188 +65,188 @@
             
               <param name="keyword" type="select" label="keyword" help="String to search for in the database metadata. Examples are families like gpcr or porin. " multiple="false">
                   
-                    <option value="porin" 
+                    <option value="porin"
                       
                     >porin
                        
                     </option>
                   
-                    <option value="outer membrane protein" 
+                    <option value="outer membrane protein"
                       
                     >outer membrane protein
                        
                     </option>
                   
-                    <option value="membrane protein" 
+                    <option value="membrane protein"
                       
                     >membrane protein
                        
                     </option>
                   
-                    <option value="gpcr" 
+                    <option value="gpcr"
                       
                     >gpcr
                        - 7-transmembrane domain receptors transducing extracellular signals into cells
                     </option>
                   
-                    <option value="ion channels" 
+                    <option value="ion channels"
                       
                     >ion channels
                        
                     </option>
                   
-                    <option value="rhodopsin" 
+                    <option value="rhodopsin"
                       
                     >rhodopsin
                        - The most famous GPCRs
                     </option>
                   
-                    <option value="abc" 
+                    <option value="abc"
                       
                     >abc
                        
                     </option>
                   
-                    <option value="mip" 
+                    <option value="mip"
                       
                     >mip
                        - Major Intrinsic Protein (MIP)/FNT superfamily: specific for the transport of water and small neutral solutes
                     </option>
                   
-                    <option value="ligand-gated" 
+                    <option value="ligand-gated"
                       
                     >ligand-gated
                        - Ligand-dependent signal conversion from chemical signals to electric signals
                     </option>
                   
-                    <option value="ammonia" 
+                    <option value="ammonia"
                       
                     >ammonia
                        - Regulating transepithelial ammonia secretion
                     </option>
                   
-                    <option value="mapeg" 
+                    <option value="mapeg"
                       
                     >mapeg
                        - Eicosanoid and Glutathione metabolism proteins
                     </option>
                   
-                    <option value="transmembrane" 
+                    <option value="transmembrane"
                       
                     >transmembrane
                        - Heme biosynthesis
                     </option>
                   
-                    <option value="protein" 
+                    <option value="protein"
                       
                     >protein
                        
                     </option>
                   
-                    <option value="kinase" 
+                    <option value="kinase"
                       
                     >kinase
                        - Tyrosine-protein kinases: regulate central nervous system; gene transcription and cell differentiation
                     </option>
                   
-                    <option value="glycoprotein" 
+                    <option value="glycoprotein"
                       
                     >glycoprotein
                        - Expression of TCR complex
                     </option>
                   
-                    <option value="immunoglobulin" 
+                    <option value="immunoglobulin"
                       
                     >immunoglobulin
                        - Recognition; binding and adhesion process of cells
                     </option>
                   
-                    <option value="integrin" 
+                    <option value="integrin"
                       
                     >integrin
                        - Bridges for cell-cell and cell-extracellular matrix interaction
                     </option>
                   
-                    <option value="bnip3" 
+                    <option value="bnip3"
                       
                     >bnip3
                        - BNip3 protein family: protect cell from apoptosis
                     </option>
                   
-                    <option value="bcl-2" 
+                    <option value="bcl-2"
                       
                     >bcl-2
                        - Regulating cell-death; either induce apoptotic or inhibit apoptosis
                     </option>
                   
-                    <option value="atpase" 
+                    <option value="atpase"
                       
                     >atpase
                        - ATPase regulators; P-P-bond hydrolysis-driven transporter
                     </option>
                   
-                    <option value="cytochrome" 
+                    <option value="cytochrome"
                       
                     >cytochrome
                        - Terminal oxidase enzyme in electron transfer chain
                     </option>
                   
-                    <option value="nadp" 
+                    <option value="nadp"
                       
                     >nadp
                        - Transmembrane proteins with NAD(P)-binding Rossmann-fold domains: monoamine oxidase; deaminates norepinephrine; epinephrine; serotonin and dopamine
                     </option>
                   
-                    <option value="a4" 
+                    <option value="a4"
                       
                     >a4
                        - Amyloid beta A4 protein; involved in alzheimer&#39;s diseases
                     </option>
                   
-                    <option value="lysosome" 
+                    <option value="lysosome"
                       
                     >lysosome
                        - Lysosome-associated membrane glycoprotein: specific to lysosomes; CD107
                     </option>
                   
-                    <option value="necrosis" 
+                    <option value="necrosis"
                       
                     >necrosis
                        - Tumor necrosis factor recepto: binding with TNF and NGF; interacting with a variety of signal molecules; highly associated with apoptosis
                     </option>
                   
-                    <option value="oxidoreductase" 
+                    <option value="oxidoreductase"
                       
                     >oxidoreductase
                        - DHODH; biosynthesis of orotate
                     </option>
                   
-                    <option value="ceramidase" 
+                    <option value="ceramidase"
                       
                     >ceramidase
                        - Neutral/alkaline ceramidase: converting sphingolipid to sphingosine
                     </option>
                   
-                    <option value="dehydrogenase" 
+                    <option value="dehydrogenase"
                       
                     >dehydrogenase
                        - Aldehyde dehydrogenase:ALDH; Oxidation of aldehydes
                     </option>
                   
-                    <option value="mitochondrial" 
+                    <option value="mitochondrial"
                       
                     >mitochondrial
                        
                     </option>
                   
-                    <option value="plastid" 
+                    <option value="plastid"
                       
                     >plastid
                        
                     </option>
                   
                 </param>
-                    
+            
           </section>
     </inputs>
     <outputs>
@@ -258,22 +258,22 @@
     <tests>
         <test>
         </test>
-    </tests>    
+    </tests>
     <help>
 .. class:: infomark
-        
+
 Check the syntax for the tool parameters at the original library documentation: https://biobb_io.readthedocs.io/en/latest
 
 -----
 
-.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png    
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
     :width: 150
 
 **https://mmb.irbbarcelona.org/biobb**
-        
+
 .. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
         :width: 150
-        
+
 **https://bioexcel.eu**
    </help>
 

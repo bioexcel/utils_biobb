@@ -12,11 +12,11 @@
         #if $config.sele == "option1":
             ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
-        
+
         fpocket_run
 
         #if $config.sele == "option1":
-            --config ${config.properties}.${config.properties.ext}
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
@@ -31,7 +31,7 @@
           --output_pockets_zip $outname_output_pockets_zip
         
           --output_summary $outname_output_summary
-        ;          
+        ;
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
@@ -47,15 +47,15 @@
     </command>
     <inputs>
         
-          <param name="input_pdb_path" type="data" format="pdb"  optional="False" label="input PDB file" help="Path to the PDB structure where the binding site is to be found. Format: [input].pdb"/> 
+          <param name="input_pdb_path" type="data" format="pdb"  optional="False" label="input PDB file" help="Path to the PDB structure where the binding site is to be found. Format: [input].pdb"/>
         
         
-          <param name="outname_output_pockets_zip" type="text" value="myfpocket_run.zip" 
-              optional="False" label="output ZIP name" 
+          <param name="outname_output_pockets_zip" type="text" value="myfpocket_run.zip"
+              optional="False" label="output ZIP name"
               help="Path to all the pockets found by fpocket in the input_pdb_path structure Format: [output].zip "/>
         
-          <param name="outname_output_summary" type="text" value="myfpocket_run.json" 
-              optional="False" label="output JSON name" 
+          <param name="outname_output_summary" type="text" value="myfpocket_run.json"
+              optional="False" label="output JSON name"
               help="Path to the JSON summary file Format: [output].json "/>
         
         <conditional name="config">
@@ -75,36 +75,36 @@
           </conditional>
           <section name="properties" title="Properties Input">
             
-              <param name="min_radius" type="float" 
+              <param name="min_radius" type="float"
                   
                   min="0.1" max="1000.0"
                   label="min_radius" help="The minimum radius in Ångstroms an alpha sphere might have in a binding pocket." optional="true"/>
             
-              <param name="max_radius" type="float" 
+              <param name="max_radius" type="float"
                   
                   min="2.0" max="1000.0"
                   label="max_radius" help="The maximum radius in Ångstroms of alpha spheres in a pocket." optional="true"/>
             
-              <param name="num_spheres" type="integer" 
+              <param name="num_spheres" type="integer"
                   
                   min="1" max="1000"
                   label="num_spheres" help="Indicates how many alpha spheres a pocket must contain at least in order to figure in the results." optional="true"/>
             
               <param name="sort_by" type="select" label="sort_by" help="From which property the output will be sorted. " multiple="false">
                   
-                    <option value="druggability_score" 
+                    <option value="druggability_score"
                       selected="true"
                     >druggability_score
                        - this score intends to assess the likeliness of the pocket to bind a small drug like molecule
                     </option>
                   
-                    <option value="score" 
+                    <option value="score"
                       
                     >score
                        - fpocket score as defined in the fpocket paper
                     </option>
                   
-                    <option value="volume" 
+                    <option value="volume"
                       
                     >volume
                        - volume of the pocket
@@ -117,7 +117,7 @@
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
-                    
+            
           </section>
     </inputs>
     <outputs>
@@ -132,22 +132,22 @@
     <tests>
         <test>
         </test>
-    </tests>    
+    </tests>
     <help>
 .. class:: infomark
-        
+
 Check the syntax for the tool parameters at the original library documentation: https://biobb_vs.readthedocs.io/en/latest
 
 -----
 
-.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png    
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
     :width: 150
 
 **https://mmb.irbbarcelona.org/biobb**
-        
+
 .. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
         :width: 150
-        
+
 **https://bioexcel.eu**
    </help>
 

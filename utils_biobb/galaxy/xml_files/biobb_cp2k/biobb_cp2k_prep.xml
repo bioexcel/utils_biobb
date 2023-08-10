@@ -1,8 +1,8 @@
-<tool id="biobb_cp2k_cp2k_prep_ext" name="Cp2kPrep" version="3.8.3" >
+<tool id="biobb_cp2k_cp2k_prep_ext" name="Cp2kPrep" version="4.0.0" >
     <description>: Helper bb to prepare inputs for the CP2K QM tool module.</description>
     <requirements>
         <requirement type="package"
-        version="3.8.3"
+        version="4.0.0"
         >biobb_cp2k</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -16,11 +16,11 @@
         #if $config.sele == "option1":
             ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
-        
+
         cp2k_prep
 
         #if $config.sele == "option1":
-            --config ${config.properties}.${config.properties.ext}
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
@@ -41,7 +41,7 @@
         
         
           --output_inp_path $outname_output_inp_path
-        ;          
+        ;
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
@@ -59,15 +59,15 @@
     </command>
     <inputs>
         
-          <param name="input_inp_path" type="data" format="pdb"  optional="True" label="input PDB file" help="Input configuration file (CP2K run options). Format: [input].pdb"/> 
+          <param name="input_inp_path" type="data" format="pdb"  optional="True" label="input PDB file" help="Input configuration file (CP2K run options). Format: [input].pdb"/>
         
-          <param name="input_pdb_path" type="data" format="pdb"  optional="True" label="input PDB file" help="Input PDB file. Format: [input].pdb"/> 
+          <param name="input_pdb_path" type="data" format="pdb"  optional="True" label="input PDB file" help="Input PDB file. Format: [input].pdb"/>
         
-          <param name="input_rst_path" type="data" format="wfn"  optional="True" label="input WFN file" help="Input restart file (WFN). Format: [input].wfn"/> 
+          <param name="input_rst_path" type="data" format="wfn"  optional="True" label="input WFN file" help="Input restart file (WFN). Format: [input].wfn"/>
         
         
-          <param name="outname_output_inp_path" type="text" value="mycp2k_prep.inp" 
-              optional="False" label="output INP,IN,TXT name" 
+          <param name="outname_output_inp_path" type="text" value="mycp2k_prep.inp"
+              optional="False" label="output INP,IN,TXT name"
               help="Output CP2K input configuration file Format: [output].[format] "/>
         
         <conditional name="config">
@@ -89,25 +89,25 @@
             
               <param name="simulation_type" type="select" label="simulation_type" help="Default options for the cp2k_in file. Each creates a different inp file. " multiple="false">
                   
-                    <option value="energy" 
+                    <option value="energy"
                       selected="true"
                     >energy
                        - Computes Energy and Forces
                     </option>
                   
-                    <option value="geom_opt" 
+                    <option value="geom_opt"
                       
                     >geom_opt
                        - Runs a geometry optimization
                     </option>
                   
-                    <option value="md" 
+                    <option value="md"
                       
                     >md
                        - Runs an MD calculation
                     </option>
                   
-                    <option value="mp2" 
+                    <option value="mp2"
                       
                     >mp2
                        - Runs an MP2 calculation
@@ -119,33 +119,33 @@
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
             
-              <param name="cell_cutoff" type="float" 
+              <param name="cell_cutoff" type="float"
                   value="5.0"
                   
                   label="cell_cutoff" help="CP2K cell cutoff, to build the cell around the system (only used if input_pdb_path is defined)." optional="false"/>
             
               <param name="output_format" type="select" label="output_format" help="Format of the output file" multiple="false">
                   
-                    <option value="inp" 
+                    <option value="inp"
                       
                     >inp
                        
                     </option>
                   
-                    <option value="in" 
+                    <option value="in"
                       
                     >in
                        
                     </option>
                   
-                    <option value="txt" 
+                    <option value="txt"
                       
                     >txt
                        
                     </option>
                   
                 </param>
-                    
+            
           </section>
     </inputs>
     <outputs>
@@ -166,22 +166,22 @@
     <tests>
         <test>
         </test>
-    </tests>    
+    </tests>
     <help>
 .. class:: infomark
-        
+
 Check the syntax for the tool parameters at the original library documentation: https://biobb_cp2k.readthedocs.io/en/latest
 
 -----
 
-.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png    
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
     :width: 150
 
 **https://mmb.irbbarcelona.org/biobb**
-        
+
 .. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
         :width: 150
-        
+
 **https://bioexcel.eu**
    </help>
 

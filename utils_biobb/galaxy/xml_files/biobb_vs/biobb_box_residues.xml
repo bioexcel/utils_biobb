@@ -12,11 +12,11 @@
         #if $config.sele == "option1":
             ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
-        
+
         box_residues
 
         #if $config.sele == "option1":
-            --config ${config.properties}.${config.properties.ext}
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
@@ -29,7 +29,7 @@
         
         
           --output_pdb_path $outname_output_pdb_path
-        ;          
+        ;
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
@@ -43,11 +43,11 @@
     </command>
     <inputs>
         
-          <param name="input_pdb_path" type="data" format="pdb"  optional="False" label="input PDB file" help="PDB protein structure for which the box will be build. Its size and center will be set around the &#39;resid_list&#39; property once mapped against this PDB. Format: [input].pdb"/> 
+          <param name="input_pdb_path" type="data" format="pdb"  optional="False" label="input PDB file" help="PDB protein structure for which the box will be build. Its size and center will be set around the &#39;resid_list&#39; property once mapped against this PDB. Format: [input].pdb"/>
         
         
-          <param name="outname_output_pdb_path" type="text" value="mybox_residues.pdb" 
-              optional="False" label="output PDB name" 
+          <param name="outname_output_pdb_path" type="text" value="mybox_residues.pdb"
+              optional="False" label="output PDB name"
               help="PDB including the annotation of the box center and size as REMARKs Format: [output].pdb "/>
         
         <conditional name="config">
@@ -71,21 +71,21 @@
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
             
-              <param name="offset" type="float" 
+              <param name="offset" type="float"
                   value="2.0"
                   min="0.1" max="1000.0"
                   label="offset" help="Extra distance (Angstroms) between the last residue atom and the box boundary." optional="false"/>
             
-              <param name="box_coordinates" type="boolean" 
+              <param name="box_coordinates" type="boolean"
                   
-                  label="box_coordinates" help="Add box coordinates as 8 ATOM records." 
+                  label="box_coordinates" help="Add box coordinates as 8 ATOM records."
                 />
             
-              <param name="residue_offset" type="integer" 
+              <param name="residue_offset" type="integer"
                   value="0"
                   
                   label="residue_offset" help="Residue id offset." optional="true"/>
-                    
+            
           </section>
     </inputs>
     <outputs>
@@ -97,22 +97,22 @@
     <tests>
         <test>
         </test>
-    </tests>    
+    </tests>
     <help>
 .. class:: infomark
-        
+
 Check the syntax for the tool parameters at the original library documentation: https://biobb_vs.readthedocs.io/en/latest
 
 -----
 
-.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png    
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
     :width: 150
 
 **https://mmb.irbbarcelona.org/biobb**
-        
+
 .. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
         :width: 150
-        
+
 **https://bioexcel.eu**
    </help>
 

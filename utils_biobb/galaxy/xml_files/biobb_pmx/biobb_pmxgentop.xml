@@ -1,8 +1,8 @@
-<tool id="biobb_pmx_pmxgentop_ext" name="Pmxgentop" version="3.8.1" >
+<tool id="biobb_pmx_pmxgentop_ext" name="Pmxgentop" version="4.0.0" >
     <description>: Wrapper class for the PMX gentop module.</description>
     <requirements>
         <requirement type="package"
-        version="3.8.1"
+        version="4.0.0"
         >biobb_pmx</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -12,15 +12,15 @@
         #if $config.sele == "option1":
             ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
-        
+
         pmxgentop
 
         #if $config.sele == "option1":
-            --config ${config.properties}.${config.properties.ext}
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__force_field__dq__:__dq__${properties.force_field}__dq__,__dq__split__dq__:${properties.split},__dq__scale_mass__dq__:${properties.scale_mass},__dq__gmx_lib__dq__:__dq__${properties.gmx_lib}__dq__,__dq__pmx_path__dq__:__dq__${properties.pmx_path}__dq____cc__'
+            --config '__oc____dq__force_field__dq__:__dq__${properties.force_field}__dq__,__dq__split__dq__:${properties.split},__dq__scale_mass__dq__:${properties.scale_mass},__dq__gmx_lib__dq__:__dq__${properties.gmx_lib}__dq__,__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
           #end if
         
           #if str($input_top_zip_path) != 'None':
@@ -29,7 +29,7 @@
         
         
           --output_top_zip_path $outname_output_top_zip_path
-        ;          
+        ;
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
@@ -43,11 +43,11 @@
     </command>
     <inputs>
         
-          <param name="input_top_zip_path" type="data" format="zip"  optional="False" label="input ZIP file" help="Path the input GROMACS topology TOP and ITP files in zip format. Format: [input].zip"/> 
+          <param name="input_top_zip_path" type="data" format="zip"  optional="False" label="input ZIP file" help="Path the input GROMACS topology TOP and ITP files in zip format. Format: [input].zip"/>
         
         
-          <param name="outname_output_top_zip_path" type="text" value="mypmxgentop.zip" 
-              optional="False" label="output ZIP name" 
+          <param name="outname_output_top_zip_path" type="text" value="mypmxgentop.zip"
+              optional="False" label="output ZIP name"
               help="Path the output TOP topology in zip format Format: [output].zip "/>
         
         <conditional name="config">
@@ -73,28 +73,28 @@
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
             
-              <param name="split" type="boolean" 
+              <param name="split" type="boolean"
                   
-                  label="split" help="Write separate topologies for the vdW and charge transformations." 
+                  label="split" help="Write separate topologies for the vdW and charge transformations."
                 />
             
-              <param name="scale_mass" type="boolean" 
+              <param name="scale_mass" type="boolean"
                   
-                  label="scale_mass" help="Scale the masses of morphing atoms so that dummies have a mass of 1." 
+                  label="scale_mass" help="Scale the masses of morphing atoms so that dummies have a mass of 1."
                 />
             
               <param name="gmx_lib" type="text" label="gmx_lib" help="Path to the GMXLIB folder in your computer." optional="false"
-                  value="$CONDA_PREFIX/lib/python3.7/site-packages/pmx/data/mutff45/"
+                  value="$CONDA_PREFIX/lib/python3.7/site-packages/pmx/data/mutff/"
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
             
-              <param name="pmx_path" type="text" label="pmx_path" help="Path to the PMX command line interface." optional="false"
+              <param name="binary_path" type="text" label="binary_path" help="Path to the PMX command line interface." optional="false"
                   value="pmx"
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
-                    
+            
           </section>
     </inputs>
     <outputs>
@@ -106,22 +106,22 @@
     <tests>
         <test>
         </test>
-    </tests>    
+    </tests>
     <help>
 .. class:: infomark
-        
+
 Check the syntax for the tool parameters at the original library documentation: https://biobb_pmx.readthedocs.io/en/latest
 
 -----
 
-.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png    
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
     :width: 150
 
 **https://mmb.irbbarcelona.org/biobb**
-        
+
 .. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
         :width: 150
-        
+
 **https://bioexcel.eu**
    </help>
 

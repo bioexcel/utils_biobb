@@ -12,11 +12,11 @@
         #if $config.sele == "option1":
             ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
-        
+
         k_means_coefficient
 
         #if $config.sele == "option1":
-            --config ${config.properties}.${config.properties.ext}
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
@@ -31,7 +31,7 @@
           --output_results_path $outname_output_results_path
         
           --output_plot_path $outname_output_plot_path
-        ;          
+        ;
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
@@ -47,15 +47,15 @@
     </command>
     <inputs>
         
-          <param name="input_dataset_path" type="data" format="csv"  optional="False" label="input CSV file" help="Path to the input dataset. Format: [input].csv"/> 
+          <param name="input_dataset_path" type="data" format="csv"  optional="False" label="input CSV file" help="Path to the input dataset. Format: [input].csv"/>
         
         
-          <param name="outname_output_results_path" type="text" value="myk_means_coefficient.csv" 
-              optional="False" label="output CSV name" 
+          <param name="outname_output_results_path" type="text" value="myk_means_coefficient.csv"
+              optional="False" label="output CSV name"
               help="Table with WCSS (elbow method), Gap and Silhouette coefficients for each cluster Format: [output].csv "/>
         
-          <param name="outname_output_plot_path" type="text" value="myk_means_coefficient.png" 
-              optional="True" label="output PNG name" 
+          <param name="outname_output_plot_path" type="text" value="myk_means_coefficient.png"
+              optional="True" label="output PNG name"
               help="Path to the elbow method and gap statistics plot Format: [output].png "/>
         
         <conditional name="config">
@@ -79,21 +79,21 @@
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
             
-              <param name="max_clusters" type="integer" 
+              <param name="max_clusters" type="integer"
                   value="6"
                   min="1" max="100"
                   label="max_clusters" help="Maximum number of clusters to use by default for kmeans queries." optional="false"/>
             
-              <param name="random_state_method" type="integer" 
+              <param name="random_state_method" type="integer"
                   value="5"
                   min="1" max="1000"
                   label="random_state_method" help="Determines random number generation for centroid initialization." optional="false"/>
             
-              <param name="scale" type="boolean" 
+              <param name="scale" type="boolean"
                   
-                  label="scale" help="Whether or not to scale the input dataset." 
+                  label="scale" help="Whether or not to scale the input dataset."
                 />
-                    
+            
           </section>
     </inputs>
     <outputs>
@@ -108,22 +108,22 @@
     <tests>
         <test>
         </test>
-    </tests>    
+    </tests>
     <help>
 .. class:: infomark
-        
+
 Check the syntax for the tool parameters at the original library documentation: https://biobb_ml.readthedocs.io/en/latest
 
 -----
 
-.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png    
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
     :width: 150
 
 **https://mmb.irbbarcelona.org/biobb**
-        
+
 .. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
         :width: 150
-        
+
 **https://bioexcel.eu**
    </help>
 

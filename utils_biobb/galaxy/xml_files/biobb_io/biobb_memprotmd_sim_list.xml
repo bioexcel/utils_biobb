@@ -8,14 +8,14 @@
     <command detect_errors="aggressive"><![CDATA[
         
         
-        
+
         memprotmd_sim_list
 
         
         
         
           --output_simulations $outname_output_simulations
-        ;          
+        ;
         
         
         
@@ -26,8 +26,8 @@
     <inputs>
         
         
-          <param name="outname_output_simulations" type="text" value="mymemprotmd_sim_list.json" 
-              optional="False" label="output JSON name" 
+          <param name="outname_output_simulations" type="text" value="mymemprotmd_sim_list.json"
+              optional="False" label="output JSON name"
               help="Path to the output JSON file Format: [output].json "/>
         
         
@@ -41,22 +41,22 @@
     <tests>
         <test>
         </test>
-    </tests>    
+    </tests>
     <help>
 .. class:: infomark
-        
+
 Check the syntax for the tool parameters at the original library documentation: https://biobb_io.readthedocs.io/en/latest
 
 -----
 
-.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png    
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
     :width: 150
 
 **https://mmb.irbbarcelona.org/biobb**
-        
+
 .. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
         :width: 150
-        
+
 **https://bioexcel.eu**
    </help>
 

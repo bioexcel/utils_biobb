@@ -50,7 +50,7 @@
               optional="False" label="output PDB,GRO name"
               help="Path to the output GRO file Format: [output].[format] "/>
 
-          <conditional name="config">
+        <conditional name="config">
             <param name="sele" type="select" label="Take tool settings:" help="Select where tool settings are to be read from">
               <option value="option3">Manual Input</option>
               <option value="option1">from configuration file</option>
@@ -65,8 +65,8 @@
             <when value="option3">
             </when>
           </conditional>
-
           <section name="properties" title="Properties Input">
+
               <param name="distance_to_molecule" type="float"
                   value="1.0"
 

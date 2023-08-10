@@ -12,11 +12,11 @@
         #if $config.sele == "option1":
             ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
-        
+
         trjcat
 
         #if $config.sele == "option1":
-            --config ${config.properties}.${config.properties.ext}
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
@@ -29,7 +29,7 @@
         
         
           --output_trj_path $outname_output_trj_path
-        ;          
+        ;
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
@@ -43,11 +43,11 @@
     </command>
     <inputs>
         
-          <param name="input_trj_zip_path" type="data" format="zip"  optional="False" label="input ZIP file" help="Path the input GROMACS trajectories (xtc, trr, cpt, gro, pdb, tng) to concatenate in zip format. Format: [input].zip"/> 
+          <param name="input_trj_zip_path" type="data" format="zip"  optional="False" label="input ZIP file" help="Path the input GROMACS trajectories (xtc, trr, cpt, gro, pdb, tng) to concatenate in zip format. Format: [input].zip"/>
         
         
-          <param name="outname_output_trj_path" type="text" value="mytrjcat.pdb" 
-              optional="False" label="output PDB,GRO,XTC,TRR,TNG name" 
+          <param name="outname_output_trj_path" type="text" value="mytrjcat.pdb"
+              optional="False" label="output PDB,GRO,XTC,TRR,TNG name"
               help="Path to the output trajectory file Format: [output].[format] "/>
         
         <conditional name="config">
@@ -67,9 +67,9 @@
           </conditional>
           <section name="properties" title="Properties Input">
             
-              <param name="concatenate" type="boolean" 
+              <param name="concatenate" type="boolean"
                   checked="true"
-                  label="concatenate" help="Only concatenate the files without removal of frames with identical timestamps." 
+                  label="concatenate" help="Only concatenate the files without removal of frames with identical timestamps."
                 />
             
               <param name="gmx_lib" type="text" label="gmx_lib" help="Path set GROMACS GMXLIB environment variable." optional="true"
@@ -86,38 +86,38 @@
             
               <param name="output_format" type="select" label="output_format" help="Format of the output file" multiple="false">
                   
-                    <option value="pdb" 
+                    <option value="pdb"
                       
                     >pdb
                        
                     </option>
                   
-                    <option value="gro" 
+                    <option value="gro"
                       
                     >gro
                        
                     </option>
                   
-                    <option value="xtc" 
+                    <option value="xtc"
                       
                     >xtc
                        
                     </option>
                   
-                    <option value="trr" 
+                    <option value="trr"
                       
                     >trr
                        
                     </option>
                   
-                    <option value="tng" 
+                    <option value="tng"
                       
                     >tng
                        
                     </option>
                   
                 </param>
-                    
+            
           </section>
     </inputs>
     <outputs>
@@ -142,22 +142,22 @@
     <tests>
         <test>
         </test>
-    </tests>    
+    </tests>
     <help>
 .. class:: infomark
-        
+
 Check the syntax for the tool parameters at the original library documentation: https://biobb_gromacs.readthedocs.io/en/latest
 
 -----
 
-.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png    
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
     :width: 150
 
 **https://mmb.irbbarcelona.org/biobb**
-        
+
 .. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
         :width: 150
-        
+
 **https://bioexcel.eu**
    </help>
 

@@ -12,11 +12,11 @@
         #if $config.sele == "option1":
             ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
-        
+
         acpype_params_gmx
 
         #if $config.sele == "option1":
-            --config ${config.properties}.${config.properties.ext}
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
@@ -33,7 +33,7 @@
           --output_path_itp $outname_output_path_itp
         
           --output_path_top $outname_output_path_top
-        ;          
+        ;
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
@@ -51,19 +51,19 @@
     </command>
     <inputs>
         
-          <param name="input_path" type="data" format="pdb,mdl,mol2"  optional="False" label="input PDB,MDL,MOL2 file" help="Path to the input file. Format: [input].[format]"/> 
+          <param name="input_path" type="data" format="pdb,mdl,mol2"  optional="False" label="input PDB,MDL,MOL2 file" help="Path to the input file. Format: [input].[format]"/>
         
         
-          <param name="outname_output_path_gro" type="text" value="myacpype_params_gmx.gro" 
-              optional="False" label="output GRO name" 
+          <param name="outname_output_path_gro" type="text" value="myacpype_params_gmx.gro"
+              optional="False" label="output GRO name"
               help="Path to the GRO output file Format: [output].gro "/>
         
-          <param name="outname_output_path_itp" type="text" value="myacpype_params_gmx.itp" 
-              optional="False" label="output ITP name" 
+          <param name="outname_output_path_itp" type="text" value="myacpype_params_gmx.itp"
+              optional="False" label="output ITP name"
               help="Path to the ITP output file Format: [output].itp "/>
         
-          <param name="outname_output_path_top" type="text" value="myacpype_params_gmx.top" 
-              optional="False" label="output TOP name" 
+          <param name="outname_output_path_top" type="text" value="myacpype_params_gmx.top"
+              optional="False" label="output TOP name"
               help="Path to the TOP output file Format: [output].top "/>
         
         <conditional name="config">
@@ -89,7 +89,7 @@
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
             
-              <param name="charge" type="integer" 
+              <param name="charge" type="integer"
                   value="0"
                   min="-20" max="20"
                   label="charge" help="Net molecular charge, for gas default is 0. If None the charge is guessed by acpype." optional="true"/>
@@ -99,7 +99,7 @@
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
-                    
+            
           </section>
     </inputs>
     <outputs>
@@ -117,22 +117,22 @@
     <tests>
         <test>
         </test>
-    </tests>    
+    </tests>
     <help>
 .. class:: infomark
-        
+
 Check the syntax for the tool parameters at the original library documentation: https://biobb_chemistry.readthedocs.io/en/latest
 
 -----
 
-.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png    
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
     :width: 150
 
 **https://mmb.irbbarcelona.org/biobb**
-        
+
 .. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
         :width: 150
-        
+
 **https://bioexcel.eu**
    </help>
 

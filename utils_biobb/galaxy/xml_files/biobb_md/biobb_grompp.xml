@@ -20,11 +20,11 @@
         #if $config.sele == "option1":
             ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
-        
+
         grompp
 
         #if $config.sele == "option1":
-            --config ${config.properties}.${config.properties.ext}
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
@@ -53,7 +53,7 @@
         
         
           --output_tpr_path $outname_output_tpr_path
-        ;          
+        ;
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
@@ -75,19 +75,19 @@
     </command>
     <inputs>
         
-          <param name="input_gro_path" type="data" format="gro"  optional="False" label="input GRO file" help="Path to the input GROMACS structure GRO file. Format: [input].gro"/> 
+          <param name="input_gro_path" type="data" format="gro"  optional="False" label="input GRO file" help="Path to the input GROMACS structure GRO file. Format: [input].gro"/>
         
-          <param name="input_top_zip_path" type="data" format="zip"  optional="False" label="input ZIP file" help="Path to the input GROMACS topology TOP and ITP files in zip format. Format: [input].zip"/> 
+          <param name="input_top_zip_path" type="data" format="zip"  optional="False" label="input ZIP file" help="Path to the input GROMACS topology TOP and ITP files in zip format. Format: [input].zip"/>
         
-          <param name="input_cpt_path" type="data" format="cpt"  optional="True" label="input CPT file" help="Path to the input GROMACS checkpoint file CPT. Format: [input].cpt"/> 
+          <param name="input_cpt_path" type="data" format="cpt"  optional="True" label="input CPT file" help="Path to the input GROMACS checkpoint file CPT. Format: [input].cpt"/>
         
-          <param name="input_ndx_path" type="data" format="ndx"  optional="True" label="input NDX file" help="Path to the input GROMACS index files NDX. Format: [input].ndx"/> 
+          <param name="input_ndx_path" type="data" format="ndx"  optional="True" label="input NDX file" help="Path to the input GROMACS index files NDX. Format: [input].ndx"/>
         
-          <param name="input_mdp_path" type="data" format="mdp"  optional="True" label="input MDP file" help="Path to the input GROMACS MDP file. Format: [input].mdp"/> 
+          <param name="input_mdp_path" type="data" format="mdp"  optional="True" label="input MDP file" help="Path to the input GROMACS MDP file. Format: [input].mdp"/>
         
         
-          <param name="outname_output_tpr_path" type="text" value="mygrompp.tpr" 
-              optional="False" label="output TPR name" 
+          <param name="outname_output_tpr_path" type="text" value="mygrompp.tpr"
+              optional="False" label="output TPR name"
               help="Path to the output portable binary run file TPR Format: [output].tpr "/>
         
         <conditional name="config">
@@ -113,37 +113,37 @@
             
               <param name="simulation_type" type="select" label="simulation_type" help="Default options for the mdp file. Each one creates a different mdp file. " multiple="false">
                   
-                    <option value="minimization" 
+                    <option value="minimization"
                       
                     >minimization
                        - Energy minimization using steepest descent algorithm is used
                     </option>
                   
-                    <option value="nvt" 
+                    <option value="nvt"
                       
                     >nvt
                        - substance N Volume V and Temperature T are conserved
                     </option>
                   
-                    <option value="npt" 
+                    <option value="npt"
                       
                     >npt
                        - substance N pressure P and Temperature T are conserved
                     </option>
                   
-                    <option value="free" 
+                    <option value="free"
                       
                     >free
                        - No design constraints applied; Free MD
                     </option>
                   
-                    <option value="ions" 
+                    <option value="ions"
                       
                     >ions
                        - Synonym of minimization
                     </option>
                   
-                    <option value="index" 
+                    <option value="index"
                       
                     >index
                        - Creates an empty mdp file
@@ -151,7 +151,7 @@
                   
                 </param>
             
-              <param name="maxwarn" type="integer" 
+              <param name="maxwarn" type="integer"
                   value="0"
                   
                   label="maxwarn" help="Maximum number of allowed warnings. If simulation_type is index default is 10." optional="true"/>
@@ -167,7 +167,7 @@
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
-                    
+            
           </section>
     </inputs>
     <outputs>
@@ -179,22 +179,22 @@
     <tests>
         <test>
         </test>
-    </tests>    
+    </tests>
     <help>
 .. class:: infomark
-        
+
 Check the syntax for the tool parameters at the original library documentation: https://biobb_md.readthedocs.io/en/latest
 
 -----
 
-.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png    
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
     :width: 150
 
 **https://mmb.irbbarcelona.org/biobb**
-        
+
 .. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
         :width: 150
-        
+
 **https://bioexcel.eu**
    </help>
 

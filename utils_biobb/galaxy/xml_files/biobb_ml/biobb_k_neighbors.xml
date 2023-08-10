@@ -12,11 +12,11 @@
         #if $config.sele == "option1":
             ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
-        
+
         k_neighbors
 
         #if $config.sele == "option1":
-            --config ${config.properties}.${config.properties.ext}
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
@@ -33,7 +33,7 @@
           --output_test_table_path $outname_output_test_table_path
         
           --output_plot_path $outname_output_plot_path
-        ;          
+        ;
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
@@ -51,19 +51,19 @@
     </command>
     <inputs>
         
-          <param name="input_dataset_path" type="data" format="csv"  optional="False" label="input CSV file" help="Path to the input dataset. Format: [input].csv"/> 
+          <param name="input_dataset_path" type="data" format="csv"  optional="False" label="input CSV file" help="Path to the input dataset. Format: [input].csv"/>
         
         
-          <param name="outname_output_model_path" type="text" value="myk_neighbors.pkl" 
-              optional="False" label="output PKL name" 
+          <param name="outname_output_model_path" type="text" value="myk_neighbors.pkl"
+              optional="False" label="output PKL name"
               help="Path to the output model file Format: [output].pkl "/>
         
-          <param name="outname_output_test_table_path" type="text" value="myk_neighbors.csv" 
-              optional="True" label="output CSV name" 
+          <param name="outname_output_test_table_path" type="text" value="myk_neighbors.csv"
+              optional="True" label="output CSV name"
               help="Path to the test table file Format: [output].csv "/>
         
-          <param name="outname_output_plot_path" type="text" value="myk_neighbors.png" 
-              optional="True" label="output PNG name" 
+          <param name="outname_output_plot_path" type="text" value="myk_neighbors.png"
+              optional="True" label="output PNG name"
               help="Path to the statistics plot. If target is binary it shows confusion matrix, distributions of the predicted probabilities of both classes and ROC curve. If target is non-binary it shows confusion matrix Format: [output].png "/>
         
         <conditional name="config">
@@ -97,43 +97,43 @@
             
               <param name="metric" type="select" label="metric" help="The distance metric to use for the tree. " multiple="false">
                   
-                    <option value="euclidean" 
+                    <option value="euclidean"
                       
                     >euclidean
                        - Computes the Euclidean distance between two 1-D arrays
                     </option>
                   
-                    <option value="manhattan" 
+                    <option value="manhattan"
                       
                     >manhattan
                        - Compute the Manhattan distance
                     </option>
                   
-                    <option value="chebyshev" 
+                    <option value="chebyshev"
                       
                     >chebyshev
                        - Compute the Chebyshev distance
                     </option>
                   
-                    <option value="minkowski" 
+                    <option value="minkowski"
                       selected="true"
                     >minkowski
                        - Compute the Minkowski distance between two 1-D arrays
                     </option>
                   
-                    <option value="wminkowski" 
+                    <option value="wminkowski"
                       
                     >wminkowski
                        - Compute the weighted Minkowski distance between two 1-D arrays
                     </option>
                   
-                    <option value="seuclidean" 
+                    <option value="seuclidean"
                       
                     >seuclidean
                        - Return the standardized Euclidean distance between two 1-D arrays
                     </option>
                   
-                    <option value="mahalanobi" 
+                    <option value="mahalanobi"
                       
                     >mahalanobi
                        - Compute the Mahalanobis distance between two 1-D arrays
@@ -141,31 +141,31 @@
                   
                 </param>
             
-              <param name="n_neighbors" type="integer" 
+              <param name="n_neighbors" type="integer"
                   value="6"
                   min="1" max="100"
                   label="n_neighbors" help="Number of neighbors to use by default for kneighbors queries." optional="false"/>
             
-              <param name="normalize_cm" type="boolean" 
+              <param name="normalize_cm" type="boolean"
                   
-                  label="normalize_cm" help="Whether or not to normalize the confusion matrix." 
+                  label="normalize_cm" help="Whether or not to normalize the confusion matrix."
                 />
             
-              <param name="random_state_train_test" type="integer" 
+              <param name="random_state_train_test" type="integer"
                   value="5"
                   min="1" max="1000"
                   label="random_state_train_test" help="Controls the shuffling applied to the data before applying the split." optional="false"/>
             
-              <param name="test_size" type="float" 
+              <param name="test_size" type="float"
                   value="0.2"
                   
                   label="test_size" help="Represents the proportion of the dataset to include in the test split. It should be between 0.0 and 1.0." optional="false"/>
             
-              <param name="scale" type="boolean" 
+              <param name="scale" type="boolean"
                   
-                  label="scale" help="Whether or not to scale the input dataset." 
+                  label="scale" help="Whether or not to scale the input dataset."
                 />
-                    
+            
           </section>
     </inputs>
     <outputs>
@@ -183,22 +183,22 @@
     <tests>
         <test>
         </test>
-    </tests>    
+    </tests>
     <help>
 .. class:: infomark
-        
+
 Check the syntax for the tool parameters at the original library documentation: https://biobb_ml.readthedocs.io/en/latest
 
 -----
 
-.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png    
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
     :width: 150
 
 **https://mmb.irbbarcelona.org/biobb**
-        
+
 .. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
         :width: 150
-        
+
 **https://bioexcel.eu**
    </help>
 

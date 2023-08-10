@@ -1,8 +1,8 @@
-<tool id="biobb_analysis_gmx_energy_ext" name="GmxEnergy" version="4.0.1" >
+<tool id="biobb_analysis_gmx_energy_ext" name="GmxEnergy" version="4.0.2" >
     <description>: Wrapper of the GROMACS energy module for extracting energy components from a given GROMACS energy file.</description>
     <requirements>
         <requirement type="package"
-        version="4.0.1"
+        version="4.0.2"
         >biobb_analysis</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -12,11 +12,11 @@
         #if $config.sele == "option1":
             ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
-        
+
         gmx_energy
 
         #if $config.sele == "option1":
-            --config ${config.properties}.${config.properties.ext}
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
@@ -29,7 +29,7 @@
         
         
           --output_xvg_path $outname_output_xvg_path
-        ;          
+        ;
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
@@ -43,11 +43,11 @@
     </command>
     <inputs>
         
-          <param name="input_energy_path" type="data" format="edr"  optional="False" label="input EDR file" help="Path to the input EDR file. Format: [input].edr"/> 
+          <param name="input_energy_path" type="data" format="edr"  optional="False" label="input EDR file" help="Path to the input EDR file. Format: [input].edr"/>
         
         
-          <param name="outname_output_xvg_path" type="text" value="mygmx_energy.xvg" 
-              optional="False" label="output XVG name" 
+          <param name="outname_output_xvg_path" type="text" value="mygmx_energy.xvg"
+              optional="False" label="output XVG name"
               help="Path to the XVG output file Format: [output].xvg "/>
         
         <conditional name="config">
@@ -69,19 +69,19 @@
             
               <param name="xvg" type="select" label="xvg" help="XVG plot formatting. " multiple="false">
                   
-                    <option value="xmgrace" 
+                    <option value="xmgrace"
                       
                     >xmgrace
                        
                     </option>
                   
-                    <option value="xmgr" 
+                    <option value="xmgr"
                       
                     >xmgr
                        
                     </option>
                   
-                    <option value="none" 
+                    <option value="none"
                       selected="true"
                     >none
                        
@@ -91,307 +91,307 @@
             
               <param name="terms" type="select" label="terms" help="Energy terms. " multiple="true">
                   
-                    <option value="Angle" 
+                    <option value="Angle"
                       
                     >Angle
                        
                     </option>
                   
-                    <option value="Proper-Dih." 
+                    <option value="Proper-Dih."
                       
                     >Proper-Dih.
                        
                     </option>
                   
-                    <option value="Improper-Dih." 
+                    <option value="Improper-Dih."
                       
                     >Improper-Dih.
                        
                     </option>
                   
-                    <option value="LJ-14" 
+                    <option value="LJ-14"
                       
                     >LJ-14
                        
                     </option>
                   
-                    <option value="Coulomb-14" 
+                    <option value="Coulomb-14"
                       
                     >Coulomb-14
                        
                     </option>
                   
-                    <option value="LJ-(SR)" 
+                    <option value="LJ-(SR)"
                       
                     >LJ-(SR)
                        
                     </option>
                   
-                    <option value="Coulomb-(SR)" 
+                    <option value="Coulomb-(SR)"
                       
                     >Coulomb-(SR)
                        
                     </option>
                   
-                    <option value="Coul.-recip." 
+                    <option value="Coul.-recip."
                       
                     >Coul.-recip.
                        
                     </option>
                   
-                    <option value="Position-Rest." 
+                    <option value="Position-Rest."
                       
                     >Position-Rest.
                        
                     </option>
                   
-                    <option value="Potential" 
+                    <option value="Potential"
                       
                     >Potential
                        
                     </option>
                   
-                    <option value="Kinetic-En." 
+                    <option value="Kinetic-En."
                       
                     >Kinetic-En.
                        
                     </option>
                   
-                    <option value="Total-Energy" 
+                    <option value="Total-Energy"
                       
                     >Total-Energy
                        
                     </option>
                   
-                    <option value="Temperature" 
+                    <option value="Temperature"
                       
                     >Temperature
                        
                     </option>
                   
-                    <option value="Pressure" 
+                    <option value="Pressure"
                       
                     >Pressure
                        
                     </option>
                   
-                    <option value="Constr.-rmsd" 
+                    <option value="Constr.-rmsd"
                       
                     >Constr.-rmsd
                        
                     </option>
                   
-                    <option value="Box-X" 
+                    <option value="Box-X"
                       
                     >Box-X
                        
                     </option>
                   
-                    <option value="Box-Y" 
+                    <option value="Box-Y"
                       
                     >Box-Y
                        
                     </option>
                   
-                    <option value="Box-Z" 
+                    <option value="Box-Z"
                       
                     >Box-Z
                        
                     </option>
                   
-                    <option value="Volume" 
+                    <option value="Volume"
                       
                     >Volume
                        
                     </option>
                   
-                    <option value="Density" 
+                    <option value="Density"
                       
                     >Density
                        
                     </option>
                   
-                    <option value="pV" 
+                    <option value="pV"
                       
                     >pV
                        
                     </option>
                   
-                    <option value="Enthalpy" 
+                    <option value="Enthalpy"
                       
                     >Enthalpy
                        
                     </option>
                   
-                    <option value="Vir-XX" 
+                    <option value="Vir-XX"
                       
                     >Vir-XX
                        
                     </option>
                   
-                    <option value="Vir-XY" 
+                    <option value="Vir-XY"
                       
                     >Vir-XY
                        
                     </option>
                   
-                    <option value="Vir-XZ" 
+                    <option value="Vir-XZ"
                       
                     >Vir-XZ
                        
                     </option>
                   
-                    <option value="Vir-YX" 
+                    <option value="Vir-YX"
                       
                     >Vir-YX
                        
                     </option>
                   
-                    <option value="Vir-YY" 
+                    <option value="Vir-YY"
                       
                     >Vir-YY
                        
                     </option>
                   
-                    <option value="Vir-YZ" 
+                    <option value="Vir-YZ"
                       
                     >Vir-YZ
                        
                     </option>
                   
-                    <option value="Vir-ZX" 
+                    <option value="Vir-ZX"
                       
                     >Vir-ZX
                        
                     </option>
                   
-                    <option value="Vir-ZY" 
+                    <option value="Vir-ZY"
                       
                     >Vir-ZY
                        
                     </option>
                   
-                    <option value="Vir-ZZ" 
+                    <option value="Vir-ZZ"
                       
                     >Vir-ZZ
                        
                     </option>
                   
-                    <option value="Pres-XX" 
+                    <option value="Pres-XX"
                       
                     >Pres-XX
                        
                     </option>
                   
-                    <option value="Pres-XY" 
+                    <option value="Pres-XY"
                       
                     >Pres-XY
                        
                     </option>
                   
-                    <option value="Pres-XZ" 
+                    <option value="Pres-XZ"
                       
                     >Pres-XZ
                        
                     </option>
                   
-                    <option value="Pres-YX" 
+                    <option value="Pres-YX"
                       
                     >Pres-YX
                        
                     </option>
                   
-                    <option value="Pres-YY" 
+                    <option value="Pres-YY"
                       
                     >Pres-YY
                        
                     </option>
                   
-                    <option value="Pres-YZ" 
+                    <option value="Pres-YZ"
                       
                     >Pres-YZ
                        
                     </option>
                   
-                    <option value="Pres-ZX" 
+                    <option value="Pres-ZX"
                       
                     >Pres-ZX
                        
                     </option>
                   
-                    <option value="Pres-ZY" 
+                    <option value="Pres-ZY"
                       
                     >Pres-ZY
                        
                     </option>
                   
-                    <option value="Pres-ZZ" 
+                    <option value="Pres-ZZ"
                       
                     >Pres-ZZ
                        
                     </option>
                   
-                    <option value="#Surf*SurfTen" 
+                    <option value="#Surf*SurfTen"
                       
                     >#Surf*SurfTen
                        
                     </option>
                   
-                    <option value="Box-Vel-XX" 
+                    <option value="Box-Vel-XX"
                       
                     >Box-Vel-XX
                        
                     </option>
                   
-                    <option value="Box-Vel-YY" 
+                    <option value="Box-Vel-YY"
                       
                     >Box-Vel-YY
                        
                     </option>
                   
-                    <option value="Box-Vel-ZZ" 
+                    <option value="Box-Vel-ZZ"
                       
                     >Box-Vel-ZZ
                        
                     </option>
                   
-                    <option value="Mu-X" 
+                    <option value="Mu-X"
                       
                     >Mu-X
                        
                     </option>
                   
-                    <option value="Mu-Y" 
+                    <option value="Mu-Y"
                       
                     >Mu-Y
                        
                     </option>
                   
-                    <option value="Mu-Z" 
+                    <option value="Mu-Z"
                       
                     >Mu-Z
                        
                     </option>
                   
-                    <option value="T-Protein" 
+                    <option value="T-Protein"
                       
                     >T-Protein
                        
                     </option>
                   
-                    <option value="T-non-Protein" 
+                    <option value="T-non-Protein"
                       
                     >T-non-Protein
                        
                     </option>
                   
-                    <option value="Lamb-Protein" 
+                    <option value="Lamb-Protein"
                       
                     >Lamb-Protein
                        
                     </option>
                   
-                    <option value="Lamb-non-Protein" 
+                    <option value="Lamb-non-Protein"
                       
                     >Lamb-non-Protein
                        
@@ -404,7 +404,7 @@
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
-                    
+            
           </section>
     </inputs>
     <outputs>
@@ -416,22 +416,22 @@
     <tests>
         <test>
         </test>
-    </tests>    
+    </tests>
     <help>
 .. class:: infomark
-        
+
 Check the syntax for the tool parameters at the original library documentation: https://biobb_analysis.readthedocs.io/en/latest
 
 -----
 
-.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png    
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
     :width: 150
 
 **https://mmb.irbbarcelona.org/biobb**
-        
+
 .. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
         :width: 150
-        
+
 **https://bioexcel.eu**
    </help>
 

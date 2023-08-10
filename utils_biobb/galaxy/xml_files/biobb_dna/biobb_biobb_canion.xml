@@ -16,11 +16,11 @@
         #if $config.sele == "option1":
             ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
-        
+
         biobb_canion
 
         #if $config.sele == "option1":
-            --config ${config.properties}.${config.properties.ext}
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
@@ -41,7 +41,7 @@
         
         
           --output_zip_path $outname_output_zip_path
-        ;          
+        ;
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
@@ -59,15 +59,15 @@
     </command>
     <inputs>
         
-          <param name="input_cdi_path" type="data" format="cdi"  optional="False" label="input CDI file" help="Trajectory input file. Format: [input].cdi"/> 
+          <param name="input_cdi_path" type="data" format="cdi"  optional="False" label="input CDI file" help="Trajectory input file. Format: [input].cdi"/>
         
-          <param name="input_afr_path" type="data" format="afr"  optional="False" label="input AFR file" help="Helical axis frames corresponding to the input conformation to be analyzed. Format: [input].afr"/> 
+          <param name="input_afr_path" type="data" format="afr"  optional="False" label="input AFR file" help="Helical axis frames corresponding to the input conformation to be analyzed. Format: [input].afr"/>
         
-          <param name="input_avg_struc_path" type="data" format="pdb"  optional="False" label="input PDB file" help="Average DNA conformation. Format: [input].pdb"/> 
+          <param name="input_avg_struc_path" type="data" format="pdb"  optional="False" label="input PDB file" help="Average DNA conformation. Format: [input].pdb"/>
         
         
-          <param name="outname_output_zip_path" type="text" value="mybiobb_canion.zip" 
-              optional="True" label="output ZIP name" 
+          <param name="outname_output_zip_path" type="text" value="mybiobb_canion.zip"
+              optional="True" label="output ZIP name"
               help="Filename for .zip files containing Canion output files Format: [output].zip "/>
         
         <conditional name="config">
@@ -99,59 +99,59 @@
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
             
-              <param name="dlow" type="float" 
+              <param name="dlow" type="float"
                   value="0.0"
                   
                   label="dlow" help="Select starting segment of the oglimer to analyze. If both dhig and dlow are 0, entire oglimer is analyzed." optional="true"/>
             
-              <param name="dhig" type="float" 
+              <param name="dhig" type="float"
                   value="0.0"
                   
                   label="dhig" help="Select ending segment of the oglimer to analyze, being the maximum value the total number of base pairs in the oligomer. If both dhig and dlow are 0, entire oglimer is analyzed." optional="true"/>
             
-              <param name="rlow" type="float" 
+              <param name="rlow" type="float"
                   value="0.0"
                   
                   label="rlow" help="Minimal distances from the helical axis taken into account in the analysis." optional="true"/>
             
-              <param name="rhig" type="float" 
+              <param name="rhig" type="float"
                   value="0.0"
                   
                   label="rhig" help="Maximal distances from the helical axis taken into account in the analysis." optional="true"/>
             
-              <param name="alow" type="float" 
+              <param name="alow" type="float"
                   value="0.0"
                   
                   label="alow" help="Minimal angle range to analyze." optional="true"/>
             
-              <param name="ahig" type="float" 
+              <param name="ahig" type="float"
                   value="360.0"
                   
                   label="ahig" help="Maximal angle range to analyze." optional="false"/>
             
-              <param name="itst" type="integer" 
+              <param name="itst" type="integer"
                   
                   
                   label="itst" help="Number of first snapshot to be analyzed." optional="true"/>
             
-              <param name="itnd" type="integer" 
+              <param name="itnd" type="integer"
                   
                   
                   label="itnd" help="Number of last snapshot to be analyzed." optional="true"/>
             
-              <param name="itdel" type="integer" 
+              <param name="itdel" type="integer"
                   
                   
                   label="itdel" help="Spacing between analyzed snapshots." optional="true"/>
             
-              <param name="rmsf" type="boolean" 
+              <param name="rmsf" type="boolean"
                   
-                  label="rmsf" help="If set to True uses the combination of the helical ion parameters and an average helical axis to map the ions into Cartesian space and then calculates their average position (pdb output) and their root mean square fluctuation values (rmsf output). A single pass rmsf algorithm to make this calculation possible with a single read of the trajectory file. This option is generally used for solute atoms and not for solvent molecules or ions." 
+                  label="rmsf" help="If set to True uses the combination of the helical ion parameters and an average helical axis to map the ions into Cartesian space and then calculates their average position (pdb output) and their root mean square fluctuation values (rmsf output). A single pass rmsf algorithm to make this calculation possible with a single read of the trajectory file. This option is generally used for solute atoms and not for solvent molecules or ions."
                 />
             
-              <param name="circ" type="boolean" 
+              <param name="circ" type="boolean"
                   
-                  label="circ" help="If set to True, minicircles are analyzed." 
+                  label="circ" help="If set to True, minicircles are analyzed."
                 />
             
               <param name="binary_path" type="text" label="binary_path" help="Path to Canion executable, otherwise the program wil look for Canion executable in the binaries folder." optional="false"
@@ -159,7 +159,7 @@
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
-                    
+            
           </section>
     </inputs>
     <outputs>
@@ -171,22 +171,22 @@
     <tests>
         <test>
         </test>
-    </tests>    
+    </tests>
     <help>
 .. class:: infomark
-        
+
 Check the syntax for the tool parameters at the original library documentation: https://biobb_dna.readthedocs.io/en/latest
 
 -----
 
-.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png    
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
     :width: 150
 
 **https://mmb.irbbarcelona.org/biobb**
-        
+
 .. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
         :width: 150
-        
+
 **https://bioexcel.eu**
    </help>
 

@@ -12,11 +12,11 @@
         #if $config.sele == "option1":
             ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
-        
+
         reduce_add_hydrogens
 
         #if $config.sele == "option1":
-            --config ${config.properties}.${config.properties.ext}
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
@@ -29,7 +29,7 @@
         
         
           --output_path $outname_output_path
-        ;          
+        ;
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
@@ -43,11 +43,11 @@
     </command>
     <inputs>
         
-          <param name="input_path" type="data" format="pdb"  optional="False" label="input PDB file" help="Path to the input file. Format: [input].pdb"/> 
+          <param name="input_path" type="data" format="pdb"  optional="False" label="input PDB file" help="Path to the input file. Format: [input].pdb"/>
         
         
-          <param name="outname_output_path" type="text" value="myreduce_add_hydrogens.pdb" 
-              optional="False" label="output PDB name" 
+          <param name="outname_output_path" type="text" value="myreduce_add_hydrogens.pdb"
+              optional="False" label="output PDB name"
               help="Path to the output file Format: [output].pdb "/>
         
         <conditional name="config">
@@ -67,99 +67,99 @@
           </conditional>
           <section name="properties" title="Properties Input">
             
-              <param name="flip" type="boolean" 
+              <param name="flip" type="boolean"
                   
-                  label="flip" help="add H and rotate and flip NQH groups" 
+                  label="flip" help="add H and rotate and flip NQH groups"
                 />
             
-              <param name="noflip" type="boolean" 
+              <param name="noflip" type="boolean"
                   
-                  label="noflip" help="add H and rotate groups with no NQH flips" 
+                  label="noflip" help="add H and rotate groups with no NQH flips"
                 />
             
-              <param name="nuclear" type="boolean" 
+              <param name="nuclear" type="boolean"
                   
-                  label="nuclear" help="use nuclear X-H distances rather than default electron cloud distances" 
+                  label="nuclear" help="use nuclear X-H distances rather than default electron cloud distances"
                 />
             
-              <param name="nooh" type="boolean" 
+              <param name="nooh" type="boolean"
                   
-                  label="nooh" help="remove hydrogens on OH and SH groups" 
+                  label="nooh" help="remove hydrogens on OH and SH groups"
                 />
             
-              <param name="oh" type="boolean" 
+              <param name="oh" type="boolean"
                   checked="true"
-                  label="oh" help="add hydrogens on OH and SH groups (default)" 
+                  label="oh" help="add hydrogens on OH and SH groups (default)"
                 />
             
-              <param name="his" type="boolean" 
+              <param name="his" type="boolean"
                   
-                  label="his" help="create NH hydrogens on HIS rings (usually used with -HIS)" 
+                  label="his" help="create NH hydrogens on HIS rings (usually used with -HIS)"
                 />
             
-              <param name="noheth" type="boolean" 
+              <param name="noheth" type="boolean"
                   
-                  label="noheth" help="do not attempt to add NH proton on Het groups" 
+                  label="noheth" help="do not attempt to add NH proton on Het groups"
                 />
             
-              <param name="rotnh3" type="boolean" 
+              <param name="rotnh3" type="boolean"
                   checked="true"
-                  label="rotnh3" help="allow lysine NH3 to rotate (default)" 
+                  label="rotnh3" help="allow lysine NH3 to rotate (default)"
                 />
             
-              <param name="norotnh3" type="boolean" 
+              <param name="norotnh3" type="boolean"
                   
-                  label="norotnh3" help="do not allow lysine NH3 to rotate" 
+                  label="norotnh3" help="do not allow lysine NH3 to rotate"
                 />
             
-              <param name="rotexist" type="boolean" 
+              <param name="rotexist" type="boolean"
                   
-                  label="rotexist" help="allow existing rotatable groups (OH, SH, Met-CH3) to rotate" 
+                  label="rotexist" help="allow existing rotatable groups (OH, SH, Met-CH3) to rotate"
                 />
             
-              <param name="rotexoh" type="boolean" 
+              <param name="rotexoh" type="boolean"
                   
-                  label="rotexoh" help="allow existing OH &amp; SH groups to rotate" 
+                  label="rotexoh" help="allow existing OH &amp; SH groups to rotate"
                 />
             
-              <param name="allalt" type="boolean" 
+              <param name="allalt" type="boolean"
                   checked="true"
-                  label="allalt" help="process adjustments for all conformations (default)" 
+                  label="allalt" help="process adjustments for all conformations (default)"
                 />
             
-              <param name="onlya" type="boolean" 
+              <param name="onlya" type="boolean"
                   
-                  label="onlya" help="only adjust &#39;A&#39; conformations" 
+                  label="onlya" help="only adjust &#39;A&#39; conformations"
                 />
             
-              <param name="charges" type="boolean" 
+              <param name="charges" type="boolean"
                   
-                  label="charges" help="output charge state for appropriate hydrogen records" 
+                  label="charges" help="output charge state for appropriate hydrogen records"
                 />
             
-              <param name="dorotmet" type="boolean" 
+              <param name="dorotmet" type="boolean"
                   
-                  label="dorotmet" help="allow methionine methyl groups to rotate (not recommended)" 
+                  label="dorotmet" help="allow methionine methyl groups to rotate (not recommended)"
                 />
             
-              <param name="noadjust" type="boolean" 
+              <param name="noadjust" type="boolean"
                   
-                  label="noadjust" help="do not process any rot or flip adjustments" 
+                  label="noadjust" help="do not process any rot or flip adjustments"
                 />
             
-              <param name="metal_bump" type="float" 
+              <param name="metal_bump" type="float"
                   
                   
                   label="metal_bump" help="H &#39;bumps&#39; metals at radius plus this" optional="true"/>
             
-              <param name="non_metal_bump" type="float" 
+              <param name="non_metal_bump" type="float"
                   
                   
                   label="non_metal_bump" help="&#39;bumps&#39; nonmetal at radius plus this" optional="true"/>
             
-              <param name="build" type="boolean" 
+              <param name="build" type="boolean"
                   
-                  label="build" help="add H, including His sc NH, then rotate and flip groups (except for pre-existing methionine methyl hydrogens)" 
+                  label="build" help="add H, including His sc NH, then rotate and flip groups (except for pre-existing methionine methyl hydrogens)"
                 />
             
               <param name="binary_path" type="text" label="binary_path" help="Path to the reduce executable binary." optional="false"
@@ -167,7 +167,7 @@
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
-                    
+            
           </section>
     </inputs>
     <outputs>
@@ -179,22 +179,22 @@
     <tests>
         <test>
         </test>
-    </tests>    
+    </tests>
     <help>
 .. class:: infomark
-        
+
 Check the syntax for the tool parameters at the original library documentation: https://biobb_chemistry.readthedocs.io/en/latest
 
 -----
 
-.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png    
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
     :width: 150
 
 **https://mmb.irbbarcelona.org/biobb**
-        
+
 .. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
         :width: 150
-        
+
 **https://bioexcel.eu**
    </help>
 
