@@ -40,7 +40,7 @@ def main():
 
     package_list = [args.package_name]
     if args.package_name.lower() == 'all':
-        package_list = ["biobb_analysis", "biobb_chemistry", "biobb_cmip", "biobb_io", "biobb_gromacs", "biobb_model", "biobb_pmx", "biobb_structure_utils", "biobb_vs", "biobb_ml", "biobb_amber", "biobb_dna"]
+        package_list = ["biobb_analysis", "biobb_chemistry", "biobb_cmip", "biobb_io", "biobb_gromacs", "biobb_model", "biobb_pmx", "biobb_structure_utils", "biobb_vs", "biobb_amber", "biobb_dna"]
 
     for package in package_list:
         BinSoftlinkGenerator(package=package, output_dir=args.output_bin_dir).launch()
