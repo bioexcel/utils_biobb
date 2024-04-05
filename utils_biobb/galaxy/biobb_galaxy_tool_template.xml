@@ -144,6 +144,8 @@
     </outputs>
     <tests>
         <test>
+          <param name="sele" value="option1"/>
+          <param name="properties" value="data/config/config_editconf.json"/>
         </test>
     </tests>
     <help>

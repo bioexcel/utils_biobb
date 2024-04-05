@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 from pathlib import Path
+from typing import Dict
 import importlib
 import argparse
 import utils_biobb.common.file_utils as fu
@@ -13,13 +14,13 @@ class BinSoftlinkGenerator:
         self.output_dir = output_dir
         try:
             self.imported_package = importlib.import_module(package)
-        except ImportError as ie:
-            raise ie(f'{package} and biobb_adapters must be available in your environment')
+        except ImportError:
+            raise ImportError(f'{package} and biobb_adapters must be available in your environment')
 
     def launch(self):
-        sub_paths_dict = fu.get_sub_paths_dict(biobb_name=self.package_name)
+        sub_paths_dict: Dict[str, str] = fu.get_sub_paths_dict(biobb_name=self.package_name)
         for module_name in sub_paths_dict:
-            module_path = Path(self.imported_package.__path__[0]).parent / sub_paths_dict.get(module_name) / f"{module_name}.py"
+            module_path = Path(self.imported_package.__path__[0]).parent / sub_paths_dict.get(module_name, '') / f"{module_name}.py"
             link_path = Path(self.output_dir).joinpath(module_name)
             print(f"Creating softlink: {link_path} -> {module_path}")
             try:

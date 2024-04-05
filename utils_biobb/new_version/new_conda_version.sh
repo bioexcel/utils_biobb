@@ -5,7 +5,7 @@
 ide=code
 path_user=/Users/pau/
 path_biobb=/Users/pau/projects/
-path_json_schemas=/Users/pau/projecs/projects/utils_biobb/utils_biobb/json/
+path_json_schemas=/Users/pau/projects/utils_biobb/utils_biobb/json/
 conda=biobb
 echo "******************************************************"
 echo "Be sure of having activated $conda conda environment!"

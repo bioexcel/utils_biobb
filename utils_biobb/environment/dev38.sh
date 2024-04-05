@@ -1,3 +1,5 @@
+source /Users/pau/mambaforge/etc/profile.d/conda.sh
+source /Users/pau/mambaforge/etc/profile.d/mamba.sh
 mamba create -n dev38 python=3.8 pyyaml requests biopython
 mamba activate dev38
 
@@ -21,6 +23,7 @@ mamba install -y mdanalysis
 
 # biobb_model
 mamba install -y xmltodict
+mamba install -y -c salilab modeller
 
 # biobb_pmx
 mamba install -y pmx_biobb
@@ -33,3 +36,6 @@ python /Users/pau/projects/utils_biobb/utils_biobb/environment/create_bin_softli
 
 # Release new version pypi
 mamba install -y twine keyring
+
+# Create 
+mamba install -y jupyter
