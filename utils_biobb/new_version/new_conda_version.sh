@@ -77,7 +77,7 @@ read -p "Modify recipes/$REPOSITORY/build.sh and press any key..." -n1 -s
 echo ""
 read -p "Modify recipes/$REPOSITORY/meta.yaml paste the headers and check if some dependency has changed from ~/$REPOSITORY/meta.yaml and press any key..." -n1 -s
 echo ""
-git status; git add recipes/$REPOSITORY/*
+git status; git add recipes/$REPOSITORY/*; git status
 git commit -m "[$REPOSITORY] update $version"
 git push -u origin $REPOSITORY
 # open in chrome

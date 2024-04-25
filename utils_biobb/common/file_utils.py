@@ -22,6 +22,11 @@ def get_file_path_list(dir_path=None, extension="json", remove_dir_name=True, ex
         list_paths = list(
             filter(lambda file_path: not str(file_path).endswith(f'{Path(dir_path.name)}.{extension}'), list_paths))
 
+    # Exclude mypy_cache __pycache__
+    excluded_words_list = ['.mypy_cache', '__pycache__']
+    list_paths = list(
+        filter(lambda file_path: not any(forbiden_word for forbiden_word in excluded_words_list if forbiden_word in str(file_path)), list_paths))
+
     return list_paths
 
 
@@ -43,6 +48,3 @@ def get_sub_paths_dict(biobb_name):
     paths_dict = {}
     _iterate_modules(current_module, paths_dict)
     return paths_dict
-
-
-

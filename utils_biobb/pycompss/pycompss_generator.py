@@ -15,12 +15,13 @@ class PycompssGenerator:
         self.output_dir = output_dir
         try:
             self.imported_package = importlib.import_module(package)
-        except ImportError as ie:
-            raise ie(f'{package} and biobb_adapters must be available in your environment')
+        except ImportError:
+            raise ImportError(f'{package} and biobb_adapters must be available in your environment')
 
     def launch(self):
         sub_paths_dict = fu.get_sub_paths_dict(biobb_name=self.package_name)
         for module_json in fu.get_file_path_list(dir_path=self.imported_package.__path__[0]):
+            print(f'Processing {module_json}')
             module_info = {}
             with open(module_json) as f_json:
                 json_dict = json.load(f_json)
