@@ -19,7 +19,7 @@ echo "Message: $message"
 read -p "Do you want to run tests for this repository [Y/n]? " test
 if [ $test == 'y' -o $test == 'Y'  ]
 then
-	nosetests -s $path_biobb$REPOSITORY/$REPOSITORY/test/unitests
+	pytest -s $path_biobb$REPOSITORY/$REPOSITORY/test/unitests
 fi
 read -p "Do you want to generate json schemas for this repository [Y/n]? " json_schemas
 if [ $json_schemas == 'y' -o $json_schemas == 'Y'  ]
@@ -50,6 +50,14 @@ echo ""
 $ide $path_biobb$REPOSITORY/$REPOSITORY/docs/source/change_log.md
 read -p "Modify change_log.md with the new version..." -n1 -s
 echo ""
+echo "*********************************************************"
+echo "## What's new in version [$version](https://github.com/bioexcel/$REPOSITORY/releases/tag/v$version)?"
+echo ""
+echo "### Changes"
+echo ""
+git log $(git describe --tags --abbrev=0)..HEAD --oneline | cut -d " " -f 2-1000 | awk '{print "*",$0}'
+echo ""
+echo "*********************************************************"
 $ide $path_biobb$REPOSITORY/$REPOSITORY/docs/source/schema.html
 read -p "Modify schema.html with the new version number..." -n1 -s
 echo ""
@@ -63,24 +71,20 @@ git push
 git tag -a v$version -m "$message"
 git push origin v$version
 
-python3 setup.py sdist bdist_wheel; python3 -m twine upload dist/* <<< andriopau
+python3 setup.py sdist bdist_wheel; python3 -m twine upload dist/*
 rm -rfv $REPOSITORY.egg-info dist build
 
-read -p "Copy the sha256 hash of the tgz file and press any key..." -n1 -s
 open https://pypi.org/project/$REPOSITORY
+read -p "Copy the sha256 hash of the tgz file in the downloads tab of the pypi site and press any key..." -n1 -s
+
 #Bioconda
 cd ${path_biobb}bioconda-recipes/
 git checkout -f master; git pull origin master
 git branch -D $REPOSITORY; git push origin --delete $REPOSITORY; git checkout -b $REPOSITORY
 $ide ${path_biobb}bioconda-recipes/recipes/$REPOSITORY
-read -p "Modify recipes/$REPOSITORY/build.sh and press any key..." -n1 -s
-echo ""
 read -p "Modify recipes/$REPOSITORY/meta.yaml paste the headers and check if some dependency has changed from ~/$REPOSITORY/meta.yaml and press any key..." -n1 -s
 echo ""
 git status; git add recipes/$REPOSITORY/*; git status
 git commit -m "[$REPOSITORY] update $version"
 git push -u origin $REPOSITORY
-# open in chrome
-# google-chrome https://github.com/bioconda/bioconda-recipes/pull/new/$REPOSITORY
-# open in safari
 open https://github.com/bioconda/bioconda-recipes/pull/new/$REPOSITORY
