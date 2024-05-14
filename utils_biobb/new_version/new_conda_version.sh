@@ -55,7 +55,7 @@ echo "## What's new in version [$version](https://github.com/bioexcel/$REPOSITOR
 echo ""
 echo "### Changes"
 echo ""
-git log $(git describe --tags --abbrev=0)..HEAD --oneline | cut -d " " -f 2-1000 | awk '{print "*",$0}'
+git -C $path_biobb$REPOSITORY log $(git -C $path_biobb$REPOSITORY describe --tags --abbrev=0)..HEAD --oneline | cut -d " " -f 2-1000 | awk '{print "*",$0}'
 echo ""
 echo "*********************************************************"
 $ide $path_biobb$REPOSITORY/$REPOSITORY/docs/source/schema.html
