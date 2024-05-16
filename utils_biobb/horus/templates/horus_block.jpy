@@ -1,0 +1,165 @@
+# Import all the required classes from the HorusAPI
+from HorusAPI import PluginBlock, PluginVariable, VariableTypes
+
+######################
+# Define INPUTS
+# These variables will appear under the palced block.
+# They expect to be conected to the outputs of other blocks
+######################
+{% for input in inputs %}
+pdb_input = PluginVariable(
+    id="pdb_input",  # ID of the variable, will allow us to identify the value
+    name="PDB Input",  # The name that will appear in the frontend
+    description="PDB Input",  # The description that will appear in the frontend
+    type=VariableTypes.FILE,  # The type. This will render the variable accrodingly
+    # The allowedValues parameter depends on the type of variable,
+    # in the case of files, they denote the allowed extensions.
+    allowedValues=["pdb"],
+)
+{% endfor %}
+
+
+######################
+# Define Variables
+# These variables appear under the block "config" button
+######################
+{% for property in properties %}
+pdb_output_name = PluginVariable(
+    id="output_name",
+    name="PDB output name",
+    description="The protonated ligand filename. If none, the input filename will be used.",
+    type=VariableTypes.STRING,
+)
+
+
+ph_variable = PluginVariable(
+    id="ph",
+    name="pH",
+    description="The pH to take into account for protonation",
+    # You can define default values for the variables
+    defaultValue=7.4,
+    type=VariableTypes.FLOAT,
+)
+{% endfor %}
+
+######################
+# Define OUTPUTS
+# These variables will apear under the blocks, and are expected to be
+# connected to the inputs of ther blocks
+######################
+{% for output in outputs %}
+pdb_output = PluginVariable(
+    id="output",
+    name="Protonated PDB",
+    description="The protonated ligand",
+    type=VariableTypes.FILE,
+    allowedValues=["pdb"],
+)
+{% endfor %}
+
+
+# Define the acton that the block will perform
+
+def {{ module_name }}_action(my_block: PluginBlock):
+
+    # It is better to have imports inside the function
+    # because the environment gets cleaned up between each
+    # of the blocks that run in the flow. Having the imports
+    # inside will ensure integrity on the action of the block
+    import subprocess
+    import os
+    import json
+
+    # Obtain the variable values
+    # my_block.inputs is just a dictionary with the ID of the variables as keys
+    # and the value as the value the user enetered
+
+    pdb_input_path = my_block.inputs["pdb_input"]
+
+    # For typo-safety, one can use the id of the PluginVariable instance instead of a string
+    pdb_input_path = my_block.inputs[pdb_input.id]
+
+    # Make sure to get inputs from my_block.inputs, and variables from my_block.variables
+    pdb_output_file = my_block.variables[pdb_output_name.id]
+
+    # Define the properties for the biobb tool
+    ph = my_block.variables[ph_variable.id]
+
+    properties = {"properties": {"ph": ph}}
+
+    with open(".tmp_config.json", "w", encoding="utf-8") as f:
+        json.dump(properties, f)
+
+    pdb_output_file = (
+        pdb_output_file
+        if (pdb_output_file is not None and pdb_output_file != "")
+        else "protonated_" + os.path.basename(pdb_input_path)
+    )
+
+    # Copy the input file to the current folder, the user may have selected a pdb from another folder
+    os.system(f"cp {pdb_input_path} ._input.tmp.pdb")
+
+    # Get the executable and engine form the config
+    engine = my_block.config["docker_slurm"]
+    executable = my_block.config["executable_path"]
+
+    if engine == "docker":
+        # Call the docker biobb tool
+        with subprocess.Popen(
+            [
+                executable,
+                "run",
+                "-v",
+                ".:/tmp",
+                "quay.io/biocontainers/biobb_chemistry:4.1.0--pyhdfd78af_0",
+                "babel_add_hydrogens",
+                "--config",
+                "/tmp/.tmp_config.json",
+                "--input_path",
+                "/tmp/._input.tmp.pdb",
+                "--output_path",
+                f"/tmp/{pdb_output_file}",
+            ],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            universal_newlines=True,
+        ) as process:
+            if process.stdout is not None:
+                for line in process.stdout:
+                    # printing anything inside the block action will
+                    # redirect the output to the Horus integrated terminal
+                    print(line)
+
+            if process.stderr is not None:
+                for line in process.stderr:
+                    print(line)
+
+            process.wait()
+
+            if process.returncode != 0:
+                # Raising an exception inside the block action will display the block as with an error,
+                # and will display the error inside the block
+                raise Exception(
+                    process.stderr
+                    if process.stderr
+                    else "An error ocurred while running the flow"
+                )
+
+            # If the block has any output, one can set its value using the ID of the output variable
+            # and the corresponding value
+            my_block.setOutput(pdb_output.id, pdb_output_file)
+
+
+# Define the block
+babel_add_hydrogens_block = PluginBlock(
+    # The name which will appear on the frontend
+    name="Babel add hydrogen",
+    # Its description
+    description="Add hydrogens with babel",
+    # The action
+    action=add_hydrogens_action,
+    # A list of inputs, variables and outputs
+    inputs=[pdb_input],
+    variables=[ph_variable, pdb_output_name],
+    outputs=[pdb_output],
+)
