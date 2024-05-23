@@ -1,0 +1,26 @@
+from HorusAPI import Plugin, PluginConfig, PluginVariable, VariableTypes
+
+{% for module_name, dot_path in dot_paths_dict.items() %}
+from {{dot_path}} import {{module_name}}_block
+{% endfor %}
+plugin = Plugin(id='{{block_name}}')
+{% for module_name, dot_path in dot_paths_dict.items() %}
+plugin.addBlock({{module_name}}_block)
+{% endfor %}
+
+executable_path_variable = PluginVariable(
+    id="executable_path",
+    name="Executable path",
+    description="The path to the docker executable",
+    defaultValue="docker",
+    type=VariableTypes.STRING,
+)
+
+executable_path_variable_config = PluginConfig(
+    name=executable_path_variable.name,
+    description=executable_path_variable.description,
+    action=None,
+    variables=[executable_path_variable],
+)
+
+plugin.addConfig(executable_path_variable_config)

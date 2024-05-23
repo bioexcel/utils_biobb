@@ -1,0 +1,8 @@
+{
+    "name": "{{_id}}",
+    "description": "The Horus adapter for {{_id}}",
+    "author": "Pau Andrio",
+    "version": "{{version}}",
+    "pluginFile": "plugin.py",
+    "dependencies": []
+}
