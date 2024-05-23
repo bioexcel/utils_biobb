@@ -98,6 +98,7 @@ class HorusGenerator:
                 module_info['module_dot_path'] = sub_paths_dict.get(module_name, '').replace('/', '.')+'.'+module_name
                 module_info['mpi'] = json_dict.get('info').get('wrapped_software').get('multinode')
                 module_info['required'] = json_dict.get('required')
+                module_info['docker_image'] = block_json_dict.get('docker', '').replace('https://', '')
                 module_info['inputs'] = []
                 module_info['outputs'] = []
                 module_info['properties'] = []
