@@ -2,13 +2,17 @@ import argparse
 import json
 import yaml
 import re
-#from importlib import import_module
+# from importlib import import_module
 from pathlib import Path, PurePath
 from os import walk
 
-class literal_unicode(str): pass
+
+class literal_unicode(str):
+    pass
+
 
 prev_indent = 1
+
 
 class MyDumper(yaml.Dumper):
     # HACK: insert blank lines between top-level objects
@@ -23,6 +27,7 @@ class MyDumper(yaml.Dumper):
 
         prev_indent = indent
 
+
 class CWLGenerator():
 
     def __init__(self, package, input_path, output_path, **kwargs):
@@ -34,13 +39,14 @@ class CWLGenerator():
             raise SystemExit('Unexisting input path')
 
         self.input_path = input_path
+        Path(output_path).mkdir(parents=True, exist_ok=True)
 
         # check if output_path exists
         if not Path(output_path).exists():
             raise SystemExit('Unexisting output path')
 
         self.output_path = output_path
-    
+
     def getJSONSchemas(self):
         """ returns all the JSON Schemas files of the package and the package json file """
 
@@ -50,7 +56,7 @@ class CWLGenerator():
             json_files.extend(filenames)
             break
 
-        if(self.package + '.json' in json_files): 
+        if (self.package + '.json' in json_files):
             json_pckg = self.package + '.json'
             json_files.remove(json_pckg)
 
@@ -59,8 +65,8 @@ class CWLGenerator():
     def parseJSON(self, json_file_path):
         """ parses json to python object """
 
-        with open(json_file_path) as json_file: 
-            schema = json.load(json_file) 
+        with open(json_file_path) as json_file:
+            schema = json.load(json_file)
 
         return schema
 
@@ -76,11 +82,11 @@ class CWLGenerator():
 
         flist = []
         aflist = []
-        
+
         for frmt in ff:
             gr = re.match('\.\*\\\\\.(.*)\$', frmt['extension'])
             aflist.append(gr.groups()[0])
-            #flist[0]["symbols"].append("edam:" + frmt['edam'])
+            # flist[0]["symbols"].append("edam:" + frmt['edam'])
             flist.append("edam:" + frmt['edam'])
 
         return flist, aflist
@@ -99,7 +105,6 @@ class CWLGenerator():
 
         return output
 
-
     def formatInputs(self, inputs_dict, typ):
         """ returns CWL inputs properly formatted """
 
@@ -107,7 +112,7 @@ class CWLGenerator():
 
         position = 1
         for attr, value in inputs_dict.items():
-            
+
             if value['filetype'] == "input":
                 tp = "File" if typ == "req" else "File?"
             else:
@@ -115,16 +120,16 @@ class CWLGenerator():
             formats, accepted_formats = self.getFormat(value['file_formats'])
 
             sample = value['sample'] if value['sample'] else "null"
-            ib = { "position": position, "prefix": "--" + attr } if typ == "req" else { "prefix": "--" + attr }
+            ib = {"position": position, "prefix": "--" + attr} if typ == "req" else {"prefix": "--" + attr}
 
             inputs[attr] = {
                 "label": value['description'],
                 "doc": literal_unicode(value['description'] + "\n"
-                    + "Type: " + value['type'] + "\n"
-                    + "File type: " + value['filetype'] + "\n"
-                    + "Accepted formats: " + ', '.join(accepted_formats) + "\n"
-                    + "Example file: " + sample
-                    ),
+                                       + "Type: " + value['type'] + "\n"
+                                       + "File type: " + value['filetype'] + "\n"
+                                       + "Accepted formats: " + ', '.join(accepted_formats) + "\n"
+                                       + "Example file: " + sample
+                                       ),
                 "type": tp,
                 "format": formats,
                 "inputBinding": ib
@@ -132,11 +137,10 @@ class CWLGenerator():
 
             if value['filetype'] == "output":
                 inputs[attr]['default'] = self.getOutputDefault(accepted_formats)
-            
+
             position = position + 1
 
         return inputs
-
 
     def returnInputs(self, tool_schema, tools, basename):
         """ returns inputs list """
@@ -145,7 +149,7 @@ class CWLGenerator():
         inputs_optional = {}
 
         for attr, value in tool_schema['properties'].items():
-            if attr != 'properties': 
+            if attr != 'properties':
                 if attr in tool_schema['required']:
                     inputs_required[attr] = value
                 else:
@@ -162,7 +166,7 @@ class CWLGenerator():
 
         inputs['config'] = {
             "label": self.setConfText(conf_label, {"name": tool_schema['name']}),
-            "doc": literal_unicode(self.setConfText(conf_doc, {"name": tool_schema['name'],"documentation": conf_doc_link})),
+            "doc": literal_unicode(self.setConfText(conf_doc, {"name": tool_schema['name'], "documentation": conf_doc_link})),
             "type": "string?",
             "inputBinding": {
                 "prefix": "--config"
@@ -177,7 +181,7 @@ class CWLGenerator():
         outputs = {}
 
         for attr, value in outputs_dict.items():
-            
+
             tp = "File" if typ == "req" else "File?"
 
             formats, accepted_formats = self.getFormat(value['file_formats'])
@@ -194,7 +198,6 @@ class CWLGenerator():
             # trick for passing cwltool --validate
             outputs[attr]["format"] = formats[0]
 
-
         return outputs
 
     def returnOutputs(self, tool_schema):
@@ -204,7 +207,7 @@ class CWLGenerator():
         outputs_optional = {}
 
         for attr, value in tool_schema['properties'].items():
-            if attr != 'properties' and value['filetype'] == 'output': 
+            if attr != 'properties' and value['filetype'] == 'output':
                 if attr in tool_schema['required']:
                     outputs_required[attr] = value
                 else:
@@ -216,7 +219,6 @@ class CWLGenerator():
         outputs = {**outputs_r, **outputs_o}
 
         return outputs
-
 
     def literal_unicode_representer(self, dumper, data):
         """ returns a literal unicode """
@@ -234,7 +236,7 @@ class CWLGenerator():
             "baseCommand": basename,
             "hints": {
                 "DockerRequirement": {
-                    #"dockerPull": "quay.io/biocontainers/" + pckg_schema['_id'] + ":" + pckg_schema['version'] + "--py_0"
+                    # "dockerPull": "quay.io/biocontainers/" + pckg_schema['_id'] + ":" + pckg_schema['version'] + "--py_0"
                     "dockerPull": pckg_schema['docker'].replace("https://", "")
                 }
             },
@@ -257,8 +259,7 @@ class CWLGenerator():
         with open(path, 'w+') as yml_file:
             yml_file.write('#!/usr/bin/env cwl-runner\n')
             yaml.dump(object_cwl, yml_file, Dumper=MyDumper, sort_keys=False)
-            #yaml.dump(object_cwl, yml_file, sort_keys=False)
-
+            # yaml.dump(object_cwl, yml_file, sort_keys=False)
 
     def launch(self):
         """ launch function for CWLGenerator """
@@ -281,7 +282,7 @@ class CWLGenerator():
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Creates CWL adapters from given json schema.", 
+    parser = argparse.ArgumentParser(description="Creates CWL adapters from given json schema.",
                                      formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999),
                                      epilog='''Examples: \ncwl_generator.py -p biobb_package -i path/to/json_schemas -o path/to/cwl_adapters\ncwl_generator.py --package biobb_package --input path/to/json_schemas --output path/to/cwl_adapters''')
     required_args = parser.add_argument_group('required arguments')
