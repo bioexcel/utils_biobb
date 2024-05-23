@@ -34,6 +34,8 @@ cwl_generator_script_path=/Users/pau/projects/utils_biobb/utils_biobb/cwl/cwl_ge
 # pycompss adapters
 pycompss_generator_script_path=/Users/pau/projects/utils_biobb/utils_biobb/pycompss/pycompss_generator.py
 pycompss_template_path=/Users/pau/projects/utils_biobb/utils_biobb/pycompss/pycompss_wrapper.tmpl
+# horus adapters
+horus_generator_script_path=/Users/pau/projects/utils_biobb/utils_biobb/horus/horus_generator.py
 
 # list of biobbs to be executed
 if [ $# -gt 0 ]; then
@@ -101,6 +103,13 @@ for biobb in ${biobb_list}
   echo "  ${biobb} Create pycompss adapters:"
   echo "    python3 ${pycompss_generator_script_path} -p ${biobb} -o ${biobb_adapters_path}/biobb_adapters/pycompss/"
   python3 ${pycompss_generator_script_path} -p ${biobb} -o ${biobb_adapters_path}/biobb_adapters/pycompss/
+  want_to_exit $?
+
+  # PYCOMPSS
+  echo ""
+  echo "  ${biobb} Create Horus adapters:"
+  echo "    python3 ${horus_generator_script_path} -p ${biobb} -o ${biobb_adapters_path}/biobb_adapters/horus/"
+  python3 ${horus_generator_script_path} -p ${biobb} -o ${biobb_adapters_path}/biobb_adapters/horus/
   want_to_exit $?
 
  done
