@@ -18,6 +18,9 @@ class HorusGenerator:
         except ImportError:
             raise ImportError(f'{package} and biobb_adapters must be available in your environment')
 
+    def _escape_string_quotes(self, string: str) -> str:
+        return string.replace('"', "\'").replace("'", "\'")
+
     def __str_type_to_horus_type(self, str_type: str) -> str:
         str_type = str_type.lower()
         if str_type == 'str':
@@ -29,6 +32,10 @@ class HorusGenerator:
         if str_type == 'dict':
             str_type = 'STRING'
         if str_type == 'object':
+            str_type = 'STRING'
+        if str_type == 'list':
+            str_type = 'STRING'
+        if str_type == 'array':
             str_type = 'STRING'
         return f"VariableTypes.{str_type.upper()}"
 
@@ -92,8 +99,8 @@ class HorusGenerator:
                 json_dict = json.load(f_json)
                 module_name = module_json.name.rsplit('.')[0]
                 module_info['module_name'] = module_name
-                module_info['long_description'] = json_dict.get('description')
-                module_info['short_description'] = json_dict.get('title')
+                module_info['long_description'] = self._escape_string_quotes(json_dict.get('description'))
+                module_info['short_description'] = self._escape_string_quotes(json_dict.get('title'))
                 module_info['iclass'] = json_dict.get('name').split()[-1]
                 module_info['module_dot_path'] = sub_paths_dict.get(module_name, '').replace('/', '.')+'.'+module_name
                 module_info['mpi'] = json_dict.get('info').get('wrapped_software').get('multinode')
@@ -105,13 +112,16 @@ class HorusGenerator:
 
                 for argument, value in json_dict.get('properties').items():
                     if argument == 'properties':
-                        module_info['properties'] = [{**prop_dict, "name": prop_name, "horus_type": self.__str_type_to_horus_type(prop_dict.get('type'))} for prop_name, prop_dict in value.get('properties').items()]
+                        module_info['properties'] = [{**prop_dict, "horus_description": self._escape_string_quotes(prop_dict.get('description')), "name": prop_name, "horus_type": self.__str_type_to_horus_type(prop_dict.get('type'))} for prop_name, prop_dict in value.get('properties').items()]
                         continue
 
                     argument_dict = {}
                     argument_dict['name'] = argument
                     argument_dict['required'] = argument in module_info['required']
-                    argument_dict['description'] = value.get('description')
+                    # print(f"Processing {argument}")
+                    # print(f"description: {value['description']}")
+                    # print(f"escape: {self._escape_string_quotes(value['description'])}")
+                    argument_dict['description'] = self._escape_string_quotes(value['description'])
                     argument_dict['extensions'] = ["".join(re.split("[^A-Za-z0-9]+", ext)) for ext in value.get('enum')]
 
                     if value.get('filetype').lower() == 'input':

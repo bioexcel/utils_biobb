@@ -12,7 +12,7 @@ from HorusAPI import PluginBlock, PluginVariable, VariableTypes
 {{ input.name }} = PluginVariable(
     id="{{ input.name }}",  # ID of the variable, will allow us to identify the value
     name="{{ input.name }}",  # The name that will appear in the frontend
-    description='{{ input.description }}',  # The description that will appear in the frontend
+    description="{{ input.description }}",  # The description that will appear in the frontend
     type=VariableTypes.FILE,  # The type. This will render the variable accrodingly
     # The allowedValues parameter depends on the type of variable,
     # in the case of files, they denote the allowed extensions.
@@ -23,7 +23,7 @@ from HorusAPI import PluginBlock, PluginVariable, VariableTypes
 {{ output.name }} = PluginVariable(
     id="{{ output.name }}",  # ID of the variable, will allow us to identify the value
     name="{{ output.name }}",  # The name that will appear in the frontend
-    description='{{ output.description }}',  # The description that will appear in the frontend
+    description="{{ output.description }}",  # The description that will appear in the frontend
     type=VariableTypes.FILE,  # The type. This will render the variable accrodingly
     # The allowedValues parameter depends on the type of variable,
     # in the case of files, they denote the allowed extensions.
@@ -38,7 +38,7 @@ from HorusAPI import PluginBlock, PluginVariable, VariableTypes
 {{property.name}} = PluginVariable(
     id="{{property.name}}",
     name="{{property.name}}",
-    description='{{property.description}}',
+    description="{{property.horus_description}}",
     type={{property.horus_type}}
 )
 {% endfor %}
@@ -163,7 +163,7 @@ variables_list.append({{property.name}})
     # The name which will appear on the frontend
     name="{{module_name}}",
     # Its description
-    description='{{short_description}}',
+    description="{{short_description}}",
     # The action
     action={{module_name}}_action,
     # A list of inputs, variables and outputs
