@@ -5,6 +5,7 @@ import utils_biobb.common.file_utils as fu
 import json
 import jinja2
 import re
+import shutil
 from typing import Tuple
 
 
@@ -137,6 +138,11 @@ class HorusGenerator:
                     template = templateEnv.get_template(horus_block_template)
                     print(f'Writting {str(adapter_file_path)}')
                     adapter_file.write(template.render(**module_info))
+        # Create zip file
+        print(f'Writting {str(Path(self.output_dir).joinpath(self.package_name+".hp"))}')
+        shutil.make_archive(str(Path(self.output_dir).joinpath(self.package_name)), 'zip', str(Path(self.output_dir).joinpath(self.package_name)))
+        shutil.move(str(Path(self.output_dir).joinpath(self.package_name+'.zip')), str(Path(self.output_dir).joinpath(self.package_name+'.hp')))
+        shutil.rmtree(str(Path(self.output_dir).joinpath(self.package_name)))
 
 
 def main():

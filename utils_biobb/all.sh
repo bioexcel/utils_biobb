@@ -105,7 +105,7 @@ for biobb in ${biobb_list}
   python3 ${pycompss_generator_script_path} -p ${biobb} -o ${biobb_adapters_path}/biobb_adapters/pycompss/
   want_to_exit $?
 
-  # PYCOMPSS
+  # Horus
   echo ""
   echo "  ${biobb} Create Horus adapters:"
   echo "    python3 ${horus_generator_script_path} -p ${biobb} -o ${biobb_adapters_path}/biobb_adapters/horus/"
