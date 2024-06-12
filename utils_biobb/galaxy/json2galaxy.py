@@ -1,16 +1,12 @@
 """ Utility to generate Galaxy automated tool definitions (XML) from biobb json_schemas """
 
 import argparse
-from itertools import count
 import json
 import os
 import re
 import sys
 from os.path import join as opj
-from tkinter import W
-
 from jinja2 import Environment, FileSystemLoader, select_autoescape
-from jinja2.exceptions import TemplateSyntaxError
 
 TEMPL = "biobb_galaxy_tool_template.xml"
 XML_DIR = "./xml_files"
@@ -27,10 +23,10 @@ SECTIONS = {
     'biobb_chemistry': 'Small molecules',
     'biobb_pmx': 'PMX Free Energy calculation',
     'biobb_vs': 'Virtual Screening / Docking',
-    'biobb_ml': 'Machine Learning',
-    'biobb_cp2k': 'Setup and simulation of QM simulations (CP2K)',
     'biobb_haddock': 'Haddock',
-    'biobb_asitedesign': 'Asite Design'
+    'biobb_pytorch': 'PyTorch',
+    'biobb_flexserv': 'FlexServ',
+    'biobb_flexdyn': 'FlexDyn'
 }
 
 
@@ -157,7 +153,8 @@ def main():
                     if 'enum' in schema_data['properties'][f]:
                         for v in schema_data['properties'][f]['enum']:
                             m = re.search(r"\w+", v)
-                            tool_data['file_types'].append(m.group(0))
+                            if m:
+                                tool_data['file_types'].append(m.group(0))
                     if args.file_types:
                         for ty in tool_data['file_types']:
                             file_types[schema_data['properties']

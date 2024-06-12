@@ -8,6 +8,22 @@ plugin = Plugin(id='{{block_name}}')
 plugin.addBlock({{module_name}}_block)
 {% endfor %}
 
+sandbox_variable = PluginVariable(
+    id="sandbox",
+    name="sandbox folder",
+    description="Sandbox",
+    defaultValue="/tmp",
+    type=VariableTypes.STRING,
+)
+
+container_folder_variable = PluginVariable(
+    id="container_folder",
+    name="container folder",
+    description="Container folder",
+    defaultValue="/tmp",
+    type=VariableTypes.STRING,
+)
+
 executable_path_variable = PluginVariable(
     id="executable_path",
     name="Executable path",
@@ -16,11 +32,11 @@ executable_path_variable = PluginVariable(
     type=VariableTypes.STRING,
 )
 
-executable_path_variable_config = PluginConfig(
+biobb_variable_config = PluginConfig(
     name=executable_path_variable.name,
     description=executable_path_variable.description,
     action=None,
-    variables=[executable_path_variable],
+    variables=[executable_path_variable, sandbox_variable, container_folder_variable],
 )
 
-plugin.addConfig(executable_path_variable_config)
+plugin.addConfig(biobb_variable_config)

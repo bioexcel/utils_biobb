@@ -1,7 +1,33 @@
 # Import all the required classes from the HorusAPI
 import shutil
 from pathlib import Path
+from copy import deepcopy
+import uuid
+import os
 from HorusAPI import PluginBlock, PluginVariable, VariableTypes
+
+
+def create_unique_dir(path: str = "", prefix: str = "", number_attempts: int = 10) -> str:
+    new_dir = prefix + str(uuid.uuid4())
+    if path:
+        new_dir = str(Path(path).joinpath(new_dir))
+    for i in range(number_attempts):
+        try:
+            oldumask = os.umask(0)
+            Path(new_dir).mkdir(mode=0o777, parents=True, exist_ok=False)
+            print("%s directory successfully created" % new_dir)
+            os.umask(oldumask)
+            return new_dir
+        except OSError:
+            print(new_dir + " Already exists")
+            print("Retrying %i times more" % (number_attempts - i))
+            new_dir = prefix + str(uuid.uuid4().hex)
+            if path:
+                new_dir = str(Path(path).joinpath(new_dir))
+                print("Trying with: " + new_dir)
+    raise FileExistsError
+
+
 
 ######################
 # Define INPUTS
@@ -27,8 +53,12 @@ from HorusAPI import PluginBlock, PluginVariable, VariableTypes
     type=VariableTypes.FILE,  # The type. This will render the variable accrodingly
     # The allowedValues parameter depends on the type of variable,
     # in the case of files, they denote the allowed extensions.
-    allowedValues={{ output.extensions }}
+    allowedValues={{ output.extensions }},
+    category="Output files"
 )
+
+{{ output.name }}_var = deepcopy({{ output.name }})
+{{ output.name }}_var.id = "{{ output.name }}_var"
 {% endfor %}
 ######################
 # Define Variables
@@ -39,11 +69,16 @@ from HorusAPI import PluginBlock, PluginVariable, VariableTypes
     id="{{property.name}}",
     name="{{property.name}}",
     description="{{property.horus_description}}",
-    type={{property.horus_type}}
+    defaultValue={{property.horus_default}},
+    type={{property.horus_type}},
+    category="Properties"
 )
 {% endfor %}
 # Define the action that the block will perform
 def {{ module_name }}_action(biobb_block: PluginBlock):
+
+    # Create a unique directory for the sandbox
+    sandbox_dir = create_unique_dir(biobb_block.config["sandbox"], "sandbox_")
 
     # It is better to have imports inside the function
     # because the environment gets cleaned up between each
@@ -59,12 +94,13 @@ def {{ module_name }}_action(biobb_block: PluginBlock):
     {{ input.name }}_value = biobb_block.inputs["{{ input.name }}"]
     {% endfor %}
     {% for output in outputs %}
-    {{ output.name }}_value = biobb_block.inputs["{{ output.name }}"]
+    {{ output.name }}_value = biobb_block.variables["{{ output.name }}_var"]
     {% endfor %}
     # Define the properties for the biobb tool
     properties_values = {}
     {% for property in properties %}
-    properties_values["{{property.name}}"] = biobb_block.variables["{{property.name}}"]
+    if biobb_block.variables["{{property.name}}"] is not None and biobb_block.variables["{{property.name}}"] != "":
+        properties_values["{{property.name}}"] = biobb_block.variables["{{property.name}}"]
     {% endfor %}
     for key in list(properties_values.keys()):
         if properties_values[key] is None:
@@ -72,7 +108,7 @@ def {{ module_name }}_action(biobb_block: PluginBlock):
     properties = {"properties": properties_values}
 
 
-    with open("{{module_name}}.json", "w", encoding="utf-8") as f:
+    with open(Path(sandbox_dir).joinpath("{{module_name}}.json"), "w", encoding="utf-8") as f:
         json.dump(properties, f)
 
     # Get the executable and engine form the config
@@ -81,32 +117,36 @@ def {{ module_name }}_action(biobb_block: PluginBlock):
     # Copy inputs to the tmp folder
     for key, value in biobb_block.inputs.items():
         if value is not None:
-            if Path(value).exists():
-                abs_path_out = Path(value).absolute()
-                abs_path_name = Path(Path(value).name).absolute()
-                if not abs_path_name.samefile(abs_path_out):
-                    shutil.copy(value, f"{Path(value).name}")
+            shutil.copy(value, f"{Path(sandbox_dir).joinpath(Path(value).name)}")
+            print(f"Copying {value} to {Path(sandbox_dir).joinpath(Path(value).name)}")
 
+    input_files = []
+    {% for input in inputs %}
+    if {{input.name}}_value is not None:
+        input_files.append("--{{ input.name }}")
+        input_files.append(f"{Path(biobb_block.config['container_folder']).joinpath(Path({{input.name}}_value).name)}")
+    {% endfor %}
+    output_files = []
+    {% for output in outputs %}
+    if {{output.name}}_value is not None:
+        output_files.append("--{{ output.name }}")
+        output_files.append(f"{Path(biobb_block.config['container_folder']).joinpath(Path({{output.name}}_value).name)}")
+    {% endfor %}
     # Call the docker biobb tool
+    print(f"Running {executable} run -v {str(Path(sandbox_dir))}:{biobb_block.config['container_folder']} {{docker_image}} {{module_name}} --config {Path(biobb_block.config['container_folder']).joinpath('{{module_name}}.json')}")
+    print(f"Input files: {input_files}")
+    print(f"Output files: {output_files}")
     with subprocess.Popen(
         [
             executable,
             "run",
             "-v",
-            ".:/tmp",
+            f"{str(Path(sandbox_dir))}:{biobb_block.config['container_folder']}",
             "{{docker_image}}",
             "{{module_name}}",
             "--config",
-            "/tmp/{{module_name}}.json",
-            {% for input in inputs %}
-            "--{{ input.name }}",
-            f"/tmp/{Path({{input.name}}_value).name}",
-            {% endfor %}
-            {% for output in outputs %}
-            "--{{ output.name }}",
-            f"/tmp/{Path({{ output.name }}_value).name}",
-            {% endfor %}
-        ],
+            f"{Path(biobb_block.config['container_folder']).joinpath('{{module_name}}.json')}"
+        ] + input_files + output_files,
         stdout=subprocess.PIPE,
         stderr=subprocess.STDOUT,
         universal_newlines=True,
@@ -135,11 +175,10 @@ def {{ module_name }}_action(biobb_block: PluginBlock):
 
         {% for output in outputs %}
         # Copy the outputs to the output folder
-        abs_path_out = Path({{ output.name }}_value).absolute()
-        abs_path_name = Path(Path({{ output.name }}_value).name).absolute()
-        if not abs_path_name.samefile(abs_path_out):
-            shutil.copy(f"{Path({{ output.name }}_value).name}", {{ output.name }}_value)
-        biobb_block.setOutput("{{output.name}}", {{output.name}}_value)
+        if {{output.name}}_value is not None:
+            shutil.copy(f"{Path(sandbox_dir).joinpath(Path({{output.name}}_value).name)}", {{ output.name }}_value)
+            print(f"Copying {Path(sandbox_dir).joinpath(Path({{output.name}}_value).name)} to {Path({{output.name}}_value)}")
+            biobb_block.setOutput("{{output.name}}", {{output.name}}_value)
         {% endfor %}
         # If the block has any output, one can set its value using the ID of the output variable
         # and the corresponding value
@@ -148,12 +187,14 @@ def {{ module_name }}_action(biobb_block: PluginBlock):
 # Define the block
 inputs_list = []
 outputs_list = []
+outputs_var_list = []
 variables_list = []
 {% for input in inputs %}
 inputs_list.append({{input.name}})
 {% endfor %}
 {% for output in outputs %}
 outputs_list.append({{output.name}})
+outputs_var_list.append({{output.name}}_var)
 {% endfor %}
 {% for property in properties %}
 variables_list.append({{property.name}})
@@ -167,7 +208,7 @@ variables_list.append({{property.name}})
     # The action
     action={{module_name}}_action,
     # A list of inputs, variables and outputs
-    inputs=inputs_list + outputs_list,
-    variables=variables_list,
+    inputs=inputs_list,
+    variables=variables_list + outputs_var_list,
     outputs=outputs_list,
 )

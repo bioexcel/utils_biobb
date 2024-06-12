@@ -85,7 +85,8 @@ class CWLGenerator():
 
         for frmt in ff:
             gr = re.match('\.\*\\\\\.(.*)\$', frmt['extension'])
-            aflist.append(gr.groups()[0])
+            if gr:
+                aflist.append(gr.groups()[0])
             # flist[0]["symbols"].append("edam:" + frmt['edam'])
             flist.append("edam:" + frmt['edam'])
 
@@ -101,7 +102,7 @@ class CWLGenerator():
 
         output = conf_label
         for attr, value in conf_dict.items():
-            output = re.sub(r'\#\#' + attr + '\#\#', value, output)
+            output = re.sub('\#\#' + attr + '\#\#', value, output)
 
         return output
 

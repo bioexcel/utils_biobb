@@ -19,6 +19,13 @@ class HorusGenerator:
         except ImportError:
             raise ImportError(f'{package} and biobb_adapters must be available in your environment')
 
+    def _default_value(self, value):
+        if value == 'null':
+            return None
+        if isinstance(value, str):
+            return f"\"{value}\""
+        return value
+
     def _escape_string_quotes(self, string: str) -> str:
         return string.replace('"', "\'").replace("'", "\'")
 
@@ -35,9 +42,9 @@ class HorusGenerator:
         if str_type == 'object':
             str_type = 'STRING'
         if str_type == 'list':
-            str_type = 'STRING'
+            str_type = 'LIST'
         if str_type == 'array':
-            str_type = 'STRING'
+            str_type = 'LIST'
         return f"VariableTypes.{str_type.upper()}"
 
     def _create_plugin_paths(self, output_path: Path) -> Tuple[Path, Path, Path, Path]:
@@ -113,7 +120,11 @@ class HorusGenerator:
 
                 for argument, value in json_dict.get('properties').items():
                     if argument == 'properties':
-                        module_info['properties'] = [{**prop_dict, "horus_description": self._escape_string_quotes(prop_dict.get('description')), "name": prop_name, "horus_type": self.__str_type_to_horus_type(prop_dict.get('type'))} for prop_name, prop_dict in value.get('properties').items()]
+                        module_info['properties'] = [{**prop_dict, "horus_description": self._escape_string_quotes(prop_dict.get('description')), "name": prop_name, "horus_type": self.__str_type_to_horus_type(prop_dict.get('type')), "horus_default": self._default_value(prop_dict.get('default'))} for prop_name, prop_dict in value.get('properties').items()]
+                        for property_dict in module_info['properties']:
+                            if property_dict.get('horus_type') == 'VariableTypes.LIST' and isinstance(property_dict.get('horus_default'), str):
+                                list_str = property_dict['horus_default'].replace('[', '').replace(']', '').replace("'", '').replace('"', '').replace(' ', '')
+                                property_dict['horus_default'] = list_str.split(',')
                         continue
 
                     argument_dict = {}

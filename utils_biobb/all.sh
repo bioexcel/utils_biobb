@@ -42,7 +42,7 @@ if [ $# -gt 0 ]; then
     biobb_list="$@"
 else
     # biobb_ml
-    # biobb_flexserv
+    # biobb_cp2k
     biobb_list="biobb_haddock biobb_pytorch biobb_analysis biobb_amber biobb_model biobb_cmip biobb_chemistry biobb_vs biobb_gromacs biobb_dna biobb_structure_utils biobb_pmx biobb_io biobb_flexserv biobb_flexdyn"
 fi
 echo "List of packages where the script will be executed:"
