@@ -1,0 +1,184 @@
+<tool id="biobb_bioml_feature_selection_ext" name="FeatureSelection" version="0.1" >
+    <description>: Wrapper class for the bioml Feature selection module.</description>
+    <requirements>
+        <requirement type="package"
+        version="0.1"
+        >biobb_bioml</requirement>
+    </requirements>
+    <command detect_errors="aggressive"><![CDATA[
+        
+          ln -f -s ${input_features} ${input_features}_`echo $$`.${input_features.ext};
+        
+          ln -f -s ${label} ${label}_`echo $$`.${label.ext};
+        
+        #if $config.sele == "option1":
+            ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
+          #end if
+
+        feature_selection
+
+        #if $config.sele == "option1":
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
+          #else if $config.sele == "option2":
+            --config '${config.jsonstr}'
+          #else if $config.sele == "option3":
+            --config '__oc____dq__feature_range__dq__:__dq__${properties.feature_range}__dq__,__dq__num_thread__dq__:${properties.num_thread},__dq__variance_threshold__dq__:${properties.variance_threshold},__dq__scaler__dq__:__dq__${properties.scaler}__dq__,__dq__kfold_parameters__dq__:__dq__${properties.kfold_parameters}__dq__,__dq__rfe_steps__dq__:${properties.rfe_steps},__dq__plot__dq__:${properties.plot},__dq__plot_num_features__dq__:${properties.plot_num_features},__dq__num_filters__dq__:${properties.num_filters}__cc__'
+          #end if
+        
+          #if str($input_features) != 'None':
+            --input_features ${input_features}_`echo $$`.${input_features.ext}
+          #end if
+        
+          #if str($label) != 'None':
+            --label ${label}_`echo $$`.${label.ext}
+          #end if
+        
+        
+          --output_excel $outname_output_excel
+        
+          --output_zip $outname_output_zip
+        ;
+        #if $config.sele == "option1":
+            rm -f ${config.properties}_`echo $$`.${config.properties.ext};
+          #end if
+        
+          rm -f ${input_features}_`echo $$`.${input_features.ext};
+        
+          rm -f ${label}_`echo $$`.${label.ext};
+        
+        
+          if test -f $outname_output_excel; then mv $outname_output_excel $output_excel; fi;
+        
+          if test -f $outname_output_zip; then mv $outname_output_zip $output_zip; fi;
+        
+    ]]>
+    </command>
+    <inputs>
+        
+          <param name="input_features" type="data" format="CSV"  optional="False" label="input CSV file" help="The path to the training features that contains both ifeature and possum in csv format. Format: [input].CSV"/>
+        
+          <param name="label" type="data" format="CSV"  optional="False" label="input CSV file" help="The path to the labels of the training set in a csv format if not in the features, if present in the features csv use the flag to specify the label column name. Format: [input].CSV"/>
+        
+        
+          <param name="outname_output_excel" type="text" value="myfeature_selection.XLSX"
+              optional="False" label="output XLSX name"
+              help="The file path to where the selected features will be saved in excel format Format: [output].XLSX "/>
+        
+          <param name="outname_output_zip" type="text" value="myfeature_selection.ZIP"
+              optional="False" label="output ZIP name"
+              help="A zip file with the extra parameters Format: [output].ZIP "/>
+        
+        <conditional name="config">
+            <param name="sele" type="select" label="Take tool settings:" help="Select where tool settings are to be read from">
+              <option value="option3">Manual Input</option>
+              <option value="option1">from configuration file</option>
+              <option value="option2">from JSON string</option>
+            </param>
+            <when value="option1">
+              <param name="properties" type="data" format="yml,json" optional="false" label="Configuration file" help="File containing tool settings. See below for the syntax"/>
+            </when>
+            <when value="option2">
+              <param name="jsonstr" type="text" value="{}" optional="false" label="JSON string" help="JSON string containing tool settings. See below for the syntax"/>
+            </when>
+            <when value="option3">
+            </when>
+          </conditional>
+          <section name="properties" title="Properties Input">
+            
+              <param name="feature_range" type="text" label="feature_range" help="Specify the minimum and maximum of number of features in start:stop:step format or a single integer. Stop can be none then the default value will be (n_samples / 2)&#34;." optional="false"
+                  value="20:none:10"
+                >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+              <param name="num_thread" type="integer"
+                  value="10"
+                  
+                  label="num_thread" help="The number of threads to use for parallelizing the feature selection." optional="false"/>
+            
+              <param name="variance_threshold" type="float"
+                  value="7.0"
+                  
+                  label="variance_threshold" help="It will influence the features to be eliminated the larger the less restrictive." optional="false"/>
+            
+              <param name="scaler" type="text" label="scaler" help="Choose one of the scaler available in scikit-learn, defaults to RobustScaler. Options: (&#34;robust&#34;, &#34;standard&#34;, &#34;minmax&#34;)." optional="false"
+                  value="robust"
+                >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+              <param name="kfold_parameters" type="text" label="kfold_parameters" help="The parameters for the kfold in num_split:test_size format." optional="false"
+                  value="5:0.2"
+                >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+              <param name="rfe_steps" type="integer"
+                  value="40"
+                  
+                  label="rfe_steps" help="The number of steps for the RFE algorithm, the more step the more precise but also more time consuming be used to select specific columns from all the generated features for the new data." optional="false"/>
+            
+              <param name="plot" type="boolean"
+                  checked="true"
+                  label="plot" help="Default to true, plot the feature importance using shap."
+                />
+            
+              <param name="plot_num_features" type="integer"
+                  value="20"
+                  
+                  label="plot_num_features" help="How many features to include in the plot." optional="false"/>
+            
+              <param name="num_filters" type="integer"
+                  value="10"
+                  
+                  label="num_filters" help="The number univariate filters to use maximum 10&#34;." optional="false"/>
+            
+          </section>
+    </inputs>
+    <outputs>
+        
+        
+          <data name="output_excel" format="XLSX" label="${outname_output_excel}"/>
+        
+        
+          <data name="output_zip" format="ZIP" label="${outname_output_zip}"/>
+        
+    </outputs>
+    <tests>
+        <test>
+          <param name="sele" value="option1"/>
+          <param name="properties" value="data/config/config_editconf.json"/>
+        </test>
+    </tests>
+    <help>
+.. class:: infomark
+
+Check the syntax for the tool parameters at the original library documentation: https://biobb_bioml.readthedocs.io/en/latest
+
+-----
+
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
+    :width: 150
+
+**https://mmb.irbbarcelona.org/biobb**
+
+.. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
+        :width: 150
+
+**https://bioexcel.eu**
+   </help>
+
+    <citations>
+        <citation type="bibtex">
+            @misc{githubbiobb,
+            author = {Andrio P, Bayarri, G., Hospital A, Gelpi JL},
+            year = {2019-21},
+            title = {biobb: BioExcel building blocks },
+            publisher = {GitHub},
+            journal = {GitHub repository},
+            url = {https://github.com/bioexcel/biobb_bioml},
+            }
+        </citation>
+        <citation type="doi">10.1038/s41597-019-0177-4</citation>
+    </citations>
+</tool>

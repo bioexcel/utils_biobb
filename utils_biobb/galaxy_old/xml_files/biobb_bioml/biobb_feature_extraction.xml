@@ -1,0 +1,213 @@
+<tool id="biobb_bioml_feature_extraction_ext" name="FeatureExtraction" version="0.1" >
+    <description>: Wrapper class for the bioml Feature extraction module.</description>
+    <requirements>
+        <requirement type="package"
+        version="0.1"
+        >biobb_bioml</requirement>
+    </requirements>
+    <command detect_errors="aggressive"><![CDATA[
+        
+          ln -f -s ${input_fasta} ${input_fasta}_`echo $$`.${input_fasta.ext};
+        
+          ln -f -s ${pssm} ${pssm}_`echo $$`.${pssm.ext};
+        
+        #if $config.sele == "option1":
+            ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
+          #end if
+
+        feature_extraction
+
+        #if $config.sele == "option1":
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
+          #else if $config.sele == "option2":
+            --config '${config.jsonstr}'
+          #else if $config.sele == "option3":
+            --config '__oc____dq__ifeature_dir__dq__:__dq__${properties.ifeature_dir}__dq__,__dq__possum_dir__dq__:__dq__${properties.possum_dir}__dq__,__dq__ifeature_out__dq__:__dq__${properties.ifeature_out}__dq__,__dq__possum_out__dq__:__dq__${properties.possum_out}__dq__,__dq__extracted_out__dq__:__dq__${properties.extracted_out}__dq__,__dq__excel__dq__:__dq__${properties.excel}__dq__,__dq__purpose__dq__:__dq__${properties.purpose}__dq__,__dq__long__dq__:__dq__${properties.long}__dq__,__dq__run__dq__:__dq__${properties.run}__dq__,__dq__num_thread__dq__:${properties.num_thread},__dq__type__dq__:__dq__${properties.type}__dq__,__dq__type_file__dq__:__dq__${properties.type_file}__dq__,__dq__sheets__dq__:__dq__${properties.sheets}__dq____cc__'
+          #end if
+        
+          #if str($input_fasta) != 'None':
+            --input_fasta ${input_fasta}_`echo $$`.${input_fasta.ext}
+          #end if
+        
+          #if str($pssm) != 'None':
+            --pssm ${pssm}_`echo $$`.${pssm.ext}
+          #end if
+        
+        
+          --every_features $outname_every_features
+        
+          --new_features $outname_new_features
+        ;
+        #if $config.sele == "option1":
+            rm -f ${config.properties}_`echo $$`.${config.properties.ext};
+          #end if
+        
+          rm -f ${input_fasta}_`echo $$`.${input_fasta.ext};
+        
+          rm -f ${pssm}_`echo $$`.${pssm.ext};
+        
+        
+          if test -f $outname_every_features; then mv $outname_every_features $every_features; fi;
+        
+          if test -f $outname_new_features; then mv $outname_new_features $new_features; fi;
+        
+    ]]>
+    </command>
+    <inputs>
+        
+          <param name="input_fasta" type="data" format="FASTA"  optional="False" label="input FASTA file" help="The fasta file path. Format: [input].FASTA"/>
+        
+          <param name="pssm" type="data" format="ZIP"  optional="False" label="input ZIP file" help="The zip file with all the pssm files. Format: [input].ZIP"/>
+        
+        
+          <param name="outname_every_features" type="text" value="myfeature_extraction.CSV"
+              optional="False" label="output CSV name"
+              help="Csv file with all the features Format: [output].CSV "/>
+        
+          <param name="outname_new_features" type="text" value="myfeature_extraction.XLSX"
+              optional="False" label="output XLSX name"
+              help="Excel file with the new features Format: [output].XLSX "/>
+        
+        <conditional name="config">
+            <param name="sele" type="select" label="Take tool settings:" help="Select where tool settings are to be read from">
+              <option value="option3">Manual Input</option>
+              <option value="option1">from configuration file</option>
+              <option value="option2">from JSON string</option>
+            </param>
+            <when value="option1">
+              <param name="properties" type="data" format="yml,json" optional="false" label="Configuration file" help="File containing tool settings. See below for the syntax"/>
+            </when>
+            <when value="option2">
+              <param name="jsonstr" type="text" value="{}" optional="false" label="JSON string" help="JSON string containing tool settings. See below for the syntax"/>
+            </when>
+            <when value="option3">
+            </when>
+          </conditional>
+          <section name="properties" title="Properties Input">
+            
+              <param name="ifeature_dir" type="text" label="ifeature_dir" help="Path to the iFeature programme folder." optional="false"
+                  value="iFeature"
+                >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+              <param name="possum_dir" type="text" label="possum_dir" help="A path to the possum programme." optional="false"
+                  value="POSSUM_Toolkit"
+                >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+              <param name="ifeature_out" type="text" label="ifeature_out" help="The directory where the ifeature features are." optional="false"
+                  value="ifeature_features"
+                >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+              <param name="possum_out" type="text" label="possum_out" help="The directory for the possum extractions." optional="false"
+                  value="possum_features"
+                >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+              <param name="extracted_out" type="text" label="extracted_out" help="The directory for the extracted features from the new data or from the training data." optional="false"
+                  value="extracted_features"
+                >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+              <param name="excel" type="text" label="excel" help="The path to where the selected features from training are saved in excel format, it will be used to select specific columns from all the generated features for the new data" optional="false"
+                  value="training_features/selected_features.xlsx"
+                >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+              <param name="purpose" type="text" label="purpose" help="Choose the operation between extracting reading for training or filtering for prediction, (&#34;extract&#34;, &#34;read&#34;, &#34;filter&#34;)." optional="false"
+                  value="extract"
+                >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+              <param name="long" type="text" label="long" help="True when restarting from the long commands." optional="false"
+                  value="False"
+                >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+              <param name="run" type="text" label="run" help="Run possum or ifeature extraction, (&#34;possum&#34;, &#34;ifeature&#34;, &#34;both&#34;)." optional="false"
+                  value="both"
+                >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+              <param name="num_thread" type="integer"
+                  value="100"
+                  
+                  label="num_thread" help="The number of threads to use for the generation of pssm profiles." optional="false"/>
+            
+              <param name="type" type="text" label="type" help="A list of the features to extract, (&#34;all&#34;, &#34;APAAC&#34;, &#34;PAAC&#34;, &#34;CKSAAGP&#34;,&#34;Moran&#34;, &#34;Geary&#34;, &#34;NMBroto&#34;, &#34;CTDC&#34;, &#34;CTDT&#34;, &#34;CTDD&#34;, &#34;CTriad&#34;, &#34;GDPC&#34;, &#34;GTPC&#34;, &#34;QSOrder&#34;, &#34;SOCNumber&#34;, &#34;GAAC&#34;, &#34;KSCtriad&#34;, &#34;aac_pssm&#34;, &#34;ab_pssm&#34;, &#34;d_fpssm&#34;, &#34;dp_pssm&#34;, &#34;dpc_pssm&#34;, &#34;edp&#34;, &#34;eedp&#34;, &#34;rpm_pssm&#34;, &#34;k_separated_bigrams_pssm&#34;, &#34;pssm_ac&#34;, &#34;pssm_cc&#34;, &#34;pssm_composition&#34;, &#34;rpssm&#34;, &#34;s_fpssm&#34;, &#34;smoothed_pssm:5&#34;, &#34;smoothed_pssm:7&#34;, &#34;smoothed_pssm:9&#34;, &#34;tpc&#34;, &#34;tri_gram_pssm&#34;, &#34;pse_pssm:1&#34;, &#34;pse_pssm:2&#34;, &#34;pse_pssm:3&#34;)." optional="false"
+                  value="all"
+                >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+              <param name="type_file" type="text" label="type_file" help="The path to the type file with the feature names." optional="true"
+                  
+                >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+              <param name="sheets" type="text" label="sheets" help="Names or index of the selected sheets from the features and the index of the models in this format-&gt; sheet (name, index):index model1,index model2 without the spaces. If only index or name of the sheets, it is assumed that all kfold models are selected. It is possible to have one sheet with kfold indices but in another ones without." optional="true"
+                  
+                >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+          </section>
+    </inputs>
+    <outputs>
+        
+        
+          <data name="every_features" format="CSV" label="${outname_every_features}"/>
+        
+        
+          <data name="new_features" format="XLSX" label="${outname_new_features}"/>
+        
+    </outputs>
+    <tests>
+        <test>
+          <param name="sele" value="option1"/>
+          <param name="properties" value="data/config/config_editconf.json"/>
+        </test>
+    </tests>
+    <help>
+.. class:: infomark
+
+Check the syntax for the tool parameters at the original library documentation: https://biobb_bioml.readthedocs.io/en/latest
+
+-----
+
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
+    :width: 150
+
+**https://mmb.irbbarcelona.org/biobb**
+
+.. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
+        :width: 150
+
+**https://bioexcel.eu**
+   </help>
+
+    <citations>
+        <citation type="bibtex">
+            @misc{githubbiobb,
+            author = {Andrio P, Bayarri, G., Hospital A, Gelpi JL},
+            year = {2019-21},
+            title = {biobb: BioExcel building blocks },
+            publisher = {GitHub},
+            journal = {GitHub repository},
+            url = {https://github.com/bioexcel/biobb_bioml},
+            }
+        </citation>
+        <citation type="doi">10.1038/s41597-019-0177-4</citation>
+    </citations>
+</tool>
