@@ -8,7 +8,7 @@ long_description: |
     create new layer of compatibility and interoperability over popular bioinformatics tools.
     The latest documentation of this package can be found in our readthedocs site:
     [latest API documentation]({{readthedocs}}).
-remote_repository_url: {{github}}
+remote_repository_url: https://github.com/galaxycomputationalchemistry/galaxy-tools-compchem/tree/master/tools/{{_id}}
 type: unrestricted
 categories:{% for keyword in keywords %}
   - {{keyword}}{% endfor %}

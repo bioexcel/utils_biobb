@@ -36,6 +36,8 @@ pycompss_generator_script_path=/Users/pau/projects/utils_biobb/utils_biobb/pycom
 pycompss_template_path=/Users/pau/projects/utils_biobb/utils_biobb/pycompss/pycompss_wrapper.tmpl
 # horus adapters
 horus_generator_script_path=/Users/pau/projects/utils_biobb/utils_biobb/horus/horus_generator.py
+# galaxy adapters
+galaxy_generator_script_path=/Users/pau/projects/utils_biobb/utils_biobb/galaxy/galaxy_generator.py
 
 # list of biobbs to be executed
 if [ $# -gt 0 ]; then
@@ -111,6 +113,14 @@ for biobb in ${biobb_list}
   echo "    python3 ${horus_generator_script_path} -p ${biobb} -o ${biobb_adapters_path}/biobb_adapters/horus/"
   python3 ${horus_generator_script_path} -p ${biobb} -o ${biobb_adapters_path}/biobb_adapters/horus/
   want_to_exit $?
+
+  # Galaxy
+  echo ""
+  echo "  ${biobb} Create Galaxy adapters:"
+  echo "    python3 ${galaxy_generator_script_path} -p ${biobb} -o ${biobb_adapters_path}/biobb_adapters/galaxy/"
+  python3 ${galaxy_generator_script_path} -p ${biobb} -o ${biobb_adapters_path}/biobb_adapters/galaxy/
+  want_to_exit $?
+
 
  done
 

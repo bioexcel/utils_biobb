@@ -9,70 +9,63 @@
     </requirements>
 
     <command detect_errors="exit_code"><![CDATA[
-
-      ln -s $input_data_npy_path ./input_data_npy_path.$input_data_npy_path.ext &&
-      ln -s $input_model_pth_path ./input_model_pth_path.$input_model_pth_path.ext;
+      {% for input in inputs %}{% if input.required %}
+      ln -s ${{input.name}} ./{{input.name}}.${{input.name}}.ext;{% else %}
+      #if ${{input.name}}:
+        ln -s ${{input.name}} ./{{input.name}}.${{input.name}}.ext;
+      #end if{% endif %}{% endfor %}
       #if $config_json:
         ln -s $config_json ./config_json.$config_json.ext;
       #end if
 
-      apply_mdae
+      {{module_name}}
 
       #if $config_json:
         --config ./config_json.$config_json.ext
       #end if
-
-      --input_data_npy_path ./input_data_npy_path.$input_data_npy_path.ext
-      --input_model_pth_path ./input_model_pth_path.$input_model_pth_path.ext
-      --output_reconstructed_data_npy_path $outname_output_reconstructed_data_npy_path
-      #if $outname_output_latent_space_npy_path:
-        --output_latent_space_npy_path $outname_output_latent_space_npy_path
-      #end if
+      {% for input in inputs %}{% if input.required %}
+      --{{input.name}} ./{{input.name}}.${{input.name}}.ext{% else %}
+      #if ${{input.name}}:
+        --{{input.name}} ./{{input.name}}.${{input.name}}.ext
+      #end if{% endif %}{% endfor %}{% for output in outputs %}{% if output.required %}
+      --{{output.name}} $outname_{{output.name}}{% else %}
+      #if $outname_{{output.name}}:
+        --{{output.name}} $outname_{{output.name}}
+      #end if{% endif %}{% endfor %}
       ;
-
-      mv $outname_output_reconstructed_data_npy_path $output_reconstructed_data_npy_path;
-      if test -f $outname_output_latent_space_npy_path; then mv $outname_output_latent_space_npy_path $output_latent_space_npy_path; fi;
-
+      {% for output in outputs %}{% if output.required %}
+      mv $outname_{{output.name}} ${{output.name}};{% else %}
+      if test -f $outname_{{output.name}}; then mv $outname_{{output.name}} ${{output.name}}; fi;{% endif %}{% endfor %}
       ]]>
     </command>
 
-    <inputs>
-      <param name="input_data_npy_path"  type="data" format="npy"  optional="False" label="Input NPY file" help="Input data file"/>
-      <param name="input_model_pth_path" type="data" format="pth"  optional="False" label="input PTH file" help="Path to the input model file. Format: [input].pth"/>
-      <param name="outname_output_reconstructed_data_npy_path" type="text" value="myapply_mdae.npy" optional="False" label="output NPY name" help="Path to the output reconstructed data file Format: [output].npy "/>
-      <param name="outname_output_latent_space_npy_path" type="text" value="myapply_mdae.npy" optional="True" label="output NPY name" help="Path to the reduced dimensionality file Format: [output].npy "/>
-      <param name="config_json" type="data" format="json" optional="True" label="Configuration file" help="File containing tool settings. See below for the syntax"/>
+    <inputs>{% for input in inputs %}
+      <param name="{{input.name}}" type="data" format="{{input.extensions[0]}}" optional={% if input.required %}"false"{% else %}"true"{% endif %} help="{{input.description}}"/>{% endfor %}{% for output in outputs %}
+      <param name="outname_{{output.name}}" type="text" optional={% if output.required %}"false"{% else %}"true"{% endif %} help="{{output.description}}"/>{% endfor %}
+      <param name="config_json" type="data" format="json" optional="true" label="Configuration file" help="File containing tool settings. See below for the syntax"/>
     </inputs>
 
-    <outputs>
-      <data name="output_reconstructed_data_npy_path" format="npy" />
-      <data name="output_latent_space_npy_path"       format="npy" />
+    <outputs>{% for output in outputs %}
+      <data name="{{output.name}}" format="{{output.extensions[0]}}" />{% endfor %}
     </outputs>
 
     <tests>
         <test>
-          <param name="config_json" value="config_apply_mdae.json" ftype="json" />
-          <param name="input_data_npy_path"  value="train_mdae_traj.npy" ftype="npy" />
-          <param name="input_model_pth_path" value="ref_output_model.pth" />
-          <param name="outname_output_reconstructed_data_npy_path" value="output_reconstructed_data.npy" />
-          <param name="outname_output_latent_space_npy_path" value="output_latent_space.npy" />
-          <output name="output_reconstructed_data_npy_path" ftype="npy">
+          <param name="config_json" value="config_{{ module_name }}.json" ftype="json" />{% for input in inputs %}{% if input.name in test_info.paths %}
+          <param name="{{ input.name }}" value="{{ test_info.paths[input.name].split('/')[-1] }}" ftype="{{ test_info.paths[input.name].split('.')[-1] }}" />{% endif %}{% endfor %}{% for output in outputs %}{% if output.name in test_info.paths %}
+          <param name="outname_{{output.name}}" value="{{ test_info.paths[output.name].split('/')[-1] }}" />{% endif %}{% endfor %}{% for output in outputs %}{% if output.name in test_info.refs %}
+          <output name="{{ output.name }}" ftype="{{ test_info.refs[output.name].file.split('.')[-1] }}">
             <assert_contents>
-              <has_size value="123k" delta="50k"/>
+              <has_size value="{{ test_info.refs[output.name].size }}" delta="{{ test_info.refs[output.name].delta }}"/>
             </assert_contents>
-          </output>
-          <output name="output_latent_space_npy_path" ftype="npy">
-            <assert_contents>
-              <has_size value="928" delta="200"/>
-            </assert_contents>
-          </output>
+          </output>{% endif %}{% endfor %}
         </test>
     </tests>
 
     <help>
 .. class:: infomark
 
-Check the syntax for the tool parameters at the original library documentation: https://biobb_pytorch.readthedocs.io/en/latest
+Check the syntax for the tool parameters at the original library documentation: https://{{ block_info._id|replace("_","-") }}.readthedocs.io/en/latest
 
 -----
 
