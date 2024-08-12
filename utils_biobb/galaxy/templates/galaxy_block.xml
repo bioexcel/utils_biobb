@@ -1,0 +1,96 @@
+<tool id="{{block_info._id}}_{{module_name}}" name="{{module_name_capitalized}}" version="@TOOL_VERSION@" >
+    <description>{{short_description}}</description>
+    <macros>
+      <token name="@TOOL_VERSION@">{{block_info.version}}</token>
+    </macros>
+
+    <requirements>
+      <requirement type="package" version="@TOOL_VERSION@">{{block_info._id}}</requirement>
+    </requirements>
+
+    <command detect_errors="exit_code"><![CDATA[
+      {% for input in inputs %}{% if input.required %}
+      ln -s ${{input.name}} ./{{input.name}}.${{input.name}}.ext;{% else %}
+      #if ${{input.name}}:
+        ln -s ${{input.name}} ./{{input.name}}.${{input.name}}.ext;
+      #end if{% endif %}{% endfor %}
+      #if $config_json:
+        ln -s $config_json ./config_json.$config_json.ext;
+      #end if
+
+      {{module_name}}
+
+      #if $config_json:
+        --config ./config_json.$config_json.ext
+      #end if
+      {% for input in inputs %}{% if input.required %}
+      --{{input.name}} ./{{input.name}}.${{input.name}}.ext{% else %}
+      #if ${{input.name}}:
+        --{{input.name}} ./{{input.name}}.${{input.name}}.ext
+      #end if{% endif %}{% endfor %}{% for output in outputs %}{% if output.required %}
+      --{{output.name}} $outname_{{output.name}}{% else %}
+      #if $outname_{{output.name}}:
+        --{{output.name}} $outname_{{output.name}}
+      #end if{% endif %}{% endfor %}
+      ;
+      {% for output in outputs %}{% if output.required %}
+      mv $outname_{{output.name}} ${{output.name}};{% else %}
+      if test -f $outname_{{output.name}}; then mv $outname_{{output.name}} ${{output.name}}; fi;{% endif %}{% endfor %}
+      ]]>
+    </command>
+
+    <inputs>{% for input in inputs %}
+      <param name="{{input.name}}" type="data" format="{{input.extensions[0]}}" optional={% if input.required %}"false"{% else %}"true"{% endif %} help="{{input.description}}"/>{% endfor %}{% for output in outputs %}
+      <param name="outname_{{output.name}}" type="text" optional={% if output.required %}"false"{% else %}"true"{% endif %} help="{{output.description}}"/>{% endfor %}
+      <param name="config_json" type="data" format="json" optional="true" label="Configuration file" help="File containing tool settings. See below for the syntax"/>
+    </inputs>
+
+    <outputs>{% for output in outputs %}
+      <data name="{{output.name}}" format="{{output.extensions[0]}}" />{% endfor %}
+    </outputs>
+
+    <tests>
+        <test>
+          <param name="config_json" value="config_{{ module_name }}.json" ftype="json" />{% for input in inputs %}{% if input.name in test_info.paths %}
+          <param name="{{ input.name }}" value="{{ test_info.paths[input.name].split('/')[-1] }}" ftype="{{ test_info.paths[input.name].split('.')[-1] }}" />{% endif %}{% endfor %}{% for output in outputs %}{% if output.name in test_info.paths %}
+          <param name="outname_{{output.name}}" value="{{ test_info.paths[output.name].split('/')[-1] }}" />{% endif %}{% endfor %}{% for output in outputs %}{% if output.name in test_info.refs %}
+          <output name="{{ output.name }}" ftype="{{ test_info.refs[output.name].file.split('.')[-1] }}">
+            <assert_contents>
+              <has_size value="{{ test_info.refs[output.name].size }}" delta="{{ test_info.refs[output.name].delta }}"/>
+            </assert_contents>
+          </output>{% endif %}{% endfor %}
+        </test>
+    </tests>
+
+    <help>
+.. class:: infomark
+
+Check the syntax for the tool parameters at the original library documentation: https://{{ block_info._id|replace("_","-") }}.readthedocs.io/en/latest
+
+-----
+
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
+    :width: 150
+
+**https://mmb.irbbarcelona.org/biobb**
+
+.. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
+        :width: 150
+
+**https://bioexcel.eu**
+   </help>
+
+    <citations>
+        <citation type="bibtex">
+            @misc{githubbiobb,
+            author = {Andrio P, Bayarri, G., Hospital A, Gelpi JL},
+            year = {2019-21},
+            title = {biobb: BioExcel building blocks },
+            publisher = {GitHub},
+            journal = {GitHub repository},
+            url = {https://github.com/bioexcel/biobb_pytorch},
+            }
+        </citation>
+        <citation type="doi">10.1038/s41597-019-0177-4</citation>
+    </citations>
+</tool>

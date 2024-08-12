@@ -1,0 +1,335 @@
+<tool id="biobb_vs_bindingsite_ext" name="Bindingsite" version="4.2.0" >
+    <description>: This class finds the binding site of the input_pdb.</description>
+    <requirements>
+        <requirement type="package"
+        version="4.2.0"
+        >biobb_vs</requirement>
+    </requirements>
+    <command detect_errors="aggressive"><![CDATA[
+        
+          ln -f -s ${input_pdb_path} ${input_pdb_path}_`echo $$`.${input_pdb_path.ext};
+        
+          ln -f -s ${input_clusters_zip} ${input_clusters_zip}_`echo $$`.${input_clusters_zip.ext};
+        
+        #if $config.sele == "option1":
+            ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
+          #end if
+
+        bindingsite
+
+        #if $config.sele == "option1":
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
+          #else if $config.sele == "option2":
+            --config '${config.jsonstr}'
+          #else if $config.sele == "option3":
+            --config '__oc____dq__ligand__dq__:__dq__${properties.ligand}__dq__,__dq__radius__dq__:${properties.radius},__dq__max_num_ligands__dq__:${properties.max_num_ligands},__dq__matrix_name__dq__:__dq__${properties.matrix_name}__dq__,__dq__gap_open__dq__:${properties.gap_open},__dq__gap_extend__dq__:${properties.gap_extend}__cc__'
+          #end if
+        
+          #if str($input_pdb_path) != 'None':
+            --input_pdb_path ${input_pdb_path}_`echo $$`.${input_pdb_path.ext}
+          #end if
+        
+          #if str($input_clusters_zip) != 'None':
+            --input_clusters_zip ${input_clusters_zip}_`echo $$`.${input_clusters_zip.ext}
+          #end if
+        
+        
+          --output_pdb_path $outname_output_pdb_path
+        ;
+        #if $config.sele == "option1":
+            rm -f ${config.properties}_`echo $$`.${config.properties.ext};
+          #end if
+        
+          rm -f ${input_pdb_path}_`echo $$`.${input_pdb_path.ext};
+        
+          rm -f ${input_clusters_zip}_`echo $$`.${input_clusters_zip.ext};
+        
+        
+          if test -f $outname_output_pdb_path; then mv $outname_output_pdb_path $output_pdb_path; fi;
+        
+    ]]>
+    </command>
+    <inputs>
+        
+          <param name="input_pdb_path" type="data" format="pdb"  optional="False" label="input PDB file" help="Path to the PDB structure where the binding site is to be found. Format: [input].pdb"/>
+        
+          <param name="input_clusters_zip" type="data" format="zip"  optional="False" label="input ZIP file" help="Path to the ZIP file with all the PDB members of the identity cluster. Format: [input].zip"/>
+        
+        
+          <param name="outname_output_pdb_path" type="text" value="mybindingsite.pdb"
+              optional="False" label="output PDB name"
+              help="Path to the PDB containig the residues belonging to the binding site Format: [output].pdb "/>
+        
+        <conditional name="config">
+            <param name="sele" type="select" label="Take tool settings:" help="Select where tool settings are to be read from">
+              <option value="option3">Manual Input</option>
+              <option value="option1">from configuration file</option>
+              <option value="option2">from JSON string</option>
+            </param>
+            <when value="option1">
+              <param name="properties" type="data" format="yml,json" optional="false" label="Configuration file" help="File containing tool settings. See below for the syntax"/>
+            </when>
+            <when value="option2">
+              <param name="jsonstr" type="text" value="{}" optional="false" label="JSON string" help="JSON string containing tool settings. See below for the syntax"/>
+            </when>
+            <when value="option3">
+            </when>
+          </conditional>
+          <section name="properties" title="Properties Input">
+            
+              <param name="ligand" type="text" label="ligand" help="Ligand to be found in the protein structure. If no ligand provided, the largest one will be selected, if more than one." optional="true"
+                  
+                >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+              <param name="radius" type="float"
+                  value="5.0"
+                  min="0.1" max="1000.0"
+                  label="radius" help="Cut-off distance (Ångstroms) around ligand atoms to consider a protein atom as a binding site atom." optional="false"/>
+            
+              <param name="max_num_ligands" type="integer"
+                  value="15"
+                  
+                  label="max_num_ligands" help="Total number of superimposed ligands to be extracted from the identity cluster. For populated clusters, the restriction avoids to superimpose redundant structures. If 0, all ligands extracted will be considered." optional="false"/>
+            
+              <param name="matrix_name" type="select" label="matrix_name" help="Substitution matrices for use in alignments. " multiple="false">
+                  
+                    <option value="BENNER22"
+                      
+                    >BENNER22
+                       
+                    </option>
+                  
+                    <option value="BENNER6"
+                      
+                    >BENNER6
+                       
+                    </option>
+                  
+                    <option value="BENNER74"
+                      
+                    >BENNER74
+                       
+                    </option>
+                  
+                    <option value="BLASTN"
+                      
+                    >BLASTN
+                       
+                    </option>
+                  
+                    <option value="BLASTP"
+                      
+                    >BLASTP
+                       
+                    </option>
+                  
+                    <option value="BLOSUM45"
+                      
+                    >BLOSUM45
+                       
+                    </option>
+                  
+                    <option value="BLOSUM50"
+                      
+                    >BLOSUM50
+                       
+                    </option>
+                  
+                    <option value="BLOSUM62"
+                      selected="true"
+                    >BLOSUM62
+                       
+                    </option>
+                  
+                    <option value="BLOSUM80"
+                      
+                    >BLOSUM80
+                       
+                    </option>
+                  
+                    <option value="BLOSUM90"
+                      
+                    >BLOSUM90
+                       
+                    </option>
+                  
+                    <option value="DAYHOFF"
+                      
+                    >DAYHOFF
+                       
+                    </option>
+                  
+                    <option value="FENG"
+                      
+                    >FENG
+                       
+                    </option>
+                  
+                    <option value="GENETIC"
+                      
+                    >GENETIC
+                       
+                    </option>
+                  
+                    <option value="GONNET1992"
+                      
+                    >GONNET1992
+                       
+                    </option>
+                  
+                    <option value="HOXD70"
+                      
+                    >HOXD70
+                       
+                    </option>
+                  
+                    <option value="JOHNSON"
+                      
+                    >JOHNSON
+                       
+                    </option>
+                  
+                    <option value="JONES"
+                      
+                    >JONES
+                       
+                    </option>
+                  
+                    <option value="LEVIN"
+                      
+                    >LEVIN
+                       
+                    </option>
+                  
+                    <option value="MCLACHLAN"
+                      
+                    >MCLACHLAN
+                       
+                    </option>
+                  
+                    <option value="MDM78"
+                      
+                    >MDM78
+                       
+                    </option>
+                  
+                    <option value="MEGABLAST"
+                      
+                    >MEGABLAST
+                       
+                    </option>
+                  
+                    <option value="NUC.4.4"
+                      
+                    >NUC.4.4
+                       
+                    </option>
+                  
+                    <option value="PAM250"
+                      
+                    >PAM250
+                       
+                    </option>
+                  
+                    <option value="PAM30"
+                      
+                    >PAM30
+                       
+                    </option>
+                  
+                    <option value="PAM70"
+                      
+                    >PAM70
+                       
+                    </option>
+                  
+                    <option value="RAO"
+                      
+                    >RAO
+                       
+                    </option>
+                  
+                    <option value="RISLER"
+                      
+                    >RISLER
+                       
+                    </option>
+                  
+                    <option value="SCHNEIDER"
+                      
+                    >SCHNEIDER
+                       
+                    </option>
+                  
+                    <option value="STR"
+                      
+                    >STR
+                       
+                    </option>
+                  
+                    <option value="TRANS"
+                      
+                    >TRANS
+                       
+                    </option>
+                  
+                </param>
+            
+              <param name="gap_open" type="float"
+                  value="-10.0"
+                  min="-1000.0" max="1000.0"
+                  label="gap_open" help="Gap open penalty." optional="false"/>
+            
+              <param name="gap_extend" type="float"
+                  value="-0.5"
+                  min="-1000.0" max="1000.0"
+                  label="gap_extend" help="Gap extend penalty." optional="false"/>
+            
+          </section>
+    </inputs>
+    <outputs>
+        
+        
+          <data name="output_pdb_path" format="pdb" label="${outname_output_pdb_path}"/>
+        
+    </outputs>
+    <tests>
+        <test>
+          <param name="sele" value="option1"/>
+          <param name="properties" value="data/config/config_editconf.json"/>
+        </test>
+    </tests>
+    <help>
+.. class:: infomark
+
+Check the syntax for the tool parameters at the original library documentation: https://biobb_vs.readthedocs.io/en/latest
+
+-----
+
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
+    :width: 150
+
+**https://mmb.irbbarcelona.org/biobb**
+
+.. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
+        :width: 150
+
+**https://bioexcel.eu**
+   </help>
+
+    <citations>
+        <citation type="bibtex">
+            @misc{githubbiobb,
+            author = {Andrio P, Bayarri, G., Hospital A, Gelpi JL},
+            year = {2019-21},
+            title = {biobb: BioExcel building blocks },
+            publisher = {GitHub},
+            journal = {GitHub repository},
+            url = {https://github.com/bioexcel/biobb_vs},
+            }
+        </citation>
+        <citation type="doi">10.1038/s41597-019-0177-4</citation>
+    </citations>
+</tool>
