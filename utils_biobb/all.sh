@@ -43,9 +43,13 @@ galaxy_generator_script_path=/Users/pau/projects/utils_biobb/utils_biobb/galaxy/
 if [ $# -gt 0 ]; then
     biobb_list="$@"
 else
+    # biobb_common
+    # biobb_template
+    # biobb_structure_checking
     # biobb_ml
-    # biobb_cp2k
-    biobb_list="biobb_haddock biobb_pytorch biobb_analysis biobb_amber biobb_model biobb_cmip biobb_chemistry biobb_vs biobb_gromacs biobb_dna biobb_structure_utils biobb_pmx biobb_io biobb_flexserv biobb_flexdyn biobb_pdb_tools"
+    # utils_biobb
+    biobb_list="biobb_amber biobb_analysis biobb_chemistry biobb_cmip biobb_cp2k biobb_dna biobb_flexdyn biobb_flexserv biobb_godmd biobb_gromacs biobb_haddock biobb_io biobb_model biobb_pdb_tools biobb_pmx biobb_pytorch biobb_structure_utils biobb_vs"
+
 fi
 echo "List of packages where the script will be executed:"
 echo "$biobb_list"

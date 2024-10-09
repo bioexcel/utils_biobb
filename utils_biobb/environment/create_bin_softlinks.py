@@ -56,7 +56,12 @@ def main():
 
     package_list = [args.package_name]
     if args.package_name.lower() == 'all':
-        package_list = ["biobb_analysis", "biobb_chemistry", "biobb_cmip", "biobb_io", "biobb_gromacs", "biobb_model", "biobb_pmx", "biobb_structure_utils", "biobb_vs", "biobb_amber", "biobb_dna"]
+        # biobb_common
+        # biobb_template
+        # biobb_structure_checking
+        # biobb_ml
+        # utils_biobb
+        package_list = ["biobb_amber", "biobb_analysis", "biobb_chemistry", "biobb_cmip", "biobb_cp2k", "biobb_dna", "biobb_flexdyn", "biobb_flexserv", "biobb_godmd", "biobb_gromacs", "biobb_haddock", "biobb_io", "biobb_model", "biobb_pdb_tools", "biobb_pmx", "biobb_pytorch", "biobb_structure_utils", "biobb_vs"]
 
     for package in package_list:
         BinSoftlinkGenerator(package=package, output_dir=args.output_bin_dir, debug=args.debug, dry=args.dry).launch()

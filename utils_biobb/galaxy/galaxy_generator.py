@@ -9,6 +9,7 @@ from typing import Tuple
 import yaml
 import shutil
 from pprint import pprint
+from galaxy_file_type import FILE_TYPE
 
 
 class GalaxyGenerator:
