@@ -2,6 +2,7 @@
 
 #Usage: ./new_conda_version.sh
 #Activate conda
+
 ide=code
 path_user=/Users/pau/
 path_biobb=/Users/pau/projects/
@@ -11,21 +12,30 @@ echo "******************************************************"
 echo "Be sure of having activated $conda conda environment!"
 echo "******************************************************"
 read -p "Repository name ie biobb_md : " REPOSITORY
-read -p "Version number ie 0.1.2 : " version
-read -p "Commit message ie 2019.4 : " message
+
+if [ -n "$1" ]; then
+    version=$1
+else
+	read -p "Version number ie 0.1.2 : " version
+fi
+if [ -n "$2" ]; then
+	message=$2
+else
+	read -p "Commit message ie 2019.4 : " message
+fi
 echo "Repository: $REPOSITORY"
 echo "Version: $version"
 echo "Message: $message"
-read -p "Do you want to run tests for this repository [Y/n]? " test
-if [ $test == 'y' -o $test == 'Y'  ]
-then
-	pytest -s $path_biobb$REPOSITORY/$REPOSITORY/test/unitests
-fi
-read -p "Do you want to generate json schemas for this repository [Y/n]? " json_schemas
-if [ $json_schemas == 'y' -o $json_schemas == 'Y'  ]
-then
-	python3 ${path_json_schemas}json_generator.py -p $REPOSITORY -o $path_biobb$REPOSITORY/$REPOSITORY
-fi
+#read -p "Do you want to run tests for this repository [Y/n]? " test
+#if [ $test == 'y' -o $test == 'Y'  ]
+#then
+#	pytest -s $path_biobb$REPOSITORY/$REPOSITORY/test/unitests
+#fi
+#read -p "Do you want to generate json schemas for this repository [Y/n]? " json_schemas
+#if [ $json_schemas == 'y' -o $json_schemas == 'Y'  ]
+#then
+#	python3 ${path_json_schemas}json_generator.py -p $REPOSITORY -o $path_biobb$REPOSITORY/$REPOSITORY
+#fi
 
 read -p "Before opening setup.py remember to check if some dependency has changed. Press any key to continue..." -n1 -s
 echo ""
@@ -47,9 +57,6 @@ echo ""
 $ide $path_biobb$REPOSITORY/$REPOSITORY/docs/source/conf.py
 read -p "Modify conf.py with the new version number..." -n1 -s
 echo ""
-$ide $path_biobb$REPOSITORY/$REPOSITORY/docs/source/change_log.md
-read -p "Modify change_log.md with the new version..." -n1 -s
-echo ""
 echo "*********************************************************"
 echo "## What's new in version [$version](https://github.com/bioexcel/$REPOSITORY/releases/tag/v$version)?"
 echo ""
@@ -58,6 +65,10 @@ echo ""
 git -C $path_biobb$REPOSITORY log $(git -C $path_biobb$REPOSITORY describe --tags --abbrev=0)..HEAD --oneline | cut -d " " -f 2-1000 | awk '{print "*",$0}'
 echo ""
 echo "*********************************************************"
+echo ""
+$ide $path_biobb$REPOSITORY/$REPOSITORY/docs/source/change_log.md
+read -p "Modify change_log.md with the new version..." -n1 -s
+echo ""
 $ide $path_biobb$REPOSITORY/$REPOSITORY/docs/source/schema.html
 read -p "Modify schema.html with the new version number..." -n1 -s
 echo ""
