@@ -3,7 +3,7 @@ from HorusAPI import Plugin, PluginConfig, PluginVariable, VariableTypes
 {% for module_name, dot_path in dot_paths_dict.items() %}
 from {{dot_path}} import {{module_name}}_block
 {% endfor %}
-plugin = Plugin(id='{{block_name}}')
+plugin = Plugin()
 {% for module_name, dot_path in dot_paths_dict.items() %}
 plugin.addBlock({{module_name}}_block)
 {% endfor %}
