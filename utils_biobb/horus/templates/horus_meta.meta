@@ -1,5 +1,4 @@
 {
-    "id": "{{_id}}",
     "name": "{{_id}}",
     "description": "The Horus adapter for {{_id}}",
     "author": "Pau Andrio",
