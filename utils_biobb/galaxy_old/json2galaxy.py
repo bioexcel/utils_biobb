@@ -1,6 +1,7 @@
 """ Utility to generate Galaxy automated tool definitions (XML) from biobb json_schemas """
 
 import argparse
+from typing import Optional
 import json
 import os
 import re

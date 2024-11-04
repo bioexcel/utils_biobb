@@ -1,8 +1,10 @@
 {
+    "id": "{{_id}}",
     "name": "{{_id}}",
     "description": "The Horus adapter for {{_id}}",
     "author": "Pau Andrio",
     "version": "{{version}}",
+    "externalURL": "{{readthedocs}}",
     "pluginFile": "plugin.py",
     "dependencies": []
 }

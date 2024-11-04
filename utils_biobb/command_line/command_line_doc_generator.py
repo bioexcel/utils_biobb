@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import argparse
+from typing import Optional
 import json
 from pathlib import Path
 import re

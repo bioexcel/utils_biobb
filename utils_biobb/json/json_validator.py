@@ -1,8 +1,10 @@
 import argparse
+from typing import Optional
 import json
 from os import walk
 from pathlib import Path, PurePath
 from jsonschema import validate, exceptions
+
 
 class JSONSchemaValidator():
 
@@ -19,7 +21,6 @@ class JSONSchemaValidator():
             raise SystemExit('Unexisting input schema')
 
         self.input_schema = input_schema
-    
 
     def getJSONSchemas(self):
         """ returns all the JSON Schemas files of the package and the package json file """
@@ -32,7 +33,7 @@ class JSONSchemaValidator():
 
         json_pckg = self.package + '.json'
 
-        if(json_pckg in json_files): 
+        if (json_pckg in json_files):
             json_files.remove(json_pckg)
 
         return json_files
@@ -40,16 +41,16 @@ class JSONSchemaValidator():
     def launch(self):
         """ launch function for JSONSchemaValidator """
 
-        # Opening JSON schema 
-        with open(self.input_schema) as json_file: 
-            schema = json.load(json_file) 
+        # Opening JSON schema
+        with open(self.input_schema) as json_file:
+            schema = json.load(json_file)
 
         json_files = self.getJSONSchemas()
         for json_file in json_files:
             json_file_path = PurePath(self.input_path).joinpath(json_file)
 
-            with open(json_file_path) as js_f_p: 
-                instance = json.load(js_f_p) 
+            with open(json_file_path) as js_f_p:
+                instance = json.load(js_f_p)
 
             try:
                 validate(instance, schema)
@@ -62,7 +63,7 @@ class JSONSchemaValidator():
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Validates json_schemas for a given BioBB package.", 
+    parser = argparse.ArgumentParser(description="Validates json_schemas for a given BioBB package.",
                                      formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999),
                                      epilog='''Examples: \njson_validator.py -p biobb_package -i path/to/json_files -s path/to/json_schema\njson_validator.py --package biobb_package --input path/to/json_files --schema path/to/json_schema''')
     required_args = parser.add_argument_group('required arguments')

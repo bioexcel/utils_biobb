@@ -8,12 +8,14 @@ plugin = Plugin(id='{{block_name}}')
 plugin.addBlock({{module_name}}_block)
 {% endfor %}
 
+
+
 sandbox_variable = PluginVariable(
     id="sandbox",
     name="sandbox folder",
     description="Sandbox",
     defaultValue="/tmp",
-    type=VariableTypes.STRING,
+    type=VariableTypes.FOLDER,
 )
 
 container_folder_variable = PluginVariable(
@@ -21,22 +23,46 @@ container_folder_variable = PluginVariable(
     name="container folder",
     description="Container folder",
     defaultValue="/tmp",
-    type=VariableTypes.STRING,
+    type=VariableTypes.FOLDER,
 )
 
-executable_path_variable = PluginVariable(
-    id="executable_path",
-    name="Executable path",
-    description="The path to the docker executable",
+docker_path_variable = PluginVariable(
+    id="docker_path",
+    name="Docker path",
+    description="The path to the docker binary",
     defaultValue="docker",
-    type=VariableTypes.STRING,
+    type=VariableTypes.FILE,
+)
+
+singularity_path_variable = PluginVariable(
+    id="singularity_path",
+    name="Singularity path",
+    description="The path to the singularity binary",
+    defaultValue="singularity",
+    type=VariableTypes.FILE,
+)
+
+conda_path_variable = PluginVariable(
+    id="conda_path",
+    name="Conda path",
+    description="The path to the conda binary",
+    defaultValue="conda",
+    type=VariableTypes.FILE,
+)
+
+conda_env_variable = PluginVariable(
+    id="conda_env",
+    name="Conda environment",
+    description="The conda environment to use",
+    defaultValue="base",
+    type=VariableTypes.FOLDER,
 )
 
 biobb_variable_config = PluginConfig(
-    name=executable_path_variable.name,
-    description=executable_path_variable.description,
+    name=sandbox_variable.name,
+    description=sandbox_variable.description,
     action=None,
-    variables=[executable_path_variable, sandbox_variable, container_folder_variable],
+    variables=[sandbox_variable, container_folder_variable, docker_path_variable, singularity_path_variable, conda_path_variable, conda_env_variable],
 )
 
 plugin.addConfig(biobb_variable_config)

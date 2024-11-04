@@ -4,6 +4,7 @@ from pathlib import Path
 from typing import Dict
 import importlib
 import argparse
+from typing import Optional
 import utils_biobb.common.file_utils as fu
 from pprint import pprint
 
