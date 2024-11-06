@@ -86,6 +86,16 @@ execution_mode_variable = PluginVariable(
     type=VariableTypes.STRING_LIST,
 )
 
+slurm_variable = PluginVariable(
+    id="slurm",
+    name="Slurm",
+    description="Use Slurm queue system",
+    category="Execution",
+    defaultValue=False,
+    type=VariableTypes.BOOLEAN,
+)
+
+
 SLURM_DEFAULT_PREAMBLE = """#!/bin/bash
 #SBATCH -J {{block_name}}
 #SBATCH --output={{block_name}}.out
@@ -220,7 +230,7 @@ def {{ module_name }}_action(biobb_block: SlurmBlock):
             "run",
             "-p",
             biobb_block.config['conda_env'],
-            {{module_name}},
+            "{{module_name}}",
             "--config",
             f"{Path(final_sandbox_dir).joinpath('{{module_name}}.json')}",
         ] + input_files + output_files
@@ -324,7 +334,7 @@ variables_list.append({{property.name}})
     name="{{module_name}}",
     # Its description
     description="{{short_description}}",
-    externalURL="{{readthedocs}}",
+    # externalURL="{{readthedocs}}",
     # The action
     initialAction={{module_name}}_action,
     finalAction=final_action_download,
