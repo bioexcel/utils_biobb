@@ -72,6 +72,9 @@ echo ""
 $ide $path_biobb$REPOSITORY/$REPOSITORY/docs/source/schema.html
 read -p "Modify schema.html with the new version number..." -n1 -s
 echo ""
+$ide $path_biobb$REPOSITORY/CITATION.cff
+read -p "Modify CITATION.cff with the new version number..." -n1 -s
+echo ""
 cd $path_biobb$REPOSITORY
 cp -v $path_biobb$REPOSITORY/README.md $path_biobb$REPOSITORY/$REPOSITORY/docs/source/readme.md
 git status
