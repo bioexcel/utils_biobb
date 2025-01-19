@@ -97,9 +97,9 @@ slurm_variable = PluginVariable(
 
 
 SLURM_DEFAULT_PREAMBLE = """#!/bin/bash
-#SBATCH -J {{block_name}}
-#SBATCH --output={{block_name}}.out
-#SBATCH --error={{block_name}}.err
+#SBATCH -J {{module_name}}
+#SBATCH --output={{module_name}}.out
+#SBATCH --error={{module_name}}.err
 #SBATCH --ntasks=4
 #SBATCH --time=30:00
 
