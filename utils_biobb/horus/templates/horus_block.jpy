@@ -4,7 +4,7 @@ from pathlib import Path
 from copy import deepcopy
 import uuid
 import os
-from HorusAPI import PluginBlock, PluginVariable, VariableTypes
+from HorusAPI import SlurmBlock, PluginVariable, VariableTypes
 
 
 def create_unique_dir(path: str = "", prefix: str = "", number_attempts: int = 10) -> str:
@@ -50,6 +50,7 @@ def create_unique_dir(path: str = "", prefix: str = "", number_attempts: int = 1
     id="{{ output.name }}",  # ID of the variable, will allow us to identify the value
     name="{{ output.name }}",  # The name that will appear in the frontend
     description="{{ output.description }}",  # The description that will appear in the frontend
+    defaultValue="{{ output.name }}.{{ output.extensions[0] }}",  # The default value
     type=VariableTypes.FILE,  # The type. This will render the variable accrodingly
     # The allowedValues parameter depends on the type of variable,
     # in the case of files, they denote the allowed extensions.
@@ -74,11 +75,56 @@ def create_unique_dir(path: str = "", prefix: str = "", number_attempts: int = 1
     category="Properties"
 )
 {% endfor %}
+
+execution_mode_variable = PluginVariable(
+    id="execution_mode",
+    name="Execution mode",
+    description="Execution mode",
+    category="Execution",
+    defaultValue="docker",
+    allowedValues=["docker", "singularity", "conda"],
+    type=VariableTypes.STRING_LIST,
+)
+
+slurm_variable = PluginVariable(
+    id="slurm",
+    name="Slurm",
+    description="Use Slurm queue system",
+    category="Execution",
+    defaultValue=False,
+    type=VariableTypes.BOOLEAN,
+)
+
+
+SLURM_DEFAULT_PREAMBLE = """#!/bin/bash
+#SBATCH -J {{module_name}}
+#SBATCH --output={{module_name}}.out
+#SBATCH --error={{module_name}}.err
+#SBATCH --ntasks=4
+#SBATCH --time=30:00
+
+# The biobb block will place here the execution command
+%execution_command%
+"""
+
+slurm_preamble_variable = PluginVariable(
+    id="slurm_preamble",
+    name="Slurm preamble",
+    description="Slurm preamble",
+    category="Execution",
+    allowedValues=["shell"],
+    defaultValue=SLURM_DEFAULT_PREAMBLE,
+    placeholder=SLURM_DEFAULT_PREAMBLE,
+    type=VariableTypes.CODE,
+)
+
 # Define the action that the block will perform
-def {{ module_name }}_action(biobb_block: PluginBlock):
+def {{ module_name }}_action(biobb_block: SlurmBlock):
 
     # Create a unique directory for the sandbox
     sandbox_dir = create_unique_dir(biobb_block.config["sandbox"], "sandbox_")
+
+    biobb_block.extraData["sandbox_dir"] = sandbox_dir
 
     # It is better to have imports inside the function
     # because the environment gets cleaned up between each
@@ -111,9 +157,6 @@ def {{ module_name }}_action(biobb_block: PluginBlock):
     with open(Path(sandbox_dir).joinpath("{{module_name}}.json"), "w", encoding="utf-8") as f:
         json.dump(properties, f)
 
-    # Get the executable and engine form the config
-    executable = biobb_block.config["executable_path"]
-
     # Copy inputs to the tmp folder
     for key, value in biobb_block.inputs.items():
         if value is not None:
@@ -121,67 +164,153 @@ def {{ module_name }}_action(biobb_block: PluginBlock):
             print(f"Copying {value} to {Path(sandbox_dir).joinpath(Path(value).name)}")
 
     input_files = []
+
+    is_conda = biobb_block.variables["execution_mode"] == "conda"
+    is_remote = not biobb_block.remote.isLocal
+
+    if is_remote:
+        # Change the sandbox dir to the remote one
+        # Use basename to not write on /tmp... on remote machines
+        final_sandbox_dir = os.path.join(
+            biobb_block.remote.workDir, os.path.basename(sandbox_dir)
+        )
+    else:
+        final_sandbox_dir = sandbox_dir
+
     {% for input in inputs %}
     if {{input.name}}_value is not None:
         input_files.append("--{{ input.name }}")
-        input_files.append(f"{Path(biobb_block.config['container_folder']).joinpath(Path({{input.name}}_value).name)}")
+        input_files.append(
+            f"{Path(biobb_block.config['container_folder']).joinpath(Path({{input.name}}_value).name)}"
+            if not is_conda
+            else f"{Path(final_sandbox_dir).joinpath(Path({{input.name}}_value).name)}"
+        )
     {% endfor %}
     output_files = []
     {% for output in outputs %}
     if {{output.name}}_value is not None:
         output_files.append("--{{ output.name }}")
-        output_files.append(f"{Path(biobb_block.config['container_folder']).joinpath(Path({{output.name}}_value).name)}")
+        output_files.append(
+            f"{Path(biobb_block.config['container_folder']).joinpath(Path({{output.name}}_value).name)}"
+            if not is_conda
+            else f"{Path(final_sandbox_dir).joinpath(Path({{output.name}}_value).name)}"
+        )
     {% endfor %}
-    # Call the docker biobb tool
-    print(f"Running {executable} run -v {str(Path(sandbox_dir))}:{biobb_block.config['container_folder']} {{docker_image}} {{module_name}} --config {Path(biobb_block.config['container_folder']).joinpath('{{module_name}}.json')}")
-    print(f"Input files: {input_files}")
-    print(f"Output files: {output_files}")
-    with subprocess.Popen(
-        [
+
+    cwd = os.getcwd()
+    if biobb_block.variables["execution_mode"] == "docker":
+        executable = biobb_block.config["docker_path"]
+        cmd = [
             executable,
             "run",
             "-v",
-            f"{str(Path(sandbox_dir))}:{biobb_block.config['container_folder']}",
+            f"{str(Path(final_sandbox_dir))}:{biobb_block.config['container_folder']}",
             "{{docker_image}}",
             "{{module_name}}",
             "--config",
             f"{Path(biobb_block.config['container_folder']).joinpath('{{module_name}}.json')}"
-        ] + input_files + output_files,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT,
-        universal_newlines=True,
-    ) as process:
-        if process.stdout is not None:
-            for line in process.stdout:
-                # printing anything inside the block action will
-                # redirect the output to the Horus integrated terminal
-                print(line)
+        ] + input_files + output_files
+    elif biobb_block.variables["execution_mode"] == "singularity":
+        executable = biobb_block.config["singularity_path"]
+        cmd = [
+            executable,
+            "run",
+            "-B",
+            f"{str(Path(final_sandbox_dir))}:{biobb_block.config['container_folder']}",
+            "docker://{{docker_image}}",
+            "{{module_name}}",
+            "--config",
+            f"{Path(biobb_block.config['container_folder']).joinpath('{{module_name}}.json')}"
+        ] + input_files + output_files
+    elif biobb_block.variables["execution_mode"] == "conda":
+        cwd = str(Path(sandbox_dir))
+        executable = biobb_block.config["conda_path"]
+        cmd = [
+            executable,
+            "run",
+            "-p",
+            biobb_block.config['conda_env'],
+            "{{module_name}}",
+            "--config",
+            f"{Path(final_sandbox_dir).joinpath('{{module_name}}.json')}",
+        ] + input_files + output_files
+    # Call the docker biobb tool
+    print(f"Running {executable} run -v {str(Path(sandbox_dir))}:{biobb_block.config['container_folder']} {{docker_image}} {{module_name}} --config {Path(biobb_block.config['container_folder']).joinpath('{{module_name}}.json')}")
+    print(f"Input files: {input_files}")
+    print(f"Output files: {output_files}")
 
-        if process.stderr is not None:
-            for line in process.stderr:
-                print(line)
+    # Store the final sandbox dir for download later in the final action
+    biobb_block.extraData["final_sandbox_dir"] = final_sandbox_dir
 
-        process.wait()
+    # If the simulation needs to be performed on remote, send the data
+    if is_remote:
+        print(f"Sending {sandbox_dir} to {biobb_block.remote.name}:{final_sandbox_dir}")
 
-        if process.returncode != 0:
-            # Raising an exception inside the block action will display the block as with an error,
-            # and will display the error inside the block
-            raise Exception(
-                process.stderr
-                if process.stderr
-                else "An error ocurred while running the flow"
+        # Here we send the data to the remote machine using Horus functionality
+        biobb_block.remote.sendData(sandbox_dir, biobb_block.remote.workDir)
+
+    # Submit a slurm script if the user desires
+    if biobb_block.variables["slurm"]:
+        slurm_script = biobb_block.variables["slurm_preamble"]
+
+        # Replace the %execution_command%
+        if "%execution_command%" in slurm_script:
+            slurm_script = slurm_script.replace("%execution_command%", " ".join(cmd))
+        else:
+            slurm_script += "\n" + " ".join(cmd)
+
+        # Here we will write into the local sandbox dir and then send it to the remote
+        with open(f"{Path(sandbox_dir).joinpath('{{module_name}}.sh')}", "w") as f:
+            f.write(slurm_script)
+
+        # Send the slurm script to the remote machine
+        if is_remote:
+
+            final_slurm_script_path = biobb_block.remote.sendData(
+                f"{Path(sandbox_dir).joinpath('{{module_name}}.sh')}", final_sandbox_dir
             )
+        else:
+            final_slurm_script_path = os.path.join(sandbox_dir, "{{module_name}}.sh")
+
+        jobID = biobb_block.remote.submitJob(final_slurm_script_path)
+
+        print(f"Submitted '{{module_name}}' with job ID: {jobID}")
+
+    # Else run the command directly as subprocess
+    else:
+
+        # This wil lexecute the command either locally or on remote
+        with biobb_block.remote.cd(cwd):
+            biobb_block.remote.remoteCommand(" ".join(cmd))
 
 
-        {% for output in outputs %}
-        # Copy the outputs to the output folder
-        if {{output.name}}_value is not None:
-            shutil.copy(f"{Path(sandbox_dir).joinpath(Path({{output.name}}_value).name)}", {{ output.name }}_value)
-            print(f"Copying {Path(sandbox_dir).joinpath(Path({{output.name}}_value).name)} to {Path({{output.name}}_value)}")
-            biobb_block.setOutput("{{output.name}}", {{output.name}}_value)
-        {% endfor %}
-        # If the block has any output, one can set its value using the ID of the output variable
-        # and the corresponding value
+def final_action_download(biobb_block: SlurmBlock):
+
+    sandbox_dir = biobb_block.extraData["sandbox_dir"]
+    final_sandbox_dir = biobb_block.extraData["final_sandbox_dir"]
+
+     # If we have selected a remote machine, download the results
+    if not biobb_block.remote.isLocal:
+
+        print(
+            f"Downloading results from {biobb_block.remote.name}:{final_sandbox_dir} to {sandbox_dir}"
+        )
+
+        # This will overwrite the local sandbox folder for the remote one
+        biobb_block.remote.getData(final_sandbox_dir, os.path.dirname(sandbox_dir))
+
+
+    # This part here should be generated by jinja, just the same as before
+    {% for output in outputs %}
+    {{output.name}}_value = biobb_block.variables["{{output.name}}_var"]
+    # Copy the outputs to the output folder
+    if {{output.name}}_value is not None:
+        print(f"Copying {Path(sandbox_dir).joinpath(Path({{output.name}}_value).name)} to {Path({{output.name}}_value)}")
+        shutil.copy(f"{Path(sandbox_dir).joinpath(Path({{output.name}}_value).name)}", {{ output.name }}_value)
+        biobb_block.setOutput("{{output.name}}", {{output.name}}_value)
+
+    {% endfor %}
+
 
 
 # Define the block
@@ -200,15 +329,18 @@ outputs_var_list.append({{output.name}}_var)
 variables_list.append({{property.name}})
 {% endfor %}
 
-{{module_name}}_block = PluginBlock(
+{{module_name}}_block = SlurmBlock(
     # The name which will appear on the frontend
     name="{{module_name}}",
     # Its description
     description="{{short_description}}",
+    # externalURL="{{readthedocs}}",
     # The action
-    action={{module_name}}_action,
+    initialAction={{module_name}}_action,
+    finalAction=final_action_download,
+
     # A list of inputs, variables and outputs
     inputs=inputs_list,
-    variables=variables_list + outputs_var_list,
+    variables=variables_list + outputs_var_list + [execution_mode_variable, slurm_variable, slurm_preamble_variable],
     outputs=outputs_list,
 )

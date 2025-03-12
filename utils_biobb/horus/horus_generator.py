@@ -1,6 +1,7 @@
 from pathlib import Path
 import importlib
 import argparse
+
 import utils_biobb.common.file_utils as fu
 import json
 import jinja2
@@ -38,9 +39,9 @@ class HorusGenerator:
         if str_type == 'bool':
             str_type = 'BOOLEAN'
         if str_type == 'dict':
-            str_type = 'STRING'
+            str_type = 'OBJECT'
         if str_type == 'object':
-            str_type = 'STRING'
+            str_type = 'OBJECT'
         if str_type == 'list':
             str_type = 'LIST'
         if str_type == 'array':
@@ -59,7 +60,7 @@ class HorusGenerator:
         # Deps folder
         plugin_dir_path.joinpath("deps").mkdir(exist_ok=True, parents=True)
         # Include folder
-        include_dir_path = plugin_dir_path.joinpath("include")
+        include_dir_path = plugin_dir_path.joinpath("Include")
         include_dir_path.mkdir(exist_ok=True, parents=True)
         # Pages folder
         plugin_dir_path.joinpath("Pages").mkdir(exist_ok=True, parents=True)
@@ -117,6 +118,7 @@ class HorusGenerator:
                 module_info['inputs'] = []
                 module_info['outputs'] = []
                 module_info['properties'] = []
+                module_info['readthedocs'] = f"{block_json_dict.get('readthedocs', '')}"
 
                 for argument, value in json_dict.get('properties').items():
                     if argument == 'properties':

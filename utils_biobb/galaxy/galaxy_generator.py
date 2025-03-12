@@ -1,6 +1,7 @@
 from pathlib import Path
 import importlib
 import argparse
+from typing import Optional
 import utils_biobb.common.file_utils as fu
 import json
 import jinja2
@@ -39,17 +40,22 @@ class GalaxyGenerator:
         if "test_data_dir" in parameter_orig_path:
             sub_folder = "data"
 
-        subpackage = sub_paths_dict.get(module_name, '').split('/')[-1]
-        if self.package_name == "biobb_dna" and "correlation" in subpackage:
-            subpackage = "correlation"
-        elif self.package_name == "biobb_pmx" and "pmxbiobb" in subpackage:
-            subpackage = subpackage.replace("pmxbiobb", "pmx")
+        # subpackage = sub_paths_dict.get(module_name, '').split('/')[-1]
+
+        # print(f"subpackage: {subpackage}")
+        # if self.package_name == "biobb_dna" and subpackage in ["intrabp_correlations", "interbp_correlations"]:
+        #    subpackage = "correlation"
+        # elif self.package_name == "biobb_pmx" and "pmxbiobb" in subpackage:
+        #    subpackage = subpackage.replace("pmxbiobb", "pmx")
 
         package_path = self.imported_package.__path__[0]
 
-        test_file_name = parameter_orig_path.split('/')[-1]
+        # test_file_name = parameter_orig_path.split('/')[-1]
 
-        return Path(package_path, f"test/{sub_folder}/{subpackage}/{test_file_name}")
+        parameter_path = "/".join(parameter_orig_path.split('/')[1:])
+
+        # return Path(package_path, f"test/{sub_folder}/{subpackage}/{test_file_name}")
+        return Path(package_path, f"test/{sub_folder}/{parameter_path}")
 
     def _escape_string_quotes(self, string: str) -> str:
         return string.replace('"', "\'").replace("'", "\'")

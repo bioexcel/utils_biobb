@@ -32,6 +32,7 @@ import json
 from pathlib import Path
 import re
 import subprocess
+from typing import Any
 
 
 def get_git_log(repo_dir):
@@ -40,8 +41,8 @@ def get_git_log(repo_dir):
     return json.loads(raw_json_log)
 
 
-def get_tag_list(git_log, min_version):
-    tag_list = []
+def get_tag_list(git_log, min_version) -> list:
+    tag_list: list = []
     commit_pattern = re.compile(r"^((?P<type>build|ci|docs|feat|fix|perf|refactor|style|test)\((?P<scope>\w+)\):)(?P<message>.+)")
     issue_pattern = re.compile(r"issue: (?P<issue_url>http.+/issues/)(?P<issue_number>\d+)")
     tag_pattern = re.compile(r"tag: (?P<version>.*),*")
@@ -49,7 +50,9 @@ def get_tag_list(git_log, min_version):
         # Tag Version
         commit_ref = commit.get('refs')
         if commit_ref:
-            tag_dict = {'refs': tag_pattern.match(commit_ref).groupdict().get("version", '').replace("v", "").strip()}
+            match = tag_pattern.match(commit_ref)
+            if match:
+                tag_dict: dict[Any, Any] = {'refs': match.groupdict().get("version", '').replace("v", "").strip()}
             # Start Changelog in version 3
             try:
                 version_num = int(tag_dict['refs'].replace(".", ""))
@@ -90,15 +93,15 @@ def get_md_str_changelog(tag_list, repo_title, github_url):
     md_str = ""
 
     md_str += f"# {repo_title} changelog \n"
-    md_str += f"\n"
+    md_str += "\n"
 
     for tag in tag_list:
         md_str += f"## What's new in version [{tag['refs']}]({github_url}/releases/tag/{tag['refs']})"
         md_str += f"{tag['overview']}"
-        md_str += f"\n"
+        md_str += "\n"
 
         if tag.get('feat'):
-            md_str += f"### New features\n"
+            md_str += "### New features\n"
             for feature in tag['feat']:
                 if feature.get('message'):
                     md_str += f"* {feature['message']}"
@@ -106,9 +109,9 @@ def get_md_str_changelog(tag_list, repo_title, github_url):
                         md_str += f"({feature['scope']})"
                     if feature.get('issue_url') and feature.get('issue_number'):
                         md_str += f"[#{feature['issue_number']}]({feature['issue_url']}{feature['issue_number']})"
-                    md_str += f"\n"
+                    md_str += "\n"
         if tag.get('fix'):
-            md_str += f"### Bug fixes\n"
+            md_str += "### Bug fixes\n"
             for feature in tag['fix']:
                 if feature.get('message'):
                     md_str += f"* {feature['message']}"
@@ -116,9 +119,9 @@ def get_md_str_changelog(tag_list, repo_title, github_url):
                         md_str += f"({feature['scope']})"
                     if feature.get('issue_url') and feature.get('issue_number'):
                         md_str += f"[#{feature['issue_number']}]({feature['issue_url']}{feature['issue_number']})"
-                    md_str += f"\n"
+                    md_str += "\n"
         if tag.get('other'):
-            md_str += f"### Other changes\n"
+            md_str += "### Other changes\n"
             for feature in tag['other']:
                 if feature.get('message'):
                     md_str += f"* {feature['message']}"
@@ -126,14 +129,14 @@ def get_md_str_changelog(tag_list, repo_title, github_url):
                         md_str += f"({feature['scope']})"
                     if feature.get('issue_url') and feature.get('issue_number'):
                         md_str += f"[#{feature['issue_number']}]({feature['issue_url']}{feature['issue_number']})"
-                    md_str += f"\n"
+                    md_str += "\n"
     return md_str
 
 
 def main():
     repo_dir = str(Path.cwd())
     repo_name = repo_dir.split("/")[-1]
-    repo_url = f"https://github.com/bioexcel/{repo_name}/"
+    # repo_url = f"https://github.com/bioexcel/{repo_name}/"
     output_file = str(Path.cwd().joinpath(repo_name, 'docs', 'source', 'change_log.md'))
     parser = argparse.ArgumentParser(description="Creates changelog.md",
                                      formatter_class=lambda prog: argparse.RawTextHelpFormatter(prog, width=99999),
@@ -160,6 +163,3 @@ def main():
             changelog_fh.write(md_str)
     else:
         print('Error generating changelog file')
-
-
-

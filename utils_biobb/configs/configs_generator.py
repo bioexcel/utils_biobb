@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import argparse
+from typing import Optional
 import yaml
 import json
 from os import walk
