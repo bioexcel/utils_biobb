@@ -1,5 +1,4 @@
 import argparse
-from typing import Optional
 import json
 import yaml
 import re
@@ -164,7 +163,9 @@ class CWLGenerator():
 
         conf_label = "Advanced configuration options for ##name##"
         conf_doc = "Advanced configuration options for ##name##. This should be passed as a string containing a dict. The possible options to include here are listed under 'properties' in the ##name## documentation: ##documentation##"
-        conf_doc_link = [item for item in tools if item['exec'] == basename][0]['docs']
+        tool = [item for item in tools if item['exec'] == basename]
+        assert len(tool) > 0, f"Tool {basename} not found in the package schema."
+        conf_doc_link = tool[0]['docs']
 
         inputs['config'] = {
             "label": self.setConfText(conf_label, {"name": tool_schema['name']}),

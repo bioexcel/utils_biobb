@@ -1,7 +1,6 @@
 from pathlib import Path
 import importlib
 import argparse
-from typing import Optional
 import utils_biobb.common.file_utils as fu
 import json
 import jinja2

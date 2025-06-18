@@ -14,30 +14,32 @@ want_to_exit(){
 }
 
 
-ide=atom
-path_user=/Users/pau/
-biobbs_dir=/Users/pau/projects/
-path_json_schemas=/Users/pau/projects/utils_biobb/utils_biobb/json/
+ide=code # (VSCode) Change to your preferred IDE.
+path_user=$HOME
+biobbs_dir=$path_user/repo/biobb  # PATH TO YOUR BIOBB REPOSITORIES
+utils_biobb=$biobbs_dir/utils_biobb/utils_biobb # PATH TO YOUR UTILS_BIOBB REPOSITORY
+path_json_schemas=$utils_biobb/json/
+export PYTHONPATH=$biobbs_dir/utils_biobb:$PYTHONPATH
 conda=biobb
 # json_paths
-json_generator_script_path=/Users/pau/projects/utils_biobb/utils_biobb/json/json_generator.py
-json_validator_script_path=/Users/pau/projects/utils_biobb/utils_biobb/json/json_validator.py
-json_master_schema_path=/Users/pau/projects/utils_biobb/utils_biobb/json/schema/master_schema.json
+json_generator_script_path=$path_json_schemas/json_generator.py
+json_validator_script_path=$path_json_schemas/json_validator.py
+json_master_schema_path=$path_json_schemas/schema/master_schema.json
 # configs
-configs_generator_script_path=/Users/pau/projects/utils_biobb/utils_biobb/configs/configs_generator.py
+configs_generator_script_path=$utils_biobb/configs/configs_generator.py
 # command_line
-command_line_generator_script_path=/Users/pau/projects/utils_biobb/utils_biobb/command_line/command_line_doc_generator.py
+command_line_generator_script_path=$utils_biobb/command_line/command_line_doc_generator.py
 # biobb_adapters
-biobb_adapters_path=/Users/pau/projects/biobb_adapters/
+biobb_adapters_path=$biobbs_dir/biobb_adapters/
 # cwl adapters
-cwl_generator_script_path=/Users/pau/projects/utils_biobb/utils_biobb/cwl/cwl_generator.py
+cwl_generator_script_path=$utils_biobb/cwl/cwl_generator.py
 # pycompss adapters
-pycompss_generator_script_path=/Users/pau/projects/utils_biobb/utils_biobb/pycompss/pycompss_generator.py
-pycompss_template_path=/Users/pau/projects/utils_biobb/utils_biobb/pycompss/pycompss_wrapper.tmpl
+pycompss_generator_script_path=$utils_biobb/pycompss/pycompss_generator.py
+pycompss_template_path=$utils_biobb/pycompss/pycompss_wrapper.tmpl
 # horus adapters
-horus_generator_script_path=/Users/pau/projects/utils_biobb/utils_biobb/horus/horus_generator.py
+horus_generator_script_path=$utils_biobb/horus/horus_generator.py
 # galaxy adapters
-galaxy_generator_script_path=/Users/pau/projects/utils_biobb/utils_biobb/galaxy/galaxy_generator.py
+galaxy_generator_script_path=$utils_biobb/galaxy/galaxy_generator.py
 
 # list of biobbs to be executed
 if [ $# -gt 0 ]; then
@@ -60,12 +62,12 @@ echo "******************************************************"
 for biobb in ${biobb_list}
  do
   echo "Processing ${biobb}:"
-  biobb_path=${biobbs_dir}${biobb}
+  biobb_path=${biobbs_dir}/${biobb}
   echo "  cd ${biobb_path}"
   cd ${biobb_path}
 
   # GIT
-  echo "  ${biobb} Updating projetct:"
+  echo "  ${biobb} Updating project:"
   echo "    git config pull.rebase false"
   git config pull.rebase false
   echo "    git pull"
