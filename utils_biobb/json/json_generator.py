@@ -1,5 +1,4 @@
 import argparse
-from typing import Optional
 import re
 import json
 from importlib import import_module
@@ -8,18 +7,18 @@ from pathlib import Path, PurePath
 from os import walk
 
 # regex_sphinx_link = '\`(.+)\<(.+)\>\`\_'
-regex_sphinx_link = '\`([^\`]+)\ (\<[^\`]+\>\`\_)'
-regex_parameters = '(\w*)\ *(?:\()(\w*)(?:\)):?\ *(\(\w*\):)?\ *(.*?)(?:\.)\ *(?:File type:\ *)(\w+)\.\ *(\`(?:.+)\<(.*)\>\`\_\.)?\ *(?:Accepted formats:\ *)(.+)(?:\.)?'
-regex_param_value = '(\w*)\ *(?:(?:\()(.*)(?:\)))?'
+regex_sphinx_link = r'\`([^\`]+)\ (\<[^\`]+\>\`\_)'
+regex_parameters = r'(\w*)\ *(?:\()(\w*)(?:\)):?\ *(\(\w*\):)?\ *(.*?)(?:\.)\ *(?:File type:\ *)(\w+)\.\ *(\`(?:.+)\<(.*)\>\`\_\.)?\ *(?:Accepted formats:\ *)(.+)(?:\.)?'
+regex_param_value = r'(\w*)\ *(?:(?:\()(.*)(?:\)))?'
 # regex_property_values = '(?:\*\ *\*\*)(.*)(?:\*\*)\ *(?:\(\*)(\w*)(?:\*\))\ *\-\ *(?:\()(.*?)(?:\))\ *(?:(?:\[)(\d+(?:\.\d+)?)\-(\d+(?:\.\d+)?)(?:\|)?(\d+(?:\.\d+)?)?(?:\]))?\ *(?:(?:\[)(.*)(?:\]))?\ *(.*)?(?:Values:\ *)(.+)(?:\.)?'
-regex_property_values = '(?:\*\ *\*\*)(.*)(?:\*\*)\ *(?:\(\*)(\w*)(?:\*\))\ *\-\ ?(?:\()(.*)(?:\))\ *(?:(?:\[)([\-]?\d+(?:\.\d+)?)\~([\-]?\d+(?:\.\d+)?)(?:\|)?(\d+(?:\.\d+)?)?(?:\]))?\ *(?:(?:\[)(.*)(?:\]))?\ *(.*)\ ?(?:Values:\ *)(.+)(?:\.)?'
-regex_property_non_values = '(?:\*\ *\*\*)(.*)(?:\*\*)\ *(?:\(\*)(\w*)(?:\*\))\ *\-\ *(?:\()(.*?)(?:\))\ *(?:(?:\[)([\-]?\d+(?:\.\d+)?)\~([\-]?\d+(?:\.\d+)?)(?:\|)?(\d+(?:\.\d+)?)?(?:\]))?\ *(?:(?:\[)(.*)(?:\]))?\ *(.*)?'
+regex_property_values = r'(?:\*\ *\*\*)(.*)(?:\*\*)\ *(?:\(\*)(\w*)(?:\*\))\ *\-\ ?(?:\()(.*)(?:\))\ *(?:(?:\[)([\-]?\d+(?:\.\d+)?)\~([\-]?\d+(?:\.\d+)?)(?:\|)?(\d+(?:\.\d+)?)?(?:\]))?\ *(?:(?:\[)(.*)(?:\]))?\ *(.*)\ ?(?:Values:\ *)(.+)(?:\.)?'
+regex_property_non_values = r'(?:\*\ *\*\*)(.*)(?:\*\*)\ *(?:\(\*)(\w*)(?:\*\))\ *\-\ *(?:\()(.*?)(?:\))\ *(?:(?:\[)([\-]?\d+(?:\.\d+)?)\~([\-]?\d+(?:\.\d+)?)(?:\|)?(\d+(?:\.\d+)?)?(?:\]))?\ *(?:(?:\[)(.*)(?:\]))?\ *(.*)?'
 #################
 # regex_property_values = '(?:\*\s*\*\*)(.*)(?:\*\*)\s*(?:\(\*)(\w*)(?:\*\))\s*\-\s*(?:\()(.*)(?:\))\s*(?:(?:\[)(\w*)\-(\w*)(?:\|)?(\w*)?(?:\]))?\s*(?:(?:\[)(.*)(?:\]))?\s([a-zA-Z0-9_\- ().&?,!;]+)(?:\s|\.)+(?:(?:Values:)(.+))?'
 ###################
-regex_prop_value = '([a-zA-Z0-9_\-\+:\/\/\.\ \,\*\#]+)\ *(?:(?:\()(.*)?(?:\)))?'
-regex_info = '\*\ *(.*)'
-regex_info_item = '(.*?)\:(?:\ *)(.*)'
+regex_prop_value = r'([a-zA-Z0-9_\-\+:\/\/\.\ \,\*\#]+)\ *(?:(?:\()(.*)?(?:\)))?'
+regex_info = r'\*\ *(.*)'
+regex_info_item = r'(.*?)\:(?:\ *)(.*)'
 
 
 class JSONSchemaGenerator():
@@ -32,7 +31,7 @@ class JSONSchemaGenerator():
             raise SystemExit('Unexisting output path')
 
         # check if output_path has correct structure
-        if not input_package in output_path:
+        if not (input_package in output_path):
             raise SystemExit('Incorrect output path. The structure must be: path/biobb_package/biobb_package')
 
         self.output_path = PurePath(output_path).joinpath('json_schemas')
@@ -102,18 +101,18 @@ class JSONSchemaGenerator():
         file_formats = []
         for val in list_vals:
             f = re.findall(regex_param_value, val)[0]
-            formats.append('.*\.{0}$'.format(f[0]))
+            formats.append(r'.*\.{0}$'.format(f[0]))
 
             ff = {
-                "extension": '.*\.{0}$'.format(f[0]),
+                "extension": r'.*\.{0}$'.format(f[0]),
                 "description": description.strip('.')
             }
 
             if f[1]:
-                ffs = re.split('\|', f[1])
+                ffs = re.split(r'\|', f[1])
 
                 for item in ffs:
-                    parts = re.split('\:', item)
+                    parts = re.split(r'\:', item)
                     ff[parts[0]] = parts[1]
 
             file_formats.append(ff)
@@ -223,7 +222,7 @@ class JSONSchemaGenerator():
         wf_prop = True if prop[6] else False
         description = re.sub(regex_sphinx_link, self.replaceLink, prop[7])
         if len(prop) == 9:
-            formats, property_formats = self.getPropFormats(prop[8].rstrip('\.'), self.getType(prop_type))
+            formats, property_formats = self.getPropFormats(prop[8].rstrip(r'\.'), self.getType(prop_type))
         # formats, property_formats = self.getPropFormats(prop[8])
 
         p = {
@@ -313,7 +312,7 @@ class JSONSchemaGenerator():
                 # second level: properties
                 if leading == 12 and not row.isspace():
 
-                    if not "properties" in properties:
+                    if not ("properties" in properties):
                         properties["properties"] = {"type": "object", "properties": {}}
 
                     prop_level1, p = self.getProperties(row)
@@ -323,7 +322,7 @@ class JSONSchemaGenerator():
                 # third level: parameters
                 if (leading == 16):
 
-                    if not "parameters" in properties["properties"]["properties"][prop_level1]:
+                    if not ("parameters" in properties["properties"]["properties"][prop_level1]):
                         properties["properties"]["properties"][prop_level1]["type"] = "object"
                         properties["properties"]["properties"][prop_level1]["parameters"] = {}
 
