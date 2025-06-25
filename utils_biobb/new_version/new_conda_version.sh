@@ -4,9 +4,9 @@
 #Activate conda
 
 ide=code
-path_user=/Users/pau/
-path_biobb=/Users/pau/projects/
-path_json_schemas=/Users/pau/projects/utils_biobb/utils_biobb/json/
+path_user=$HOME/
+path_biobb=$path_user/repo/biobb/  # PATH TO YOUR BIOBB REPOSITORIES
+path_json_schemas=$path_biobb/utils_biobb/utils_biobb/json/
 conda=biobb
 echo "******************************************************"
 echo "Be sure of having activated $conda conda environment!"
@@ -16,12 +16,12 @@ read -p "Repository name ie biobb_md : " REPOSITORY
 if [ -n "$1" ]; then
     version=$1
 else
-	read -p "Version number ie 0.1.2 : " version
+	read -p "Version number ie 5.1.0 : " version
 fi
 if [ -n "$2" ]; then
 	message=$2
 else
-	read -p "Commit message ie 2019.4 : " message
+	read -p "Commit message ie 2025.1 : " message
 fi
 echo "Repository: $REPOSITORY"
 echo "Version: $version"
