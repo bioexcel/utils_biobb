@@ -69,6 +69,11 @@ class JSONSchemaGenerator():
         elif type != 'dict':
             default = re.sub('\"|\'', '', default)
         elif type == 'dict':
+            try:
+                default = re.sub(r'True', 'true', default)
+                default = re.sub(r'False', 'false', default)
+            except json.JSONDecodeError:
+                default = {}
             default = json.loads(default)
 
         if type == 'str' or type == 'string':
