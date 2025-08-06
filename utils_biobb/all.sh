@@ -16,10 +16,11 @@ want_to_exit(){
 
 ide=code # (VSCode) Change to your preferred IDE.
 path_user=$HOME
-biobbs_dir=$path_user/repo/biobb  # PATH TO YOUR BIOBB REPOSITORIES
-utils_biobb=$biobbs_dir/utils_biobb/utils_biobb # PATH TO YOUR UTILS_BIOBB REPOSITORY
+biobbs_dir=$path_user/repo/biobb/biobb_all/biobb  # PATH TO YOUR BIOBB REPOSITORIES
+utils_biobb=$path_user/repo/biobb/utils_biobb/utils_biobb # PATH TO YOUR UTILS_BIOBB REPOSITORY
+biobb_adapters_path=$path_user/repo/biobb/biobb_adapters/  # PATH TO YOUR biobb_adapters REPOSITORY 
 path_json_schemas=$utils_biobb/json/
-export PYTHONPATH=$biobbs_dir/utils_biobb:$PYTHONPATH
+export PYTHONPATH=$path_user/repo/biobb/utils_biobb/:$PYTHONPATH
 conda=biobb
 # json_paths
 json_generator_script_path=$path_json_schemas/json_generator.py
@@ -29,8 +30,6 @@ json_master_schema_path=$path_json_schemas/schema/master_schema.json
 configs_generator_script_path=$utils_biobb/configs/configs_generator.py
 # command_line
 command_line_generator_script_path=$utils_biobb/command_line/command_line_doc_generator.py
-# biobb_adapters
-biobb_adapters_path=$biobbs_dir/biobb_adapters/
 # cwl adapters
 cwl_generator_script_path=$utils_biobb/cwl/cwl_generator.py
 # pycompss adapters
@@ -66,13 +65,13 @@ for biobb in ${biobb_list}
   echo "  cd ${biobb_path}"
   cd ${biobb_path}
 
-  # GIT
-  echo "  ${biobb} Updating project:"
-  echo "    git config pull.rebase false"
-  git config pull.rebase false
-  echo "    git pull"
-  git pull
-  want_to_exit $?
+#   # GIT
+#   echo "  ${biobb} Updating project:"
+#   echo "    git config pull.rebase false"
+#   git config pull.rebase false
+#   echo "    git pull"
+#   git pull
+#   want_to_exit $?
 
   # JSON
   echo ""
