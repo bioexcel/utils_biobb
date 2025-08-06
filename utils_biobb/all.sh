@@ -15,14 +15,14 @@ want_to_exit(){
 
 
 ide=code # (VSCode) Change to your preferred IDE.
+conda=biobb_all
 path_user=$HOME
-biobbs_dir=$path_user/repo/biobb/biobb_all/biobb  # PATH TO YOUR BIOBB REPOSITORIES
-utils_biobb=$path_user/repo/biobb/utils_biobb/utils_biobb # PATH TO YOUR UTILS_BIOBB REPOSITORY
-biobb_adapters_path=$path_user/repo/biobb/biobb_adapters/  # PATH TO YOUR biobb_adapters REPOSITORY 
-path_json_schemas=$utils_biobb/json/
-export PYTHONPATH=$path_user/repo/biobb/utils_biobb/:$PYTHONPATH
-conda=biobb
+biobb_dir=$path_user/repo/biobb/biobb_all/biobb  # PATH TO YOUR BIOBB REPOSITORIES
+utils_biobb=$biobb_dir/utils_biobb/utils_biobb # PATH TO YOUR UTILS_BIOBB REPOSITORY
+biobb_adapters_path=$biobb_dir/biobb_adapters/  # PATH TO YOUR biobb_adapters REPOSITORY 
+export PYTHONPATH=$biobb_dir/utils_biobb/:$PYTHONPATH
 # json_paths
+path_json_schemas=$utils_biobb/json/
 json_generator_script_path=$path_json_schemas/json_generator.py
 json_validator_script_path=$path_json_schemas/json_validator.py
 json_master_schema_path=$path_json_schemas/schema/master_schema.json

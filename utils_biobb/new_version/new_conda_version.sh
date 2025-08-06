@@ -5,9 +5,9 @@
 
 ide=code
 path_user=$HOME/
-path_biobb=$path_user/repo/biobb/
-path_lib=$path_biobb/biobb_all/biobb  # PATH TO YOUR BIOBB REPOSITORIES
+path_biobb=$path_user/repo/biobb/biobb  # PATH TO YOUR BIOBB REPOSITORIES
 path_json_schemas=$path_biobb/utils_biobb/utils_biobb/json/
+path_bioconda=$path_user/repo/biobb/bioconda-recipes
 conda=biobb_all
 echo "******************************************************"
 echo "Be sure of having activated $conda conda environment!"
@@ -48,23 +48,23 @@ read -p "Do you want update the version [Y/n]? " cont
 if [ $cont == 'y' -o $cont == 'Y'  ]
 then
 	read -p "Before opening setup.py remember to check if some dependency has changed. Press any key to continue..." -n1 -s
-	echo $path_lib/$REPOSITORY/setup.py
-	$ide $path_lib/$REPOSITORY/setup.py
+	echo $path_biobb/$REPOSITORY/setup.py
+	$ide $path_biobb/$REPOSITORY/setup.py
 	read -p "Modify setup.py with the new version number and press any key..." -n1 -s
 	echo ""
-	$ide $path_lib/$REPOSITORY/.github/env.yaml
+	$ide $path_biobb/$REPOSITORY/.github/env.yaml
 	read -p "Modify env.yaml with the new dependencies versions and press any key..." -n1 -s
 	echo ""
-	$ide $path_lib/$REPOSITORY/$REPOSITORY/__init__.py
+	$ide $path_biobb/$REPOSITORY/$REPOSITORY/__init__.py
 	read -p "Modify __init__.py adding the new version number: __version__ = \"$version\"" -n1 -s
 	echo ""
-	$ide $path_lib/$REPOSITORY/README.md
+	$ide $path_biobb/$REPOSITORY/README.md
 	read -p "Modify README.md with the new version number (in version and instructions) and press any key..." -n1 -s
 	echo ""
-	$ide $path_lib/$REPOSITORY/$REPOSITORY/json_schemas/$REPOSITORY.json
+	$ide $path_biobb/$REPOSITORY/$REPOSITORY/json_schemas/$REPOSITORY.json
 	read -p "Modify $REPOSITORY.json with the new version number and the check if some dependency has changed..." -n1 -s
 	echo ""
-	$ide $path_lib/$REPOSITORY/$REPOSITORY/docs/source/conf.py
+	$ide $path_biobb/$REPOSITORY/$REPOSITORY/docs/source/conf.py
 	read -p "Modify conf.py with the new version number..." -n1 -s
 	echo ""
 	echo "*********************************************************"
@@ -72,21 +72,21 @@ then
 	echo ""
 	echo "### Changes"
 	echo ""
-	git -C $path_lib/$REPOSITORY log $(git -C $path_lib/$REPOSITORY describe --tags --abbrev=0)..HEAD --oneline | cut -d " " -f 2-1000 | awk '{print "*",$0}'
+	git -C $path_biobb/$REPOSITORY log $(git -C $path_biobb/$REPOSITORY describe --tags --abbrev=0)..HEAD --oneline | cut -d " " -f 2-1000 | awk '{print "*",$0}'
 	echo ""
 	echo "*********************************************************"
 	echo ""
-	$ide $path_lib/$REPOSITORY/$REPOSITORY/docs/source/change_log.md
+	$ide $path_biobb/$REPOSITORY/$REPOSITORY/docs/source/change_log.md
 	read -p "Modify change_log.md with the new version..." -n1 -s
 	echo ""
-	$ide $path_lib/$REPOSITORY/$REPOSITORY/docs/source/schema.html
+	$ide $path_biobb/$REPOSITORY/$REPOSITORY/docs/source/schema.html
 	read -p "Modify schema.html with the new version number..." -n1 -s
 	echo ""
-	$ide $path_lib/$REPOSITORY/CITATION.cff
+	$ide $path_biobb/$REPOSITORY/CITATION.cff
 	read -p "Modify CITATION.cff with the new version number..." -n1 -s
 	echo ""
-	cd $path_lib/$REPOSITORY
-	cp -v $path_lib/$REPOSITORY/README.md $path_lib/$REPOSITORY/$REPOSITORY/docs/source/readme.md
+	cd $path_biobb/$REPOSITORY
+	cp -v $path_biobb/$REPOSITORY/README.md $path_biobb/$REPOSITORY/$REPOSITORY/docs/source/readme.md
 fi
 
 # Upload to PyPI
@@ -112,10 +112,10 @@ fi
 read -p "Do you want upload to Bioconda [Y/n]? " cont
 if [ $cont == 'y' -o $cont == 'Y'  ]
 then
-	cd $path_biobb/bioconda-recipes
+	cd $path_bioconda
 	git checkout -f master; git pull origin master
 	git branch -D $REPOSITORY; git push origin --delete $REPOSITORY; git checkout -b $REPOSITORY
-	$ide $path_biobb/bioconda-recipes/recipes/$REPOSITORY
+	$ide $path_bioconda/recipes/$REPOSITORY
 	read -p "Modify recipes/$REPOSITORY/meta.yaml paste the headers and check if some dependency has changed from ~/$REPOSITORY/meta.yaml and press any key..." -n1 -s
 	echo ""
 	git status; git add recipes/$REPOSITORY/*; git status
