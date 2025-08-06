@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import argparse
-from typing import Optional
 import json
 from pathlib import Path
 import re
@@ -57,8 +56,10 @@ def main():
         out.write("```\n")
         out.write("-----------------\n")
         out.write("\n")
-
-        for json_file_path in Path(args.json_schemas_folder).glob('*.json'):
+        # Create the docs by alphabetical order
+        schemas = Path(args.json_schemas_folder).glob('*.json')
+        schemas = sorted(schemas, key=lambda x: x.stem)
+        for json_file_path in schemas:
             block_name = json_file_path.stem
             if block_name == biobb_name:
                 continue

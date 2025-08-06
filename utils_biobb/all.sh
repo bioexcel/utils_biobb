@@ -50,7 +50,7 @@ else
     # biobb_structure_checking
     # biobb_ml
     # utils_biobb
-    biobb_list="biobb_amber biobb_analysis biobb_chemistry biobb_cmip biobb_cp2k biobb_dna biobb_flexdyn biobb_flexserv biobb_godmd biobb_gromacs biobb_haddock biobb_io biobb_model biobb_pdb_tools biobb_pmx biobb_pytorch biobb_structure_utils biobb_vs"
+    biobb_list="biobb_amber biobb_analysis biobb_chemistry biobb_cmip biobb_cp2k biobb_dna biobb_flexdyn biobb_flexserv biobb_godmd biobb_gromacs biobb_haddock biobb_io biobb_mem biobb_model biobb_pdb_tools biobb_pmx biobb_pytorch biobb_structure_utils biobb_vs"
 
 fi
 echo "List of packages where the script will be executed:"
