@@ -6,8 +6,8 @@
 
 want_to_exit(){
   if [ $1 -ne 0 ]; then
-      read -p "Last command has failed do you want to continue [Y/n]? " continue_script
-      if [ $continue_script == 'y' -o $continue_script == 'Y'  ]; then
+      read -p "Last command has failed do you want to exit [Y/n]? " exit_script
+      if [ $exit_script == 'y' -o $exit_script == 'Y'  ]; then
 	        exit 1
       fi
   fi
@@ -19,10 +19,10 @@ conda=biobb_all
 path_user=$HOME
 biobb_dir=$path_user/repo/biobb/biobb_all/biobb  # PATH TO YOUR BIOBB REPOSITORIES
 utils_biobb=$biobb_dir/utils_biobb/utils_biobb # PATH TO YOUR UTILS_BIOBB REPOSITORY
-biobb_adapters_path=$biobb_dir/biobb_adapters/  # PATH TO YOUR biobb_adapters REPOSITORY 
+biobb_adapters_path=$biobb_dir/biobb_adapters  # PATH TO YOUR biobb_adapters REPOSITORY 
 export PYTHONPATH=$biobb_dir/utils_biobb/:$PYTHONPATH
 # json_paths
-path_json_schemas=$utils_biobb/json/
+path_json_schemas=$utils_biobb/json
 json_generator_script_path=$path_json_schemas/json_generator.py
 json_validator_script_path=$path_json_schemas/json_validator.py
 json_master_schema_path=$path_json_schemas/schema/master_schema.json
@@ -50,7 +50,7 @@ else
     # biobb_ml
     # utils_biobb
     biobb_list="biobb_amber biobb_analysis biobb_chemistry biobb_cmip biobb_cp2k biobb_dna biobb_flexdyn biobb_flexserv biobb_godmd biobb_gromacs biobb_haddock biobb_io biobb_mem biobb_model biobb_pdb_tools biobb_pmx biobb_pytorch biobb_structure_utils biobb_vs"
-
+    #biobb_list="biobb_godmd biobb_pytorch"
 fi
 echo "List of packages where the script will be executed:"
 echo "$biobb_list"
@@ -58,20 +58,21 @@ echo "$biobb_list"
 echo "******************************************************"
 echo "Be sure of having activated $conda conda environment!"
 echo "******************************************************"
+
 for biobb in ${biobb_list}
- do
+do
   echo "Processing ${biobb}:"
-  biobb_path=${biobbs_dir}/${biobb}
+  biobb_path=${biobb_dir}/${biobb}
   echo "  cd ${biobb_path}"
   cd ${biobb_path}
 
-#   # GIT
-#   echo "  ${biobb} Updating project:"
-#   echo "    git config pull.rebase false"
-#   git config pull.rebase false
-#   echo "    git pull"
-#   git pull
-#   want_to_exit $?
+  #   # GIT
+  #   echo "  ${biobb} Updating project:"
+  #   echo "    git config pull.rebase false"
+  #   git config pull.rebase false
+  #   echo "    git pull"
+  #   git pull
+  #   want_to_exit $?
 
   # JSON
   echo ""
@@ -124,8 +125,5 @@ for biobb in ${biobb_list}
   echo "  ${biobb} Create Galaxy adapters:"
   echo "    python3 ${galaxy_generator_script_path} -p ${biobb} -o ${biobb_adapters_path}/biobb_adapters/galaxy/"
   python3 ${galaxy_generator_script_path} -p ${biobb} -o ${biobb_adapters_path}/biobb_adapters/galaxy/
-  want_to_exit $?
 
-
- done
-
+done
