@@ -40,11 +40,11 @@ class JSONSchemaGenerator():
             raise SystemExit('Incorrect output path. The structure must be: path/biobb_package/biobb_package')
 
     def similar_string(self, a, b):
-        """ check similarity between two strings """
+        """Check similarity between two strings."""
         return SequenceMatcher(None, a.replace("_", "").lower(), b.replace("_", "").lower()).ratio()
 
     def getType(self, type):
-        """ return JSON friendly type """
+        """Return JSON friendly type: string, integer, number, boolean, object, array."""
         if type == 'str':
             return 'string'
         if type == 'int':
@@ -57,7 +57,8 @@ class JSONSchemaGenerator():
             return 'object'
         if type == 'list':
             return 'array'
-
+        if type == 'dir':
+            return 'dir'
         return type
 
     def getDefaultProperty(self, type, default):
@@ -99,7 +100,7 @@ class JSONSchemaGenerator():
         return matchobj.group(1).strip()
 
     def getParamFormats(self, vals, description):
-
+        """ Get the EDAM formats from arguments."""
         list_vals = re.split(', |,', vals)
 
         formats = []
@@ -170,6 +171,7 @@ class JSONSchemaGenerator():
         return formats, prop_formats
 
     def getParameters(self, row, required):
+        """ Get information for main arguments (the ones that are not properties) """
         # get list with all info in parameters:
         # * property id
         # * property type

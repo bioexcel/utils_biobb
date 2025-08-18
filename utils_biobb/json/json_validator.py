@@ -1,5 +1,4 @@
 import argparse
-from typing import Optional
 import json
 from os import walk
 from pathlib import Path, PurePath
