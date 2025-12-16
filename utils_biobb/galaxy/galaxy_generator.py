@@ -114,6 +114,9 @@ class GalaxyGenerator:
                     argument_dict['required'] = argument in module_info['required']
                     argument_dict['description'] = self._escape_string_quotes(value['description'])
                     argument_dict['extensions'] = ["".join(re.split("[^A-Za-z0-9]+", ext)) for ext in value.get('enum')]
+
+                    # Check if this is a collection/folder output
+                    argument_dict['is_collection'] = value['type'].lower() == 'dir'
                     if value.get('filetype').lower() == 'input':
                         module_info['inputs'].append(argument_dict)
                     else:
@@ -139,7 +142,10 @@ class GalaxyGenerator:
                 if param_name.startswith('input_'):
                     input_file_path = self._get_test_file_path(module_name, param_path, sub_paths_dict)
                     print(f"Copying {input_file_path} to {testdata_dir_path.joinpath(param_path.split('/')[-1])}")
-                    shutil.copy(input_file_path, testdata_dir_path.joinpath(param_path.split('/')[-1]))
+                    if input_file_path.is_dir():
+                        shutil.copytree(input_file_path, testdata_dir_path.joinpath(param_path.split('/')[-1]), dirs_exist_ok=True)
+                    else:
+                        shutil.copy(input_file_path, testdata_dir_path.joinpath(param_path.split('/')[-1]))
                 module_info['test_info'][param_name] = param_path.split('/')[-1]
 
             # Write adapter file

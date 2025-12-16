@@ -15,7 +15,7 @@ want_to_exit(){
 
 
 ide=code # (VSCode) Change to your preferred IDE.
-conda=biobb_all
+conda=biobb
 path_user=$HOME
 biobb_dir=$path_user/repo/biobb/biobb_all/biobb  # PATH TO YOUR BIOBB REPOSITORIES
 utils_biobb=$biobb_dir/utils_biobb/utils_biobb # PATH TO YOUR UTILS_BIOBB REPOSITORY

@@ -114,7 +114,7 @@
             "properties": {
                 "type": {
                     "type": "string",
-                    "enum": ["string"]
+                    "enum": ["string", "dir"]
                 },
                 "description": {
                     "type": "string"

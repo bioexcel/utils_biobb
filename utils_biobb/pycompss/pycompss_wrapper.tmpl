@@ -4,7 +4,7 @@ import sys
 import traceback
 # Pycompss
 from pycompss.api.task import task
-from pycompss.api.parameter import FILE_IN, FILE_OUT
+from pycompss.api.parameter import FILE_IN, FILE_OUT, DIRECTORY_IN, DIRECTORY_OUT
 # Adapters commons pycompss
 from biobb_adapters.pycompss.biobb_commons import task_config
 # Wrapped Biobb
@@ -15,7 +15,7 @@ task_time_out = int(os.environ.get('TASK_TIME_OUT', 0))
 
 @task({% for argument in module_info.arguments %}{{argument[0]}}={{argument[1]}}, {% endfor %}
       on_failure="IGNORE", time_out=task_time_out)
-def _{{ module_info.iclass | lower }}({% for argument in module_info.arguments %}{{argument[0]}}, {% endfor %} properties, **kwargs):
+def _{{ module_info.iclass | lower }}({% for argument in module_info.arguments %}{{argument[0]}}, {% endfor %}properties, **kwargs):
     {% if module_info.mpi %}
     task_config.config_multinode(properties)
     {% else %}
@@ -33,8 +33,9 @@ def _{{ module_info.iclass | lower }}({% for argument in module_info.arguments %
 
 def {{ module_info.module_name | lower }}({% for argument in module_info.arguments %}{% if argument[0] in module_info.required %}{{argument[0]}}, {% else %}{{argument[0]}}=None, {% endif %}{% endfor %}properties=None, **kwargs):
 
-    if {% for argument in module_info.arguments if argument[1] == 'FILE_OUT' %}({{argument[0]}} is None or (os.path.exists({{argument[0]}}) and os.stat({{argument[0]}}).st_size > 0)) and \
+    if {% for argument in module_info.arguments if argument[1] in ['FILE_OUT', 'DIRECTORY_OUT']%}({{argument[0]}} is None or (os.path.exists({{argument[0]}}) and os.stat({{argument[0]}}).st_size > 0)) and \
        {% endfor %}True:
         print("WARN: Task {{module_info.iclass}} already executed.")
     else:
-        _{{ module_info.iclass | lower }}({% for argument in module_info.arguments %} {{argument[0]}}, {% endfor %} properties, **kwargs)
+        _{{ module_info.iclass | lower }}({% for argument in module_info.arguments %}{{argument[0]}}, {% endfor %}properties, **kwargs)
+

@@ -45,6 +45,8 @@ class HorusGenerator:
             str_type = 'LIST'
         if str_type == 'array':
             str_type = 'LIST'
+        if str_type == 'dir':
+            str_type = 'FOLDER'
         return f"VariableTypes.{str_type.upper()}"
 
     def _create_plugin_paths(self, output_path: Path) -> Tuple[Path, Path, Path, Path]:
@@ -101,55 +103,70 @@ class HorusGenerator:
             plugin_file.write(template.render(block_name=block_json_dict['_id'], dot_paths_dict=dot_paths_dict))
 
         for module_json in fu.get_file_path_list(dir_path=self.imported_package.__path__[0]):
-            print(f'Processing {module_json}')
+            print(f'Processing schema {module_json}')
             module_info = {}
             with open(module_json) as f_json:
                 json_dict = json.load(f_json)
-                module_name = module_json.name.rsplit('.')[0]
-                module_info['module_name'] = module_name
-                module_info['long_description'] = self._escape_string_quotes(json_dict.get('description'))
-                module_info['short_description'] = self._escape_string_quotes(json_dict.get('title'))
-                module_info['iclass'] = json_dict.get('name').split()[-1]
-                module_info['module_dot_path'] = sub_paths_dict.get(module_name, '').replace('/', '.')+'.'+module_name
-                module_info['mpi'] = json_dict.get('info').get('wrapped_software').get('multinode')
-                module_info['required'] = json_dict.get('required')
+            module_name = module_json.name.rsplit('.')[0]
+            module_info['module_name'] = module_name
+            module_info['long_description'] = self._escape_string_quotes(json_dict.get('description'))
+            module_info['short_description'] = self._escape_string_quotes(json_dict.get('title'))
+            module_info['iclass'] = json_dict.get('name').split()[-1]
+            module_info['module_dot_path'] = sub_paths_dict.get(module_name, '').replace('/', '.')+'.'+module_name
+            module_info['mpi'] = json_dict.get('info').get('wrapped_software').get('multinode')
+            module_info['required'] = json_dict.get('required')
+            if module_name == 'folder_test':  # BORRAR
+                module_info['docker_image'] = 'quay.io/biocontainers/mulled-v2-0d74d1016344becf56aa05276bfe6d176266238e:29450066f7a131dfc0f19d73955ab3e2101ec25f-0'
+            else:
                 module_info['docker_image'] = block_json_dict.get('docker', '').replace('https://', '')
-                module_info['inputs'] = []
-                module_info['outputs'] = []
-                module_info['properties'] = []
-                module_info['readthedocs'] = f"{block_json_dict.get('readthedocs', '')}"
+            module_info['inputs'] = []
+            module_info['outputs'] = []
+            module_info['properties'] = []
+            module_info['readthedocs'] = f"{block_json_dict.get('readthedocs', '')}"
 
-                for argument, value in json_dict.get('properties').items():
-                    if argument == 'properties':
-                        module_info['properties'] = [{**prop_dict, "horus_description": self._escape_string_quotes(prop_dict.get('description')), "name": prop_name, "horus_type": self.__str_type_to_horus_type(prop_dict.get('type')), "horus_default": self._default_value(prop_dict.get('default'))} for prop_name, prop_dict in value.get('properties').items()]
-                        for property_dict in module_info['properties']:
-                            if property_dict.get('horus_type') == 'VariableTypes.LIST' and isinstance(property_dict.get('horus_default'), str):
-                                list_str = property_dict['horus_default'].replace('[', '').replace(']', '').replace("'", '').replace('"', '').replace(' ', '')
-                                property_dict['horus_default'] = list_str.split(',')
-                        continue
+            for argument, value in json_dict.get('properties').items():
+                if argument == 'properties':
+                    module_info['properties'] = [
+                        {**prop_dict,
+                            "horus_description": self._escape_string_quotes(prop_dict.get('description')),
+                            "name": prop_name,
+                            "horus_type": self.__str_type_to_horus_type(prop_dict.get('type')),
+                            "horus_default": self._default_value(prop_dict.get('default'))}
+                        for prop_name, prop_dict in value.get('properties').items()
+                    ]
+                    for property_dict in module_info['properties']:
+                        if property_dict.get('horus_type') == 'VariableTypes.LIST' and isinstance(property_dict.get('horus_default'), str):
+                            list_str = property_dict['horus_default'].replace('[', '').replace(']', '').replace("'", '').replace('"', '').replace(' ', '')
+                            property_dict['horus_default'] = list_str.split(',')
+                    continue
+                # Process input and output arguments
+                argument_dict = {}
+                argument_dict['name'] = argument
+                argument_dict['required'] = argument in module_info['required']
+                argument_dict['type'] = self.__str_type_to_horus_type(value.get('type'))
 
-                    argument_dict = {}
-                    argument_dict['name'] = argument
-                    argument_dict['required'] = argument in module_info['required']
-                    # print(f"Processing {argument}")
-                    # print(f"description: {value['description']}")
-                    # print(f"escape: {self._escape_string_quotes(value['description'])}")
-                    argument_dict['description'] = self._escape_string_quotes(value['description'])
+                # print(f"description: {value['description']}")
+                # print(f"escape: {self._escape_string_quotes(value['description'])}")
+                argument_dict['description'] = self._escape_string_quotes(value['description'])
+                if value.get('type') != 'dir':
                     argument_dict['extensions'] = ["".join(re.split("[^A-Za-z0-9]+", ext)) for ext in value.get('enum')]
+                    argument_dict['default'] = argument_dict['name'] + '.' + argument_dict['extensions'][0]
+                else:
+                    argument_dict['extensions'] = []
+                    argument_dict['default'] = argument_dict['name']
+                if value.get('filetype').lower() == 'input':
+                    module_info['inputs'].append(argument_dict)
+                else:
+                    module_info['outputs'].append(argument_dict)
 
-                    if value.get('filetype').lower() == 'input':
-                        module_info['inputs'].append(argument_dict)
-                    else:
-                        module_info['outputs'].append(argument_dict)
-
-                adapter_dir_path = Path(include_dir_path).joinpath(Path(sub_paths_dict.get(module_name, '')))
-                adapter_dir_path.mkdir(exist_ok=True, parents=True)
-                adapter_file_path = adapter_dir_path.joinpath(module_name+'.py')
-                with open(adapter_file_path, 'w') as adapter_file:
-                    horus_block_template = "templates/horus_block.jpy"
-                    template = templateEnv.get_template(horus_block_template)
-                    print(f'Writting {str(adapter_file_path)}')
-                    adapter_file.write(template.render(**module_info))
+            adapter_dir_path = Path(include_dir_path).joinpath(Path(sub_paths_dict.get(module_name, '')))
+            adapter_dir_path.mkdir(exist_ok=True, parents=True)
+            adapter_file_path = adapter_dir_path.joinpath(module_name+'.py')
+            with open(adapter_file_path, 'w') as adapter_file:
+                horus_block_template = "templates/horus_block.jpy"
+                template = templateEnv.get_template(horus_block_template)
+                print(f'Writting {str(adapter_file_path)}')
+                adapter_file.write(template.render(**module_info))
         # Create zip file
         print(f'Writting {str(Path(self.output_dir).joinpath(self.package_name+".hp"))}')
         shutil.make_archive(str(Path(self.output_dir).joinpath(self.package_name)), 'zip', str(Path(self.output_dir).joinpath(self.package_name)))

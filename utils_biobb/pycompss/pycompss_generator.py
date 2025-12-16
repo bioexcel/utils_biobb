@@ -33,20 +33,22 @@ class PycompssGenerator:
                 # print(f'module_info["mpi"]: {module_info["mpi"]}')
                 module_info['required'] = json_dict.get('required')
                 module_info['arguments'] = []
+
                 not_required = []
                 for argument, value in json_dict.get('properties').items():
                     if argument == 'properties':
                         continue
+                    type = 'DIRECTORY' if value['type'] == 'dir' else 'FILE'
                     if value.get('filetype').lower() == 'input':
                         if argument in module_info['required']:
-                            module_info['arguments'].append((argument, 'FILE_IN'))
+                            module_info['arguments'].append((argument, type+'_IN'))
                         else:
-                            not_required.append((argument, 'FILE_IN'))
+                            not_required.append((argument, type+'_IN'))
                     else:
                         if argument in module_info['required']:
-                            module_info['arguments'].append((argument, 'FILE_OUT'))
+                            module_info['arguments'].append((argument, type+'_OUT'))
                         else:
-                            not_required.append((argument, 'FILE_OUT'))
+                            not_required.append((argument, type+'_OUT'))
 
                 module_info['arguments'].extend(not_required)
 

@@ -274,7 +274,6 @@ class JSONSchemaGenerator():
 
         # clean empty spaces from doclines
         doclines = list(filter(lambda name: name.strip(), doclines))
-
         # get name, title and description
         name = self.getGenericInfo(doclines[0])
         title = self.getGenericInfo(doclines[1])

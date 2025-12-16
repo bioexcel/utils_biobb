@@ -1,8 +1,8 @@
-<tool id="biobb_template_template_container_ext" name="TemplateContainer" version="4.1.0" >
+<tool id="biobb_template_template_container_ext" name="TemplateContainer" version="5.1.0" >
     <description>: Short description for the template container module in Restructured Text (reST) syntax. Mandatory.</description>
     <requirements>
         <requirement type="package"
-        version="4.1.0"
+        version="5.1.0"
         >biobb_template</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[

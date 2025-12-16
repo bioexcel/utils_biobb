@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-
+set -x
 #Usage: ./new_conda_version.sh
 #Activate conda
 
 ide=code
 path_user=$HOME/
-path_biobb=$path_user/repo/biobb/biobb  # PATH TO YOUR BIOBB REPOSITORIES
+path_biobb=$path_user/repo/biobb/biobb_all/biobb  # PATH TO YOUR BIOBB REPOSITORIES
 path_json_schemas=$path_biobb/utils_biobb/utils_biobb/json/
 path_bioconda=$path_user/repo/biobb/bioconda-recipes
 conda=biobb_all
@@ -21,12 +21,14 @@ fi
 if [ -n "$2" ]; then
     version=$2
 else
-	read -p "Version number ie 5.1.0 : " version
+	echo "No version number provided. Using default version: 5.1.1"
+	version="5.1.1"
 fi
 if [ -n "$3" ]; then
 	message=$3
 else
-	read -p "Commit message ie 2025.1 : " message
+	echo "No commit message provided. Using default message: 2025.1"
+	message="2025.1"
 fi
 echo "Repository: $REPOSITORY"
 echo "Version: $version"
@@ -35,13 +37,13 @@ echo "Message: $message"
 read -p "Do you want to run tests for this repository [Y/n]? " cont
 if [ $cont == 'y' -o $cont == 'Y'  ]
 then
-	pytest -s $path_biobb$REPOSITORY/$REPOSITORY/test/unitests
+	pytest -s $path_biobb/$REPOSITORY/$REPOSITORY/test/unitests
 fi
 
 read -p "Do you want to generate json schemas for this repository [Y/n]? " cont
 if [ $cont == 'y' -o $cont == 'Y'  ]
 then
-	python3 ${path_json_schemas}json_generator.py -p $REPOSITORY -o $path_biobb$REPOSITORY/$REPOSITORY
+	python3 ${path_json_schemas}json_generator.py -p $REPOSITORY -o $path_biobb/$REPOSITORY/$REPOSITORY
 fi
 
 read -p "Do you want update the version [Y/n]? " cont

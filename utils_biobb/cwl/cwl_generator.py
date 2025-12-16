@@ -115,7 +115,8 @@ class CWLGenerator():
         for attr, value in inputs_dict.items():
 
             if value['filetype'] == "input":
-                tp = "File" if typ == "req" else "File?"
+                tp = 'Directory' if value['type'] == 'dir' else 'File'
+                tp = tp if typ == "req" else tp + "?"
             else:
                 tp = "string"
             formats, accepted_formats = self.getFormat(value['file_formats'])
@@ -170,7 +171,7 @@ class CWLGenerator():
         inputs['config'] = {
             "label": self.setConfText(conf_label, {"name": tool_schema['name']}),
             "doc": literal_unicode(self.setConfText(conf_doc, {"name": tool_schema['name'], "documentation": conf_doc_link})),
-            "type": "string?",
+            "type": "File?",
             "inputBinding": {
                 "prefix": "--config"
             }
@@ -185,7 +186,8 @@ class CWLGenerator():
 
         for attr, value in outputs_dict.items():
 
-            tp = "File" if typ == "req" else "File?"
+            tp = 'Directory' if value['type'] == 'dir' else 'File'
+            tp = tp if typ == "req" else tp + "?"
 
             formats, accepted_formats = self.getFormat(value['file_formats'])
 

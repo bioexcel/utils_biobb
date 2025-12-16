@@ -9,11 +9,17 @@
     </requirements>
 
     <command detect_errors="exit_code"><![CDATA[
-      {% for input in inputs %}{% if input.required %}
+      {% for input in inputs %}{% if input.is_collection %}
+      #if ${{input.name}}:
+        mkdir -p input_folder;
+        #for $dataset in ${{input.name}}:
+            cp '$dataset' input_folder/'$dataset.element_identifier';
+        #end for
+      #end if{% else %}{% if input.required %}
       ln -s ${{input.name}} ./{{input.name}}.${{input.name}}.ext;{% else %}
       #if ${{input.name}}:
         ln -s ${{input.name}} ./{{input.name}}.${{input.name}}.ext;
-      #end if{% endif %}{% endfor %}
+      #end if{% endif %}{% endif %}{% endfor %}
       #if $config_json:
         ln -s $config_json ./config_json.$config_json.ext;
       #end if
@@ -23,30 +29,38 @@
       #if $config_json:
         --config ./config_json.$config_json.ext
       #end if
-      {% for input in inputs %}{% if input.required %}
+      {% for input in inputs %}{% if input.is_collection %}
+      #if ${{input.name}}:
+        --{{input.name}} ./input_folder
+      #end if{% else %}{% if input.required %}
       --{{input.name}} ./{{input.name}}.${{input.name}}.ext{% else %}
       #if ${{input.name}}:
         --{{input.name}} ./{{input.name}}.${{input.name}}.ext
-      #end if{% endif %}{% endfor %}{% for output in outputs %}{% if output.required %}
+      #end if{% endif %}{% endif %}{% endfor %}{% for output in outputs %}{% if output.is_collection %}
+      --{{output.name}} ./output_folder{% else %}{% if output.required %}
       --{{output.name}} $outname_{{output.name}}{% else %}
       #if $outname_{{output.name}}:
         --{{output.name}} $outname_{{output.name}}
-      #end if{% endif %}{% endfor %}
+      #end if{% endif %}{% endif %}{% endfor %}
       ;
-      {% for output in outputs %}{% if output.required %}
+      {% for output in outputs %}{% if not output.is_collection %}{% if output.required %}
       mv $outname_{{output.name}} ${{output.name}};{% else %}
-      if test -f $outname_{{output.name}}; then mv $outname_{{output.name}} ${{output.name}}; fi;{% endif %}{% endfor %}
+      if test -f $outname_{{output.name}}; then mv $outname_{{output.name}} ${{output.name}}; fi;{% endif %}{% endif %}{% endfor %}
       ]]>
     </command>
 
-    <inputs>{% for input in inputs %}
-      <param name="{{input.name}}" type="data" format="{{input.extensions[0]}}" optional={% if input.required %}"false"{% else %}"true"{% endif %} help="{{input.description}}"/>{% endfor %}{% for output in outputs %}
-      <param name="outname_{{output.name}}" type="text" optional={% if output.required %}"false"{% else %}"true"{% endif %} help="{{output.description}}"/>{% endfor %}
+    <inputs>{% for input in inputs %}{% if input.is_collection %}
+      <param name="{{input.name}}" type="data_collection" collection_type="list" optional={% if input.required %}"false"{% else %}"true"{% endif %} help="{{input.description}}"/>{% else %}
+      <param name="{{input.name}}" type="data" format="{{input.extensions[0]}}" optional={% if input.required %}"false"{% else %}"true"{% endif %} help="{{input.description}}"/>{% endif %}{% endfor %}{% for output in outputs %}{% if not output.is_collection %}
+      <param name="outname_{{output.name}}" type="text" optional={% if output.required %}"false"{% else %}"true"{% endif %} help="{{output.description}}"/>{% endif %}{% endfor %}
       <param name="config_json" type="data" format="json" optional="true" label="Configuration file" help="File containing tool settings. See below for the syntax"/>
     </inputs>
 
-    <outputs>{% for output in outputs %}
-      <data name="{{output.name}}" format="{{output.extensions[0]}}" />{% endfor %}
+    <outputs>{% for output in outputs %}{% if output.is_collection %}
+      <collection name="{{output.name}}" type="list" label="{{output.description}}">
+        <discover_datasets pattern="__designation__" directory="{{output.name}}" />
+      </collection>{% else %}
+      <data name="{{output.name}}" format="{{output.extensions[0]}}" />{% endif %}{% endfor %}
     </outputs>
 
     <tests>
