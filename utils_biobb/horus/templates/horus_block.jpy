@@ -199,8 +199,13 @@ def {{ module_name }}_action(biobb_block: SlurmBlock):
     {% endfor %}
 
     cwd = os.getcwd()
+    env = os.environ.copy()
     if biobb_block.variables["execution_mode"] == "docker":
         executable = biobb_block.config["docker_path"]
+
+        # Add env where docker installation is to PATH
+        env["PATH"] = f"{Path(executable).parent}:{env['PATH']}" 
+
         cmd = [
             executable,
             "run",
@@ -213,6 +218,10 @@ def {{ module_name }}_action(biobb_block: SlurmBlock):
         ] + input_files + output_files
     elif biobb_block.variables["execution_mode"] == "singularity":
         executable = biobb_block.config["singularity_path"]
+
+        # Add env where docker installation is to PATH
+        env["PATH"] = f"{Path(executable).parent}:{env['PATH']}" 
+
         cmd = [
             executable,
             "run",
@@ -282,7 +291,7 @@ def {{ module_name }}_action(biobb_block: SlurmBlock):
 
         # This wil lexecute the command either locally or on remote
         with biobb_block.remote.cd(cwd):
-            biobb_block.remote.remoteCommand(" ".join(cmd))
+            biobb_block.remote.command(" ".join(cmd), env=env)
 
 
 def final_action_download(biobb_block: SlurmBlock):
