@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
 
 import argparse
-from typing import Optional
 import yaml
 import json
-from os import walk
-from pathlib import Path, PurePath
+from pathlib import Path
 
 
 def main():

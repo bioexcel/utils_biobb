@@ -430,6 +430,8 @@ class JSONSchemaGenerator():
                             similarity = s
 
                 # exceptions:
+                if sel_class == "Featurizer" and module == "mdfeaturizer":
+                    sel_class = "MDFeaturePipeline"
                 if sel_class == "KMeans" and module == "k_means":
                     sel_class = "KMeansClustering"
                 if sel_class == "KMeans" and module == "dbscan":
@@ -442,7 +444,6 @@ class JSONSchemaGenerator():
                 # get class documentation
                 klass = getattr(mod, sel_class)
                 doclines = klass.__doc__.splitlines()
-
                 object_schema = self.parseDocs(doclines, module)
 
                 self.saveJSONFile(module, object_schema)

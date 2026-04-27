@@ -86,7 +86,8 @@ class GalaxyGenerator:
             pprint(sub_paths_dict)
         # Create each xml file
         for module_json in fu.get_file_path_list(dir_path=self.imported_package.__path__[0]):
-
+            if module_json.name == 'plumed_cmd.json':
+                continue
             print(f'Processing {module_json}')
             with open(module_json) as f_json:
                 json_dict = json.load(f_json)
@@ -142,7 +143,10 @@ class GalaxyGenerator:
                 if param_name.startswith('input_'):
                     input_file_path = self._get_test_file_path(module_name, param_path, sub_paths_dict)
                     print(f"Copying {input_file_path} to {testdata_dir_path.joinpath(param_path.split('/')[-1])}")
-                    if input_file_path.is_dir():
+                    if 'THGA_K.cdi' in str(input_file_path):
+                        print(f"Skipping {input_file_path} due to size")
+                        continue
+                    elif input_file_path.is_dir():
                         shutil.copytree(input_file_path, testdata_dir_path.joinpath(param_path.split('/')[-1]), dirs_exist_ok=True)
                     else:
                         shutil.copy(input_file_path, testdata_dir_path.joinpath(param_path.split('/')[-1]))

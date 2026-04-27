@@ -58,8 +58,10 @@ def main():
         out.write("\n")
         # Create the docs by alphabetical order
         schemas = Path(args.json_schemas_folder).glob('*.json')
-        schemas = sorted(schemas, key=lambda x: x.stem)
+        schemas = sorted(schemas, key=lambda x: x.stem.lower())
+
         for json_file_path in schemas:
+            print(json_file_path)
             block_name = json_file_path.stem
             if block_name == biobb_name:
                 continue
@@ -96,7 +98,7 @@ def main():
             out.write("\n")
             out.write("Config parameters for this building block:\n")
             for argument, argument_dict in json_dict['properties']['properties']['properties'].items():
-                out.write(f"* **{argument}** (*{argument_dict['type']}*): ({argument_dict['default']}) {rstlink2mdlink(argument_dict['description'])}.\n")
+                out.write(f"* **{argument}** (*{argument_dict['type']}*): ({argument_dict['default']}) {rstlink2mdlink(argument_dict['description'])}\n")
 
             for extension in ['yml', 'json']:
                 if extension == 'yml':

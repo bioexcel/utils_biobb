@@ -103,6 +103,8 @@ class HorusGenerator:
             plugin_file.write(template.render(block_name=block_json_dict['_id'], dot_paths_dict=dot_paths_dict))
 
         for module_json in fu.get_file_path_list(dir_path=self.imported_package.__path__[0]):
+            if module_json.name == 'plumed_cmd.json':
+                continue
             print(f'Processing schema {module_json}')
             module_info = {}
             with open(module_json) as f_json:

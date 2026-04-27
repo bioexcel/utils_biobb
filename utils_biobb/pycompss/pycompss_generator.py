@@ -21,7 +21,9 @@ class PycompssGenerator:
     def launch(self):
         sub_paths_dict = fu.get_sub_paths_dict(biobb_name=self.package_name)
         for module_json in fu.get_file_path_list(dir_path=self.imported_package.__path__[0]):
-            print(f'Processing {module_json}')
+            if module_json.name == 'plumed_cmd.json':
+                continue
+            print(f'Processing {module_json.name} at {str(module_json)}')
             module_info = {}
             with open(module_json) as f_json:
                 json_dict = json.load(f_json)

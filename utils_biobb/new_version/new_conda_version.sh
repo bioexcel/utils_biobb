@@ -21,14 +21,14 @@ fi
 if [ -n "$2" ]; then
     version=$2
 else
-	echo "No version number provided. Using default version: 5.1.1"
-	version="5.1.1"
+	echo "No version number provided. Using default version: 5.2.0"
+	version="5.2.0"
 fi
 if [ -n "$3" ]; then
 	message=$3
 else
-	echo "No commit message provided. Using default message: 2025.1"
-	message="2025.1"
+	echo "No commit message provided. Using default message: 2025.2"
+	message="2025.2"
 fi
 echo "Repository: $REPOSITORY"
 echo "Version: $version"
