@@ -10,6 +10,9 @@ from os import walk
 regex_sphinx_link = r'\`([^\`]+)\ (\<[^\`]+\>\`\_)'
 regex_parameters = r'(\w*)\ *(?:\()(\w*)(?:\)):?\ *(\(\w*\):)?\ *(.*?)(?:\.)\ *(?:File type:\ *)(\w+)\.\ *(\`(?:.+)\<(.*)\>\`\_\.)?\ *(?:Accepted formats:\ *)(.+)(?:\.)?'
 regex_param_value = r'(\w*)\ *(?:(?:\()(.*)(?:\)))?'
+# Match edma ontology ids in the docstrings
+# e.g. pdb (edam:format_1476)
+regex_edam_format = r'^(\w*)\ *\((edam:format_[0-9]*)\)?$'
 # regex_property_values = '(?:\*\ *\*\*)(.*)(?:\*\*)\ *(?:\(\*)(\w*)(?:\*\))\ *\-\ *(?:\()(.*?)(?:\))\ *(?:(?:\[)(\d+(?:\.\d+)?)\-(\d+(?:\.\d+)?)(?:\|)?(\d+(?:\.\d+)?)?(?:\]))?\ *(?:(?:\[)(.*)(?:\]))?\ *(.*)?(?:Values:\ *)(.+)(?:\.)?'
 regex_property_values = r'(?:\*\ *\*\*)(.*)(?:\*\*)\ *(?:\(\*)(\w*)(?:\*\))\ *\-\ ?(?:\()(.*)(?:\))\ *(?:(?:\[)([\-]?\d+(?:\.\d+)?)\~([\-]?\d+(?:\.\d+)?)(?:\|)?(\d+(?:\.\d+)?)?(?:\]))?\ *(?:(?:\[)(.*)(?:\]))?\ *(.*)\ ?(?:Values:\ *)(.+)(?:\.)?'
 regex_property_non_values = r'(?:\*\ *\*\*)(.*)(?:\*\*)\ *(?:\(\*)(\w*)(?:\*\))\ *\-\ *(?:\()(.*?)(?:\))\ *(?:(?:\[)([\-]?\d+(?:\.\d+)?)\~([\-]?\d+(?:\.\d+)?)(?:\|)?(\d+(?:\.\d+)?)?(?:\]))?\ *(?:(?:\[)(.*)(?:\]))?\ *(.*)?'
@@ -101,27 +104,36 @@ class JSONSchemaGenerator():
 
     def getParamFormats(self, vals, description):
         """ Get the EDAM formats from arguments."""
-        list_vals = re.split(', |,', vals)
+
+        # Here vals is the line with all file formats
+        # Split the line in the different formats
+        # Each value includes the format name and its ontology id
+        list_vals = re.split(', |,', vals.replace('.', ''))
 
         formats = []
         file_formats = []
         for val in list_vals:
-            f = re.findall(regex_param_value, val)[0]
-            formats.append(r'.*\.{0}$'.format(f[0]))
+            # Split the format in its format name and ontology id
+            format_match = re.findall(regex_edam_format, val)
+            if not format_match:
+                raise ValueError(f'Expected format when definin file formats is "<format name> (edam:<edam id>)". The following format is not respecting the pattern: {val}')
+            format_name, format_ontology = format_match[0]
+            formats.append(r'.*\.{0}$'.format(format_name))
 
-            ff = {
-                "extension": r'.*\.{0}$'.format(f[0]),
+            file_format = {
+                "extension": r'.*\.{0}$'.format(format_name),
                 "description": description.strip('.')
             }
 
-            if f[1]:
-                ffs = re.split(r'\|', f[1])
+            if format_ontology:
+                # Try to split the format ontology in case there are more than one ids from different ontologies
+                ontology_ids = re.split(r'\|', format_ontology)
+                # Add them all to the final file format object
+                for ontology_id in ontology_ids:
+                    ontology_name, ontology_internal_id = re.split(r'\:', ontology_id)
+                    file_format[ontology_name] = ontology_internal_id
 
-                for item in ffs:
-                    parts = re.split(r'\:', item)
-                    ff[parts[0]] = parts[1]
-
-            file_formats.append(ff)
+            file_formats.append(file_format)
 
         return formats, file_formats
 
