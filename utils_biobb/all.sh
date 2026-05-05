@@ -17,8 +17,8 @@ want_to_exit(){
 ide=code # (VSCode) Change to your preferred IDE.
 conda=biobb
 path_user=$HOME
-biobb_dir=$path_user/libraries/biobb/biobb  # PATH TO YOUR BIOBB REPOSITORIES
-utils_biobb=$path_user/libraries/utils_biobb/utils_biobb # PATH TO YOUR UTILS_BIOBB REPOSITORY
+biobb_dir=$path_user/repo/biobb/biobb_all/biobb  # PATH TO YOUR BIOBB REPOSITORIES
+utils_biobb=$biobb_dir/utils_biobb/utils_biobb # PATH TO YOUR UTILS_BIOBB REPOSITORY
 biobb_adapters_path=$biobb_dir/biobb_adapters  # PATH TO YOUR biobb_adapters REPOSITORY 
 export PYTHONPATH=$biobb_dir/utils_biobb/:$PYTHONPATH
 # json_paths
@@ -85,45 +85,45 @@ do
   python3 ${json_validator_script_path} -p ${biobb} -i ${biobb_path}/${biobb}/json_schemas/ -s ${json_master_schema_path}
   want_to_exit $?
 
-  # # CONFIGS
-  # echo ""
-  # echo "  - ${biobb} Create configs:"
-  # echo "    python3 ${configs_generator_script_path} -i ${biobb_path}/${biobb}/test/conf.yml -o ${biobb_path}/${biobb}/test/data/config/"
-  # python3 ${configs_generator_script_path} -i ${biobb_path}/${biobb}/test/conf.yml -o ${biobb_path}/${biobb}/test/data/config/
-  # want_to_exit $?
+  # CONFIGS
+  echo ""
+  echo "  - ${biobb} Create configs:"
+  echo "    python3 ${configs_generator_script_path} -i ${biobb_path}/${biobb}/test/conf.yml -o ${biobb_path}/${biobb}/test/data/config/"
+  python3 ${configs_generator_script_path} -i ${biobb_path}/${biobb}/test/conf.yml -o ${biobb_path}/${biobb}/test/data/config/
+  want_to_exit $?
 
-  # # COMMAND_LINE.MD
-  # echo ""
-  # echo "  - ${biobb} Create command_line.md:"
-  # echo "    python3 ${command_line_generator_script_path} -j ${biobb_path}/${biobb}/json_schemas/ -c ${biobb_path}/${biobb}/test/data/config/ -b ${biobb} -o ${biobb_path}/${biobb}/docs/source/command_line.md"
-  # python3 ${command_line_generator_script_path} -j ${biobb_path}/${biobb}/json_schemas/ -c ${biobb_path}/${biobb}/test/data/config/ -b ${biobb} -o ${biobb_path}/${biobb}/docs/source/command_line.md
-  # want_to_exit $?
+  # COMMAND_LINE.MD
+  echo ""
+  echo "  - ${biobb} Create command_line.md:"
+  echo "    python3 ${command_line_generator_script_path} -j ${biobb_path}/${biobb}/json_schemas/ -c ${biobb_path}/${biobb}/test/data/config/ -b ${biobb} -o ${biobb_path}/${biobb}/docs/source/command_line.md"
+  python3 ${command_line_generator_script_path} -j ${biobb_path}/${biobb}/json_schemas/ -c ${biobb_path}/${biobb}/test/data/config/ -b ${biobb} -o ${biobb_path}/${biobb}/docs/source/command_line.md
+  want_to_exit $?
 
-  # # CWL
-  # echo ""
-  # echo "  - ${biobb} Create CWL adapters:"
-  # echo "    python3 ${cwl_generator_script_path} -p ${biobb} -i ${biobb_path}/${biobb}/json_schemas/ -o ${biobb_adapters_path}/biobb_adapters/cwl/${biobb}"
-  # python3 ${cwl_generator_script_path} -p ${biobb} -i ${biobb_path}/${biobb}/json_schemas/ -o ${biobb_adapters_path}/biobb_adapters/cwl/${biobb}
-  # want_to_exit $?
+  # CWL
+  echo ""
+  echo "  - ${biobb} Create CWL adapters:"
+  echo "    python3 ${cwl_generator_script_path} -p ${biobb} -i ${biobb_path}/${biobb}/json_schemas/ -o ${biobb_adapters_path}/biobb_adapters/cwl/${biobb}"
+  python3 ${cwl_generator_script_path} -p ${biobb} -i ${biobb_path}/${biobb}/json_schemas/ -o ${biobb_adapters_path}/biobb_adapters/cwl/${biobb}
+  want_to_exit $?
 
-  # # PYCOMPSS
-  # echo ""
-  # echo "  - ${biobb} Create pycompss adapters:"
-  # echo "    python3 ${pycompss_generator_script_path} -p ${biobb} -o ${biobb_adapters_path}/biobb_adapters/pycompss/"
-  # python3 ${pycompss_generator_script_path} -p ${biobb} -o ${biobb_adapters_path}/biobb_adapters/pycompss/
-  # want_to_exit $?
+  # PYCOMPSS
+  echo ""
+  echo "  - ${biobb} Create pycompss adapters:"
+  echo "    python3 ${pycompss_generator_script_path} -p ${biobb} -o ${biobb_adapters_path}/biobb_adapters/pycompss/"
+  python3 ${pycompss_generator_script_path} -p ${biobb} -o ${biobb_adapters_path}/biobb_adapters/pycompss/
+  want_to_exit $?
 
-  # # Horus
-  # echo ""
-  # echo "  - ${biobb} Create Horus adapters:"
-  # echo "    python3 ${horus_generator_script_path} -p ${biobb} -o ${biobb_adapters_path}/biobb_adapters/horus/"
-  # python3 ${horus_generator_script_path} -p ${biobb} -o ${biobb_adapters_path}/biobb_adapters/horus/
-  # want_to_exit $?
+  # Horus
+  echo ""
+  echo "  - ${biobb} Create Horus adapters:"
+  echo "    python3 ${horus_generator_script_path} -p ${biobb} -o ${biobb_adapters_path}/biobb_adapters/horus/"
+  python3 ${horus_generator_script_path} -p ${biobb} -o ${biobb_adapters_path}/biobb_adapters/horus/
+  want_to_exit $?
 
-  # # Galaxy
-  # echo ""
-  # echo "  - ${biobb} Create Galaxy adapters:"
-  # echo "    python3 ${galaxy_generator_script_path} -p ${biobb} -o ${biobb_adapters_path}/biobb_adapters/galaxy/"
-  # python3 ${galaxy_generator_script_path} -p ${biobb} -o ${biobb_adapters_path}/biobb_adapters/galaxy/
+  # Galaxy
+  echo ""
+  echo "  - ${biobb} Create Galaxy adapters:"
+  echo "    python3 ${galaxy_generator_script_path} -p ${biobb} -o ${biobb_adapters_path}/biobb_adapters/galaxy/"
+  python3 ${galaxy_generator_script_path} -p ${biobb} -o ${biobb_adapters_path}/biobb_adapters/galaxy/
 
 done
