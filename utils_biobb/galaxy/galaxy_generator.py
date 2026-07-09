@@ -84,6 +84,11 @@ class GalaxyGenerator:
         sub_paths_dict = fu.get_sub_paths_dict(biobb_name=self.package_name)
         if self.debug:
             pprint(sub_paths_dict)
+        # Remove old files so there is not old/renamed biobbs
+        for old_file in Path(dir_path).glob("*.xml"):
+            old_file.unlink()
+        for old_file in Path(testdata_dir_path).glob("*.json"):
+            old_file.unlink()
         # Create each xml file
         for module_json in fu.get_file_path_list(dir_path=self.imported_package.__path__[0]):
             if module_json.name == 'plumed_cmd.json':
@@ -131,7 +136,7 @@ class GalaxyGenerator:
             test_config_file_path = testdata_dir_path.joinpath(f"config_{module_name}.json")
             with open(test_config_file_path, 'w') as test_config_file:
                 print(f'Writting {str(test_config_file_path)}')
-                json.dump(properties_dict, test_config_file, indent=4)
+                json.dump({'properties': properties_dict}, test_config_file, indent=4)
 
             for param_name, param_path in test_info.get("paths", {}).items():
                 if param_name.startswith('ref_'):

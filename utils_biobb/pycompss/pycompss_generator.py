@@ -20,6 +20,11 @@ class PycompssGenerator:
 
     def launch(self):
         sub_paths_dict = fu.get_sub_paths_dict(biobb_name=self.package_name)
+        # Remove old files so there is not old/renamed biobbs
+        print((Path(self.output_dir) / self.package_name))
+        for old_file in (Path(self.output_dir) / self.package_name).glob("**/*.py"):
+            if old_file.name != '__init__.py':
+                old_file.unlink()
         for module_json in fu.get_file_path_list(dir_path=self.imported_package.__path__[0]):
             if module_json.name == 'plumed_cmd.json':
                 continue

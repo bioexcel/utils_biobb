@@ -274,6 +274,10 @@ class CWLGenerator():
         json_pckg_path = PurePath(self.input_path).joinpath(json_pckg)
         pckg_schema = self.parseJSON(json_pckg_path)
 
+        # Remove old files so there is not old/renamed biobbs
+        for old_file in Path(self.output_path).glob("*.cwl"):
+            old_file.unlink()
+
         for json_file in json_files:
             json_file_path = PurePath(self.input_path).joinpath(json_file)
 
