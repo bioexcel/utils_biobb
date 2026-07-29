@@ -21,14 +21,14 @@ fi
 if [ -n "$2" ]; then
     version=$2
 else
-	echo "No version number provided. Using default version: 5.2.0"
-	version="5.2.0"
+	echo "No version number provided. Using default version: 5.3.0"
+	version="5.3.0"
 fi
 if [ -n "$3" ]; then
 	message=$3
 else
-	echo "No commit message provided. Using default message: 2025.2"
-	message="2025.2"
+	echo "No commit message provided. Using default message: 2026.1"
+	message="2026.1"
 fi
 echo "Repository: $REPOSITORY"
 echo "Version: $version"
@@ -117,7 +117,7 @@ then
 	cd $path_bioconda
 	git checkout -f master; git pull origin master
 	git branch -D $REPOSITORY; git push origin --delete $REPOSITORY; git checkout -b $REPOSITORY
-	$ide $path_bioconda/recipes/$REPOSITORY
+	$ide $path_bioconda/recipes/$REPOSITORY/meta.yaml
 	read -p "Modify recipes/$REPOSITORY/meta.yaml paste the headers and check if some dependency has changed from ~/$REPOSITORY/meta.yaml and press any key..." -n1 -s
 	echo ""
 	git status; git add recipes/$REPOSITORY/*; git status
