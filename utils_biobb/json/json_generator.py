@@ -281,11 +281,29 @@ class JSONSchemaGenerator():
             output = None
         return output
 
+    def normalizeIndent(self, doclines):
+        """ Re-indent the docstring so 'Args:' sits at 4 spaces.
+
+        Python 3.13 onwards strips the common leading whitespace of docstrings at
+        compile time, so the levels this parser relies on (8, 12, 16) would be
+        shifted by 4 when running on newer interpreters.
+        """
+        offset = 0
+        for row in doclines:
+            if 'Args:' in row:
+                offset = 4 - (len(row) - len(row.lstrip()))
+                break
+        if offset <= 0:
+            return doclines
+        return [(' ' * offset) + row for row in doclines]
+
     def parseDocs(self, doclines, module):
         """ parse python docs to object / JSON format """
 
         # clean empty spaces from doclines
         doclines = list(filter(lambda name: name.strip(), doclines))
+        # restore the expected indentation levels (Python >= 3.13 dedents docstrings)
+        doclines = self.normalizeIndent(doclines)
         # get name, title and description
         name = self.getGenericInfo(doclines[0])
         title = self.getGenericInfo(doclines[1])
@@ -319,13 +337,9 @@ class JSONSchemaGenerator():
 
             if args:
                 # first level: I/O & parameters dictionary
-                if leading == 8:
-
-                    if 'properties' not in row:
-
-                        param_id, p, required = self.getParameters(row, required)
-
-                        properties[param_id] = p
+                if leading == 8 and 'properties' not in row:
+                    param_id, p, required = self.getParameters(row, required)
+                    properties[param_id] = p
 
                 # second level: properties
                 if leading == 12 and not row.isspace():
