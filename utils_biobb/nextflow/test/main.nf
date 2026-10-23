@@ -23,6 +23,7 @@ workflow {
     tpr = BIOBB_GROMACS_GROMPP.out.output_tpr_path
     gro = BIOBB_GROMACS_MDRUN.out.output_gro_path
     log = BIOBB_GROMACS_MDRUN.out.output_log_path
+    trr = BIOBB_GROMACS_MDRUN.out.output_trr_path
 }
 
 output {
@@ -33,6 +34,9 @@ output {
         path 'mdrun'
     }
     log {
+        path 'mdrun'
+    }
+    trr {
         path 'mdrun'
     }
 }

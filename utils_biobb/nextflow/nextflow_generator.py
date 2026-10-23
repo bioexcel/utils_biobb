@@ -110,7 +110,7 @@ class NextflowGenerator():
             else:
                 arg["role"] = self.getRole(attr)
                 alternatives = ["" if ext == "directory" else "." + ext for ext in arg["formats"]]
-                arg["glob"] = "*." + arg["role"] + (alternatives[0] if len(alternatives) == 1 else "{" + ",".join(alternatives) + "}")
+                arg["pattern"] = "*_" + arg["role"] + (alternatives[0] if len(alternatives) == 1 else "{" + ",".join(alternatives) + "}")
                 outputs.append(arg)
 
         def sort_key(arg):
@@ -138,28 +138,32 @@ class NextflowGenerator():
         return properties
 
     def getOutputNames(self, outputs):
-        """ returns the Groovy definitions of the output file names: <prefix>.<role>.<extension>, '' if not requested """
+        """ returns the Groovy assignments of the output file names: <prefix>_<role>.<extension>, without extension for folders.
+        They are not declared with def, so the output declarations can use them """
 
         lines = []
         for arg in outputs:
             name, role = arg["name"], arg["role"]
-            file_name = f"\"${{prefix}}.{role}.${{outputs.{name}}}\""
-            if arg["type"] == "dir":
-                file_name = f"(outputs.{name} == 'directory' ? \"${{prefix}}.{role}\" : {file_name})"
-            lines.append(f"def {name} = outputs.{name} ? {file_name} : ''")
+            extension = f"outputs.{name} ?: '{arg['formats'][0]}'"
+            file_name = f"\"${{prefix}}_{role}.${{{extension}}}\""
+            if "directory" in arg["formats"]:
+                file_name = f"({extension}) == 'directory' ? \"${{prefix}}_{role}\" : {file_name}"
+            lines.append(f"{name} = {file_name}")
 
         return lines
 
     def getCommand(self, basename, inputs, outputs):
-        """ returns the block command line, one argument per line """
+        """ returns the block command line, one argument per line. Optional outputs are only passed if requested in ext.outputs """
 
         lines = [f"{basename} --config config.json"]
         for arg in inputs + outputs:
             name = arg["name"]
-            if arg["optional"]:
+            if not arg["optional"]:
+                lines.append(f"--{name} ${{{name}}}")
+            elif arg in inputs:
                 lines.append(f"${{{name} ? \"--{name} ${{{name}}}\" : ''}}")
             else:
-                lines.append(f"--{name} ${{{name}}}")
+                lines.append(f"${{outputs.{name} ? \"--{name} ${{{name}}}\" : ''}}")
 
         return " \\\\\n        ".join(lines)
 
@@ -170,11 +174,11 @@ class NextflowGenerator():
         for arg in outputs:
             name = arg["name"]
             create = "touch"
-            if arg["type"] == "dir":
-                create = f"${{outputs.{name} == 'directory' ? 'mkdir -p' : 'touch'}}"
+            if "directory" in arg["formats"]:
+                create = f"${{(outputs.{name} ?: '{arg['formats'][0]}') == 'directory' ? 'mkdir -p' : 'touch'}}"
             command = f"{create} ${{{name}}}"
             if arg["optional"]:
-                command = f"${{{name} ? \"{command}\" : ''}}"
+                command = f"${{outputs.{name} ? \"{command}\" : ''}}"
             stub.append(command)
 
         return stub
@@ -186,11 +190,14 @@ class NextflowGenerator():
             return {"name": "meta", "type": "map", "description": "Map with at least an id key, used as tag and output file prefix"}
 
         def channel(arg):
+            description = " ".join(arg["description"].split())
+            if arg["optional"] and "pattern" in arg:
+                description += ". Only produced if requested in ext.outputs"
             return {
                 "name": arg["name"],
                 "type": "directory" if arg["type"] == "dir" else "file",
-                "description": " ".join(arg["description"].split()),
-                "pattern": arg["glob"] if "glob" in arg else self.getPattern(arg["formats"]),
+                "description": description,
+                "pattern": arg.get("pattern") or self.getPattern(arg["formats"]),
                 "optional": arg["optional"],
                 "ontologies": [{"edam": edam} for edam in dict.fromkeys(arg["edam"])]
             }
@@ -242,11 +249,10 @@ class NextflowGenerator():
         example_properties = next((f"{p}: {self.groovyValue(v['enum'][0])}" for p, v in candidates.items() if v.get('enum')), None) or \
             next((f"{p}: {self.groovyValue(v['default'])}" for p, v in candidates.items() if v.get('default') not in (None, {}, [], "")), "")
 
-        module = f"{self.package}_{basename}"
         context = {
             "mark": GENERATED_MARK,
-            "module_name": f"{self.namespace}/{module}",
-            "process_name": module.upper(),
+            "module_name": f"{self.namespace}/{self.package}/{basename}",
+            "process_name": f"{self.package}_{basename}".upper(),
             "package": self.package,
             "block": tool['block'],
             "version": pckg_schema['version'],
@@ -261,7 +267,7 @@ class NextflowGenerator():
             "label": label,
             "inputs": [dict(arg, description=self.tableText(arg["description"])) for arg in inputs],
             "outputs": [dict(arg, description=self.tableText(arg["description"])) for arg in outputs],
-            "default_outputs": self.groovyMap({arg["name"]: self.groovyValue(arg["formats"][0]) for arg in outputs}),
+            "example_output": next((arg for arg in outputs if arg["optional"]), outputs[0]),
             "default_properties": self.groovyMap(default_properties),
             "example_properties": example_properties,
             "properties": self.getProperties(tool_schema),

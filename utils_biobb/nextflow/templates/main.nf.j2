@@ -26,13 +26,13 @@ process {{ process_name }} {
 
     output:
 {%- for o in outputs %}
-    tuple val(meta), path("{{ o.glob }}"){{ ", optional: true" if o.optional }}, emit: {{ o.name }}
+    tuple val(meta), path({{ o.name }}){{ ", optional: true" if o.optional }}, emit: {{ o.name }}
 {%- endfor %}
     tuple val("${task.process}"), val('{{ package }}'), eval('python -c "import {{ package }}; print({{ package }}.__version__)"'), emit: versions_{{ package }}, topic: versions
 
     script:
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def outputs = {{ default_outputs }} + (task.ext.outputs ?: [:])
+    def outputs = task.ext.outputs ?: [:]
 {%- for line in output_names %}
     {{ line }}
 {%- endfor %}
@@ -47,7 +47,7 @@ process {{ process_name }} {
 
     stub:
     def prefix = task.ext.prefix ?: "${meta.id}"
-    def outputs = {{ default_outputs }} + (task.ext.outputs ?: [:])
+    def outputs = task.ext.outputs ?: [:]
 {%- for line in output_names %}
     {{ line }}
 {%- endfor %}

@@ -32,12 +32,13 @@ Optional input files are passed as `[]`.
 
 ## Outputs
 
-Each output channel emits `[meta, file]`. Files are named `<prefix>.<role>.<extension>`.
+Each output channel emits `[meta, file]`. Files are named `<prefix>_<role>.<extension>`, where role is the output argument without `output_` and `_path`.
+Optional outputs are only produced if requested in `ext.outputs`.
 
 | Channel | Required | Formats (default first) | Description |
 |---|---|---|---|
 {%- for o in outputs %}
-| `{{ o.name }}` | {{ "yes" if not o.optional else "no" }} | {{ o.formats | join(", ") }} | {{ o.description }} |
+| `{{ o.name }}` | {{ "yes" if not o.optional else "no, opt-in" }} | {{ o.formats | join(", ") }} | {{ o.description }} |
 {%- endfor %}
 | `versions_{{ package }}` | yes | | `[process, '{{ package }}', version]`, also sent to the `versions` topic |
 
@@ -48,7 +49,7 @@ Set with `ext` in a `process` `withName` selector:
 | Option | Description |
 |---|---|
 | `ext.properties` | Map of {{ block }} properties (see below){% if default_properties != "[:]" %}. Defaults: `{{ default_properties }}`{% endif %} |
-| `ext.outputs` | Map of output argument to extension (for example `[{{ outputs[0].name }}: '{{ outputs[0].formats[0] }}']`). Optional outputs set to `false` are not requested |
+| `ext.outputs` | Map of output argument to extension, for example `[{{ example_output.name }}: '{{ example_output.formats[0] }}']`. Required outputs use their first format by default; optional outputs are only requested when listed here |
 | `ext.prefix` | Output file prefix (default: `meta.id`) |
 
 `raise_error` and `restart` are always set by the adapter: failed commands fail the task, and `-resume` replaces restart.
