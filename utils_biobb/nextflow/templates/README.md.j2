@@ -1,0 +1,75 @@
+<!-- {{ mark }} -->
+# {{ module_name }}
+
+## Summary
+
+{{ title }}
+
+{{ description }}
+
+Nextflow adapter of the [{{ block }}]({{ docs }}) building block of [{{ package }}]({{ github }}) {{ version }}.
+
+## Get started
+
+```nextflow
+include { {{ process_name }} } from '{{ module_name }}'
+
+workflow {
+    {{ process_name }}({{ call_example }})
+}
+```
+
+Optional input files are passed as `[]`.
+
+## Inputs
+
+| Name | Required | Formats | Description |
+|---|---|---|---|
+| `meta` | yes | | Map with at least an `id` key, used as tag and output file prefix |
+{%- for i in inputs %}
+| `{{ i.name }}` | {{ "yes" if not i.optional else "no" }} | {{ i.formats | join(", ") }} | {{ i.description }} |
+{%- endfor %}
+
+## Outputs
+
+Each output channel emits `[meta, file]`. Files are named `<prefix>.<role>.<extension>`.
+
+| Channel | Required | Formats (default first) | Description |
+|---|---|---|---|
+{%- for o in outputs %}
+| `{{ o.name }}` | {{ "yes" if not o.optional else "no" }} | {{ o.formats | join(", ") }} | {{ o.description }} |
+{%- endfor %}
+| `versions_{{ package }}` | yes | | `[process, '{{ package }}', version]`, also sent to the `versions` topic |
+
+## Configuration
+
+Set with `ext` in a `process` `withName` selector:
+
+| Option | Description |
+|---|---|
+| `ext.properties` | Map of {{ block }} properties (see below){% if default_properties != "[:]" %}. Defaults: `{{ default_properties }}`{% endif %} |
+| `ext.outputs` | Map of output argument to extension (for example `[{{ outputs[0].name }}: '{{ outputs[0].formats[0] }}']`). Optional outputs set to `false` are not requested |
+| `ext.prefix` | Output file prefix (default: `meta.id`) |
+
+`raise_error` and `restart` are always set by the adapter: failed commands fail the task, and `-resume` replaces restart.
+Do not set the `container_*` properties: Nextflow runs the task inside the {{ package }} container.
+
+```groovy
+process {
+    withName: '{{ process_name }}' {
+        ext.properties = [{{ example_properties }}]
+    }
+}
+```
+
+### Properties
+
+| Name | Type | Default | Description |
+|---|---|---|---|
+{%- for p in properties %}
+| `{{ p.name }}` | {{ p.type }} | {{ p.default }} | {{ p.description }} |
+{%- endfor %}
+
+## License
+
+Apache-2.0

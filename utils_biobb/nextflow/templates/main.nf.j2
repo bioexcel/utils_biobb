@@ -1,0 +1,59 @@
+/*
+ * {{ mark }}
+ * Module: {{ module_name }}
+ * {{ title }}
+ * Docs: {{ docs }}
+ */
+
+process {{ process_name }} {
+    tag "${meta.id}"
+    label '{{ label }}'
+
+    conda 'bioconda::{{ package }}={{ version }}'
+    container "${workflow.containerEngine in ['singularity', 'apptainer'] && !task.ext.singularity_pull_docker_container
+        ? '{{ singularity }}'
+        : '{{ docker }}'}"
+
+    input:
+{%- if inputs %}
+    tuple val(meta),
+{%- for i in inputs %}
+        path({{ i.name }}, stageAs: '{{ i.name }}/*'){{ "," if not loop.last }}
+{%- endfor %}
+{%- else %}
+    val(meta)
+{%- endif %}
+
+    output:
+{%- for o in outputs %}
+    tuple val(meta), path("{{ o.glob }}"){{ ", optional: true" if o.optional }}, emit: {{ o.name }}
+{%- endfor %}
+    tuple val("${task.process}"), val('{{ package }}'), eval('python -c "import {{ package }}; print({{ package }}.__version__)"'), emit: versions_{{ package }}, topic: versions
+
+    script:
+    def prefix = task.ext.prefix ?: "${meta.id}"
+    def outputs = {{ default_outputs }} + (task.ext.outputs ?: [:])
+{%- for line in output_names %}
+    {{ line }}
+{%- endfor %}
+    def props = {{ default_properties }} + (task.ext.properties ?: [:]) + [raise_error: true, restart: false]
+    """
+    cat > config.json <<'END_CONFIG'
+    ${groovy.json.JsonOutput.toJson([properties: props])}
+    END_CONFIG
+
+    {{ command }}
+    """
+
+    stub:
+    def prefix = task.ext.prefix ?: "${meta.id}"
+    def outputs = {{ default_outputs }} + (task.ext.outputs ?: [:])
+{%- for line in output_names %}
+    {{ line }}
+{%- endfor %}
+    """
+{%- for line in stub %}
+    {{ line }}
+{%- endfor %}
+    """
+}
