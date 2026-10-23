@@ -1,0 +1,49 @@
+/*
+ * {{ mark }}
+ * Tests of the {{ package }} Nextflow modules: runs every block once with the inputs, properties and outputs
+ * of {{ package }}/test/conf.yml, writes tests_report.tsv and fails if an expected output is missing.
+ * Usage: nextflow run main.nf [-profile docker|apptainer] [--test_data <{{ package }}/test folder or URL>]
+ */
+{% for test in tests if test.call %}
+include { {{ test.process }} } from '../{{ test.block }}'
+{%- endfor %}
+
+params {
+    test_data: String = "${projectDir}/{{ test_data }}"
+}
+
+workflow {
+    main:
+{%- for test in tests %}
+{%- if test.call %}
+    {{ test.call }}
+{%- else %}
+    // {{ test.block }}: skipped, {{ test.skip }}
+{%- endif %}
+{%- endfor %}
+
+    def expected = [
+{%- for output in expected %}
+        '{{ output }}'{{ "," if not loop.last }}
+{%- endfor %}
+    ]
+    channel.empty()
+        .mix(
+{%- for test in tests if test.call %}
+{%- set outer = loop %}
+{%- for output in test.outputs %}
+            {{ test.process }}.out.{{ output }}.map { meta, _file -> meta.id + '.{{ output }}' }{{ "," if not (outer.last and loop.last) }}
+{%- endfor %}
+{%- endfor %}
+        )
+        .collect()
+        .ifEmpty([])
+        .subscribe { produced ->
+            def missing = expected - produced
+            file("${workflow.launchDir}/tests_report.tsv").text = expected.collect { output -> "${output}\t${output in missing ? 'missing' : 'ok'}" }.join('\n') + '\n'
+            if (missing) {
+                error("Missing outputs: ${missing.join(', ')}")
+            }
+            log.info("All ${expected.size()} expected outputs were produced")
+        }
+}

@@ -1,0 +1,31 @@
+// {{ mark }}
+// Test settings of {{ package }}: properties and outputs of {{ package }}/test/conf.yml
+
+process {
+    errorStrategy = 'ignore'
+    time = '1h'
+{%- for test in tests if test.call and test.config %}
+    withName: '{{ test.process }}' {
+{%- for line in test.config %}
+        {{ line }}
+{%- endfor %}
+    }
+{%- endfor %}
+}
+
+trace {
+    enabled = true
+    file = 'tests_trace.tsv'
+    overwrite = true
+    fields = 'process,tag,status,exit,realtime'
+}
+
+profiles {
+    docker {
+        docker.enabled = true
+        docker.runOptions = '-u $(id -u):$(id -g)'
+    }
+    apptainer {
+        apptainer.enabled = true
+    }
+}

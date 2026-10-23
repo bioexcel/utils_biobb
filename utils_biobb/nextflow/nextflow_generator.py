@@ -1,5 +1,6 @@
 import argparse
 import json
+import os
 import re
 import shutil
 from pathlib import Path
@@ -21,7 +22,7 @@ RESOURCE_PROPERTIES = {"num_threads": ("task.cpus", "process_medium")}
 
 class NextflowGenerator():
 
-    def __init__(self, package, input_path, output_path, namespace="bioexcel", **kwargs):
+    def __init__(self, package, input_path, output_path, namespace="bioexcel", conf_path=None, **kwargs):
 
         self.package = package
 
@@ -33,11 +34,15 @@ class NextflowGenerator():
         self.output_path = Path(output_path)
         self.output_path.mkdir(parents=True, exist_ok=True)
         self.namespace = namespace
+        # Test configuration of the package: <package>/test/conf.yml next to the json_schemas folder by default
+        self.conf_path = Path(conf_path) if conf_path else self.input_path.parent.joinpath("test", "conf.yml")
 
         template_env = jinja2.Environment(loader=jinja2.FileSystemLoader(str(Path(__file__).parent.joinpath("templates"))),
                                           keep_trailing_newline=True)
         self.main_template = template_env.get_template("main.nf.j2")
         self.readme_template = template_env.get_template("README.md.j2")
+        self.tests_main_template = template_env.get_template("tests_main.nf.j2")
+        self.tests_config_template = template_env.get_template("tests_nextflow.config.j2")
 
     def getExtensions(self, file_formats):
         """ returns the extensions of the accepted formats ('directory' for folders) """
@@ -75,7 +80,8 @@ class NextflowGenerator():
             return "[" + ", ".join(self.groovyValue(v) for v in value) + "]"
         if isinstance(value, dict):
             return self.groovyMap({k: self.groovyValue(v) for k, v in value.items()})
-        return "'" + str(value).replace("\\", "\\\\").replace("'", "\\'") + "'"
+        escaped = str(value).replace("\\", "\\\\").replace("'", "\\'").replace("\n", "\\n").replace("\r", "\\r").replace("\t", "\\t")
+        return "'" + escaped + "'"
 
     def groovyMap(self, items):
         """ returns a Groovy map literal of already formatted values """
@@ -288,6 +294,81 @@ class NextflowGenerator():
         with open(module_path.joinpath("README.md"), "w") as readme_file:
             readme_file.write(self.readme_template.render(**context))
 
+        return context["process_name"], inputs, outputs
+
+    def getTestExtension(self, arg, file_name):
+        """ returns the accepted extension of a test output file name ('directory' for folders without one) """
+
+        extension = next((ext for ext in sorted(arg["formats"], key=len, reverse=True) if file_name.endswith("." + ext)), None)
+        if extension:
+            return extension
+        return "directory" if "directory" in arg["formats"] else arg["formats"][0]
+
+    def getTest(self, basename, process_name, inputs, outputs, entry):
+        """ returns the test of a block from its conf.yml entry: call, config lines and expected outputs, or the reason to skip it """
+
+        test = {"block": basename, "process": process_name, "call": None, "config": [], "expected": []}
+        if not entry:
+            test["skip"] = "no entry in conf.yml"
+            return test
+        paths = entry.get('paths') or {}
+
+        files = []
+        for arg in inputs:
+            value = paths.get(arg["name"])
+            if not value:
+                if not arg["optional"]:
+                    test["skip"] = f"no test file for {arg['name']} in conf.yml"
+                    return test
+                files.append("[]")
+                continue
+            data_path = re.sub(r'^file:test_data_dir', 'data', re.sub(r'^file:test_reference_dir', 'reference', str(value)))
+            if data_path == str(value):
+                test["skip"] = f"{arg['name']} is not a test file: {value}"
+                return test
+            files.append(f"file(\"${{params.test_data}}/{data_path}\")")
+
+        meta = f"[id: '{basename}']"
+        channel = f"[{meta}, {', '.join(files)}]" if inputs else meta
+        test["call"] = f"{process_name}(channel.of({channel}))"
+
+        extensions = {}
+        for arg in outputs:
+            if arg["name"] not in paths:
+                continue
+            extension = self.getTestExtension(arg, str(paths[arg["name"]]))
+            if arg["optional"] or extension != arg["formats"][0]:
+                extensions[arg["name"]] = self.groovyValue(extension)
+        test["expected"] = [f"{basename}.{arg['name']}" for arg in outputs if not arg["optional"] or arg["name"] in extensions]
+        test["outputs"] = [arg["name"] for arg in outputs]
+
+        properties = entry.get('properties') or {}
+        if properties:
+            test["config"].append(f"ext.properties = {self.groovyValue(properties)}")
+        if extensions:
+            test["config"].append(f"ext.outputs = {self.groovyMap(extensions)}")
+
+        return test
+
+    def generateTests(self, tests):
+        """ generates the tests folder: a workflow running every block with its conf.yml inputs, properties and outputs """
+
+        if not any(test["call"] for test in tests):
+            return
+        tests_path = self.output_path.joinpath("tests")
+        tests_path.mkdir(parents=True, exist_ok=True)
+        context = {
+            "mark": GENERATED_MARK,
+            "package": self.package,
+            "tests": tests,
+            "test_data": os.path.relpath(self.conf_path.parent.resolve(), tests_path.resolve()),
+            "expected": [output for test in tests if test["call"] for output in test["expected"]]
+        }
+        with open(tests_path.joinpath("main.nf"), "w") as main_file:
+            main_file.write(self.tests_main_template.render(**context))
+        with open(tests_path.joinpath("nextflow.config"), "w") as config_file:
+            config_file.write(self.tests_config_template.render(**context))
+
     def removeOldModules(self):
         """ removes the generated modules, so there are no old/renamed biobbs """
 
@@ -301,17 +382,28 @@ class NextflowGenerator():
         with open(self.input_path.joinpath(self.package + '.json')) as json_file:
             pckg_schema = json.load(json_file)
 
+        conf = {}
+        if self.conf_path.exists():
+            with open(self.conf_path) as conf_file:
+                conf = yaml.safe_load(conf_file)
+
         self.removeOldModules()
 
+        tests = []
         for json_file_path in sorted(self.input_path.glob("*.json")):
             if json_file_path.stem == self.package:
                 continue
             with open(json_file_path) as json_file:
                 tool_schema = json.load(json_file)
 
-            self.generateModule(tool_schema, pckg_schema, json_file_path.stem)
+            process_name, inputs, outputs = self.generateModule(tool_schema, pckg_schema, json_file_path.stem)
+            tests.append(self.getTest(json_file_path.stem, process_name, inputs, outputs, conf.get(json_file_path.stem)))
 
             print(str(self.output_path.joinpath(json_file_path.stem)) + " module saved")
+
+        self.generateTests(tests)
+        if conf:
+            print(f"{self.output_path.joinpath('tests')} saved: {sum(1 for test in tests if test['call'])} of {len(tests)} blocks tested")
 
 
 def main():
@@ -321,6 +413,7 @@ def main():
                                             'nextflow_generator.py -p biobb_package -i path/to/json_schemas -o path/to/nextflow_adapters\n'
                                             'nextflow_generator.py --package biobb_package --input path/to/json_schemas --output path/to/nextflow_adapters')
     parser.add_argument('--namespace', '-n', default='bioexcel', help='Nextflow module registry namespace (default: bioexcel).')
+    parser.add_argument('--conf', '-c', help='Test configuration of the package (default: test/conf.yml next to the json schemas folder).')
     required_args = parser.add_argument_group('required arguments')
     required_args.add_argument('--package', '-p', required=True, help='BioBB package from where the json schemas will be taken.')
     required_args.add_argument('--input', '-i', required=True, help='Path to the folder from where the json schemas will be taken.')
@@ -328,7 +421,7 @@ def main():
 
     args = parser.parse_args()
 
-    NextflowGenerator(package=args.package, input_path=args.input, output_path=args.output, namespace=args.namespace).launch()
+    NextflowGenerator(package=args.package, input_path=args.input, output_path=args.output, namespace=args.namespace, conf_path=args.conf).launch()
 
 
 if __name__ == '__main__':
