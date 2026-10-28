@@ -39,6 +39,8 @@ pycompss_template_path=$utils_biobb/pycompss/pycompss_wrapper.tmpl
 horus_generator_script_path=$utils_biobb/horus/horus_generator.py
 # galaxy adapters
 galaxy_generator_script_path=$utils_biobb/galaxy/galaxy_generator.py
+# nextflow adapters
+nextflow_generator_script_path=$utils_biobb/nextflow/nextflow_generator.py
 
 # list of biobbs to be executed
 if [ $# -gt 0 ]; then
@@ -125,5 +127,12 @@ do
   echo "  - ${biobb} Create Galaxy adapters:"
   echo "    python3 ${galaxy_generator_script_path} -p ${biobb} -o ${biobb_adapters_path}/biobb_adapters/galaxy/"
   python3 ${galaxy_generator_script_path} -p ${biobb} -o ${biobb_adapters_path}/biobb_adapters/galaxy/
+
+  # Nextflow
+  echo ""
+  echo "  - ${biobb} Create Nextflow adapters:"
+  echo "    python3 ${nextflow_generator_script_path} -p ${biobb} -i ${biobb_path}/${biobb}/json_schemas/ -o ${biobb_adapters_path}/biobb_adapters/nextflow/${biobb}"
+  python3 ${nextflow_generator_script_path} -p ${biobb} -i ${biobb_path}/${biobb}/json_schemas/ -o ${biobb_adapters_path}/biobb_adapters/nextflow/${biobb}
+  want_to_exit $?
 
 done

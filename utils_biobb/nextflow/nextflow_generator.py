@@ -18,6 +18,8 @@ HIDDEN_PROPERTIES = {"restart", "container_path", "container_image", "container_
 DEFAULT_PROPERTIES = {"can_write_file_log": "false"}
 # Properties set from the task resources when the block has them: {property: (Groovy value, label)}
 RESOURCE_PROPERTIES = {"num_threads": ("task.cpus", "process_medium")}
+# CPUs of the test tasks of blocks with resource properties
+TEST_CPUS = 4
 
 
 class NextflowGenerator():
@@ -294,7 +296,7 @@ class NextflowGenerator():
         with open(module_path.joinpath("README.md"), "w") as readme_file:
             readme_file.write(self.readme_template.render(**context))
 
-        return context["process_name"], inputs, outputs
+        return context["process_name"], inputs, outputs, [prop for prop in RESOURCE_PROPERTIES if prop in schema_properties]
 
     def getTestExtension(self, arg, file_name):
         """ returns the accepted extension of a test output file name ('directory' for folders without one) """
@@ -304,7 +306,7 @@ class NextflowGenerator():
             return extension
         return "directory" if "directory" in arg["formats"] else arg["formats"][0]
 
-    def getTest(self, basename, process_name, inputs, outputs, entry):
+    def getTest(self, basename, process_name, inputs, outputs, entry, resource_properties):
         """ returns the test of a block from its conf.yml entry: call, config lines and expected outputs, or the reason to skip it """
 
         test = {"block": basename, "process": process_name, "call": None, "config": [], "expected": []}
@@ -342,7 +344,10 @@ class NextflowGenerator():
         test["expected"] = [f"{basename}.{arg['name']}" for arg in outputs if not arg["optional"] or arg["name"] in extensions]
         test["outputs"] = [arg["name"] for arg in outputs]
 
-        properties = entry.get('properties') or {}
+        # Resource properties (num_threads: 0 uses every core) come from the task cpus instead, so parallel tests don't compete for the same cores
+        properties = {k: v for k, v in (entry.get('properties') or {}).items() if k not in resource_properties}
+        if resource_properties:
+            test["config"].append(f"cpus = {TEST_CPUS}")
         if properties:
             test["config"].append(f"ext.properties = {self.groovyValue(properties)}")
         if extensions:
@@ -396,8 +401,8 @@ class NextflowGenerator():
             with open(json_file_path) as json_file:
                 tool_schema = json.load(json_file)
 
-            process_name, inputs, outputs = self.generateModule(tool_schema, pckg_schema, json_file_path.stem)
-            tests.append(self.getTest(json_file_path.stem, process_name, inputs, outputs, conf.get(json_file_path.stem)))
+            process_name, inputs, outputs, resource_properties = self.generateModule(tool_schema, pckg_schema, json_file_path.stem)
+            tests.append(self.getTest(json_file_path.stem, process_name, inputs, outputs, conf.get(json_file_path.stem), resource_properties))
 
             print(str(self.output_path.joinpath(json_file_path.stem)) + " module saved")
 
