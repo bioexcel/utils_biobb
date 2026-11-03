@@ -1,0 +1,48 @@
+/*
+ * {{ mark }}
+ * {{ title }}
+ * Nextflow version of {{ wf_name }}/python/workflow.py, with the BioBB Nextflow modules in modules/.
+ * Usage: nextflow run main.nf -profile docker [--input samplesheet.csv]{% for flag in flags %} [--{{ flag }} <value>]{% endfor %}
+ */
+{% for step in steps %}
+{{ step.include }}
+{%- endfor %}
+
+params {
+    // CSV with an id column and one column per input file: one workflow run per row
+    input: String = "${projectDir}/samplesheet.csv"
+{%- for flag, value in flags.items() %}
+    {{ flag }}: {{ flag_types[flag] }} = {{ value }}
+{%- endfor %}
+}
+
+workflow {
+    main:
+    // One [meta, files] item per samplesheet row: the steps of every row run in parallel
+    ch_samples = channel.fromPath(params.input)
+        .splitCsv(header: true)
+        .map { row -> [[id: row.id], [{% for column in columns.values() %}{{ column }}: samplePath(row.{{ column }}){{ ", " if not loop.last }}{% else %}:{% endfor %}]] }
+{% for step in steps %}
+    // {{ step.name }}{{ ": " + step.description if step.description }}
+    {{ step.call }}
+{%- endfor %}
+
+    publish:
+    results = channel.empty().mix(
+{%- for step in steps %}
+        {{ step.results }}{{ "," if not loop.last }}
+{%- endfor %}
+    )
+}
+
+output {
+    // results/<id>/<step>/<id>_<step>_<role>.<ext>
+    results {
+        path { meta, step, _result -> "${meta.id}/${step}" }
+    }
+}
+
+// Path of a samplesheet column: absolute, or relative to the samplesheet folder
+def samplePath(String value) {
+    file(file(params.input).parent.resolve(value).toString(), checkIfExists: true)
+}

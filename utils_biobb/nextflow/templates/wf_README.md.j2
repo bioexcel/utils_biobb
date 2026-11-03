@@ -1,0 +1,47 @@
+<!-- {{ mark }} -->
+# {{ title }}: Nextflow
+
+Nextflow version of the [python workflow](../python/workflow.py), with the [BioBB Nextflow modules](https://github.com/bioexcel/biobb_adapters/tree/master/biobb_adapters/nextflow) it uses copied in `modules/`. Every step runs the BioBB block inside its biocontainer (or bioconda package) with the properties of [python/workflow.yml](../python/workflow.yml).
+
+## Run
+
+From a clone of this repository, with [Nextflow](https://www.nextflow.io/docs/latest/install.html) {{ nextflow_version }} and Docker:
+
+```bash
+nextflow run {{ wf_name }}/nextflow -profile docker
+```
+
+Profiles: `docker`, `apptainer`, `singularity` and `conda`. Results are written to `results/<id>/<step>/` (`-output-dir` to change it), with files named `<id>_<step>_<role>.<ext>`.
+
+## Inputs
+
+`samplesheet.csv` (`--input`): one row per system, all of them run in parallel. Paths are absolute or relative to the samplesheet folder. The default samplesheet runs the inputs of the python workflow.
+
+| Column | Python workflow input | Used by |
+|---|---|---|
+| `id` | | Name of the run, prefix of the output files |
+{%- for value, column in columns.items() %}
+| `{{ column }}` | `{{ value[5:] }}` | {{ column_steps[column] | join(", ") }} |
+{%- endfor %}
+{%- if flags %}
+
+Parameters:
+
+| Parameter | Default | Description |
+|---|---|---|
+{%- for flag, value in flags.items() %}
+| `--{{ flag }}` | `{{ value }}` | Run the steps under `{{ flag }}` in the python workflow: {{ flag_steps[flag] | join(", ") }} |
+{%- endfor %}
+{%- endif %}
+
+## Configuration
+
+`nextflow.config` has the BioBB properties (`ext.properties`) and output extensions (`ext.outputs`) of every step{% if labels %}, and the CPUs of the multithreaded steps ({{ labels | join(", ") }} label){% endif %}. Change them there or in a config file given with `-c`.{% if mpi_steps %} The MPI properties of the python workflow (`mpi_bin`, `mpi_np` and the MPI `binary_path`) are left out, because the biocontainers have no MPI: add them back to run {{ mpi_steps | join(", ") }} with MPI in your own environment.{% endif %}
+
+## Steps
+
+| Step | Block | Description |
+|---|---|---|
+{%- for step in steps %}
+| {{ step.name }} | [{{ step.module.package }}/{{ step.module.tool }}](modules/{{ namespace }}/{{ step.module.package }}/{{ step.module.tool }}/README.md) | {{ step.description }}{{ " (only with --" + step.flags | join(", --") + ")" if step.flags }} |
+{%- endfor %}

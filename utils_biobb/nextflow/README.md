@@ -59,6 +59,26 @@ nextflow run test/main.nf
 nextflow run test/main.nf -stub
 ```
 
+## Workflow generator
+
+`nextflow_wf_generator.py` translates a pure python workflow of [biobb_workflows](https://github.com/bioexcel/biobb_workflows) (`python/workflow.yml` and `python/workflow.py`) to a Nextflow workflow, as `cwl_wf_generator.py` does for CWL:
+
+* `main.nf`: one step per `workflow.py` call, running the module of its block under the step name (`include { BIOBB_GROMACS_GROMPP as STEP9_GROMPP_MIN }`). `file:` inputs become samplesheet columns and `dependency/<step>/<output>` paths the output channel of that step, joined by `meta` in the module input order.
+* `samplesheet.csv` (`--input`): one row per system, all of them run in parallel. The default one has a row with the python workflow inputs, which are copied next to it.
+* `nextflow.config`: the `ext.properties` and `ext.outputs` (extensions of the `workflow.yml` file names and optional outputs) of every step, CPUs of the multithreaded blocks and `docker`, `apptainer`, `singularity` and `conda` profiles.
+* `README.md` and the modules used, copied from biobb_adapters into `modules/bioexcel/<package>/<block>`.
+* The MPI properties (`mpi_bin`, `mpi_np`, ...) and the `binary_path` of their steps (`sander.MPI`) are left out, because the biocontainers have no MPI.
+* Steps under `if conf.properties['global_properties'][<flag>]` in `workflow.py` only run when the `--<flag>` param is true. Workflows with steps inside loops or other conditions are not supported: port them by hand.
+* Results are published to `results/<id>/<step>/`.
+
+Generated files are overwritten when regenerating, unless they were edited by hand (no generated mark). `samplesheet.csv` is only written when it doesn't exist.
+
+```Shell
+python3 nextflow_wf_generator.py -y path/to/biobb_wf_name/python/workflow.yml -p path/to/biobb_wf_name/python/workflow.py -a path/to/biobb_adapters/biobb_adapters/nextflow -o path/to/biobb_wf_name/nextflow
+nextflow lint path/to/biobb_wf_name/nextflow
+nextflow run path/to/biobb_wf_name/nextflow -profile docker
+```
+
 ## Copyright & Licensing
 This software has been developed in the [MMB group](http://mmb.irbbarcelona.org) at the [BSC](http://www.bsc.es/) & [IRB](https://www.irbbarcelona.org/) for the [European BioExcel](http://bioexcel.eu/), funded by the European Commission (EU Horizon Europe [101093290](https://cordis.europa.eu/project/id/101093290), EU H2020 [823830](http://cordis.europa.eu/projects/823830), EU H2020 [675728](http://cordis.europa.eu/projects/675728)).
 

@@ -69,7 +69,8 @@ class NextflowGenerator():
         alternatives = ["*" if ext == "directory" else "*." + ext for ext in extensions]
         return alternatives[0] if len(alternatives) == 1 else "{" + ",".join(alternatives) + "}"
 
-    def groovyValue(self, value):
+    @staticmethod
+    def groovyValue(value):
         """ returns a Groovy literal of a JSON value """
 
         if isinstance(value, bool):
@@ -79,13 +80,14 @@ class NextflowGenerator():
         if isinstance(value, (int, float)):
             return str(value)
         if isinstance(value, list):
-            return "[" + ", ".join(self.groovyValue(v) for v in value) + "]"
+            return "[" + ", ".join(NextflowGenerator.groovyValue(v) for v in value) + "]"
         if isinstance(value, dict):
-            return self.groovyMap({k: self.groovyValue(v) for k, v in value.items()})
+            return NextflowGenerator.groovyMap({k: NextflowGenerator.groovyValue(v) for k, v in value.items()})
         escaped = str(value).replace("\\", "\\\\").replace("'", "\\'").replace("\n", "\\n").replace("\r", "\\r").replace("\t", "\\t")
         return "'" + escaped + "'"
 
-    def groovyMap(self, items):
+    @staticmethod
+    def groovyMap(items):
         """ returns a Groovy map literal of already formatted values """
 
         if not items:

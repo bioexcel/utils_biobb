@@ -1,0 +1,56 @@
+/*
+ * {{ mark }}
+ * Configuration of {{ wf_name }}: biobb properties (ext.properties) and output extensions (ext.outputs) of every step,
+ * from python/workflow.yml.
+ */
+
+manifest {
+    name = '{{ wf_name }}'
+    description = {{ title_literal }}
+    homePage = 'https://github.com/bioexcel/biobb_workflows'
+    mainScript = 'main.nf'
+    nextflowVersion = '!{{ nextflow_version }}'
+    license = 'Apache-2.0'
+}
+
+outputDir = 'results'
+workflow.output.mode = 'copy'
+
+process {
+    // Output files named <id>_<step>_<role>.<ext>
+    ext.prefix = { "${meta.id}_${task.process.tokenize(':')[-1].toLowerCase()}" }
+{%- if labels %}
+{% for label in labels %}
+    // {{ label_comments[label] }}
+    withLabel: '{{ label }}' {
+        cpus = 4
+    }
+{%- endfor %}
+{%- endif %}
+{%- for step in steps if step.config %}
+
+    withName: '{{ step.alias }}' {
+{%- for line in step.config %}
+        {{ line }}
+{%- endfor %}
+    }
+{%- endfor %}
+}
+
+profiles {
+    docker {
+        docker.enabled = true
+        // Run as the host user, so the results are not owned by root
+        docker.runOptions = '-u $(id -u):$(id -g)'
+    }
+    apptainer {
+        apptainer.enabled = true
+    }
+    singularity {
+        singularity.enabled = true
+    }
+    conda {
+        conda.enabled = true
+        conda.channels = ['conda-forge', 'bioconda']
+    }
+}
