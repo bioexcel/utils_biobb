@@ -38,7 +38,7 @@ python3 nextflow_generator.py --package biobb_package --input path/to/json_schem
 
 Previously generated modules in the output folder are removed first, so there are no old/renamed modules.
 
-When the package has a `test/conf.yml` (next to the json schemas folder, or given with `--conf`), the generator also writes a `tests` folder with a workflow that runs every block once with the inputs, properties and outputs of its conf.yml entry, writes `tests_report.tsv` and `tests_trace.tsv` in the launch folder, and fails if an expected output is missing. Test files are read from the package `test` folder of the local checkout, or from `--test_data`:
+When the package has a `test/conf.yml` (next to the json schemas folder, or given with `--conf`), the generator also writes a `tests` folder with a workflow that runs every block once with the inputs, properties and outputs of its conf.yml entry, writes `tests_report.tsv` and `tests_trace.tsv` in the launch folder, and fails if an expected output is missing. Blocks whose test can't run in their biocontainer (licensed software, listed in `SKIP_TESTS`) are skipped with a comment. Test files are read from the package `test` folder of the local checkout, or from `--test_data`:
 
 ```Shell
 nextflow run path/to/biobb_adapters/biobb_adapters/nextflow/biobb_package/tests/main.nf -profile docker

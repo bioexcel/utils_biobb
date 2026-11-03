@@ -20,6 +20,12 @@ DEFAULT_PROPERTIES = {"can_write_file_log": "false"}
 RESOURCE_PROPERTIES = {"num_threads": ("task.cpus", "process_medium")}
 # CPUs of the test tasks of blocks with resource properties
 TEST_CPUS = 4
+# conf.yml tests that can't run in the biocontainer of the block: {package: {block: reason}}
+SKIP_TESTS = {
+    "biobb_amber": {"pmemd_mdrun": "needs pmemd (Amber), not in any ambertools conda package"},
+    # Also ignored by the biobb_model CI
+    "biobb_model": {"fix_backbone": "needs Modeller (licensed, not in the biocontainer) to model the backbone breaks of the test structure"},
+}
 
 
 class NextflowGenerator():
@@ -314,6 +320,9 @@ class NextflowGenerator():
         test = {"block": basename, "process": process_name, "call": None, "config": [], "expected": []}
         if not entry:
             test["skip"] = "no entry in conf.yml"
+            return test
+        if basename in SKIP_TESTS.get(self.package, {}):
+            test["skip"] = SKIP_TESTS[self.package][basename]
             return test
         paths = entry.get('paths') or {}
 
