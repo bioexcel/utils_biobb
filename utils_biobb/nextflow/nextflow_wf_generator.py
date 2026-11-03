@@ -20,6 +20,18 @@ WORKFLOW_PROPERTIES = {"working_dir_path", "can_write_console_log"}
 MPI_PROPERTIES = {"mpi_bin", "mpi_np", "mpi_flags", "mpi_hostlist"}
 # Module labels with resources to set in the workflow configuration: {label: comment}
 LABEL_COMMENTS = {"process_medium": "Multithreaded blocks (num_threads = cpus): set cpus to the cores of your machine or node"}
+# e2e test settings of tests/nextflow/run_test.sh per workflow: the runtime cuts of the python CI (python-reusable.yaml,
+# docs/testing.md §1.5) as sed -E expressions on a copy of nextflow.config, and full workflow attempts for flaky lookups
+TEST_SETTINGS = {
+    "biobb_wf_amber_abc_setup": {"runtime": [r"s/nstlim: [0-9]+/nstlim: 100/g", r"s/maxcyc: [0-9]+/maxcyc: 50/g"]},
+    "biobb_wf_amber_md_setup": {"runtime": [r"s/nstlim: [0-9]+/nstlim: 500/g", r"s/maxcyc: [0-9]+/maxcyc: 100/g"]},
+    "biobb_wf_amber_md_setup_lig": {"runtime": [r"s/nstlim: [0-9]+/nstlim: 500/g", r"s/maxcyc: [0-9]+/maxcyc: 100/g"]},
+    "biobb_wf_md_setup": {"runtime": [r"s/nsteps: [0-9]+/nsteps: 10/g"]},
+    # Only the free MD: a blanket cut blows up the NPT run of the un-equilibrated system
+    "biobb_wf_protein-complex_md_setup": {"runtime": [r"s/nsteps: 250000/nsteps: 10/g"]},
+    # structure_check fetches the ligand names from a flaky API
+    "biobb_wf_structure_checking": {"attempts": 3},
+}
 # Groovy keywords that can't be closure parameter names
 GROOVY_KEYWORDS = {"as", "def", "else", "for", "if", "in", "new", "return", "switch", "while"}
 
@@ -60,6 +72,7 @@ class NextflowWFGenerator():
         self.main_template = template_env.get_template("wf_main.nf.j2")
         self.config_template = template_env.get_template("wf_nextflow.config.j2")
         self.readme_template = template_env.get_template("wf_README.md.j2")
+        self.test_template = template_env.get_template("wf_run_test.sh.j2")
 
     def parseYAML(self):
         """ returns the global properties and the steps of the workflow.yml """
@@ -124,7 +137,9 @@ class NextflowWFGenerator():
                 continue
             arg = channel[1]
             default = re.search(r"outputs\.%s \?: '([^']*)'" % arg["name"], main)
-            outputs.append({"name": arg["name"], "optional": arg["optional"], "default": default.group(1) if default else None})
+            # Output file named <prefix>_<role>.<extension>
+            role = re.search(r"^\s+%s = .*?\$\{prefix\}_(\w+)" % arg["name"], main, re.M)
+            outputs.append({"name": arg["name"], "optional": arg["optional"], "default": default.group(1) if default else "directory", "role": role.group(1)})
 
         self.modules[(package, tool)] = {
             "package": package,
@@ -226,7 +241,13 @@ class NextflowWFGenerator():
                 extension = Path(str(paths[arg["name"]])).suffix[1:] or "directory"
                 if arg["optional"] or extension != arg["default"]:
                     extensions[arg["name"]] = extension
-        produced = [f"{alias}.out.{arg['name']}" for arg in module["outputs"] if not arg["optional"] or arg["name"] in paths]
+        produced_args = [arg for arg in module["outputs"] if not arg["optional"] or arg["name"] in paths]
+        produced = [f"{alias}.out.{arg['name']}" for arg in produced_args]
+        # Published file names without the <id>_ prefix (ext.prefix is <id>_<step>), folders ending in /
+        files = []
+        for arg in produced_args:
+            extension = extensions.get(arg["name"], arg["default"])
+            files.append(f"{step.lower()}_{arg['role']}" + ("/" if extension == "directory" else f".{extension}"))
 
         properties = {**global_properties, **(entry.get("properties") or {})}
         # Steps with MPI properties also set the MPI build of the binary (sander.MPI): use the block default
@@ -247,6 +268,7 @@ class NextflowWFGenerator():
             "flags": flags,
             "call": call,
             "config": config,
+            "files": files,
             "results": produced[0] + (f".mix({', '.join(produced[1:])})" if len(produced) > 1 else "") + f".map {{ meta, result -> [meta, '{step}', result] }}",
         }
 
@@ -260,14 +282,22 @@ class NextflowWFGenerator():
                     return line[2:].strip()
         return self.wf_path.name
 
-    def writeGenerated(self, file_name, content):
-        """ writes a generated file, unless it exists and was not generated """
+    def getSampleId(self):
+        """ returns the id of the default samplesheet row: the workflow name without biobb_wf_ """
 
-        file_path = self.output_path.joinpath(file_name)
+        return re.sub(r"^biobb_wf_", "", self.wf_path.name)
+
+    def writeGenerated(self, file_name, content, folder=None, executable=False):
+        """ writes a generated file (in the output folder by default), unless it exists and was not generated """
+
+        file_path = (folder or self.output_path).joinpath(file_name)
         if file_path.exists() and GENERATED_MARK not in file_path.read_text():
             print(f"{file_path} not generated: it exists and was edited by hand")
             return
+        file_path.parent.mkdir(parents=True, exist_ok=True)
         file_path.write_text(content)
+        if executable:
+            file_path.chmod(0o755)
         print(f"{file_path} has been properly generated")
 
     def copyModules(self, steps):
@@ -302,9 +332,8 @@ class NextflowWFGenerator():
         if samplesheet_path.exists():
             print(f"{samplesheet_path} not generated: it already exists")
             return
-        sample_id = re.sub(r"^biobb_wf_", "", self.wf_path.name)
         samplesheet_path.write_text(",".join(["id"] + list(columns.values())) + "\n"
-                                    + ",".join([sample_id] + [value[5:] for value in columns]) + "\n")
+                                    + ",".join([self.getSampleId()] + [value[5:] for value in columns]) + "\n")
         print(f"{samplesheet_path} has been properly generated")
 
     def launch(self):
@@ -348,12 +377,27 @@ class NextflowWFGenerator():
             "label_comments": LABEL_COMMENTS,
         }
 
+        # e2e test: every output of the steps run by default, under results/<id>/<step>/
+        sample_id = self.getSampleId()
+        settings = TEST_SETTINGS.get(self.wf_path.name, {})
+        test_context = {
+            **context,
+            "sample_id": sample_id,
+            "expected": [f"{sample_id}/{step['name']}/{sample_id}_{file}" for step in wf_steps
+                         if all(flags[flag] for flag in step["flags"]) for file in step["files"]],
+            "runtime": settings.get("runtime", []),
+            "runtime_doc": ", ".join(settings.get("runtime", [])) + " (the python CI ones)" if settings.get("runtime") else "none",
+            "attempts": settings.get("attempts", 1),
+        }
+
         self.copyModules(wf_steps)
         self.copyInputs(columns)
         self.writeGenerated("main.nf", self.main_template.render(**context))
         self.writeGenerated("nextflow.config", self.config_template.render(**context))
         self.writeGenerated("README.md", self.readme_template.render(**context))
         self.writeGenerated(".gitignore", f"# {GENERATED_MARK}\nwork/\nresults/\n.nextflow/\n.nextflow.log*\n")
+        # <wf>/tests/nextflow next to <wf>/nextflow
+        self.writeGenerated("run_test.sh", self.test_template.render(**test_context), folder=self.output_path.parent.joinpath("tests", "nextflow"), executable=True)
 
 
 def main():

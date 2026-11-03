@@ -70,6 +70,7 @@ nextflow run test/main.nf -stub
 * The MPI properties (`mpi_bin`, `mpi_np`, ...) and the `binary_path` of their steps (`sander.MPI`) are left out, because the biocontainers have no MPI.
 * Steps under `if conf.properties['global_properties'][<flag>]` in `workflow.py` only run when the `--<flag>` param is true. Workflows with steps inside loops or other conditions are not supported: port them by hand.
 * Results are published to `results/<id>/<step>/`.
+* `../tests/nextflow/run_test.sh`: the e2e test of the workflow, with the conventions of the other biobb_workflows flavours (see its `docs/testing.md`). It runs the workflow with a copy of `nextflow.config` cut by the per-workflow `TEST_SETTINGS` (the runtime reductions of the python CI) and checks every output of every step.
 
 Generated files are overwritten when regenerating, unless they were edited by hand (no generated mark). `samplesheet.csv` is only written when it doesn't exist.
 
