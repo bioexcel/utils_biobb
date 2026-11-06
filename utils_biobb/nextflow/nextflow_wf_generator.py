@@ -37,6 +37,12 @@ GROOVY_KEYWORDS = {"as", "def", "else", "for", "if", "in", "new", "return", "swi
 
 IMPORT_RE = re.compile(r"^from (biobb_\w+)\.[\w.]+ import (\w+)")
 CALL_RE = re.compile(r"(\w+)\(\*\*global_paths\[[\"'](\w+)[\"']\]")
+PROPERTIES_RE = re.compile(r"properties=global_prop\[[\"'](\w+)[\"']\]\)")
+# Any other call of a block, or a change of the step paths and properties, is python logic
+TOOL_CALL_RE = re.compile(r"\b(\w+)\(")
+EDIT_RE = re.compile(r"\bglobal_(paths|prop)\[[^]]+\]\[[^]]+\]\s*=[^=]|=\s*global_(paths|prop)\[[^]]+\]\s*$")
+# Modules of a main.nf written by hand
+INCLUDE_RE = re.compile(r"from '\./modules/%s/(\w+)/(\w+)'" % NAMESPACE)
 LOG_RE = re.compile(r"global_log\.info\([\"'](\w+): (.+?)[\"']\)")
 FLAG_RE = re.compile(r"^if conf\.properties\[[\"']global_properties[\"']\]\[[\"'](\w+)[\"']\]:$")
 BLOCK_RE = re.compile(r"^(if|elif|else|for|while|with|try|except|finally)\b")
@@ -108,7 +114,16 @@ class NextflowWFGenerator():
             if match:
                 if any(flag is None for _, flag in blocks):
                     raise SystemExit(f"{match.group(2)} is called inside a loop or a condition that is not a global property: port this workflow by hand")
+                properties = PROPERTIES_RE.search(code)
+                if not properties or properties.group(1) != match.group(2):
+                    raise SystemExit(f"{match.group(2)} is not called with properties=global_prop['{match.group(2)}']: port this workflow by hand")
                 calls.append((match.group(2), match.group(1), [flag for _, flag in blocks]))
+            else:
+                for name in TOOL_CALL_RE.findall(code):
+                    if name in tools:
+                        raise SystemExit(f"{name} is called without **global_paths[<step>] in {self.python_input_path}: port this workflow by hand")
+            if EDIT_RE.search(code):
+                raise SystemExit(f"The step paths or properties are changed in {self.python_input_path} ({code}): port this workflow by hand")
             if BLOCK_RE.match(code):
                 match = FLAG_RE.match(code)
                 blocks.append((indent, match.group(1) if match else None))
@@ -317,6 +332,12 @@ class NextflowWFGenerator():
             if package_path.is_dir() and not any(package_path.iterdir()):
                 package_path.rmdir()
 
+    def refreshModules(self, main_path):
+        """ copies the modules included by a main.nf written by hand: the rest of the workflow is not generated """
+
+        print(f"{main_path} was written by hand: only its modules are refreshed")
+        self.copyModules([{"module": self.getModule(package, tool)} for package, tool in INCLUDE_RE.findall(main_path.read_text())])
+
     def copyInputs(self, columns):
         """ copies the input files of the python workflow and writes the default samplesheet, with one row """
 
@@ -338,6 +359,12 @@ class NextflowWFGenerator():
 
     def launch(self):
         """ launch function for NextflowWFGenerator """
+
+        # Workflows ported by hand (python logic the generator can't translate) keep their files
+        main_path = self.output_path.joinpath("main.nf")
+        if main_path.exists() and GENERATED_MARK not in main_path.read_text():
+            self.refreshModules(main_path)
+            return
 
         global_properties, steps = self.parseYAML()
         tools, calls, descriptions = self.parsePython()

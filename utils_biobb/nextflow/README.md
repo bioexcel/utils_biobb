@@ -68,11 +68,14 @@ nextflow run test/main.nf -stub
 * `nextflow.config`: the `ext.properties` and `ext.outputs` (extensions of the `workflow.yml` file names and optional outputs) of every step, CPUs of the multithreaded blocks and `docker`, `apptainer`, `singularity` and `conda` profiles.
 * `README.md` and the modules used, copied from biobb_adapters into `modules/bioexcel/<package>/<block>`.
 * The MPI properties (`mpi_bin`, `mpi_np`, ...) and the `binary_path` of their steps (`sander.MPI`) are left out, because the biocontainers have no MPI.
-* Steps under `if conf.properties['global_properties'][<flag>]` in `workflow.py` only run when the `--<flag>` param is true. Workflows with steps inside loops or other conditions are not supported: port them by hand.
+* Steps under `if conf.properties['global_properties'][<flag>]` in `workflow.py` only run when the `--<flag>` param is true.
+* Other python logic is not supported, and the generator stops with "port this workflow by hand" when it finds it: steps inside loops or other conditions, blocks not called as `<block>(**global_paths[<step>], properties=global_prop[<step>])`, or changes of the step paths or properties (`paths = global_paths[...]`, `global_prop[...][...] = ...`). Python code that does not call blocks (helper functions, files written with Biopython...) can't be detected: check the generated `main.nf` against `workflow.py`.
 * Results are published to `results/<id>/<step>/`.
 * `../tests/nextflow/run_test.sh`: the e2e test of the workflow, with the conventions of the other biobb_workflows flavours (see its `docs/testing.md`). It runs the workflow with a copy of `nextflow.config` cut by the per-workflow `TEST_SETTINGS` (the runtime reductions of the python CI) and checks every output of every step.
 
 Generated files are overwritten when regenerating, unless they were edited by hand (no generated mark). `samplesheet.csv` is only written when it doesn't exist.
+
+Workflows ported by hand (a `main.nf` without the generated mark, as the 7 biobb_workflows with python logic) are not regenerated: the generator only refreshes the modules of `modules/bioexcel` that their `main.nf` includes, so new module versions reach them with the same command. Their other files, `modules/local` (python logic as small processes) and `tests/nextflow/run_test.sh` are kept.
 
 ```Shell
 python3 nextflow_wf_generator.py -y path/to/biobb_wf_name/python/workflow.yml -p path/to/biobb_wf_name/python/workflow.py -a path/to/biobb_adapters/biobb_adapters/nextflow -o path/to/biobb_wf_name/nextflow
