@@ -1,8 +1,8 @@
-<tool id="biobb_haddock_topology_ext" name="Topology" version="4.2.1" >
-    <description>: Wrapper class for the Haddock Topology module.</description>
+<tool id="biobb_haddock_topology_ext" name="Topology" version="5.3.3" >
+    <description>: Wrapper class for the HADDOCK3 Topology module.</description>
     <requirements>
         <requirement type="package"
-        version="4.2.1"
+        version="5.3.3"
         >biobb_haddock</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -24,7 +24,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__cfg__dq__:${properties.cfg},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
+            --config '__oc____dq__properties__dq__:__oc____dq__cfg__dq__:${properties.cfg},__dq__global_cfg__dq__:${properties.global_cfg},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc____cc__'
           #end if
         
           #if str($mol1_input_pdb_path) != 'None':
@@ -44,7 +44,7 @@
         
           --mol2_output_top_zip_path $outname_mol2_output_top_zip_path
         
-          --output_haddock_wf_data_zip $outname_output_haddock_wf_data_zip
+          --output_haddock_wf_data $outname_output_haddock_wf_data
         ;
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
@@ -61,7 +61,7 @@
         
           if test -f $outname_mol2_output_top_zip_path; then mv $outname_mol2_output_top_zip_path $mol2_output_top_zip_path; fi;
         
-          if test -f $outname_output_haddock_wf_data_zip; then mv $outname_output_haddock_wf_data_zip $output_haddock_wf_data_zip; fi;
+          if test -f $outname_output_haddock_wf_data; then mv $outname_output_haddock_wf_data $output_haddock_wf_data; fi;
         
     ]]>
     </command>
@@ -75,16 +75,16 @@
         
         
           <param name="outname_mol1_output_top_zip_path" type="text" value="mytopology.zip"
-              optional="False" label="output ZIP name"
+              optional="True" label="output ZIP name"
               help="Path to the output PDB file collection in zip format Format: [output].zip "/>
         
           <param name="outname_mol2_output_top_zip_path" type="text" value="mytopology.zip"
               optional="True" label="output ZIP name"
               help="Path to the output PDB file collection in zip format Format: [output].zip "/>
         
-          <param name="outname_output_haddock_wf_data_zip" type="text" value="mytopology.zip"
-              optional="True" label="output ZIP name"
-              help="Path to the output zipball containing all the current Haddock workflow data Format: [output].zip "/>
+          <param name="outname_output_haddock_wf_data" type="text" value="mytopology.directory"
+              optional="False" label="output DIRECTORY,ZIP name"
+              help="Path to the output directory containing all the current Haddock workflow data Format: [output].[format] "/>
         
         <conditional name="config">
             <param name="sele" type="select" label="Take tool settings:" help="Select where tool settings are to be read from">
@@ -107,10 +107,30 @@
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
             
+              <param name="global_cfg" type="text" label="global_cfg" help="Global configuration options specification. (Json)" value="{}">
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
               <param name="binary_path" type="text" label="binary_path" help="Path to the haddock haddock executable binary." optional="false"
                   value="haddock"
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+              <param name="output_format" type="select" label="output_format" help="Format of the output file" multiple="false">
+                  
+                    <option value="directory"
+                      
+                    >directory
+                       
+                    </option>
+                  
+                    <option value="zip"
+                      
+                    >zip
+                       
+                    </option>
+                  
                 </param>
             
           </section>
@@ -123,8 +143,15 @@
         
           <data name="mol2_output_top_zip_path" format="zip" label="${outname_mol2_output_top_zip_path}"/>
         
-        
-          <data name="output_haddock_wf_data_zip" format="zip" label="${outname_output_haddock_wf_data_zip}"/>
+        <data name="output_haddock_wf_data" format="text" label="${outname_output_haddock_wf_data}">
+            <change_format>
+            
+            <when input="properties.output_format" value="directory" format="directory" />
+            
+            <when input="properties.output_format" value="zip" format="zip" />
+            
+            </change_format>
+          </data>
         
     </outputs>
     <tests>

@@ -1,8 +1,8 @@
-<tool id="biobb_cmip_cmip_run_ext" name="CmipRun" version="4.2.0" >
+<tool id="biobb_cmip_cmip_run_ext" name="CmipRun" version="5.3.1" >
     <description>: Wrapper class for the CMIP cmip module.</description>
     <requirements>
         <requirement type="package"
-        version="4.2.0"
+        version="5.3.1"
         >biobb_cmip</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -32,7 +32,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__execution_type__dq__:__dq__${properties.execution_type}__dq__,__dq__params__dq__:${properties.params},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
+            --config '__oc____dq__properties__dq__:__oc____dq__execution_type__dq__:__dq__${properties.execution_type}__dq__,__dq__params__dq__:${properties.params},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc____cc__'
           #end if
         
           #if str($input_pdb_path) != 'None':

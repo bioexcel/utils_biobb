@@ -1,0 +1,196 @@
+<tool id="biobb_pytorch_make_plumed_ext" name="MakePlumed" version="5.3.0" >
+    <description>: Generate PLUMED input for biased dynamics using an MDAE model.</description>
+    <requirements>
+        <requirement type="package"
+        version="5.3.0"
+        >biobb_pytorch</requirement>
+    </requirements>
+    <command detect_errors="aggressive"><![CDATA[
+        
+          ln -f -s ${input_model_pth_path} ${input_model_pth_path}_`echo $$`.${input_model_pth_path.ext};
+        
+          ln -f -s ${input_stats_pt_path} ${input_stats_pt_path}_`echo $$`.${input_stats_pt_path.ext};
+        
+          ln -f -s ${input_reference_pdb_path} ${input_reference_pdb_path}_`echo $$`.${input_reference_pdb_path.ext};
+        
+          ln -f -s ${input_ndx_path} ${input_ndx_path}_`echo $$`.${input_ndx_path.ext};
+        
+        #if $config.sele == "option1":
+            ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
+          #end if
+
+        make_plumed
+
+        #if $config.sele == "option1":
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
+          #else if $config.sele == "option2":
+            --config '${config.jsonstr}'
+          #else if $config.sele == "option3":
+            --config '__oc____dq__properties__dq__:__oc____dq__include_energy__dq__:${properties.include_energy},__dq__bias__dq__:${properties.bias},__dq__prints__dq__:${properties.prints},__dq__group__dq__:${properties.group},__dq__wholemolecules__dq__:${properties.wholemolecules},__dq__fit_to_template__dq__:${properties.fit_to_template},__dq__pytorch_model__dq__:${properties.pytorch_model}__cc____cc__'
+          #end if
+        
+          #if str($input_model_pth_path) != 'None':
+            --input_model_pth_path ${input_model_pth_path}_`echo $$`.${input_model_pth_path.ext}
+          #end if
+        
+          #if str($input_stats_pt_path) != 'None':
+            --input_stats_pt_path ${input_stats_pt_path}_`echo $$`.${input_stats_pt_path.ext}
+          #end if
+        
+          #if str($input_reference_pdb_path) != 'None':
+            --input_reference_pdb_path ${input_reference_pdb_path}_`echo $$`.${input_reference_pdb_path.ext}
+          #end if
+        
+          #if str($input_ndx_path) != 'None':
+            --input_ndx_path ${input_ndx_path}_`echo $$`.${input_ndx_path.ext}
+          #end if
+        
+        
+          --output_plumed_dat_path $outname_output_plumed_dat_path
+        
+          --output_features_dat_path $outname_output_features_dat_path
+        
+          --output_model_ptc_path $outname_output_model_ptc_path
+        ;
+        #if $config.sele == "option1":
+            rm -f ${config.properties}_`echo $$`.${config.properties.ext};
+          #end if
+        
+          rm -f ${input_model_pth_path}_`echo $$`.${input_model_pth_path.ext};
+        
+          rm -f ${input_stats_pt_path}_`echo $$`.${input_stats_pt_path.ext};
+        
+          rm -f ${input_reference_pdb_path}_`echo $$`.${input_reference_pdb_path.ext};
+        
+          rm -f ${input_ndx_path}_`echo $$`.${input_ndx_path.ext};
+        
+        
+          if test -f $outname_output_plumed_dat_path; then mv $outname_output_plumed_dat_path $output_plumed_dat_path; fi;
+        
+          if test -f $outname_output_features_dat_path; then mv $outname_output_features_dat_path $output_features_dat_path; fi;
+        
+          if test -f $outname_output_model_ptc_path; then mv $outname_output_model_ptc_path $output_model_ptc_path; fi;
+        
+    ]]>
+    </command>
+    <inputs>
+        
+          <param name="input_model_pth_path" type="data" format="pth"  optional="False" label="input PTH file" help="Path to the trained PyTorch model (.pth) to be converted to TorchScript and used in PLUMED. Format: [input].pth"/>
+        
+          <param name="input_stats_pt_path" type="data" format="pt"  optional="True" label="input PT file" help="Path to statistics file (.pt) produced during featurization, used to derive the PLUMED features.dat content. Format: [input].pt"/>
+        
+          <param name="input_reference_pdb_path" type="data" format="pdb"  optional="True" label="input PDB file" help="Path to reference PDB used for FIT_TO_TEMPLATE actions when Cartesian features are present. Format: [input].pdb"/>
+        
+          <param name="input_ndx_path" type="data" format="ndx"  optional="True" label="input NDX file" help="Path to GROMACS index (NDX) file used to define groups when required by PLUMED. Format: [input].ndx"/>
+        
+        
+          <param name="outname_output_plumed_dat_path" type="text" value="mymake_plumed.dat"
+              optional="False" label="output DAT name"
+              help="Path to the output PLUMED input file Format: [output].dat "/>
+        
+          <param name="outname_output_features_dat_path" type="text" value="mymake_plumed.dat"
+              optional="False" label="output DAT name"
+              help="Path to the output features.dat file describing the CVs to PLUMED Format: [output].dat "/>
+        
+          <param name="outname_output_model_ptc_path" type="text" value="mymake_plumed.ptc"
+              optional="False" label="output PTC name"
+              help="Path to the output TorchScript model file (.ptc) for PLUMED&#39;s PYTORCH_MODEL action Format: [output].ptc "/>
+        
+        <conditional name="config">
+            <param name="sele" type="select" label="Take tool settings:" help="Select where tool settings are to be read from">
+              <option value="option3">Manual Input</option>
+              <option value="option1">from configuration file</option>
+              <option value="option2">from JSON string</option>
+            </param>
+            <when value="option1">
+              <param name="properties" type="data" format="yml,json" optional="false" label="Configuration file" help="File containing tool settings. See below for the syntax"/>
+            </when>
+            <when value="option2">
+              <param name="jsonstr" type="text" value="{}" optional="false" label="JSON string" help="JSON string containing tool settings. See below for the syntax"/>
+            </when>
+            <when value="option3">
+            </when>
+          </conditional>
+          <section name="properties" title="Properties Input">
+            
+              <param name="include_energy" type="boolean"
+                  checked="true"
+                  label="include_energy" help="Whether to include ENERGY in PLUMED."
+                />
+            
+              <param name="bias" type="text" label="bias" help="List of biasing actions (e.g. METAD) to be added to the PLUMED file. (Json)" value="[]" >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+              <param name="prints" type="text" label="prints" help="PRINT command parameters (e.g. ARG, STRIDE, FILE). (Json)" value="{}">
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+              <param name="group" type="text" label="group" help="GROUP definition options (label, NDX group or atom selection parameters). (Json)" value="{}">
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+              <param name="wholemolecules" type="text" label="wholemolecules" help="WHOLEMOLECULES options when using Cartesian coordinates. (Json)" value="{}">
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+              <param name="fit_to_template" type="text" label="fit_to_template" help="FIT_TO_TEMPLATE options (e.g. STRIDE, TYPE, etc.). (Json)" value="{}">
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+              <param name="pytorch_model" type="text" label="pytorch_model" help="PYTORCH_MODEL options (label, PACE and other parameters). (Json)" value="{}">
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+          </section>
+    </inputs>
+    <outputs>
+        
+        
+          <data name="output_plumed_dat_path" format="dat" label="${outname_output_plumed_dat_path}"/>
+        
+        
+          <data name="output_features_dat_path" format="dat" label="${outname_output_features_dat_path}"/>
+        
+        
+          <data name="output_model_ptc_path" format="ptc" label="${outname_output_model_ptc_path}"/>
+        
+    </outputs>
+    <tests>
+        <test>
+          <param name="sele" value="option1"/>
+          <param name="properties" value="data/config/config_editconf.json"/>
+        </test>
+    </tests>
+    <help>
+.. class:: infomark
+
+Check the syntax for the tool parameters at the original library documentation: https://biobb_pytorch.readthedocs.io/en/latest
+
+-----
+
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
+    :width: 150
+
+**https://mmb.irbbarcelona.org/biobb**
+
+.. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
+        :width: 150
+
+**https://bioexcel.eu**
+   </help>
+
+    <citations>
+        <citation type="bibtex">
+            @misc{githubbiobb,
+            author = {Andrio P, Bayarri, G., Hospital A, Gelpi JL},
+            year = {2019-21},
+            title = {biobb: BioExcel building blocks },
+            publisher = {GitHub},
+            journal = {GitHub repository},
+            url = {https://github.com/bioexcel/biobb_pytorch},
+            }
+        </citation>
+        <citation type="doi">10.1038/s41597-019-0177-4</citation>
+    </citations>
+</tool>

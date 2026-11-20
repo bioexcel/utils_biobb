@@ -1,8 +1,8 @@
-<tool id="biobb_pmx_pmxatom_mapping_ext" name="PmxatomMapping" version="4.2.1" >
+<tool id="biobb_pmx_pmxatom_mapping_ext" name="PmxatomMapping" version="5.3.1" >
     <description>: Wrapper class for the PMX atom_mapping module.</description>
     <requirements>
         <requirement type="package"
-        version="4.2.1"
+        version="5.3.1"
         >biobb_pmx</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -22,7 +22,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__noalignment__dq__:${properties.noalignment},__dq__nomcs__dq__:${properties.nomcs},__dq__noH2H__dq__:${properties.noH2H},__dq__H2Hpolar__dq__:${properties.H2Hpolar},__dq__H2Heavy__dq__:${properties.H2Heavy},__dq__RingsOnly__dq__:${properties.RingsOnly},__dq__dMCS__dq__:${properties.dMCS},__dq__swap__dq__:${properties.swap},__dq__nochirality__dq__:${properties.nochirality},__dq__distance__dq__:${properties.distance},__dq__timeout__dq__:${properties.timeout}__cc__'
+            --config '__oc____dq__properties__dq__:__oc____dq__noalignment__dq__:${properties.noalignment},__dq__nomcs__dq__:${properties.nomcs},__dq__noH2H__dq__:${properties.noH2H},__dq__H2Hpolar__dq__:${properties.H2Hpolar},__dq__H2Heavy__dq__:${properties.H2Heavy},__dq__RingsOnly__dq__:${properties.RingsOnly},__dq__dMCS__dq__:${properties.dMCS},__dq__swap__dq__:${properties.swap},__dq__nochirality__dq__:${properties.nochirality},__dq__distance__dq__:${properties.distance},__dq__timeout__dq__:${properties.timeout},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc____cc__'
           #end if
         
           #if str($input_structure1_path) != 'None':
@@ -203,6 +203,12 @@
                   value="10"
                   
                   label="timeout" help="Maximum time (s) for an MCS search." optional="false"/>
+            
+              <param name="binary_path" type="text" label="binary_path" help="Path to the PMX command line interface." optional="false"
+                  value="pmx"
+                >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
             
               <param name="output_pairs1_path_format" type="select" label="output_pairs1_path_format" help="Format of the output file" multiple="false">
                   

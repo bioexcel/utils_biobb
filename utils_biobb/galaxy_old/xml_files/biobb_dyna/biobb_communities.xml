@@ -1,0 +1,160 @@
+<tool id="biobb_dyna_communities_ext" name="Communities" version="5.0.0" >
+    <description>: Community detection in a protein network graph.</description>
+    <requirements>
+        <requirement type="package"
+        version="5.0.0"
+        >biobb_dyna</requirement>
+    </requirements>
+    <command detect_errors="aggressive"><![CDATA[
+        
+          ln -f -s ${input_graph_path} ${input_graph_path}_`echo $$`.${input_graph_path.ext};
+        
+        #if $config.sele == "option1":
+            ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
+          #end if
+
+        communities
+
+        #if $config.sele == "option1":
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
+          #else if $config.sele == "option2":
+            --config '${config.jsonstr}'
+          #else if $config.sele == "option3":
+            --config '__oc____dq__properties__dq__:__oc____dq__algorithm__dq__:__dq__${properties.algorithm}__dq__,__dq__resolution__dq__:${properties.resolution},__dq__max_levels__dq__:${properties.max_levels},__dq__remove_tmp__dq__:${properties.remove_tmp},__dq__restart__dq__:${properties.restart}__cc____cc__'
+          #end if
+        
+          #if str($input_graph_path) != 'None':
+            --input_graph_path ${input_graph_path}_`echo $$`.${input_graph_path.ext}
+          #end if
+        
+        
+          --output_communities_path $outname_output_communities_path
+        ;
+        #if $config.sele == "option1":
+            rm -f ${config.properties}_`echo $$`.${config.properties.ext};
+          #end if
+        
+          rm -f ${input_graph_path}_`echo $$`.${input_graph_path.ext};
+        
+        
+          if test -f $outname_output_communities_path; then mv $outname_output_communities_path $output_communities_path; fi;
+        
+    ]]>
+    </command>
+    <inputs>
+        
+          <param name="input_graph_path" type="data" format=""  optional="False" label="input  file" help="Path to input GraphML graph.. Format: [input]."/>
+        
+        
+          <param name="outname_output_communities_path" type="text" value="mycommunities."
+              optional="False" label="output  name"
+              help="Path to output JSON with community assignments and modularity. Format: [output]. "/>
+        
+        <conditional name="config">
+            <param name="sele" type="select" label="Take tool settings:" help="Select where tool settings are to be read from">
+              <option value="option3">Manual Input</option>
+              <option value="option1">from configuration file</option>
+              <option value="option2">from JSON string</option>
+            </param>
+            <when value="option1">
+              <param name="properties" type="data" format="yml,json" optional="false" label="Configuration file" help="File containing tool settings. See below for the syntax"/>
+            </when>
+            <when value="option2">
+              <param name="jsonstr" type="text" value="{}" optional="false" label="JSON string" help="JSON string containing tool settings. See below for the syntax"/>
+            </when>
+            <when value="option3">
+            </when>
+          </conditional>
+          <section name="properties" title="Properties Input">
+            
+              <param name="algorithm" type="select" label="algorithm" help="Community detection algorithm." multiple="false">
+                  
+                    <option value="louvain"
+                      selected="true"
+                    >louvain
+                       
+                    </option>
+                  
+                    <option value="girvan_newman"
+                      
+                    >girvan_newman
+                       
+                    </option>
+                  
+                    <option value="greedy_modularity"
+                      
+                    >greedy_modularity
+                       
+                    </option>
+                  
+                    <option value="label_propagation"
+                      
+                    >label_propagation
+                       
+                    </option>
+                  
+                </param>
+            
+              <param name="resolution" type="float"
+                  value="1.0"
+                  
+                  label="resolution" help="Resolution for Louvain / greedy modularity." optional="false"/>
+            
+              
+            
+              <param name="remove_tmp" type="boolean"
+                  checked="true"
+                  label="remove_tmp" help="Remove temporary files."
+                />
+            
+              <param name="restart" type="boolean"
+                  
+                  label="restart" help="Skip execution if output already exists."
+                />
+            
+          </section>
+    </inputs>
+    <outputs>
+        
+        
+          <data name="output_communities_path" format="" label="${outname_output_communities_path}"/>
+        
+    </outputs>
+    <tests>
+        <test>
+          <param name="sele" value="option1"/>
+          <param name="properties" value="data/config/config_editconf.json"/>
+        </test>
+    </tests>
+    <help>
+.. class:: infomark
+
+Check the syntax for the tool parameters at the original library documentation: https://biobb_dyna.readthedocs.io/en/latest
+
+-----
+
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
+    :width: 150
+
+**https://mmb.irbbarcelona.org/biobb**
+
+.. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
+        :width: 150
+
+**https://bioexcel.eu**
+   </help>
+
+    <citations>
+        <citation type="bibtex">
+            @misc{githubbiobb,
+            author = {Andrio P, Bayarri, G., Hospital A, Gelpi JL},
+            year = {2019-21},
+            title = {biobb: BioExcel building blocks },
+            publisher = {GitHub},
+            journal = {GitHub repository},
+            url = {https://github.com/bioexcel/biobb_dyna},
+            }
+        </citation>
+        <citation type="doi">10.1038/s41597-019-0177-4</citation>
+    </citations>
+</tool>

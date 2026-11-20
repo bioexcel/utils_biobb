@@ -1,8 +1,8 @@
-<tool id="biobb_chemistry_acpype_params_ac_ext" name="AcpypeParamsAc" version="4.2.0" >
+<tool id="biobb_chemistry_acpype_params_ac_ext" name="AcpypeParamsAc" version="5.3.2" >
     <description>: This class is a wrapper of Acpype tool for small molecule parameterization for AMBER MD package.</description>
     <requirements>
         <requirement type="package"
-        version="4.2.0"
+        version="5.3.2"
         >biobb_chemistry</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__basename__dq__:__dq__${properties.basename}__dq__,__dq__charge__dq__:${properties.charge},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
+            --config '__oc____dq__properties__dq__:__oc____dq__basename__dq__:__dq__${properties.basename}__dq__,__dq__charge__dq__:${properties.charge},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc____cc__'
           #end if
         
           #if str($input_path) != 'None':

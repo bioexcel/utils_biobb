@@ -1,8 +1,8 @@
-<tool id="biobb_vs_fpocket_filter_ext" name="FpocketFilter" version="4.2.0" >
+<tool id="biobb_vs_fpocket_filter_ext" name="FpocketFilter" version="5.3.0" >
     <description>: Performs a search over the outputs of the fpocket building block.</description>
     <requirements>
         <requirement type="package"
-        version="4.2.0"
+        version="5.3.0"
         >biobb_vs</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -22,7 +22,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__score__dq__:${properties.score},__dq__druggability_score__dq__:${properties.druggability_score},__dq__volume__dq__:${properties.volume}__cc__'
+            --config '__oc____dq__properties__dq__:__oc____dq__score__dq__:${properties.score},__dq__druggability_score__dq__:${properties.druggability_score},__dq__volume__dq__:${properties.volume}__cc____cc__'
           #end if
         
           #if str($input_pockets_zip) != 'None':

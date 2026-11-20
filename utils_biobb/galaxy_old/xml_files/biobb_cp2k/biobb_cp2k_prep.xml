@@ -1,8 +1,8 @@
-<tool id="biobb_cp2k_cp2k_prep_ext" name="Cp2kPrep" version="4.2.0" >
+<tool id="biobb_cp2k_cp2k_prep_ext" name="Cp2kPrep" version="5.3.0" >
     <description>: Helper bb to prepare inputs for the CP2K QM tool module.</description>
     <requirements>
         <requirement type="package"
-        version="4.2.0"
+        version="5.3.0"
         >biobb_cp2k</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -24,7 +24,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__simulation_type__dq__:__dq__${properties.simulation_type}__dq__,__dq__cp2k_in__dq__:${properties.cp2k_in},__dq__cell_cutoff__dq__:${properties.cell_cutoff}__cc__'
+            --config '__oc____dq__properties__dq__:__oc____dq__simulation_type__dq__:__dq__${properties.simulation_type}__dq__,__dq__cp2k_in__dq__:${properties.cp2k_in},__dq__cell_cutoff__dq__:${properties.cell_cutoff}__cc____cc__'
           #end if
         
           #if str($input_inp_path) != 'None':
@@ -59,7 +59,7 @@
     </command>
     <inputs>
         
-          <param name="input_inp_path" type="data" format="pdb"  optional="True" label="input PDB file" help="Input configuration file (CP2K run options). Format: [input].pdb"/>
+          <param name="input_inp_path" type="data" format="inp,in,txt,wfn"  optional="True" label="input INP,IN,TXT,WFN file" help="Input configuration file (CP2K run options). Format: [input].[format]"/>
         
           <param name="input_pdb_path" type="data" format="pdb"  optional="True" label="input PDB file" help="Input PDB file. Format: [input].pdb"/>
         

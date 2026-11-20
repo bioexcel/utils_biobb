@@ -1,8 +1,8 @@
-<tool id="biobb_cmip_cmip_prepare_structure_ext" name="CmipPrepareStructure" version="4.2.0" >
+<tool id="biobb_cmip_cmip_prepare_structure_ext" name="CmipPrepareStructure" version="5.3.1" >
     <description>: Generate a CMIP suitable PDB input.</description>
     <requirements>
         <requirement type="package"
-        version="4.2.0"
+        version="5.3.1"
         >biobb_cmip</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[

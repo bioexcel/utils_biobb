@@ -1,8 +1,8 @@
-<tool id="biobb_godmd_godmd_prep_ext" name="GodmdPrep" version="4.0.2" >
+<tool id="biobb_godmd_godmd_prep_ext" name="GodmdPrep" version="4.1.0" >
     <description>: Helper bb to prepare inputs for the GOdMD tool module.</description>
     <requirements>
         <requirement type="package"
-        version="4.0.2"
+        version="4.1.0"
         >biobb_godmd</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -22,7 +22,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__gapopen__dq__:${properties.gapopen},__dq__gapextend__dq__:${properties.gapextend},__dq__datafile__dq__:__dq__${properties.datafile}__dq__,__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
+            --config '__oc____dq__properties__dq__:__oc____dq__gapopen__dq__:${properties.gapopen},__dq__gapextend__dq__:${properties.gapextend},__dq__datafile__dq__:__dq__${properties.datafile}__dq__,__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc____cc__'
           #end if
         
           #if str($input_pdb_orig_path) != 'None':
@@ -166,6 +166,8 @@
     </outputs>
     <tests>
         <test>
+          <param name="sele" value="option1"/>
+          <param name="properties" value="data/config/config_editconf.json"/>
         </test>
     </tests>
     <help>

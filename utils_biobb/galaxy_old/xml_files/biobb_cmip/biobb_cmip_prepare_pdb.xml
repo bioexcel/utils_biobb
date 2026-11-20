@@ -1,8 +1,8 @@
-<tool id="biobb_cmip_cmip_prepare_pdb_ext" name="CmipPreparePdb" version="4.2.0" >
+<tool id="biobb_cmip_cmip_prepare_pdb_ext" name="CmipPreparePdb" version="5.3.1" >
     <description>: Class to add CMIP charges and atom types.</description>
     <requirements>
         <requirement type="package"
-        version="4.2.0"
+        version="5.3.1"
         >biobb_cmip</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__remove_water__dq__:${properties.remove_water},__dq__add_hydrogen__dq__:${properties.add_hydrogen},__dq__keep_hydrogen__dq__:${properties.keep_hydrogen},__dq__fix_sidechains__dq__:${properties.fix_sidechains},__dq__fix_backbone_atoms__dq__:${properties.fix_backbone_atoms}__cc__'
+            --config '__oc____dq__properties__dq__:__oc____dq__remove_water__dq__:${properties.remove_water},__dq__add_hydrogen__dq__:${properties.add_hydrogen},__dq__keep_hydrogen__dq__:${properties.keep_hydrogen},__dq__fix_sidechains__dq__:${properties.fix_sidechains},__dq__fix_backbone_atoms__dq__:${properties.fix_backbone_atoms}__cc____cc__'
           #end if
         
           #if str($input_pdb_path) != 'None':

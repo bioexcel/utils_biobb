@@ -1,8 +1,8 @@
-<tool id="biobb_chemistry_babel_convert_ext" name="BabelConvert" version="4.2.0" >
+<tool id="biobb_chemistry_babel_convert_ext" name="BabelConvert" version="5.3.2" >
     <description>: This class is a wrapper of the Open Babel tool.</description>
     <requirements>
         <requirement type="package"
-        version="4.2.0"
+        version="5.3.2"
         >biobb_chemistry</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__input_format__dq__:__dq__${properties.input_format}__dq__,__dq__output_format__dq__:__dq__${properties.output_format}__dq__,__dq__coordinates__dq__:__dq__${properties.coordinates}__dq__,__dq__ph__dq__:${properties.ph},__dq__flex__dq__:${properties.flex},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
+            --config '__oc____dq__properties__dq__:__oc____dq__input_format__dq__:__dq__${properties.input_format}__dq__,__dq__output_format__dq__:__dq__${properties.output_format}__dq__,__dq__fs_input__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.fs_input)}__dq____cb__,__dq__fs_output__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.fs_output)}__dq____cb__,__dq__coordinates__dq__:__dq__${properties.coordinates}__dq__,__dq__effort__dq__:__dq__${properties.effort}__dq__,__dq__ph__dq__:${properties.ph},__dq__flex__dq__:${properties.flex},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc____cc__'
           #end if
         
           #if str($input_path) != 'None':
@@ -309,6 +309,68 @@
                   
                 </param>
             
+              <param name="fs_input" type="select" label="fs_input" help="Format-specific input options. " multiple="true">
+                  
+                    <option value="b"
+                      
+                    >b
+                       - disable automatic bonding
+                    </option>
+                  
+                    <option value="d"
+                      
+                    >d
+                       - input file is in dlg -AutoDock docking log- format
+                    </option>
+                  
+                </param>
+            
+              <param name="fs_output" type="select" label="fs_output" help="Format-specific output options. " multiple="true">
+                  
+                    <option value="b"
+                      
+                    >b
+                       - enable automatic bonding
+                    </option>
+                  
+                    <option value="r"
+                      
+                    >r
+                       - output as a rigid molecule
+                    </option>
+                  
+                    <option value="c"
+                      
+                    >c
+                       - combine separate molecular pieces of input into a single rigid molecule
+                    </option>
+                  
+                    <option value="s"
+                      
+                    >s
+                       - output as a flexible residue
+                    </option>
+                  
+                    <option value="p"
+                      
+                    >p
+                       - preserve atom indices from input file
+                    </option>
+                  
+                    <option value="h"
+                      
+                    >h
+                       - preserve hydrogens
+                    </option>
+                  
+                    <option value="n"
+                      
+                    >n
+                       - preserve atom names
+                    </option>
+                  
+                </param>
+            
               <param name="coordinates" type="select" label="coordinates" help="Type of coordinates: 2D or 3D. " multiple="false">
                   
                     <option value="2"
@@ -321,6 +383,46 @@
                       
                     >3
                        - 3D coordinates
+                    </option>
+                  
+                </param>
+            
+              <param name="effort" type="select" label="effort" help="Computational effort wanted to dedicate for the conformer generation coordinates calculations, only for 3D coordinates. " multiple="false">
+                  
+                    <option value="fastest"
+                      
+                    >fastest
+                       
+                    </option>
+                  
+                    <option value="no force field or conformer search"
+                      
+                    >no force field or conformer search
+                       
+                    </option>
+                  
+                    <option value="fast"
+                      
+                    >fast
+                       - perform quick forcefield optimization
+                    </option>
+                  
+                    <option value="medium"
+                      selected="true"
+                    >medium
+                       - forcefield optimization + fast conformer search
+                    </option>
+                  
+                    <option value="better"
+                      
+                    >better
+                       - more optimization + fast conformer search
+                    </option>
+                  
+                    <option value="best"
+                      
+                    >best
+                       - more optimization + significant conformer search
                     </option>
                   
                 </param>

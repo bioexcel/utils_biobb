@@ -1,8 +1,8 @@
-<tool id="biobb_flexdyn_concoord_dist_ext" name="ConcoordDist" version="4.2.0" >
+<tool id="biobb_flexdyn_concoord_dist_ext" name="ConcoordDist" version="5.3.0" >
     <description>: Wrapper of the Dist tool from the Concoord package.</description>
     <requirements>
         <requirement type="package"
-        version="4.2.0"
+        version="5.3.0"
         >biobb_flexdyn</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__binary_path__dq__:__dq__${properties.binary_path}__dq__,__dq__vdw__dq__:__dq__${properties.vdw}__dq__,__dq__bond_angle__dq__:__dq__${properties.bond_angle}__dq__,__dq__retain_hydrogens__dq__:${properties.retain_hydrogens},__dq__nb_interactions__dq__:${properties.nb_interactions},__dq__cutoff__dq__:${properties.cutoff},__dq__min_distances__dq__:${properties.min_distances},__dq__damp__dq__:${properties.damp},__dq__fixed_atoms__dq__:${properties.fixed_atoms}__cc__'
+            --config '__oc____dq__properties__dq__:__oc____dq__binary_path__dq__:__dq__${properties.binary_path}__dq__,__dq__vdw__dq__:__dq__${properties.vdw}__dq__,__dq__concoord_lib_path__dq__:__dq__${properties.concoord_lib_path}__dq__,__dq__bond_angle__dq__:__dq__${properties.bond_angle}__dq__,__dq__retain_hydrogens__dq__:${properties.retain_hydrogens},__dq__nb_interactions__dq__:${properties.nb_interactions},__dq__cutoff__dq__:${properties.cutoff},__dq__min_distances__dq__:${properties.min_distances},__dq__damp__dq__:${properties.damp},__dq__fixed_atoms__dq__:${properties.fixed_atoms}__cc____cc__'
           #end if
         
           #if str($input_structure_path) != 'None':
@@ -127,6 +127,12 @@
                        - OPLS-X parameters -recommended for NMR structure determination-
                     </option>
                   
+                </param>
+            
+              <param name="concoord_lib_path" type="text" label="concoord_lib_path" help="Path to Concoord library files. If not specified will look for CONCOORDLIB conda environment variable." optional="true"
+                  
+                >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
             
               <param name="bond_angle" type="select" label="bond_angle" help="Select a set of bond/angle parameters. " multiple="false">

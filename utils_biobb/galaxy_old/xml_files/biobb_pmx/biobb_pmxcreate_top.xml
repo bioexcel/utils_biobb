@@ -1,8 +1,8 @@
-<tool id="biobb_pmx_pmxcreate_top_ext" name="PmxcreateTop" version="4.2.1" >
+<tool id="biobb_pmx_pmxcreate_top_ext" name="PmxcreateTop" version="5.3.1" >
     <description>: Wrapper class for the PMX create_top module.</description>
     <requirements>
         <requirement type="package"
-        version="4.2.1"
+        version="5.3.1"
         >biobb_pmx</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -22,7 +22,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__force_field__dq__:__dq__${properties.force_field}__dq__,__dq__water__dq__:__dq__${properties.water}__dq__,__dq__system_name__dq__:__dq__${properties.system_name}__dq__,__dq__mols__dq__:${properties.mols}__cc__'
+            --config '__oc____dq__properties__dq__:__oc____dq__force_field__dq__:__dq__${properties.force_field}__dq__,__dq__water__dq__:__dq__${properties.water}__dq__,__dq__system_name__dq__:__dq__${properties.system_name}__dq__,__dq__mols__dq__:${properties.mols}__cc____cc__'
           #end if
         
           #if str($input_topology1_path) != 'None':

@@ -1,8 +1,8 @@
-<tool id="biobb_structure_utils_str_check_add_hydrogens_ext" name="StrCheckAddHydrogens" version="4.2.0" >
+<tool id="biobb_structure_utils_str_check_add_hydrogens_ext" name="StrCheckAddHydrogens" version="5.3.0" >
     <description>: This class is a wrapper of the Structure Checking tool to add hydrogens to a 3D structure.</description>
     <requirements>
         <requirement type="package"
-        version="4.2.0"
+        version="5.3.0"
         >biobb_structure_utils</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__charges__dq__:${properties.charges},__dq__mode__dq__:__dq__${properties.mode}__dq__,__dq__ph__dq__:${properties.ph},__dq__list__dq__:__dq__${properties.list}__dq__,__dq__keep_canonical_resnames__dq__:${properties.keep_canonical_resnames},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
+            --config '__oc____dq__properties__dq__:__oc____dq__charges__dq__:${properties.charges},__dq__mode__dq__:__dq__${properties.mode}__dq__,__dq__ph__dq__:${properties.ph},__dq__list__dq__:__dq__${properties.list}__dq__,__dq__keep_canonical_resnames__dq__:${properties.keep_canonical_resnames},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc____cc__'
           #end if
         
           #if str($input_structure_path) != 'None':

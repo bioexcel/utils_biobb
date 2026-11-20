@@ -1,8 +1,8 @@
-<tool id="biobb_cp2k_cp2k_run_ext" name="Cp2kRun" version="4.2.0" >
+<tool id="biobb_cp2k_cp2k_run_ext" name="Cp2kRun" version="5.3.0" >
     <description>: Wrapper of the CP2K QM tool module.</description>
     <requirements>
         <requirement type="package"
-        version="4.2.0"
+        version="5.3.0"
         >biobb_cp2k</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__binary_path__dq__:__dq__${properties.binary_path}__dq__,__dq__param_path__dq__:__dq__${properties.param_path}__dq__,__dq__mpi_bin__dq__:__dq__${properties.mpi_bin}__dq__,__dq__mpi_np__dq__:${properties.mpi_np},__dq__mpi_flags__dq__:__dq__${properties.mpi_flags}__dq____cc__'
+            --config '__oc____dq__properties__dq__:__oc____dq__binary_path__dq__:__dq__${properties.binary_path}__dq__,__dq__param_path__dq__:__dq__${properties.param_path}__dq__,__dq__mpi_bin__dq__:__dq__${properties.mpi_bin}__dq__,__dq__mpi_np__dq__:${properties.mpi_np},__dq__mpi_flags__dq__:__dq__${properties.mpi_flags}__dq____cc____cc__'
           #end if
         
           #if str($input_inp_path) != 'None':

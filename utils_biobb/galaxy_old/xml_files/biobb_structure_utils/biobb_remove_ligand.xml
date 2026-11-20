@@ -1,8 +1,8 @@
-<tool id="biobb_structure_utils_remove_ligand_ext" name="RemoveLigand" version="4.2.0" >
+<tool id="biobb_structure_utils_remove_ligand_ext" name="RemoveLigand" version="5.3.0" >
     <description>: Class to remove the selected ligand atoms from a 3D structure.</description>
     <requirements>
         <requirement type="package"
-        version="4.2.0"
+        version="5.3.0"
         >biobb_structure_utils</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__ligand__dq__:__dq__${properties.ligand}__dq____cc__'
+            --config '__oc____dq__properties__dq__:__oc____dq__ligand__dq__:__dq__${properties.ligand}__dq____cc____cc__'
           #end if
         
           #if str($input_structure_path) != 'None':

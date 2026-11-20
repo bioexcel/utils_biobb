@@ -1,0 +1,384 @@
+<tool id="biobb_dna_dna_timeseries_unzip_ext" name="DnaTimeseriesUnzip" version="5.3.0" >
+    <description>: Tool for extracting dna_timeseries output files.</description>
+    <requirements>
+        <requirement type="package"
+        version="5.3.0"
+        >biobb_dna</requirement>
+    </requirements>
+    <command detect_errors="aggressive"><![CDATA[
+        
+          ln -f -s ${input_zip_file} ${input_zip_file}_`echo $$`.${input_zip_file.ext};
+        
+        #if $config.sele == "option1":
+            ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
+          #end if
+
+        dna_timeseries_unzip
+
+        #if $config.sele == "option1":
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
+          #else if $config.sele == "option2":
+            --config '${config.jsonstr}'
+          #else if $config.sele == "option3":
+            --config '__oc____dq__properties__dq__:__oc____dq__type__dq__:__dq__${properties.type}__dq__,__dq__parameter__dq__:__dq__${properties.parameter}__dq__,__dq__sequence__dq__:__dq__${properties.sequence}__dq__,__dq__index__dq__:${properties.index}__cc____cc__'
+          #end if
+        
+          #if str($input_zip_file) != 'None':
+            --input_zip_file ${input_zip_file}_`echo $$`.${input_zip_file.ext}
+          #end if
+        
+        
+          --output_path_csv $outname_output_path_csv
+        
+          --output_path_jpg $outname_output_path_jpg
+        
+          --output_list_path $outname_output_list_path
+        ;
+        #if $config.sele == "option1":
+            rm -f ${config.properties}_`echo $$`.${config.properties.ext};
+          #end if
+        
+          rm -f ${input_zip_file}_`echo $$`.${input_zip_file.ext};
+        
+        
+          if test -f $outname_output_path_csv; then mv $outname_output_path_csv $output_path_csv; fi;
+        
+          if test -f $outname_output_path_jpg; then mv $outname_output_path_jpg $output_path_jpg; fi;
+        
+          if test -f $outname_output_list_path; then mv $outname_output_list_path $output_list_path; fi;
+        
+    ]]>
+    </command>
+    <inputs>
+        
+          <param name="input_zip_file" type="data" format="zip"  optional="False" label="input ZIP file" help="Zip file with dna_timeseries output files. Format: [input].zip"/>
+        
+        
+          <param name="outname_output_path_csv" type="text" value="mydna_timeseries_unzip.csv"
+              optional="False" label="output CSV name"
+              help="dna_timeseries output csv file contained within input_zip_file Format: [output].csv "/>
+        
+          <param name="outname_output_path_jpg" type="text" value="mydna_timeseries_unzip.jpg"
+              optional="False" label="output JPG name"
+              help="dna_timeseries output jpg file contained within input_zip_file Format: [output].jpg "/>
+        
+          <param name="outname_output_list_path" type="text" value="mydna_timeseries_unzip.txt"
+              optional="True" label="output TXT name"
+              help="Text file with a list of all dna_timeseries output files contained within input_zip_file Format: [output].txt "/>
+        
+        <conditional name="config">
+            <param name="sele" type="select" label="Take tool settings:" help="Select where tool settings are to be read from">
+              <option value="option3">Manual Input</option>
+              <option value="option1">from configuration file</option>
+              <option value="option2">from JSON string</option>
+            </param>
+            <when value="option1">
+              <param name="properties" type="data" format="yml,json" optional="false" label="Configuration file" help="File containing tool settings. See below for the syntax"/>
+            </when>
+            <when value="option2">
+              <param name="jsonstr" type="text" value="{}" optional="false" label="JSON string" help="JSON string containing tool settings. See below for the syntax"/>
+            </when>
+            <when value="option3">
+            </when>
+          </conditional>
+          <section name="properties" title="Properties Input">
+            
+              <param name="type" type="select" label="type" help="Type of analysis, series or histogram. " multiple="false">
+                  
+                    <option value="series"
+                      
+                    >series
+                       
+                    </option>
+                  
+                    <option value="hist"
+                      
+                    >hist
+                       
+                    </option>
+                  
+                </param>
+            
+              <param name="parameter" type="select" label="parameter" help="Type of parameter. " multiple="false">
+                  
+                    <option value="majd"
+                      
+                    >majd
+                       
+                    </option>
+                  
+                    <option value="majw"
+                      
+                    >majw
+                       
+                    </option>
+                  
+                    <option value="mind"
+                      
+                    >mind
+                       
+                    </option>
+                  
+                    <option value="minw"
+                      
+                    >minw
+                       
+                    </option>
+                  
+                    <option value="inclin"
+                      
+                    >inclin
+                       
+                    </option>
+                  
+                    <option value="tip"
+                      
+                    >tip
+                       
+                    </option>
+                  
+                    <option value="xdisp"
+                      
+                    >xdisp
+                       
+                    </option>
+                  
+                    <option value="ydisp"
+                      
+                    >ydisp
+                       
+                    </option>
+                  
+                    <option value="shear"
+                      
+                    >shear
+                       
+                    </option>
+                  
+                    <option value="stretch"
+                      
+                    >stretch
+                       
+                    </option>
+                  
+                    <option value="stagger"
+                      
+                    >stagger
+                       
+                    </option>
+                  
+                    <option value="buckle"
+                      
+                    >buckle
+                       
+                    </option>
+                  
+                    <option value="propel"
+                      
+                    >propel
+                       
+                    </option>
+                  
+                    <option value="opening"
+                      
+                    >opening
+                       
+                    </option>
+                  
+                    <option value="rise"
+                      
+                    >rise
+                       
+                    </option>
+                  
+                    <option value="roll"
+                      
+                    >roll
+                       
+                    </option>
+                  
+                    <option value="twist"
+                      
+                    >twist
+                       
+                    </option>
+                  
+                    <option value="shift"
+                      
+                    >shift
+                       
+                    </option>
+                  
+                    <option value="slide"
+                      
+                    >slide
+                       
+                    </option>
+                  
+                    <option value="tilt"
+                      
+                    >tilt
+                       
+                    </option>
+                  
+                    <option value="alphaC"
+                      
+                    >alphaC
+                       
+                    </option>
+                  
+                    <option value="alphaW"
+                      
+                    >alphaW
+                       
+                    </option>
+                  
+                    <option value="betaC"
+                      
+                    >betaC
+                       
+                    </option>
+                  
+                    <option value="betaW"
+                      
+                    >betaW
+                       
+                    </option>
+                  
+                    <option value="gammaC"
+                      
+                    >gammaC
+                       
+                    </option>
+                  
+                    <option value="gammaW"
+                      
+                    >gammaW
+                       
+                    </option>
+                  
+                    <option value="deltaC"
+                      
+                    >deltaC
+                       
+                    </option>
+                  
+                    <option value="deltaW"
+                      
+                    >deltaW
+                       
+                    </option>
+                  
+                    <option value="epsilC"
+                      
+                    >epsilC
+                       
+                    </option>
+                  
+                    <option value="epsilW"
+                      
+                    >epsilW
+                       
+                    </option>
+                  
+                    <option value="zetaC"
+                      
+                    >zetaC
+                       
+                    </option>
+                  
+                    <option value="zetaW"
+                      
+                    >zetaW
+                       
+                    </option>
+                  
+                    <option value="chiC"
+                      
+                    >chiC
+                       
+                    </option>
+                  
+                    <option value="chiW"
+                      
+                    >chiW
+                       
+                    </option>
+                  
+                    <option value="phaseC"
+                      
+                    >phaseC
+                       
+                    </option>
+                  
+                    <option value="phaseW"
+                      
+                    >phaseW
+                       
+                    </option>
+                  
+                </param>
+            
+              <param name="sequence" type="text" label="sequence" help="Nucleic acid sequence used for generating dna_timeseries output file." optional="true"
+                  
+                >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+              <param name="index" type="integer"
+                  value="1"
+                  
+                  label="index" help="Base pair index in the parameter &#39;sequence&#39;, starting from 1." optional="false"/>
+            
+          </section>
+    </inputs>
+    <outputs>
+        
+        
+          <data name="output_path_csv" format="csv" label="${outname_output_path_csv}"/>
+        
+        
+          <data name="output_path_jpg" format="jpg" label="${outname_output_path_jpg}"/>
+        
+        
+          <data name="output_list_path" format="txt" label="${outname_output_list_path}"/>
+        
+    </outputs>
+    <tests>
+        <test>
+          <param name="sele" value="option1"/>
+          <param name="properties" value="data/config/config_editconf.json"/>
+        </test>
+    </tests>
+    <help>
+.. class:: infomark
+
+Check the syntax for the tool parameters at the original library documentation: https://biobb_dna.readthedocs.io/en/latest
+
+-----
+
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
+    :width: 150
+
+**https://mmb.irbbarcelona.org/biobb**
+
+.. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
+        :width: 150
+
+**https://bioexcel.eu**
+   </help>
+
+    <citations>
+        <citation type="bibtex">
+            @misc{githubbiobb,
+            author = {Andrio P, Bayarri, G., Hospital A, Gelpi JL},
+            year = {2019-21},
+            title = {biobb: BioExcel building blocks },
+            publisher = {GitHub},
+            journal = {GitHub repository},
+            url = {https://github.com/bioexcel/biobb_dna},
+            }
+        </citation>
+        <citation type="doi">10.1038/s41597-019-0177-4</citation>
+    </citations>
+</tool>

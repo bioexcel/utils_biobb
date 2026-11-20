@@ -1,0 +1,186 @@
+<tool id="biobb_mem_mda_hole_ext" name="MdaHole" version="5.3.1" >
+    <description>: Wrapper of the MDAnalysis HOLE module for analyzing ion channel pores or transporter pathways.</description>
+    <requirements>
+        <requirement type="package"
+        version="5.3.1"
+        >biobb_mem</requirement>
+    </requirements>
+    <command detect_errors="aggressive"><![CDATA[
+        
+          ln -f -s ${input_top_path} ${input_top_path}_`echo $$`.${input_top_path.ext};
+        
+          ln -f -s ${input_traj_path} ${input_traj_path}_`echo $$`.${input_traj_path.ext};
+        
+        #if $config.sele == "option1":
+            ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
+          #end if
+
+        mda_hole
+
+        #if $config.sele == "option1":
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
+          #else if $config.sele == "option2":
+            --config '${config.jsonstr}'
+          #else if $config.sele == "option3":
+            --config '__oc____dq__properties__dq__:__oc____dq__start__dq__:${properties.start},__dq__stop__dq__:${properties.stop},__dq__steps__dq__:${properties.steps},__dq__executable__dq__:__dq__${properties.executable}__dq__,__dq__select__dq__:__dq__${properties.select}__dq__,__dq__cpoint__dq__:${properties.cpoint},__dq__cvect__dq__:${properties.cvect},__dq__sample__dq__:${properties.sample},__dq__end_radius__dq__:${properties.end_radius},__dq__dot_density__dq__:${properties.dot_density}__cc____cc__'
+          #end if
+        
+          #if str($input_top_path) != 'None':
+            --input_top_path ${input_top_path}_`echo $$`.${input_top_path.ext}
+          #end if
+        
+          #if str($input_traj_path) != 'None':
+            --input_traj_path ${input_traj_path}_`echo $$`.${input_traj_path.ext}
+          #end if
+        
+        
+          --output_hole_path $outname_output_hole_path
+        
+          --output_csv_path $outname_output_csv_path
+        ;
+        #if $config.sele == "option1":
+            rm -f ${config.properties}_`echo $$`.${config.properties.ext};
+          #end if
+        
+          rm -f ${input_top_path}_`echo $$`.${input_top_path.ext};
+        
+          rm -f ${input_traj_path}_`echo $$`.${input_traj_path.ext};
+        
+        
+          if test -f $outname_output_hole_path; then mv $outname_output_hole_path $output_hole_path; fi;
+        
+          if test -f $outname_output_csv_path; then mv $outname_output_csv_path $output_csv_path; fi;
+        
+    ]]>
+    </command>
+    <inputs>
+        
+          <param name="input_top_path" type="data" format="crd,gro,mdcrd,mol2,pdb,pdbqt,prmtop,psf,top,tpr,xml,xyz"  optional="False" label="input CRD,GRO,MDCRD,MOL2,PDB,PDBQT,PRMTOP,PSF,TOP,TPR,XML,XYZ file" help="Path to the input structure or topology file. Format: [input].[format]"/>
+        
+          <param name="input_traj_path" type="data" format="arc,crd,dcd,ent,gro,inpcrd,mdcrd,mol2,nc,pdb,pdbqt,restrt,tng,trr,xtc,xyz"  optional="False" label="input ARC,CRD,DCD,ENT,GRO,INPCRD,MDCRD,MOL2,NC,PDB,PDBQT,RESTRT,TNG,TRR,XTC,XYZ file" help="Path to the input trajectory to be processed. Format: [input].[format]"/>
+        
+        
+          <param name="outname_output_hole_path" type="text" value="mymda_hole.vmd"
+              optional="False" label="output VMD name"
+              help="Path to the output HOLE analysis results Format: [output].vmd "/>
+        
+          <param name="outname_output_csv_path" type="text" value="mymda_hole.csv"
+              optional="False" label="output CSV name"
+              help="Path to the output CSV file containing the radius and coordinates of the pore Format: [output].csv "/>
+        
+        <conditional name="config">
+            <param name="sele" type="select" label="Take tool settings:" help="Select where tool settings are to be read from">
+              <option value="option3">Manual Input</option>
+              <option value="option1">from configuration file</option>
+              <option value="option2">from JSON string</option>
+            </param>
+            <when value="option1">
+              <param name="properties" type="data" format="yml,json" optional="false" label="Configuration file" help="File containing tool settings. See below for the syntax"/>
+            </when>
+            <when value="option2">
+              <param name="jsonstr" type="text" value="{}" optional="false" label="JSON string" help="JSON string containing tool settings. See below for the syntax"/>
+            </when>
+            <when value="option3">
+            </when>
+          </conditional>
+          <section name="properties" title="Properties Input">
+            
+              <param name="start" type="integer"
+                  
+                  
+                  label="start" help="Starting frame for slicing." optional="true"/>
+            
+              <param name="stop" type="integer"
+                  
+                  
+                  label="stop" help="Ending frame for slicing." optional="true"/>
+            
+              <param name="steps" type="integer"
+                  
+                  
+                  label="steps" help="Step for slicing." optional="true"/>
+            
+              <param name="executable" type="text" label="executable" help="Path to the HOLE executable." optional="false"
+                  value="hole"
+                >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+              <param name="select" type="text" label="select" help="The selection string to create an atom selection that the HOLE analysis is applied to." optional="false"
+                  value="protein"
+                >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+              <param name="cpoint" type="text" label="cpoint" help="Coordinates of a point inside the pore (Å). If None, tries to guess based on the geometry. (Json)" value="[]" >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+              <param name="cvect" type="text" label="cvect" help="Search direction vector. If None, tries to guess based on the geometry. (Json)" value="[]" >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+              <param name="sample" type="float"
+                  value="0.2"
+                  
+                  label="sample" help="Distance of sample points in Å. This value determines how many points in the pore profile are calculated." optional="false"/>
+            
+              <param name="end_radius" type="float"
+                  value="22.0"
+                  
+                  label="end_radius" help="Radius in Å, which is considered to be the end of the pore." optional="false"/>
+            
+              <param name="dot_density" type="integer"
+                  value="15"
+                  min="5" max="35"
+                  label="dot_density" help="Density of facets for generating a 3D pore representation." optional="false"/>
+            
+          </section>
+    </inputs>
+    <outputs>
+        
+        
+          <data name="output_hole_path" format="vmd" label="${outname_output_hole_path}"/>
+        
+        
+          <data name="output_csv_path" format="csv" label="${outname_output_csv_path}"/>
+        
+    </outputs>
+    <tests>
+        <test>
+          <param name="sele" value="option1"/>
+          <param name="properties" value="data/config/config_editconf.json"/>
+        </test>
+    </tests>
+    <help>
+.. class:: infomark
+
+Check the syntax for the tool parameters at the original library documentation: https://biobb_mem.readthedocs.io/en/latest
+
+-----
+
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
+    :width: 150
+
+**https://mmb.irbbarcelona.org/biobb**
+
+.. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
+        :width: 150
+
+**https://bioexcel.eu**
+   </help>
+
+    <citations>
+        <citation type="bibtex">
+            @misc{githubbiobb,
+            author = {Andrio P, Bayarri, G., Hospital A, Gelpi JL},
+            year = {2019-21},
+            title = {biobb: BioExcel building blocks },
+            publisher = {GitHub},
+            journal = {GitHub repository},
+            url = {https://github.com/bioexcel/biobb_mem},
+            }
+        </citation>
+        <citation type="doi">10.1038/s41597-019-0177-4</citation>
+    </citations>
+</tool>

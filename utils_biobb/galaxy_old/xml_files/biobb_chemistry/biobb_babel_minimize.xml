@@ -1,8 +1,8 @@
-<tool id="biobb_chemistry_babel_minimize_ext" name="BabelMinimize" version="4.2.0" >
+<tool id="biobb_chemistry_babel_minimize_ext" name="BabelMinimize" version="5.3.2" >
     <description>: This class is a wrapper of the Open Babel tool.</description>
     <requirements>
         <requirement type="package"
-        version="4.2.0"
+        version="5.3.2"
         >biobb_chemistry</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__criteria__dq__:${properties.criteria},__dq__method__dq__:__dq__${properties.method}__dq__,__dq__force_field__dq__:__dq__${properties.force_field}__dq__,__dq__hydrogens__dq__:${properties.hydrogens},__dq__steps__dq__:${properties.steps},__dq__cutoff__dq__:${properties.cutoff},__dq__rvdw__dq__:${properties.rvdw},__dq__rele__dq__:${properties.rele},__dq__frequency__dq__:${properties.frequency},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
+            --config '__oc____dq__properties__dq__:__oc____dq__criteria__dq__:${properties.criteria},__dq__method__dq__:__dq__${properties.method}__dq__,__dq__force_field__dq__:__dq__${properties.force_field}__dq__,__dq__hydrogens__dq__:${properties.hydrogens},__dq__steps__dq__:${properties.steps},__dq__cutoff__dq__:${properties.cutoff},__dq__rvdw__dq__:${properties.rvdw},__dq__rele__dq__:${properties.rele},__dq__frequency__dq__:${properties.frequency},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc____cc__'
           #end if
         
           #if str($input_path) != 'None':

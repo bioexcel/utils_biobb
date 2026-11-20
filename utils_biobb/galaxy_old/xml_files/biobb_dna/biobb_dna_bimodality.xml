@@ -1,8 +1,8 @@
-<tool id="biobb_dna_dna_bimodality_ext" name="DnaBimodality" version="4.2.2" >
+<tool id="biobb_dna_dna_bimodality_ext" name="DnaBimodality" version="5.3.0" >
     <description>: Determine binormality/bimodality from a helical parameter series dataset.</description>
     <requirements>
         <requirement type="package"
-        version="4.2.2"
+        version="5.3.0"
         >biobb_dna</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -22,7 +22,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__helpar_name__dq__:__dq__${properties.helpar_name}__dq__,__dq__confidence_level__dq__:${properties.confidence_level},__dq__max_iter__dq__:${properties.max_iter},__dq__tol__dq__:${properties.tol}__cc__'
+            --config '__oc____dq__properties__dq__:__oc____dq__helpar_name__dq__:__dq__${properties.helpar_name}__dq__,__dq__confidence_level__dq__:${properties.confidence_level},__dq__max_iter__dq__:${properties.max_iter},__dq__tol__dq__:${properties.tol}__cc____cc__'
           #end if
         
           #if str($input_csv_file) != 'None':

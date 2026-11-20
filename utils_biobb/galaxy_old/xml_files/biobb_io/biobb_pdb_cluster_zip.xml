@@ -1,8 +1,8 @@
-<tool id="biobb_io_pdb_cluster_zip_ext" name="PdbClusterZip" version="4.2.0" >
+<tool id="biobb_io_pdb_cluster_zip_ext" name="PdbClusterZip" version="5.3.2" >
     <description>: This class is a wrapper for downloading a PDB cluster from the Protein Data Bank.</description>
     <requirements>
         <requirement type="package"
-        version="4.2.0"
+        version="5.3.2"
         >biobb_io</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -18,7 +18,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__pdb_code__dq__:__dq__${properties.pdb_code}__dq__,__dq__filter__dq__:__dq__${properties.filter}__dq__,__dq__cluster__dq__:__dq__${properties.cluster}__dq__,__dq__api_id__dq__:__dq__${properties.api_id}__dq____cc__'
+            --config '__oc____dq__properties__dq__:__oc____dq__pdb_code__dq__:__dq__${properties.pdb_code}__dq__,__dq__filter__dq__:__dq__${properties.filter}__dq__,__dq__cluster__dq__:__dq__${properties.cluster}__dq__,__dq__api_id__dq__:__dq__${properties.api_id}__dq____cc____cc__'
           #end if
         
         

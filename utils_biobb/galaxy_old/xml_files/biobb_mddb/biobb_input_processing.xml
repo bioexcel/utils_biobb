@@ -1,0 +1,208 @@
+<tool id="biobb_mddb_input_processing_ext" name="InputProcessing" version="5.2.0" >
+    <description>: Wrapper of the Input processing steps from MDDB workflow module.</description>
+    <requirements>
+        <requirement type="package"
+        version="5.2.0"
+        >biobb_mddb</requirement>
+    </requirements>
+    <command detect_errors="aggressive"><![CDATA[
+        
+          ln -f -s ${input_topology_filepath} ${input_topology_filepath}_`echo $$`.${input_topology_filepath.ext};
+        
+          ln -f -s ${input_trajectory_filepath} ${input_trajectory_filepath}_`echo $$`.${input_trajectory_filepath.ext};
+        
+        #if $config.sele == "option1":
+            ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
+          #end if
+
+        input_processing
+
+        #if $config.sele == "option1":
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
+          #else if $config.sele == "option2":
+            --config '${config.jsonstr}'
+          #else if $config.sele == "option3":
+            --config '__oc____dq__properties__dq__:__oc____dq__filter__dq__:__dq__${properties.filter}__dq__,__dq__image__dq__:${properties.image},__dq__fit__dq__:${properties.fit},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc____cc__'
+          #end if
+        
+          #if str($input_topology_filepath) != 'None':
+            --input_topology_filepath ${input_topology_filepath}_`echo $$`.${input_topology_filepath.ext}
+          #end if
+        
+          #if str($input_trajectory_filepath) != 'None':
+            --input_trajectory_filepath ${input_trajectory_filepath}_`echo $$`.${input_trajectory_filepath.ext}
+          #end if
+        
+        
+          --output_topology_filepath $outname_output_topology_filepath
+        
+          --output_trajectory_filepath $outname_output_trajectory_filepath
+        
+          --output_structure_filepath $outname_output_structure_filepath
+        ;
+        #if $config.sele == "option1":
+            rm -f ${config.properties}_`echo $$`.${config.properties.ext};
+          #end if
+        
+          rm -f ${input_topology_filepath}_`echo $$`.${input_topology_filepath.ext};
+        
+          rm -f ${input_trajectory_filepath}_`echo $$`.${input_trajectory_filepath.ext};
+        
+        
+          if test -f $outname_output_topology_filepath; then mv $outname_output_topology_filepath $output_topology_filepath; fi;
+        
+          if test -f $outname_output_trajectory_filepath; then mv $outname_output_trajectory_filepath $output_trajectory_filepath; fi;
+        
+          if test -f $outname_output_structure_filepath; then mv $outname_output_structure_filepath $output_structure_filepath; fi;
+        
+    ]]>
+    </command>
+    <inputs>
+        
+          <param name="input_topology_filepath" type="data" format="pdb,gro,prmtop,top,itp,tpr,psf"  optional="False" label="input PDB,GRO,PRMTOP,TOP,ITP,TPR,PSF file" help="Input topology or structure file. Format: [input].[format]"/>
+        
+          <param name="input_trajectory_filepath" type="data" format="xtc,trr,dcd,nc"  optional="False" label="input XTC,TRR,DCD,NC file" help="Input trajectory file. Format: [input].[format]"/>
+        
+        
+          <param name="outname_output_topology_filepath" type="text" value="myinput_processing.prmtop"
+              optional="False" label="output PRMTOP,TOP,TPR,PSF name"
+              help="Output topology file, with a filtered set of atoms matching the trajectory Format: [output].[format] "/>
+        
+          <param name="outname_output_trajectory_filepath" type="text" value="myinput_processing.xtc"
+              optional="False" label="output XTC name"
+              help="Output XTC trajectory file with the filtered, imaged and fitted coordinates Format: [output].xtc "/>
+        
+          <param name="outname_output_structure_filepath" type="text" value="myinput_processing.cif"
+              optional="False" label="output CIF name"
+              help="Output mmCIF structure file with the filtered, imaged and fitted coordinates Format: [output].cif "/>
+        
+        <conditional name="config">
+            <param name="sele" type="select" label="Take tool settings:" help="Select where tool settings are to be read from">
+              <option value="option3">Manual Input</option>
+              <option value="option1">from configuration file</option>
+              <option value="option2">from JSON string</option>
+            </param>
+            <when value="option1">
+              <param name="properties" type="data" format="yml,json" optional="false" label="Configuration file" help="File containing tool settings. See below for the syntax"/>
+            </when>
+            <when value="option2">
+              <param name="jsonstr" type="text" value="{}" optional="false" label="JSON string" help="JSON string containing tool settings. See below for the syntax"/>
+            </when>
+            <when value="option3">
+            </when>
+          </conditional>
+          <section name="properties" title="Properties Input">
+            
+              <param name="filter" type="text" label="filter" help="Removed atoms from the system. A custom atom selection may be passed using VMD selection syntax. Pass the label &#39;def&#39; to remove water and counter ions by default" optional="false"
+                  value="False"
+                >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+              <param name="image" type="boolean"
+                  
+                  label="image" help="Set if the workflow must attempt to automatically image the system (remove Periodic Boundary Conditions where pertinent). WARNING: This is a simple default imaging protocol and may fail in many cases."
+                />
+            
+              <param name="fit" type="boolean"
+                  
+                  label="fit" help="Set if the workflow must attempt to automatically fit the system (remove rotation and translation where pertinent)."
+                />
+            
+              <param name="binary_path" type="text" label="binary_path" help="Path to the MDDB workflow executable binary." optional="false"
+                  value="mwf"
+                >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+              <param name="output_format" type="select" label="output_format" help="Format of the output file" multiple="false">
+                  
+                    <option value="prmtop"
+                      
+                    >prmtop
+                       
+                    </option>
+                  
+                    <option value="top"
+                      
+                    >top
+                       
+                    </option>
+                  
+                    <option value="tpr"
+                      
+                    >tpr
+                       
+                    </option>
+                  
+                    <option value="psf"
+                      
+                    >psf
+                       
+                    </option>
+                  
+                </param>
+            
+          </section>
+    </inputs>
+    <outputs>
+        
+        <data name="output_topology_filepath" format="text" label="${outname_output_topology_filepath}">
+            <change_format>
+            
+            <when input="properties.output_format" value="prmtop" format="prmtop" />
+            
+            <when input="properties.output_format" value="top" format="top" />
+            
+            <when input="properties.output_format" value="tpr" format="tpr" />
+            
+            <when input="properties.output_format" value="psf" format="psf" />
+            
+            </change_format>
+          </data>
+        
+        
+          <data name="output_trajectory_filepath" format="xtc" label="${outname_output_trajectory_filepath}"/>
+        
+        
+          <data name="output_structure_filepath" format="cif" label="${outname_output_structure_filepath}"/>
+        
+    </outputs>
+    <tests>
+        <test>
+          <param name="sele" value="option1"/>
+          <param name="properties" value="data/config/config_editconf.json"/>
+        </test>
+    </tests>
+    <help>
+.. class:: infomark
+
+Check the syntax for the tool parameters at the original library documentation: https://biobb_mddb.readthedocs.io/en/latest
+
+-----
+
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
+    :width: 150
+
+**https://mmb.irbbarcelona.org/biobb**
+
+.. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
+        :width: 150
+
+**https://bioexcel.eu**
+   </help>
+
+    <citations>
+        <citation type="bibtex">
+            @misc{githubbiobb,
+            author = {Andrio P, Bayarri, G., Hospital A, Gelpi JL},
+            year = {2019-21},
+            title = {biobb: BioExcel building blocks },
+            publisher = {GitHub},
+            journal = {GitHub repository},
+            url = {https://github.com/bioexcel/biobb_mddb},
+            }
+        </citation>
+        <citation type="doi">10.1038/s41597-019-0177-4</citation>
+    </citations>
+</tool>

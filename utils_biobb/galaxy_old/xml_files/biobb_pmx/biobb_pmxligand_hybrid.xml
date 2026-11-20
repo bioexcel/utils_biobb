@@ -1,8 +1,8 @@
-<tool id="biobb_pmx_pmxligand_hybrid_ext" name="PmxligandHybrid" version="4.2.1" >
+<tool id="biobb_pmx_pmxligand_hybrid_ext" name="PmxligandHybrid" version="5.3.1" >
     <description>: Wrapper class for the PMX ligand_hybrid module.</description>
     <requirements>
         <requirement type="package"
-        version="4.2.1"
+        version="5.3.1"
         >biobb_pmx</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -32,7 +32,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__fit__dq__:${properties.fit},__dq__split__dq__:${properties.split},__dq__scDUMm__dq__:${properties.scDUMm},__dq__scDUMa__dq__:${properties.scDUMa},__dq__scDUMd__dq__:${properties.scDUMd},__dq__deAng__dq__:${properties.deAng},__dq__distance__dq__:${properties.distance}__cc__'
+            --config '__oc____dq__properties__dq__:__oc____dq__fit__dq__:${properties.fit},__dq__split__dq__:${properties.split},__dq__scDUMm__dq__:${properties.scDUMm},__dq__scDUMa__dq__:${properties.scDUMa},__dq__scDUMd__dq__:${properties.scDUMd},__dq__deAng__dq__:${properties.deAng},__dq__distance__dq__:${properties.distance},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc____cc__'
           #end if
         
           #if str($input_structure1_path) != 'None':
@@ -193,6 +193,12 @@
                   value="0.05"
                   
                   label="distance" help="Distance (nm) between atoms to consider them morphable for alignment approach (Only used if input_pairs_path is not provided)." optional="false"/>
+            
+              <param name="binary_path" type="text" label="binary_path" help="Path to the PMX command line interface." optional="false"
+                  value="pmx"
+                >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
             
               <param name="output_format" type="select" label="output_format" help="Format of the output file" multiple="false">
                   

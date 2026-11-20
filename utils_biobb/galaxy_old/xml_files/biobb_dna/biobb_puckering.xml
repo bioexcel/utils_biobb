@@ -1,8 +1,8 @@
-<tool id="biobb_dna_puckering_ext" name="Puckering" version="4.2.2" >
+<tool id="biobb_dna_puckering_ext" name="Puckering" version="5.3.0" >
     <description>: Calculate Puckering from phase parameters.</description>
     <requirements>
         <requirement type="package"
-        version="4.2.2"
+        version="5.3.0"
         >biobb_dna</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -22,7 +22,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__sequence__dq__:__dq__${properties.sequence}__dq__,__dq__helpar_name__dq__:__dq__${properties.helpar_name}__dq__,__dq__stride__dq__:${properties.stride},__dq__seqpos__dq__:${properties.seqpos}__cc__'
+            --config '__oc____dq__properties__dq__:__oc____dq__sequence__dq__:__dq__${properties.sequence}__dq__,__dq__stride__dq__:${properties.stride},__dq__seqpos__dq__:${properties.seqpos}__cc____cc__'
           #end if
         
           #if str($input_phaseC_path) != 'None':
@@ -86,12 +86,6 @@
           <section name="properties" title="Properties Input">
             
               <param name="sequence" type="text" label="sequence" help="Nucleic acid sequence corresponding to the input .ser file. Length of sequence is expected to be the same as the total number of columns in the .ser file, minus the index column (even if later on a subset of columns is selected with the *seqpos* option)." optional="true"
-                  
-                >
-                  <sanitizer><valid initial="string.printable"/></sanitizer>
-                </param>
-            
-              <param name="helpar_name" type="text" label="helpar_name" help="helical parameter name." optional="true"
                   
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>

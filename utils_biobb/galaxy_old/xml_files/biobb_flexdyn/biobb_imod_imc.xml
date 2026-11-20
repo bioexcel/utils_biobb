@@ -1,8 +1,8 @@
-<tool id="biobb_flexdyn_imod_imc_ext" name="ImodImc" version="4.2.0" >
+<tool id="biobb_flexdyn_imod_imc_ext" name="ImodImc" version="5.3.0" >
     <description>: Wrapper of the imc tool</description>
     <requirements>
         <requirement type="package"
-        version="4.2.0"
+        version="5.3.0"
         >biobb_flexdyn</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -22,7 +22,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__num_structs__dq__:${properties.num_structs},__dq__num_modes__dq__:${properties.num_modes},__dq__amplitude__dq__:${properties.amplitude}__cc__'
+            --config '__oc____dq__properties__dq__:__oc____dq__binary_path__dq__:__dq__${properties.binary_path}__dq__,__dq__num_structs__dq__:${properties.num_structs},__dq__num_modes__dq__:${properties.num_modes},__dq__amplitude__dq__:${properties.amplitude}__cc____cc__'
           #end if
         
           #if str($input_pdb_path) != 'None':
@@ -76,6 +76,12 @@
             </when>
           </conditional>
           <section name="properties" title="Properties Input">
+            
+              <param name="binary_path" type="text" label="binary_path" help="iMODS imc binary path to be used." optional="false"
+                  value="imc"
+                >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
             
               <param name="num_structs" type="integer"
                   value="500"

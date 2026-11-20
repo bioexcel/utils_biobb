@@ -1,8 +1,8 @@
-<tool id="biobb_template_template_container_ext" name="TemplateContainer" version="5.2.0" >
+<tool id="biobb_template_template_container_ext" name="TemplateContainer" version="" >
     <description>: Short description for the template container module in Restructured Text (reST) syntax. Mandatory.</description>
     <requirements>
         <requirement type="package"
-        version="5.2.0"
+        
         >biobb_template</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -22,7 +22,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__boolean_property__dq__:${properties.boolean_property},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
+            --config '__oc____dq__properties__dq__:__oc____dq__boolean_property__dq__:${properties.boolean_property},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc____cc__'
           #end if
         
           #if str($input_file_path1) != 'None':

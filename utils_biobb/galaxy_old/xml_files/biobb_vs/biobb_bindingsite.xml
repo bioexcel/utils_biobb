@@ -1,8 +1,8 @@
-<tool id="biobb_vs_bindingsite_ext" name="Bindingsite" version="4.2.0" >
+<tool id="biobb_vs_bindingsite_ext" name="Bindingsite" version="5.3.0" >
     <description>: This class finds the binding site of the input_pdb.</description>
     <requirements>
         <requirement type="package"
-        version="4.2.0"
+        version="5.3.0"
         >biobb_vs</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -22,7 +22,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__ligand__dq__:__dq__${properties.ligand}__dq__,__dq__radius__dq__:${properties.radius},__dq__max_num_ligands__dq__:${properties.max_num_ligands},__dq__matrix_name__dq__:__dq__${properties.matrix_name}__dq__,__dq__gap_open__dq__:${properties.gap_open},__dq__gap_extend__dq__:${properties.gap_extend}__cc__'
+            --config '__oc____dq__properties__dq__:__oc____dq__ligand__dq__:__dq__${properties.ligand}__dq__,__dq__radius__dq__:${properties.radius},__dq__max_num_ligands__dq__:${properties.max_num_ligands},__dq__matrix_name__dq__:__dq__${properties.matrix_name}__dq__,__dq__gap_open__dq__:${properties.gap_open},__dq__gap_extend__dq__:${properties.gap_extend}__cc____cc__'
           #end if
         
           #if str($input_pdb_path) != 'None':

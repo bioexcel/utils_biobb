@@ -1,8 +1,8 @@
-<tool id="biobb_structure_utils_remove_molecules_ext" name="RemoveMolecules" version="4.2.0" >
+<tool id="biobb_structure_utils_remove_molecules_ext" name="RemoveMolecules" version="5.3.0" >
     <description>: Class to remove molecules from a 3D structure using Biopython.</description>
     <requirements>
         <requirement type="package"
-        version="4.2.0"
+        version="5.3.0"
         >biobb_structure_utils</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__molecules__dq__:${properties.molecules}__cc__'
+            --config '__oc____dq__properties__dq__:__oc____dq__molecules__dq__:${properties.molecules}__cc____cc__'
           #end if
         
           #if str($input_structure_path) != 'None':

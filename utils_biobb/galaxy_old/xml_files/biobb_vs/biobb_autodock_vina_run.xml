@@ -1,8 +1,8 @@
-<tool id="biobb_vs_autodock_vina_run_ext" name="AutodockVinaRun" version="4.2.0" >
+<tool id="biobb_vs_autodock_vina_run_ext" name="AutodockVinaRun" version="5.3.0" >
     <description>: Wrapper of the AutoDock Vina software.</description>
     <requirements>
         <requirement type="package"
-        version="4.2.0"
+        version="5.3.0"
         >biobb_vs</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -24,7 +24,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__cpu__dq__:${properties.cpu},__dq__exhaustiveness__dq__:${properties.exhaustiveness},__dq__num_modes__dq__:${properties.num_modes},__dq__min_rmsd__dq__:${properties.min_rmsd},__dq__energy_range__dq__:${properties.energy_range},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
+            --config '__oc____dq__properties__dq__:__oc____dq__cpu__dq__:${properties.cpu},__dq__exhaustiveness__dq__:${properties.exhaustiveness},__dq__num_modes__dq__:${properties.num_modes},__dq__min_rmsd__dq__:${properties.min_rmsd},__dq__energy_range__dq__:${properties.energy_range},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc____cc__'
           #end if
         
           #if str($input_ligand_pdbqt_path) != 'None':

@@ -1,8 +1,8 @@
-<tool id="biobb_io_alphafold_ext" name="Alphafold" version="4.2.0" >
+<tool id="biobb_io_alphafold_ext" name="Alphafold" version="5.3.2" >
     <description>: This class is a wrapper for downloading a PDB structure from the AlphaFold Protein Structure Database.</description>
     <requirements>
         <requirement type="package"
-        version="4.2.0"
+        version="5.3.2"
         >biobb_io</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -18,7 +18,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__uniprot_code__dq__:__dq__${properties.uniprot_code}__dq____cc__'
+            --config '__oc____dq__properties__dq__:__oc____dq__uniprot_code__dq__:__dq__${properties.uniprot_code}__dq____cc____cc__'
           #end if
         
         

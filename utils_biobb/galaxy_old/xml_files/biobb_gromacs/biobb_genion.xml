@@ -1,8 +1,8 @@
-<tool id="biobb_gromacs_genion_ext" name="Genion" version="4.2.0" >
+<tool id="biobb_gromacs_genion_ext" name="Genion" version="5.3.2" >
     <description>: Wrapper class for the GROMACS genion module.</description>
     <requirements>
         <requirement type="package"
-        version="4.2.0"
+        version="5.3.2"
         >biobb_gromacs</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -24,7 +24,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__replaced_group__dq__:__dq__${properties.replaced_group}__dq__,__dq__neutral__dq__:${properties.neutral},__dq__concentration__dq__:${properties.concentration},__dq__seed__dq__:${properties.seed},__dq__gmx_lib__dq__:__dq__${properties.gmx_lib}__dq__,__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
+            --config '__oc____dq__properties__dq__:__oc____dq__replaced_group__dq__:__dq__${properties.replaced_group}__dq__,__dq__neutral__dq__:${properties.neutral},__dq__pname__dq__:__dq__${properties.pname}__dq__,__dq__nname__dq__:__dq__${properties.nname}__dq__,__dq__np__dq__:${properties.np},__dq__nn__dq__:${properties.nn},__dq__pq__dq__:${properties.pq},__dq__nq__dq__:${properties.nq},__dq__rmin__dq__:${properties.rmin},__dq__concentration__dq__:${properties.concentration},__dq__seed__dq__:${properties.seed},__dq__gmx_lib__dq__:__dq__${properties.gmx_lib}__dq__,__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc____cc__'
           #end if
         
           #if str($input_tpr_path) != 'None':
@@ -106,10 +106,47 @@
                   label="neutral" help="Neutralize the charge of the system."
                 />
             
-              <param name="concentration" type="float"
-                  value="0.05"
+              <param name="pname" type="text" label="pname" help="Name of the positive ion." optional="false"
+                  value="NA"
+                >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+              <param name="nname" type="text" label="nname" help="Name of the negative ion." optional="false"
+                  value="CL"
+                >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+              <param name="np" type="integer"
+                  value="0"
                   
-                  label="concentration" help="Concentration of the ions in (mol/liter)." optional="false"/>
+                  label="np" help="Number of positive ions to add." optional="true"/>
+            
+              <param name="nn" type="integer"
+                  value="0"
+                  
+                  label="nn" help="Number of negative ions to add." optional="true"/>
+            
+              <param name="pq" type="integer"
+                  value="1"
+                  
+                  label="pq" help="Charge of the positive ion." optional="false"/>
+            
+              <param name="nq" type="integer"
+                  value="-1"
+                  
+                  label="nq" help="Charge of the negative ion." optional="false"/>
+            
+              <param name="rmin" type="float"
+                  value="0.6"
+                  
+                  label="rmin" help="Minimum distance between ions and non-solvent in nm." optional="false"/>
+            
+              <param name="concentration" type="float"
+                  value="0.0"
+                  
+                  label="concentration" help="Concentration of the ions in (mol/liter). When nonzero, overrides np and nn. Neutralization adds ions on top of the specified counts or concentration." optional="true"/>
             
               <param name="seed" type="integer"
                   value="1993"

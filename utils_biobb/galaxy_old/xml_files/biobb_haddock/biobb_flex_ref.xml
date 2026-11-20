@@ -1,15 +1,19 @@
-<tool id="biobb_haddock_flex_ref_ext" name="FlexRef" version="4.2.1" >
-    <description>: Wrapper class for the Haddock FlexRef module.</description>
+<tool id="biobb_haddock_flex_ref_ext" name="FlexRef" version="5.3.3" >
+    <description>: Wrapper class for the HADDOCK3 FlexRef module.</description>
     <requirements>
         <requirement type="package"
-        version="4.2.1"
+        version="5.3.3"
         >biobb_haddock</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
         
-          ln -f -s ${input_haddock_wf_data_zip} ${input_haddock_wf_data_zip}_`echo $$`.${input_haddock_wf_data_zip.ext};
+          ln -f -s ${input_haddock_wf_data} ${input_haddock_wf_data}_`echo $$`.${input_haddock_wf_data.ext};
         
-          ln -f -s ${restraints_table_path} ${restraints_table_path}_`echo $$`.${restraints_table_path.ext};
+          ln -f -s ${ambig_restraints_table_path} ${ambig_restraints_table_path}_`echo $$`.${ambig_restraints_table_path.ext};
+        
+          ln -f -s ${unambig_restraints_table_path} ${unambig_restraints_table_path}_`echo $$`.${unambig_restraints_table_path.ext};
+        
+          ln -f -s ${hb_restraints_table_path} ${hb_restraints_table_path}_`echo $$`.${hb_restraints_table_path.ext};
         
           ln -f -s ${haddock_config_path} ${haddock_config_path}_`echo $$`.${haddock_config_path.ext};
         
@@ -24,15 +28,23 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__cfg__dq__:${properties.cfg},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
+            --config '__oc____dq__properties__dq__:__oc____dq__cfg__dq__:${properties.cfg},__dq__global_cfg__dq__:${properties.global_cfg},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc____cc__'
           #end if
         
-          #if str($input_haddock_wf_data_zip) != 'None':
-            --input_haddock_wf_data_zip ${input_haddock_wf_data_zip}_`echo $$`.${input_haddock_wf_data_zip.ext}
+          #if str($input_haddock_wf_data) != 'None':
+            --input_haddock_wf_data ${input_haddock_wf_data}_`echo $$`.${input_haddock_wf_data.ext}
           #end if
         
-          #if str($restraints_table_path) != 'None':
-            --restraints_table_path ${restraints_table_path}_`echo $$`.${restraints_table_path.ext}
+          #if str($ambig_restraints_table_path) != 'None':
+            --ambig_restraints_table_path ${ambig_restraints_table_path}_`echo $$`.${ambig_restraints_table_path.ext}
+          #end if
+        
+          #if str($unambig_restraints_table_path) != 'None':
+            --unambig_restraints_table_path ${unambig_restraints_table_path}_`echo $$`.${unambig_restraints_table_path.ext}
+          #end if
+        
+          #if str($hb_restraints_table_path) != 'None':
+            --hb_restraints_table_path ${hb_restraints_table_path}_`echo $$`.${hb_restraints_table_path.ext}
           #end if
         
           #if str($haddock_config_path) != 'None':
@@ -40,43 +52,51 @@
           #end if
         
         
-          --refinement_output_zip_path $outname_refinement_output_zip_path
+          --output_haddock_wf_data $outname_output_haddock_wf_data
         
-          --output_haddock_wf_data_zip $outname_output_haddock_wf_data_zip
+          --refinement_output_zip_path $outname_refinement_output_zip_path
         ;
         #if $config.sele == "option1":
             rm -f ${config.properties}_`echo $$`.${config.properties.ext};
           #end if
         
-          rm -f ${input_haddock_wf_data_zip}_`echo $$`.${input_haddock_wf_data_zip.ext};
+          rm -f ${input_haddock_wf_data}_`echo $$`.${input_haddock_wf_data.ext};
         
-          rm -f ${restraints_table_path}_`echo $$`.${restraints_table_path.ext};
+          rm -f ${ambig_restraints_table_path}_`echo $$`.${ambig_restraints_table_path.ext};
+        
+          rm -f ${unambig_restraints_table_path}_`echo $$`.${unambig_restraints_table_path.ext};
+        
+          rm -f ${hb_restraints_table_path}_`echo $$`.${hb_restraints_table_path.ext};
         
           rm -f ${haddock_config_path}_`echo $$`.${haddock_config_path.ext};
         
         
-          if test -f $outname_refinement_output_zip_path; then mv $outname_refinement_output_zip_path $refinement_output_zip_path; fi;
+          if test -f $outname_output_haddock_wf_data; then mv $outname_output_haddock_wf_data $output_haddock_wf_data; fi;
         
-          if test -f $outname_output_haddock_wf_data_zip; then mv $outname_output_haddock_wf_data_zip $output_haddock_wf_data_zip; fi;
+          if test -f $outname_refinement_output_zip_path; then mv $outname_refinement_output_zip_path $refinement_output_zip_path; fi;
         
     ]]>
     </command>
     <inputs>
         
-          <param name="input_haddock_wf_data_zip" type="data" format="zip"  optional="False" label="input ZIP file" help="Path to the input zipball containing all the current Haddock workflow data. Format: [input].zip"/>
+          <param name="input_haddock_wf_data" type="data" format="directory,zip"  optional="False" label="input DIRECTORY,ZIP file" help="Path to the input directory containing all the current Haddock workflow data. Format: [input].[format]"/>
         
-          <param name="restraints_table_path" type="data" format="tbl"  optional="True" label="input TBL file" help="Path to the input TBL file containing a list of restraints for docking. Format: [input].tbl"/>
+          <param name="ambig_restraints_table_path" type="data" format="tbl"  optional="True" label="input TBL file" help="Path to the input TBL file containing a list of ambiguous restraints for docking. Format: [input].tbl"/>
+        
+          <param name="unambig_restraints_table_path" type="data" format="tbl"  optional="True" label="input TBL file" help="Path to the input TBL file containing a list of unambiguous restraints for docking. Format: [input].tbl"/>
+        
+          <param name="hb_restraints_table_path" type="data" format="tbl"  optional="True" label="input TBL file" help="Path to the input TBL file containing a list of hydrogen bond restraints for docking. Format: [input].tbl"/>
         
           <param name="haddock_config_path" type="data" format="cfg"  optional="True" label="input CFG file" help="Haddock configuration CFG file path. Format: [input].cfg"/>
         
         
-          <param name="outname_refinement_output_zip_path" type="text" value="myflex_ref.zip"
-              optional="False" label="output ZIP name"
-              help="Path to the output PDB file collection in zip format Format: [output].zip "/>
+          <param name="outname_output_haddock_wf_data" type="text" value="myflex_ref.directory"
+              optional="False" label="output DIRECTORY,ZIP name"
+              help="Path to the output directory containing all the current Haddock workflow data Format: [output].[format] "/>
         
-          <param name="outname_output_haddock_wf_data_zip" type="text" value="myflex_ref.zip"
+          <param name="outname_refinement_output_zip_path" type="text" value="myflex_ref.zip"
               optional="True" label="output ZIP name"
-              help="Path to the output zipball containing all the current Haddock workflow data Format: [output].zip "/>
+              help="Path to the output PDB file collection in zip format Format: [output].zip "/>
         
         <conditional name="config">
             <param name="sele" type="select" label="Take tool settings:" help="Select where tool settings are to be read from">
@@ -99,21 +119,48 @@
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
             
+              <param name="global_cfg" type="text" label="global_cfg" help="Global configuration options specification. (Json)" value="{}">
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
               <param name="binary_path" type="text" label="binary_path" help="Path to the haddock haddock executable binary." optional="false"
                   value="haddock"
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
             
+              <param name="output_format" type="select" label="output_format" help="Format of the output file" multiple="false">
+                  
+                    <option value="directory"
+                      
+                    >directory
+                       
+                    </option>
+                  
+                    <option value="zip"
+                      
+                    >zip
+                       
+                    </option>
+                  
+                </param>
+            
           </section>
     </inputs>
     <outputs>
         
+        <data name="output_haddock_wf_data" format="text" label="${outname_output_haddock_wf_data}">
+            <change_format>
+            
+            <when input="properties.output_format" value="directory" format="directory" />
+            
+            <when input="properties.output_format" value="zip" format="zip" />
+            
+            </change_format>
+          </data>
+        
         
           <data name="refinement_output_zip_path" format="zip" label="${outname_refinement_output_zip_path}"/>
-        
-        
-          <data name="output_haddock_wf_data_zip" format="zip" label="${outname_output_haddock_wf_data_zip}"/>
         
     </outputs>
     <tests>

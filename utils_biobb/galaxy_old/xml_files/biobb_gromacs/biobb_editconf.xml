@@ -1,8 +1,8 @@
-<tool id="biobb_gromacs_editconf_ext" name="Editconf" version="4.2.0" >
+<tool id="biobb_gromacs_editconf_ext" name="Editconf" version="5.3.2" >
     <description>: Wrapper class for the GROMACS editconf module.</description>
     <requirements>
         <requirement type="package"
-        version="4.2.0"
+        version="5.3.2"
         >biobb_gromacs</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__distance_to_molecule__dq__:${properties.distance_to_molecule},__dq__box_vector_lenghts__dq__:__dq__${properties.box_vector_lenghts}__dq__,__dq__box_type__dq__:__dq__${properties.box_type}__dq__,__dq__center_molecule__dq__:${properties.center_molecule},__dq__gmx_lib__dq__:__dq__${properties.gmx_lib}__dq__,__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
+            --config '__oc____dq__properties__dq__:__oc____dq__distance_to_molecule__dq__:${properties.distance_to_molecule},__dq__box_vector_lenghts__dq__:__dq__${properties.box_vector_lenghts}__dq__,__dq__box_type__dq__:__dq__${properties.box_type}__dq__,__dq__center_molecule__dq__:${properties.center_molecule},__dq__gmx_lib__dq__:__dq__${properties.gmx_lib}__dq__,__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc____cc__'
           #end if
         
           #if str($input_gro_path) != 'None':

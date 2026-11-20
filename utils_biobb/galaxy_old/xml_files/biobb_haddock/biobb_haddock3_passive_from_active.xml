@@ -1,0 +1,193 @@
+<tool id="biobb_haddock_haddock3_passive_from_active_ext" name="Haddock3PassiveFromActive" version="5.3.3" >
+    <description>: Wrapper class for the Haddock3-Restraints passive_from_active module.</description>
+    <requirements>
+        <requirement type="package"
+        version="5.3.3"
+        >biobb_haddock</requirement>
+    </requirements>
+    <command detect_errors="aggressive"><![CDATA[
+        
+          ln -f -s ${input_pdb_path} ${input_pdb_path}_`echo $$`.${input_pdb_path.ext};
+        
+          ln -f -s ${input_active_list_path} ${input_active_list_path}_`echo $$`.${input_active_list_path.ext};
+        
+        #if $config.sele == "option1":
+            ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
+          #end if
+
+        haddock3_passive_from_active
+
+        #if $config.sele == "option1":
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
+          #else if $config.sele == "option2":
+            --config '${config.jsonstr}'
+          #else if $config.sele == "option3":
+            --config '__oc____dq__properties__dq__:__oc____dq__active_list__dq__:__dq__${properties.active_list}__dq__,__dq__chain_id__dq__:__dq__${properties.chain_id}__dq__,__dq__surface_list_path__dq__:__dq__${properties.surface_list_path}__dq__,__dq__radius__dq__:${properties.radius},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc____cc__'
+          #end if
+        
+          #if str($input_pdb_path) != 'None':
+            --input_pdb_path ${input_pdb_path}_`echo $$`.${input_pdb_path.ext}
+          #end if
+        
+          #if str($input_active_list_path) != 'None':
+            --input_active_list_path ${input_active_list_path}_`echo $$`.${input_active_list_path.ext}
+          #end if
+        
+        
+          --output_actpass_path $outname_output_actpass_path
+        ;
+        #if $config.sele == "option1":
+            rm -f ${config.properties}_`echo $$`.${config.properties.ext};
+          #end if
+        
+          rm -f ${input_pdb_path}_`echo $$`.${input_pdb_path.ext};
+        
+          rm -f ${input_active_list_path}_`echo $$`.${input_active_list_path.ext};
+        
+        
+          if test -f $outname_output_actpass_path; then mv $outname_output_actpass_path $output_actpass_path; fi;
+        
+    ]]>
+    </command>
+    <inputs>
+        
+          <param name="input_pdb_path" type="data" format="pdb"  optional="False" label="input PDB file" help="Path to the input PDB structure file. Format: [input].pdb"/>
+        
+          <param name="input_active_list_path" type="data" format="txt,dat,list"  optional="True" label="input TXT,DAT,LIST file" help="Path to the input file with list of active residues. Format: [input].[format]"/>
+        
+        
+          <param name="outname_output_actpass_path" type="text" value="myhaddock3_passive_from_active.txt"
+              optional="False" label="output TXT,DAT,LIST,OUT name"
+              help="Path to the output file with list of passive residues Format: [output].[format] "/>
+        
+        <conditional name="config">
+            <param name="sele" type="select" label="Take tool settings:" help="Select where tool settings are to be read from">
+              <option value="option3">Manual Input</option>
+              <option value="option1">from configuration file</option>
+              <option value="option2">from JSON string</option>
+            </param>
+            <when value="option1">
+              <param name="properties" type="data" format="yml,json" optional="false" label="Configuration file" help="File containing tool settings. See below for the syntax"/>
+            </when>
+            <when value="option2">
+              <param name="jsonstr" type="text" value="{}" optional="false" label="JSON string" help="JSON string containing tool settings. See below for the syntax"/>
+            </when>
+            <when value="option3">
+            </when>
+          </conditional>
+          <section name="properties" title="Properties Input">
+            
+              <param name="active_list" type="text" label="active_list" help="List of active residues as a comma-separated string. Required if input_active_list_path is not provided." optional="true"
+                  
+                >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+              <param name="chain_id" type="text" label="chain_id" help="Chain ID to consider when calculating passive residues." optional="true"
+                  
+                >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+              <param name="surface_list_path" type="text" label="surface_list_path" help="Path to file with list of surface residues to filter." optional="true"
+                  
+                >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+              <param name="radius" type="float"
+                  value="6.5"
+                  
+                  label="radius" help="Radius in Angstroms to look for surface residues around active ones." optional="false"/>
+            
+              <param name="binary_path" type="text" label="binary_path" help="Path to the haddock3-restraints executable binary." optional="false"
+                  value="haddock3-restraints"
+                >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+              <param name="output_format" type="select" label="output_format" help="Format of the output file" multiple="false">
+                  
+                    <option value="txt"
+                      
+                    >txt
+                       
+                    </option>
+                  
+                    <option value="dat"
+                      
+                    >dat
+                       
+                    </option>
+                  
+                    <option value="list"
+                      
+                    >list
+                       
+                    </option>
+                  
+                    <option value="out"
+                      
+                    >out
+                       
+                    </option>
+                  
+                </param>
+            
+          </section>
+    </inputs>
+    <outputs>
+        
+        <data name="output_actpass_path" format="text" label="${outname_output_actpass_path}">
+            <change_format>
+            
+            <when input="properties.output_format" value="txt" format="txt" />
+            
+            <when input="properties.output_format" value="dat" format="dat" />
+            
+            <when input="properties.output_format" value="list" format="list" />
+            
+            <when input="properties.output_format" value="out" format="out" />
+            
+            </change_format>
+          </data>
+        
+    </outputs>
+    <tests>
+        <test>
+          <param name="sele" value="option1"/>
+          <param name="properties" value="data/config/config_editconf.json"/>
+        </test>
+    </tests>
+    <help>
+.. class:: infomark
+
+Check the syntax for the tool parameters at the original library documentation: https://biobb_haddock.readthedocs.io/en/latest
+
+-----
+
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
+    :width: 150
+
+**https://mmb.irbbarcelona.org/biobb**
+
+.. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
+        :width: 150
+
+**https://bioexcel.eu**
+   </help>
+
+    <citations>
+        <citation type="bibtex">
+            @misc{githubbiobb,
+            author = {Andrio P, Bayarri, G., Hospital A, Gelpi JL},
+            year = {2019-21},
+            title = {biobb: BioExcel building blocks },
+            publisher = {GitHub},
+            journal = {GitHub repository},
+            url = {https://github.com/bioexcel/biobb_haddock},
+            }
+        </citation>
+        <citation type="doi">10.1038/s41597-019-0177-4</citation>
+    </citations>
+</tool>

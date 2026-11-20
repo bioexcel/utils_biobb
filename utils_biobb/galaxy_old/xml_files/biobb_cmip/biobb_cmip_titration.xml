@@ -1,8 +1,8 @@
-<tool id="biobb_cmip_cmip_titration_ext" name="CmipTitration" version="4.2.0" >
+<tool id="biobb_cmip_cmip_titration_ext" name="CmipTitration" version="5.3.1" >
     <description>: Wrapper class for the CMIP titration module.</description>
     <requirements>
         <requirement type="package"
-        version="4.2.0"
+        version="5.3.1"
         >biobb_cmip</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -24,7 +24,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__params__dq__:${properties.params},__dq__energy_cutoff__dq__:${properties.energy_cutoff},__dq__num_wats__dq__:${properties.num_wats},__dq__neutral__dq__:${properties.neutral},__dq__num_positive_ions__dq__:${properties.num_positive_ions},__dq__num_negative_ions__dq__:${properties.num_negative_ions},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
+            --config '__oc____dq__properties__dq__:__oc____dq__params__dq__:${properties.params},__dq__energy_cutoff__dq__:${properties.energy_cutoff},__dq__num_wats__dq__:${properties.num_wats},__dq__neutral__dq__:${properties.neutral},__dq__num_positive_ions__dq__:${properties.num_positive_ions},__dq__num_negative_ions__dq__:${properties.num_negative_ions},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc____cc__'
           #end if
         
           #if str($input_pdb_path) != 'None':

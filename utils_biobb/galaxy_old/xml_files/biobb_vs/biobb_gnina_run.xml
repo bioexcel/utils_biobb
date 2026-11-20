@@ -1,0 +1,410 @@
+<tool id="biobb_vs_gnina_run_ext" name="GninaRun" version="5.3.0" >
+    <description>: Wrapper of the gnina software.</description>
+    <requirements>
+        <requirement type="package"
+        version="5.3.0"
+        >biobb_vs</requirement>
+    </requirements>
+    <command detect_errors="aggressive"><![CDATA[
+        
+          ln -f -s ${input_ligand_path} ${input_ligand_path}_`echo $$`.${input_ligand_path.ext};
+        
+          ln -f -s ${input_receptor_path} ${input_receptor_path}_`echo $$`.${input_receptor_path.ext};
+        
+          ln -f -s ${input_box_path} ${input_box_path}_`echo $$`.${input_box_path.ext};
+        
+          ln -f -s ${input_autobox_path} ${input_autobox_path}_`echo $$`.${input_autobox_path.ext};
+        
+        #if $config.sele == "option1":
+            ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
+          #end if
+
+        gnina_run
+
+        #if $config.sele == "option1":
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
+          #else if $config.sele == "option2":
+            --config '${config.jsonstr}'
+          #else if $config.sele == "option3":
+            --config '__oc____dq__properties__dq__:__oc____dq__cpu__dq__:${properties.cpu},__dq__exhaustiveness__dq__:${properties.exhaustiveness},__dq__num_modes__dq__:${properties.num_modes},__dq__min_rmsd_filter__dq__:${properties.min_rmsd_filter},__dq__num_mc_saved__dq__:${properties.num_mc_saved},__dq__seed__dq__:${properties.seed},__dq__scoring__dq__:__dq__${properties.scoring}__dq__,__dq__cnn_scoring__dq__:__dq__${properties.cnn_scoring}__dq__,__dq__cnn__dq__:__dq__${properties.cnn}__dq__,__dq__pose_sort_order__dq__:__dq__${properties.pose_sort_order}__dq__,__dq__autobox_add__dq__:${properties.autobox_add},__dq__autobox_extend__dq__:${properties.autobox_extend},__dq__minimize__dq__:${properties.minimize},__dq__score_only__dq__:${properties.score_only},__dq__local_only__dq__:${properties.local_only},__dq__no_gpu__dq__:${properties.no_gpu},__dq__device__dq__:${properties.device},__dq__quiet__dq__:${properties.quiet},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc____cc__'
+          #end if
+        
+          #if str($input_ligand_path) != 'None':
+            --input_ligand_path ${input_ligand_path}_`echo $$`.${input_ligand_path.ext}
+          #end if
+        
+          #if str($input_receptor_path) != 'None':
+            --input_receptor_path ${input_receptor_path}_`echo $$`.${input_receptor_path.ext}
+          #end if
+        
+          #if str($input_box_path) != 'None':
+            --input_box_path ${input_box_path}_`echo $$`.${input_box_path.ext}
+          #end if
+        
+          #if str($input_autobox_path) != 'None':
+            --input_autobox_path ${input_autobox_path}_`echo $$`.${input_autobox_path.ext}
+          #end if
+        
+        
+          --output_sdf_path $outname_output_sdf_path
+        
+          --output_summary_path $outname_output_summary_path
+        
+          --output_log_path $outname_output_log_path
+        ;
+        #if $config.sele == "option1":
+            rm -f ${config.properties}_`echo $$`.${config.properties.ext};
+          #end if
+        
+          rm -f ${input_ligand_path}_`echo $$`.${input_ligand_path.ext};
+        
+          rm -f ${input_receptor_path}_`echo $$`.${input_receptor_path.ext};
+        
+          rm -f ${input_box_path}_`echo $$`.${input_box_path.ext};
+        
+          rm -f ${input_autobox_path}_`echo $$`.${input_autobox_path.ext};
+        
+        
+          if test -f $outname_output_sdf_path; then mv $outname_output_sdf_path $output_sdf_path; fi;
+        
+          if test -f $outname_output_summary_path; then mv $outname_output_summary_path $output_summary_path; fi;
+        
+          if test -f $outname_output_log_path; then mv $outname_output_log_path $output_log_path; fi;
+        
+    ]]>
+    </command>
+    <inputs>
+        
+          <param name="input_ligand_path" type="data" format="sdf,mol2,pdb,pdbqt"  optional="False" label="input SDF,MOL2,PDB,PDBQT file" help="Path to the input ligand. It may hold several ligands and it must hold genuine 3D coordinates, as gnina samples torsions but never bond lengths, bond angles or ring conformations. Format: [input].[format]"/>
+        
+          <param name="input_receptor_path" type="data" format="pdb,pdbqt"  optional="False" label="input PDB,PDBQT file" help="Path to the input receptor. Every atom of this file is treated as rigid receptor, so any crystal ligand must be removed beforehand. Provide a PDBQT file for full control over protonation, as PDBQT input is passed to gnina unmodified. Charges are not taken into account, just hydrogen donor/acceptor character which depends on the protonation state. Format: [input].[format]"/>
+        
+          <param name="input_box_path" type="data" format="pdb"  optional="True" label="input PDB file" help="Path to the PDB file with the box center and size annotated as a REMARK, as written by the box and box_residues building blocks. Mutually exclusive with input_autobox_path. Format: [input].pdb"/>
+        
+          <param name="input_autobox_path" type="data" format="sdf,mol2,pdb,pdbqt,pqr"  optional="True" label="input SDF,MOL2,PDB,PDBQT,PQR file" help="Path to a reference structure whose bounding coordinates define the docking box, for example a crystal ligand, an fpocket pocket or the whole receptor. It only needs atoms with Cartesian coordinates, it does not need to be a real molecule. Mutually exclusive with input_box_path. Format: [input].[format]"/>
+        
+        
+          <param name="outname_output_sdf_path" type="text" value="mygnina_run.sdf"
+              optional="False" label="output SDF,GZ name"
+              help="Path to the output file with the docked poses and their scores as SD data fields. Use a .sdf.gz extension to obtain gzip compressed output Format: [output].[format] "/>
+        
+          <param name="outname_output_summary_path" type="text" value="mygnina_run.json"
+              optional="True" label="output JSON name"
+              help="Path to the JSON summary file, holding one entry per output pose with the ligand it belongs to and every score gnina assigned to it Format: [output].json "/>
+        
+          <param name="outname_output_log_path" type="text" value="mygnina_run.log"
+              optional="True" label="output LOG name"
+              help="Path to the log file written by gnina Format: [output].log "/>
+        
+        <conditional name="config">
+            <param name="sele" type="select" label="Take tool settings:" help="Select where tool settings are to be read from">
+              <option value="option3">Manual Input</option>
+              <option value="option1">from configuration file</option>
+              <option value="option2">from JSON string</option>
+            </param>
+            <when value="option1">
+              <param name="properties" type="data" format="yml,json" optional="false" label="Configuration file" help="File containing tool settings. See below for the syntax"/>
+            </when>
+            <when value="option2">
+              <param name="jsonstr" type="text" value="{}" optional="false" label="JSON string" help="JSON string containing tool settings. See below for the syntax"/>
+            </when>
+            <when value="option3">
+            </when>
+          </conditional>
+          <section name="properties" title="Properties Input">
+            
+              <param name="cpu" type="integer"
+                  value="1"
+                  min="1" max="1000"
+                  label="cpu" help="Number of CPU cores to use. Keep it lower than or equal to exhaustiveness, and always set it explicitly on a shared machine." optional="false"/>
+            
+              <param name="exhaustiveness" type="integer"
+                  value="8"
+                  min="1" max="10000"
+                  label="exhaustiveness" help="Number of independent Monte Carlo search chains. This is the main sampling knob, but it gives diminishing returns past the default for a targeted pocket." optional="false"/>
+            
+              <param name="num_modes" type="integer"
+                  value="9"
+                  min="1" max="1000"
+                  label="num_modes" help="Maximum number of binding modes written out." optional="false"/>
+            
+              <param name="min_rmsd_filter" type="float"
+                  value="1.0"
+                  
+                  label="min_rmsd_filter" help="RMSD in Angstroms below which a pose is dropped as redundant with a better ranked one." optional="false"/>
+            
+              <param name="num_mc_saved" type="integer"
+                  
+                  min="1" max="10000"
+                  label="num_mc_saved" help="Number of top poses retained in each Monte Carlo chain, gnina defaults to 50 when unset." optional="true"/>
+            
+              <param name="seed" type="integer"
+                  
+                  
+                  label="seed" help="Explicit random seed. Docking is stochastic, so set it for reproducible runs." optional="true"/>
+            
+              <param name="scoring" type="select" label="scoring" help="Built-in empirical scoring function, gnina uses its own default when unset. " multiple="false">
+                  
+                    <option value="default"
+                      
+                    >default
+                       - the gnina default empirical scoring function
+                    </option>
+                  
+                    <option value="vina"
+                      
+                    >vina
+                       - the AutoDock Vina scoring function
+                    </option>
+                  
+                    <option value="vinardo"
+                      
+                    >vinardo
+                       - a reparameterization of the Vina terms that often does better for virtual screening
+                    </option>
+                  
+                    <option value="ad4_scoring"
+                      
+                    >ad4_scoring
+                       - the AutoDock4 scoring function
+                    </option>
+                  
+                    <option value="dkoes_fast"
+                      
+                    >dkoes_fast
+                       - a fast variant of the dkoes scoring function
+                    </option>
+                  
+                    <option value="dkoes_scoring"
+                      
+                    >dkoes_scoring
+                       - the dkoes scoring function
+                    </option>
+                  
+                    <option value="dkoes_scoring_old"
+                      
+                    >dkoes_scoring_old
+                       - the legacy dkoes scoring function
+                    </option>
+                  
+                </param>
+            
+              <param name="cnn_scoring" type="select" label="cnn_scoring" help="Where the convolutional neural network is used in the pipeline, gnina defaults to rescore when unset. " multiple="false">
+                  
+                    <option value="none"
+                      
+                    >none
+                       
+                    </option>
+                  
+                    <option value="by far the fastest"
+                      
+                    >by far the fastest
+                       
+                    </option>
+                  
+                    <option value="rescore"
+                      
+                    >rescore
+                       - the network only re-ranks the final pool of poses
+                    </option>
+                  
+                    <option value="refinement"
+                      
+                    >refinement
+                       
+                    </option>
+                  
+                    <option value="around ten times slower"
+                      
+                    >around ten times slower
+                       
+                    </option>
+                  
+                    <option value="metrorescore"
+                      
+                    >metrorescore
+                       - network rescoring combined with Metropolis sampling
+                    </option>
+                  
+                    <option value="metrorefine"
+                      
+                    >metrorefine
+                       - network refinement combined with Metropolis sampling
+                    </option>
+                  
+                    <option value="all"
+                      
+                    >all
+                       
+                    </option>
+                  
+                    <option value="very slow"
+                      
+                    >very slow
+                       
+                    </option>
+                  
+                </param>
+            
+              <param name="cnn" type="text" label="cnn" help="Name of a built-in convolutional neural network model, or a name ending in _ensemble to evaluate every built-in model sharing that prefix. gnina defaults to an ensemble of three models when unset." optional="true"
+                  
+                >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+              <param name="pose_sort_order" type="select" label="pose_sort_order" help="How the internal pose pool is sorted before the redundancy filter and the num_modes cutoff are applied, so it can surface a different set of poses and not merely reorder them. gnina defaults to CNNscore when unset. " multiple="false">
+                  
+                    <option value="CNNscore"
+                      
+                    >CNNscore
+                       
+                    </option>
+                  
+                    <option value="which answers whether a pose is right"
+                      
+                    >which answers whether a pose is right
+                       
+                    </option>
+                  
+                    <option value="CNNaffinity"
+                      
+                    >CNNaffinity
+                       
+                    </option>
+                  
+                    <option value="which is what ranks compounds in a screen"
+                      
+                    >which is what ranks compounds in a screen
+                       
+                    </option>
+                  
+                    <option value="Energy"
+                      
+                    >Energy
+                       - sort by empirical energy
+                    </option>
+                  
+                </param>
+            
+              <param name="autobox_add" type="float"
+                  
+                  
+                  label="autobox_add" help="Buffer in Angstroms added on every side of the box derived from input_autobox_path, gnina defaults to 4 when unset. A larger box does not slow gnina down, but it does loosen the constraint on sampling." optional="true"/>
+            
+              <param name="autobox_extend" type="boolean"
+                  
+                  label="autobox_extend" help="Enlarge the box derived from input_autobox_path when needed so the input ligand can rotate freely inside it, gnina enables this when unset."
+                />
+            
+              <param name="minimize" type="boolean"
+                  
+                  label="minimize" help="Energy minimize the poses given in input_ligand_path instead of searching for new ones."
+                />
+            
+              <param name="score_only" type="boolean"
+                  
+                  label="score_only" help="Score the poses given in input_ligand_path without searching or minimizing."
+                />
+            
+              <param name="local_only" type="boolean"
+                  
+                  label="local_only" help="Restrict the search to a local one inside the box."
+                />
+            
+              <param name="no_gpu" type="boolean"
+                  
+                  label="no_gpu" help="Disable GPU acceleration even when a GPU is available."
+                />
+            
+              <param name="device" type="integer"
+                  
+                  
+                  label="device" help="Index of the GPU device to use." optional="true"/>
+            
+              <param name="quiet" type="boolean"
+                  
+                  label="quiet" help="Suppress the gnina output messages."
+                />
+            
+              <param name="binary_path" type="text" label="binary_path" help="Path to the gnina executable in your local computer. gnina is not distributed with this package, install it from its binary release or run it through a container." optional="false"
+                  value="gnina"
+                >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+              <param name="output_format" type="select" label="output_format" help="Format of the output file" multiple="false">
+                  
+                    <option value="sdf"
+                      
+                    >sdf
+                       
+                    </option>
+                  
+                    <option value="gz"
+                      
+                    >gz
+                       
+                    </option>
+                  
+                </param>
+            
+          </section>
+    </inputs>
+    <outputs>
+        
+        <data name="output_sdf_path" format="text" label="${outname_output_sdf_path}">
+            <change_format>
+            
+            <when input="properties.output_format" value="sdf" format="sdf" />
+            
+            <when input="properties.output_format" value="gz" format="gz" />
+            
+            </change_format>
+          </data>
+        
+        
+          <data name="output_summary_path" format="json" label="${outname_output_summary_path}"/>
+        
+        
+          <data name="output_log_path" format="log" label="${outname_output_log_path}"/>
+        
+    </outputs>
+    <tests>
+        <test>
+          <param name="sele" value="option1"/>
+          <param name="properties" value="data/config/config_editconf.json"/>
+        </test>
+    </tests>
+    <help>
+.. class:: infomark
+
+Check the syntax for the tool parameters at the original library documentation: https://biobb_vs.readthedocs.io/en/latest
+
+-----
+
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
+    :width: 150
+
+**https://mmb.irbbarcelona.org/biobb**
+
+.. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
+        :width: 150
+
+**https://bioexcel.eu**
+   </help>
+
+    <citations>
+        <citation type="bibtex">
+            @misc{githubbiobb,
+            author = {Andrio P, Bayarri, G., Hospital A, Gelpi JL},
+            year = {2019-21},
+            title = {biobb: BioExcel building blocks },
+            publisher = {GitHub},
+            journal = {GitHub repository},
+            url = {https://github.com/bioexcel/biobb_vs},
+            }
+        </citation>
+        <citation type="doi">10.1038/s41597-019-0177-4</citation>
+    </citations>
+</tool>

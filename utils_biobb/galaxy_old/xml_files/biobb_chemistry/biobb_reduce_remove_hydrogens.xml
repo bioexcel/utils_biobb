@@ -1,8 +1,8 @@
-<tool id="biobb_chemistry_reduce_remove_hydrogens_ext" name="ReduceRemoveHydrogens" version="4.2.0" >
+<tool id="biobb_chemistry_reduce_remove_hydrogens_ext" name="ReduceRemoveHydrogens" version="5.3.2" >
     <description>: This class is a wrapper of the Ambertools reduce module for removing hydrogens from a given structure.</description>
     <requirements>
         <requirement type="package"
-        version="4.2.0"
+        version="5.3.2"
         >biobb_chemistry</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
+            --config '__oc____dq__properties__dq__:__oc____dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc____cc__'
           #end if
         
           #if str($input_path) != 'None':

@@ -1,0 +1,188 @@
+<tool id="biobb_vs_gnina_select_pose_ext" name="GninaSelectPose" version="5.3.0" >
+    <description>: Selects a single pose in the output of the gnina_run building block.</description>
+    <requirements>
+        <requirement type="package"
+        version="5.3.0"
+        >biobb_vs</requirement>
+    </requirements>
+    <command detect_errors="aggressive"><![CDATA[
+        
+          ln -f -s ${input_sdf_path} ${input_sdf_path}_`echo $$`.${input_sdf_path.ext};
+        
+        #if $config.sele == "option1":
+            ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
+          #end if
+
+        gnina_select_pose
+
+        #if $config.sele == "option1":
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
+          #else if $config.sele == "option2":
+            --config '${config.jsonstr}'
+          #else if $config.sele == "option3":
+            --config '__oc____dq__properties__dq__:__oc____dq__pose__dq__:${properties.pose},__dq__ligand__dq__:${properties.ligand},__dq__sort_by__dq__:__dq__${properties.sort_by}__dq____cc____cc__'
+          #end if
+        
+          #if str($input_sdf_path) != 'None':
+            --input_sdf_path ${input_sdf_path}_`echo $$`.${input_sdf_path.ext}
+          #end if
+        
+        
+          --output_sdf_path $outname_output_sdf_path
+        ;
+        #if $config.sele == "option1":
+            rm -f ${config.properties}_`echo $$`.${config.properties.ext};
+          #end if
+        
+          rm -f ${input_sdf_path}_`echo $$`.${input_sdf_path.ext};
+        
+        
+          if test -f $outname_output_sdf_path; then mv $outname_output_sdf_path $output_sdf_path; fi;
+        
+    ]]>
+    </command>
+    <inputs>
+        
+          <param name="input_sdf_path" type="data" format="sdf,gz"  optional="False" label="input SDF,GZ file" help="Path to the SDF file with the docked poses written by the gnina_run building block. Format: [input].[format]"/>
+        
+        
+          <param name="outname_output_sdf_path" type="text" value="mygnina_select_pose.sdf"
+              optional="False" label="output SDF,GZ name"
+              help="Path to the output SDF file with the selected pose Format: [output].[format] "/>
+        
+        <conditional name="config">
+            <param name="sele" type="select" label="Take tool settings:" help="Select where tool settings are to be read from">
+              <option value="option3">Manual Input</option>
+              <option value="option1">from configuration file</option>
+              <option value="option2">from JSON string</option>
+            </param>
+            <when value="option1">
+              <param name="properties" type="data" format="yml,json" optional="false" label="Configuration file" help="File containing tool settings. See below for the syntax"/>
+            </when>
+            <when value="option2">
+              <param name="jsonstr" type="text" value="{}" optional="false" label="JSON string" help="JSON string containing tool settings. See below for the syntax"/>
+            </when>
+            <when value="option3">
+            </when>
+          </conditional>
+          <section name="properties" title="Properties Input">
+            
+              <param name="pose" type="integer"
+                  value="1"
+                  min="1" max="10000"
+                  label="pose" help="Rank of the pose to extract, counted over the poses left after ligand has been applied and sort_by has been honoured." optional="false"/>
+            
+              <param name="ligand" type="integer"
+                  
+                  min="1" max="1000000"
+                  label="ligand" help="Index of the ligand whose poses are considered, following the order of the ligands in the file gnina docked. All poses in the file are considered when unset." optional="true"/>
+            
+              <param name="sort_by" type="select" label="sort_by" help="Score to reorder the poses by before one is picked. The poses are taken in the order gnina wrote them when unset, which is already gnina&#39;s own ranking. Note that this reorders only the poses present in the file, so it is not equivalent to the pose_sort_order property of gnina_run, which reorders the whole internal pool before the redundancy filter and the num_modes cutoff discard poses. " multiple="false">
+                  
+                    <option value="CNNscore"
+                      
+                    >CNNscore
+                       
+                    </option>
+                  
+                    <option value="highest first"
+                      
+                    >highest first
+                       
+                    </option>
+                  
+                    <option value="CNNaffinity"
+                      
+                    >CNNaffinity
+                       
+                    </option>
+                  
+                    <option value="highest first"
+                      
+                    >highest first
+                       
+                    </option>
+                  
+                    <option value="minimizedAffinity"
+                      
+                    >minimizedAffinity
+                       
+                    </option>
+                  
+                    <option value="lowest first"
+                      
+                    >lowest first
+                       
+                    </option>
+                  
+                </param>
+            
+              <param name="output_format" type="select" label="output_format" help="Format of the output file" multiple="false">
+                  
+                    <option value="sdf"
+                      
+                    >sdf
+                       
+                    </option>
+                  
+                    <option value="gz"
+                      
+                    >gz
+                       
+                    </option>
+                  
+                </param>
+            
+          </section>
+    </inputs>
+    <outputs>
+        
+        <data name="output_sdf_path" format="text" label="${outname_output_sdf_path}">
+            <change_format>
+            
+            <when input="properties.output_format" value="sdf" format="sdf" />
+            
+            <when input="properties.output_format" value="gz" format="gz" />
+            
+            </change_format>
+          </data>
+        
+    </outputs>
+    <tests>
+        <test>
+          <param name="sele" value="option1"/>
+          <param name="properties" value="data/config/config_editconf.json"/>
+        </test>
+    </tests>
+    <help>
+.. class:: infomark
+
+Check the syntax for the tool parameters at the original library documentation: https://biobb_vs.readthedocs.io/en/latest
+
+-----
+
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
+    :width: 150
+
+**https://mmb.irbbarcelona.org/biobb**
+
+.. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
+        :width: 150
+
+**https://bioexcel.eu**
+   </help>
+
+    <citations>
+        <citation type="bibtex">
+            @misc{githubbiobb,
+            author = {Andrio P, Bayarri, G., Hospital A, Gelpi JL},
+            year = {2019-21},
+            title = {biobb: BioExcel building blocks },
+            publisher = {GitHub},
+            journal = {GitHub repository},
+            url = {https://github.com/bioexcel/biobb_vs},
+            }
+        </citation>
+        <citation type="doi">10.1038/s41597-019-0177-4</citation>
+    </citations>
+</tool>

@@ -1,8 +1,8 @@
-<tool id="biobb_gromacs_pdb2gmx_ext" name="Pdb2gmx" version="4.2.0" >
+<tool id="biobb_gromacs_pdb2gmx_ext" name="Pdb2gmx" version="5.3.2" >
     <description>: Wrapper class for the GROMACS pdb2gmx module.</description>
     <requirements>
         <requirement type="package"
-        version="4.2.0"
+        version="5.3.2"
         >biobb_gromacs</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__water_type__dq__:__dq__${properties.water_type}__dq__,__dq__force_field__dq__:__dq__${properties.force_field}__dq__,__dq__ignh__dq__:${properties.ignh},__dq__his__dq__:__dq__${properties.his}__dq__,__dq__merge__dq__:${properties.merge},__dq__gmx_lib__dq__:__dq__${properties.gmx_lib}__dq__,__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
+            --config '__oc____dq__properties__dq__:__oc____dq__water_type__dq__:__dq__${properties.water_type}__dq__,__dq__force_field__dq__:__dq__${properties.force_field}__dq__,__dq__ignh__dq__:${properties.ignh},__dq__lys__dq__:${properties.lys},__dq__arg__dq__:${properties.arg},__dq__asp__dq__:${properties.asp},__dq__glu__dq__:${properties.glu},__dq__gln__dq__:${properties.gln},__dq__his__dq__:${properties.his},__dq__merge__dq__:${properties.merge},__dq__gmx_lib__dq__:__dq__${properties.gmx_lib}__dq__,__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc____cc__'
           #end if
         
           #if str($input_pdb_path) != 'None':
@@ -217,12 +217,30 @@
             
               <param name="ignh" type="boolean"
                   
-                  label="ignh" help="Should pdb2gmx ignore the hidrogens in the original structure."
+                  label="ignh" help="Should pdb2gmx ignore the hydrogens in the original structure."
                 />
             
-              <param name="his" type="text" label="his" help="Histidine protonation array." optional="true"
-                  
-                >
+              <param name="lys" type="text" label="lys" help="Lysine protonation states for each chain in the input pdb. Each item of the list should be a string with the protonation states for that chain or empty if the residue is not present in that chain (0: not protonated, 1: protonated). (Json)" value="[]" >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+              <param name="arg" type="text" label="arg" help="Arginine protonation states for each chain in the input pdb. Each item of the list should be a string with the protonation states for that chain or empty if the residue is not present in that chain (0: not protonated, 1: protonated). (Json)" value="[]" >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+              <param name="asp" type="text" label="asp" help="Aspartic acid protonation states for each chain in the input pdb. Each item of the list should be a string with the protonation states for that chain or empty if the residue is not present in that chain (0: not protonated, 1: protonated). (Json)" value="[]" >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+              <param name="glu" type="text" label="glu" help="Glutamic acid protonation states for each chain in the input pdb. Each item of the list should be a string with the protonation states for that chain or empty if the residue is not present in that chain (0: not protonated, 1: protonated). (Json)" value="[]" >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+              <param name="gln" type="text" label="gln" help="Glutamine protonation states for each chain in the input pdb. Each item of the list should be a string with the protonation states for that chain or empty if the residue is not present in that chain (0: not protonated, 1: protonated). (Json)" value="[]" >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+              <param name="his" type="text" label="his" help="Histidine protonation states for each chain in the input pdb. Each item of the list should be a string with the protonation states for that chain or empty if the residue is not present in that chain. Make sure residues are named HIS (0: HID, 1: HIE, 2: HIP, 3: HIS1). (Json)" value="[]" >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
             

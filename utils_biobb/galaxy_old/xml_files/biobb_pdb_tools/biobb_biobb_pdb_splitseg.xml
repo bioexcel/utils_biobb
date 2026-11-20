@@ -1,8 +1,8 @@
-<tool id="biobb_pdb_tools_biobb_pdb_splitseg_ext" name="BiobbPdbSplitseg" version="4.2.0" >
+<tool id="biobb_pdb_tools_biobb_pdb_splitseg_ext" name="BiobbPdbSplitseg" version="5.3.2" >
     <description>: Splits a PDB file into several, each containing one segment.</description>
     <requirements>
         <requirement type="package"
-        version="4.2.0"
+        version="5.3.2"
         >biobb_pdb_tools</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
+            --config '__oc____dq__properties__dq__:__oc____dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc____cc__'
           #end if
         
           #if str($input_file_path) != 'None':
@@ -43,7 +43,7 @@
     </command>
     <inputs>
         
-          <param name="input_file_path" type="data" format="pdb"  optional="False" label="input PDB file" help="PDB file. Format: [input].pdb"/>
+          <param name="input_file_path" type="data" format="pdb"  optional="False" label="input PDB file" help="Input PDB file. Format: [input].pdb"/>
         
         
           <param name="outname_output_file_path" type="text" value="mybiobb_pdb_splitseg.zip"

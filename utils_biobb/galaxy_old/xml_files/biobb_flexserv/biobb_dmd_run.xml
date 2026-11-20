@@ -1,8 +1,8 @@
-<tool id="biobb_flexserv_dmd_run_ext" name="DmdRun" version="4.2.0" >
+<tool id="biobb_flexserv_dmd_run_ext" name="DmdRun" version="5.3.0" >
     <description>: Wrapper of the Discrete Molecular Dynamics tool from the FlexServ module.</description>
     <requirements>
         <requirement type="package"
-        version="4.2.0"
+        version="5.3.0"
         >biobb_flexserv</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__binary_path__dq__:__dq__${properties.binary_path}__dq__,__dq__dt__dq__:${properties.dt},__dq__temperature__dq__:${properties.temperature},__dq__frames__dq__:${properties.frames}__cc__'
+            --config '__oc____dq__properties__dq__:__oc____dq__binary_path__dq__:__dq__${properties.binary_path}__dq__,__dq__dt__dq__:${properties.dt},__dq__temperature__dq__:${properties.temperature},__dq__frames__dq__:${properties.frames}__cc____cc__'
           #end if
         
           #if str($input_pdb_path) != 'None':

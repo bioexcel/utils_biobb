@@ -1,8 +1,8 @@
-<tool id="biobb_pmx_pmxgentop_ext" name="Pmxgentop" version="4.2.1" >
+<tool id="biobb_pmx_pmxgentop_ext" name="Pmxgentop" version="5.3.1" >
     <description>: Wrapper class for the PMX gentop module.</description>
     <requirements>
         <requirement type="package"
-        version="4.2.1"
+        version="5.3.1"
         >biobb_pmx</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__force_field__dq__:__dq__${properties.force_field}__dq__,__dq__split__dq__:${properties.split},__dq__scale_mass__dq__:${properties.scale_mass},__dq__gmx_lib__dq__:__dq__${properties.gmx_lib}__dq__,__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
+            --config '__oc____dq__properties__dq__:__oc____dq__force_field__dq__:__dq__${properties.force_field}__dq__,__dq__split__dq__:${properties.split},__dq__scale_mass__dq__:${properties.scale_mass},__dq__gmx_lib__dq__:__dq__${properties.gmx_lib}__dq__,__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc____cc__'
           #end if
         
           #if str($input_top_zip_path) != 'None':

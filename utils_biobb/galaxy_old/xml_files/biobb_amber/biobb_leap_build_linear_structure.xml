@@ -1,8 +1,8 @@
-<tool id="biobb_amber_leap_build_linear_structure_ext" name="LeapBuildLinearStructure" version="4.2.0" >
+<tool id="biobb_amber_leap_build_linear_structure_ext" name="LeapBuildLinearStructure" version="5.3.3" >
     <description>: Wrapper of the AmberTools (AMBER MD Package) leap tool module.</description>
     <requirements>
         <requirement type="package"
-        version="4.2.0"
+        version="5.3.3"
         >biobb_amber</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -18,7 +18,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__sequence__dq__:__dq__${properties.sequence}__dq__,__dq__forcefield__dq__:__ob____dq__${'__dq__,__dq__'.join($properties.forcefield)}__dq____cb__,__dq__build_library__dq__:${properties.build_library},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
+            --config '__oc____dq__properties__dq__:__oc____dq__sequence__dq__:__dq__${properties.sequence}__dq__,__dq__forcefield__dq__:${properties.forcefield},__dq__build_library__dq__:${properties.build_library},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc____cc__'
           #end if
         
         
@@ -63,44 +63,8 @@
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
             
-              <param name="forcefield" type="select" label="forcefield" help="Forcefield to be used for the structure generation. " multiple="true">
-                  
-                    <option value="protein.ff14SB"
-                      
-                    >protein.ff14SB
-                       
-                    </option>
-                  
-                    <option value="protein.ff19SB"
-                      
-                    >protein.ff19SB
-                       
-                    </option>
-                  
-                    <option value="DNA.bsc1"
-                      
-                    >DNA.bsc1
-                       
-                    </option>
-                  
-                    <option value="DNA.OL15"
-                      
-                    >DNA.OL15
-                       
-                    </option>
-                  
-                    <option value="RNA.OL3"
-                      
-                    >RNA.OL3
-                       
-                    </option>
-                  
-                    <option value="gaff"
-                      
-                    >gaff
-                       
-                    </option>
-                  
+              <param name="forcefield" type="text" label="forcefield" help="Forcefields to be used for the structure generation. Each item should be either a path to a leaprc file or a string with the leaprc file name if the force field is included with Amber (e.g. &#34;/path/to/leaprc.protein.ff14SB&#34; or &#34;protein.ff14SB&#34;). Default values: [&#34;protein.ff14SB&#34;,&#34;DNA.bsc1&#34;,&#34;gaff&#34;]. (Json)" value="[]" >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
             
               <param name="build_library" type="boolean"

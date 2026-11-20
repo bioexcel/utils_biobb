@@ -1,0 +1,162 @@
+<tool id="biobb_mem_lpp_zpositions_ext" name="LppZpositions" version="5.3.1" >
+    <description>: Wrapper of the LiPyphilic ZPositions module for calculating the z distance of lipids to the bilayer center.</description>
+    <requirements>
+        <requirement type="package"
+        version="5.3.1"
+        >biobb_mem</requirement>
+    </requirements>
+    <command detect_errors="aggressive"><![CDATA[
+        
+          ln -f -s ${input_top_path} ${input_top_path}_`echo $$`.${input_top_path.ext};
+        
+          ln -f -s ${input_traj_path} ${input_traj_path}_`echo $$`.${input_traj_path.ext};
+        
+        #if $config.sele == "option1":
+            ln -s -f ${config.properties} ${config.properties}_`echo $$`.${config.properties.ext};
+          #end if
+
+        lpp_zpositions
+
+        #if $config.sele == "option1":
+            --config ${config.properties}_`echo $$`.${config.properties.ext}
+          #else if $config.sele == "option2":
+            --config '${config.jsonstr}'
+          #else if $config.sele == "option3":
+            --config '__oc____dq__properties__dq__:__oc____dq__start__dq__:${properties.start},__dq__stop__dq__:${properties.stop},__dq__steps__dq__:${properties.steps},__dq__lipid_sel__dq__:__dq__${properties.lipid_sel}__dq__,__dq__height_sel__dq__:__dq__${properties.height_sel}__dq__,__dq__n_bins__dq__:${properties.n_bins},__dq__ignore_no_box__dq__:${properties.ignore_no_box}__cc____cc__'
+          #end if
+        
+          #if str($input_top_path) != 'None':
+            --input_top_path ${input_top_path}_`echo $$`.${input_top_path.ext}
+          #end if
+        
+          #if str($input_traj_path) != 'None':
+            --input_traj_path ${input_traj_path}_`echo $$`.${input_traj_path.ext}
+          #end if
+        
+        
+          --output_positions_path $outname_output_positions_path
+        ;
+        #if $config.sele == "option1":
+            rm -f ${config.properties}_`echo $$`.${config.properties.ext};
+          #end if
+        
+          rm -f ${input_top_path}_`echo $$`.${input_top_path.ext};
+        
+          rm -f ${input_traj_path}_`echo $$`.${input_traj_path.ext};
+        
+        
+          if test -f $outname_output_positions_path; then mv $outname_output_positions_path $output_positions_path; fi;
+        
+    ]]>
+    </command>
+    <inputs>
+        
+          <param name="input_top_path" type="data" format="crd,gro,mdcrd,mol2,pdb,pdbqt,prmtop,psf,top,tpr,xml,xyz"  optional="False" label="input CRD,GRO,MDCRD,MOL2,PDB,PDBQT,PRMTOP,PSF,TOP,TPR,XML,XYZ file" help="Path to the input structure or topology file. Format: [input].[format]"/>
+        
+          <param name="input_traj_path" type="data" format="arc,crd,dcd,ent,gro,inpcrd,mdcrd,mol2,nc,pdb,pdbqt,restrt,tng,trr,xtc,xyz"  optional="False" label="input ARC,CRD,DCD,ENT,GRO,INPCRD,MDCRD,MOL2,NC,PDB,PDBQT,RESTRT,TNG,TRR,XTC,XYZ file" help="Path to the input trajectory to be processed. Format: [input].[format]"/>
+        
+        
+          <param name="outname_output_positions_path" type="text" value="mylpp_zpositions.csv"
+              optional="False" label="output CSV name"
+              help="Path to the output z positions Format: [output].csv "/>
+        
+        <conditional name="config">
+            <param name="sele" type="select" label="Take tool settings:" help="Select where tool settings are to be read from">
+              <option value="option3">Manual Input</option>
+              <option value="option1">from configuration file</option>
+              <option value="option2">from JSON string</option>
+            </param>
+            <when value="option1">
+              <param name="properties" type="data" format="yml,json" optional="false" label="Configuration file" help="File containing tool settings. See below for the syntax"/>
+            </when>
+            <when value="option2">
+              <param name="jsonstr" type="text" value="{}" optional="false" label="JSON string" help="JSON string containing tool settings. See below for the syntax"/>
+            </when>
+            <when value="option3">
+            </when>
+          </conditional>
+          <section name="properties" title="Properties Input">
+            
+              <param name="start" type="integer"
+                  
+                  
+                  label="start" help="Starting frame for slicing." optional="true"/>
+            
+              <param name="stop" type="integer"
+                  
+                  
+                  label="stop" help="Ending frame for slicing." optional="true"/>
+            
+              <param name="steps" type="integer"
+                  
+                  
+                  label="steps" help="Step for slicing." optional="true"/>
+            
+              <param name="lipid_sel" type="text" label="lipid_sel" help="Selection string for the lipids in a membrane. The selection should cover **all** residues in the membrane, including cholesterol." optional="false"
+                  value="all"
+                >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+              <param name="height_sel" type="text" label="height_sel" help="Atom selection for the molecules for which the z position will be calculated." optional="false"
+                  value="all"
+                >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+              <param name="n_bins" type="integer"
+                  value="1"
+                  
+                  label="n_bins" help="Number of bins in *x* and *y* to use to create a grid of membrane patches. Local membrane midpoints are computed for each patch, and lipids assigned a leaflet based on the distance to their local membrane midpoint. The default is `1`, which is equivalent to computing a single global midpoint." optional="false"/>
+            
+              <param name="ignore_no_box" type="boolean"
+                  
+                  label="ignore_no_box" help="Ignore the absence of box information in the trajectory. If the trajectory does not contain box information, the box will be set to the minimum and maximum positions of the atoms in the trajectory."
+                />
+            
+          </section>
+    </inputs>
+    <outputs>
+        
+        
+          <data name="output_positions_path" format="csv" label="${outname_output_positions_path}"/>
+        
+    </outputs>
+    <tests>
+        <test>
+          <param name="sele" value="option1"/>
+          <param name="properties" value="data/config/config_editconf.json"/>
+        </test>
+    </tests>
+    <help>
+.. class:: infomark
+
+Check the syntax for the tool parameters at the original library documentation: https://biobb_mem.readthedocs.io/en/latest
+
+-----
+
+.. image:: http://mmb.irbbarcelona.org/biobb/assets/layouts/layout3/img/logo.png
+    :width: 150
+
+**https://mmb.irbbarcelona.org/biobb**
+
+.. image:: https://bioexcel.eu/wp-content/uploads/2019/08/Bioexcel_logo_no_subheading_660px.png
+        :width: 150
+
+**https://bioexcel.eu**
+   </help>
+
+    <citations>
+        <citation type="bibtex">
+            @misc{githubbiobb,
+            author = {Andrio P, Bayarri, G., Hospital A, Gelpi JL},
+            year = {2019-21},
+            title = {biobb: BioExcel building blocks },
+            publisher = {GitHub},
+            journal = {GitHub repository},
+            url = {https://github.com/bioexcel/biobb_mem},
+            }
+        </citation>
+        <citation type="doi">10.1038/s41597-019-0177-4</citation>
+    </citations>
+</tool>

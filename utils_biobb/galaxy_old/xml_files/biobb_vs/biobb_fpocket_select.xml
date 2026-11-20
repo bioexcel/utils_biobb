@@ -1,8 +1,8 @@
-<tool id="biobb_vs_fpocket_select_ext" name="FpocketSelect" version="4.2.0" >
+<tool id="biobb_vs_fpocket_select_ext" name="FpocketSelect" version="5.3.0" >
     <description>: Selects a single pocket in the outputs of the fpocket building block.</description>
     <requirements>
         <requirement type="package"
-        version="4.2.0"
+        version="5.3.0"
         >biobb_vs</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__pocket__dq__:${properties.pocket}__cc__'
+            --config '__oc____dq__properties__dq__:__oc____dq__pocket__dq__:${properties.pocket}__cc____cc__'
           #end if
         
           #if str($input_pockets_zip) != 'None':

@@ -1,8 +1,8 @@
-<tool id="biobb_model_fix_backbone_ext" name="FixBackbone" version="4.2.3" >
+<tool id="biobb_model_fix_backbone_ext" name="FixBackbone" version="5.3.0" >
     <description>: Class to model the missing atoms in the backbone of a PDB structure.</description>
     <requirements>
         <requirement type="package"
-        version="4.2.3"
+        version="5.3.0"
         >biobb_model</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -22,7 +22,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__add_caps__dq__:${properties.add_caps},__dq__modeller_key__dq__:__dq__${properties.modeller_key}__dq__,__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
+            --config '__oc____dq__properties__dq__:__oc____dq__add_caps__dq__:${properties.add_caps},__dq__extra_gap__dq__:${properties.extra_gap},__dq__fix_known__dq__:${properties.fix_known},__dq__modeller_key__dq__:__dq__${properties.modeller_key}__dq__,__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc____cc__'
           #end if
         
           #if str($input_pdb_path) != 'None':
@@ -80,6 +80,16 @@
               <param name="add_caps" type="boolean"
                   
                   label="add_caps" help="Add caps to terminal residues."
+                />
+            
+              <param name="extra_gap" type="integer"
+                  value="0"
+                  
+                  label="extra_gap" help="Recover additional residues from the model on either side of the break to help fix loop connections." optional="true"/>
+            
+              <param name="fix_known" type="boolean"
+                  
+                  label="fix_known" help="Optimize only the missing residues with Modeller, the residues in the structure keep their coordinates."
                 />
             
               <param name="modeller_key" type="text" label="modeller_key" help="Modeller license key." optional="true"

@@ -1,8 +1,8 @@
-<tool id="biobb_vs_extract_model_pdbqt_ext" name="ExtractModelPdbqt" version="4.2.0" >
+<tool id="biobb_vs_extract_model_pdbqt_ext" name="ExtractModelPdbqt" version="5.3.0" >
     <description>: Extracts a model from a PDBQT file with several models.</description>
     <requirements>
         <requirement type="package"
-        version="4.2.0"
+        version="5.3.0"
         >biobb_vs</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__model__dq__:${properties.model}__cc__'
+            --config '__oc____dq__properties__dq__:__oc____dq__model__dq__:${properties.model}__cc____cc__'
           #end if
         
           #if str($input_pdbqt_path) != 'None':

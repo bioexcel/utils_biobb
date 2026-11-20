@@ -1,8 +1,8 @@
-<tool id="biobb_structure_utils_extract_molecule_ext" name="ExtractMolecule" version="4.2.0" >
+<tool id="biobb_structure_utils_extract_molecule_ext" name="ExtractMolecule" version="5.3.0" >
     <description>: This class is a wrapper of the Structure Checking tool to extract a molecule from a 3D structure.</description>
     <requirements>
         <requirement type="package"
-        version="4.2.0"
+        version="5.3.0"
         >biobb_structure_utils</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__molecule_type__dq__:__dq__${properties.molecule_type}__dq__,__dq__chains__dq__:${properties.chains},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
+            --config '__oc____dq__properties__dq__:__oc____dq__molecule_type__dq__:__dq__${properties.molecule_type}__dq__,__dq__chains__dq__:${properties.chains},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc____cc__'
           #end if
         
           #if str($input_structure_path) != 'None':

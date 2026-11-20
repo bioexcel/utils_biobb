@@ -1,8 +1,8 @@
-<tool id="biobb_gromacs_trjcat_ext" name="Trjcat" version="4.2.0" >
+<tool id="biobb_gromacs_trjcat_ext" name="Trjcat" version="5.3.2" >
     <description>: Wrapper class for the GROMACS trjcat module.</description>
     <requirements>
         <requirement type="package"
-        version="4.2.0"
+        version="5.3.2"
         >biobb_gromacs</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__concatenate__dq__:${properties.concatenate},__dq__gmx_lib__dq__:__dq__${properties.gmx_lib}__dq__,__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
+            --config '__oc____dq__properties__dq__:__oc____dq__concatenate__dq__:${properties.concatenate},__dq__gmx_lib__dq__:__dq__${properties.gmx_lib}__dq__,__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc____cc__'
           #end if
         
           #if str($input_trj_zip_path) != 'None':

@@ -1,8 +1,8 @@
-<tool id="biobb_gromacs_ndx2resttop_ext" name="Ndx2resttop" version="4.2.0" >
+<tool id="biobb_gromacs_ndx2resttop_ext" name="Ndx2resttop" version="5.3.2" >
     <description>: Generate a restrained topology from an index NDX file.</description>
     <requirements>
         <requirement type="package"
-        version="4.2.0"
+        version="5.3.2"
         >biobb_gromacs</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -22,7 +22,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__force_constants__dq__:__dq__${properties.force_constants}__dq__,__dq__ref_rest_chain_triplet_list__dq__:__dq__${properties.ref_rest_chain_triplet_list}__dq____cc__'
+            --config '__oc____dq__properties__dq__:__oc____dq__posres_names__dq__:__dq__${properties.posres_names}__dq__,__dq__force_constants__dq__:__dq__${properties.force_constants}__dq__,__dq__ref_rest_mol_triplet_list__dq__:__dq__${properties.ref_rest_mol_triplet_list}__dq____cc____cc__'
           #end if
         
           #if str($input_ndx_path) != 'None':
@@ -77,13 +77,19 @@
           </conditional>
           <section name="properties" title="Properties Input">
             
-              <param name="force_constants" type="text" label="force_constants" help="Array of three floats defining the force constants." optional="false"
+              <param name="posres_names" type="text" label="posres_names" help="Space-separated preprocessor macro names, one per triplet (e.g. ``&#34;CHAIN_A_POSRES CHAIN_B_POSRES&#34;``). Activated at grompp time via ``-D &lt;name&gt;``. Must match the length of ref_rest_mol_triplet_list." optional="false"
+                  value="CUSTOM_POSRES"
+                >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+              <param name="force_constants" type="text" label="force_constants" help="Three space-separated force constants Fx Fy Fz in kJ/mol/nm². Written verbatim into each ITP line so the same value is applied to every restrained atom." optional="false"
                   value="500 500 500"
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
             
-              <param name="ref_rest_chain_triplet_list" type="text" label="ref_rest_chain_triplet_list" help="Triplet list composed by (reference group, restrain group, chain) list." optional="true"
+              <param name="ref_rest_mol_triplet_list" type="text" label="ref_rest_mol_triplet_list" help="Comma-separated triplets ``(reference_group, restrain_group, molecule_name)``, one per molecule to restrain.``reference_group``: NDX group containing *all* atoms of the molecule in global (system-wide) GROMACS numbering. Used only as a coordinate frame to convert global indices to molecule-local 1-based indices. Example: ``r_1-9280``. ``restrain_group``: NDX group with the subset of atoms to actually restrain (must be a strict subset of reference_group). Example: ``P_&amp;_r_1-9280``. ``molecule_name``: the ``[ moleculetype ]`` name in the topology used to locate where to splice the ``#ifdef`` block. Example: ``1TSR``." optional="true"
                   
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>

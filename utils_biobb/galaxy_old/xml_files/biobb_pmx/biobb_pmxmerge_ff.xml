@@ -1,8 +1,8 @@
-<tool id="biobb_pmx_pmxmerge_ff_ext" name="PmxmergeFf" version="4.2.1" >
+<tool id="biobb_pmx_pmxmerge_ff_ext" name="PmxmergeFf" version="5.3.1" >
     <description>: Wrapper class for the PMX merge_ff module.</description>
     <requirements>
         <requirement type="package"
-        version="4.2.1"
+        version="5.3.1"
         >biobb_pmx</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[

@@ -1,8 +1,8 @@
-<tool id="biobb_cmip_cmip_ignore_residues_ext" name="CmipIgnoreResidues" version="4.2.0" >
+<tool id="biobb_cmip_cmip_ignore_residues_ext" name="CmipIgnoreResidues" version="5.3.1" >
     <description>: Class to ignore residues in CMIP potential calculations.</description>
     <requirements>
         <requirement type="package"
-        version="4.2.0"
+        version="5.3.1"
         >biobb_cmip</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__residue_list__dq__:__dq__${properties.residue_list}__dq__,__dq__ignore_all__dq__:${properties.ignore_all}__cc__'
+            --config '__oc____dq__properties__dq__:__oc____dq__residue_list__dq__:__dq__${properties.residue_list}__dq__,__dq__ignore_all__dq__:${properties.ignore_all}__cc____cc__'
           #end if
         
           #if str($input_cmip_pdb_path) != 'None':

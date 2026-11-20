@@ -1,8 +1,8 @@
-<tool id="biobb_pdb_tools_biobb_pdb_fetch_ext" name="BiobbPdbFetch" version="4.2.0" >
+<tool id="biobb_pdb_tools_biobb_pdb_fetch_ext" name="BiobbPdbFetch" version="5.3.2" >
     <description>: Downloads a structure in PDB format from the RCSB website.</description>
     <requirements>
         <requirement type="package"
-        version="4.2.0"
+        version="5.3.2"
         >biobb_pdb_tools</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -18,7 +18,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__pdbid__dq__:__dq__${properties.pdbid}__dq__,__dq__biounit__dq__:__dq__${properties.biounit}__dq__,__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc__'
+            --config '__oc____dq__properties__dq__:__oc____dq__pdbid__dq__:__dq__${properties.pdbid}__dq__,__dq__biounit__dq__:__dq__${properties.biounit}__dq__,__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc____cc__'
           #end if
         
         

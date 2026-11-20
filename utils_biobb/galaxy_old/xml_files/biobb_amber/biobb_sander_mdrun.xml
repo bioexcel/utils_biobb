@@ -1,8 +1,8 @@
-<tool id="biobb_amber_sander_mdrun_ext" name="SanderMdrun" version="4.2.0" >
+<tool id="biobb_amber_sander_mdrun_ext" name="SanderMdrun" version="5.3.3" >
     <description>: Wrapper of the AmberTools (AMBER MD Package) sander tool module.</description>
     <requirements>
         <requirement type="package"
-        version="4.2.0"
+        version="5.3.3"
         >biobb_amber</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -28,7 +28,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__mdin__dq__:${properties.mdin},__dq__simulation_type__dq__:__dq__${properties.simulation_type}__dq__,__dq__binary_path__dq__:__dq__${properties.binary_path}__dq__,__dq__direct_mdin__dq__:${properties.direct_mdin},__dq__mpi_bin__dq__:__dq__${properties.mpi_bin}__dq__,__dq__mpi_np__dq__:${properties.mpi_np},__dq__mpi_flags__dq__:__dq__${properties.mpi_flags}__dq____cc__'
+            --config '__oc____dq__properties__dq__:__oc____dq__mdin__dq__:${properties.mdin},__dq__simulation_type__dq__:__dq__${properties.simulation_type}__dq__,__dq__binary_path__dq__:__dq__${properties.binary_path}__dq__,__dq__direct_mdin__dq__:${properties.direct_mdin},__dq__mpi_bin__dq__:__dq__${properties.mpi_bin}__dq__,__dq__mpi_np__dq__:${properties.mpi_np},__dq__mpi_flags__dq__:__dq__${properties.mpi_flags}__dq____cc____cc__'
           #end if
         
           #if str($input_top_path) != 'None':
@@ -97,7 +97,7 @@
         
           <param name="input_top_path" type="data" format="top,parmtop,prmtop"  optional="False" label="input TOP,PARMTOP,PRMTOP file" help="Input topology file (AMBER ParmTop). Format: [input].[format]"/>
         
-          <param name="input_crd_path" type="data" format="crd,mdcrd,inpcrd,netcdf,nc,ncrst"  optional="False" label="input CRD,MDCRD,INPCRD,NETCDF,NC,NCRST file" help="Input coordinates file (AMBER crd). Format: [input].[format]"/>
+          <param name="input_crd_path" type="data" format="crd,mdcrd,inpcrd,netcdf,nc,ncrst,rst"  optional="False" label="input CRD,MDCRD,INPCRD,NETCDF,NC,NCRST,RST file" help="Input coordinates file (AMBER crd). Format: [input].[format]"/>
         
           <param name="input_mdin_path" type="data" format="mdin,in,txt"  optional="True" label="input MDIN,IN,TXT file" help="Input configuration file (MD run options) (AMBER mdin). Format: [input].[format]"/>
         

@@ -1,8 +1,8 @@
-<tool id="biobb_io_memprotmd_sim_search_ext" name="MemprotmdSimSearch" version="4.2.0" >
+<tool id="biobb_io_memprotmd_sim_search_ext" name="MemprotmdSimSearch" version="5.3.2" >
     <description>: This class is a wrapper of the MemProtMD to perform advanced searches in the MemProtMD DB using its REST API.</description>
     <requirements>
         <requirement type="package"
-        version="4.2.0"
+        version="5.3.2"
         >biobb_io</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -18,7 +18,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__collection_name__dq__:__dq__${properties.collection_name}__dq__,__dq__keyword__dq__:__dq__${properties.keyword}__dq____cc__'
+            --config '__oc____dq__properties__dq__:__oc____dq__collection_name__dq__:__dq__${properties.collection_name}__dq__,__dq__keyword__dq__:__dq__${properties.keyword}__dq____cc____cc__'
           #end if
         
         

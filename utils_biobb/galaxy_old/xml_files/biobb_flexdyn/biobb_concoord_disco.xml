@@ -1,8 +1,8 @@
-<tool id="biobb_flexdyn_concoord_disco_ext" name="ConcoordDisco" version="4.2.0" >
+<tool id="biobb_flexdyn_concoord_disco_ext" name="ConcoordDisco" version="5.3.0" >
     <description>: Wrapper of the Disco tool from the Concoord package.</description>
     <requirements>
         <requirement type="package"
-        version="4.2.0"
+        version="5.3.0"
         >biobb_flexdyn</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
@@ -22,7 +22,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__binary_path__dq__:__dq__${properties.binary_path}__dq__,__dq__vdw__dq__:__dq__${properties.vdw}__dq__,__dq__num_structs__dq__:${properties.num_structs},__dq__num_iterations__dq__:${properties.num_iterations},__dq__chirality_check__dq__:__dq__${properties.chirality_check}__dq__,__dq__bs__dq__:${properties.bs},__dq__nofit__dq__:${properties.nofit},__dq__seed__dq__:${properties.seed},__dq__violation__dq__:${properties.violation},__dq__convergence__dq__:${properties.convergence},__dq__trials__dq__:${properties.trials},__dq__damp__dq__:__dq__${properties.damp}__dq__,__dq__dyn__dq__:${properties.dyn},__dq__bump__dq__:${properties.bump},__dq__pairlist_freq__dq__:${properties.pairlist_freq},__dq__cutoff__dq__:${properties.cutoff},__dq__ref__dq__:${properties.ref},__dq__scale__dq__:${properties.scale}__cc__'
+            --config '__oc____dq__properties__dq__:__oc____dq__binary_path__dq__:__dq__${properties.binary_path}__dq__,__dq__vdw__dq__:__dq__${properties.vdw}__dq__,__dq__concoord_lib_path__dq__:__dq__${properties.concoord_lib_path}__dq__,__dq__num_structs__dq__:${properties.num_structs},__dq__num_iterations__dq__:${properties.num_iterations},__dq__chirality_check__dq__:__dq__${properties.chirality_check}__dq__,__dq__bs__dq__:${properties.bs},__dq__nofit__dq__:${properties.nofit},__dq__seed__dq__:${properties.seed},__dq__violation__dq__:${properties.violation},__dq__convergence__dq__:${properties.convergence},__dq__trials__dq__:${properties.trials},__dq__damp__dq__:__dq__${properties.damp}__dq__,__dq__dyn__dq__:${properties.dyn},__dq__bump__dq__:${properties.bump},__dq__pairlist_freq__dq__:${properties.pairlist_freq},__dq__cutoff__dq__:${properties.cutoff},__dq__ref__dq__:${properties.ref},__dq__scale__dq__:${properties.scale}__cc____cc__'
           #end if
         
           #if str($input_pdb_path) != 'None':
@@ -137,6 +137,12 @@
                        - OPLS-X parameters -recommended for NMR structure determination-
                     </option>
                   
+                </param>
+            
+              <param name="concoord_lib_path" type="text" label="concoord_lib_path" help="Path to Concoord library files. If not specified will look for CONCOORDLIB conda environment variable." optional="true"
+                  
+                >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
             
               <param name="num_structs" type="integer"
