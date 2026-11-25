@@ -27,7 +27,10 @@ SECTIONS = {
     'biobb_haddock': 'Haddock',
     'biobb_pytorch': 'PyTorch',
     'biobb_flexserv': 'FlexServ',
-    'biobb_flexdyn': 'FlexDyn'
+    'biobb_flexdyn': 'FlexDyn',
+    'biobb_mddm': 'MDDB',
+    'biobb_lsvs': 'Smina (Virtual Screening)'
+      
 }
 
 
@@ -238,8 +241,8 @@ def main():
                             props_str.append(
                                 "__dq__" + k + "__dq__:${properties." + k + "}")
 
-                    data['config_str'] = "__oc__" + \
-                        ",".join(props_str) + "__cc__"
+                    data['config_str'] = "__oc____dq__properties__dq__:__oc__" + \
+                        ",".join(props_str) + "__cc____cc__"
                     # print(data)
                     # Adding output_format when multiple output formats
                     n_formats_required = len(multiple_formats_required)

@@ -1,8 +1,8 @@
-<tool id="biobb_godmd_godmd_run_ext" name="GodmdRun" version="4.1.0" >
+<tool id="biobb_godmd_godmd_run_ext" name="GodmdRun" version="5.3.1" >
     <description>: Wrapper of the GOdMD tool module.</description>
     <requirements>
         <requirement type="package"
-        version="4.1.0"
+        version="5.3.1"
         >biobb_godmd</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[

@@ -101,7 +101,7 @@
         
           <param name="input_mdin_path" type="data" format="mdin,in,txt"  optional="True" label="input MDIN,IN,TXT file" help="Input configuration file (MD run options) (AMBER mdin). Format: [input].[format]"/>
         
-          <param name="input_cpin_path" type="data" format="cpin"  optional="True" label="input CPIN file" help="Input constant pH file (AMBER cpin). Format: [input].cpin"/>
+          <param name="input_cpin_path" type="data" format="cpin,in,txt"  optional="True" label="input CPIN,IN,TXT file" help="Input constant pH file (AMBER cpin). Format: [input].[format]"/>
         
           <param name="input_ref_path" type="data" format="crd,mdcrd,inpcrd,rst,rst7,netcdf,nc,ncrst"  optional="True" label="input CRD,MDCRD,INPCRD,RST,RST7,NETCDF,NC,NCRST file" help="Input reference coordinates for position restraints. Format: [input].[format]"/>
         

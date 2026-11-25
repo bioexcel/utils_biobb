@@ -47,7 +47,7 @@
         
         
           <param name="outname_output_path" type="text" value="mybabel_remove_hydrogens.ent"
-              optional="False" label="output ENT,FA,FASTA,GRO,INP,MCIF,MDL,MMCIF,MOL,MOL2,PDB,PDBQT,PNG,SDF,SMI,SMILES,TXT name"
+              optional="False" label="output ENT,FA,FASTA,GRO,INP,MCIF,MDL,MMCIF,MOL,MOL2,PDB,PDBQT,PNG,SDF,SMI,SMILES,TXT,DAT,LOG,XML,XTC name"
               help="Path to the output file Format: [output].[format] "/>
         
         <conditional name="config">
@@ -478,6 +478,14 @@
             <when input="properties.output_format" value="smiles" format="smiles" />
             
             <when input="properties.output_format" value="txt" format="txt" />
+            
+            <when input="properties.output_format" value="dat" format="dat" />
+            
+            <when input="properties.output_format" value="log" format="log" />
+            
+            <when input="properties.output_format" value="xml" format="xml" />
+            
+            <when input="properties.output_format" value="xtc" format="xtc" />
             
             </change_format>
           </data>

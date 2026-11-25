@@ -71,9 +71,9 @@
     </command>
     <inputs>
         
-          <param name="input_cpin_path" type="data" format="cpin"  optional="False" label="input CPIN file" help="Input constant pH file (AMBER cpin). Format: [input].cpin"/>
+          <param name="input_cpin_path" type="data" format="cpin,in,txt"  optional="False" label="input CPIN,IN,TXT file" help="Input constant pH file (AMBER cpin). Format: [input].[format]"/>
         
-          <param name="input_cpout_path" type="data" format="cpout,zip,gzip"  optional="False" label="input CPOUT,ZIP,GZIP file" help="Output constant pH file (AMBER cpout). Format: [input].[format]"/>
+          <param name="input_cpout_path" type="data" format="cpout,zip,gzip,gz"  optional="False" label="input CPOUT,ZIP,GZIP,GZ file" help="Output constant pH file (AMBER cpout). Format: [input].[format]"/>
         
         
           <param name="outname_output_dat_path" type="text" value="mycphstats_run.dat"

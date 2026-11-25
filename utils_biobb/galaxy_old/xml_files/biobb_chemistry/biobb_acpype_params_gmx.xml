@@ -20,7 +20,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__properties__dq__:__oc____dq__basename__dq__:__dq__${properties.basename}__dq__,__dq__charge__dq__:${properties.charge},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc____cc__'
+            --config '__oc____dq__properties__dq__:__oc____dq__basename__dq__:__dq__${properties.basename}__dq__,__dq__charge__dq__:${properties.charge},__dq__charge_method__dq__:__dq__${properties.charge_method}__dq__,__dq__multiplicity__dq__:${properties.multiplicity},__dq__atom_type__dq__:__dq__${properties.atom_type}__dq__,__dq__protein_ff__dq__:__dq__${properties.protein_ff}__dq__,__dq__qprog__dq__:__dq__${properties.qprog}__dq__,__dq__keyword__dq__:__dq__${properties.keyword}__dq__,__dq__max_time__dq__:${properties.max_time},__dq__predindex__dq__:__dq__${properties.predindex}__dq__,__dq__gmx4__dq__:${properties.gmx4},__dq__merge__dq__:${properties.merge},__dq__sorted__dq__:${properties.sorted},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc____cc__'
           #end if
         
           #if str($input_path) != 'None':
@@ -93,6 +93,171 @@
                   value="0"
                   min="-20" max="20"
                   label="charge" help="Net molecular charge, for gas default is 0. If None the charge is guessed by acpype." optional="true"/>
+            
+              <param name="charge_method" type="select" label="charge_method" help="Charge method. " multiple="false">
+                  
+                    <option value="gas"
+                      
+                    >gas
+                       - Gasteiger charges
+                    </option>
+                  
+                    <option value="bcc"
+                      selected="true"
+                    >bcc
+                       - AM1-BCC charges
+                    </option>
+                  
+                    <option value="abcg2"
+                      
+                    >abcg2
+                       - ABCG2 charges; recommended for GAFF2; not available in acpype 2023.10.27
+                    </option>
+                  
+                    <option value="user"
+                      
+                    >user
+                       - charges read from the mol2 input file
+                    </option>
+                  
+                </param>
+            
+              <param name="multiplicity" type="integer"
+                  value="1"
+                  min="1" max="10"
+                  label="multiplicity" help="Multiplicity (2S+1) of the molecule." optional="false"/>
+            
+              <param name="atom_type" type="select" label="atom_type" help="Atom type. " multiple="false">
+                  
+                    <option value="gaff"
+                      
+                    >gaff
+                       - General AMBER Force Field
+                    </option>
+                  
+                    <option value="amber"
+                      
+                    >amber
+                       - protein force field set in protein_ff + GAFF
+                    </option>
+                  
+                    <option value="gaff2"
+                      selected="true"
+                    >gaff2
+                       - General AMBER Force Field 2
+                    </option>
+                  
+                    <option value="amber2"
+                      
+                    >amber2
+                       - protein force field set in protein_ff + GAFF2
+                    </option>
+                  
+                </param>
+            
+              <param name="protein_ff" type="select" label="protein_ff" help="Protein force field used with the amber and amber2 atom types; only written to the command line when it is not the default value, not available in acpype 2023.10.27. " multiple="false">
+                  
+                    <option value="ff14SB"
+                      selected="true"
+                    >ff14SB
+                       - AMBER ff14SB
+                    </option>
+                  
+                    <option value="ff99SB"
+                      
+                    >ff99SB
+                       - AMBER ff99SB
+                    </option>
+                  
+                </param>
+            
+              <param name="qprog" type="select" label="qprog" help="AM1-BCC charges engine; mopac and divcon need a full external AmberTools. " multiple="false">
+                  
+                    <option value="sqm"
+                      selected="true"
+                    >sqm
+                       - sqm
+                    </option>
+                  
+                    <option value="mopac"
+                      
+                    >mopac
+                       - MOPAC
+                    </option>
+                  
+                    <option value="divcon"
+                      
+                    >divcon
+                       - DivCon
+                    </option>
+                  
+                </param>
+            
+              <param name="keyword" type="text" label="keyword" help="Keyword of the mopac or sqm engine, ie: &#34;qm_theory=&#39;AM1&#39;, grms_tol=0.0005, scfconv=1.d-10&#34;." optional="true"
+                  
+                >
+                  <sanitizer><valid initial="string.printable"/></sanitizer>
+                </param>
+            
+              <param name="max_time" type="integer"
+                  value="10800"
+                  min="1" max="1000000"
+                  label="max_time" help="Maximum time (in seconds) for the sqm or mopac execution." optional="false"/>
+            
+              <param name="predindex" type="select" label="predindex" help="Antechamber atom and bond type prediction index, the antechamber -j flag; only 1, 4 and 5 produce a topology. Only written to the command line when it is not the default value, not available in acpype 2023.10.27. " multiple="false">
+                  
+                    <option value="0"
+                      
+                    >0
+                       - no prediction
+                    </option>
+                  
+                    <option value="1"
+                      
+                    >1
+                       - atom type
+                    </option>
+                  
+                    <option value="2"
+                      
+                    >2
+                       - full bond types
+                    </option>
+                  
+                    <option value="3"
+                      
+                    >3
+                       - part bond types
+                    </option>
+                  
+                    <option value="4"
+                      selected="true"
+                    >4
+                       - atom and full bond type
+                    </option>
+                  
+                    <option value="5"
+                      
+                    >5
+                       - atom and part bond type
+                    </option>
+                  
+                </param>
+            
+              <param name="gmx4" type="boolean"
+                  
+                  label="gmx4" help="Write Ryckaert-Bellemans dihedrals for the old GROMACS 4.0."
+                />
+            
+              <param name="merge" type="boolean"
+                  
+                  label="merge" help="Merge lower and uppercase atom types in the GROMACS topology if their parameters match."
+                />
+            
+              <param name="sorted" type="boolean"
+                  
+                  label="sorted" help="Sort atoms for the GROMACS ordering."
+                />
             
               <param name="binary_path" type="text" label="binary_path" help="Path to the acpype executable binary." optional="false"
                   value="acpype"

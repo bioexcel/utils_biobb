@@ -51,7 +51,7 @@
     </command>
     <inputs>
         
-          <param name="input_pdb_path" type="data" format="pdb"  optional="False" label="input PDB file" help="Path to the PDB structure where the binding site is to be found. Format: [input].pdb"/>
+          <param name="input_pdb_path" type="data" format="pdb,pqr"  optional="False" label="input PDB,PQR file" help="Path to the PDB structure where the binding site is to be found. Format: [input].[format]"/>
         
           <param name="input_clusters_zip" type="data" format="zip"  optional="False" label="input ZIP file" help="Path to the ZIP file with all the PDB members of the identity cluster. Format: [input].zip"/>
         

@@ -57,7 +57,7 @@
         
           <param name="input_top_path" type="data" format="top,parmtop,prmtop"  optional="False" label="input TOP,PARMTOP,PRMTOP file" help="Input topology file (AMBER ParmTop). Format: [input].[format]"/>
         
-          <param name="input_crd_path" type="data" format="crd,mdcrd,inpcrd"  optional="False" label="input CRD,MDCRD,INPCRD file" help="Input coordinates file (AMBER crd). Format: [input].[format]"/>
+          <param name="input_crd_path" type="data" format="crd,mdcrd,inpcrd,rst,rst7"  optional="False" label="input CRD,MDCRD,INPCRD,RST,RST7 file" help="Input coordinates file (AMBER crd). Format: [input].[format]"/>
         
         
           <param name="outname_output_pdb_path" type="text" value="mycpptraj_randomize_ions.pdb"
@@ -65,7 +65,7 @@
               help="Structure PDB file with randomized ions Format: [output].pdb "/>
         
           <param name="outname_output_crd_path" type="text" value="mycpptraj_randomize_ions.crd"
-              optional="False" label="output CRD,MDCRD,INPCRD name"
+              optional="False" label="output CRD,MDCRD,INPCRD,RST,RST7 name"
               help="Structure CRD file with coordinates including randomized ions Format: [output].[format] "/>
         
         <conditional name="config">
@@ -133,6 +133,18 @@
                        
                     </option>
                   
+                    <option value="rst"
+                      
+                    >rst
+                       
+                    </option>
+                  
+                    <option value="rst7"
+                      
+                    >rst7
+                       
+                    </option>
+                  
                 </param>
             
           </section>
@@ -150,6 +162,10 @@
             <when input="properties.output_format" value="mdcrd" format="mdcrd" />
             
             <when input="properties.output_format" value="inpcrd" format="inpcrd" />
+            
+            <when input="properties.output_format" value="rst" format="rst" />
+            
+            <when input="properties.output_format" value="rst7" format="rst7" />
             
             </change_format>
           </data>

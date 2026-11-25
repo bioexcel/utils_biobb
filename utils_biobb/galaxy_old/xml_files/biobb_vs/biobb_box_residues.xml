@@ -43,7 +43,7 @@
     </command>
     <inputs>
         
-          <param name="input_pdb_path" type="data" format="pdb"  optional="False" label="input PDB file" help="PDB protein structure for which the box will be build. Its size and center will be set around the &#39;resid_list&#39; property once mapped against this PDB. Format: [input].pdb"/>
+          <param name="input_pdb_path" type="data" format="pdb,pqr"  optional="False" label="input PDB,PQR file" help="PDB protein structure for which the box will be build. Its size and center will be set around the &#39;resid_list&#39; property once mapped against this PDB. Format: [input].[format]"/>
         
         
           <param name="outname_output_pdb_path" type="text" value="mybox_residues.pdb"

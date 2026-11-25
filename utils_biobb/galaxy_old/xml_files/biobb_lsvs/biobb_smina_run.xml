@@ -67,7 +67,7 @@
         
           <param name="input_receptor_pdbqt_path" type="data" format="pdbqt"  optional="False" label="input PDBQT file" help="Path to the input PDBQT receptor. Format: [input].pdbqt"/>
         
-          <param name="input_site_coords_path" type="data" format="yml"  optional="False" label="input YML file" help="Path to the yaml-file containing the binding site size and coordinates. Format: [input].yml"/>
+          <param name="input_site_coords_path" type="data" format="yml,yaml"  optional="False" label="input YML,YAML file" help="Path to the yaml-file containing the binding site size and coordinates. Format: [input].[format]"/>
         
         
           <param name="outname_output_sdf_path" type="text" value="mysmina_run.sdf"

@@ -71,7 +71,7 @@
     </command>
     <inputs>
         
-          <param name="input_cein_path" type="data" format="cein,cpein"  optional="False" label="input CEIN,CPEIN file" help="Input cein or cpein file (from pmemd or sander) with titrating residue information. Format: [input].[format]"/>
+          <param name="input_cein_path" type="data" format="cein,cpein,in,txt"  optional="False" label="input CEIN,CPEIN,IN,TXT file" help="Input cein or cpein file (from pmemd or sander) with titrating residue information. Format: [input].[format]"/>
         
           <param name="input_ceout_path" type="data" format="ceout,zip,gzip,gz"  optional="False" label="input CEOUT,ZIP,GZIP,GZ file" help="Output ceout file (AMBER ceout). Format: [input].[format]"/>
         

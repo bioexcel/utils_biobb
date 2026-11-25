@@ -118,6 +118,7 @@
   <tool file="biobb/biobb_gromacs/biobb_make_ndx.xml" />
   <tool file="biobb/biobb_gromacs/biobb_gmxselect.xml" />
   <tool file="biobb/biobb_gromacs/biobb_solvate.xml" />
+  <tool file="biobb/biobb_gromacs/biobb_insert_molecules.xml" />
   <tool file="biobb/biobb_gromacs/biobb_trjcat.xml" />
   <tool file="biobb/biobb_gromacs/biobb_ndx2resttop.xml" />
   <tool file="biobb/biobb_gromacs/biobb_append_ligand.xml" />

@@ -22,7 +22,7 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__properties__dq__:__oc____dq__basename__dq__:__dq__${properties.basename}__dq__,__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc____cc__'
+            --config '__oc____dq__properties__dq__:__oc____dq__basename__dq__:__dq__${properties.basename}__dq__,__dq__gmx4__dq__:${properties.gmx4},__dq__merge__dq__:${properties.merge},__dq__sorted__dq__:${properties.sorted},__dq__split_molecules__dq__:${properties.split_molecules},__dq__direct__dq__:${properties.direct},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc____cc__'
           #end if
         
           #if str($input_crd_path) != 'None':
@@ -90,6 +90,31 @@
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>
                 </param>
+            
+              <param name="gmx4" type="boolean"
+                  
+                  label="gmx4" help="Write Ryckaert-Bellemans dihedrals for the old GROMACS 4.0."
+                />
+            
+              <param name="merge" type="boolean"
+                  
+                  label="merge" help="Merge lower and uppercase atom types in the GROMACS topology if their parameters match."
+                />
+            
+              <param name="sorted" type="boolean"
+                  
+                  label="sorted" help="Sort atoms for the GROMACS ordering."
+                />
+            
+              <param name="split_molecules" type="boolean"
+                  
+                  label="split_molecules" help="Write one [ moleculetype ] per molecule found in the AMBER topology, ie: protein and ligand apart (not available in acpype 2023.10.27)."
+                />
+            
+              <param name="direct" type="boolean"
+                  
+                  label="direct" help="Do a direct conversion of any solvent (experimental)."
+                />
             
               <param name="binary_path" type="text" label="binary_path" help="Path to the acpype executable binary." optional="false"
                   value="acpype"

@@ -165,7 +165,7 @@
               <param name="num_threads_omp" type="integer"
                   value="0"
                   
-                  label="num_threads_omp" help="Let GROMACS guess. The number of GROMACS OPENMP threads per MPI rank that are going to be used." optional="true"/>
+                  label="num_threads_omp" help="Let GROMACS guess. The number of GROMACS OPENMP threads per MPI rank that are going to be used. If bigger than 0, OMP_NUM_THREADS is also set to this value for the mdrun process only, replacing any value inherited from the environment or set in env_vars_dict." optional="true"/>
             
               <param name="num_threads_omp_pme" type="integer"
                   value="0"
