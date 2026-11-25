@@ -15,6 +15,7 @@ SERVER_BASE_DIR = "biobb"
 SECTIONS = {
     'biobb_io': 'Get Data',
     'biobb_structure_utils': 'Structure Utils',
+    'biobb_pdb_tools': 'PDB tools',
     'biobb_model': 'Modelling',
     'biobb_cmip': 'CMIP',
     'biobb_gromacs': 'Setup and Simulation (GROMACS)',
@@ -29,10 +30,16 @@ SECTIONS = {
     'biobb_flexserv': 'FlexServ',
     'biobb_flexdyn': 'FlexDyn',
     'biobb_mddm': 'MDDB',
-    'biobb_lsvs': 'Smina (Virtual Screening)'
+    'biobb_lsvs': 'Smina (Virtual Screening)',
+    'biobb_godmd': 'goDMD Dynamics',
+    'biobb_mddb': 'MDDB tools',
+    'biobb_cp2k': 'CP2K QM package',
+    'biobb_mem' : 'Membrane analysis'
+    
       
 }
-
+               
+             
 
 def tool_name(orig):
     data = re.split('_', orig)
