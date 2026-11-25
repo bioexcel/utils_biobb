@@ -1,13 +1,15 @@
-<tool id="biobb_analysis_gmx_trjconv_trj_ext" name="GmxTrjconvTrj" version="3.0.2" >
+<tool id="biobb_analysis_gmx_trjconv_trj_ext" name="GmxTrjconvTrj" version="5.3.1" >
     <description>: Wrapper of the GROMACS trjconv module for converting between GROMACS compatible trajectory file formats and/or extracts a selection of atoms.</description>
     <requirements>
         <requirement type="package"
-        version="3.0.2"
+        version="5.3.1"
         >biobb_analysis</requirement>
     </requirements>
     <command detect_errors="aggressive"><![CDATA[
         
           ln -f -s ${input_traj_path} ${input_traj_path}_`echo $$`.${input_traj_path.ext};
+        
+          ln -f -s ${input_top_path} ${input_top_path}_`echo $$`.${input_top_path.ext};
         
           ln -f -s ${input_index_path} ${input_index_path}_`echo $$`.${input_index_path.ext};
         
@@ -22,11 +24,15 @@
           #else if $config.sele == "option2":
             --config '${config.jsonstr}'
           #else if $config.sele == "option3":
-            --config '__oc____dq__properties__dq__:__oc____dq__selection__dq__:__dq__${properties.selection}__dq__,__dq__start__dq__:${properties.start},__dq__end__dq__:${properties.end},__dq__dt__dq__:${properties.dt},__dq__gmx_path__dq__:__dq__${properties.gmx_path}__dq____cc____cc__'
+            --config '__oc____dq__properties__dq__:__oc____dq__selection__dq__:__dq__${properties.selection}__dq__,__dq__start__dq__:${properties.start},__dq__end__dq__:${properties.end},__dq__dt__dq__:${properties.dt},__dq__dump__dq__:${properties.dump},__dq__binary_path__dq__:__dq__${properties.binary_path}__dq____cc____cc__'
           #end if
         
           #if str($input_traj_path) != 'None':
             --input_traj_path ${input_traj_path}_`echo $$`.${input_traj_path.ext}
+          #end if
+        
+          #if str($input_top_path) != 'None':
+            --input_top_path ${input_top_path}_`echo $$`.${input_top_path.ext}
           #end if
         
           #if str($input_index_path) != 'None':
@@ -42,6 +48,8 @@
         
           rm -f ${input_traj_path}_`echo $$`.${input_traj_path.ext};
         
+          rm -f ${input_top_path}_`echo $$`.${input_top_path.ext};
+        
           rm -f ${input_index_path}_`echo $$`.${input_index_path.ext};
         
         
@@ -52,6 +60,8 @@
     <inputs>
         
           <param name="input_traj_path" type="data" format="xtc,trr,cpt,gro,g96,pdb,tng"  optional="False" label="input XTC,TRR,CPT,GRO,G96,PDB,TNG file" help="Path to the GROMACS trajectory file. Format: [input].[format]"/>
+        
+          <param name="input_top_path" type="data" format="tpr,gro,g96,pdb,brk,ent"  optional="True" label="input TPR,GRO,G96,PDB,BRK,ENT file" help="Path to the GROMACS input topology file. Format: [input].[format]"/>
         
           <param name="input_index_path" type="data" format="ndx"  optional="True" label="input NDX file" help="Path to the GROMACS index file. Format: [input].ndx"/>
         
@@ -193,6 +203,42 @@
                        - combination of the Water and Ions groups
                     </option>
                   
+                    <option value="DNA"
+                      
+                    >DNA
+                       - all DNA atoms
+                    </option>
+                  
+                    <option value="RNA"
+                      
+                    >RNA
+                       - all RNA atoms
+                    </option>
+                  
+                    <option value="Protein_DNA"
+                      
+                    >Protein_DNA
+                       - all Protein-DNA complex atoms
+                    </option>
+                  
+                    <option value="Protein_RNA"
+                      
+                    >Protein_RNA
+                       - all Protein-RNA complex atoms
+                    </option>
+                  
+                    <option value="Protein_DNA_RNA"
+                      
+                    >Protein_DNA_RNA
+                       - all Protein-DNA-RNA complex atoms
+                    </option>
+                  
+                    <option value="DNA_RNA"
+                      
+                    >DNA_RNA
+                       - all DNA-RNA complex atoms
+                    </option>
+                  
                 </param>
             
               <param name="start" type="integer"
@@ -210,7 +256,12 @@
                   
                   label="dt" help="Only write frame when t MOD dt = first time (ps)." optional="true"/>
             
-              <param name="gmx_path" type="text" label="gmx_path" help="Path to the GROMACS executable binary." optional="false"
+              <param name="dump" type="integer"
+                  value="0"
+                  
+                  label="dump" help="Dump frame nearest specified time (ps). If specified, overrides the -b, -e and -dt options." optional="true"/>
+            
+              <param name="binary_path" type="text" label="binary_path" help="Path to the GROMACS executable binary." optional="false"
                   value="gmx"
                 >
                   <sanitizer><valid initial="string.printable"/></sanitizer>

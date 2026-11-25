@@ -27,6 +27,35 @@
   <tool file="biobb/biobb_vs/biobb_gnina_run.xml" />
   <tool file="biobb/biobb_vs/biobb_gnina_select_pose.xml" />
 </section>
+<section id="biobb_mddb" name="MDDB tools" >
+  <tool file="biobb/biobb_mddb/biobb_area_per_lipid.xml" />
+  <tool file="biobb/biobb_mddb/biobb_clusters.xml" />
+  <tool file="biobb/biobb_mddb/biobb_dihedral_energies.xml" />
+  <tool file="biobb/biobb_mddb/biobb_distance_per_residue.xml" />
+  <tool file="biobb/biobb_mddb/biobb_energies.xml" />
+  <tool file="biobb/biobb_mddb/biobb_helical_parameters.xml" />
+  <tool file="biobb/biobb_mddb/biobb_hydrogen_bonds.xml" />
+  <tool file="biobb/biobb_mddb/biobb_input_processing.xml" />
+  <tool file="biobb/biobb_mddb/biobb_lipid_interactions.xml" />
+  <tool file="biobb/biobb_mddb/biobb_lipid_order.xml" />
+  <tool file="biobb/biobb_mddb/biobb_markov.xml" />
+  <tool file="biobb/biobb_mddb/biobb_membrane_channels.xml" />
+  <tool file="biobb/biobb_mddb/biobb_membrane_density.xml" />
+  <tool file="biobb/biobb_mddb/biobb_membrane_thickness.xml" />
+  <tool file="biobb/biobb_mddb/biobb_pca.xml" />
+  <tool file="biobb/biobb_mddb/biobb_pockets.xml" />
+  <tool file="biobb/biobb_mddb/biobb_rgyr.xml" />
+  <tool file="biobb/biobb_mddb/biobb_rmsd_pairwise.xml" />
+  <tool file="biobb/biobb_mddb/biobb_rmsd_per_residue.xml" />
+  <tool file="biobb/biobb_mddb/biobb_rmsds.xml" />
+  <tool file="biobb/biobb_mddb/biobb_rmsf.xml" />
+  <tool file="biobb/biobb_mddb/biobb_sasa.xml" />
+  <tool file="biobb/biobb_mddb/biobb_tmscores.xml" />
+</section>
+<section id="biobb_cp2k" name="CP2K QM package" >
+  <tool file="biobb/biobb_cp2k/biobb_cp2k_run.xml" />
+  <tool file="biobb/biobb_cp2k/biobb_cp2k_prep.xml" />
+</section>
 <section id="biobb_io" name="Get Data" >
   <tool file="biobb/biobb_io/biobb_ligand.xml" />
   <tool file="biobb/biobb_io/biobb_pdb.xml" />
@@ -52,7 +81,9 @@
 </section>
 <section id="biobb_analysis" name="Trajectory analysis" >
   <tool file="biobb/biobb_analysis/biobb_gmx_cluster.xml" />
+  <tool file="biobb/biobb_analysis/biobb_gmx_check.xml" />
   <tool file="biobb/biobb_analysis/biobb_gmx_rms.xml" />
+  <tool file="biobb/biobb_analysis/biobb_gmx_rmsf.xml" />
   <tool file="biobb/biobb_analysis/biobb_gmx_rgyr.xml" />
   <tool file="biobb/biobb_analysis/biobb_gmx_energy.xml" />
   <tool file="biobb/biobb_analysis/biobb_gmx_image.xml" />
@@ -61,6 +92,7 @@
   <tool file="biobb/biobb_analysis/biobb_gmx_trjconv_trj.xml" />
   <tool file="biobb/biobb_analysis/biobb_cpptraj_average.xml" />
   <tool file="biobb/biobb_analysis/biobb_cpptraj_bfactor.xml" />
+  <tool file="biobb/biobb_analysis/biobb_cpptraj_cluster.xml" />
   <tool file="biobb/biobb_analysis/biobb_cpptraj_rms.xml" />
   <tool file="biobb/biobb_analysis/biobb_cpptraj_rmsf.xml" />
   <tool file="biobb/biobb_analysis/biobb_cpptraj_rgyr.xml" />
@@ -71,6 +103,10 @@
   <tool file="biobb/biobb_analysis/biobb_cpptraj_convert.xml" />
   <tool file="biobb/biobb_analysis/biobb_cpptraj_mask.xml" />
   <tool file="biobb/biobb_analysis/biobb_cpptraj_image.xml" />
+</section>
+<section id="biobb_godmd" name="goDMD Dynamics" >
+  <tool file="biobb/biobb_godmd/biobb_godmd_prep.xml" />
+  <tool file="biobb/biobb_godmd/biobb_godmd_run.xml" />
 </section>
 <section id="biobb_pytorch" name="PyTorch" >
   <tool file="biobb/biobb_pytorch/biobb_build_model.xml" />
@@ -139,6 +175,27 @@
   <tool file="biobb/biobb_structure_utils/biobb_sort_gro_residues.xml" />
   <tool file="biobb/biobb_structure_utils/biobb_str_check_add_hydrogens.xml" />
   <tool file="biobb/biobb_structure_utils/biobb_structure_check.xml" />
+</section>
+<section id="biobb_pdb_tools" name="PDB tools" >
+  <tool file="biobb/biobb_pdb_tools/biobb_biobb_pdb_chain.xml" />
+  <tool file="biobb/biobb_pdb_tools/biobb_biobb_pdb_chainxseg.xml" />
+  <tool file="biobb/biobb_pdb_tools/biobb_biobb_pdb_delhetatm.xml" />
+  <tool file="biobb/biobb_pdb_tools/biobb_biobb_pdb_fetch.xml" />
+  <tool file="biobb/biobb_pdb_tools/biobb_biobb_pdb_fixinsert.xml" />
+  <tool file="biobb/biobb_pdb_tools/biobb_biobb_pdb_keepcoord.xml" />
+  <tool file="biobb/biobb_pdb_tools/biobb_biobb_pdb_merge.xml" />
+  <tool file="biobb/biobb_pdb_tools/biobb_biobb_pdb_mkensemble.xml" />
+  <tool file="biobb/biobb_pdb_tools/biobb_biobb_pdb_reres.xml" />
+  <tool file="biobb/biobb_pdb_tools/biobb_biobb_pdb_seg.xml" />
+  <tool file="biobb/biobb_pdb_tools/biobb_biobb_pdb_selaltloc.xml" />
+  <tool file="biobb/biobb_pdb_tools/biobb_biobb_pdb_selchain.xml" />
+  <tool file="biobb/biobb_pdb_tools/biobb_biobb_pdb_selmodel.xml" />
+  <tool file="biobb/biobb_pdb_tools/biobb_biobb_pdb_selres.xml" />
+  <tool file="biobb/biobb_pdb_tools/biobb_biobb_pdb_splitmodel.xml" />
+  <tool file="biobb/biobb_pdb_tools/biobb_biobb_pdb_splitseg.xml" />
+  <tool file="biobb/biobb_pdb_tools/biobb_biobb_pdb_tidy.xml" />
+  <tool file="biobb/biobb_pdb_tools/biobb_biobb_pdb_tofasta.xml" />
+  <tool file="biobb/biobb_pdb_tools/biobb_biobb_pdb_uniqname.xml" />
 </section>
 <section id="biobb_dna" name="Nucleic Acids Trajectory analysis" >
   <tool file="biobb/biobb_dna/biobb_biobb_curves.xml" />
@@ -214,6 +271,18 @@
   <tool file="biobb/biobb_flexdyn/biobb_imod_imove.xml" />
   <tool file="biobb/biobb_flexdyn/biobb_nolb_nma.xml" />
   <tool file="biobb/biobb_flexdyn/biobb_prody_anm.xml" />
+</section>
+<section id="biobb_mem" name="Membrane analysis" >
+  <tool file="biobb/biobb_mem/biobb_cpptraj_density.xml" />
+  <tool file="biobb/biobb_mem/biobb_fatslim_apl.xml" />
+  <tool file="biobb/biobb_mem/biobb_fatslim_membranes.xml" />
+  <tool file="biobb/biobb_mem/biobb_gorder_aa.xml" />
+  <tool file="biobb/biobb_mem/biobb_gorder_cg.xml" />
+  <tool file="biobb/biobb_mem/biobb_gorder_ua.xml" />
+  <tool file="biobb/biobb_mem/biobb_lpp_assign_leaflets.xml" />
+  <tool file="biobb/biobb_mem/biobb_lpp_flip_flop.xml" />
+  <tool file="biobb/biobb_mem/biobb_lpp_zpositions.xml" />
+  <tool file="biobb/biobb_mem/biobb_mda_hole.xml" />
 </section>
 <section id="biobb_lsvs" name="Smina (Virtual Screening)" >
   <tool file="biobb/biobb_lsvs/biobb_smina_run.xml" />
